@@ -159,6 +159,21 @@ func PossibleDirectoryServiceOptionsValues() []DirectoryServiceOptions {
 	return []DirectoryServiceOptions{DirectoryServiceOptionsAADDS, DirectoryServiceOptionsAD, DirectoryServiceOptionsNone}
 }
 
+// EnabledProtocols enumerates the values for enabled protocols.
+type EnabledProtocols string
+
+const (
+	// NFS ...
+	NFS EnabledProtocols = "NFS"
+	// SMB ...
+	SMB EnabledProtocols = "SMB"
+)
+
+// PossibleEnabledProtocolsValues returns an array of possible values for the EnabledProtocols const type.
+func PossibleEnabledProtocolsValues() []EnabledProtocols {
+	return []EnabledProtocols{NFS, SMB}
+}
+
 // GeoReplicationStatus enumerates the values for geo replication status.
 type GeoReplicationStatus string
 
@@ -479,6 +494,23 @@ const (
 // PossibleReasonCodeValues returns an array of possible values for the ReasonCode const type.
 func PossibleReasonCodeValues() []ReasonCode {
 	return []ReasonCode{NotAvailableForSubscription, QuotaID}
+}
+
+// RootSquash enumerates the values for root squash.
+type RootSquash string
+
+const (
+	// RootSquashAllSquash ...
+	RootSquashAllSquash RootSquash = "AllSquash"
+	// RootSquashNoRootSquash ...
+	RootSquashNoRootSquash RootSquash = "NoRootSquash"
+	// RootSquashRootSquash ...
+	RootSquashRootSquash RootSquash = "RootSquash"
+)
+
+// PossibleRootSquashValues returns an array of possible values for the RootSquash const type.
+func PossibleRootSquashValues() []RootSquash {
+	return []RootSquash{RootSquashAllSquash, RootSquashNoRootSquash, RootSquashRootSquash}
 }
 
 // RoutingChoice enumerates the values for routing choice.
@@ -1940,6 +1972,12 @@ func (fs *FileShare) UnmarshalJSON(body []byte) error {
 	return nil
 }
 
+// FileShareCreateParameters the parameters used to create the file share.
+type FileShareCreateParameters struct {
+	// Properties - Properties of the file share to create the file share.
+	Properties *FileSharePropertiesCreateParameters `json:"properties,omitempty"`
+}
+
 // FileShareItem the file share properties be listed out.
 type FileShareItem struct {
 	// FileShareProperties - The file share properties be listed out.
@@ -2178,6 +2216,10 @@ type FileShareProperties struct {
 	Metadata map[string]*string `json:"metadata"`
 	// ShareQuota - The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to 5TB (5120).
 	ShareQuota *int32 `json:"shareQuota,omitempty"`
+	// EnabledProtocols - Protocols for file shares. Possible values include: 'SMB', 'NFS'
+	EnabledProtocols EnabledProtocols `json:"enabledProtocols,omitempty"`
+	// RootSquash - Reduction of the access rights for the remote superuser. Possible values include: 'RootSquashNoRootSquash', 'RootSquashRootSquash', 'RootSquashAllSquash'
+	RootSquash RootSquash `json:"rootSquash,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for FileShareProperties.
@@ -2189,7 +2231,74 @@ func (fsp FileShareProperties) MarshalJSON() ([]byte, error) {
 	if fsp.ShareQuota != nil {
 		objectMap["shareQuota"] = fsp.ShareQuota
 	}
+	if fsp.EnabledProtocols != "" {
+		objectMap["enabledProtocols"] = fsp.EnabledProtocols
+	}
+	if fsp.RootSquash != "" {
+		objectMap["rootSquash"] = fsp.RootSquash
+	}
 	return json.Marshal(objectMap)
+}
+
+// FileSharePropertiesCreateParameters ...
+type FileSharePropertiesCreateParameters struct {
+	// Metadata - A name-value pair to associate with the share as metadata.
+	Metadata map[string]*string `json:"metadata"`
+	// ShareQuota - The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to 5TB (5120).
+	ShareQuota *int32 `json:"shareQuota,omitempty"`
+	// EnabledProtocols - Protocols for file shares. It cannot be changed after file share creation. Possible values include: 'SMB', 'NFS'
+	EnabledProtocols EnabledProtocols `json:"enabledProtocols,omitempty"`
+	// RootSquash - Reduction of the access rights for the remote superuser. Possible values include: 'RootSquashNoRootSquash', 'RootSquashRootSquash', 'RootSquashAllSquash'
+	RootSquash RootSquash `json:"rootSquash,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for FileSharePropertiesCreateParameters.
+func (fspcp FileSharePropertiesCreateParameters) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if fspcp.Metadata != nil {
+		objectMap["metadata"] = fspcp.Metadata
+	}
+	if fspcp.ShareQuota != nil {
+		objectMap["shareQuota"] = fspcp.ShareQuota
+	}
+	if fspcp.EnabledProtocols != "" {
+		objectMap["enabledProtocols"] = fspcp.EnabledProtocols
+	}
+	if fspcp.RootSquash != "" {
+		objectMap["rootSquash"] = fspcp.RootSquash
+	}
+	return json.Marshal(objectMap)
+}
+
+// FileSharePropertiesUpdateParameters ...
+type FileSharePropertiesUpdateParameters struct {
+	// Metadata - A name-value pair to associate with the share as metadata.
+	Metadata map[string]*string `json:"metadata"`
+	// ShareQuota - The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to 5TB (5120).
+	ShareQuota *int32 `json:"shareQuota,omitempty"`
+	// RootSquash - Reduction of the access rights for the remote superuser. Possible values include: 'RootSquashNoRootSquash', 'RootSquashRootSquash', 'RootSquashAllSquash'
+	RootSquash RootSquash `json:"rootSquash,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for FileSharePropertiesUpdateParameters.
+func (fspup FileSharePropertiesUpdateParameters) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if fspup.Metadata != nil {
+		objectMap["metadata"] = fspup.Metadata
+	}
+	if fspup.ShareQuota != nil {
+		objectMap["shareQuota"] = fspup.ShareQuota
+	}
+	if fspup.RootSquash != "" {
+		objectMap["rootSquash"] = fspup.RootSquash
+	}
+	return json.Marshal(objectMap)
+}
+
+// FileShareUpdateParameters the parameters used to create the file share.
+type FileShareUpdateParameters struct {
+	// Properties - Properties of the file share to update the file share.
+	Properties *FileSharePropertiesUpdateParameters `json:"properties,omitempty"`
 }
 
 // GeoReplicationStats statistics related to replication for storage account's Blob, Table, Queue and File
