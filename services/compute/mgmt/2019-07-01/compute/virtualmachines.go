@@ -207,7 +207,8 @@ func (client VirtualMachinesClient) ConvertToManagedDisksResponder(resp *http.Re
 	return
 }
 
-// CreateOrUpdate the operation to create or update a virtual machine.
+// CreateOrUpdate the operation to create or update a virtual machine. Some properties can be set only during
+// provisioning the virtual machine.
 // Parameters:
 // resourceGroupName - the name of the resource group.
 // VMName - the name of the virtual machine.
@@ -462,7 +463,8 @@ func (client VirtualMachinesClient) DeleteResponder(resp *http.Response) (result
 	return
 }
 
-// Generalize sets the state of the virtual machine to generalized.
+// Generalize sets the OS state of the virtual machine to generalized. It is recommended to sysprep the virtual machine
+// before performing this operation
 // Parameters:
 // resourceGroupName - the name of the resource group.
 // VMName - the name of the virtual machine.
