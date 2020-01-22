@@ -18,36 +18,38 @@ package azuredataapi
 // Changes may cause incorrect behavior and will be lost if the code is regenerated.
 
 import (
-	"context"
-	"github.com/Azure/azure-sdk-for-go/services/preview/azuredata/mgmt/2017-03-01-preview/azuredata"
-	"github.com/Azure/go-autorest/autorest"
+    "context"
+    "github.com/Azure/azure-sdk-for-go/services/preview/azuredata/mgmt/2017-03-01-preview/azuredata"
+    "github.com/Azure/go-autorest/autorest"
 )
 
-// OperationsClientAPI contains the set of methods on the OperationsClient type.
-type OperationsClientAPI interface {
-	List(ctx context.Context) (result azuredata.OperationListResultPage, err error)
-}
+        // OperationsClientAPI contains the set of methods on the OperationsClient type.
+        type OperationsClientAPI interface {
+            List(ctx context.Context) (result azuredata.OperationListResultPage, err error)
+                ListComplete(ctx context.Context) (result azuredata.OperationListResultIterator, err error)
+        }
 
-var _ OperationsClientAPI = (*azuredata.OperationsClient)(nil)
+        var _ OperationsClientAPI = (*azuredata.OperationsClient)(nil)
+        // SQLServerRegistrationsClientAPI contains the set of methods on the SQLServerRegistrationsClient type.
+        type SQLServerRegistrationsClientAPI interface {
+            CreateOrUpdate(ctx context.Context, resourceGroupName string, SQLServerRegistrationName string, parameters azuredata.SQLServerRegistration) (result azuredata.SQLServerRegistration, err error)
+            Delete(ctx context.Context, resourceGroupName string, SQLServerRegistrationName string) (result autorest.Response, err error)
+            Get(ctx context.Context, resourceGroupName string, SQLServerRegistrationName string) (result azuredata.SQLServerRegistration, err error)
+            List(ctx context.Context) (result azuredata.SQLServerRegistrationListResultPage, err error)
+                ListComplete(ctx context.Context) (result azuredata.SQLServerRegistrationListResultIterator, err error)
+            ListByResourceGroup(ctx context.Context, resourceGroupName string) (result azuredata.SQLServerRegistrationListResultPage, err error)
+                ListByResourceGroupComplete(ctx context.Context, resourceGroupName string) (result azuredata.SQLServerRegistrationListResultIterator, err error)
+            Update(ctx context.Context, resourceGroupName string, SQLServerRegistrationName string, parameters azuredata.SQLServerRegistrationUpdate) (result azuredata.SQLServerRegistration, err error)
+        }
 
-// SQLServerRegistrationsClientAPI contains the set of methods on the SQLServerRegistrationsClient type.
-type SQLServerRegistrationsClientAPI interface {
-	CreateOrUpdate(ctx context.Context, resourceGroupName string, SQLServerRegistrationName string, parameters azuredata.SQLServerRegistration) (result azuredata.SQLServerRegistration, err error)
-	Delete(ctx context.Context, resourceGroupName string, SQLServerRegistrationName string) (result autorest.Response, err error)
-	Get(ctx context.Context, resourceGroupName string, SQLServerRegistrationName string) (result azuredata.SQLServerRegistration, err error)
-	List(ctx context.Context) (result azuredata.SQLServerRegistrationListResultPage, err error)
-	ListByResourceGroup(ctx context.Context, resourceGroupName string) (result azuredata.SQLServerRegistrationListResultPage, err error)
-	Update(ctx context.Context, resourceGroupName string, SQLServerRegistrationName string, parameters azuredata.SQLServerRegistrationUpdate) (result azuredata.SQLServerRegistration, err error)
-}
+        var _ SQLServerRegistrationsClientAPI = (*azuredata.SQLServerRegistrationsClient)(nil)
+        // SQLServersClientAPI contains the set of methods on the SQLServersClient type.
+        type SQLServersClientAPI interface {
+            CreateOrUpdate(ctx context.Context, resourceGroupName string, SQLServerRegistrationName string, SQLServerName string, parameters azuredata.SQLServer) (result azuredata.SQLServer, err error)
+            Delete(ctx context.Context, resourceGroupName string, SQLServerRegistrationName string, SQLServerName string) (result autorest.Response, err error)
+            Get(ctx context.Context, resourceGroupName string, SQLServerRegistrationName string, SQLServerName string, expand string) (result azuredata.SQLServer, err error)
+            ListByResourceGroup(ctx context.Context, resourceGroupName string, SQLServerRegistrationName string, expand string) (result azuredata.SQLServerListResultPage, err error)
+                ListByResourceGroupComplete(ctx context.Context, resourceGroupName string, SQLServerRegistrationName string, expand string) (result azuredata.SQLServerListResultIterator, err error)
+        }
 
-var _ SQLServerRegistrationsClientAPI = (*azuredata.SQLServerRegistrationsClient)(nil)
-
-// SQLServersClientAPI contains the set of methods on the SQLServersClient type.
-type SQLServersClientAPI interface {
-	CreateOrUpdate(ctx context.Context, resourceGroupName string, SQLServerRegistrationName string, SQLServerName string, parameters azuredata.SQLServer) (result azuredata.SQLServer, err error)
-	Delete(ctx context.Context, resourceGroupName string, SQLServerRegistrationName string, SQLServerName string) (result autorest.Response, err error)
-	Get(ctx context.Context, resourceGroupName string, SQLServerRegistrationName string, SQLServerName string, expand string) (result azuredata.SQLServer, err error)
-	ListByResourceGroup(ctx context.Context, resourceGroupName string, SQLServerRegistrationName string, expand string) (result azuredata.SQLServerListResultPage, err error)
-}
-
-var _ SQLServersClientAPI = (*azuredata.SQLServersClient)(nil)
+        var _ SQLServersClientAPI = (*azuredata.SQLServersClient)(nil)
