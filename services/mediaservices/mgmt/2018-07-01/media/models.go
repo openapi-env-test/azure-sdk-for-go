@@ -1464,8 +1464,7 @@ type APIError struct {
 // Asset an Asset.
 type Asset struct {
 	autorest.Response `json:"-"`
-	// AssetProperties - The resource properties.
-	*AssetProperties `json:"properties,omitempty"`
+	*AssetProperties  `json:"properties,omitempty"`
 	// ID - READ-ONLY; Fully qualified resource ID for the resource.
 	ID *string `json:"id,omitempty"`
 	// Name - READ-ONLY; The name of the resource.
@@ -3826,11 +3825,11 @@ func (ckprtk ContentKeyPolicyRestrictionTokenKey) AsBasicContentKeyPolicyRestric
 	return &ckprtk, true
 }
 
-// ContentKeyPolicyRsaTokenKey specifies a RSA key for token validation
+// ContentKeyPolicyRsaTokenKey specifies a RSA key for token validation.
 type ContentKeyPolicyRsaTokenKey struct {
-	// Exponent - The RSA Parameter exponent
+	// Exponent - The RSA Parameter exponent.
 	Exponent *[]byte `json:"exponent,omitempty"`
-	// Modulus - The RSA Parameter modulus
+	// Modulus - The RSA Parameter modulus.
 	Modulus *[]byte `json:"modulus,omitempty"`
 	// OdataType - Possible values include: 'OdataTypeContentKeyPolicyRestrictionTokenKey', 'OdataTypeMicrosoftMediaContentKeyPolicySymmetricTokenKey', 'OdataTypeMicrosoftMediaContentKeyPolicyRsaTokenKey', 'OdataTypeMicrosoftMediaContentKeyPolicyX509CertificateTokenKey'
 	OdataType OdataTypeBasicContentKeyPolicyRestrictionTokenKey `json:"@odata.type,omitempty"`
@@ -6944,12 +6943,11 @@ func (l Layer) AsBasicLayer() (BasicLayer, bool) {
 	return &l, true
 }
 
-// ListContainerSasInput the parameters to the list SAS request.
+// ListContainerSasInput ...
 type ListContainerSasInput struct {
-	// Permissions - The permissions to set on the SAS URL. Possible values include: 'Read', 'ReadWrite', 'ReadWriteDelete'
+	// Permissions - Possible values include: 'Read', 'ReadWrite', 'ReadWriteDelete'
 	Permissions AssetContainerPermission `json:"permissions,omitempty"`
-	// ExpiryTime - The SAS URL expiration time.  This must be less than 24 hours from the current time.
-	ExpiryTime *date.Time `json:"expiryTime,omitempty"`
+	ExpiryTime  *date.Time               `json:"expiryTime,omitempty"`
 }
 
 // ListContentKeysResponse class of response for listContentKeys action
