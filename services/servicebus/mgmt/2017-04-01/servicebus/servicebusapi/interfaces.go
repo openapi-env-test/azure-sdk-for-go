@@ -170,3 +170,10 @@ type EventHubsClientAPI interface {
 }
 
 var _ EventHubsClientAPI = (*servicebus.EventHubsClient)(nil)
+
+// NamespaceOperationsClientAPI contains the set of methods on the NamespaceOperationsClient type.
+type NamespaceOperationsClientAPI interface {
+	Get(ctx context.Context, locationName string, operationResultID string) (result autorest.Response, err error)
+}
+
+var _ NamespaceOperationsClientAPI = (*servicebus.NamespaceOperationsClient)(nil)
