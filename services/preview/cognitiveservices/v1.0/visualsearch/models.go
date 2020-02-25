@@ -492,6 +492,8 @@ const (
 	TypeImageTag Type = "ImageTag"
 	// TypeIntangible ...
 	TypeIntangible Type = "Intangible"
+	// TypeLicense ...
+	TypeLicense Type = "License"
 	// TypeMediaObject ...
 	TypeMediaObject Type = "MediaObject"
 	// TypeNormalizedQuadrilateral ...
@@ -518,7 +520,7 @@ const (
 
 // PossibleTypeValues returns an array of possible values for the Type const type.
 func PossibleTypeValues() []Type {
-	return []Type{TypeAction, TypeAggregateOffer, TypeCreativeWork, TypeErrorResponse, TypeIdentifiable, TypeImageAction, TypeImageEntityAction, TypeImageKnowledge, TypeImageModuleAction, TypeImageObject, TypeImageRecipesAction, TypeImageRelatedSearchesAction, TypeImageShoppingSourcesAction, TypeImageTag, TypeIntangible, TypeMediaObject, TypeNormalizedQuadrilateral, TypeOffer, TypeOrganization, TypePerson, TypePoint2D, TypeRecipe, TypeResponse, TypeResponseBase, TypeStructuredValue, TypeThing}
+	return []Type{TypeAction, TypeAggregateOffer, TypeCreativeWork, TypeErrorResponse, TypeIdentifiable, TypeImageAction, TypeImageEntityAction, TypeImageKnowledge, TypeImageModuleAction, TypeImageObject, TypeImageRecipesAction, TypeImageRelatedSearchesAction, TypeImageShoppingSourcesAction, TypeImageTag, TypeIntangible, TypeLicense, TypeMediaObject, TypeNormalizedQuadrilateral, TypeOffer, TypeOrganization, TypePerson, TypePoint2D, TypeRecipe, TypeResponse, TypeResponseBase, TypeStructuredValue, TypeThing}
 }
 
 // TypeBasicPropertiesItem enumerates the values for type basic properties item.
@@ -568,6 +570,8 @@ type Action struct {
 	DatePublished *string `json:"datePublished,omitempty"`
 	// Text - READ-ONLY; Text content of this creative work.
 	Text *string `json:"text,omitempty"`
+	// MainEntity - READ-ONLY
+	MainEntity BasicThing `json:"mainEntity,omitempty"`
 	// Name - READ-ONLY; The name of the thing represented by this object.
 	Name *string `json:"name,omitempty"`
 	// URL - READ-ONLY; The URL to get more information about the thing represented by this object.
@@ -586,7 +590,7 @@ type Action struct {
 	WebSearchURL *string `json:"webSearchUrl,omitempty"`
 	// ID - READ-ONLY; A String identifier.
 	ID *string `json:"id,omitempty"`
-	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeStructuredValue'
+	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeLicense', 'TypeStructuredValue'
 	Type Type `json:"_type,omitempty"`
 }
 
@@ -822,6 +826,11 @@ func (a Action) AsImageShoppingSourcesAction() (*ImageShoppingSourcesAction, boo
 	return nil, false
 }
 
+// AsLicense is the BasicResponseBase implementation for Action.
+func (a Action) AsLicense() (*License, bool) {
+	return nil, false
+}
+
 // AsStructuredValue is the BasicResponseBase implementation for Action.
 func (a Action) AsStructuredValue() (*StructuredValue, bool) {
 	return nil, false
@@ -920,6 +929,14 @@ func (a *Action) UnmarshalJSON(body []byte) error {
 					return err
 				}
 				a.Text = &textVar
+			}
+		case "mainEntity":
+			if v != nil {
+				mainEntity, err := unmarshalBasicThing(*v)
+				if err != nil {
+					return err
+				}
+				a.MainEntity = mainEntity
 			}
 		case "name":
 			if v != nil {
@@ -1051,7 +1068,7 @@ type AggregateOffer struct {
 	WebSearchURL *string `json:"webSearchUrl,omitempty"`
 	// ID - READ-ONLY; A String identifier.
 	ID *string `json:"id,omitempty"`
-	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeStructuredValue'
+	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeLicense', 'TypeStructuredValue'
 	Type Type `json:"_type,omitempty"`
 }
 
@@ -1227,6 +1244,11 @@ func (ao AggregateOffer) AsImageRelatedSearchesAction() (*ImageRelatedSearchesAc
 
 // AsImageShoppingSourcesAction is the BasicResponseBase implementation for AggregateOffer.
 func (ao AggregateOffer) AsImageShoppingSourcesAction() (*ImageShoppingSourcesAction, bool) {
+	return nil, false
+}
+
+// AsLicense is the BasicResponseBase implementation for AggregateOffer.
+func (ao AggregateOffer) AsLicense() (*License, bool) {
 	return nil, false
 }
 
@@ -1485,6 +1507,7 @@ type BasicCreativeWork interface {
 	AsImageRecipesAction() (*ImageRecipesAction, bool)
 	AsImageRelatedSearchesAction() (*ImageRelatedSearchesAction, bool)
 	AsImageShoppingSourcesAction() (*ImageShoppingSourcesAction, bool)
+	AsLicense() (*License, bool)
 	AsCreativeWork() (*CreativeWork, bool)
 }
 
@@ -1499,6 +1522,8 @@ type CreativeWork struct {
 	DatePublished *string `json:"datePublished,omitempty"`
 	// Text - READ-ONLY; Text content of this creative work.
 	Text *string `json:"text,omitempty"`
+	// MainEntity - READ-ONLY
+	MainEntity BasicThing `json:"mainEntity,omitempty"`
 	// Name - READ-ONLY; The name of the thing represented by this object.
 	Name *string `json:"name,omitempty"`
 	// URL - READ-ONLY; The URL to get more information about the thing represented by this object.
@@ -1517,7 +1542,7 @@ type CreativeWork struct {
 	WebSearchURL *string `json:"webSearchUrl,omitempty"`
 	// ID - READ-ONLY; A String identifier.
 	ID *string `json:"id,omitempty"`
-	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeStructuredValue'
+	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeLicense', 'TypeStructuredValue'
 	Type Type `json:"_type,omitempty"`
 }
 
@@ -1569,6 +1594,10 @@ func unmarshalBasicCreativeWork(body []byte) (BasicCreativeWork, error) {
 		var issa ImageShoppingSourcesAction
 		err := json.Unmarshal(body, &issa)
 		return issa, err
+	case string(TypeLicense):
+		var l License
+		err := json.Unmarshal(body, &l)
+		return l, err
 	default:
 		var cw CreativeWork
 		err := json.Unmarshal(body, &cw)
@@ -1769,6 +1798,11 @@ func (cw CreativeWork) AsImageShoppingSourcesAction() (*ImageShoppingSourcesActi
 	return nil, false
 }
 
+// AsLicense is the BasicResponseBase implementation for CreativeWork.
+func (cw CreativeWork) AsLicense() (*License, bool) {
+	return nil, false
+}
+
 // AsStructuredValue is the BasicResponseBase implementation for CreativeWork.
 func (cw CreativeWork) AsStructuredValue() (*StructuredValue, bool) {
 	return nil, false
@@ -1832,6 +1866,14 @@ func (cw *CreativeWork) UnmarshalJSON(body []byte) error {
 					return err
 				}
 				cw.Text = &textVar
+			}
+		case "mainEntity":
+			if v != nil {
+				mainEntity, err := unmarshalBasicThing(*v)
+				if err != nil {
+					return err
+				}
+				cw.MainEntity = mainEntity
 			}
 		case "name":
 			if v != nil {
@@ -1968,7 +2010,7 @@ type ErrorResponse struct {
 	WebSearchURL *string `json:"webSearchUrl,omitempty"`
 	// ID - READ-ONLY; A String identifier.
 	ID *string `json:"id,omitempty"`
-	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeStructuredValue'
+	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeLicense', 'TypeStructuredValue'
 	Type Type `json:"_type,omitempty"`
 }
 
@@ -2150,6 +2192,11 @@ func (er ErrorResponse) AsImageShoppingSourcesAction() (*ImageShoppingSourcesAct
 	return nil, false
 }
 
+// AsLicense is the BasicResponseBase implementation for ErrorResponse.
+func (er ErrorResponse) AsLicense() (*License, bool) {
+	return nil, false
+}
+
 // AsStructuredValue is the BasicResponseBase implementation for ErrorResponse.
 func (er ErrorResponse) AsStructuredValue() (*StructuredValue, bool) {
 	return nil, false
@@ -2210,6 +2257,7 @@ type BasicIdentifiable interface {
 	AsImageRecipesAction() (*ImageRecipesAction, bool)
 	AsImageRelatedSearchesAction() (*ImageRelatedSearchesAction, bool)
 	AsImageShoppingSourcesAction() (*ImageShoppingSourcesAction, bool)
+	AsLicense() (*License, bool)
 	AsStructuredValue() (*StructuredValue, bool)
 	AsBasicStructuredValue() (BasicStructuredValue, bool)
 	AsIdentifiable() (*Identifiable, bool)
@@ -2219,7 +2267,7 @@ type BasicIdentifiable interface {
 type Identifiable struct {
 	// ID - READ-ONLY; A String identifier.
 	ID *string `json:"id,omitempty"`
-	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeStructuredValue'
+	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeLicense', 'TypeStructuredValue'
 	Type Type `json:"_type,omitempty"`
 }
 
@@ -2323,6 +2371,10 @@ func unmarshalBasicIdentifiable(body []byte) (BasicIdentifiable, error) {
 		var issa ImageShoppingSourcesAction
 		err := json.Unmarshal(body, &issa)
 		return issa, err
+	case string(TypeLicense):
+		var l License
+		err := json.Unmarshal(body, &l)
+		return l, err
 	case string(TypeStructuredValue):
 		var sv StructuredValue
 		err := json.Unmarshal(body, &sv)
@@ -2527,6 +2579,11 @@ func (i Identifiable) AsImageShoppingSourcesAction() (*ImageShoppingSourcesActio
 	return nil, false
 }
 
+// AsLicense is the BasicResponseBase implementation for Identifiable.
+func (i Identifiable) AsLicense() (*License, bool) {
+	return nil, false
+}
+
 // AsStructuredValue is the BasicResponseBase implementation for Identifiable.
 func (i Identifiable) AsStructuredValue() (*StructuredValue, bool) {
 	return nil, false
@@ -2577,6 +2634,8 @@ type ImageAction struct {
 	DatePublished *string `json:"datePublished,omitempty"`
 	// Text - READ-ONLY; Text content of this creative work.
 	Text *string `json:"text,omitempty"`
+	// MainEntity - READ-ONLY
+	MainEntity BasicThing `json:"mainEntity,omitempty"`
 	// Name - READ-ONLY; The name of the thing represented by this object.
 	Name *string `json:"name,omitempty"`
 	// URL - READ-ONLY; The URL to get more information about the thing represented by this object.
@@ -2595,7 +2654,7 @@ type ImageAction struct {
 	WebSearchURL *string `json:"webSearchUrl,omitempty"`
 	// ID - READ-ONLY; A String identifier.
 	ID *string `json:"id,omitempty"`
-	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeStructuredValue'
+	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeLicense', 'TypeStructuredValue'
 	Type Type `json:"_type,omitempty"`
 }
 
@@ -2827,6 +2886,11 @@ func (ia ImageAction) AsImageShoppingSourcesAction() (*ImageShoppingSourcesActio
 	return nil, false
 }
 
+// AsLicense is the BasicResponseBase implementation for ImageAction.
+func (ia ImageAction) AsLicense() (*License, bool) {
+	return nil, false
+}
+
 // AsStructuredValue is the BasicResponseBase implementation for ImageAction.
 func (ia ImageAction) AsStructuredValue() (*StructuredValue, bool) {
 	return nil, false
@@ -2935,6 +2999,14 @@ func (ia *ImageAction) UnmarshalJSON(body []byte) error {
 				}
 				ia.Text = &textVar
 			}
+		case "mainEntity":
+			if v != nil {
+				mainEntity, err := unmarshalBasicThing(*v)
+				if err != nil {
+					return err
+				}
+				ia.MainEntity = mainEntity
+			}
 		case "name":
 			if v != nil {
 				var name string
@@ -3033,6 +3105,10 @@ func (ia *ImageAction) UnmarshalJSON(body []byte) error {
 
 // ImageEntityAction defines an entity action.
 type ImageEntityAction struct {
+	// Data - READ-ONLY; Information about the entity
+	Data BasicThing `json:"data,omitempty"`
+	// IsTranslated - READ-ONLY; Indicates whether entity name or description is translated or not. Only set to true when translated.
+	IsTranslated *bool `json:"isTranslated,omitempty"`
 	// ActionType - READ-ONLY; A string representing the type of action.
 	ActionType *string `json:"actionType,omitempty"`
 	// Result - READ-ONLY; The result produced in the action.
@@ -3051,6 +3127,8 @@ type ImageEntityAction struct {
 	DatePublished *string `json:"datePublished,omitempty"`
 	// Text - READ-ONLY; Text content of this creative work.
 	Text *string `json:"text,omitempty"`
+	// MainEntity - READ-ONLY
+	MainEntity BasicThing `json:"mainEntity,omitempty"`
 	// Name - READ-ONLY; The name of the thing represented by this object.
 	Name *string `json:"name,omitempty"`
 	// URL - READ-ONLY; The URL to get more information about the thing represented by this object.
@@ -3069,7 +3147,7 @@ type ImageEntityAction struct {
 	WebSearchURL *string `json:"webSearchUrl,omitempty"`
 	// ID - READ-ONLY; A String identifier.
 	ID *string `json:"id,omitempty"`
-	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeStructuredValue'
+	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeLicense', 'TypeStructuredValue'
 	Type Type `json:"_type,omitempty"`
 }
 
@@ -3248,6 +3326,11 @@ func (iea ImageEntityAction) AsImageShoppingSourcesAction() (*ImageShoppingSourc
 	return nil, false
 }
 
+// AsLicense is the BasicResponseBase implementation for ImageEntityAction.
+func (iea ImageEntityAction) AsLicense() (*License, bool) {
+	return nil, false
+}
+
 // AsStructuredValue is the BasicResponseBase implementation for ImageEntityAction.
 func (iea ImageEntityAction) AsStructuredValue() (*StructuredValue, bool) {
 	return nil, false
@@ -3277,6 +3360,23 @@ func (iea *ImageEntityAction) UnmarshalJSON(body []byte) error {
 	}
 	for k, v := range m {
 		switch k {
+		case "data":
+			if v != nil {
+				data, err := unmarshalBasicThing(*v)
+				if err != nil {
+					return err
+				}
+				iea.Data = data
+			}
+		case "isTranslated":
+			if v != nil {
+				var isTranslated bool
+				err = json.Unmarshal(*v, &isTranslated)
+				if err != nil {
+					return err
+				}
+				iea.IsTranslated = &isTranslated
+			}
 		case "actionType":
 			if v != nil {
 				var actionType string
@@ -3355,6 +3455,14 @@ func (iea *ImageEntityAction) UnmarshalJSON(body []byte) error {
 					return err
 				}
 				iea.Text = &textVar
+			}
+		case "mainEntity":
+			if v != nil {
+				mainEntity, err := unmarshalBasicThing(*v)
+				if err != nil {
+					return err
+				}
+				iea.MainEntity = mainEntity
 			}
 		case "name":
 			if v != nil {
@@ -3476,7 +3584,7 @@ type ImageKnowledge struct {
 	WebSearchURL *string `json:"webSearchUrl,omitempty"`
 	// ID - READ-ONLY; A String identifier.
 	ID *string `json:"id,omitempty"`
-	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeStructuredValue'
+	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeLicense', 'TypeStructuredValue'
 	Type Type `json:"_type,omitempty"`
 }
 
@@ -3655,6 +3763,11 @@ func (ik ImageKnowledge) AsImageShoppingSourcesAction() (*ImageShoppingSourcesAc
 	return nil, false
 }
 
+// AsLicense is the BasicResponseBase implementation for ImageKnowledge.
+func (ik ImageKnowledge) AsLicense() (*License, bool) {
+	return nil, false
+}
+
 // AsStructuredValue is the BasicResponseBase implementation for ImageKnowledge.
 func (ik ImageKnowledge) AsStructuredValue() (*StructuredValue, bool) {
 	return nil, false
@@ -3697,6 +3810,8 @@ type ImageModuleAction struct {
 	DatePublished *string `json:"datePublished,omitempty"`
 	// Text - READ-ONLY; Text content of this creative work.
 	Text *string `json:"text,omitempty"`
+	// MainEntity - READ-ONLY
+	MainEntity BasicThing `json:"mainEntity,omitempty"`
 	// Name - READ-ONLY; The name of the thing represented by this object.
 	Name *string `json:"name,omitempty"`
 	// URL - READ-ONLY; The URL to get more information about the thing represented by this object.
@@ -3715,7 +3830,7 @@ type ImageModuleAction struct {
 	WebSearchURL *string `json:"webSearchUrl,omitempty"`
 	// ID - READ-ONLY; A String identifier.
 	ID *string `json:"id,omitempty"`
-	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeStructuredValue'
+	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeLicense', 'TypeStructuredValue'
 	Type Type `json:"_type,omitempty"`
 }
 
@@ -3894,6 +4009,11 @@ func (ima ImageModuleAction) AsImageShoppingSourcesAction() (*ImageShoppingSourc
 	return nil, false
 }
 
+// AsLicense is the BasicResponseBase implementation for ImageModuleAction.
+func (ima ImageModuleAction) AsLicense() (*License, bool) {
+	return nil, false
+}
+
 // AsStructuredValue is the BasicResponseBase implementation for ImageModuleAction.
 func (ima ImageModuleAction) AsStructuredValue() (*StructuredValue, bool) {
 	return nil, false
@@ -4010,6 +4130,14 @@ func (ima *ImageModuleAction) UnmarshalJSON(body []byte) error {
 					return err
 				}
 				ima.Text = &textVar
+			}
+		case "mainEntity":
+			if v != nil {
+				mainEntity, err := unmarshalBasicThing(*v)
+				if err != nil {
+					return err
+				}
+				ima.MainEntity = mainEntity
 			}
 		case "name":
 			if v != nil {
@@ -4143,6 +4271,8 @@ type ImageObject struct {
 	DatePublished *string `json:"datePublished,omitempty"`
 	// Text - READ-ONLY; Text content of this creative work.
 	Text *string `json:"text,omitempty"`
+	// MainEntity - READ-ONLY
+	MainEntity BasicThing `json:"mainEntity,omitempty"`
 	// Name - READ-ONLY; The name of the thing represented by this object.
 	Name *string `json:"name,omitempty"`
 	// URL - READ-ONLY; The URL to get more information about the thing represented by this object.
@@ -4161,7 +4291,7 @@ type ImageObject struct {
 	WebSearchURL *string `json:"webSearchUrl,omitempty"`
 	// ID - READ-ONLY; A String identifier.
 	ID *string `json:"id,omitempty"`
-	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeStructuredValue'
+	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeLicense', 'TypeStructuredValue'
 	Type Type `json:"_type,omitempty"`
 }
 
@@ -4337,6 +4467,11 @@ func (ioVar ImageObject) AsImageRelatedSearchesAction() (*ImageRelatedSearchesAc
 
 // AsImageShoppingSourcesAction is the BasicResponseBase implementation for ImageObject.
 func (ioVar ImageObject) AsImageShoppingSourcesAction() (*ImageShoppingSourcesAction, bool) {
+	return nil, false
+}
+
+// AsLicense is the BasicResponseBase implementation for ImageObject.
+func (ioVar ImageObject) AsLicense() (*License, bool) {
 	return nil, false
 }
 
@@ -4521,6 +4656,14 @@ func (ioVar *ImageObject) UnmarshalJSON(body []byte) error {
 				}
 				ioVar.Text = &textVar
 			}
+		case "mainEntity":
+			if v != nil {
+				mainEntity, err := unmarshalBasicThing(*v)
+				if err != nil {
+					return err
+				}
+				ioVar.MainEntity = mainEntity
+			}
 		case "name":
 			if v != nil {
 				var name string
@@ -4639,6 +4782,8 @@ type ImageRecipesAction struct {
 	DatePublished *string `json:"datePublished,omitempty"`
 	// Text - READ-ONLY; Text content of this creative work.
 	Text *string `json:"text,omitempty"`
+	// MainEntity - READ-ONLY
+	MainEntity BasicThing `json:"mainEntity,omitempty"`
 	// Name - READ-ONLY; The name of the thing represented by this object.
 	Name *string `json:"name,omitempty"`
 	// URL - READ-ONLY; The URL to get more information about the thing represented by this object.
@@ -4657,7 +4802,7 @@ type ImageRecipesAction struct {
 	WebSearchURL *string `json:"webSearchUrl,omitempty"`
 	// ID - READ-ONLY; A String identifier.
 	ID *string `json:"id,omitempty"`
-	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeStructuredValue'
+	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeLicense', 'TypeStructuredValue'
 	Type Type `json:"_type,omitempty"`
 }
 
@@ -4836,6 +4981,11 @@ func (ira ImageRecipesAction) AsImageShoppingSourcesAction() (*ImageShoppingSour
 	return nil, false
 }
 
+// AsLicense is the BasicResponseBase implementation for ImageRecipesAction.
+func (ira ImageRecipesAction) AsLicense() (*License, bool) {
+	return nil, false
+}
+
 // AsStructuredValue is the BasicResponseBase implementation for ImageRecipesAction.
 func (ira ImageRecipesAction) AsStructuredValue() (*StructuredValue, bool) {
 	return nil, false
@@ -4952,6 +5102,14 @@ func (ira *ImageRecipesAction) UnmarshalJSON(body []byte) error {
 					return err
 				}
 				ira.Text = &textVar
+			}
+		case "mainEntity":
+			if v != nil {
+				mainEntity, err := unmarshalBasicThing(*v)
+				if err != nil {
+					return err
+				}
+				ira.MainEntity = mainEntity
 			}
 		case "name":
 			if v != nil {
@@ -5071,6 +5229,8 @@ type ImageRelatedSearchesAction struct {
 	DatePublished *string `json:"datePublished,omitempty"`
 	// Text - READ-ONLY; Text content of this creative work.
 	Text *string `json:"text,omitempty"`
+	// MainEntity - READ-ONLY
+	MainEntity BasicThing `json:"mainEntity,omitempty"`
 	// Name - READ-ONLY; The name of the thing represented by this object.
 	Name *string `json:"name,omitempty"`
 	// URL - READ-ONLY; The URL to get more information about the thing represented by this object.
@@ -5089,7 +5249,7 @@ type ImageRelatedSearchesAction struct {
 	WebSearchURL *string `json:"webSearchUrl,omitempty"`
 	// ID - READ-ONLY; A String identifier.
 	ID *string `json:"id,omitempty"`
-	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeStructuredValue'
+	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeLicense', 'TypeStructuredValue'
 	Type Type `json:"_type,omitempty"`
 }
 
@@ -5268,6 +5428,11 @@ func (irsa ImageRelatedSearchesAction) AsImageShoppingSourcesAction() (*ImageSho
 	return nil, false
 }
 
+// AsLicense is the BasicResponseBase implementation for ImageRelatedSearchesAction.
+func (irsa ImageRelatedSearchesAction) AsLicense() (*License, bool) {
+	return nil, false
+}
+
 // AsStructuredValue is the BasicResponseBase implementation for ImageRelatedSearchesAction.
 func (irsa ImageRelatedSearchesAction) AsStructuredValue() (*StructuredValue, bool) {
 	return nil, false
@@ -5384,6 +5549,14 @@ func (irsa *ImageRelatedSearchesAction) UnmarshalJSON(body []byte) error {
 					return err
 				}
 				irsa.Text = &textVar
+			}
+		case "mainEntity":
+			if v != nil {
+				mainEntity, err := unmarshalBasicThing(*v)
+				if err != nil {
+					return err
+				}
+				irsa.MainEntity = mainEntity
 			}
 		case "name":
 			if v != nil {
@@ -5503,6 +5676,8 @@ type ImageShoppingSourcesAction struct {
 	DatePublished *string `json:"datePublished,omitempty"`
 	// Text - READ-ONLY; Text content of this creative work.
 	Text *string `json:"text,omitempty"`
+	// MainEntity - READ-ONLY
+	MainEntity BasicThing `json:"mainEntity,omitempty"`
 	// Name - READ-ONLY; The name of the thing represented by this object.
 	Name *string `json:"name,omitempty"`
 	// URL - READ-ONLY; The URL to get more information about the thing represented by this object.
@@ -5521,7 +5696,7 @@ type ImageShoppingSourcesAction struct {
 	WebSearchURL *string `json:"webSearchUrl,omitempty"`
 	// ID - READ-ONLY; A String identifier.
 	ID *string `json:"id,omitempty"`
-	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeStructuredValue'
+	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeLicense', 'TypeStructuredValue'
 	Type Type `json:"_type,omitempty"`
 }
 
@@ -5700,6 +5875,11 @@ func (issa ImageShoppingSourcesAction) AsImageShoppingSourcesAction() (*ImageSho
 	return &issa, true
 }
 
+// AsLicense is the BasicResponseBase implementation for ImageShoppingSourcesAction.
+func (issa ImageShoppingSourcesAction) AsLicense() (*License, bool) {
+	return nil, false
+}
+
 // AsStructuredValue is the BasicResponseBase implementation for ImageShoppingSourcesAction.
 func (issa ImageShoppingSourcesAction) AsStructuredValue() (*StructuredValue, bool) {
 	return nil, false
@@ -5816,6 +5996,14 @@ func (issa *ImageShoppingSourcesAction) UnmarshalJSON(body []byte) error {
 					return err
 				}
 				issa.Text = &textVar
+			}
+		case "mainEntity":
+			if v != nil {
+				mainEntity, err := unmarshalBasicThing(*v)
+				if err != nil {
+					return err
+				}
+				issa.MainEntity = mainEntity
 			}
 		case "name":
 			if v != nil {
@@ -5956,7 +6144,7 @@ type ImageTag struct {
 	WebSearchURL *string `json:"webSearchUrl,omitempty"`
 	// ID - READ-ONLY; A String identifier.
 	ID *string `json:"id,omitempty"`
-	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeStructuredValue'
+	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeLicense', 'TypeStructuredValue'
 	Type Type `json:"_type,omitempty"`
 }
 
@@ -6132,6 +6320,11 @@ func (it ImageTag) AsImageRelatedSearchesAction() (*ImageRelatedSearchesAction, 
 
 // AsImageShoppingSourcesAction is the BasicResponseBase implementation for ImageTag.
 func (it ImageTag) AsImageShoppingSourcesAction() (*ImageShoppingSourcesAction, bool) {
+	return nil, false
+}
+
+// AsLicense is the BasicResponseBase implementation for ImageTag.
+func (it ImageTag) AsLicense() (*License, bool) {
 	return nil, false
 }
 
@@ -6325,7 +6518,7 @@ type Intangible struct {
 	WebSearchURL *string `json:"webSearchUrl,omitempty"`
 	// ID - READ-ONLY; A String identifier.
 	ID *string `json:"id,omitempty"`
-	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeStructuredValue'
+	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeLicense', 'TypeStructuredValue'
 	Type Type `json:"_type,omitempty"`
 }
 
@@ -6549,6 +6742,11 @@ func (i Intangible) AsImageShoppingSourcesAction() (*ImageShoppingSourcesAction,
 	return nil, false
 }
 
+// AsLicense is the BasicResponseBase implementation for Intangible.
+func (i Intangible) AsLicense() (*License, bool) {
+	return nil, false
+}
+
 // AsStructuredValue is the BasicResponseBase implementation for Intangible.
 func (i Intangible) AsStructuredValue() (*StructuredValue, bool) {
 	return nil, false
@@ -6574,6 +6772,388 @@ func (i Intangible) AsBasicResponseBase() (BasicResponseBase, bool) {
 type KnowledgeRequest struct {
 	// Filters - A key-value object consisting of filters that may be specified to limit the results returned by the API.
 	Filters *Filters `json:"filters,omitempty"`
+}
+
+// License defines the license under which the text or photo may be used.
+type License struct {
+	// ThumbnailURL - READ-ONLY; The URL to a thumbnail of the item.
+	ThumbnailURL *string `json:"thumbnailUrl,omitempty"`
+	// Provider - READ-ONLY; The source of the creative work.
+	Provider *[]BasicThing `json:"provider,omitempty"`
+	// DatePublished - READ-ONLY; The date on which the CreativeWork was published.
+	DatePublished *string `json:"datePublished,omitempty"`
+	// Text - READ-ONLY; Text content of this creative work.
+	Text *string `json:"text,omitempty"`
+	// MainEntity - READ-ONLY
+	MainEntity BasicThing `json:"mainEntity,omitempty"`
+	// Name - READ-ONLY; The name of the thing represented by this object.
+	Name *string `json:"name,omitempty"`
+	// URL - READ-ONLY; The URL to get more information about the thing represented by this object.
+	URL *string `json:"url,omitempty"`
+	// Image - READ-ONLY; An image of the item.
+	Image *ImageObject `json:"image,omitempty"`
+	// Description - READ-ONLY; A short description of the item.
+	Description *string `json:"description,omitempty"`
+	// AlternateName - READ-ONLY; An alias for the item.
+	AlternateName *string `json:"alternateName,omitempty"`
+	// BingID - READ-ONLY; An ID that uniquely identifies this item.
+	BingID *string `json:"bingId,omitempty"`
+	// ReadLink - READ-ONLY; The URL that returns this resource. To use the URL, append query parameters as appropriate and include the Ocp-Apim-Subscription-Key header.
+	ReadLink *string `json:"readLink,omitempty"`
+	// WebSearchURL - READ-ONLY; The URL to Bing's search result for this item.
+	WebSearchURL *string `json:"webSearchUrl,omitempty"`
+	// ID - READ-ONLY; A String identifier.
+	ID *string `json:"id,omitempty"`
+	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeLicense', 'TypeStructuredValue'
+	Type Type `json:"_type,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for License.
+func (l License) MarshalJSON() ([]byte, error) {
+	l.Type = TypeLicense
+	objectMap := make(map[string]interface{})
+	if l.Type != "" {
+		objectMap["_type"] = l.Type
+	}
+	return json.Marshal(objectMap)
+}
+
+// AsPoint2D is the BasicResponseBase implementation for License.
+func (l License) AsPoint2D() (*Point2D, bool) {
+	return nil, false
+}
+
+// AsNormalizedQuadrilateral is the BasicResponseBase implementation for License.
+func (l License) AsNormalizedQuadrilateral() (*NormalizedQuadrilateral, bool) {
+	return nil, false
+}
+
+// AsImageAction is the BasicResponseBase implementation for License.
+func (l License) AsImageAction() (*ImageAction, bool) {
+	return nil, false
+}
+
+// AsBasicImageAction is the BasicResponseBase implementation for License.
+func (l License) AsBasicImageAction() (BasicImageAction, bool) {
+	return nil, false
+}
+
+// AsImageTag is the BasicResponseBase implementation for License.
+func (l License) AsImageTag() (*ImageTag, bool) {
+	return nil, false
+}
+
+// AsOrganization is the BasicResponseBase implementation for License.
+func (l License) AsOrganization() (*Organization, bool) {
+	return nil, false
+}
+
+// AsOffer is the BasicResponseBase implementation for License.
+func (l License) AsOffer() (*Offer, bool) {
+	return nil, false
+}
+
+// AsBasicOffer is the BasicResponseBase implementation for License.
+func (l License) AsBasicOffer() (BasicOffer, bool) {
+	return nil, false
+}
+
+// AsAggregateOffer is the BasicResponseBase implementation for License.
+func (l License) AsAggregateOffer() (*AggregateOffer, bool) {
+	return nil, false
+}
+
+// AsImageObject is the BasicResponseBase implementation for License.
+func (l License) AsImageObject() (*ImageObject, bool) {
+	return nil, false
+}
+
+// AsImageKnowledge is the BasicResponseBase implementation for License.
+func (l License) AsImageKnowledge() (*ImageKnowledge, bool) {
+	return nil, false
+}
+
+// AsResponse is the BasicResponseBase implementation for License.
+func (l License) AsResponse() (*Response, bool) {
+	return nil, false
+}
+
+// AsBasicResponse is the BasicResponseBase implementation for License.
+func (l License) AsBasicResponse() (BasicResponse, bool) {
+	return &l, true
+}
+
+// AsIdentifiable is the BasicResponseBase implementation for License.
+func (l License) AsIdentifiable() (*Identifiable, bool) {
+	return nil, false
+}
+
+// AsBasicIdentifiable is the BasicResponseBase implementation for License.
+func (l License) AsBasicIdentifiable() (BasicIdentifiable, bool) {
+	return &l, true
+}
+
+// AsErrorResponse is the BasicResponseBase implementation for License.
+func (l License) AsErrorResponse() (*ErrorResponse, bool) {
+	return nil, false
+}
+
+// AsThing is the BasicResponseBase implementation for License.
+func (l License) AsThing() (*Thing, bool) {
+	return nil, false
+}
+
+// AsBasicThing is the BasicResponseBase implementation for License.
+func (l License) AsBasicThing() (BasicThing, bool) {
+	return &l, true
+}
+
+// AsAction is the BasicResponseBase implementation for License.
+func (l License) AsAction() (*Action, bool) {
+	return nil, false
+}
+
+// AsBasicAction is the BasicResponseBase implementation for License.
+func (l License) AsBasicAction() (BasicAction, bool) {
+	return nil, false
+}
+
+// AsMediaObject is the BasicResponseBase implementation for License.
+func (l License) AsMediaObject() (*MediaObject, bool) {
+	return nil, false
+}
+
+// AsBasicMediaObject is the BasicResponseBase implementation for License.
+func (l License) AsBasicMediaObject() (BasicMediaObject, bool) {
+	return nil, false
+}
+
+// AsCreativeWork is the BasicResponseBase implementation for License.
+func (l License) AsCreativeWork() (*CreativeWork, bool) {
+	return nil, false
+}
+
+// AsBasicCreativeWork is the BasicResponseBase implementation for License.
+func (l License) AsBasicCreativeWork() (BasicCreativeWork, bool) {
+	return &l, true
+}
+
+// AsPerson is the BasicResponseBase implementation for License.
+func (l License) AsPerson() (*Person, bool) {
+	return nil, false
+}
+
+// AsIntangible is the BasicResponseBase implementation for License.
+func (l License) AsIntangible() (*Intangible, bool) {
+	return nil, false
+}
+
+// AsBasicIntangible is the BasicResponseBase implementation for License.
+func (l License) AsBasicIntangible() (BasicIntangible, bool) {
+	return nil, false
+}
+
+// AsImageEntityAction is the BasicResponseBase implementation for License.
+func (l License) AsImageEntityAction() (*ImageEntityAction, bool) {
+	return nil, false
+}
+
+// AsImageModuleAction is the BasicResponseBase implementation for License.
+func (l License) AsImageModuleAction() (*ImageModuleAction, bool) {
+	return nil, false
+}
+
+// AsRecipe is the BasicResponseBase implementation for License.
+func (l License) AsRecipe() (*Recipe, bool) {
+	return nil, false
+}
+
+// AsImageRecipesAction is the BasicResponseBase implementation for License.
+func (l License) AsImageRecipesAction() (*ImageRecipesAction, bool) {
+	return nil, false
+}
+
+// AsImageRelatedSearchesAction is the BasicResponseBase implementation for License.
+func (l License) AsImageRelatedSearchesAction() (*ImageRelatedSearchesAction, bool) {
+	return nil, false
+}
+
+// AsImageShoppingSourcesAction is the BasicResponseBase implementation for License.
+func (l License) AsImageShoppingSourcesAction() (*ImageShoppingSourcesAction, bool) {
+	return nil, false
+}
+
+// AsLicense is the BasicResponseBase implementation for License.
+func (l License) AsLicense() (*License, bool) {
+	return &l, true
+}
+
+// AsStructuredValue is the BasicResponseBase implementation for License.
+func (l License) AsStructuredValue() (*StructuredValue, bool) {
+	return nil, false
+}
+
+// AsBasicStructuredValue is the BasicResponseBase implementation for License.
+func (l License) AsBasicStructuredValue() (BasicStructuredValue, bool) {
+	return nil, false
+}
+
+// AsResponseBase is the BasicResponseBase implementation for License.
+func (l License) AsResponseBase() (*ResponseBase, bool) {
+	return nil, false
+}
+
+// AsBasicResponseBase is the BasicResponseBase implementation for License.
+func (l License) AsBasicResponseBase() (BasicResponseBase, bool) {
+	return &l, true
+}
+
+// UnmarshalJSON is the custom unmarshaler for License struct.
+func (l *License) UnmarshalJSON(body []byte) error {
+	var m map[string]*json.RawMessage
+	err := json.Unmarshal(body, &m)
+	if err != nil {
+		return err
+	}
+	for k, v := range m {
+		switch k {
+		case "thumbnailUrl":
+			if v != nil {
+				var thumbnailURL string
+				err = json.Unmarshal(*v, &thumbnailURL)
+				if err != nil {
+					return err
+				}
+				l.ThumbnailURL = &thumbnailURL
+			}
+		case "provider":
+			if v != nil {
+				provider, err := unmarshalBasicThingArray(*v)
+				if err != nil {
+					return err
+				}
+				l.Provider = &provider
+			}
+		case "datePublished":
+			if v != nil {
+				var datePublished string
+				err = json.Unmarshal(*v, &datePublished)
+				if err != nil {
+					return err
+				}
+				l.DatePublished = &datePublished
+			}
+		case "text":
+			if v != nil {
+				var textVar string
+				err = json.Unmarshal(*v, &textVar)
+				if err != nil {
+					return err
+				}
+				l.Text = &textVar
+			}
+		case "mainEntity":
+			if v != nil {
+				mainEntity, err := unmarshalBasicThing(*v)
+				if err != nil {
+					return err
+				}
+				l.MainEntity = mainEntity
+			}
+		case "name":
+			if v != nil {
+				var name string
+				err = json.Unmarshal(*v, &name)
+				if err != nil {
+					return err
+				}
+				l.Name = &name
+			}
+		case "url":
+			if v != nil {
+				var URL string
+				err = json.Unmarshal(*v, &URL)
+				if err != nil {
+					return err
+				}
+				l.URL = &URL
+			}
+		case "image":
+			if v != nil {
+				var imageVar ImageObject
+				err = json.Unmarshal(*v, &imageVar)
+				if err != nil {
+					return err
+				}
+				l.Image = &imageVar
+			}
+		case "description":
+			if v != nil {
+				var description string
+				err = json.Unmarshal(*v, &description)
+				if err != nil {
+					return err
+				}
+				l.Description = &description
+			}
+		case "alternateName":
+			if v != nil {
+				var alternateName string
+				err = json.Unmarshal(*v, &alternateName)
+				if err != nil {
+					return err
+				}
+				l.AlternateName = &alternateName
+			}
+		case "bingId":
+			if v != nil {
+				var bingID string
+				err = json.Unmarshal(*v, &bingID)
+				if err != nil {
+					return err
+				}
+				l.BingID = &bingID
+			}
+		case "readLink":
+			if v != nil {
+				var readLink string
+				err = json.Unmarshal(*v, &readLink)
+				if err != nil {
+					return err
+				}
+				l.ReadLink = &readLink
+			}
+		case "webSearchUrl":
+			if v != nil {
+				var webSearchURL string
+				err = json.Unmarshal(*v, &webSearchURL)
+				if err != nil {
+					return err
+				}
+				l.WebSearchURL = &webSearchURL
+			}
+		case "id":
+			if v != nil {
+				var ID string
+				err = json.Unmarshal(*v, &ID)
+				if err != nil {
+					return err
+				}
+				l.ID = &ID
+			}
+		case "_type":
+			if v != nil {
+				var typeVar Type
+				err = json.Unmarshal(*v, &typeVar)
+				if err != nil {
+					return err
+				}
+				l.Type = typeVar
+			}
+		}
+	}
+
+	return nil
 }
 
 // BasicMediaObject defines a media object.
@@ -6606,6 +7186,8 @@ type MediaObject struct {
 	DatePublished *string `json:"datePublished,omitempty"`
 	// Text - READ-ONLY; Text content of this creative work.
 	Text *string `json:"text,omitempty"`
+	// MainEntity - READ-ONLY
+	MainEntity BasicThing `json:"mainEntity,omitempty"`
 	// Name - READ-ONLY; The name of the thing represented by this object.
 	Name *string `json:"name,omitempty"`
 	// URL - READ-ONLY; The URL to get more information about the thing represented by this object.
@@ -6624,7 +7206,7 @@ type MediaObject struct {
 	WebSearchURL *string `json:"webSearchUrl,omitempty"`
 	// ID - READ-ONLY; A String identifier.
 	ID *string `json:"id,omitempty"`
-	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeStructuredValue'
+	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeLicense', 'TypeStructuredValue'
 	Type Type `json:"_type,omitempty"`
 }
 
@@ -6840,6 +7422,11 @@ func (mo MediaObject) AsImageShoppingSourcesAction() (*ImageShoppingSourcesActio
 	return nil, false
 }
 
+// AsLicense is the BasicResponseBase implementation for MediaObject.
+func (mo MediaObject) AsLicense() (*License, bool) {
+	return nil, false
+}
+
 // AsStructuredValue is the BasicResponseBase implementation for MediaObject.
 func (mo MediaObject) AsStructuredValue() (*StructuredValue, bool) {
 	return nil, false
@@ -6967,6 +7554,14 @@ func (mo *MediaObject) UnmarshalJSON(body []byte) error {
 				}
 				mo.Text = &textVar
 			}
+		case "mainEntity":
+			if v != nil {
+				mainEntity, err := unmarshalBasicThing(*v)
+				if err != nil {
+					return err
+				}
+				mo.MainEntity = mainEntity
+			}
 		case "name":
 			if v != nil {
 				var name string
@@ -7093,7 +7688,7 @@ type NormalizedQuadrilateral struct {
 	WebSearchURL *string `json:"webSearchUrl,omitempty"`
 	// ID - READ-ONLY; A String identifier.
 	ID *string `json:"id,omitempty"`
-	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeStructuredValue'
+	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeLicense', 'TypeStructuredValue'
 	Type Type `json:"_type,omitempty"`
 }
 
@@ -7284,6 +7879,11 @@ func (nq NormalizedQuadrilateral) AsImageShoppingSourcesAction() (*ImageShopping
 	return nil, false
 }
 
+// AsLicense is the BasicResponseBase implementation for NormalizedQuadrilateral.
+func (nq NormalizedQuadrilateral) AsLicense() (*License, bool) {
+	return nil, false
+}
+
 // AsStructuredValue is the BasicResponseBase implementation for NormalizedQuadrilateral.
 func (nq NormalizedQuadrilateral) AsStructuredValue() (*StructuredValue, bool) {
 	return nil, false
@@ -7342,7 +7942,7 @@ type Offer struct {
 	WebSearchURL *string `json:"webSearchUrl,omitempty"`
 	// ID - READ-ONLY; A String identifier.
 	ID *string `json:"id,omitempty"`
-	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeStructuredValue'
+	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeLicense', 'TypeStructuredValue'
 	Type Type `json:"_type,omitempty"`
 }
 
@@ -7558,6 +8158,11 @@ func (o Offer) AsImageShoppingSourcesAction() (*ImageShoppingSourcesAction, bool
 	return nil, false
 }
 
+// AsLicense is the BasicResponseBase implementation for Offer.
+func (o Offer) AsLicense() (*License, bool) {
+	return nil, false
+}
+
 // AsStructuredValue is the BasicResponseBase implementation for Offer.
 func (o Offer) AsStructuredValue() (*StructuredValue, bool) {
 	return nil, false
@@ -7598,7 +8203,7 @@ type Organization struct {
 	WebSearchURL *string `json:"webSearchUrl,omitempty"`
 	// ID - READ-ONLY; A String identifier.
 	ID *string `json:"id,omitempty"`
-	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeStructuredValue'
+	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeLicense', 'TypeStructuredValue'
 	Type Type `json:"_type,omitempty"`
 }
 
@@ -7777,6 +8382,11 @@ func (o Organization) AsImageShoppingSourcesAction() (*ImageShoppingSourcesActio
 	return nil, false
 }
 
+// AsLicense is the BasicResponseBase implementation for Organization.
+func (o Organization) AsLicense() (*License, bool) {
+	return nil, false
+}
+
 // AsStructuredValue is the BasicResponseBase implementation for Organization.
 func (o Organization) AsStructuredValue() (*StructuredValue, bool) {
 	return nil, false
@@ -7821,7 +8431,7 @@ type Person struct {
 	WebSearchURL *string `json:"webSearchUrl,omitempty"`
 	// ID - READ-ONLY; A String identifier.
 	ID *string `json:"id,omitempty"`
-	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeStructuredValue'
+	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeLicense', 'TypeStructuredValue'
 	Type Type `json:"_type,omitempty"`
 }
 
@@ -8000,6 +8610,11 @@ func (p Person) AsImageShoppingSourcesAction() (*ImageShoppingSourcesAction, boo
 	return nil, false
 }
 
+// AsLicense is the BasicResponseBase implementation for Person.
+func (p Person) AsLicense() (*License, bool) {
+	return nil, false
+}
+
 // AsStructuredValue is the BasicResponseBase implementation for Person.
 func (p Person) AsStructuredValue() (*StructuredValue, bool) {
 	return nil, false
@@ -8044,7 +8659,7 @@ type Point2D struct {
 	WebSearchURL *string `json:"webSearchUrl,omitempty"`
 	// ID - READ-ONLY; A String identifier.
 	ID *string `json:"id,omitempty"`
-	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeStructuredValue'
+	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeLicense', 'TypeStructuredValue'
 	Type Type `json:"_type,omitempty"`
 }
 
@@ -8226,6 +8841,11 @@ func (p2 Point2D) AsImageRelatedSearchesAction() (*ImageRelatedSearchesAction, b
 
 // AsImageShoppingSourcesAction is the BasicResponseBase implementation for Point2D.
 func (p2 Point2D) AsImageShoppingSourcesAction() (*ImageShoppingSourcesAction, bool) {
+	return nil, false
+}
+
+// AsLicense is the BasicResponseBase implementation for Point2D.
+func (p2 Point2D) AsLicense() (*License, bool) {
 	return nil, false
 }
 
@@ -8464,6 +9084,8 @@ type Recipe struct {
 	DatePublished *string `json:"datePublished,omitempty"`
 	// Text - READ-ONLY; Text content of this creative work.
 	Text *string `json:"text,omitempty"`
+	// MainEntity - READ-ONLY
+	MainEntity BasicThing `json:"mainEntity,omitempty"`
 	// Name - READ-ONLY; The name of the thing represented by this object.
 	Name *string `json:"name,omitempty"`
 	// URL - READ-ONLY; The URL to get more information about the thing represented by this object.
@@ -8482,7 +9104,7 @@ type Recipe struct {
 	WebSearchURL *string `json:"webSearchUrl,omitempty"`
 	// ID - READ-ONLY; A String identifier.
 	ID *string `json:"id,omitempty"`
-	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeStructuredValue'
+	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeLicense', 'TypeStructuredValue'
 	Type Type `json:"_type,omitempty"`
 }
 
@@ -8661,6 +9283,11 @@ func (r Recipe) AsImageShoppingSourcesAction() (*ImageShoppingSourcesAction, boo
 	return nil, false
 }
 
+// AsLicense is the BasicResponseBase implementation for Recipe.
+func (r Recipe) AsLicense() (*License, bool) {
+	return nil, false
+}
+
 // AsStructuredValue is the BasicResponseBase implementation for Recipe.
 func (r Recipe) AsStructuredValue() (*StructuredValue, bool) {
 	return nil, false
@@ -8751,6 +9378,14 @@ func (r *Recipe) UnmarshalJSON(body []byte) error {
 					return err
 				}
 				r.Text = &textVar
+			}
+		case "mainEntity":
+			if v != nil {
+				mainEntity, err := unmarshalBasicThing(*v)
+				if err != nil {
+					return err
+				}
+				r.MainEntity = mainEntity
 			}
 		case "name":
 			if v != nil {
@@ -8900,6 +9535,7 @@ type BasicResponse interface {
 	AsImageRecipesAction() (*ImageRecipesAction, bool)
 	AsImageRelatedSearchesAction() (*ImageRelatedSearchesAction, bool)
 	AsImageShoppingSourcesAction() (*ImageShoppingSourcesAction, bool)
+	AsLicense() (*License, bool)
 	AsStructuredValue() (*StructuredValue, bool)
 	AsBasicStructuredValue() (BasicStructuredValue, bool)
 	AsResponse() (*Response, bool)
@@ -8914,7 +9550,7 @@ type Response struct {
 	WebSearchURL *string `json:"webSearchUrl,omitempty"`
 	// ID - READ-ONLY; A String identifier.
 	ID *string `json:"id,omitempty"`
-	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeStructuredValue'
+	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeLicense', 'TypeStructuredValue'
 	Type Type `json:"_type,omitempty"`
 }
 
@@ -9014,6 +9650,10 @@ func unmarshalBasicResponse(body []byte) (BasicResponse, error) {
 		var issa ImageShoppingSourcesAction
 		err := json.Unmarshal(body, &issa)
 		return issa, err
+	case string(TypeLicense):
+		var l License
+		err := json.Unmarshal(body, &l)
+		return l, err
 	case string(TypeStructuredValue):
 		var sv StructuredValue
 		err := json.Unmarshal(body, &sv)
@@ -9218,6 +9858,11 @@ func (r Response) AsImageShoppingSourcesAction() (*ImageShoppingSourcesAction, b
 	return nil, false
 }
 
+// AsLicense is the BasicResponseBase implementation for Response.
+func (r Response) AsLicense() (*License, bool) {
+	return nil, false
+}
+
 // AsStructuredValue is the BasicResponseBase implementation for Response.
 func (r Response) AsStructuredValue() (*StructuredValue, bool) {
 	return nil, false
@@ -9273,6 +9918,7 @@ type BasicResponseBase interface {
 	AsImageRecipesAction() (*ImageRecipesAction, bool)
 	AsImageRelatedSearchesAction() (*ImageRelatedSearchesAction, bool)
 	AsImageShoppingSourcesAction() (*ImageShoppingSourcesAction, bool)
+	AsLicense() (*License, bool)
 	AsStructuredValue() (*StructuredValue, bool)
 	AsBasicStructuredValue() (BasicStructuredValue, bool)
 	AsResponseBase() (*ResponseBase, bool)
@@ -9280,7 +9926,7 @@ type BasicResponseBase interface {
 
 // ResponseBase response base.
 type ResponseBase struct {
-	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeStructuredValue'
+	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeLicense', 'TypeStructuredValue'
 	Type Type `json:"_type,omitempty"`
 }
 
@@ -9388,6 +10034,10 @@ func unmarshalBasicResponseBase(body []byte) (BasicResponseBase, error) {
 		var issa ImageShoppingSourcesAction
 		err := json.Unmarshal(body, &issa)
 		return issa, err
+	case string(TypeLicense):
+		var l License
+		err := json.Unmarshal(body, &l)
+		return l, err
 	case string(TypeStructuredValue):
 		var sv StructuredValue
 		err := json.Unmarshal(body, &sv)
@@ -9592,6 +10242,11 @@ func (rb ResponseBase) AsImageShoppingSourcesAction() (*ImageShoppingSourcesActi
 	return nil, false
 }
 
+// AsLicense is the BasicResponseBase implementation for ResponseBase.
+func (rb ResponseBase) AsLicense() (*License, bool) {
+	return nil, false
+}
+
 // AsStructuredValue is the BasicResponseBase implementation for ResponseBase.
 func (rb ResponseBase) AsStructuredValue() (*StructuredValue, bool) {
 	return nil, false
@@ -9639,7 +10294,7 @@ type StructuredValue struct {
 	WebSearchURL *string `json:"webSearchUrl,omitempty"`
 	// ID - READ-ONLY; A String identifier.
 	ID *string `json:"id,omitempty"`
-	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeStructuredValue'
+	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeLicense', 'TypeStructuredValue'
 	Type Type `json:"_type,omitempty"`
 }
 
@@ -9859,6 +10514,11 @@ func (sv StructuredValue) AsImageShoppingSourcesAction() (*ImageShoppingSourcesA
 	return nil, false
 }
 
+// AsLicense is the BasicResponseBase implementation for StructuredValue.
+func (sv StructuredValue) AsLicense() (*License, bool) {
+	return nil, false
+}
+
 // AsStructuredValue is the BasicResponseBase implementation for StructuredValue.
 func (sv StructuredValue) AsStructuredValue() (*StructuredValue, bool) {
 	return &sv, true
@@ -9906,6 +10566,7 @@ type BasicThing interface {
 	AsImageRecipesAction() (*ImageRecipesAction, bool)
 	AsImageRelatedSearchesAction() (*ImageRelatedSearchesAction, bool)
 	AsImageShoppingSourcesAction() (*ImageShoppingSourcesAction, bool)
+	AsLicense() (*License, bool)
 	AsStructuredValue() (*StructuredValue, bool)
 	AsBasicStructuredValue() (BasicStructuredValue, bool)
 	AsThing() (*Thing, bool)
@@ -9931,7 +10592,7 @@ type Thing struct {
 	WebSearchURL *string `json:"webSearchUrl,omitempty"`
 	// ID - READ-ONLY; A String identifier.
 	ID *string `json:"id,omitempty"`
-	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeStructuredValue'
+	// Type - Possible values include: 'TypeResponseBase', 'TypePoint2D', 'TypeNormalizedQuadrilateral', 'TypeImageAction', 'TypeImageTag', 'TypeOrganization', 'TypeOffer', 'TypeAggregateOffer', 'TypeImageObject', 'TypeImageKnowledge', 'TypeResponse', 'TypeIdentifiable', 'TypeErrorResponse', 'TypeThing', 'TypeAction', 'TypeMediaObject', 'TypeCreativeWork', 'TypePerson', 'TypeIntangible', 'TypeImageEntityAction', 'TypeImageModuleAction', 'TypeRecipe', 'TypeImageRecipesAction', 'TypeImageRelatedSearchesAction', 'TypeImageShoppingSourcesAction', 'TypeLicense', 'TypeStructuredValue'
 	Type Type `json:"_type,omitempty"`
 }
 
@@ -10019,6 +10680,10 @@ func unmarshalBasicThing(body []byte) (BasicThing, error) {
 		var issa ImageShoppingSourcesAction
 		err := json.Unmarshal(body, &issa)
 		return issa, err
+	case string(TypeLicense):
+		var l License
+		err := json.Unmarshal(body, &l)
+		return l, err
 	case string(TypeStructuredValue):
 		var sv StructuredValue
 		err := json.Unmarshal(body, &sv)
@@ -10220,6 +10885,11 @@ func (t Thing) AsImageRelatedSearchesAction() (*ImageRelatedSearchesAction, bool
 
 // AsImageShoppingSourcesAction is the BasicResponseBase implementation for Thing.
 func (t Thing) AsImageShoppingSourcesAction() (*ImageShoppingSourcesAction, bool) {
+	return nil, false
+}
+
+// AsLicense is the BasicResponseBase implementation for Thing.
+func (t Thing) AsLicense() (*License, bool) {
 	return nil, false
 }
 
