@@ -596,6 +596,27 @@ func PossiblePolicyResourceStateValues() []PolicyResourceState {
 	return []PolicyResourceState{PolicyResourceStateCreating, PolicyResourceStateDeleting, PolicyResourceStateDisabled, PolicyResourceStateDisabling, PolicyResourceStateEnabled, PolicyResourceStateEnabling}
 }
 
+// PrivateEndpointStatus enumerates the values for private endpoint status.
+type PrivateEndpointStatus string
+
+const (
+	// Approved ...
+	Approved PrivateEndpointStatus = "Approved"
+	// Disconnected ...
+	Disconnected PrivateEndpointStatus = "Disconnected"
+	// Pending ...
+	Pending PrivateEndpointStatus = "Pending"
+	// Rejected ...
+	Rejected PrivateEndpointStatus = "Rejected"
+	// Timeout ...
+	Timeout PrivateEndpointStatus = "Timeout"
+)
+
+// PossiblePrivateEndpointStatusValues returns an array of possible values for the PrivateEndpointStatus const type.
+func PossiblePrivateEndpointStatusValues() []PrivateEndpointStatus {
+	return []PrivateEndpointStatus{Approved, Disconnected, Pending, Rejected, Timeout}
+}
+
 // Protocol enumerates the values for protocol.
 type Protocol string
 
@@ -617,13 +638,17 @@ type Query string
 const (
 	// StripAll ...
 	StripAll Query = "StripAll"
+	// StripAllExcept ...
+	StripAllExcept Query = "StripAllExcept"
 	// StripNone ...
 	StripNone Query = "StripNone"
+	// StripOnly ...
+	StripOnly Query = "StripOnly"
 )
 
 // PossibleQueryValues returns an array of possible values for the Query const type.
 func PossibleQueryValues() []Query {
-	return []Query{StripAll, StripNone}
+	return []Query{StripAll, StripAllExcept, StripNone, StripOnly}
 }
 
 // RedirectProtocol enumerates the values for redirect protocol.
@@ -924,10 +949,12 @@ type AzureAsyncOperationResult struct {
 type Backend struct {
 	// Address - Location of the backend (IP address or FQDN)
 	Address *string `json:"address,omitempty"`
-	// PrivateLinkID - If this backend is private, provide the private link resource Id. Populating this optional field indicates that this backend is 'Private'
-	PrivateLinkID *string `json:"privateLinkId,omitempty"`
-	// Location - Region of the backend if it is in Azure. Mandatory field if backend is 'Private'
-	Location *string `json:"location,omitempty"`
+	// PrivateLinkAlias - The Alias of the Private Link resource. Populating this optional field indicates that this backend is 'Private'
+	PrivateLinkAlias *string `json:"privateLinkAlias,omitempty"`
+	// PrivateEndpointStatus - READ-ONLY; The Approval status for the connection to the Private Link. Possible values include: 'Pending', 'Approved', 'Rejected', 'Disconnected', 'Timeout'
+	PrivateEndpointStatus PrivateEndpointStatus `json:"privateEndpointStatus,omitempty"`
+	// PrivateLinkApprovalMessage - A custom message to be included in the approval request to connect to the Private Link
+	PrivateLinkApprovalMessage *string `json:"privateLinkApprovalMessage,omitempty"`
 	// HTTPPort - The HTTP TCP port number. Must be between 1 and 65535.
 	HTTPPort *int32 `json:"httpPort,omitempty"`
 	// HTTPSPort - The HTTPS TCP port number. Must be between 1 and 65535.
@@ -1062,10 +1089,14 @@ type BackendPoolUpdateParameters struct {
 // CacheConfiguration caching settings for a caching-type route. To disable caching, do not provide a
 // cacheConfiguration object.
 type CacheConfiguration struct {
-	// QueryParameterStripDirective - Treatment of URL query terms when forming the cache key. Possible values include: 'StripNone', 'StripAll'
+	// QueryParameterStripDirective - Treatment of URL query terms when forming the cache key. Possible values include: 'StripNone', 'StripAll', 'StripOnly', 'StripAllExcept'
 	QueryParameterStripDirective Query `json:"queryParameterStripDirective,omitempty"`
+	// QueryParameters - query parameters to include or exclude (comma separated).
+	QueryParameters *string `json:"queryParameters,omitempty"`
 	// DynamicCompression - Whether to use dynamic compression for cached content. Possible values include: 'DynamicCompressionEnabledEnabled', 'DynamicCompressionEnabledDisabled'
 	DynamicCompression DynamicCompressionEnabled `json:"dynamicCompression,omitempty"`
+	// CacheDuration - The duration for which the content needs to be cached. Allowed format is in ISO 8601 format (http://en.wikipedia.org/wiki/ISO_8601#Durations). HTTP requires the value to be no more than a year
+	CacheDuration *string `json:"cacheDuration,omitempty"`
 }
 
 // CertificateSourceParameters parameters required for enabling SSL with Front Door-managed certificates
