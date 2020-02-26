@@ -1,0 +1,5057 @@
+{
+ "modelTypes": [
+  {
+   "$id": "1",
+   "$type": "CompositeType",
+   "properties": [
+    {
+     "$id": "2",
+     "isReadOnly": false,
+     "realPath": [
+      "level"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "The lock level of the management lock."
+     },
+     "extensions": {
+      "x-ms-metadata": {
+       "apiVersions": [
+        "2015-01-01"
+       ],
+       "filename": [
+        "mem:///244?oai3.shaken.json"
+       ],
+       "name": "LockLevel",
+       "originalLocations": [
+        "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/schemas/ManagementLockProperties-level"
+       ]
+      },
+      "x-ms-enum": {
+       "name": "LockLevel",
+       "modelAsString": true
+      }
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "level"
+     },
+     "serializedName": "level",
+     "modelType": {
+      "$id": "3",
+      "$type": "EnumType",
+      "modelAsExtensible": false,
+      "values": [
+       {
+        "name": "NotSpecified",
+        "serializedName": "NotSpecified"
+       },
+       {
+        "name": "CanNotDelete",
+        "serializedName": "CanNotDelete"
+       },
+       {
+        "name": "ReadOnly",
+        "serializedName": "ReadOnly"
+       }
+      ],
+      "modelAsString": true,
+      "underlyingType": {
+       "$id": "4",
+       "$type": "PrimaryType",
+       "knownPrimaryType": "string",
+       "name": {
+        "fixed": false,
+        "raw": "String"
+       }
+      },
+      "name": {
+       "fixed": false,
+       "raw": "LockLevel"
+      }
+     }
+    },
+    {
+     "$id": "5",
+     "isReadOnly": false,
+     "realPath": [
+      "notes"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "The notes of the management lock."
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "notes"
+     },
+     "serializedName": "notes",
+     "modelType": {
+      "$id": "6",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "fixed": false,
+       "raw": "String"
+      }
+     }
+    }
+   ],
+   "serializedName": "ManagementLockProperties",
+   "documentation": "The management lock properties.",
+   "containsConstantProperties": false,
+   "name": {
+    "fixed": false,
+    "raw": "ManagementLockProperties"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2015-01-01"
+     ],
+     "filename": [
+      "mem:///244?oai3.shaken.json"
+     ],
+     "name": "ManagementLockProperties",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/schemas/ManagementLockProperties"
+     ]
+    }
+   }
+  },
+  {
+   "$id": "7",
+   "$type": "CompositeType",
+   "properties": [
+    {
+     "$id": "8",
+     "isReadOnly": false,
+     "realPath": [
+      "properties"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "The properties of the lock."
+     },
+     "extensions": {
+      "x-ms-client-flatten": true
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "properties"
+     },
+     "serializedName": "properties",
+     "modelType": {
+      "$ref": "1"
+     }
+    },
+    {
+     "$id": "9",
+     "isReadOnly": true,
+     "realPath": [
+      "id"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "The Id of the lock."
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "id"
+     },
+     "serializedName": "id",
+     "modelType": {
+      "$id": "10",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "fixed": false,
+       "raw": "String"
+      }
+     }
+    },
+    {
+     "$id": "11",
+     "isReadOnly": true,
+     "realPath": [
+      "type"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "The type of the lock."
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "type"
+     },
+     "serializedName": "type",
+     "modelType": {
+      "$id": "12",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "fixed": false,
+       "raw": "String"
+      }
+     }
+    },
+    {
+     "$id": "13",
+     "isReadOnly": false,
+     "realPath": [
+      "name"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "The name of the lock."
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "name"
+     },
+     "serializedName": "name",
+     "modelType": {
+      "$id": "14",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "fixed": false,
+       "raw": "String"
+      }
+     }
+    }
+   ],
+   "serializedName": "ManagementLockObject",
+   "documentation": "Management lock information.",
+   "containsConstantProperties": false,
+   "name": {
+    "fixed": false,
+    "raw": "ManagementLockObject"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2015-01-01"
+     ],
+     "filename": [
+      "mem:///244?oai3.shaken.json"
+     ],
+     "name": "ManagementLockObject",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/schemas/ManagementLockObject"
+     ]
+    },
+    "x-ms-azure-resource": true
+   }
+  },
+  {
+   "$id": "15",
+   "$type": "CompositeType",
+   "properties": [
+    {
+     "$id": "16",
+     "isReadOnly": false,
+     "realPath": [
+      "value"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "The list of locks."
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "value"
+     },
+     "serializedName": "value",
+     "modelType": {
+      "$id": "17",
+      "$type": "SequenceType",
+      "elementType": {
+       "$ref": "7"
+      },
+      "name": {
+       "fixed": false
+      }
+     }
+    },
+    {
+     "$id": "18",
+     "isReadOnly": false,
+     "realPath": [
+      "nextLink"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "The URL to get the next set of results."
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "nextLink"
+     },
+     "serializedName": "nextLink",
+     "modelType": {
+      "$id": "19",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "fixed": false,
+       "raw": "String"
+      }
+     }
+    }
+   ],
+   "serializedName": "ManagementLockListResult",
+   "documentation": "List of management locks.",
+   "containsConstantProperties": false,
+   "name": {
+    "fixed": false,
+    "raw": "ManagementLockListResult"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2015-01-01"
+     ],
+     "filename": [
+      "mem:///244?oai3.shaken.json"
+     ],
+     "name": "ManagementLockListResult",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/schemas/ManagementLockListResult"
+     ]
+    }
+   }
+  }
+ ],
+ "enumTypes": [
+  {
+   "$ref": "3"
+  }
+ ],
+ "name": "ManagementLockClient",
+ "namespace": "Locks",
+ "modelsName": "Models",
+ "apiVersion": "2015-01-01",
+ "baseUrl": "https://management.azure.com",
+ "extensions": {
+  "security": [
+   {
+    "azure_auth": [
+     "user_impersonation"
+    ]
+   }
+  ]
+ },
+ "properties": [
+  {
+   "$id": "20",
+   "isReadOnly": false,
+   "realPath": [
+    "subscriptionId"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The ID of the target subscription."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2015-01-01"
+     ],
+     "filename": [
+      "mem:///244?oai3.shaken.json"
+     ],
+     "name": "SubscriptionIdParameter",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/SubscriptionIdParameter"
+     ]
+    }
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "subscriptionId"
+   },
+   "serializedName": "subscriptionId",
+   "modelType": {
+    "$id": "21",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "22",
+   "isReadOnly": false,
+   "realPath": [
+    "api-version"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The API version to use for the operation."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2015-01-01"
+     ],
+     "filename": [
+      "mem:///244?oai3.shaken.json"
+     ],
+     "name": "ApiVersionParameter",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/ApiVersionParameter"
+     ]
+    }
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "api-version"
+   },
+   "serializedName": "api-version",
+   "modelType": {
+    "$id": "23",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "24",
+   "isReadOnly": false,
+   "realPath": [
+    "resourceGroupName"
+   ],
+   "collectionFormat": "none",
+   "constraints": {
+    "MaxLength": "90",
+    "MinLength": "1",
+    "Pattern": "^[-\\p{L}\\._\\(\\)\\w]+$"
+   },
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The resource group name."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2015-01-01"
+     ],
+     "filename": [
+      "mem:///244?oai3.shaken.json"
+     ],
+     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks-lockname·put·parameters·0",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks-lockname·put·parameters·0"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "resourceGroupName"
+   },
+   "serializedName": "resourceGroupName",
+   "modelType": {
+    "$id": "25",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "26",
+   "isReadOnly": false,
+   "realPath": [
+    "lockName"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The lock name."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2015-01-01"
+     ],
+     "filename": [
+      "mem:///244?oai3.shaken.json"
+     ],
+     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks-lockname·put·parameters·1",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks-lockname·put·parameters·1"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "lockName"
+   },
+   "serializedName": "lockName",
+   "modelType": {
+    "$id": "27",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "28",
+   "isReadOnly": false,
+   "realPath": [
+    "resourceGroupName"
+   ],
+   "collectionFormat": "none",
+   "constraints": {
+    "MaxLength": "90",
+    "MinLength": "1",
+    "Pattern": "^[-\\p{L}\\._\\(\\)\\w]+$"
+   },
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The resource group name."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2015-01-01"
+     ],
+     "filename": [
+      "mem:///244?oai3.shaken.json"
+     ],
+     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks-lockname·delete·parameters·0",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks-lockname·delete·parameters·0"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "ResourceGroupName1"
+   },
+   "serializedName": "resourceGroupName",
+   "modelType": {
+    "$id": "29",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "30",
+   "isReadOnly": false,
+   "realPath": [
+    "lockName"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The name of lock."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2015-01-01"
+     ],
+     "filename": [
+      "mem:///244?oai3.shaken.json"
+     ],
+     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks-lockname·delete·parameters·1",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks-lockname·delete·parameters·1"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "LockName1"
+   },
+   "serializedName": "lockName",
+   "modelType": {
+    "$id": "31",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "32",
+   "isReadOnly": false,
+   "realPath": [
+    "resourceGroupName"
+   ],
+   "collectionFormat": "none",
+   "constraints": {
+    "MaxLength": "90",
+    "MinLength": "1",
+    "Pattern": "^[-\\p{L}\\._\\(\\)\\w]+$"
+   },
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The resource group name."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2015-01-01"
+     ],
+     "filename": [
+      "mem:///244?oai3.shaken.json"
+     ],
+     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks-lockname·get·parameters·0",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks-lockname·get·parameters·0"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "ResourceGroupName2"
+   },
+   "serializedName": "resourceGroupName",
+   "modelType": {
+    "$id": "33",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "34",
+   "isReadOnly": false,
+   "realPath": [
+    "lockName"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The lock name."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2015-01-01"
+     ],
+     "filename": [
+      "mem:///244?oai3.shaken.json"
+     ],
+     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks-lockname·get·parameters·1",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks-lockname·get·parameters·1"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "LockName2"
+   },
+   "serializedName": "lockName",
+   "modelType": {
+    "$id": "35",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "36",
+   "isReadOnly": false,
+   "realPath": [
+    "resourceGroupName"
+   ],
+   "collectionFormat": "none",
+   "constraints": {
+    "MaxLength": "90",
+    "MinLength": "1",
+    "Pattern": "^[-\\p{L}\\._\\(\\)\\w]+$"
+   },
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The name of the resource group. "
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2015-01-01"
+     ],
+     "filename": [
+      "mem:///244?oai3.shaken.json"
+     ],
+     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·put·parameters·0",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·put·parameters·0"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "ResourceGroupName3"
+   },
+   "serializedName": "resourceGroupName",
+   "modelType": {
+    "$id": "37",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "38",
+   "isReadOnly": false,
+   "realPath": [
+    "resourceProviderNamespace"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "Resource identity."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2015-01-01"
+     ],
+     "filename": [
+      "mem:///244?oai3.shaken.json"
+     ],
+     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·put·parameters·1",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·put·parameters·1"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "resourceProviderNamespace"
+   },
+   "serializedName": "resourceProviderNamespace",
+   "modelType": {
+    "$id": "39",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "40",
+   "isReadOnly": false,
+   "realPath": [
+    "parentResourcePath"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "Resource identity."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2015-01-01"
+     ],
+     "filename": [
+      "mem:///244?oai3.shaken.json"
+     ],
+     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·put·parameters·2",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·put·parameters·2"
+     ]
+    },
+    "x-ms-skip-url-encoding": true,
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "parentResourcePath"
+   },
+   "serializedName": "parentResourcePath",
+   "modelType": {
+    "$id": "41",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "42",
+   "isReadOnly": false,
+   "realPath": [
+    "resourceType"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "Resource identity."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2015-01-01"
+     ],
+     "filename": [
+      "mem:///244?oai3.shaken.json"
+     ],
+     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·put·parameters·3",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·put·parameters·3"
+     ]
+    },
+    "x-ms-skip-url-encoding": true,
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "resourceType"
+   },
+   "serializedName": "resourceType",
+   "modelType": {
+    "$id": "43",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "44",
+   "isReadOnly": false,
+   "realPath": [
+    "resourceName"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "Resource identity."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2015-01-01"
+     ],
+     "filename": [
+      "mem:///244?oai3.shaken.json"
+     ],
+     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·put·parameters·4",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·put·parameters·4"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "resourceName"
+   },
+   "serializedName": "resourceName",
+   "modelType": {
+    "$id": "45",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "46",
+   "isReadOnly": false,
+   "realPath": [
+    "lockName"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The name of lock."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2015-01-01"
+     ],
+     "filename": [
+      "mem:///244?oai3.shaken.json"
+     ],
+     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·put·parameters·5",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·put·parameters·5"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "LockName3"
+   },
+   "serializedName": "lockName",
+   "modelType": {
+    "$id": "47",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "48",
+   "isReadOnly": false,
+   "realPath": [
+    "resourceGroupName"
+   ],
+   "collectionFormat": "none",
+   "constraints": {
+    "MaxLength": "90",
+    "MinLength": "1",
+    "Pattern": "^[-\\p{L}\\._\\(\\)\\w]+$"
+   },
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The name of the resource group. "
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2015-01-01"
+     ],
+     "filename": [
+      "mem:///244?oai3.shaken.json"
+     ],
+     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·delete·parameters·0",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·delete·parameters·0"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "ResourceGroupName4"
+   },
+   "serializedName": "resourceGroupName",
+   "modelType": {
+    "$id": "49",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "50",
+   "isReadOnly": false,
+   "realPath": [
+    "resourceProviderNamespace"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "Resource identity."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2015-01-01"
+     ],
+     "filename": [
+      "mem:///244?oai3.shaken.json"
+     ],
+     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·delete·parameters·1",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·delete·parameters·1"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "ResourceProviderNamespace1"
+   },
+   "serializedName": "resourceProviderNamespace",
+   "modelType": {
+    "$id": "51",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "52",
+   "isReadOnly": false,
+   "realPath": [
+    "parentResourcePath"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "Resource identity."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2015-01-01"
+     ],
+     "filename": [
+      "mem:///244?oai3.shaken.json"
+     ],
+     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·delete·parameters·2",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·delete·parameters·2"
+     ]
+    },
+    "x-ms-skip-url-encoding": true,
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "ParentResourcePath1"
+   },
+   "serializedName": "parentResourcePath",
+   "modelType": {
+    "$id": "53",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "54",
+   "isReadOnly": false,
+   "realPath": [
+    "resourceType"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "Resource identity."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2015-01-01"
+     ],
+     "filename": [
+      "mem:///244?oai3.shaken.json"
+     ],
+     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·delete·parameters·3",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·delete·parameters·3"
+     ]
+    },
+    "x-ms-skip-url-encoding": true,
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "ResourceType1"
+   },
+   "serializedName": "resourceType",
+   "modelType": {
+    "$id": "55",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "56",
+   "isReadOnly": false,
+   "realPath": [
+    "resourceName"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "Resource identity."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2015-01-01"
+     ],
+     "filename": [
+      "mem:///244?oai3.shaken.json"
+     ],
+     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·delete·parameters·4",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·delete·parameters·4"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "ResourceName1"
+   },
+   "serializedName": "resourceName",
+   "modelType": {
+    "$id": "57",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "58",
+   "isReadOnly": false,
+   "realPath": [
+    "lockName"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The name of lock."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2015-01-01"
+     ],
+     "filename": [
+      "mem:///244?oai3.shaken.json"
+     ],
+     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·delete·parameters·5",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·delete·parameters·5"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "LockName4"
+   },
+   "serializedName": "lockName",
+   "modelType": {
+    "$id": "59",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "60",
+   "isReadOnly": false,
+   "realPath": [
+    "lockName"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The name of lock."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2015-01-01"
+     ],
+     "filename": [
+      "mem:///244?oai3.shaken.json"
+     ],
+     "name": "paths·subscriptions-subscriptionid-providers-microsoft-authorization-locks-lockname·put·parameters·0",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-providers-microsoft-authorization-locks-lockname·put·parameters·0"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "LockName5"
+   },
+   "serializedName": "lockName",
+   "modelType": {
+    "$id": "61",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "62",
+   "isReadOnly": false,
+   "realPath": [
+    "lockName"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The name of lock."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2015-01-01"
+     ],
+     "filename": [
+      "mem:///244?oai3.shaken.json"
+     ],
+     "name": "paths·subscriptions-subscriptionid-providers-microsoft-authorization-locks-lockname·delete·parameters·0",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-providers-microsoft-authorization-locks-lockname·delete·parameters·0"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "LockName6"
+   },
+   "serializedName": "lockName",
+   "modelType": {
+    "$id": "63",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "64",
+   "isReadOnly": false,
+   "realPath": [
+    "lockName"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "Name of the management lock."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2015-01-01"
+     ],
+     "filename": [
+      "mem:///244?oai3.shaken.json"
+     ],
+     "name": "paths·subscriptions-subscriptionid-providers-microsoft-authorization-locks-lockname·get·parameters·0",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-providers-microsoft-authorization-locks-lockname·get·parameters·0"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "LockName7"
+   },
+   "serializedName": "lockName",
+   "modelType": {
+    "$id": "65",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "66",
+   "isReadOnly": false,
+   "realPath": [
+    "resourceGroupName"
+   ],
+   "collectionFormat": "none",
+   "constraints": {
+    "MaxLength": "90",
+    "MinLength": "1",
+    "Pattern": "^[-\\p{L}\\._\\(\\)\\w]+$"
+   },
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "Resource group name."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2015-01-01"
+     ],
+     "filename": [
+      "mem:///244?oai3.shaken.json"
+     ],
+     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks·get·parameters·0",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks·get·parameters·0"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "ResourceGroupName5"
+   },
+   "serializedName": "resourceGroupName",
+   "modelType": {
+    "$id": "67",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "68",
+   "isReadOnly": false,
+   "realPath": [
+    "$filter"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The filter to apply on the operation."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2015-01-01"
+     ],
+     "filename": [
+      "mem:///244?oai3.shaken.json"
+     ],
+     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks·get·parameters·1",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks·get·parameters·1"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": false,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "$filter"
+   },
+   "serializedName": "$filter",
+   "modelType": {
+    "$id": "69",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "70",
+   "isReadOnly": false,
+   "realPath": [
+    "resourceGroupName"
+   ],
+   "collectionFormat": "none",
+   "constraints": {
+    "MaxLength": "90",
+    "MinLength": "1",
+    "Pattern": "^[-\\p{L}\\._\\(\\)\\w]+$"
+   },
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The name of the resource group. The name is case insensitive."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2015-01-01"
+     ],
+     "filename": [
+      "mem:///244?oai3.shaken.json"
+     ],
+     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks·get·parameters·0",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks·get·parameters·0"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "ResourceGroupName6"
+   },
+   "serializedName": "resourceGroupName",
+   "modelType": {
+    "$id": "71",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "72",
+   "isReadOnly": false,
+   "realPath": [
+    "resourceProviderNamespace"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "Resource identity."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2015-01-01"
+     ],
+     "filename": [
+      "mem:///244?oai3.shaken.json"
+     ],
+     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks·get·parameters·1",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks·get·parameters·1"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "ResourceProviderNamespace2"
+   },
+   "serializedName": "resourceProviderNamespace",
+   "modelType": {
+    "$id": "73",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "74",
+   "isReadOnly": false,
+   "realPath": [
+    "parentResourcePath"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "Resource identity."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2015-01-01"
+     ],
+     "filename": [
+      "mem:///244?oai3.shaken.json"
+     ],
+     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks·get·parameters·2",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks·get·parameters·2"
+     ]
+    },
+    "x-ms-skip-url-encoding": true,
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "ParentResourcePath2"
+   },
+   "serializedName": "parentResourcePath",
+   "modelType": {
+    "$id": "75",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "76",
+   "isReadOnly": false,
+   "realPath": [
+    "resourceType"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "Resource identity."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2015-01-01"
+     ],
+     "filename": [
+      "mem:///244?oai3.shaken.json"
+     ],
+     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks·get·parameters·3",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks·get·parameters·3"
+     ]
+    },
+    "x-ms-skip-url-encoding": true,
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "ResourceType2"
+   },
+   "serializedName": "resourceType",
+   "modelType": {
+    "$id": "77",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "78",
+   "isReadOnly": false,
+   "realPath": [
+    "resourceName"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "Resource identity."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2015-01-01"
+     ],
+     "filename": [
+      "mem:///244?oai3.shaken.json"
+     ],
+     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks·get·parameters·4",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks·get·parameters·4"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "ResourceName2"
+   },
+   "serializedName": "resourceName",
+   "modelType": {
+    "$id": "79",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "80",
+   "isReadOnly": false,
+   "realPath": [
+    "$filter"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The filter to apply on the operation."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2015-01-01"
+     ],
+     "filename": [
+      "mem:///244?oai3.shaken.json"
+     ],
+     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks·get·parameters·5",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks·get·parameters·5"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": false,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "Filter1"
+   },
+   "serializedName": "$filter",
+   "modelType": {
+    "$id": "81",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "82",
+   "isReadOnly": false,
+   "realPath": [
+    "$filter"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The filter to apply on the operation."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2015-01-01"
+     ],
+     "filename": [
+      "mem:///244?oai3.shaken.json"
+     ],
+     "name": "paths·subscriptions-subscriptionid-providers-microsoft-authorization-locks·get·parameters·0",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-providers-microsoft-authorization-locks·get·parameters·0"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": false,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "Filter2"
+   },
+   "serializedName": "$filter",
+   "modelType": {
+    "$id": "83",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  }
+ ],
+ "operations": [
+  {
+   "methods": [
+    {
+     "parameters": [
+      {
+       "$id": "84",
+       "clientProperty": {
+        "$ref": "24"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "constraints": {
+        "MaxLength": "90",
+        "MinLength": "1",
+        "Pattern": "^[-\\p{L}\\._\\(\\)\\w]+$"
+       },
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The resource group name."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks-lockname·put·parameters·0",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks-lockname·put·parameters·0"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "resourceGroupName"
+       },
+       "serializedName": "resourceGroupName",
+       "modelType": {
+        "$id": "85",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "86",
+       "clientProperty": {
+        "$ref": "26"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The lock name."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks-lockname·put·parameters·1",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks-lockname·put·parameters·1"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "lockName"
+       },
+       "serializedName": "lockName",
+       "modelType": {
+        "$id": "87",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "88",
+       "location": "body",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The management lock parameters."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks-lockname·put·requestbody",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/requestBodies/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks-lockname·put·requestbody"
+         ]
+        },
+        "x-ms-requestBody-name": "parameters"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "parameters"
+       },
+       "serializedName": "parameters",
+       "modelType": {
+        "$ref": "7"
+       }
+      },
+      {
+       "$id": "89",
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false,
+        "raw": "2015-01-01"
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The API version to use for the request."
+       },
+       "isRequired": true,
+       "isConstant": true,
+       "name": {
+        "fixed": false,
+        "raw": "api-version"
+       },
+       "serializedName": "api-version",
+       "modelType": {
+        "$id": "90",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "91",
+       "clientProperty": {
+        "$ref": "20"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The ID of the target subscription."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "SubscriptionIdParameter",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/SubscriptionIdParameter"
+         ]
+        }
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "subscriptionId"
+       },
+       "serializedName": "subscriptionId",
+       "modelType": {
+        "$id": "92",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      }
+     ],
+     "name": {
+      "fixed": false,
+      "raw": "CreateOrUpdateAtResourceGroupLevel"
+     },
+     "group": {
+      "fixed": false,
+      "raw": "ManagementLocks"
+     },
+     "serializedName": "ManagementLocks_CreateOrUpdateAtResourceGroupLevel",
+     "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/locks/{lockName}",
+     "isAbsoluteUrl": false,
+     "httpMethod": "put",
+     "responses": {
+      "OK": {
+       "body": {
+        "$ref": "7"
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks-lockname·put·responses·200",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/responses/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks-lockname·put·responses·200",
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/responses/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks-lockname·put·responses·201"
+         ]
+        }
+       },
+       "isNullable": true
+      },
+      "Created": {
+       "body": {
+        "$ref": "7"
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks-lockname·put·responses·200",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/responses/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks-lockname·put·responses·200",
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/responses/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks-lockname·put·responses·201"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "isNullable": true
+     },
+     "returnType": {
+      "body": {
+       "$ref": "7"
+      },
+      "isNullable": true
+     },
+     "description": "Create or update a management lock at the resource group level.",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json"
+     ],
+     "extensions": {
+      "servers": [
+       {
+        "url": "https://management.azure.com/"
+       }
+      ],
+      "x-ms-requestBody-index": "2"
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "parameters": [
+      {
+       "$id": "93",
+       "clientProperty": {
+        "$ref": "24"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "constraints": {
+        "MaxLength": "90",
+        "MinLength": "1",
+        "Pattern": "^[-\\p{L}\\._\\(\\)\\w]+$"
+       },
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The resource group name."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks-lockname·delete·parameters·0",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks-lockname·delete·parameters·0"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "resourceGroupName"
+       },
+       "serializedName": "resourceGroupName",
+       "modelType": {
+        "$id": "94",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "95",
+       "clientProperty": {
+        "$ref": "26"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The name of lock."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks-lockname·delete·parameters·1",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks-lockname·delete·parameters·1"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "lockName"
+       },
+       "serializedName": "lockName",
+       "modelType": {
+        "$id": "96",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "97",
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false,
+        "raw": "2015-01-01"
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The API version to use for the request."
+       },
+       "isRequired": true,
+       "isConstant": true,
+       "name": {
+        "fixed": false,
+        "raw": "api-version"
+       },
+       "serializedName": "api-version",
+       "modelType": {
+        "$id": "98",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "99",
+       "clientProperty": {
+        "$ref": "20"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The ID of the target subscription."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "SubscriptionIdParameter",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/SubscriptionIdParameter"
+         ]
+        }
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "subscriptionId"
+       },
+       "serializedName": "subscriptionId",
+       "modelType": {
+        "$id": "100",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      }
+     ],
+     "name": {
+      "fixed": false,
+      "raw": "DeleteAtResourceGroupLevel"
+     },
+     "group": {
+      "fixed": false,
+      "raw": "ManagementLocks"
+     },
+     "serializedName": "ManagementLocks_DeleteAtResourceGroupLevel",
+     "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/locks/{lockName}",
+     "isAbsoluteUrl": false,
+     "httpMethod": "delete",
+     "responses": {
+      "OK": {
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks-lockname·delete·responses·200",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/responses/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks-lockname·delete·responses·200",
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/responses/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks-lockname·delete·responses·204"
+         ]
+        }
+       },
+       "isNullable": true
+      },
+      "NoContent": {
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks-lockname·delete·responses·200",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/responses/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks-lockname·delete·responses·200",
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/responses/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks-lockname·delete·responses·204"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "isNullable": true
+     },
+     "returnType": {
+      "isNullable": true
+     },
+     "description": "Deletes the management lock of a resource group.",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json"
+     ],
+     "extensions": {
+      "servers": [
+       {
+        "url": "https://management.azure.com/"
+       }
+      ]
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "parameters": [
+      {
+       "$id": "101",
+       "clientProperty": {
+        "$ref": "24"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "constraints": {
+        "MaxLength": "90",
+        "MinLength": "1",
+        "Pattern": "^[-\\p{L}\\._\\(\\)\\w]+$"
+       },
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The resource group name."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks-lockname·get·parameters·0",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks-lockname·get·parameters·0"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "resourceGroupName"
+       },
+       "serializedName": "resourceGroupName",
+       "modelType": {
+        "$id": "102",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "103",
+       "clientProperty": {
+        "$ref": "26"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The lock name."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks-lockname·get·parameters·1",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks-lockname·get·parameters·1"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "lockName"
+       },
+       "serializedName": "lockName",
+       "modelType": {
+        "$id": "104",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "105",
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false,
+        "raw": "2015-01-01"
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The API version to use for the request."
+       },
+       "isRequired": true,
+       "isConstant": true,
+       "name": {
+        "fixed": false,
+        "raw": "api-version"
+       },
+       "serializedName": "api-version",
+       "modelType": {
+        "$id": "106",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "107",
+       "clientProperty": {
+        "$ref": "20"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The ID of the target subscription."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "SubscriptionIdParameter",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/SubscriptionIdParameter"
+         ]
+        }
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "subscriptionId"
+       },
+       "serializedName": "subscriptionId",
+       "modelType": {
+        "$id": "108",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      }
+     ],
+     "name": {
+      "fixed": false,
+      "raw": "GetAtResourceGroupLevel"
+     },
+     "group": {
+      "fixed": false,
+      "raw": "ManagementLocks"
+     },
+     "serializedName": "ManagementLocks_GetAtResourceGroupLevel",
+     "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/locks/{lockName}",
+     "isAbsoluteUrl": false,
+     "httpMethod": "get",
+     "responses": {
+      "OK": {
+       "body": {
+        "$ref": "7"
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks-lockname·get·responses·200",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/responses/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks-lockname·get·responses·200"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "isNullable": true
+     },
+     "returnType": {
+      "body": {
+       "$ref": "7"
+      },
+      "isNullable": true
+     },
+     "description": "Gets a management lock at the resource group level.",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json"
+     ],
+     "extensions": {
+      "servers": [
+       {
+        "url": "https://management.azure.com/"
+       }
+      ]
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "parameters": [
+      {
+       "$id": "109",
+       "clientProperty": {
+        "$ref": "24"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "constraints": {
+        "MaxLength": "90",
+        "MinLength": "1",
+        "Pattern": "^[-\\p{L}\\._\\(\\)\\w]+$"
+       },
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The name of the resource group. "
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·put·parameters·0",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·put·parameters·0"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "resourceGroupName"
+       },
+       "serializedName": "resourceGroupName",
+       "modelType": {
+        "$id": "110",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "111",
+       "clientProperty": {
+        "$ref": "38"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "Resource identity."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·put·parameters·1",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·put·parameters·1"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "resourceProviderNamespace"
+       },
+       "serializedName": "resourceProviderNamespace",
+       "modelType": {
+        "$id": "112",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "113",
+       "clientProperty": {
+        "$ref": "40"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "Resource identity."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·put·parameters·2",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·put·parameters·2"
+         ]
+        },
+        "x-ms-skip-url-encoding": true,
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "parentResourcePath"
+       },
+       "serializedName": "parentResourcePath",
+       "modelType": {
+        "$id": "114",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "115",
+       "clientProperty": {
+        "$ref": "42"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "Resource identity."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·put·parameters·3",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·put·parameters·3"
+         ]
+        },
+        "x-ms-skip-url-encoding": true,
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "resourceType"
+       },
+       "serializedName": "resourceType",
+       "modelType": {
+        "$id": "116",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "117",
+       "clientProperty": {
+        "$ref": "44"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "Resource identity."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·put·parameters·4",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·put·parameters·4"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "resourceName"
+       },
+       "serializedName": "resourceName",
+       "modelType": {
+        "$id": "118",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "119",
+       "clientProperty": {
+        "$ref": "26"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The name of lock."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·put·parameters·5",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·put·parameters·5"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "lockName"
+       },
+       "serializedName": "lockName",
+       "modelType": {
+        "$id": "120",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "121",
+       "location": "body",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "Create or update management lock parameters."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·put·requestbody",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/requestBodies/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·put·requestbody"
+         ]
+        },
+        "x-ms-requestBody-name": "parameters"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "parameters"
+       },
+       "serializedName": "parameters",
+       "modelType": {
+        "$ref": "7"
+       }
+      },
+      {
+       "$id": "122",
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false,
+        "raw": "2015-01-01"
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The API version to use for the request."
+       },
+       "isRequired": true,
+       "isConstant": true,
+       "name": {
+        "fixed": false,
+        "raw": "api-version"
+       },
+       "serializedName": "api-version",
+       "modelType": {
+        "$id": "123",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "124",
+       "clientProperty": {
+        "$ref": "20"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The ID of the target subscription."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "SubscriptionIdParameter",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/SubscriptionIdParameter"
+         ]
+        }
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "subscriptionId"
+       },
+       "serializedName": "subscriptionId",
+       "modelType": {
+        "$id": "125",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      }
+     ],
+     "name": {
+      "fixed": false,
+      "raw": "CreateOrUpdateAtResourceLevel"
+     },
+     "group": {
+      "fixed": false,
+      "raw": "ManagementLocks"
+     },
+     "serializedName": "ManagementLocks_CreateOrUpdateAtResourceLevel",
+     "url": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}/providers/Microsoft.Authorization/locks/{lockName}",
+     "isAbsoluteUrl": false,
+     "httpMethod": "put",
+     "responses": {
+      "OK": {
+       "body": {
+        "$ref": "7"
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·put·responses·200",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/responses/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·put·responses·200",
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/responses/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·put·responses·201"
+         ]
+        }
+       },
+       "isNullable": true
+      },
+      "Created": {
+       "body": {
+        "$ref": "7"
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·put·responses·200",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/responses/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·put·responses·200",
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/responses/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·put·responses·201"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "isNullable": true
+     },
+     "returnType": {
+      "body": {
+       "$ref": "7"
+      },
+      "isNullable": true
+     },
+     "description": "Create or update a management lock at the resource level or any level below resource.",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json"
+     ],
+     "extensions": {
+      "servers": [
+       {
+        "url": "https://management.azure.com/"
+       }
+      ],
+      "x-ms-requestBody-index": "6"
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "parameters": [
+      {
+       "$id": "126",
+       "clientProperty": {
+        "$ref": "24"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "constraints": {
+        "MaxLength": "90",
+        "MinLength": "1",
+        "Pattern": "^[-\\p{L}\\._\\(\\)\\w]+$"
+       },
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The name of the resource group. "
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·delete·parameters·0",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·delete·parameters·0"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "resourceGroupName"
+       },
+       "serializedName": "resourceGroupName",
+       "modelType": {
+        "$id": "127",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "128",
+       "clientProperty": {
+        "$ref": "38"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "Resource identity."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·delete·parameters·1",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·delete·parameters·1"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "resourceProviderNamespace"
+       },
+       "serializedName": "resourceProviderNamespace",
+       "modelType": {
+        "$id": "129",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "130",
+       "clientProperty": {
+        "$ref": "40"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "Resource identity."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·delete·parameters·2",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·delete·parameters·2"
+         ]
+        },
+        "x-ms-skip-url-encoding": true,
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "parentResourcePath"
+       },
+       "serializedName": "parentResourcePath",
+       "modelType": {
+        "$id": "131",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "132",
+       "clientProperty": {
+        "$ref": "42"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "Resource identity."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·delete·parameters·3",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·delete·parameters·3"
+         ]
+        },
+        "x-ms-skip-url-encoding": true,
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "resourceType"
+       },
+       "serializedName": "resourceType",
+       "modelType": {
+        "$id": "133",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "134",
+       "clientProperty": {
+        "$ref": "44"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "Resource identity."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·delete·parameters·4",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·delete·parameters·4"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "resourceName"
+       },
+       "serializedName": "resourceName",
+       "modelType": {
+        "$id": "135",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "136",
+       "clientProperty": {
+        "$ref": "26"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The name of lock."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·delete·parameters·5",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·delete·parameters·5"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "lockName"
+       },
+       "serializedName": "lockName",
+       "modelType": {
+        "$id": "137",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "138",
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false,
+        "raw": "2015-01-01"
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The API version to use for the request."
+       },
+       "isRequired": true,
+       "isConstant": true,
+       "name": {
+        "fixed": false,
+        "raw": "api-version"
+       },
+       "serializedName": "api-version",
+       "modelType": {
+        "$id": "139",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "140",
+       "clientProperty": {
+        "$ref": "20"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The ID of the target subscription."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "SubscriptionIdParameter",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/SubscriptionIdParameter"
+         ]
+        }
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "subscriptionId"
+       },
+       "serializedName": "subscriptionId",
+       "modelType": {
+        "$id": "141",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      }
+     ],
+     "name": {
+      "fixed": false,
+      "raw": "DeleteAtResourceLevel"
+     },
+     "group": {
+      "fixed": false,
+      "raw": "ManagementLocks"
+     },
+     "serializedName": "ManagementLocks_DeleteAtResourceLevel",
+     "url": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}/providers/Microsoft.Authorization/locks/{lockName}",
+     "isAbsoluteUrl": false,
+     "httpMethod": "delete",
+     "responses": {
+      "OK": {
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·delete·responses·200",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/responses/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·delete·responses·200",
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/responses/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·delete·responses·204"
+         ]
+        }
+       },
+       "isNullable": true
+      },
+      "NoContent": {
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·delete·responses·200",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/responses/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·delete·responses·200",
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/responses/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks-lockname·delete·responses·204"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "isNullable": true
+     },
+     "returnType": {
+      "isNullable": true
+     },
+     "description": "Deletes the management lock of a resource or any level below resource.",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json"
+     ],
+     "extensions": {
+      "servers": [
+       {
+        "url": "https://management.azure.com/"
+       }
+      ]
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "parameters": [
+      {
+       "$id": "142",
+       "clientProperty": {
+        "$ref": "26"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The name of lock."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-providers-microsoft-authorization-locks-lockname·put·parameters·0",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-providers-microsoft-authorization-locks-lockname·put·parameters·0"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "lockName"
+       },
+       "serializedName": "lockName",
+       "modelType": {
+        "$id": "143",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "144",
+       "location": "body",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The management lock parameters."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-providers-microsoft-authorization-locks-lockname·put·requestbody",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/requestBodies/paths·subscriptions-subscriptionid-providers-microsoft-authorization-locks-lockname·put·requestbody"
+         ]
+        },
+        "x-ms-requestBody-name": "parameters"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "parameters"
+       },
+       "serializedName": "parameters",
+       "modelType": {
+        "$ref": "7"
+       }
+      },
+      {
+       "$id": "145",
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false,
+        "raw": "2015-01-01"
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The API version to use for the request."
+       },
+       "isRequired": true,
+       "isConstant": true,
+       "name": {
+        "fixed": false,
+        "raw": "api-version"
+       },
+       "serializedName": "api-version",
+       "modelType": {
+        "$id": "146",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "147",
+       "clientProperty": {
+        "$ref": "20"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The ID of the target subscription."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "SubscriptionIdParameter",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/SubscriptionIdParameter"
+         ]
+        }
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "subscriptionId"
+       },
+       "serializedName": "subscriptionId",
+       "modelType": {
+        "$id": "148",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      }
+     ],
+     "name": {
+      "fixed": false,
+      "raw": "CreateOrUpdateAtSubscriptionLevel"
+     },
+     "group": {
+      "fixed": false,
+      "raw": "ManagementLocks"
+     },
+     "serializedName": "ManagementLocks_CreateOrUpdateAtSubscriptionLevel",
+     "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/locks/{lockName}",
+     "isAbsoluteUrl": false,
+     "httpMethod": "put",
+     "responses": {
+      "OK": {
+       "body": {
+        "$ref": "7"
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-providers-microsoft-authorization-locks-lockname·put·responses·200",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/responses/paths·subscriptions-subscriptionid-providers-microsoft-authorization-locks-lockname·put·responses·200",
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/responses/paths·subscriptions-subscriptionid-providers-microsoft-authorization-locks-lockname·put·responses·201"
+         ]
+        }
+       },
+       "isNullable": true
+      },
+      "Created": {
+       "body": {
+        "$ref": "7"
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-providers-microsoft-authorization-locks-lockname·put·responses·200",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/responses/paths·subscriptions-subscriptionid-providers-microsoft-authorization-locks-lockname·put·responses·200",
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/responses/paths·subscriptions-subscriptionid-providers-microsoft-authorization-locks-lockname·put·responses·201"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "isNullable": true
+     },
+     "returnType": {
+      "body": {
+       "$ref": "7"
+      },
+      "isNullable": true
+     },
+     "description": "Create or update a management lock at the subscription level.",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json"
+     ],
+     "extensions": {
+      "servers": [
+       {
+        "url": "https://management.azure.com/"
+       }
+      ],
+      "x-ms-requestBody-index": "1"
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "parameters": [
+      {
+       "$id": "149",
+       "clientProperty": {
+        "$ref": "26"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The name of lock."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-providers-microsoft-authorization-locks-lockname·delete·parameters·0",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-providers-microsoft-authorization-locks-lockname·delete·parameters·0"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "lockName"
+       },
+       "serializedName": "lockName",
+       "modelType": {
+        "$id": "150",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "151",
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false,
+        "raw": "2015-01-01"
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The API version to use for the request."
+       },
+       "isRequired": true,
+       "isConstant": true,
+       "name": {
+        "fixed": false,
+        "raw": "api-version"
+       },
+       "serializedName": "api-version",
+       "modelType": {
+        "$id": "152",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "153",
+       "clientProperty": {
+        "$ref": "20"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The ID of the target subscription."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "SubscriptionIdParameter",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/SubscriptionIdParameter"
+         ]
+        }
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "subscriptionId"
+       },
+       "serializedName": "subscriptionId",
+       "modelType": {
+        "$id": "154",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      }
+     ],
+     "name": {
+      "fixed": false,
+      "raw": "DeleteAtSubscriptionLevel"
+     },
+     "group": {
+      "fixed": false,
+      "raw": "ManagementLocks"
+     },
+     "serializedName": "ManagementLocks_DeleteAtSubscriptionLevel",
+     "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/locks/{lockName}",
+     "isAbsoluteUrl": false,
+     "httpMethod": "delete",
+     "responses": {
+      "OK": {
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-providers-microsoft-authorization-locks-lockname·delete·responses·200",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/responses/paths·subscriptions-subscriptionid-providers-microsoft-authorization-locks-lockname·delete·responses·200",
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/responses/paths·subscriptions-subscriptionid-providers-microsoft-authorization-locks-lockname·delete·responses·204"
+         ]
+        }
+       },
+       "isNullable": true
+      },
+      "NoContent": {
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-providers-microsoft-authorization-locks-lockname·delete·responses·200",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/responses/paths·subscriptions-subscriptionid-providers-microsoft-authorization-locks-lockname·delete·responses·200",
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/responses/paths·subscriptions-subscriptionid-providers-microsoft-authorization-locks-lockname·delete·responses·204"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "isNullable": true
+     },
+     "returnType": {
+      "isNullable": true
+     },
+     "description": "Deletes the management lock of a subscription.",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json"
+     ],
+     "extensions": {
+      "servers": [
+       {
+        "url": "https://management.azure.com/"
+       }
+      ]
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "parameters": [
+      {
+       "$id": "155",
+       "clientProperty": {
+        "$ref": "26"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "Name of the management lock."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-providers-microsoft-authorization-locks-lockname·get·parameters·0",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-providers-microsoft-authorization-locks-lockname·get·parameters·0"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "lockName"
+       },
+       "serializedName": "lockName",
+       "modelType": {
+        "$id": "156",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "157",
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false,
+        "raw": "2015-01-01"
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The API version to use for the request."
+       },
+       "isRequired": true,
+       "isConstant": true,
+       "name": {
+        "fixed": false,
+        "raw": "api-version"
+       },
+       "serializedName": "api-version",
+       "modelType": {
+        "$id": "158",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "159",
+       "clientProperty": {
+        "$ref": "20"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The ID of the target subscription."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "SubscriptionIdParameter",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/SubscriptionIdParameter"
+         ]
+        }
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "subscriptionId"
+       },
+       "serializedName": "subscriptionId",
+       "modelType": {
+        "$id": "160",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      }
+     ],
+     "name": {
+      "fixed": false,
+      "raw": "Get"
+     },
+     "group": {
+      "fixed": false,
+      "raw": "ManagementLocks"
+     },
+     "serializedName": "ManagementLocks_Get",
+     "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/locks/{lockName}",
+     "isAbsoluteUrl": false,
+     "httpMethod": "get",
+     "responses": {
+      "OK": {
+       "body": {
+        "$ref": "7"
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-providers-microsoft-authorization-locks-lockname·get·responses·200",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/responses/paths·subscriptions-subscriptionid-providers-microsoft-authorization-locks-lockname·get·responses·200"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "isNullable": true
+     },
+     "returnType": {
+      "body": {
+       "$ref": "7"
+      },
+      "isNullable": true
+     },
+     "description": "Gets the management lock of a scope.",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json"
+     ],
+     "extensions": {
+      "servers": [
+       {
+        "url": "https://management.azure.com/"
+       }
+      ]
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "parameters": [
+      {
+       "$id": "161",
+       "clientProperty": {
+        "$ref": "24"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "constraints": {
+        "MaxLength": "90",
+        "MinLength": "1",
+        "Pattern": "^[-\\p{L}\\._\\(\\)\\w]+$"
+       },
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "Resource group name."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks·get·parameters·0",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks·get·parameters·0"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "resourceGroupName"
+       },
+       "serializedName": "resourceGroupName",
+       "modelType": {
+        "$id": "162",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "163",
+       "clientProperty": {
+        "$ref": "68"
+       },
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The filter to apply on the operation."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks·get·parameters·1",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks·get·parameters·1"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": false,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "$filter"
+       },
+       "serializedName": "$filter",
+       "modelType": {
+        "$id": "164",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "165",
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false,
+        "raw": "2015-01-01"
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The API version to use for the request."
+       },
+       "isRequired": true,
+       "isConstant": true,
+       "name": {
+        "fixed": false,
+        "raw": "api-version"
+       },
+       "serializedName": "api-version",
+       "modelType": {
+        "$id": "166",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "167",
+       "clientProperty": {
+        "$ref": "20"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The ID of the target subscription."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "SubscriptionIdParameter",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/SubscriptionIdParameter"
+         ]
+        }
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "subscriptionId"
+       },
+       "serializedName": "subscriptionId",
+       "modelType": {
+        "$id": "168",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      }
+     ],
+     "name": {
+      "fixed": false,
+      "raw": "ListAtResourceGroupLevel"
+     },
+     "group": {
+      "fixed": false,
+      "raw": "ManagementLocks"
+     },
+     "serializedName": "ManagementLocks_ListAtResourceGroupLevel",
+     "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/locks",
+     "isAbsoluteUrl": false,
+     "httpMethod": "get",
+     "responses": {
+      "OK": {
+       "body": {
+        "$ref": "15"
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks·get·responses·200",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/responses/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-locks·get·responses·200"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "isNullable": true
+     },
+     "returnType": {
+      "body": {
+       "$ref": "15"
+      },
+      "isNullable": true
+     },
+     "description": "Gets all the management locks of a resource group.",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json"
+     ],
+     "extensions": {
+      "servers": [
+       {
+        "url": "https://management.azure.com/"
+       }
+      ],
+      "x-ms-pageable": {
+       "nextLinkName": "nextLink"
+      },
+      "x-ms-odata": "#/components/schemas/ManagementLockObject"
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "parameters": [
+      {
+       "$id": "169",
+       "clientProperty": {
+        "$ref": "24"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "constraints": {
+        "MaxLength": "90",
+        "MinLength": "1",
+        "Pattern": "^[-\\p{L}\\._\\(\\)\\w]+$"
+       },
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The name of the resource group. The name is case insensitive."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks·get·parameters·0",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks·get·parameters·0"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "resourceGroupName"
+       },
+       "serializedName": "resourceGroupName",
+       "modelType": {
+        "$id": "170",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "171",
+       "clientProperty": {
+        "$ref": "38"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "Resource identity."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks·get·parameters·1",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks·get·parameters·1"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "resourceProviderNamespace"
+       },
+       "serializedName": "resourceProviderNamespace",
+       "modelType": {
+        "$id": "172",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "173",
+       "clientProperty": {
+        "$ref": "40"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "Resource identity."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks·get·parameters·2",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks·get·parameters·2"
+         ]
+        },
+        "x-ms-skip-url-encoding": true,
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "parentResourcePath"
+       },
+       "serializedName": "parentResourcePath",
+       "modelType": {
+        "$id": "174",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "175",
+       "clientProperty": {
+        "$ref": "42"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "Resource identity."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks·get·parameters·3",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks·get·parameters·3"
+         ]
+        },
+        "x-ms-skip-url-encoding": true,
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "resourceType"
+       },
+       "serializedName": "resourceType",
+       "modelType": {
+        "$id": "176",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "177",
+       "clientProperty": {
+        "$ref": "44"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "Resource identity."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks·get·parameters·4",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks·get·parameters·4"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "resourceName"
+       },
+       "serializedName": "resourceName",
+       "modelType": {
+        "$id": "178",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "179",
+       "clientProperty": {
+        "$ref": "68"
+       },
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The filter to apply on the operation."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks·get·parameters·5",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks·get·parameters·5"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": false,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "$filter"
+       },
+       "serializedName": "$filter",
+       "modelType": {
+        "$id": "180",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "181",
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false,
+        "raw": "2015-01-01"
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The API version to use for the request."
+       },
+       "isRequired": true,
+       "isConstant": true,
+       "name": {
+        "fixed": false,
+        "raw": "api-version"
+       },
+       "serializedName": "api-version",
+       "modelType": {
+        "$id": "182",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "183",
+       "clientProperty": {
+        "$ref": "20"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The ID of the target subscription."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "SubscriptionIdParameter",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/SubscriptionIdParameter"
+         ]
+        }
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "subscriptionId"
+       },
+       "serializedName": "subscriptionId",
+       "modelType": {
+        "$id": "184",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      }
+     ],
+     "name": {
+      "fixed": false,
+      "raw": "ListAtResourceLevel"
+     },
+     "group": {
+      "fixed": false,
+      "raw": "ManagementLocks"
+     },
+     "serializedName": "ManagementLocks_ListAtResourceLevel",
+     "url": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}/providers/Microsoft.Authorization/locks",
+     "isAbsoluteUrl": false,
+     "httpMethod": "get",
+     "responses": {
+      "OK": {
+       "body": {
+        "$ref": "15"
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks·get·responses·200",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/responses/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-locks·get·responses·200"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "isNullable": true
+     },
+     "returnType": {
+      "body": {
+       "$ref": "15"
+      },
+      "isNullable": true
+     },
+     "description": "Gets all the management locks of a resource or any level below resource.",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json"
+     ],
+     "extensions": {
+      "servers": [
+       {
+        "url": "https://management.azure.com/"
+       }
+      ],
+      "x-ms-pageable": {
+       "nextLinkName": "nextLink"
+      },
+      "x-ms-odata": "#/components/schemas/ManagementLockObject"
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "parameters": [
+      {
+       "$id": "185",
+       "clientProperty": {
+        "$ref": "68"
+       },
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The filter to apply on the operation."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-providers-microsoft-authorization-locks·get·parameters·0",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/paths·subscriptions-subscriptionid-providers-microsoft-authorization-locks·get·parameters·0"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": false,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "$filter"
+       },
+       "serializedName": "$filter",
+       "modelType": {
+        "$id": "186",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "187",
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false,
+        "raw": "2015-01-01"
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The API version to use for the request."
+       },
+       "isRequired": true,
+       "isConstant": true,
+       "name": {
+        "fixed": false,
+        "raw": "api-version"
+       },
+       "serializedName": "api-version",
+       "modelType": {
+        "$id": "188",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "189",
+       "clientProperty": {
+        "$ref": "20"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The ID of the target subscription."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "SubscriptionIdParameter",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/parameters/SubscriptionIdParameter"
+         ]
+        }
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "subscriptionId"
+       },
+       "serializedName": "subscriptionId",
+       "modelType": {
+        "$id": "190",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      }
+     ],
+     "name": {
+      "fixed": false,
+      "raw": "ListAtSubscriptionLevel"
+     },
+     "group": {
+      "fixed": false,
+      "raw": "ManagementLocks"
+     },
+     "serializedName": "ManagementLocks_ListAtSubscriptionLevel",
+     "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/locks",
+     "isAbsoluteUrl": false,
+     "httpMethod": "get",
+     "responses": {
+      "OK": {
+       "body": {
+        "$ref": "15"
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2015-01-01"
+         ],
+         "filename": [
+          "mem:///244?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-providers-microsoft-authorization-locks·get·responses·200",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2015-01-01/locks.json#/components/responses/paths·subscriptions-subscriptionid-providers-microsoft-authorization-locks·get·responses·200"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "isNullable": true
+     },
+     "returnType": {
+      "body": {
+       "$ref": "15"
+      },
+      "isNullable": true
+     },
+     "description": "Gets all the management locks of a subscription.",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json"
+     ],
+     "extensions": {
+      "servers": [
+       {
+        "url": "https://management.azure.com/"
+       }
+      ],
+      "x-ms-pageable": {
+       "nextLinkName": "nextLink"
+      },
+      "x-ms-odata": "#/components/schemas/ManagementLockObject"
+     },
+     "deprecated": false,
+     "hidden": false
+    }
+   ],
+   "name": {
+    "fixed": false,
+    "raw": "ManagementLocks"
+   },
+   "typeName": {
+    "fixed": false
+   },
+   "nameForProperty": "ManagementLocks"
+  }
+ ]
+}
