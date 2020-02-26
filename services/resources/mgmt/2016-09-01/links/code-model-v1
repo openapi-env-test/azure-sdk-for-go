@@ -1,0 +1,2119 @@
+{
+ "modelTypes": [
+  {
+   "$id": "1",
+   "$type": "CompositeType",
+   "properties": [
+    {
+     "$id": "2",
+     "isReadOnly": false,
+     "realPath": [
+      "targetId"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "The ID of the target resource."
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "targetId"
+     },
+     "serializedName": "targetId",
+     "modelType": {
+      "$id": "3",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "fixed": false,
+       "raw": "String"
+      }
+     }
+    }
+   ],
+   "serializedName": "ResourceLinkFilter",
+   "documentation": "Resource link filter.",
+   "containsConstantProperties": false,
+   "name": {
+    "fixed": false,
+    "raw": "ResourceLinkFilter"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-09-01"
+     ],
+     "filename": [
+      "mem:///243?oai3.shaken.json"
+     ],
+     "name": "ResourceLinkFilter",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Resources/stable/2016-09-01/links.json#/components/schemas/ResourceLinkFilter"
+     ]
+    }
+   }
+  },
+  {
+   "$id": "4",
+   "$type": "CompositeType",
+   "properties": [
+    {
+     "$id": "5",
+     "isReadOnly": true,
+     "realPath": [
+      "sourceId"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "The fully qualified ID of the source resource in the link. "
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "sourceId"
+     },
+     "serializedName": "sourceId",
+     "modelType": {
+      "$id": "6",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "fixed": false,
+       "raw": "String"
+      }
+     }
+    },
+    {
+     "$id": "7",
+     "isReadOnly": false,
+     "realPath": [
+      "targetId"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "The fully qualified ID of the target resource in the link."
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "targetId"
+     },
+     "serializedName": "targetId",
+     "modelType": {
+      "$id": "8",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "fixed": false,
+       "raw": "String"
+      }
+     }
+    },
+    {
+     "$id": "9",
+     "isReadOnly": false,
+     "realPath": [
+      "notes"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "Notes about the resource link."
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "notes"
+     },
+     "serializedName": "notes",
+     "modelType": {
+      "$id": "10",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "fixed": false,
+       "raw": "String"
+      }
+     }
+    }
+   ],
+   "serializedName": "ResourceLinkProperties",
+   "documentation": "The resource link properties.",
+   "containsConstantProperties": false,
+   "name": {
+    "fixed": false,
+    "raw": "ResourceLinkProperties"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-09-01"
+     ],
+     "filename": [
+      "mem:///243?oai3.shaken.json"
+     ],
+     "name": "ResourceLinkProperties",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Resources/stable/2016-09-01/links.json#/components/schemas/ResourceLinkProperties"
+     ]
+    }
+   }
+  },
+  {
+   "$id": "11",
+   "$type": "CompositeType",
+   "properties": [
+    {
+     "$id": "12",
+     "isReadOnly": true,
+     "realPath": [
+      "id"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "The fully qualified ID of the resource link."
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "id"
+     },
+     "serializedName": "id",
+     "modelType": {
+      "$id": "13",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "fixed": false,
+       "raw": "String"
+      }
+     }
+    },
+    {
+     "$id": "14",
+     "isReadOnly": true,
+     "realPath": [
+      "name"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "The name of the resource link."
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "name"
+     },
+     "serializedName": "name",
+     "modelType": {
+      "$id": "15",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "fixed": false,
+       "raw": "String"
+      }
+     }
+    },
+    {
+     "$id": "16",
+     "isReadOnly": true,
+     "realPath": [
+      "type"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "The resource link object."
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "type"
+     },
+     "serializedName": "type",
+     "modelType": {
+      "$id": "17",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "object",
+      "name": {
+       "fixed": false,
+       "raw": "Object"
+      }
+     }
+    },
+    {
+     "$id": "18",
+     "isReadOnly": false,
+     "realPath": [
+      "properties"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "Properties for resource link."
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "properties"
+     },
+     "serializedName": "properties",
+     "modelType": {
+      "$ref": "4"
+     }
+    }
+   ],
+   "serializedName": "ResourceLink",
+   "documentation": "The resource link.",
+   "containsConstantProperties": false,
+   "name": {
+    "fixed": false,
+    "raw": "ResourceLink"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-09-01"
+     ],
+     "filename": [
+      "mem:///243?oai3.shaken.json"
+     ],
+     "name": "ResourceLink",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Resources/stable/2016-09-01/links.json#/components/schemas/ResourceLink"
+     ]
+    },
+    "x-ms-azure-resource": true
+   }
+  },
+  {
+   "$id": "19",
+   "$type": "CompositeType",
+   "properties": [
+    {
+     "$id": "20",
+     "isReadOnly": false,
+     "realPath": [
+      "value"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "An array of resource links."
+     },
+     "isRequired": true,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "value"
+     },
+     "serializedName": "value",
+     "modelType": {
+      "$id": "21",
+      "$type": "SequenceType",
+      "elementType": {
+       "$ref": "11"
+      },
+      "name": {
+       "fixed": false
+      }
+     }
+    },
+    {
+     "$id": "22",
+     "isReadOnly": true,
+     "realPath": [
+      "nextLink"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "The URL to use for getting the next set of results."
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "nextLink"
+     },
+     "serializedName": "nextLink",
+     "modelType": {
+      "$id": "23",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "fixed": false,
+       "raw": "String"
+      }
+     }
+    }
+   ],
+   "serializedName": "ResourceLinkResult",
+   "documentation": "List of resource links.",
+   "containsConstantProperties": false,
+   "name": {
+    "fixed": false,
+    "raw": "ResourceLinkResult"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-09-01"
+     ],
+     "filename": [
+      "mem:///243?oai3.shaken.json"
+     ],
+     "name": "ResourceLinkResult",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Resources/stable/2016-09-01/links.json#/components/schemas/ResourceLinkResult"
+     ]
+    }
+   }
+  },
+  {
+   "$id": "24",
+   "$type": "CompositeType",
+   "properties": [
+    {
+     "$id": "25",
+     "isReadOnly": false,
+     "realPath": [
+      "provider"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "Service provider: Microsoft.Resources"
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "provider"
+     },
+     "serializedName": "provider",
+     "modelType": {
+      "$id": "26",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "fixed": false,
+       "raw": "String"
+      }
+     }
+    },
+    {
+     "$id": "27",
+     "isReadOnly": false,
+     "realPath": [
+      "resource"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "Resource on which the operation is performed: Profile, endpoint, etc."
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "resource"
+     },
+     "serializedName": "resource",
+     "modelType": {
+      "$id": "28",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "fixed": false,
+       "raw": "String"
+      }
+     }
+    },
+    {
+     "$id": "29",
+     "isReadOnly": false,
+     "realPath": [
+      "operation"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "Operation type: Read, write, delete, etc."
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "operation"
+     },
+     "serializedName": "operation",
+     "modelType": {
+      "$id": "30",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "fixed": false,
+       "raw": "String"
+      }
+     }
+    },
+    {
+     "$id": "31",
+     "isReadOnly": false,
+     "realPath": [
+      "description"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "Description of the operation."
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "description"
+     },
+     "serializedName": "description",
+     "modelType": {
+      "$id": "32",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "fixed": false,
+       "raw": "String"
+      }
+     }
+    }
+   ],
+   "serializedName": "Operation-display",
+   "documentation": "The object that represents the operation.",
+   "containsConstantProperties": false,
+   "name": {
+    "fixed": false,
+    "raw": "Operation-display"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-09-01"
+     ],
+     "filename": [
+      "mem:///243?oai3.shaken.json"
+     ],
+     "name": "Operation-display",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Resources/stable/2016-09-01/links.json#/components/schemas/Operation-display"
+     ]
+    }
+   }
+  },
+  {
+   "$id": "33",
+   "$type": "CompositeType",
+   "properties": [
+    {
+     "$id": "34",
+     "isReadOnly": false,
+     "realPath": [
+      "name"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "Operation name: {provider}/{resource}/{operation}"
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "name"
+     },
+     "serializedName": "name",
+     "modelType": {
+      "$id": "35",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "fixed": false,
+       "raw": "String"
+      }
+     }
+    },
+    {
+     "$id": "36",
+     "isReadOnly": false,
+     "realPath": [
+      "display"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "The object that represents the operation."
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "display"
+     },
+     "serializedName": "display",
+     "modelType": {
+      "$ref": "24"
+     }
+    }
+   ],
+   "serializedName": "Operation",
+   "documentation": "Microsoft.Resources operation",
+   "containsConstantProperties": false,
+   "name": {
+    "fixed": false,
+    "raw": "Operation"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-09-01"
+     ],
+     "filename": [
+      "mem:///243?oai3.shaken.json"
+     ],
+     "name": "Operation",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Resources/stable/2016-09-01/links.json#/components/schemas/Operation"
+     ]
+    }
+   }
+  },
+  {
+   "$id": "37",
+   "$type": "CompositeType",
+   "properties": [
+    {
+     "$id": "38",
+     "isReadOnly": false,
+     "realPath": [
+      "value"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "List of Microsoft.Resources operations."
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "value"
+     },
+     "serializedName": "value",
+     "modelType": {
+      "$id": "39",
+      "$type": "SequenceType",
+      "elementType": {
+       "$ref": "33"
+      },
+      "name": {
+       "fixed": false
+      }
+     }
+    },
+    {
+     "$id": "40",
+     "isReadOnly": false,
+     "realPath": [
+      "nextLink"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "URL to get the next set of operation list results if there are any."
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "nextLink"
+     },
+     "serializedName": "nextLink",
+     "modelType": {
+      "$id": "41",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "fixed": false,
+       "raw": "String"
+      }
+     }
+    }
+   ],
+   "serializedName": "OperationListResult",
+   "documentation": "Result of the request to list Microsoft.Resources operations. It contains a list of operations and a URL link to get the next set of results.",
+   "containsConstantProperties": false,
+   "name": {
+    "fixed": false,
+    "raw": "OperationListResult"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-09-01"
+     ],
+     "filename": [
+      "mem:///243?oai3.shaken.json"
+     ],
+     "name": "OperationListResult",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Resources/stable/2016-09-01/links.json#/components/schemas/OperationListResult"
+     ]
+    }
+   }
+  }
+ ],
+ "enumTypes": [
+  {
+   "$id": "42",
+   "$type": "EnumType",
+   "modelAsExtensible": false,
+   "values": [
+    {
+     "name": "atScope()",
+     "serializedName": "atScope()"
+    }
+   ],
+   "modelAsString": false,
+   "underlyingType": {
+    "$id": "43",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   },
+   "name": {
+    "fixed": false,
+    "raw": "Filter"
+   }
+  }
+ ],
+ "name": "ManagementLinkClient",
+ "namespace": "Links",
+ "modelsName": "Models",
+ "apiVersion": "2016-09-01",
+ "baseUrl": "https://management.azure.com",
+ "documentation": "Azure resources can be linked together to form logical relationships. You can establish links between resources belonging to different resource groups. However, all the linked resources must belong to the same subscription. Each resource can be linked to 50 other resources. If any of the linked resources are deleted or moved, the link owner must clean up the remaining link.",
+ "extensions": {
+  "security": [
+   {
+    "azure_auth": [
+     "user_impersonation"
+    ]
+   }
+  ]
+ },
+ "properties": [
+  {
+   "$id": "44",
+   "isReadOnly": false,
+   "realPath": [
+    "subscriptionId"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The ID of the target subscription."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-09-01"
+     ],
+     "filename": [
+      "mem:///243?oai3.shaken.json"
+     ],
+     "name": "SubscriptionIdParameter",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Resources/stable/2016-09-01/links.json#/components/parameters/SubscriptionIdParameter"
+     ]
+    }
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "subscriptionId"
+   },
+   "serializedName": "subscriptionId",
+   "modelType": {
+    "$id": "45",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "46",
+   "isReadOnly": false,
+   "realPath": [
+    "api-version"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The API version to use for the operation."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-09-01"
+     ],
+     "filename": [
+      "mem:///243?oai3.shaken.json"
+     ],
+     "name": "ApiVersionParameter",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Resources/stable/2016-09-01/links.json#/components/parameters/ApiVersionParameter"
+     ]
+    }
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "api-version"
+   },
+   "serializedName": "api-version",
+   "modelType": {
+    "$id": "47",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "48",
+   "isReadOnly": false,
+   "realPath": [
+    "linkId"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The fully qualified ID of the resource link. Use the format, /subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/{provider-namespace}/{resource-type}/{resource-name}/Microsoft.Resources/links/{link-name}. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite/Microsoft.Resources/links/myLink"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-09-01"
+     ],
+     "filename": [
+      "mem:///243?oai3.shaken.json"
+     ],
+     "name": "paths·linkid·delete·parameters·0",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Resources/stable/2016-09-01/links.json#/components/parameters/paths·linkid·delete·parameters·0"
+     ]
+    },
+    "x-ms-skip-url-encoding": true,
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "linkId"
+   },
+   "serializedName": "linkId",
+   "modelType": {
+    "$id": "49",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "50",
+   "isReadOnly": false,
+   "realPath": [
+    "linkId"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The fully qualified ID of the resource link. Use the format, /subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/{provider-namespace}/{resource-type}/{resource-name}/Microsoft.Resources/links/{link-name}. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite/Microsoft.Resources/links/myLink"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-09-01"
+     ],
+     "filename": [
+      "mem:///243?oai3.shaken.json"
+     ],
+     "name": "paths·linkid·put·parameters·0",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Resources/stable/2016-09-01/links.json#/components/parameters/paths·linkid·put·parameters·0"
+     ]
+    },
+    "x-ms-skip-url-encoding": true,
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "LinkId1"
+   },
+   "serializedName": "linkId",
+   "modelType": {
+    "$id": "51",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "52",
+   "isReadOnly": false,
+   "realPath": [
+    "linkId"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The fully qualified Id of the resource link. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite/Microsoft.Resources/links/myLink"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-09-01"
+     ],
+     "filename": [
+      "mem:///243?oai3.shaken.json"
+     ],
+     "name": "paths·linkid·get·parameters·0",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Resources/stable/2016-09-01/links.json#/components/parameters/paths·linkid·get·parameters·0"
+     ]
+    },
+    "x-ms-skip-url-encoding": true,
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "LinkId2"
+   },
+   "serializedName": "linkId",
+   "modelType": {
+    "$id": "53",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "54",
+   "isReadOnly": false,
+   "realPath": [
+    "$filter"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-09-01"
+     ],
+     "filename": [
+      "mem:///243?oai3.shaken.json"
+     ],
+     "name": "paths·subscriptions-subscriptionid-providers-microsoft-resources-links·get·parameters·0",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Resources/stable/2016-09-01/links.json#/components/parameters/paths·subscriptions-subscriptionid-providers-microsoft-resources-links·get·parameters·0"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": false,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "Filter1"
+   },
+   "serializedName": "$filter",
+   "modelType": {
+    "$id": "55",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "56",
+   "isReadOnly": false,
+   "realPath": [
+    "scope"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-09-01"
+     ],
+     "filename": [
+      "mem:///243?oai3.shaken.json"
+     ],
+     "name": "paths·scope-providers-microsoft-resources-links·get·parameters·0",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Resources/stable/2016-09-01/links.json#/components/parameters/paths·scope-providers-microsoft-resources-links·get·parameters·0"
+     ]
+    },
+    "x-ms-skip-url-encoding": true,
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "scope"
+   },
+   "serializedName": "scope",
+   "modelType": {
+    "$id": "57",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "58",
+   "isReadOnly": false,
+   "realPath": [
+    "$filter"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The filter to apply when getting resource links. To get links only at the specified scope (not below the scope), use Filter.atScope()."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-09-01"
+     ],
+     "filename": [
+      "mem:///243?oai3.shaken.json"
+     ],
+     "name": "paths·scope-providers-microsoft-resources-links·get·parameters·1",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Resources/stable/2016-09-01/links.json#/components/parameters/paths·scope-providers-microsoft-resources-links·get·parameters·1"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": false,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "Filter2"
+   },
+   "serializedName": "$filter",
+   "modelType": {
+    "$ref": "42"
+   }
+  }
+ ],
+ "operations": [
+  {
+   "methods": [
+    {
+     "parameters": [
+      {
+       "$id": "59",
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false,
+        "raw": "2016-09-01"
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The API version to use for the request."
+       },
+       "isRequired": true,
+       "isConstant": true,
+       "name": {
+        "fixed": false,
+        "raw": "api-version"
+       },
+       "serializedName": "api-version",
+       "modelType": {
+        "$id": "60",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      }
+     ],
+     "name": {
+      "fixed": false,
+      "raw": "List"
+     },
+     "group": {
+      "fixed": false,
+      "raw": "Operations"
+     },
+     "serializedName": "Operations_List",
+     "url": "/providers/Microsoft.Resources/operations",
+     "isAbsoluteUrl": false,
+     "httpMethod": "get",
+     "responses": {
+      "OK": {
+       "body": {
+        "$ref": "37"
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-09-01"
+         ],
+         "filename": [
+          "mem:///243?oai3.shaken.json"
+         ],
+         "name": "paths·providers-microsoft-resources-operations·get·responses·200",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Resources/stable/2016-09-01/links.json#/components/responses/paths·providers-microsoft-resources-operations·get·responses·200"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "isNullable": true
+     },
+     "returnType": {
+      "body": {
+       "$ref": "37"
+      },
+      "isNullable": true
+     },
+     "description": "Lists all of the available Microsoft.Resources REST API operations.",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json"
+     ],
+     "extensions": {
+      "servers": [
+       {
+        "url": "https://management.azure.com/"
+       }
+      ],
+      "x-ms-pageable": {
+       "nextLinkName": "nextLink"
+      }
+     },
+     "deprecated": false,
+     "hidden": false
+    }
+   ],
+   "name": {
+    "fixed": false,
+    "raw": "Operations"
+   },
+   "typeName": {
+    "fixed": false
+   },
+   "nameForProperty": "Operations"
+  },
+  {
+   "methods": [
+    {
+     "parameters": [
+      {
+       "$id": "61",
+       "clientProperty": {
+        "$ref": "48"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The fully qualified ID of the resource link. Use the format, /subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/{provider-namespace}/{resource-type}/{resource-name}/Microsoft.Resources/links/{link-name}. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite/Microsoft.Resources/links/myLink"
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-09-01"
+         ],
+         "filename": [
+          "mem:///243?oai3.shaken.json"
+         ],
+         "name": "paths·linkid·delete·parameters·0",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Resources/stable/2016-09-01/links.json#/components/parameters/paths·linkid·delete·parameters·0"
+         ]
+        },
+        "x-ms-skip-url-encoding": true,
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "linkId"
+       },
+       "serializedName": "linkId",
+       "modelType": {
+        "$id": "62",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "63",
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false,
+        "raw": "2016-09-01"
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The API version to use for the request."
+       },
+       "isRequired": true,
+       "isConstant": true,
+       "name": {
+        "fixed": false,
+        "raw": "api-version"
+       },
+       "serializedName": "api-version",
+       "modelType": {
+        "$id": "64",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      }
+     ],
+     "name": {
+      "fixed": false,
+      "raw": "Delete"
+     },
+     "group": {
+      "fixed": false,
+      "raw": "ResourceLinks"
+     },
+     "serializedName": "ResourceLinks_Delete",
+     "url": "/{linkId}",
+     "isAbsoluteUrl": false,
+     "httpMethod": "delete",
+     "responses": {
+      "OK": {
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-09-01"
+         ],
+         "filename": [
+          "mem:///243?oai3.shaken.json"
+         ],
+         "name": "paths·linkid·delete·responses·200",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Resources/stable/2016-09-01/links.json#/components/responses/paths·linkid·delete·responses·200",
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Resources/stable/2016-09-01/links.json#/components/responses/paths·linkid·delete·responses·204"
+         ]
+        }
+       },
+       "isNullable": true
+      },
+      "NoContent": {
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-09-01"
+         ],
+         "filename": [
+          "mem:///243?oai3.shaken.json"
+         ],
+         "name": "paths·linkid·delete·responses·200",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Resources/stable/2016-09-01/links.json#/components/responses/paths·linkid·delete·responses·200",
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Resources/stable/2016-09-01/links.json#/components/responses/paths·linkid·delete·responses·204"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "isNullable": true
+     },
+     "returnType": {
+      "isNullable": true
+     },
+     "description": "Deletes a resource link with the specified ID.",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json"
+     ],
+     "extensions": {
+      "servers": [
+       {
+        "url": "https://management.azure.com/"
+       }
+      ]
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "parameters": [
+      {
+       "$id": "65",
+       "clientProperty": {
+        "$ref": "48"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The fully qualified ID of the resource link. Use the format, /subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/{provider-namespace}/{resource-type}/{resource-name}/Microsoft.Resources/links/{link-name}. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite/Microsoft.Resources/links/myLink"
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-09-01"
+         ],
+         "filename": [
+          "mem:///243?oai3.shaken.json"
+         ],
+         "name": "paths·linkid·put·parameters·0",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Resources/stable/2016-09-01/links.json#/components/parameters/paths·linkid·put·parameters·0"
+         ]
+        },
+        "x-ms-skip-url-encoding": true,
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "linkId"
+       },
+       "serializedName": "linkId",
+       "modelType": {
+        "$id": "66",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "67",
+       "location": "body",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "Parameters for creating or updating a resource link."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-09-01"
+         ],
+         "filename": [
+          "mem:///243?oai3.shaken.json"
+         ],
+         "name": "paths·linkid·put·requestbody",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Resources/stable/2016-09-01/links.json#/components/requestBodies/paths·linkid·put·requestbody"
+         ]
+        },
+        "x-ms-requestBody-name": "parameters"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "parameters"
+       },
+       "serializedName": "parameters",
+       "modelType": {
+        "$ref": "11"
+       }
+      },
+      {
+       "$id": "68",
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false,
+        "raw": "2016-09-01"
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The API version to use for the request."
+       },
+       "isRequired": true,
+       "isConstant": true,
+       "name": {
+        "fixed": false,
+        "raw": "api-version"
+       },
+       "serializedName": "api-version",
+       "modelType": {
+        "$id": "69",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      }
+     ],
+     "name": {
+      "fixed": false,
+      "raw": "CreateOrUpdate"
+     },
+     "group": {
+      "fixed": false,
+      "raw": "ResourceLinks"
+     },
+     "serializedName": "ResourceLinks_CreateOrUpdate",
+     "url": "/{linkId}",
+     "isAbsoluteUrl": false,
+     "httpMethod": "put",
+     "responses": {
+      "OK": {
+       "body": {
+        "$ref": "11"
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-09-01"
+         ],
+         "filename": [
+          "mem:///243?oai3.shaken.json"
+         ],
+         "name": "paths·linkid·put·responses·200",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Resources/stable/2016-09-01/links.json#/components/responses/paths·linkid·put·responses·200",
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Resources/stable/2016-09-01/links.json#/components/responses/paths·linkid·put·responses·201"
+         ]
+        }
+       },
+       "isNullable": true
+      },
+      "Created": {
+       "body": {
+        "$ref": "11"
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-09-01"
+         ],
+         "filename": [
+          "mem:///243?oai3.shaken.json"
+         ],
+         "name": "paths·linkid·put·responses·200",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Resources/stable/2016-09-01/links.json#/components/responses/paths·linkid·put·responses·200",
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Resources/stable/2016-09-01/links.json#/components/responses/paths·linkid·put·responses·201"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "isNullable": true
+     },
+     "returnType": {
+      "body": {
+       "$ref": "11"
+      },
+      "isNullable": true
+     },
+     "description": "Creates or updates a resource link between the specified resources.",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json"
+     ],
+     "extensions": {
+      "servers": [
+       {
+        "url": "https://management.azure.com/"
+       }
+      ],
+      "x-ms-requestBody-index": "1"
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "parameters": [
+      {
+       "$id": "70",
+       "clientProperty": {
+        "$ref": "48"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The fully qualified Id of the resource link. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite/Microsoft.Resources/links/myLink"
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-09-01"
+         ],
+         "filename": [
+          "mem:///243?oai3.shaken.json"
+         ],
+         "name": "paths·linkid·get·parameters·0",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Resources/stable/2016-09-01/links.json#/components/parameters/paths·linkid·get·parameters·0"
+         ]
+        },
+        "x-ms-skip-url-encoding": true,
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "linkId"
+       },
+       "serializedName": "linkId",
+       "modelType": {
+        "$id": "71",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "72",
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false,
+        "raw": "2016-09-01"
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The API version to use for the request."
+       },
+       "isRequired": true,
+       "isConstant": true,
+       "name": {
+        "fixed": false,
+        "raw": "api-version"
+       },
+       "serializedName": "api-version",
+       "modelType": {
+        "$id": "73",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      }
+     ],
+     "name": {
+      "fixed": false,
+      "raw": "Get"
+     },
+     "group": {
+      "fixed": false,
+      "raw": "ResourceLinks"
+     },
+     "serializedName": "ResourceLinks_Get",
+     "url": "/{linkId}",
+     "isAbsoluteUrl": false,
+     "httpMethod": "get",
+     "responses": {
+      "OK": {
+       "body": {
+        "$ref": "11"
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-09-01"
+         ],
+         "filename": [
+          "mem:///243?oai3.shaken.json"
+         ],
+         "name": "paths·linkid·get·responses·200",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Resources/stable/2016-09-01/links.json#/components/responses/paths·linkid·get·responses·200"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "isNullable": true
+     },
+     "returnType": {
+      "body": {
+       "$ref": "11"
+      },
+      "isNullable": true
+     },
+     "description": "Gets a resource link with the specified ID.",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json"
+     ],
+     "extensions": {
+      "servers": [
+       {
+        "url": "https://management.azure.com/"
+       }
+      ]
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "parameters": [
+      {
+       "$id": "74",
+       "clientProperty": {
+        "$ref": "54"
+       },
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}"
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-09-01"
+         ],
+         "filename": [
+          "mem:///243?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-providers-microsoft-resources-links·get·parameters·0",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Resources/stable/2016-09-01/links.json#/components/parameters/paths·subscriptions-subscriptionid-providers-microsoft-resources-links·get·parameters·0"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": false,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "$filter"
+       },
+       "serializedName": "$filter",
+       "modelType": {
+        "$id": "75",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "76",
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false,
+        "raw": "2016-09-01"
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The API version to use for the request."
+       },
+       "isRequired": true,
+       "isConstant": true,
+       "name": {
+        "fixed": false,
+        "raw": "api-version"
+       },
+       "serializedName": "api-version",
+       "modelType": {
+        "$id": "77",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "78",
+       "clientProperty": {
+        "$ref": "44"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The ID of the target subscription."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-09-01"
+         ],
+         "filename": [
+          "mem:///243?oai3.shaken.json"
+         ],
+         "name": "SubscriptionIdParameter",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Resources/stable/2016-09-01/links.json#/components/parameters/SubscriptionIdParameter"
+         ]
+        }
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "subscriptionId"
+       },
+       "serializedName": "subscriptionId",
+       "modelType": {
+        "$id": "79",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      }
+     ],
+     "name": {
+      "fixed": false,
+      "raw": "ListAtSubscription"
+     },
+     "group": {
+      "fixed": false,
+      "raw": "ResourceLinks"
+     },
+     "serializedName": "ResourceLinks_ListAtSubscription",
+     "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Resources/links",
+     "isAbsoluteUrl": false,
+     "httpMethod": "get",
+     "responses": {
+      "OK": {
+       "body": {
+        "$ref": "19"
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-09-01"
+         ],
+         "filename": [
+          "mem:///243?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-providers-microsoft-resources-links·get·responses·200",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Resources/stable/2016-09-01/links.json#/components/responses/paths·subscriptions-subscriptionid-providers-microsoft-resources-links·get·responses·200"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "isNullable": true
+     },
+     "returnType": {
+      "body": {
+       "$ref": "19"
+      },
+      "isNullable": true
+     },
+     "description": "Gets all the linked resources for the subscription.",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json"
+     ],
+     "extensions": {
+      "servers": [
+       {
+        "url": "https://management.azure.com/"
+       }
+      ],
+      "x-ms-pageable": {
+       "nextLinkName": "nextLink"
+      },
+      "x-ms-odata": "#/components/schemas/ResourceLinkFilter"
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "parameters": [
+      {
+       "$id": "80",
+       "clientProperty": {
+        "$ref": "56"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-09-01"
+         ],
+         "filename": [
+          "mem:///243?oai3.shaken.json"
+         ],
+         "name": "paths·scope-providers-microsoft-resources-links·get·parameters·0",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Resources/stable/2016-09-01/links.json#/components/parameters/paths·scope-providers-microsoft-resources-links·get·parameters·0"
+         ]
+        },
+        "x-ms-skip-url-encoding": true,
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "scope"
+       },
+       "serializedName": "scope",
+       "modelType": {
+        "$id": "81",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "82",
+       "clientProperty": {
+        "$ref": "54"
+       },
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The filter to apply when getting resource links. To get links only at the specified scope (not below the scope), use Filter.atScope()."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-09-01"
+         ],
+         "filename": [
+          "mem:///243?oai3.shaken.json"
+         ],
+         "name": "paths·scope-providers-microsoft-resources-links·get·parameters·1",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Resources/stable/2016-09-01/links.json#/components/parameters/paths·scope-providers-microsoft-resources-links·get·parameters·1"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": false,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "$filter"
+       },
+       "serializedName": "$filter",
+       "modelType": {
+        "$ref": "42"
+       }
+      },
+      {
+       "$id": "83",
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false,
+        "raw": "2016-09-01"
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The API version to use for the request."
+       },
+       "isRequired": true,
+       "isConstant": true,
+       "name": {
+        "fixed": false,
+        "raw": "api-version"
+       },
+       "serializedName": "api-version",
+       "modelType": {
+        "$id": "84",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      }
+     ],
+     "name": {
+      "fixed": false,
+      "raw": "ListAtSourceScope"
+     },
+     "group": {
+      "fixed": false,
+      "raw": "ResourceLinks"
+     },
+     "serializedName": "ResourceLinks_ListAtSourceScope",
+     "url": "/{scope}/providers/Microsoft.Resources/links",
+     "isAbsoluteUrl": false,
+     "httpMethod": "get",
+     "responses": {
+      "OK": {
+       "body": {
+        "$ref": "19"
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-09-01"
+         ],
+         "filename": [
+          "mem:///243?oai3.shaken.json"
+         ],
+         "name": "paths·scope-providers-microsoft-resources-links·get·responses·200",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Resources/stable/2016-09-01/links.json#/components/responses/paths·scope-providers-microsoft-resources-links·get·responses·200"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "isNullable": true
+     },
+     "returnType": {
+      "body": {
+       "$ref": "19"
+      },
+      "isNullable": true
+     },
+     "description": "Gets a list of resource links at and below the specified source scope.",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json"
+     ],
+     "extensions": {
+      "servers": [
+       {
+        "url": "https://management.azure.com/"
+       }
+      ],
+      "x-ms-pageable": {
+       "nextLinkName": "nextLink"
+      },
+      "x-ms-odata": "#/components/schemas/ResourceLinkFilter"
+     },
+     "deprecated": false,
+     "hidden": false
+    }
+   ],
+   "name": {
+    "fixed": false,
+    "raw": "ResourceLinks"
+   },
+   "typeName": {
+    "fixed": false
+   },
+   "nameForProperty": "ResourceLinks"
+  }
+ ]
+}
