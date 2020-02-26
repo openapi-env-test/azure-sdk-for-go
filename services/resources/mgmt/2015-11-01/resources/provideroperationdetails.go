@@ -45,7 +45,7 @@ func NewProviderOperationDetailsClientWithBaseURI(baseURI string, subscriptionID
 // List gets a list of resource providers.
 // Parameters:
 // resourceProviderNamespace - resource identity.
-func (client ProviderOperationDetailsClient) List(ctx context.Context, resourceProviderNamespace string, APIVersion string) (result ProviderOperationDetailListResultPage, err error) {
+func (client ProviderOperationDetailsClient) List(ctx context.Context, resourceProviderNamespace string) (result ProviderOperationDetailListResultPage, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/ProviderOperationDetailsClient.List")
 		defer func() {
@@ -57,7 +57,7 @@ func (client ProviderOperationDetailsClient) List(ctx context.Context, resourceP
 		}()
 	}
 	result.fn = client.listNextResults
-	req, err := client.ListPreparer(ctx, resourceProviderNamespace, APIVersion)
+	req, err := client.ListPreparer(ctx, resourceProviderNamespace)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "resources.ProviderOperationDetailsClient", "List", nil, "Failure preparing request")
 		return
@@ -79,11 +79,12 @@ func (client ProviderOperationDetailsClient) List(ctx context.Context, resourceP
 }
 
 // ListPreparer prepares the List request.
-func (client ProviderOperationDetailsClient) ListPreparer(ctx context.Context, resourceProviderNamespace string, APIVersion string) (*http.Request, error) {
+func (client ProviderOperationDetailsClient) ListPreparer(ctx context.Context, resourceProviderNamespace string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"resourceProviderNamespace": autorest.Encode("path", resourceProviderNamespace),
 	}
 
+	const APIVersion = "2015-11-01"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -99,8 +100,7 @@ func (client ProviderOperationDetailsClient) ListPreparer(ctx context.Context, r
 // ListSender sends the List request. The method will close the
 // http.Response Body if it receives an error.
 func (client ProviderOperationDetailsClient) ListSender(req *http.Request) (*http.Response, error) {
-	sd := autorest.GetSendDecorators(req.Context(), autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
-	return autorest.SendWithSender(client, req, sd...)
+	return client.Send(req, autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
 }
 
 // ListResponder handles the response to the List request. The method always
@@ -138,7 +138,7 @@ func (client ProviderOperationDetailsClient) listNextResults(ctx context.Context
 }
 
 // ListComplete enumerates all values, automatically crossing page boundaries as required.
-func (client ProviderOperationDetailsClient) ListComplete(ctx context.Context, resourceProviderNamespace string, APIVersion string) (result ProviderOperationDetailListResultIterator, err error) {
+func (client ProviderOperationDetailsClient) ListComplete(ctx context.Context, resourceProviderNamespace string) (result ProviderOperationDetailListResultIterator, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/ProviderOperationDetailsClient.List")
 		defer func() {
@@ -149,6 +149,6 @@ func (client ProviderOperationDetailsClient) ListComplete(ctx context.Context, r
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	result.page, err = client.List(ctx, resourceProviderNamespace, APIVersion)
+	result.page, err = client.List(ctx, resourceProviderNamespace)
 	return
 }
