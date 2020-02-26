@@ -1,0 +1,5949 @@
+{
+ "modelTypes": [
+  {
+   "$id": "1",
+   "$type": "CompositeType",
+   "properties": [
+    {
+     "$id": "2",
+     "isReadOnly": false,
+     "realPath": [
+      "policyType"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "The type of policy definition. Possible values are NotSpecified, BuiltIn, and Custom."
+     },
+     "extensions": {
+      "x-ms-metadata": {
+       "apiVersions": [
+        "2016-12-01"
+       ],
+       "filename": [
+        "mem:///259?oai3.shaken.json"
+       ],
+       "name": "policyType",
+       "originalLocations": [
+        "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/schemas/PolicyDefinitionProperties-policyType"
+       ]
+      },
+      "x-ms-enum": {
+       "name": "policyType",
+       "modelAsString": true
+      }
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "policyType"
+     },
+     "serializedName": "policyType",
+     "modelType": {
+      "$id": "3",
+      "$type": "EnumType",
+      "modelAsExtensible": false,
+      "values": [
+       {
+        "name": "NotSpecified",
+        "serializedName": "NotSpecified"
+       },
+       {
+        "name": "BuiltIn",
+        "serializedName": "BuiltIn"
+       },
+       {
+        "name": "Custom",
+        "serializedName": "Custom"
+       }
+      ],
+      "modelAsString": true,
+      "underlyingType": {
+       "$id": "4",
+       "$type": "PrimaryType",
+       "knownPrimaryType": "string",
+       "name": {
+        "fixed": false,
+        "raw": "String"
+       }
+      },
+      "name": {
+       "fixed": false,
+       "raw": "policyType"
+      }
+     }
+    },
+    {
+     "$id": "5",
+     "isReadOnly": false,
+     "realPath": [
+      "mode"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "The policy definition mode. Possible values are NotSpecified, Indexed, and All."
+     },
+     "extensions": {
+      "x-ms-metadata": {
+       "apiVersions": [
+        "2016-12-01"
+       ],
+       "filename": [
+        "mem:///259?oai3.shaken.json"
+       ],
+       "name": "policyMode",
+       "originalLocations": [
+        "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/schemas/PolicyDefinitionProperties-mode"
+       ]
+      },
+      "x-ms-enum": {
+       "name": "policyMode",
+       "modelAsString": true
+      }
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "mode"
+     },
+     "serializedName": "mode",
+     "modelType": {
+      "$id": "6",
+      "$type": "EnumType",
+      "modelAsExtensible": false,
+      "values": [
+       {
+        "name": "NotSpecified",
+        "serializedName": "NotSpecified"
+       },
+       {
+        "name": "Indexed",
+        "serializedName": "Indexed"
+       },
+       {
+        "name": "All",
+        "serializedName": "All"
+       }
+      ],
+      "modelAsString": true,
+      "underlyingType": {
+       "$id": "7",
+       "$type": "PrimaryType",
+       "knownPrimaryType": "string",
+       "name": {
+        "fixed": false,
+        "raw": "String"
+       }
+      },
+      "name": {
+       "fixed": false,
+       "raw": "policyMode"
+      }
+     }
+    },
+    {
+     "$id": "8",
+     "isReadOnly": false,
+     "realPath": [
+      "displayName"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "The display name of the policy definition."
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "displayName"
+     },
+     "serializedName": "displayName",
+     "modelType": {
+      "$id": "9",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "fixed": false,
+       "raw": "String"
+      }
+     }
+    },
+    {
+     "$id": "10",
+     "isReadOnly": false,
+     "realPath": [
+      "description"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "The policy definition description."
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "description"
+     },
+     "serializedName": "description",
+     "modelType": {
+      "$id": "11",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "fixed": false,
+       "raw": "String"
+      }
+     }
+    },
+    {
+     "$id": "12",
+     "isReadOnly": false,
+     "realPath": [
+      "policyRule"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "The policy rule."
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "policyRule"
+     },
+     "serializedName": "policyRule",
+     "modelType": {
+      "$id": "13",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "object",
+      "name": {
+       "fixed": false,
+       "raw": "Object"
+      }
+     }
+    },
+    {
+     "$id": "14",
+     "isReadOnly": false,
+     "realPath": [
+      "metadata"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "The policy definition metadata."
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "metadata"
+     },
+     "serializedName": "metadata",
+     "modelType": {
+      "$id": "15",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "object",
+      "name": {
+       "fixed": false,
+       "raw": "Object"
+      }
+     }
+    },
+    {
+     "$id": "16",
+     "isReadOnly": false,
+     "realPath": [
+      "parameters"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "Required if a parameter is used in policy rule."
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "parameters"
+     },
+     "serializedName": "parameters",
+     "modelType": {
+      "$id": "17",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "object",
+      "name": {
+       "fixed": false,
+       "raw": "Object"
+      }
+     }
+    }
+   ],
+   "serializedName": "PolicyDefinitionProperties",
+   "documentation": "The policy definition properties.",
+   "containsConstantProperties": false,
+   "name": {
+    "fixed": false,
+    "raw": "PolicyDefinitionProperties"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-12-01"
+     ],
+     "filename": [
+      "mem:///259?oai3.shaken.json"
+     ],
+     "name": "PolicyDefinitionProperties",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/schemas/PolicyDefinitionProperties"
+     ]
+    }
+   }
+  },
+  {
+   "$id": "18",
+   "$type": "CompositeType",
+   "properties": [
+    {
+     "$id": "19",
+     "isReadOnly": false,
+     "realPath": [
+      "properties"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "The policy definition properties."
+     },
+     "extensions": {
+      "x-ms-client-flatten": true
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "properties"
+     },
+     "serializedName": "properties",
+     "modelType": {
+      "$ref": "1"
+     }
+    },
+    {
+     "$id": "20",
+     "isReadOnly": true,
+     "realPath": [
+      "id"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "The ID of the policy definition."
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "id"
+     },
+     "serializedName": "id",
+     "modelType": {
+      "$id": "21",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "fixed": false,
+       "raw": "String"
+      }
+     }
+    },
+    {
+     "$id": "22",
+     "isReadOnly": true,
+     "realPath": [
+      "name"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "The name of the policy definition."
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "name"
+     },
+     "serializedName": "name",
+     "modelType": {
+      "$id": "23",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "fixed": false,
+       "raw": "String"
+      }
+     }
+    }
+   ],
+   "serializedName": "PolicyDefinition",
+   "documentation": "The policy definition.",
+   "containsConstantProperties": false,
+   "name": {
+    "fixed": false,
+    "raw": "PolicyDefinition"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-12-01"
+     ],
+     "filename": [
+      "mem:///259?oai3.shaken.json"
+     ],
+     "name": "PolicyDefinition",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/schemas/PolicyDefinition"
+     ]
+    },
+    "x-ms-azure-resource": true
+   }
+  },
+  {
+   "$id": "24",
+   "$type": "CompositeType",
+   "properties": [
+    {
+     "$id": "25",
+     "isReadOnly": false,
+     "realPath": [
+      "value"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "An array of policy definitions."
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "value"
+     },
+     "serializedName": "value",
+     "modelType": {
+      "$id": "26",
+      "$type": "SequenceType",
+      "elementType": {
+       "$ref": "18"
+      },
+      "name": {
+       "fixed": false
+      }
+     }
+    },
+    {
+     "$id": "27",
+     "isReadOnly": false,
+     "realPath": [
+      "nextLink"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "The URL to use for getting the next set of results."
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "nextLink"
+     },
+     "serializedName": "nextLink",
+     "modelType": {
+      "$id": "28",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "fixed": false,
+       "raw": "String"
+      }
+     }
+    }
+   ],
+   "serializedName": "PolicyDefinitionListResult",
+   "documentation": "List of policy definitions.",
+   "containsConstantProperties": false,
+   "name": {
+    "fixed": false,
+    "raw": "PolicyDefinitionListResult"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-12-01"
+     ],
+     "filename": [
+      "mem:///259?oai3.shaken.json"
+     ],
+     "name": "PolicyDefinitionListResult",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/schemas/PolicyDefinitionListResult"
+     ]
+    }
+   }
+  },
+  {
+   "$id": "29",
+   "$type": "CompositeType",
+   "properties": [
+    {
+     "$id": "30",
+     "isReadOnly": false,
+     "realPath": [
+      "displayName"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "The display name of the policy assignment."
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "displayName"
+     },
+     "serializedName": "displayName",
+     "modelType": {
+      "$id": "31",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "fixed": false,
+       "raw": "String"
+      }
+     }
+    },
+    {
+     "$id": "32",
+     "isReadOnly": false,
+     "realPath": [
+      "policyDefinitionId"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "The ID of the policy definition."
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "policyDefinitionId"
+     },
+     "serializedName": "policyDefinitionId",
+     "modelType": {
+      "$id": "33",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "fixed": false,
+       "raw": "String"
+      }
+     }
+    },
+    {
+     "$id": "34",
+     "isReadOnly": false,
+     "realPath": [
+      "scope"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "The scope for the policy assignment."
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "scope"
+     },
+     "serializedName": "scope",
+     "modelType": {
+      "$id": "35",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "fixed": false,
+       "raw": "String"
+      }
+     }
+    },
+    {
+     "$id": "36",
+     "isReadOnly": false,
+     "realPath": [
+      "parameters"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "Required if a parameter is used in policy rule."
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "parameters"
+     },
+     "serializedName": "parameters",
+     "modelType": {
+      "$id": "37",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "object",
+      "name": {
+       "fixed": false,
+       "raw": "Object"
+      }
+     }
+    },
+    {
+     "$id": "38",
+     "isReadOnly": false,
+     "realPath": [
+      "description"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "This message will be part of response in case of policy violation."
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "description"
+     },
+     "serializedName": "description",
+     "modelType": {
+      "$id": "39",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "fixed": false,
+       "raw": "String"
+      }
+     }
+    }
+   ],
+   "serializedName": "PolicyAssignmentProperties",
+   "documentation": "The policy assignment properties.",
+   "containsConstantProperties": false,
+   "name": {
+    "fixed": false,
+    "raw": "PolicyAssignmentProperties"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-12-01"
+     ],
+     "filename": [
+      "mem:///260?oai3.shaken.json"
+     ],
+     "name": "PolicyAssignmentProperties",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/schemas/PolicyAssignmentProperties"
+     ]
+    }
+   }
+  },
+  {
+   "$id": "40",
+   "$type": "CompositeType",
+   "properties": [
+    {
+     "$id": "41",
+     "isReadOnly": false,
+     "realPath": [
+      "properties"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "Properties for the policy assignment."
+     },
+     "extensions": {
+      "x-ms-client-flatten": true
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "properties"
+     },
+     "serializedName": "properties",
+     "modelType": {
+      "$ref": "29"
+     }
+    },
+    {
+     "$id": "42",
+     "isReadOnly": true,
+     "realPath": [
+      "id"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "The ID of the policy assignment."
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "id"
+     },
+     "serializedName": "id",
+     "modelType": {
+      "$id": "43",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "fixed": false,
+       "raw": "String"
+      }
+     }
+    },
+    {
+     "$id": "44",
+     "isReadOnly": false,
+     "realPath": [
+      "type"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "The type of the policy assignment."
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "type"
+     },
+     "serializedName": "type",
+     "modelType": {
+      "$id": "45",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "fixed": false,
+       "raw": "String"
+      }
+     }
+    },
+    {
+     "$id": "46",
+     "isReadOnly": false,
+     "realPath": [
+      "name"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "The name of the policy assignment."
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "name"
+     },
+     "serializedName": "name",
+     "modelType": {
+      "$id": "47",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "fixed": false,
+       "raw": "String"
+      }
+     }
+    }
+   ],
+   "serializedName": "PolicyAssignment",
+   "documentation": "The policy assignment.",
+   "containsConstantProperties": false,
+   "name": {
+    "fixed": false,
+    "raw": "PolicyAssignment"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-12-01"
+     ],
+     "filename": [
+      "mem:///260?oai3.shaken.json"
+     ],
+     "name": "PolicyAssignment",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/schemas/PolicyAssignment"
+     ]
+    },
+    "x-ms-azure-resource": true
+   }
+  },
+  {
+   "$id": "48",
+   "$type": "CompositeType",
+   "properties": [
+    {
+     "$id": "49",
+     "isReadOnly": false,
+     "realPath": [
+      "value"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "An array of policy assignments."
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "value"
+     },
+     "serializedName": "value",
+     "modelType": {
+      "$id": "50",
+      "$type": "SequenceType",
+      "elementType": {
+       "$ref": "40"
+      },
+      "name": {
+       "fixed": false
+      }
+     }
+    },
+    {
+     "$id": "51",
+     "isReadOnly": false,
+     "realPath": [
+      "nextLink"
+     ],
+     "collectionFormat": "none",
+     "defaultValue": {
+      "fixed": false
+     },
+     "documentation": {
+      "fixed": false,
+      "raw": "The URL to use for getting the next set of results."
+     },
+     "isRequired": false,
+     "isConstant": false,
+     "name": {
+      "fixed": false,
+      "raw": "nextLink"
+     },
+     "serializedName": "nextLink",
+     "modelType": {
+      "$id": "52",
+      "$type": "PrimaryType",
+      "knownPrimaryType": "string",
+      "name": {
+       "fixed": false,
+       "raw": "String"
+      }
+     }
+    }
+   ],
+   "serializedName": "PolicyAssignmentListResult",
+   "documentation": "List of policy assignments.",
+   "containsConstantProperties": false,
+   "name": {
+    "fixed": false,
+    "raw": "PolicyAssignmentListResult"
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-12-01"
+     ],
+     "filename": [
+      "mem:///260?oai3.shaken.json"
+     ],
+     "name": "PolicyAssignmentListResult",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/schemas/PolicyAssignmentListResult"
+     ]
+    }
+   }
+  }
+ ],
+ "enumTypes": [
+  {
+   "$ref": "3"
+  },
+  {
+   "$ref": "6"
+  }
+ ],
+ "name": "PolicyClient",
+ "namespace": "Policy",
+ "modelsName": "Models",
+ "apiVersion": "2016-12-01",
+ "baseUrl": "https://management.azure.com",
+ "documentation": "To manage and control access to your resources, you can define customized policies and assign them at a scope.",
+ "extensions": {
+  "security": [
+   {
+    "azure_auth": [
+     "user_impersonation"
+    ]
+   }
+  ]
+ },
+ "properties": [
+  {
+   "$id": "53",
+   "isReadOnly": false,
+   "realPath": [
+    "subscriptionId"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The ID of the target subscription."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-12-01"
+     ],
+     "filename": [
+      "mem:///259?oai3.shaken.json",
+      "mem:///260?oai3.shaken.json"
+     ],
+     "name": "SubscriptionIdParameter",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/parameters/SubscriptionIdParameter",
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/SubscriptionIdParameter"
+     ]
+    }
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "subscriptionId"
+   },
+   "serializedName": "subscriptionId",
+   "modelType": {
+    "$id": "54",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "55",
+   "isReadOnly": false,
+   "realPath": [
+    "managementGroupId"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The ID of the management group."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-12-01"
+     ],
+     "filename": [
+      "mem:///259?oai3.shaken.json"
+     ],
+     "name": "ManagementGroupIdParameter",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/parameters/ManagementGroupIdParameter"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "managementGroupId"
+   },
+   "serializedName": "managementGroupId",
+   "modelType": {
+    "$id": "56",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "57",
+   "isReadOnly": false,
+   "realPath": [
+    "api-version"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The API version to use for the operation."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-12-01"
+     ],
+     "filename": [
+      "mem:///259?oai3.shaken.json",
+      "mem:///260?oai3.shaken.json"
+     ],
+     "name": "ApiVersionParameter",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/parameters/ApiVersionParameter",
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/ApiVersionParameter"
+     ]
+    }
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "api-version"
+   },
+   "serializedName": "api-version",
+   "modelType": {
+    "$id": "58",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "59",
+   "isReadOnly": false,
+   "realPath": [
+    "policyDefinitionName"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The name of the policy definition to create."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-12-01"
+     ],
+     "filename": [
+      "mem:///259?oai3.shaken.json"
+     ],
+     "name": "paths·subscriptions-subscriptionid-providers-microsoft-authorization-policydefinitions-policydefinitionname·put·parameters·0",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/parameters/paths·subscriptions-subscriptionid-providers-microsoft-authorization-policydefinitions-policydefinitionname·put·parameters·0"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "policyDefinitionName"
+   },
+   "serializedName": "policyDefinitionName",
+   "modelType": {
+    "$id": "60",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "61",
+   "isReadOnly": false,
+   "realPath": [
+    "policyDefinitionName"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The name of the policy definition to delete."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-12-01"
+     ],
+     "filename": [
+      "mem:///259?oai3.shaken.json"
+     ],
+     "name": "paths·subscriptions-subscriptionid-providers-microsoft-authorization-policydefinitions-policydefinitionname·delete·parameters·0",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/parameters/paths·subscriptions-subscriptionid-providers-microsoft-authorization-policydefinitions-policydefinitionname·delete·parameters·0"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "PolicyDefinitionName1"
+   },
+   "serializedName": "policyDefinitionName",
+   "modelType": {
+    "$id": "62",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "63",
+   "isReadOnly": false,
+   "realPath": [
+    "policyDefinitionName"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The name of the policy definition to get."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-12-01"
+     ],
+     "filename": [
+      "mem:///259?oai3.shaken.json"
+     ],
+     "name": "paths·subscriptions-subscriptionid-providers-microsoft-authorization-policydefinitions-policydefinitionname·get·parameters·0",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/parameters/paths·subscriptions-subscriptionid-providers-microsoft-authorization-policydefinitions-policydefinitionname·get·parameters·0"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "PolicyDefinitionName2"
+   },
+   "serializedName": "policyDefinitionName",
+   "modelType": {
+    "$id": "64",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "65",
+   "isReadOnly": false,
+   "realPath": [
+    "policyDefinitionName"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The name of the built in policy definition to get."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-12-01"
+     ],
+     "filename": [
+      "mem:///259?oai3.shaken.json"
+     ],
+     "name": "paths·providers-microsoft-authorization-policydefinitions-policydefinitionname·get·parameters·0",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/parameters/paths·providers-microsoft-authorization-policydefinitions-policydefinitionname·get·parameters·0"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "PolicyDefinitionName3"
+   },
+   "serializedName": "policyDefinitionName",
+   "modelType": {
+    "$id": "66",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "67",
+   "isReadOnly": false,
+   "realPath": [
+    "policyDefinitionName"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The name of the policy definition to create."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-12-01"
+     ],
+     "filename": [
+      "mem:///259?oai3.shaken.json"
+     ],
+     "name": "paths·providers-microsoft-management-managementgroups-managementgroupid-providers-microsoft-authorization-policydefinitions-policydefinitionname·put·parameters·0",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/parameters/paths·providers-microsoft-management-managementgroups-managementgroupid-providers-microsoft-authorization-policydefinitions-policydefinitionname·put·parameters·0"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "PolicyDefinitionName4"
+   },
+   "serializedName": "policyDefinitionName",
+   "modelType": {
+    "$id": "68",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "69",
+   "isReadOnly": false,
+   "realPath": [
+    "policyDefinitionName"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The name of the policy definition to delete."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-12-01"
+     ],
+     "filename": [
+      "mem:///259?oai3.shaken.json"
+     ],
+     "name": "paths·providers-microsoft-management-managementgroups-managementgroupid-providers-microsoft-authorization-policydefinitions-policydefinitionname·delete·parameters·0",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/parameters/paths·providers-microsoft-management-managementgroups-managementgroupid-providers-microsoft-authorization-policydefinitions-policydefinitionname·delete·parameters·0"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "PolicyDefinitionName5"
+   },
+   "serializedName": "policyDefinitionName",
+   "modelType": {
+    "$id": "70",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "71",
+   "isReadOnly": false,
+   "realPath": [
+    "policyDefinitionName"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The name of the policy definition to get."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-12-01"
+     ],
+     "filename": [
+      "mem:///259?oai3.shaken.json"
+     ],
+     "name": "paths·providers-microsoft-management-managementgroups-managementgroupid-providers-microsoft-authorization-policydefinitions-policydefinitionname·get·parameters·0",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/parameters/paths·providers-microsoft-management-managementgroups-managementgroupid-providers-microsoft-authorization-policydefinitions-policydefinitionname·get·parameters·0"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "PolicyDefinitionName6"
+   },
+   "serializedName": "policyDefinitionName",
+   "modelType": {
+    "$id": "72",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "73",
+   "isReadOnly": false,
+   "realPath": [
+    "scope"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The scope of the policy assignment."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-12-01"
+     ],
+     "filename": [
+      "mem:///260?oai3.shaken.json"
+     ],
+     "name": "paths·scope-providers-microsoft-authorization-policyassignments-policyassignmentname·delete·parameters·0",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/paths·scope-providers-microsoft-authorization-policyassignments-policyassignmentname·delete·parameters·0"
+     ]
+    },
+    "x-ms-skip-url-encoding": true,
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "scope"
+   },
+   "serializedName": "scope",
+   "modelType": {
+    "$id": "74",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "75",
+   "isReadOnly": false,
+   "realPath": [
+    "policyAssignmentName"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The name of the policy assignment to delete."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-12-01"
+     ],
+     "filename": [
+      "mem:///260?oai3.shaken.json"
+     ],
+     "name": "paths·scope-providers-microsoft-authorization-policyassignments-policyassignmentname·delete·parameters·1",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/paths·scope-providers-microsoft-authorization-policyassignments-policyassignmentname·delete·parameters·1"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "policyAssignmentName"
+   },
+   "serializedName": "policyAssignmentName",
+   "modelType": {
+    "$id": "76",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "77",
+   "isReadOnly": false,
+   "realPath": [
+    "scope"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The scope of the policy assignment."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-12-01"
+     ],
+     "filename": [
+      "mem:///260?oai3.shaken.json"
+     ],
+     "name": "paths·scope-providers-microsoft-authorization-policyassignments-policyassignmentname·put·parameters·0",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/paths·scope-providers-microsoft-authorization-policyassignments-policyassignmentname·put·parameters·0"
+     ]
+    },
+    "x-ms-skip-url-encoding": true,
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "Scope1"
+   },
+   "serializedName": "scope",
+   "modelType": {
+    "$id": "78",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "79",
+   "isReadOnly": false,
+   "realPath": [
+    "policyAssignmentName"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The name of the policy assignment."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-12-01"
+     ],
+     "filename": [
+      "mem:///260?oai3.shaken.json"
+     ],
+     "name": "paths·scope-providers-microsoft-authorization-policyassignments-policyassignmentname·put·parameters·1",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/paths·scope-providers-microsoft-authorization-policyassignments-policyassignmentname·put·parameters·1"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "PolicyAssignmentName1"
+   },
+   "serializedName": "policyAssignmentName",
+   "modelType": {
+    "$id": "80",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "81",
+   "isReadOnly": false,
+   "realPath": [
+    "scope"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The scope of the policy assignment."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-12-01"
+     ],
+     "filename": [
+      "mem:///260?oai3.shaken.json"
+     ],
+     "name": "paths·scope-providers-microsoft-authorization-policyassignments-policyassignmentname·get·parameters·0",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/paths·scope-providers-microsoft-authorization-policyassignments-policyassignmentname·get·parameters·0"
+     ]
+    },
+    "x-ms-skip-url-encoding": true,
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "Scope2"
+   },
+   "serializedName": "scope",
+   "modelType": {
+    "$id": "82",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "83",
+   "isReadOnly": false,
+   "realPath": [
+    "policyAssignmentName"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The name of the policy assignment to get."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-12-01"
+     ],
+     "filename": [
+      "mem:///260?oai3.shaken.json"
+     ],
+     "name": "paths·scope-providers-microsoft-authorization-policyassignments-policyassignmentname·get·parameters·1",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/paths·scope-providers-microsoft-authorization-policyassignments-policyassignmentname·get·parameters·1"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "PolicyAssignmentName2"
+   },
+   "serializedName": "policyAssignmentName",
+   "modelType": {
+    "$id": "84",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "85",
+   "isReadOnly": false,
+   "realPath": [
+    "resourceGroupName"
+   ],
+   "collectionFormat": "none",
+   "constraints": {
+    "MaxLength": "90",
+    "MinLength": "1",
+    "Pattern": "^[-\\p{L}\\._\\(\\)\\w]+$"
+   },
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The name of the resource group that contains policy assignments."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-12-01"
+     ],
+     "filename": [
+      "mem:///260?oai3.shaken.json"
+     ],
+     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-policyassignments·get·parameters·0",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-policyassignments·get·parameters·0"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "resourceGroupName"
+   },
+   "serializedName": "resourceGroupName",
+   "modelType": {
+    "$id": "86",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "87",
+   "isReadOnly": false,
+   "realPath": [
+    "$filter"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The filter to apply on the operation."
+   },
+   "extensions": {
+    "x-ms-skip-url-encoding": true,
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-12-01"
+     ],
+     "filename": [
+      "mem:///260?oai3.shaken.json"
+     ],
+     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-policyassignments·get·parameters·1",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-policyassignments·get·parameters·1"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": false,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "$filter"
+   },
+   "serializedName": "$filter",
+   "modelType": {
+    "$id": "88",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "89",
+   "isReadOnly": false,
+   "realPath": [
+    "resourceGroupName"
+   ],
+   "collectionFormat": "none",
+   "constraints": {
+    "MaxLength": "90",
+    "MinLength": "1",
+    "Pattern": "^[-\\p{L}\\._\\(\\)\\w]+$"
+   },
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The name of the resource group containing the resource. The name is case insensitive."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-12-01"
+     ],
+     "filename": [
+      "mem:///260?oai3.shaken.json"
+     ],
+     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-policyassignments·get·parameters·0",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-policyassignments·get·parameters·0"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "ResourceGroupName1"
+   },
+   "serializedName": "resourceGroupName",
+   "modelType": {
+    "$id": "90",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "91",
+   "isReadOnly": false,
+   "realPath": [
+    "resourceProviderNamespace"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The namespace of the resource provider."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-12-01"
+     ],
+     "filename": [
+      "mem:///260?oai3.shaken.json"
+     ],
+     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-policyassignments·get·parameters·1",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-policyassignments·get·parameters·1"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "resourceProviderNamespace"
+   },
+   "serializedName": "resourceProviderNamespace",
+   "modelType": {
+    "$id": "92",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "93",
+   "isReadOnly": false,
+   "realPath": [
+    "parentResourcePath"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The parent resource path."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-12-01"
+     ],
+     "filename": [
+      "mem:///260?oai3.shaken.json"
+     ],
+     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-policyassignments·get·parameters·2",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-policyassignments·get·parameters·2"
+     ]
+    },
+    "x-ms-skip-url-encoding": true,
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "parentResourcePath"
+   },
+   "serializedName": "parentResourcePath",
+   "modelType": {
+    "$id": "94",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "95",
+   "isReadOnly": false,
+   "realPath": [
+    "resourceType"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The resource type."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-12-01"
+     ],
+     "filename": [
+      "mem:///260?oai3.shaken.json"
+     ],
+     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-policyassignments·get·parameters·3",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-policyassignments·get·parameters·3"
+     ]
+    },
+    "x-ms-skip-url-encoding": true,
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "resourceType"
+   },
+   "serializedName": "resourceType",
+   "modelType": {
+    "$id": "96",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "97",
+   "isReadOnly": false,
+   "realPath": [
+    "resourceName"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The name of the resource with policy assignments."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-12-01"
+     ],
+     "filename": [
+      "mem:///260?oai3.shaken.json"
+     ],
+     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-policyassignments·get·parameters·4",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-policyassignments·get·parameters·4"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "resourceName"
+   },
+   "serializedName": "resourceName",
+   "modelType": {
+    "$id": "98",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "99",
+   "isReadOnly": false,
+   "realPath": [
+    "$filter"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The filter to apply on the operation."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-12-01"
+     ],
+     "filename": [
+      "mem:///260?oai3.shaken.json"
+     ],
+     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-policyassignments·get·parameters·5",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-policyassignments·get·parameters·5"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": false,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "Filter1"
+   },
+   "serializedName": "$filter",
+   "modelType": {
+    "$id": "100",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "101",
+   "isReadOnly": false,
+   "realPath": [
+    "$filter"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The filter to apply on the operation."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-12-01"
+     ],
+     "filename": [
+      "mem:///260?oai3.shaken.json"
+     ],
+     "name": "paths·subscriptions-subscriptionid-providers-microsoft-authorization-policyassignments·get·parameters·0",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/paths·subscriptions-subscriptionid-providers-microsoft-authorization-policyassignments·get·parameters·0"
+     ]
+    },
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": false,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "Filter2"
+   },
+   "serializedName": "$filter",
+   "modelType": {
+    "$id": "102",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "103",
+   "isReadOnly": false,
+   "realPath": [
+    "policyAssignmentId"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The ID of the policy assignment to delete. Use the format '/{scope}/providers/Microsoft.Authorization/policyAssignments/{policy-assignment-name}'."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-12-01"
+     ],
+     "filename": [
+      "mem:///260?oai3.shaken.json"
+     ],
+     "name": "paths·policyassignmentid·delete·parameters·0",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/paths·policyassignmentid·delete·parameters·0"
+     ]
+    },
+    "x-ms-skip-url-encoding": true,
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "policyAssignmentId"
+   },
+   "serializedName": "policyAssignmentId",
+   "modelType": {
+    "$id": "104",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "105",
+   "isReadOnly": false,
+   "realPath": [
+    "policyAssignmentId"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The ID of the policy assignment to create. Use the format '/{scope}/providers/Microsoft.Authorization/policyAssignments/{policy-assignment-name}'."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-12-01"
+     ],
+     "filename": [
+      "mem:///260?oai3.shaken.json"
+     ],
+     "name": "paths·policyassignmentid·put·parameters·0",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/paths·policyassignmentid·put·parameters·0"
+     ]
+    },
+    "x-ms-skip-url-encoding": true,
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "PolicyAssignmentId1"
+   },
+   "serializedName": "policyAssignmentId",
+   "modelType": {
+    "$id": "106",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  },
+  {
+   "$id": "107",
+   "isReadOnly": false,
+   "realPath": [
+    "policyAssignmentId"
+   ],
+   "collectionFormat": "none",
+   "defaultValue": {
+    "fixed": false
+   },
+   "documentation": {
+    "fixed": false,
+    "raw": "The ID of the policy assignment to get. Use the format '/{scope}/providers/Microsoft.Authorization/policyAssignments/{policy-assignment-name}'."
+   },
+   "extensions": {
+    "x-ms-metadata": {
+     "apiVersions": [
+      "2016-12-01"
+     ],
+     "filename": [
+      "mem:///260?oai3.shaken.json"
+     ],
+     "name": "paths·policyassignmentid·get·parameters·0",
+     "originalLocations": [
+      "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/paths·policyassignmentid·get·parameters·0"
+     ]
+    },
+    "x-ms-skip-url-encoding": true,
+    "x-ms-parameter-location": "method"
+   },
+   "isRequired": true,
+   "isConstant": false,
+   "name": {
+    "fixed": false,
+    "raw": "PolicyAssignmentId2"
+   },
+   "serializedName": "policyAssignmentId",
+   "modelType": {
+    "$id": "108",
+    "$type": "PrimaryType",
+    "knownPrimaryType": "string",
+    "name": {
+     "fixed": false,
+     "raw": "String"
+    }
+   }
+  }
+ ],
+ "operations": [
+  {
+   "methods": [
+    {
+     "parameters": [
+      {
+       "$id": "109",
+       "clientProperty": {
+        "$ref": "59"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The name of the policy definition to create."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///259?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-providers-microsoft-authorization-policydefinitions-policydefinitionname·put·parameters·0",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/parameters/paths·subscriptions-subscriptionid-providers-microsoft-authorization-policydefinitions-policydefinitionname·put·parameters·0"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "policyDefinitionName"
+       },
+       "serializedName": "policyDefinitionName",
+       "modelType": {
+        "$id": "110",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "111",
+       "location": "body",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The policy definition properties."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///259?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-providers-microsoft-authorization-policydefinitions-policydefinitionname·put·requestbody",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/requestBodies/paths·subscriptions-subscriptionid-providers-microsoft-authorization-policydefinitions-policydefinitionname·put·requestbody"
+         ]
+        },
+        "x-ms-requestBody-name": "parameters"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "parameters"
+       },
+       "serializedName": "parameters",
+       "modelType": {
+        "$ref": "18"
+       }
+      },
+      {
+       "$id": "112",
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false,
+        "raw": "2016-12-01"
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The API version to use for the request."
+       },
+       "isRequired": true,
+       "isConstant": true,
+       "name": {
+        "fixed": false,
+        "raw": "api-version"
+       },
+       "serializedName": "api-version",
+       "modelType": {
+        "$id": "113",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "114",
+       "clientProperty": {
+        "$ref": "53"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The ID of the target subscription."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///259?oai3.shaken.json",
+          "mem:///260?oai3.shaken.json"
+         ],
+         "name": "SubscriptionIdParameter",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/parameters/SubscriptionIdParameter",
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/SubscriptionIdParameter"
+         ]
+        }
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "subscriptionId"
+       },
+       "serializedName": "subscriptionId",
+       "modelType": {
+        "$id": "115",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      }
+     ],
+     "name": {
+      "fixed": false,
+      "raw": "CreateOrUpdate"
+     },
+     "group": {
+      "fixed": false,
+      "raw": "PolicyDefinitions"
+     },
+     "serializedName": "PolicyDefinitions_CreateOrUpdate",
+     "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}",
+     "isAbsoluteUrl": false,
+     "httpMethod": "put",
+     "responses": {
+      "Created": {
+       "body": {
+        "$ref": "18"
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///259?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-providers-microsoft-authorization-policydefinitions-policydefinitionname·put·responses·201",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/responses/paths·subscriptions-subscriptionid-providers-microsoft-authorization-policydefinitions-policydefinitionname·put·responses·201"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "isNullable": true
+     },
+     "returnType": {
+      "body": {
+       "$ref": "18"
+      },
+      "isNullable": true
+     },
+     "description": "Creates or updates a policy definition.",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json",
+      "text/json"
+     ],
+     "extensions": {
+      "servers": [
+       {
+        "url": "https://management.azure.com/"
+       }
+      ],
+      "x-ms-requestBody-index": "1"
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "parameters": [
+      {
+       "$id": "116",
+       "clientProperty": {
+        "$ref": "59"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The name of the policy definition to delete."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///259?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-providers-microsoft-authorization-policydefinitions-policydefinitionname·delete·parameters·0",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/parameters/paths·subscriptions-subscriptionid-providers-microsoft-authorization-policydefinitions-policydefinitionname·delete·parameters·0"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "policyDefinitionName"
+       },
+       "serializedName": "policyDefinitionName",
+       "modelType": {
+        "$id": "117",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "118",
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false,
+        "raw": "2016-12-01"
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The API version to use for the request."
+       },
+       "isRequired": true,
+       "isConstant": true,
+       "name": {
+        "fixed": false,
+        "raw": "api-version"
+       },
+       "serializedName": "api-version",
+       "modelType": {
+        "$id": "119",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "120",
+       "clientProperty": {
+        "$ref": "53"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The ID of the target subscription."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///259?oai3.shaken.json",
+          "mem:///260?oai3.shaken.json"
+         ],
+         "name": "SubscriptionIdParameter",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/parameters/SubscriptionIdParameter",
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/SubscriptionIdParameter"
+         ]
+        }
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "subscriptionId"
+       },
+       "serializedName": "subscriptionId",
+       "modelType": {
+        "$id": "121",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      }
+     ],
+     "name": {
+      "fixed": false,
+      "raw": "Delete"
+     },
+     "group": {
+      "fixed": false,
+      "raw": "PolicyDefinitions"
+     },
+     "serializedName": "PolicyDefinitions_Delete",
+     "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}",
+     "isAbsoluteUrl": false,
+     "httpMethod": "delete",
+     "responses": {
+      "OK": {
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///259?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-providers-microsoft-authorization-policydefinitions-policydefinitionname·delete·responses·200",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/responses/paths·subscriptions-subscriptionid-providers-microsoft-authorization-policydefinitions-policydefinitionname·delete·responses·200",
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/responses/paths·subscriptions-subscriptionid-providers-microsoft-authorization-policydefinitions-policydefinitionname·delete·responses·204"
+         ]
+        }
+       },
+       "isNullable": true
+      },
+      "NoContent": {
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///259?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-providers-microsoft-authorization-policydefinitions-policydefinitionname·delete·responses·200",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/responses/paths·subscriptions-subscriptionid-providers-microsoft-authorization-policydefinitions-policydefinitionname·delete·responses·200",
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/responses/paths·subscriptions-subscriptionid-providers-microsoft-authorization-policydefinitions-policydefinitionname·delete·responses·204"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "isNullable": true
+     },
+     "returnType": {
+      "isNullable": true
+     },
+     "description": "Deletes a policy definition.",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json"
+     ],
+     "extensions": {
+      "servers": [
+       {
+        "url": "https://management.azure.com/"
+       }
+      ]
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "parameters": [
+      {
+       "$id": "122",
+       "clientProperty": {
+        "$ref": "59"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The name of the policy definition to get."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///259?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-providers-microsoft-authorization-policydefinitions-policydefinitionname·get·parameters·0",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/parameters/paths·subscriptions-subscriptionid-providers-microsoft-authorization-policydefinitions-policydefinitionname·get·parameters·0"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "policyDefinitionName"
+       },
+       "serializedName": "policyDefinitionName",
+       "modelType": {
+        "$id": "123",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "124",
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false,
+        "raw": "2016-12-01"
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The API version to use for the request."
+       },
+       "isRequired": true,
+       "isConstant": true,
+       "name": {
+        "fixed": false,
+        "raw": "api-version"
+       },
+       "serializedName": "api-version",
+       "modelType": {
+        "$id": "125",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "126",
+       "clientProperty": {
+        "$ref": "53"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The ID of the target subscription."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///259?oai3.shaken.json",
+          "mem:///260?oai3.shaken.json"
+         ],
+         "name": "SubscriptionIdParameter",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/parameters/SubscriptionIdParameter",
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/SubscriptionIdParameter"
+         ]
+        }
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "subscriptionId"
+       },
+       "serializedName": "subscriptionId",
+       "modelType": {
+        "$id": "127",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      }
+     ],
+     "name": {
+      "fixed": false,
+      "raw": "Get"
+     },
+     "group": {
+      "fixed": false,
+      "raw": "PolicyDefinitions"
+     },
+     "serializedName": "PolicyDefinitions_Get",
+     "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}",
+     "isAbsoluteUrl": false,
+     "httpMethod": "get",
+     "responses": {
+      "OK": {
+       "body": {
+        "$ref": "18"
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///259?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-providers-microsoft-authorization-policydefinitions-policydefinitionname·get·responses·200",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/responses/paths·subscriptions-subscriptionid-providers-microsoft-authorization-policydefinitions-policydefinitionname·get·responses·200"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "isNullable": true
+     },
+     "returnType": {
+      "body": {
+       "$ref": "18"
+      },
+      "isNullable": true
+     },
+     "description": "Gets the policy definition.",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json",
+      "text/json"
+     ],
+     "extensions": {
+      "servers": [
+       {
+        "url": "https://management.azure.com/"
+       }
+      ]
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "parameters": [
+      {
+       "$id": "128",
+       "clientProperty": {
+        "$ref": "59"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The name of the built in policy definition to get."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///259?oai3.shaken.json"
+         ],
+         "name": "paths·providers-microsoft-authorization-policydefinitions-policydefinitionname·get·parameters·0",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/parameters/paths·providers-microsoft-authorization-policydefinitions-policydefinitionname·get·parameters·0"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "policyDefinitionName"
+       },
+       "serializedName": "policyDefinitionName",
+       "modelType": {
+        "$id": "129",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "130",
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false,
+        "raw": "2016-12-01"
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The API version to use for the request."
+       },
+       "isRequired": true,
+       "isConstant": true,
+       "name": {
+        "fixed": false,
+        "raw": "api-version"
+       },
+       "serializedName": "api-version",
+       "modelType": {
+        "$id": "131",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      }
+     ],
+     "name": {
+      "fixed": false,
+      "raw": "GetBuiltIn"
+     },
+     "group": {
+      "fixed": false,
+      "raw": "PolicyDefinitions"
+     },
+     "serializedName": "PolicyDefinitions_GetBuiltIn",
+     "url": "/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}",
+     "isAbsoluteUrl": false,
+     "httpMethod": "get",
+     "responses": {
+      "OK": {
+       "body": {
+        "$ref": "18"
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///259?oai3.shaken.json"
+         ],
+         "name": "paths·providers-microsoft-authorization-policydefinitions-policydefinitionname·get·responses·200",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/responses/paths·providers-microsoft-authorization-policydefinitions-policydefinitionname·get·responses·200"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "isNullable": true
+     },
+     "returnType": {
+      "body": {
+       "$ref": "18"
+      },
+      "isNullable": true
+     },
+     "description": "Gets the built in policy definition.",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json",
+      "text/json"
+     ],
+     "extensions": {
+      "servers": [
+       {
+        "url": "https://management.azure.com/"
+       }
+      ]
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "parameters": [
+      {
+       "$id": "132",
+       "clientProperty": {
+        "$ref": "59"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The name of the policy definition to create."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///259?oai3.shaken.json"
+         ],
+         "name": "paths·providers-microsoft-management-managementgroups-managementgroupid-providers-microsoft-authorization-policydefinitions-policydefinitionname·put·parameters·0",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/parameters/paths·providers-microsoft-management-managementgroups-managementgroupid-providers-microsoft-authorization-policydefinitions-policydefinitionname·put·parameters·0"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "policyDefinitionName"
+       },
+       "serializedName": "policyDefinitionName",
+       "modelType": {
+        "$id": "133",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "134",
+       "location": "body",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The policy definition properties."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///259?oai3.shaken.json"
+         ],
+         "name": "paths·providers-microsoft-management-managementgroups-managementgroupid-providers-microsoft-authorization-policydefinitions-policydefinitionname·put·requestbody",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/requestBodies/paths·providers-microsoft-management-managementgroups-managementgroupid-providers-microsoft-authorization-policydefinitions-policydefinitionname·put·requestbody"
+         ]
+        },
+        "x-ms-requestBody-name": "parameters"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "parameters"
+       },
+       "serializedName": "parameters",
+       "modelType": {
+        "$ref": "18"
+       }
+      },
+      {
+       "$id": "135",
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false,
+        "raw": "2016-12-01"
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The API version to use for the request."
+       },
+       "isRequired": true,
+       "isConstant": true,
+       "name": {
+        "fixed": false,
+        "raw": "api-version"
+       },
+       "serializedName": "api-version",
+       "modelType": {
+        "$id": "136",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "137",
+       "clientProperty": {
+        "$ref": "55"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The ID of the management group."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///259?oai3.shaken.json"
+         ],
+         "name": "ManagementGroupIdParameter",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/parameters/ManagementGroupIdParameter"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "managementGroupId"
+       },
+       "serializedName": "managementGroupId",
+       "modelType": {
+        "$id": "138",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      }
+     ],
+     "name": {
+      "fixed": false,
+      "raw": "CreateOrUpdateAtManagementGroup"
+     },
+     "group": {
+      "fixed": false,
+      "raw": "PolicyDefinitions"
+     },
+     "serializedName": "PolicyDefinitions_CreateOrUpdateAtManagementGroup",
+     "url": "/providers/Microsoft.Management/managementgroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}",
+     "isAbsoluteUrl": false,
+     "httpMethod": "put",
+     "responses": {
+      "Created": {
+       "body": {
+        "$ref": "18"
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///259?oai3.shaken.json"
+         ],
+         "name": "paths·providers-microsoft-management-managementgroups-managementgroupid-providers-microsoft-authorization-policydefinitions-policydefinitionname·put·responses·201",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/responses/paths·providers-microsoft-management-managementgroups-managementgroupid-providers-microsoft-authorization-policydefinitions-policydefinitionname·put·responses·201"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "isNullable": true
+     },
+     "returnType": {
+      "body": {
+       "$ref": "18"
+      },
+      "isNullable": true
+     },
+     "description": "Creates or updates a policy definition at management group level.",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json",
+      "text/json"
+     ],
+     "extensions": {
+      "servers": [
+       {
+        "url": "https://management.azure.com/"
+       }
+      ],
+      "x-ms-requestBody-index": "1"
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "parameters": [
+      {
+       "$id": "139",
+       "clientProperty": {
+        "$ref": "59"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The name of the policy definition to delete."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///259?oai3.shaken.json"
+         ],
+         "name": "paths·providers-microsoft-management-managementgroups-managementgroupid-providers-microsoft-authorization-policydefinitions-policydefinitionname·delete·parameters·0",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/parameters/paths·providers-microsoft-management-managementgroups-managementgroupid-providers-microsoft-authorization-policydefinitions-policydefinitionname·delete·parameters·0"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "policyDefinitionName"
+       },
+       "serializedName": "policyDefinitionName",
+       "modelType": {
+        "$id": "140",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "141",
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false,
+        "raw": "2016-12-01"
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The API version to use for the request."
+       },
+       "isRequired": true,
+       "isConstant": true,
+       "name": {
+        "fixed": false,
+        "raw": "api-version"
+       },
+       "serializedName": "api-version",
+       "modelType": {
+        "$id": "142",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "143",
+       "clientProperty": {
+        "$ref": "55"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The ID of the management group."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///259?oai3.shaken.json"
+         ],
+         "name": "ManagementGroupIdParameter",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/parameters/ManagementGroupIdParameter"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "managementGroupId"
+       },
+       "serializedName": "managementGroupId",
+       "modelType": {
+        "$id": "144",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      }
+     ],
+     "name": {
+      "fixed": false,
+      "raw": "DeleteAtManagementGroup"
+     },
+     "group": {
+      "fixed": false,
+      "raw": "PolicyDefinitions"
+     },
+     "serializedName": "PolicyDefinitions_DeleteAtManagementGroup",
+     "url": "/providers/Microsoft.Management/managementgroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}",
+     "isAbsoluteUrl": false,
+     "httpMethod": "delete",
+     "responses": {
+      "OK": {
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///259?oai3.shaken.json"
+         ],
+         "name": "paths·providers-microsoft-management-managementgroups-managementgroupid-providers-microsoft-authorization-policydefinitions-policydefinitionname·delete·responses·200",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/responses/paths·providers-microsoft-management-managementgroups-managementgroupid-providers-microsoft-authorization-policydefinitions-policydefinitionname·delete·responses·200",
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/responses/paths·providers-microsoft-management-managementgroups-managementgroupid-providers-microsoft-authorization-policydefinitions-policydefinitionname·delete·responses·204"
+         ]
+        }
+       },
+       "isNullable": true
+      },
+      "NoContent": {
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///259?oai3.shaken.json"
+         ],
+         "name": "paths·providers-microsoft-management-managementgroups-managementgroupid-providers-microsoft-authorization-policydefinitions-policydefinitionname·delete·responses·200",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/responses/paths·providers-microsoft-management-managementgroups-managementgroupid-providers-microsoft-authorization-policydefinitions-policydefinitionname·delete·responses·200",
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/responses/paths·providers-microsoft-management-managementgroups-managementgroupid-providers-microsoft-authorization-policydefinitions-policydefinitionname·delete·responses·204"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "isNullable": true
+     },
+     "returnType": {
+      "isNullable": true
+     },
+     "description": "Deletes a policy definition at management group level.",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json"
+     ],
+     "extensions": {
+      "servers": [
+       {
+        "url": "https://management.azure.com/"
+       }
+      ]
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "parameters": [
+      {
+       "$id": "145",
+       "clientProperty": {
+        "$ref": "59"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The name of the policy definition to get."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///259?oai3.shaken.json"
+         ],
+         "name": "paths·providers-microsoft-management-managementgroups-managementgroupid-providers-microsoft-authorization-policydefinitions-policydefinitionname·get·parameters·0",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/parameters/paths·providers-microsoft-management-managementgroups-managementgroupid-providers-microsoft-authorization-policydefinitions-policydefinitionname·get·parameters·0"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "policyDefinitionName"
+       },
+       "serializedName": "policyDefinitionName",
+       "modelType": {
+        "$id": "146",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "147",
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false,
+        "raw": "2016-12-01"
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The API version to use for the request."
+       },
+       "isRequired": true,
+       "isConstant": true,
+       "name": {
+        "fixed": false,
+        "raw": "api-version"
+       },
+       "serializedName": "api-version",
+       "modelType": {
+        "$id": "148",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "149",
+       "clientProperty": {
+        "$ref": "55"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The ID of the management group."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///259?oai3.shaken.json"
+         ],
+         "name": "ManagementGroupIdParameter",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/parameters/ManagementGroupIdParameter"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "managementGroupId"
+       },
+       "serializedName": "managementGroupId",
+       "modelType": {
+        "$id": "150",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      }
+     ],
+     "name": {
+      "fixed": false,
+      "raw": "GetAtManagementGroup"
+     },
+     "group": {
+      "fixed": false,
+      "raw": "PolicyDefinitions"
+     },
+     "serializedName": "PolicyDefinitions_GetAtManagementGroup",
+     "url": "/providers/Microsoft.Management/managementgroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}",
+     "isAbsoluteUrl": false,
+     "httpMethod": "get",
+     "responses": {
+      "OK": {
+       "body": {
+        "$ref": "18"
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///259?oai3.shaken.json"
+         ],
+         "name": "paths·providers-microsoft-management-managementgroups-managementgroupid-providers-microsoft-authorization-policydefinitions-policydefinitionname·get·responses·200",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/responses/paths·providers-microsoft-management-managementgroups-managementgroupid-providers-microsoft-authorization-policydefinitions-policydefinitionname·get·responses·200"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "isNullable": true
+     },
+     "returnType": {
+      "body": {
+       "$ref": "18"
+      },
+      "isNullable": true
+     },
+     "description": "Gets the policy definition at management group level.",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json",
+      "text/json"
+     ],
+     "extensions": {
+      "servers": [
+       {
+        "url": "https://management.azure.com/"
+       }
+      ]
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "parameters": [
+      {
+       "$id": "151",
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false,
+        "raw": "2016-12-01"
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The API version to use for the request."
+       },
+       "isRequired": true,
+       "isConstant": true,
+       "name": {
+        "fixed": false,
+        "raw": "api-version"
+       },
+       "serializedName": "api-version",
+       "modelType": {
+        "$id": "152",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "153",
+       "clientProperty": {
+        "$ref": "53"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The ID of the target subscription."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///259?oai3.shaken.json",
+          "mem:///260?oai3.shaken.json"
+         ],
+         "name": "SubscriptionIdParameter",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/parameters/SubscriptionIdParameter",
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/SubscriptionIdParameter"
+         ]
+        }
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "subscriptionId"
+       },
+       "serializedName": "subscriptionId",
+       "modelType": {
+        "$id": "154",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      }
+     ],
+     "name": {
+      "fixed": false,
+      "raw": "List"
+     },
+     "group": {
+      "fixed": false,
+      "raw": "PolicyDefinitions"
+     },
+     "serializedName": "PolicyDefinitions_List",
+     "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions",
+     "isAbsoluteUrl": false,
+     "httpMethod": "get",
+     "responses": {
+      "OK": {
+       "body": {
+        "$ref": "24"
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///259?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-providers-microsoft-authorization-policydefinitions·get·responses·200",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/responses/paths·subscriptions-subscriptionid-providers-microsoft-authorization-policydefinitions·get·responses·200"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "isNullable": true
+     },
+     "returnType": {
+      "body": {
+       "$ref": "24"
+      },
+      "isNullable": true
+     },
+     "description": "Gets all the policy definitions for a subscription.",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json",
+      "text/json"
+     ],
+     "extensions": {
+      "servers": [
+       {
+        "url": "https://management.azure.com/"
+       }
+      ],
+      "x-ms-pageable": {
+       "nextLinkName": "nextLink"
+      }
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "parameters": [
+      {
+       "$id": "155",
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false,
+        "raw": "2016-12-01"
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The API version to use for the request."
+       },
+       "isRequired": true,
+       "isConstant": true,
+       "name": {
+        "fixed": false,
+        "raw": "api-version"
+       },
+       "serializedName": "api-version",
+       "modelType": {
+        "$id": "156",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      }
+     ],
+     "name": {
+      "fixed": false,
+      "raw": "ListBuiltIn"
+     },
+     "group": {
+      "fixed": false,
+      "raw": "PolicyDefinitions"
+     },
+     "serializedName": "PolicyDefinitions_ListBuiltIn",
+     "url": "/providers/Microsoft.Authorization/policyDefinitions",
+     "isAbsoluteUrl": false,
+     "httpMethod": "get",
+     "responses": {
+      "OK": {
+       "body": {
+        "$ref": "24"
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///259?oai3.shaken.json"
+         ],
+         "name": "paths·providers-microsoft-authorization-policydefinitions·get·responses·200",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/responses/paths·providers-microsoft-authorization-policydefinitions·get·responses·200"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "isNullable": true
+     },
+     "returnType": {
+      "body": {
+       "$ref": "24"
+      },
+      "isNullable": true
+     },
+     "description": "Gets all the built in policy definitions.",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json",
+      "text/json"
+     ],
+     "extensions": {
+      "servers": [
+       {
+        "url": "https://management.azure.com/"
+       }
+      ],
+      "x-ms-pageable": {
+       "nextLinkName": "nextLink"
+      }
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "parameters": [
+      {
+       "$id": "157",
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false,
+        "raw": "2016-12-01"
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The API version to use for the request."
+       },
+       "isRequired": true,
+       "isConstant": true,
+       "name": {
+        "fixed": false,
+        "raw": "api-version"
+       },
+       "serializedName": "api-version",
+       "modelType": {
+        "$id": "158",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "159",
+       "clientProperty": {
+        "$ref": "55"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The ID of the management group."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///259?oai3.shaken.json"
+         ],
+         "name": "ManagementGroupIdParameter",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/parameters/ManagementGroupIdParameter"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "managementGroupId"
+       },
+       "serializedName": "managementGroupId",
+       "modelType": {
+        "$id": "160",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      }
+     ],
+     "name": {
+      "fixed": false,
+      "raw": "ListByManagementGroup"
+     },
+     "group": {
+      "fixed": false,
+      "raw": "PolicyDefinitions"
+     },
+     "serializedName": "PolicyDefinitions_ListByManagementGroup",
+     "url": "/providers/Microsoft.Management/managementgroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions",
+     "isAbsoluteUrl": false,
+     "httpMethod": "get",
+     "responses": {
+      "OK": {
+       "body": {
+        "$ref": "24"
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///259?oai3.shaken.json"
+         ],
+         "name": "paths·providers-microsoft-management-managementgroups-managementgroupid-providers-microsoft-authorization-policydefinitions·get·responses·200",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/responses/paths·providers-microsoft-management-managementgroups-managementgroupid-providers-microsoft-authorization-policydefinitions·get·responses·200"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "isNullable": true
+     },
+     "returnType": {
+      "body": {
+       "$ref": "24"
+      },
+      "isNullable": true
+     },
+     "description": "Gets all the policy definitions for a subscription at management group level.",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json",
+      "text/json"
+     ],
+     "extensions": {
+      "servers": [
+       {
+        "url": "https://management.azure.com/"
+       }
+      ],
+      "x-ms-pageable": {
+       "nextLinkName": "nextLink"
+      }
+     },
+     "deprecated": false,
+     "hidden": false
+    }
+   ],
+   "name": {
+    "fixed": false,
+    "raw": "PolicyDefinitions"
+   },
+   "typeName": {
+    "fixed": false
+   },
+   "nameForProperty": "PolicyDefinitions"
+  },
+  {
+   "methods": [
+    {
+     "parameters": [
+      {
+       "$id": "161",
+       "clientProperty": {
+        "$ref": "73"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The scope of the policy assignment."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///260?oai3.shaken.json"
+         ],
+         "name": "paths·scope-providers-microsoft-authorization-policyassignments-policyassignmentname·delete·parameters·0",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/paths·scope-providers-microsoft-authorization-policyassignments-policyassignmentname·delete·parameters·0"
+         ]
+        },
+        "x-ms-skip-url-encoding": true,
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "scope"
+       },
+       "serializedName": "scope",
+       "modelType": {
+        "$id": "162",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "163",
+       "clientProperty": {
+        "$ref": "75"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The name of the policy assignment to delete."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///260?oai3.shaken.json"
+         ],
+         "name": "paths·scope-providers-microsoft-authorization-policyassignments-policyassignmentname·delete·parameters·1",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/paths·scope-providers-microsoft-authorization-policyassignments-policyassignmentname·delete·parameters·1"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "policyAssignmentName"
+       },
+       "serializedName": "policyAssignmentName",
+       "modelType": {
+        "$id": "164",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "165",
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false,
+        "raw": "2016-12-01"
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The API version to use for the request."
+       },
+       "isRequired": true,
+       "isConstant": true,
+       "name": {
+        "fixed": false,
+        "raw": "api-version"
+       },
+       "serializedName": "api-version",
+       "modelType": {
+        "$id": "166",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      }
+     ],
+     "name": {
+      "fixed": false,
+      "raw": "Delete"
+     },
+     "group": {
+      "fixed": false,
+      "raw": "PolicyAssignments"
+     },
+     "serializedName": "PolicyAssignments_Delete",
+     "url": "/{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}",
+     "isAbsoluteUrl": false,
+     "httpMethod": "delete",
+     "responses": {
+      "OK": {
+       "body": {
+        "$ref": "40"
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///260?oai3.shaken.json"
+         ],
+         "name": "paths·scope-providers-microsoft-authorization-policyassignments-policyassignmentname·delete·responses·200",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/responses/paths·scope-providers-microsoft-authorization-policyassignments-policyassignmentname·delete·responses·200"
+         ]
+        }
+       },
+       "isNullable": true
+      },
+      "NoContent": {
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///260?oai3.shaken.json"
+         ],
+         "name": "paths·scope-providers-microsoft-authorization-policyassignments-policyassignmentname·delete·responses·204",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/responses/paths·scope-providers-microsoft-authorization-policyassignments-policyassignmentname·delete·responses·204"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "isNullable": true
+     },
+     "returnType": {
+      "body": {
+       "$ref": "40"
+      },
+      "isNullable": true
+     },
+     "description": "Deletes a policy assignment.",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json",
+      "text/json"
+     ],
+     "extensions": {
+      "servers": [
+       {
+        "url": "https://management.azure.com/"
+       }
+      ]
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "parameters": [
+      {
+       "$id": "167",
+       "clientProperty": {
+        "$ref": "73"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The scope of the policy assignment."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///260?oai3.shaken.json"
+         ],
+         "name": "paths·scope-providers-microsoft-authorization-policyassignments-policyassignmentname·put·parameters·0",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/paths·scope-providers-microsoft-authorization-policyassignments-policyassignmentname·put·parameters·0"
+         ]
+        },
+        "x-ms-skip-url-encoding": true,
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "scope"
+       },
+       "serializedName": "scope",
+       "modelType": {
+        "$id": "168",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "169",
+       "clientProperty": {
+        "$ref": "75"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The name of the policy assignment."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///260?oai3.shaken.json"
+         ],
+         "name": "paths·scope-providers-microsoft-authorization-policyassignments-policyassignmentname·put·parameters·1",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/paths·scope-providers-microsoft-authorization-policyassignments-policyassignmentname·put·parameters·1"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "policyAssignmentName"
+       },
+       "serializedName": "policyAssignmentName",
+       "modelType": {
+        "$id": "170",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "171",
+       "location": "body",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "Parameters for the policy assignment."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///260?oai3.shaken.json"
+         ],
+         "name": "paths·scope-providers-microsoft-authorization-policyassignments-policyassignmentname·put·requestbody",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/requestBodies/paths·scope-providers-microsoft-authorization-policyassignments-policyassignmentname·put·requestbody"
+         ]
+        },
+        "x-ms-requestBody-name": "parameters"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "parameters"
+       },
+       "serializedName": "parameters",
+       "modelType": {
+        "$ref": "40"
+       }
+      },
+      {
+       "$id": "172",
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false,
+        "raw": "2016-12-01"
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The API version to use for the request."
+       },
+       "isRequired": true,
+       "isConstant": true,
+       "name": {
+        "fixed": false,
+        "raw": "api-version"
+       },
+       "serializedName": "api-version",
+       "modelType": {
+        "$id": "173",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      }
+     ],
+     "name": {
+      "fixed": false,
+      "raw": "Create"
+     },
+     "group": {
+      "fixed": false,
+      "raw": "PolicyAssignments"
+     },
+     "serializedName": "PolicyAssignments_Create",
+     "url": "/{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}",
+     "isAbsoluteUrl": false,
+     "httpMethod": "put",
+     "responses": {
+      "Created": {
+       "body": {
+        "$ref": "40"
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///260?oai3.shaken.json"
+         ],
+         "name": "paths·scope-providers-microsoft-authorization-policyassignments-policyassignmentname·put·responses·201",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/responses/paths·scope-providers-microsoft-authorization-policyassignments-policyassignmentname·put·responses·201"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "isNullable": true
+     },
+     "returnType": {
+      "body": {
+       "$ref": "40"
+      },
+      "isNullable": true
+     },
+     "description": "Policy assignments are inherited by child resources. For example, when you apply a policy to a resource group that policy is assigned to all resources in the group.",
+     "summary": "Creates a policy assignment.",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json",
+      "text/json"
+     ],
+     "extensions": {
+      "servers": [
+       {
+        "url": "https://management.azure.com/"
+       }
+      ],
+      "x-ms-requestBody-index": "2"
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "parameters": [
+      {
+       "$id": "174",
+       "clientProperty": {
+        "$ref": "73"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The scope of the policy assignment."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///260?oai3.shaken.json"
+         ],
+         "name": "paths·scope-providers-microsoft-authorization-policyassignments-policyassignmentname·get·parameters·0",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/paths·scope-providers-microsoft-authorization-policyassignments-policyassignmentname·get·parameters·0"
+         ]
+        },
+        "x-ms-skip-url-encoding": true,
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "scope"
+       },
+       "serializedName": "scope",
+       "modelType": {
+        "$id": "175",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "176",
+       "clientProperty": {
+        "$ref": "75"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The name of the policy assignment to get."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///260?oai3.shaken.json"
+         ],
+         "name": "paths·scope-providers-microsoft-authorization-policyassignments-policyassignmentname·get·parameters·1",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/paths·scope-providers-microsoft-authorization-policyassignments-policyassignmentname·get·parameters·1"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "policyAssignmentName"
+       },
+       "serializedName": "policyAssignmentName",
+       "modelType": {
+        "$id": "177",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "178",
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false,
+        "raw": "2016-12-01"
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The API version to use for the request."
+       },
+       "isRequired": true,
+       "isConstant": true,
+       "name": {
+        "fixed": false,
+        "raw": "api-version"
+       },
+       "serializedName": "api-version",
+       "modelType": {
+        "$id": "179",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      }
+     ],
+     "name": {
+      "fixed": false,
+      "raw": "Get"
+     },
+     "group": {
+      "fixed": false,
+      "raw": "PolicyAssignments"
+     },
+     "serializedName": "PolicyAssignments_Get",
+     "url": "/{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}",
+     "isAbsoluteUrl": false,
+     "httpMethod": "get",
+     "responses": {
+      "OK": {
+       "body": {
+        "$ref": "40"
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///260?oai3.shaken.json"
+         ],
+         "name": "paths·scope-providers-microsoft-authorization-policyassignments-policyassignmentname·get·responses·200",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/responses/paths·scope-providers-microsoft-authorization-policyassignments-policyassignmentname·get·responses·200"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "isNullable": true
+     },
+     "returnType": {
+      "body": {
+       "$ref": "40"
+      },
+      "isNullable": true
+     },
+     "description": "Gets a policy assignment.",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json",
+      "text/json"
+     ],
+     "extensions": {
+      "servers": [
+       {
+        "url": "https://management.azure.com/"
+       }
+      ]
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "parameters": [
+      {
+       "$id": "180",
+       "clientProperty": {
+        "$ref": "85"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "constraints": {
+        "MaxLength": "90",
+        "MinLength": "1",
+        "Pattern": "^[-\\p{L}\\._\\(\\)\\w]+$"
+       },
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The name of the resource group that contains policy assignments."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///260?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-policyassignments·get·parameters·0",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-policyassignments·get·parameters·0"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "resourceGroupName"
+       },
+       "serializedName": "resourceGroupName",
+       "modelType": {
+        "$id": "181",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "182",
+       "clientProperty": {
+        "$ref": "87"
+       },
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The filter to apply on the operation."
+       },
+       "extensions": {
+        "x-ms-skip-url-encoding": true,
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///260?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-policyassignments·get·parameters·1",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-policyassignments·get·parameters·1"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": false,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "$filter"
+       },
+       "serializedName": "$filter",
+       "modelType": {
+        "$id": "183",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "184",
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false,
+        "raw": "2016-12-01"
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The API version to use for the request."
+       },
+       "isRequired": true,
+       "isConstant": true,
+       "name": {
+        "fixed": false,
+        "raw": "api-version"
+       },
+       "serializedName": "api-version",
+       "modelType": {
+        "$id": "185",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "186",
+       "clientProperty": {
+        "$ref": "53"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The ID of the target subscription."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///259?oai3.shaken.json",
+          "mem:///260?oai3.shaken.json"
+         ],
+         "name": "SubscriptionIdParameter",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/parameters/SubscriptionIdParameter",
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/SubscriptionIdParameter"
+         ]
+        }
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "subscriptionId"
+       },
+       "serializedName": "subscriptionId",
+       "modelType": {
+        "$id": "187",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      }
+     ],
+     "name": {
+      "fixed": false,
+      "raw": "ListForResourceGroup"
+     },
+     "group": {
+      "fixed": false,
+      "raw": "PolicyAssignments"
+     },
+     "serializedName": "PolicyAssignments_ListForResourceGroup",
+     "url": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/policyAssignments",
+     "isAbsoluteUrl": false,
+     "httpMethod": "get",
+     "responses": {
+      "OK": {
+       "body": {
+        "$ref": "48"
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///260?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-policyassignments·get·responses·200",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/responses/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-authorization-policyassignments·get·responses·200"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "isNullable": true
+     },
+     "returnType": {
+      "body": {
+       "$ref": "48"
+      },
+      "isNullable": true
+     },
+     "description": "Gets policy assignments for the resource group.",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json",
+      "text/json"
+     ],
+     "extensions": {
+      "servers": [
+       {
+        "url": "https://management.azure.com/"
+       }
+      ],
+      "x-ms-pageable": {
+       "nextLinkName": "nextLink"
+      }
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "parameters": [
+      {
+       "$id": "188",
+       "clientProperty": {
+        "$ref": "85"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "constraints": {
+        "MaxLength": "90",
+        "MinLength": "1",
+        "Pattern": "^[-\\p{L}\\._\\(\\)\\w]+$"
+       },
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The name of the resource group containing the resource. The name is case insensitive."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///260?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-policyassignments·get·parameters·0",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-policyassignments·get·parameters·0"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "resourceGroupName"
+       },
+       "serializedName": "resourceGroupName",
+       "modelType": {
+        "$id": "189",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "190",
+       "clientProperty": {
+        "$ref": "91"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The namespace of the resource provider."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///260?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-policyassignments·get·parameters·1",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-policyassignments·get·parameters·1"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "resourceProviderNamespace"
+       },
+       "serializedName": "resourceProviderNamespace",
+       "modelType": {
+        "$id": "191",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "192",
+       "clientProperty": {
+        "$ref": "93"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The parent resource path."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///260?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-policyassignments·get·parameters·2",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-policyassignments·get·parameters·2"
+         ]
+        },
+        "x-ms-skip-url-encoding": true,
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "parentResourcePath"
+       },
+       "serializedName": "parentResourcePath",
+       "modelType": {
+        "$id": "193",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "194",
+       "clientProperty": {
+        "$ref": "95"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The resource type."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///260?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-policyassignments·get·parameters·3",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-policyassignments·get·parameters·3"
+         ]
+        },
+        "x-ms-skip-url-encoding": true,
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "resourceType"
+       },
+       "serializedName": "resourceType",
+       "modelType": {
+        "$id": "195",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "196",
+       "clientProperty": {
+        "$ref": "97"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The name of the resource with policy assignments."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///260?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-policyassignments·get·parameters·4",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-policyassignments·get·parameters·4"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "resourceName"
+       },
+       "serializedName": "resourceName",
+       "modelType": {
+        "$id": "197",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "198",
+       "clientProperty": {
+        "$ref": "87"
+       },
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The filter to apply on the operation."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///260?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-policyassignments·get·parameters·5",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-policyassignments·get·parameters·5"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": false,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "$filter"
+       },
+       "serializedName": "$filter",
+       "modelType": {
+        "$id": "199",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "200",
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false,
+        "raw": "2016-12-01"
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The API version to use for the request."
+       },
+       "isRequired": true,
+       "isConstant": true,
+       "name": {
+        "fixed": false,
+        "raw": "api-version"
+       },
+       "serializedName": "api-version",
+       "modelType": {
+        "$id": "201",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "202",
+       "clientProperty": {
+        "$ref": "53"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The ID of the target subscription."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///259?oai3.shaken.json",
+          "mem:///260?oai3.shaken.json"
+         ],
+         "name": "SubscriptionIdParameter",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/parameters/SubscriptionIdParameter",
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/SubscriptionIdParameter"
+         ]
+        }
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "subscriptionId"
+       },
+       "serializedName": "subscriptionId",
+       "modelType": {
+        "$id": "203",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      }
+     ],
+     "name": {
+      "fixed": false,
+      "raw": "ListForResource"
+     },
+     "group": {
+      "fixed": false,
+      "raw": "PolicyAssignments"
+     },
+     "serializedName": "PolicyAssignments_ListForResource",
+     "url": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}/providers/Microsoft.Authorization/policyAssignments",
+     "isAbsoluteUrl": false,
+     "httpMethod": "get",
+     "responses": {
+      "OK": {
+       "body": {
+        "$ref": "48"
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///260?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-policyassignments·get·responses·200",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/responses/paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-resourceprovidernamespace-parentresourcepath-resourcetype-resourcename-providers-microsoft-authorization-policyassignments·get·responses·200"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "isNullable": true
+     },
+     "returnType": {
+      "body": {
+       "$ref": "48"
+      },
+      "isNullable": true
+     },
+     "description": "Gets policy assignments for a resource.",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json",
+      "text/json"
+     ],
+     "extensions": {
+      "servers": [
+       {
+        "url": "https://management.azure.com/"
+       }
+      ],
+      "x-ms-pageable": {
+       "nextLinkName": "nextLink"
+      },
+      "x-ms-odata": "#/components/schemas/PolicyAssignment"
+     },
+     "deprecated": true,
+     "hidden": false
+    },
+    {
+     "parameters": [
+      {
+       "$id": "204",
+       "clientProperty": {
+        "$ref": "87"
+       },
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The filter to apply on the operation."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///260?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-providers-microsoft-authorization-policyassignments·get·parameters·0",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/paths·subscriptions-subscriptionid-providers-microsoft-authorization-policyassignments·get·parameters·0"
+         ]
+        },
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": false,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "$filter"
+       },
+       "serializedName": "$filter",
+       "modelType": {
+        "$id": "205",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "206",
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false,
+        "raw": "2016-12-01"
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The API version to use for the request."
+       },
+       "isRequired": true,
+       "isConstant": true,
+       "name": {
+        "fixed": false,
+        "raw": "api-version"
+       },
+       "serializedName": "api-version",
+       "modelType": {
+        "$id": "207",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "208",
+       "clientProperty": {
+        "$ref": "53"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The ID of the target subscription."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///259?oai3.shaken.json",
+          "mem:///260?oai3.shaken.json"
+         ],
+         "name": "SubscriptionIdParameter",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json#/components/parameters/SubscriptionIdParameter",
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/SubscriptionIdParameter"
+         ]
+        }
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "subscriptionId"
+       },
+       "serializedName": "subscriptionId",
+       "modelType": {
+        "$id": "209",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      }
+     ],
+     "name": {
+      "fixed": false,
+      "raw": "List"
+     },
+     "group": {
+      "fixed": false,
+      "raw": "PolicyAssignments"
+     },
+     "serializedName": "PolicyAssignments_List",
+     "url": "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyAssignments",
+     "isAbsoluteUrl": false,
+     "httpMethod": "get",
+     "responses": {
+      "OK": {
+       "body": {
+        "$ref": "48"
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///260?oai3.shaken.json"
+         ],
+         "name": "paths·subscriptions-subscriptionid-providers-microsoft-authorization-policyassignments·get·responses·200",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/responses/paths·subscriptions-subscriptionid-providers-microsoft-authorization-policyassignments·get·responses·200"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "isNullable": true
+     },
+     "returnType": {
+      "body": {
+       "$ref": "48"
+      },
+      "isNullable": true
+     },
+     "description": "Gets all the policy assignments for a subscription.",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json",
+      "text/json"
+     ],
+     "extensions": {
+      "servers": [
+       {
+        "url": "https://management.azure.com/"
+       }
+      ],
+      "x-ms-pageable": {
+       "nextLinkName": "nextLink"
+      },
+      "x-ms-odata": "#/components/schemas/PolicyAssignment"
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "parameters": [
+      {
+       "$id": "210",
+       "clientProperty": {
+        "$ref": "103"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The ID of the policy assignment to delete. Use the format '/{scope}/providers/Microsoft.Authorization/policyAssignments/{policy-assignment-name}'."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///260?oai3.shaken.json"
+         ],
+         "name": "paths·policyassignmentid·delete·parameters·0",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/paths·policyassignmentid·delete·parameters·0"
+         ]
+        },
+        "x-ms-skip-url-encoding": true,
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "policyAssignmentId"
+       },
+       "serializedName": "policyAssignmentId",
+       "modelType": {
+        "$id": "211",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "212",
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false,
+        "raw": "2016-12-01"
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The API version to use for the request."
+       },
+       "isRequired": true,
+       "isConstant": true,
+       "name": {
+        "fixed": false,
+        "raw": "api-version"
+       },
+       "serializedName": "api-version",
+       "modelType": {
+        "$id": "213",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      }
+     ],
+     "name": {
+      "fixed": false,
+      "raw": "DeleteById"
+     },
+     "group": {
+      "fixed": false,
+      "raw": "PolicyAssignments"
+     },
+     "serializedName": "PolicyAssignments_DeleteById",
+     "url": "/{policyAssignmentId}",
+     "isAbsoluteUrl": false,
+     "httpMethod": "delete",
+     "responses": {
+      "OK": {
+       "body": {
+        "$ref": "40"
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///260?oai3.shaken.json"
+         ],
+         "name": "paths·policyassignmentid·delete·responses·200",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/responses/paths·policyassignmentid·delete·responses·200"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "isNullable": true
+     },
+     "returnType": {
+      "body": {
+       "$ref": "40"
+      },
+      "isNullable": true
+     },
+     "description": "When providing a scope for the assignment, use '/subscriptions/{subscription-id}/' for subscriptions, '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for resource groups, and '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider-namespace}/{resource-type}/{resource-name}' for resources.",
+     "summary": "Deletes a policy assignment by ID.",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json",
+      "text/json"
+     ],
+     "extensions": {
+      "servers": [
+       {
+        "url": "https://management.azure.com/"
+       }
+      ]
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "parameters": [
+      {
+       "$id": "214",
+       "clientProperty": {
+        "$ref": "103"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The ID of the policy assignment to create. Use the format '/{scope}/providers/Microsoft.Authorization/policyAssignments/{policy-assignment-name}'."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///260?oai3.shaken.json"
+         ],
+         "name": "paths·policyassignmentid·put·parameters·0",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/paths·policyassignmentid·put·parameters·0"
+         ]
+        },
+        "x-ms-skip-url-encoding": true,
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "policyAssignmentId"
+       },
+       "serializedName": "policyAssignmentId",
+       "modelType": {
+        "$id": "215",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "216",
+       "location": "body",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "Parameters for policy assignment."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///260?oai3.shaken.json"
+         ],
+         "name": "paths·policyassignmentid·put·requestbody",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/requestBodies/paths·policyassignmentid·put·requestbody"
+         ]
+        },
+        "x-ms-requestBody-name": "parameters"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "parameters"
+       },
+       "serializedName": "parameters",
+       "modelType": {
+        "$ref": "40"
+       }
+      },
+      {
+       "$id": "217",
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false,
+        "raw": "2016-12-01"
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The API version to use for the request."
+       },
+       "isRequired": true,
+       "isConstant": true,
+       "name": {
+        "fixed": false,
+        "raw": "api-version"
+       },
+       "serializedName": "api-version",
+       "modelType": {
+        "$id": "218",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      }
+     ],
+     "name": {
+      "fixed": false,
+      "raw": "CreateById"
+     },
+     "group": {
+      "fixed": false,
+      "raw": "PolicyAssignments"
+     },
+     "serializedName": "PolicyAssignments_CreateById",
+     "url": "/{policyAssignmentId}",
+     "isAbsoluteUrl": false,
+     "httpMethod": "put",
+     "responses": {
+      "Created": {
+       "body": {
+        "$ref": "40"
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///260?oai3.shaken.json"
+         ],
+         "name": "paths·policyassignmentid·put·responses·201",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/responses/paths·policyassignmentid·put·responses·201"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "isNullable": true
+     },
+     "returnType": {
+      "body": {
+       "$ref": "40"
+      },
+      "isNullable": true
+     },
+     "description": "Policy assignments are inherited by child resources. For example, when you apply a policy to a resource group that policy is assigned to all resources in the group. When providing a scope for the assignment, use '/subscriptions/{subscription-id}/' for subscriptions, '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for resource groups, and '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider-namespace}/{resource-type}/{resource-name}' for resources.",
+     "summary": "Creates a policy assignment by ID.",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json",
+      "text/json"
+     ],
+     "extensions": {
+      "servers": [
+       {
+        "url": "https://management.azure.com/"
+       }
+      ],
+      "x-ms-requestBody-index": "1"
+     },
+     "deprecated": false,
+     "hidden": false
+    },
+    {
+     "parameters": [
+      {
+       "$id": "219",
+       "clientProperty": {
+        "$ref": "103"
+       },
+       "location": "path",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The ID of the policy assignment to get. Use the format '/{scope}/providers/Microsoft.Authorization/policyAssignments/{policy-assignment-name}'."
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///260?oai3.shaken.json"
+         ],
+         "name": "paths·policyassignmentid·get·parameters·0",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/parameters/paths·policyassignmentid·get·parameters·0"
+         ]
+        },
+        "x-ms-skip-url-encoding": true,
+        "x-ms-parameter-location": "method"
+       },
+       "isRequired": true,
+       "isConstant": false,
+       "name": {
+        "fixed": false,
+        "raw": "policyAssignmentId"
+       },
+       "serializedName": "policyAssignmentId",
+       "modelType": {
+        "$id": "220",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      },
+      {
+       "$id": "221",
+       "location": "query",
+       "collectionFormat": "none",
+       "defaultValue": {
+        "fixed": false,
+        "raw": "2016-12-01"
+       },
+       "documentation": {
+        "fixed": false,
+        "raw": "The API version to use for the request."
+       },
+       "isRequired": true,
+       "isConstant": true,
+       "name": {
+        "fixed": false,
+        "raw": "api-version"
+       },
+       "serializedName": "api-version",
+       "modelType": {
+        "$id": "222",
+        "$type": "PrimaryType",
+        "knownPrimaryType": "string",
+        "name": {
+         "fixed": false,
+         "raw": "String"
+        }
+       }
+      }
+     ],
+     "name": {
+      "fixed": false,
+      "raw": "GetById"
+     },
+     "group": {
+      "fixed": false,
+      "raw": "PolicyAssignments"
+     },
+     "serializedName": "PolicyAssignments_GetById",
+     "url": "/{policyAssignmentId}",
+     "isAbsoluteUrl": false,
+     "httpMethod": "get",
+     "responses": {
+      "OK": {
+       "body": {
+        "$ref": "40"
+       },
+       "extensions": {
+        "x-ms-metadata": {
+         "apiVersions": [
+          "2016-12-01"
+         ],
+         "filename": [
+          "mem:///260?oai3.shaken.json"
+         ],
+         "name": "paths·policyassignmentid·get·responses·200",
+         "originalLocations": [
+          "file:///z/work/azure-rest-api-specs/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json#/components/responses/paths·policyassignmentid·get·responses·200"
+         ]
+        }
+       },
+       "isNullable": true
+      }
+     },
+     "defaultResponse": {
+      "isNullable": true
+     },
+     "returnType": {
+      "body": {
+       "$ref": "40"
+      },
+      "isNullable": true
+     },
+     "description": "When providing a scope for the assignment, use '/subscriptions/{subscription-id}/' for subscriptions, '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for resource groups, and '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider-namespace}/{resource-type}/{resource-name}' for resources.",
+     "summary": "Gets a policy assignment by ID.",
+     "requestContentType": "application/json; charset=utf-8",
+     "responseContentTypes": [
+      "application/json",
+      "text/json"
+     ],
+     "extensions": {
+      "servers": [
+       {
+        "url": "https://management.azure.com/"
+       }
+      ]
+     },
+     "deprecated": false,
+     "hidden": false
+    }
+   ],
+   "name": {
+    "fixed": false,
+    "raw": "PolicyAssignments"
+   },
+   "typeName": {
+    "fixed": false
+   },
+   "nameForProperty": "PolicyAssignments"
+  }
+ ]
+}
