@@ -1179,6 +1179,25 @@ func PossiblePresenceStatusValues() []PresenceStatus {
 	return []PresenceStatus{NotPresent, Present, Unknown}
 }
 
+// ProtectionHealth enumerates the values for protection health.
+type ProtectionHealth string
+
+const (
+	// ProtectionHealthCritical ...
+	ProtectionHealthCritical ProtectionHealth = "Critical"
+	// ProtectionHealthNone ...
+	ProtectionHealthNone ProtectionHealth = "None"
+	// ProtectionHealthNormal ...
+	ProtectionHealthNormal ProtectionHealth = "Normal"
+	// ProtectionHealthWarning ...
+	ProtectionHealthWarning ProtectionHealth = "Warning"
+)
+
+// PossibleProtectionHealthValues returns an array of possible values for the ProtectionHealth const type.
+func PossibleProtectionHealthValues() []ProtectionHealth {
+	return []ProtectionHealth{ProtectionHealthCritical, ProtectionHealthNone, ProtectionHealthNormal, ProtectionHealthWarning}
+}
+
 // RecoveryPlanActionLocation enumerates the values for recovery plan action location.
 type RecoveryPlanActionLocation string
 
@@ -9362,6 +9381,8 @@ type InMageAzureV2ReplicationDetails struct {
 	LastHeartbeat *date.Time `json:"lastHeartbeat,omitempty"`
 	// ProcessServerID - The process server Id.
 	ProcessServerID *string `json:"processServerId,omitempty"`
+	// ProcessServerName - READ-ONLY; The process server name.
+	ProcessServerName *string `json:"processServerName,omitempty"`
 	// MultiVMGroupID - The multi vm group Id.
 	MultiVMGroupID *string `json:"multiVmGroupId,omitempty"`
 	// MultiVMGroupName - The multi vm group name.
@@ -13668,6 +13689,22 @@ type ProcessServer struct {
 	AgentExpiryDate *date.Time `json:"agentExpiryDate,omitempty"`
 	// AgentVersionDetails - The agent version details.
 	AgentVersionDetails *VersionDetails `json:"agentVersionDetails,omitempty"`
+	// Health - READ-ONLY; The health of Process Server. Possible values include: 'ProtectionHealthNone', 'ProtectionHealthNormal', 'ProtectionHealthWarning', 'ProtectionHealthCritical'
+	Health ProtectionHealth `json:"health,omitempty"`
+	// PsStatsRefreshTime - READ-ONLY; The process server stats refresh time.
+	PsStatsRefreshTime *date.Time `json:"psStatsRefreshTime,omitempty"`
+	// ThroughputUploadPendingDataInBytes - READ-ONLY; The uploading pending data in bytes.
+	ThroughputUploadPendingDataInBytes *int64 `json:"throughputUploadPendingDataInBytes,omitempty"`
+	// ThroughputInMBps - READ-ONLY; The throughput in MBps.
+	ThroughputInMBps *int64 `json:"throughputInMBps,omitempty"`
+	// ThroughputInBytes - READ-ONLY; The throughput in bytes.
+	ThroughputInBytes *int64 `json:"throughputInBytes,omitempty"`
+	// ThroughputStatus - READ-ONLY; The throughput status.
+	ThroughputStatus *string `json:"throughputStatus,omitempty"`
+	// MarsCommunicationStatus - READ-ONLY; The MARS communication status.
+	MarsCommunicationStatus *string `json:"marsCommunicationStatus,omitempty"`
+	// MarsRegistrationStatus - READ-ONLY; The MARS registration status.
+	MarsRegistrationStatus *string `json:"marsRegistrationStatus,omitempty"`
 }
 
 // ProtectableItem replication protected item
@@ -20997,6 +21034,8 @@ type TargetComputeSizeProperties struct {
 	FriendlyName *string `json:"friendlyName,omitempty"`
 	// CPUCoresCount - The maximum cpu cores count supported by target compute size.
 	CPUCoresCount *int32 `json:"cpuCoresCount,omitempty"`
+	// VCPUsAvailable - READ-ONLY; The Available vCPUs supported by target compute size.
+	VCPUsAvailable *int32 `json:"vCPUsAvailable,omitempty"`
 	// MemoryInGB - The maximum memory in GB supported by target compute size.
 	MemoryInGB *float64 `json:"memoryInGB,omitempty"`
 	// MaxDataDiskCount - The maximum data disks count supported by target compute size.
@@ -21007,6 +21046,8 @@ type TargetComputeSizeProperties struct {
 	Errors *[]ComputeSizeErrorDetails `json:"errors,omitempty"`
 	// HighIopsSupported - The value indicating whether the target compute size supports high Iops.
 	HighIopsSupported *string `json:"highIopsSupported,omitempty"`
+	// HyperVGenerations - READ-ONLY; The supported HyperV Generations.
+	HyperVGenerations *[]string `json:"hyperVGenerations,omitempty"`
 }
 
 // BasicTaskTypeDetails task details based on specific task type.
