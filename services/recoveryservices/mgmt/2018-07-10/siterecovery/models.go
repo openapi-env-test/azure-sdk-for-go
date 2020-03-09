@@ -22926,6 +22926,18 @@ type VMNicDetails struct {
 	EnableAcceleratedNetworkingOnTfo *bool `json:"enableAcceleratedNetworkingOnTfo,omitempty"`
 	// TfoIPConfigs - The IP configurations to be used by NIC during test failover.
 	TfoIPConfigs *[]IPConfig `json:"tfoIPConfigs,omitempty"`
+	// RecoveryNicName - The name of the NIC to be used when creating target NICs.
+	RecoveryNicName *string `json:"recoveryNicName,omitempty"`
+	// RecoveryNicResourceGroupName - The resource group of the NIC to be used when creating target NICs.
+	RecoveryNicResourceGroupName *string `json:"recoveryNicResourceGroupName,omitempty"`
+	// ReuseExistingNic - A value indicating whether an existing NIC is allowed to be reused during failover subject to availability.
+	ReuseExistingNic *bool `json:"reuseExistingNic,omitempty"`
+	// TfoRecoveryNicName - The name of the NIC to be used when creating target NICs in TFO.
+	TfoRecoveryNicName *string `json:"tfoRecoveryNicName,omitempty"`
+	// TfoRecoveryNicResourceGroupName - The resource group of the NIC to be used when creating target NICs in TFO.
+	TfoRecoveryNicResourceGroupName *string `json:"tfoRecoveryNicResourceGroupName,omitempty"`
+	// TfoReuseExistingNic - A value indicating whether an existing NIC is allowed to be reused during test failover subject to availability.
+	TfoReuseExistingNic *bool `json:"tfoReuseExistingNic,omitempty"`
 }
 
 // VMNicInputDetails hyper V VM network input details.
@@ -22954,6 +22966,18 @@ type VMNicInputDetails struct {
 	EnableAcceleratedNetworkingOnTfo *bool `json:"enableAcceleratedNetworkingOnTfo,omitempty"`
 	// TfoIPConfigs - The IP configurations to be used by NIC during test failover.
 	TfoIPConfigs *[]IPConfig `json:"tfoIPConfigs,omitempty"`
+	// RecoveryNicName - The name of the NIC to be used when creating target NICs.
+	RecoveryNicName *string `json:"recoveryNicName,omitempty"`
+	// RecoveryNicResourceGroupName - The resource group of the NIC to be used when creating target NICs.
+	RecoveryNicResourceGroupName *string `json:"recoveryNicResourceGroupName,omitempty"`
+	// ReuseExistingNic - A value indicating whether an existing NIC is allowed to be reused during failover subject to availability.
+	ReuseExistingNic *bool `json:"reuseExistingNic,omitempty"`
+	// TfoNicName - The name of the NIC to be used when creating target NICs in TFO.
+	TfoNicName *string `json:"tfoNicName,omitempty"`
+	// TfoNicResourceGroupName - The resource group of the NIC to be used when creating target NICs in TFO.
+	TfoNicResourceGroupName *string `json:"tfoNicResourceGroupName,omitempty"`
+	// TfoReuseExistingNic - A value indicating whether an existing NIC is allowed to be reused during test failover subject to availability.
+	TfoReuseExistingNic *bool `json:"tfoReuseExistingNic,omitempty"`
 }
 
 // VMNicUpdatesTaskDetails this class represents the vm NicUpdates task details.
