@@ -142,28 +142,6 @@ type AllowedConnectionsClientAPI interface {
 
 var _ AllowedConnectionsClientAPI = (*security.AllowedConnectionsClient)(nil)
 
-// DiscoveredSecuritySolutionsClientAPI contains the set of methods on the DiscoveredSecuritySolutionsClient type.
-type DiscoveredSecuritySolutionsClientAPI interface {
-	Get(ctx context.Context, resourceGroupName string, discoveredSecuritySolutionName string) (result security.DiscoveredSecuritySolution, err error)
-	List(ctx context.Context) (result security.DiscoveredSecuritySolutionListPage, err error)
-	ListComplete(ctx context.Context) (result security.DiscoveredSecuritySolutionListIterator, err error)
-	ListByHomeRegion(ctx context.Context) (result security.DiscoveredSecuritySolutionListPage, err error)
-	ListByHomeRegionComplete(ctx context.Context) (result security.DiscoveredSecuritySolutionListIterator, err error)
-}
-
-var _ DiscoveredSecuritySolutionsClientAPI = (*security.DiscoveredSecuritySolutionsClient)(nil)
-
-// ExternalSecuritySolutionsClientAPI contains the set of methods on the ExternalSecuritySolutionsClient type.
-type ExternalSecuritySolutionsClientAPI interface {
-	Get(ctx context.Context, resourceGroupName string, externalSecuritySolutionsName string) (result security.ExternalSecuritySolutionModel, err error)
-	List(ctx context.Context) (result security.ExternalSecuritySolutionListPage, err error)
-	ListComplete(ctx context.Context) (result security.ExternalSecuritySolutionListIterator, err error)
-	ListByHomeRegion(ctx context.Context) (result security.ExternalSecuritySolutionListPage, err error)
-	ListByHomeRegionComplete(ctx context.Context) (result security.ExternalSecuritySolutionListIterator, err error)
-}
-
-var _ ExternalSecuritySolutionsClientAPI = (*security.ExternalSecuritySolutionsClient)(nil)
-
 // JitNetworkAccessPoliciesClientAPI contains the set of methods on the JitNetworkAccessPoliciesClient type.
 type JitNetworkAccessPoliciesClientAPI interface {
 	CreateOrUpdate(ctx context.Context, resourceGroupName string, jitNetworkAccessPolicyName string, body security.JitNetworkAccessPolicy) (result security.JitNetworkAccessPolicy, err error)
@@ -184,6 +162,7 @@ var _ JitNetworkAccessPoliciesClientAPI = (*security.JitNetworkAccessPoliciesCli
 
 // AdaptiveApplicationControlsClientAPI contains the set of methods on the AdaptiveApplicationControlsClient type.
 type AdaptiveApplicationControlsClientAPI interface {
+	Delete(ctx context.Context, groupName string) (result autorest.Response, err error)
 	Get(ctx context.Context, groupName string) (result security.AppWhitelistingGroup, err error)
 	List(ctx context.Context, includePathRecommendations *bool, summary *bool) (result security.AppWhitelistingGroups, err error)
 	Put(ctx context.Context, groupName string, body security.AppWhitelistingPutGroupData) (result security.AppWhitelistingGroup, err error)
@@ -374,3 +353,25 @@ type AssessmentsClientAPI interface {
 }
 
 var _ AssessmentsClientAPI = (*security.AssessmentsClient)(nil)
+
+// DiscoveredSecuritySolutionsClientAPI contains the set of methods on the DiscoveredSecuritySolutionsClient type.
+type DiscoveredSecuritySolutionsClientAPI interface {
+	Get(ctx context.Context, resourceGroupName string, discoveredSecuritySolutionName string) (result security.DiscoveredSecuritySolution, err error)
+	List(ctx context.Context) (result security.DiscoveredSecuritySolutionListPage, err error)
+	ListComplete(ctx context.Context) (result security.DiscoveredSecuritySolutionListIterator, err error)
+	ListByHomeRegion(ctx context.Context) (result security.DiscoveredSecuritySolutionListPage, err error)
+	ListByHomeRegionComplete(ctx context.Context) (result security.DiscoveredSecuritySolutionListIterator, err error)
+}
+
+var _ DiscoveredSecuritySolutionsClientAPI = (*security.DiscoveredSecuritySolutionsClient)(nil)
+
+// ExternalSecuritySolutionsClientAPI contains the set of methods on the ExternalSecuritySolutionsClient type.
+type ExternalSecuritySolutionsClientAPI interface {
+	Get(ctx context.Context, resourceGroupName string, externalSecuritySolutionsName string) (result security.ExternalSecuritySolutionModel, err error)
+	List(ctx context.Context) (result security.ExternalSecuritySolutionListPage, err error)
+	ListComplete(ctx context.Context) (result security.ExternalSecuritySolutionListIterator, err error)
+	ListByHomeRegion(ctx context.Context) (result security.ExternalSecuritySolutionListPage, err error)
+	ListByHomeRegionComplete(ctx context.Context) (result security.ExternalSecuritySolutionListIterator, err error)
+}
+
+var _ ExternalSecuritySolutionsClientAPI = (*security.ExternalSecuritySolutionsClient)(nil)
