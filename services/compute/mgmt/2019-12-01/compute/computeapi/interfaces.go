@@ -85,6 +85,21 @@ type DedicatedHostsClientAPI interface {
 
 var _ DedicatedHostsClientAPI = (*compute.DedicatedHostsClient)(nil)
 
+// SSHPublicKeysClientAPI contains the set of methods on the SSHPublicKeysClient type.
+type SSHPublicKeysClientAPI interface {
+	Create(ctx context.Context, resourceGroupName string, SSHPublicKeyName string, parameters compute.SSHPublicKeyResource) (result compute.SSHPublicKeyResource, err error)
+	Delete(ctx context.Context, resourceGroupName string, SSHPublicKeyName string) (result autorest.Response, err error)
+	GenerateKeyPair(ctx context.Context, resourceGroupName string, SSHPublicKeyName string) (result compute.SSHPublicKeyGenerateKeyPairResult, err error)
+	Get(ctx context.Context, resourceGroupName string, SSHPublicKeyName string) (result compute.SSHPublicKeyResource, err error)
+	ListByResourceGroup(ctx context.Context, resourceGroupName string) (result compute.SSHPublicKeysGroupListResultPage, err error)
+	ListByResourceGroupComplete(ctx context.Context, resourceGroupName string) (result compute.SSHPublicKeysGroupListResultIterator, err error)
+	ListBySubscription(ctx context.Context) (result compute.SSHPublicKeysGroupListResultPage, err error)
+	ListBySubscriptionComplete(ctx context.Context) (result compute.SSHPublicKeysGroupListResultIterator, err error)
+	Update(ctx context.Context, resourceGroupName string, SSHPublicKeyName string, parameters compute.SSHPublicKeyUpdateResource) (result compute.SSHPublicKeyResource, err error)
+}
+
+var _ SSHPublicKeysClientAPI = (*compute.SSHPublicKeysClient)(nil)
+
 // VirtualMachineExtensionImagesClientAPI contains the set of methods on the VirtualMachineExtensionImagesClient type.
 type VirtualMachineExtensionImagesClientAPI interface {
 	Get(ctx context.Context, location string, publisherName string, typeParameter string, version string) (result compute.VirtualMachineExtensionImage, err error)
