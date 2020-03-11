@@ -51,7 +51,7 @@ func NewStorageTargetsClientWithBaseURI(baseURI string, subscriptionID string) S
 // cacheName - name of Cache.
 // storageTargetName - name of the Storage Target.
 // storagetarget - object containing the definition of a Storage Target.
-func (client StorageTargetsClient) CreateOrUpdate(ctx context.Context, resourceGroupName string, cacheName string, storageTargetName string, storagetarget *StorageTarget) (result StorageTargetsCreateOrUpdateFuture, err error) {
+func (client StorageTargetsClient) CreateOrUpdate(ctx context.Context, resourceGroupName string, cacheName string, storageTargetName string, storagetarget StorageTarget) (result StorageTargetsCreateOrUpdateFuture, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/StorageTargetsClient.CreateOrUpdate")
 		defer func() {
@@ -64,16 +64,14 @@ func (client StorageTargetsClient) CreateOrUpdate(ctx context.Context, resourceG
 	}
 	if err := validation.Validate([]validation.Validation{
 		{TargetValue: cacheName,
-			Constraints: []validation.Constraint{{Target: "cacheName", Name: validation.Pattern, Rule: `^[-0-9a-zA-Z_]{1,31}$`, Chain: nil}}},
+			Constraints: []validation.Constraint{{Target: "cacheName", Name: validation.Pattern, Rule: `^[-0-9a-zA-Z_]{1,80}$`, Chain: nil}}},
 		{TargetValue: storageTargetName,
 			Constraints: []validation.Constraint{{Target: "storageTargetName", Name: validation.Pattern, Rule: `^[-0-9a-zA-Z_]{1,31}$`, Chain: nil}}},
 		{TargetValue: storagetarget,
-			Constraints: []validation.Constraint{{Target: "storagetarget", Name: validation.Null, Rule: false,
-				Chain: []validation.Constraint{{Target: "storagetarget.StorageTargetProperties", Name: validation.Null, Rule: false,
-					Chain: []validation.Constraint{{Target: "storagetarget.StorageTargetProperties.Nfs3", Name: validation.Null, Rule: false,
-						Chain: []validation.Constraint{{Target: "storagetarget.StorageTargetProperties.Nfs3.Target", Name: validation.Null, Rule: false,
-							Chain: []validation.Constraint{{Target: "storagetarget.StorageTargetProperties.Nfs3.Target", Name: validation.Pattern, Rule: `^[-.0-9a-zA-Z]+$`, Chain: nil}}},
-						}},
+			Constraints: []validation.Constraint{{Target: "storagetarget.StorageTargetProperties", Name: validation.Null, Rule: false,
+				Chain: []validation.Constraint{{Target: "storagetarget.StorageTargetProperties.Nfs3", Name: validation.Null, Rule: false,
+					Chain: []validation.Constraint{{Target: "storagetarget.StorageTargetProperties.Nfs3.Target", Name: validation.Null, Rule: false,
+						Chain: []validation.Constraint{{Target: "storagetarget.StorageTargetProperties.Nfs3.Target", Name: validation.Pattern, Rule: `^[-.0-9a-zA-Z]+$`, Chain: nil}}},
 					}},
 				}}}}}); err != nil {
 		return result, validation.NewError("storagecache.StorageTargetsClient", "CreateOrUpdate", err.Error())
@@ -95,7 +93,7 @@ func (client StorageTargetsClient) CreateOrUpdate(ctx context.Context, resourceG
 }
 
 // CreateOrUpdatePreparer prepares the CreateOrUpdate request.
-func (client StorageTargetsClient) CreateOrUpdatePreparer(ctx context.Context, resourceGroupName string, cacheName string, storageTargetName string, storagetarget *StorageTarget) (*http.Request, error) {
+func (client StorageTargetsClient) CreateOrUpdatePreparer(ctx context.Context, resourceGroupName string, cacheName string, storageTargetName string, storagetarget StorageTarget) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"cacheName":         autorest.Encode("path", cacheName),
 		"resourceGroupName": autorest.Encode("path", resourceGroupName),
@@ -116,11 +114,8 @@ func (client StorageTargetsClient) CreateOrUpdatePreparer(ctx context.Context, r
 		autorest.AsPut(),
 		autorest.WithBaseURL(client.BaseURI),
 		autorest.WithPathParameters("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets/{storageTargetName}", pathParameters),
+		autorest.WithJSON(storagetarget),
 		autorest.WithQueryParameters(queryParameters))
-	if storagetarget != nil {
-		preparer = autorest.DecoratePreparer(preparer,
-			autorest.WithJSON(storagetarget))
-	}
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
 }
 
@@ -170,7 +165,7 @@ func (client StorageTargetsClient) Delete(ctx context.Context, resourceGroupName
 	}
 	if err := validation.Validate([]validation.Validation{
 		{TargetValue: cacheName,
-			Constraints: []validation.Constraint{{Target: "cacheName", Name: validation.Pattern, Rule: `^[-0-9a-zA-Z_]{1,31}$`, Chain: nil}}},
+			Constraints: []validation.Constraint{{Target: "cacheName", Name: validation.Pattern, Rule: `^[-0-9a-zA-Z_]{1,80}$`, Chain: nil}}},
 		{TargetValue: storageTargetName,
 			Constraints: []validation.Constraint{{Target: "storageTargetName", Name: validation.Pattern, Rule: `^[-0-9a-zA-Z_]{1,31}$`, Chain: nil}}}}); err != nil {
 		return result, validation.NewError("storagecache.StorageTargetsClient", "Delete", err.Error())
@@ -256,7 +251,7 @@ func (client StorageTargetsClient) Get(ctx context.Context, resourceGroupName st
 	}
 	if err := validation.Validate([]validation.Validation{
 		{TargetValue: cacheName,
-			Constraints: []validation.Constraint{{Target: "cacheName", Name: validation.Pattern, Rule: `^[-0-9a-zA-Z_]{1,31}$`, Chain: nil}}},
+			Constraints: []validation.Constraint{{Target: "cacheName", Name: validation.Pattern, Rule: `^[-0-9a-zA-Z_]{1,80}$`, Chain: nil}}},
 		{TargetValue: storageTargetName,
 			Constraints: []validation.Constraint{{Target: "storageTargetName", Name: validation.Pattern, Rule: `^[-0-9a-zA-Z_]{1,31}$`, Chain: nil}}}}); err != nil {
 		return result, validation.NewError("storagecache.StorageTargetsClient", "Get", err.Error())
@@ -341,7 +336,7 @@ func (client StorageTargetsClient) ListByCache(ctx context.Context, resourceGrou
 	}
 	if err := validation.Validate([]validation.Validation{
 		{TargetValue: cacheName,
-			Constraints: []validation.Constraint{{Target: "cacheName", Name: validation.Pattern, Rule: `^[-0-9a-zA-Z_]{1,31}$`, Chain: nil}}}}); err != nil {
+			Constraints: []validation.Constraint{{Target: "cacheName", Name: validation.Pattern, Rule: `^[-0-9a-zA-Z_]{1,80}$`, Chain: nil}}}}); err != nil {
 		return result, validation.NewError("storagecache.StorageTargetsClient", "ListByCache", err.Error())
 	}
 

@@ -66,7 +66,7 @@ var _ CachesClientAPI = (*storagecache.CachesClient)(nil)
 
 // StorageTargetsClientAPI contains the set of methods on the StorageTargetsClient type.
 type StorageTargetsClientAPI interface {
-	CreateOrUpdate(ctx context.Context, resourceGroupName string, cacheName string, storageTargetName string, storagetarget *storagecache.StorageTarget) (result storagecache.StorageTargetsCreateOrUpdateFuture, err error)
+	CreateOrUpdate(ctx context.Context, resourceGroupName string, cacheName string, storageTargetName string, storagetarget storagecache.StorageTarget) (result storagecache.StorageTargetsCreateOrUpdateFuture, err error)
 	Delete(ctx context.Context, resourceGroupName string, cacheName string, storageTargetName string) (result storagecache.StorageTargetsDeleteFuture, err error)
 	Get(ctx context.Context, resourceGroupName string, cacheName string, storageTargetName string) (result storagecache.StorageTarget, err error)
 	ListByCache(ctx context.Context, resourceGroupName string, cacheName string) (result storagecache.StorageTargetsResultPage, err error)
