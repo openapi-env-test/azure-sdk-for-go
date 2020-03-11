@@ -9022,6 +9022,324 @@ type SSHPublicKey struct {
 	KeyData *string `json:"keyData,omitempty"`
 }
 
+// SSHPublicKeyGenerateKeyPairResult response from generation of an SSH key pair.
+type SSHPublicKeyGenerateKeyPairResult struct {
+	autorest.Response `json:"-"`
+	// PrivateKey - Private key portion of the key pair used to authenticate to a virtual machine through ssh. The private key is returned in RFC3447 format and should be treated as a secret.
+	PrivateKey *string `json:"privateKey,omitempty"`
+	// PublicKey - Public key portion of the key pair used to authenticate to a virtual machine through ssh. The public key is in ssh-rsa format.
+	PublicKey *string `json:"publicKey,omitempty"`
+	// ID - The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{SshPublicKeyName}
+	ID *string `json:"id,omitempty"`
+}
+
+// SSHPublicKeyResource specifies information about the SSH public key.
+type SSHPublicKeyResource struct {
+	autorest.Response `json:"-"`
+	// SSHPublicKeyResourceProperties - Properties of the SSH public key.
+	*SSHPublicKeyResourceProperties `json:"properties,omitempty"`
+	// ID - READ-ONLY; Resource Id
+	ID *string `json:"id,omitempty"`
+	// Name - READ-ONLY; Resource name
+	Name *string `json:"name,omitempty"`
+	// Type - READ-ONLY; Resource type
+	Type *string `json:"type,omitempty"`
+	// Location - Resource location
+	Location *string `json:"location,omitempty"`
+	// Tags - Resource tags
+	Tags map[string]*string `json:"tags"`
+}
+
+// MarshalJSON is the custom marshaler for SSHPublicKeyResource.
+func (spkr SSHPublicKeyResource) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if spkr.SSHPublicKeyResourceProperties != nil {
+		objectMap["properties"] = spkr.SSHPublicKeyResourceProperties
+	}
+	if spkr.Location != nil {
+		objectMap["location"] = spkr.Location
+	}
+	if spkr.Tags != nil {
+		objectMap["tags"] = spkr.Tags
+	}
+	return json.Marshal(objectMap)
+}
+
+// UnmarshalJSON is the custom unmarshaler for SSHPublicKeyResource struct.
+func (spkr *SSHPublicKeyResource) UnmarshalJSON(body []byte) error {
+	var m map[string]*json.RawMessage
+	err := json.Unmarshal(body, &m)
+	if err != nil {
+		return err
+	}
+	for k, v := range m {
+		switch k {
+		case "properties":
+			if v != nil {
+				var SSHPublicKeyResourceProperties SSHPublicKeyResourceProperties
+				err = json.Unmarshal(*v, &SSHPublicKeyResourceProperties)
+				if err != nil {
+					return err
+				}
+				spkr.SSHPublicKeyResourceProperties = &SSHPublicKeyResourceProperties
+			}
+		case "id":
+			if v != nil {
+				var ID string
+				err = json.Unmarshal(*v, &ID)
+				if err != nil {
+					return err
+				}
+				spkr.ID = &ID
+			}
+		case "name":
+			if v != nil {
+				var name string
+				err = json.Unmarshal(*v, &name)
+				if err != nil {
+					return err
+				}
+				spkr.Name = &name
+			}
+		case "type":
+			if v != nil {
+				var typeVar string
+				err = json.Unmarshal(*v, &typeVar)
+				if err != nil {
+					return err
+				}
+				spkr.Type = &typeVar
+			}
+		case "location":
+			if v != nil {
+				var location string
+				err = json.Unmarshal(*v, &location)
+				if err != nil {
+					return err
+				}
+				spkr.Location = &location
+			}
+		case "tags":
+			if v != nil {
+				var tags map[string]*string
+				err = json.Unmarshal(*v, &tags)
+				if err != nil {
+					return err
+				}
+				spkr.Tags = tags
+			}
+		}
+	}
+
+	return nil
+}
+
+// SSHPublicKeyResourceProperties properties of the SSH public key.
+type SSHPublicKeyResourceProperties struct {
+	// PublicKey - SSH public key used to authenticate to a virtual machine through ssh. If this property is not initially provided when the resource is created, the publicKey property will be populated when generateKeyPair is called. If the public key is provided upon resource creation, the provided public key needs to be at least 2048-bit and in ssh-rsa format.
+	PublicKey *string `json:"publicKey,omitempty"`
+}
+
+// SSHPublicKeysGroupListResult the list SSH public keys operation response.
+type SSHPublicKeysGroupListResult struct {
+	autorest.Response `json:"-"`
+	// Value - The list of SSH public keys
+	Value *[]SSHPublicKeyResource `json:"value,omitempty"`
+	// NextLink - The URI to fetch the next page of SSH public keys. Call ListNext() with this URI to fetch the next page of SSH public keys.
+	NextLink *string `json:"nextLink,omitempty"`
+}
+
+// SSHPublicKeysGroupListResultIterator provides access to a complete listing of SSHPublicKeyResource
+// values.
+type SSHPublicKeysGroupListResultIterator struct {
+	i    int
+	page SSHPublicKeysGroupListResultPage
+}
+
+// NextWithContext advances to the next value.  If there was an error making
+// the request the iterator does not advance and the error is returned.
+func (iter *SSHPublicKeysGroupListResultIterator) NextWithContext(ctx context.Context) (err error) {
+	if tracing.IsEnabled() {
+		ctx = tracing.StartSpan(ctx, fqdn+"/SSHPublicKeysGroupListResultIterator.NextWithContext")
+		defer func() {
+			sc := -1
+			if iter.Response().Response.Response != nil {
+				sc = iter.Response().Response.Response.StatusCode
+			}
+			tracing.EndSpan(ctx, sc, err)
+		}()
+	}
+	iter.i++
+	if iter.i < len(iter.page.Values()) {
+		return nil
+	}
+	err = iter.page.NextWithContext(ctx)
+	if err != nil {
+		iter.i--
+		return err
+	}
+	iter.i = 0
+	return nil
+}
+
+// Next advances to the next value.  If there was an error making
+// the request the iterator does not advance and the error is returned.
+// Deprecated: Use NextWithContext() instead.
+func (iter *SSHPublicKeysGroupListResultIterator) Next() error {
+	return iter.NextWithContext(context.Background())
+}
+
+// NotDone returns true if the enumeration should be started or is not yet complete.
+func (iter SSHPublicKeysGroupListResultIterator) NotDone() bool {
+	return iter.page.NotDone() && iter.i < len(iter.page.Values())
+}
+
+// Response returns the raw server response from the last page request.
+func (iter SSHPublicKeysGroupListResultIterator) Response() SSHPublicKeysGroupListResult {
+	return iter.page.Response()
+}
+
+// Value returns the current value or a zero-initialized value if the
+// iterator has advanced beyond the end of the collection.
+func (iter SSHPublicKeysGroupListResultIterator) Value() SSHPublicKeyResource {
+	if !iter.page.NotDone() {
+		return SSHPublicKeyResource{}
+	}
+	return iter.page.Values()[iter.i]
+}
+
+// Creates a new instance of the SSHPublicKeysGroupListResultIterator type.
+func NewSSHPublicKeysGroupListResultIterator(page SSHPublicKeysGroupListResultPage) SSHPublicKeysGroupListResultIterator {
+	return SSHPublicKeysGroupListResultIterator{page: page}
+}
+
+// IsEmpty returns true if the ListResult contains no values.
+func (spkglr SSHPublicKeysGroupListResult) IsEmpty() bool {
+	return spkglr.Value == nil || len(*spkglr.Value) == 0
+}
+
+// sSHPublicKeysGroupListResultPreparer prepares a request to retrieve the next set of results.
+// It returns nil if no more results exist.
+func (spkglr SSHPublicKeysGroupListResult) sSHPublicKeysGroupListResultPreparer(ctx context.Context) (*http.Request, error) {
+	if spkglr.NextLink == nil || len(to.String(spkglr.NextLink)) < 1 {
+		return nil, nil
+	}
+	return autorest.Prepare((&http.Request{}).WithContext(ctx),
+		autorest.AsJSON(),
+		autorest.AsGet(),
+		autorest.WithBaseURL(to.String(spkglr.NextLink)))
+}
+
+// SSHPublicKeysGroupListResultPage contains a page of SSHPublicKeyResource values.
+type SSHPublicKeysGroupListResultPage struct {
+	fn     func(context.Context, SSHPublicKeysGroupListResult) (SSHPublicKeysGroupListResult, error)
+	spkglr SSHPublicKeysGroupListResult
+}
+
+// NextWithContext advances to the next page of values.  If there was an error making
+// the request the page does not advance and the error is returned.
+func (page *SSHPublicKeysGroupListResultPage) NextWithContext(ctx context.Context) (err error) {
+	if tracing.IsEnabled() {
+		ctx = tracing.StartSpan(ctx, fqdn+"/SSHPublicKeysGroupListResultPage.NextWithContext")
+		defer func() {
+			sc := -1
+			if page.Response().Response.Response != nil {
+				sc = page.Response().Response.Response.StatusCode
+			}
+			tracing.EndSpan(ctx, sc, err)
+		}()
+	}
+	next, err := page.fn(ctx, page.spkglr)
+	if err != nil {
+		return err
+	}
+	page.spkglr = next
+	return nil
+}
+
+// Next advances to the next page of values.  If there was an error making
+// the request the page does not advance and the error is returned.
+// Deprecated: Use NextWithContext() instead.
+func (page *SSHPublicKeysGroupListResultPage) Next() error {
+	return page.NextWithContext(context.Background())
+}
+
+// NotDone returns true if the page enumeration should be started or is not yet complete.
+func (page SSHPublicKeysGroupListResultPage) NotDone() bool {
+	return !page.spkglr.IsEmpty()
+}
+
+// Response returns the raw server response from the last page request.
+func (page SSHPublicKeysGroupListResultPage) Response() SSHPublicKeysGroupListResult {
+	return page.spkglr
+}
+
+// Values returns the slice of values for the current page or nil if there are no values.
+func (page SSHPublicKeysGroupListResultPage) Values() []SSHPublicKeyResource {
+	if page.spkglr.IsEmpty() {
+		return nil
+	}
+	return *page.spkglr.Value
+}
+
+// Creates a new instance of the SSHPublicKeysGroupListResultPage type.
+func NewSSHPublicKeysGroupListResultPage(getNextPage func(context.Context, SSHPublicKeysGroupListResult) (SSHPublicKeysGroupListResult, error)) SSHPublicKeysGroupListResultPage {
+	return SSHPublicKeysGroupListResultPage{fn: getNextPage}
+}
+
+// SSHPublicKeyUpdateResource specifies information about the SSH public key.
+type SSHPublicKeyUpdateResource struct {
+	// SSHPublicKeyResourceProperties - Properties of the SSH public key.
+	*SSHPublicKeyResourceProperties `json:"properties,omitempty"`
+	// Tags - Resource tags
+	Tags map[string]*string `json:"tags"`
+}
+
+// MarshalJSON is the custom marshaler for SSHPublicKeyUpdateResource.
+func (spkur SSHPublicKeyUpdateResource) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if spkur.SSHPublicKeyResourceProperties != nil {
+		objectMap["properties"] = spkur.SSHPublicKeyResourceProperties
+	}
+	if spkur.Tags != nil {
+		objectMap["tags"] = spkur.Tags
+	}
+	return json.Marshal(objectMap)
+}
+
+// UnmarshalJSON is the custom unmarshaler for SSHPublicKeyUpdateResource struct.
+func (spkur *SSHPublicKeyUpdateResource) UnmarshalJSON(body []byte) error {
+	var m map[string]*json.RawMessage
+	err := json.Unmarshal(body, &m)
+	if err != nil {
+		return err
+	}
+	for k, v := range m {
+		switch k {
+		case "properties":
+			if v != nil {
+				var SSHPublicKeyResourceProperties SSHPublicKeyResourceProperties
+				err = json.Unmarshal(*v, &SSHPublicKeyResourceProperties)
+				if err != nil {
+					return err
+				}
+				spkur.SSHPublicKeyResourceProperties = &SSHPublicKeyResourceProperties
+			}
+		case "tags":
+			if v != nil {
+				var tags map[string]*string
+				err = json.Unmarshal(*v, &tags)
+				if err != nil {
+					return err
+				}
+				spkur.Tags = tags
+			}
+		}
+	}
+
+	return nil
+}
+
 // StorageProfile specifies the storage settings for the virtual machine disks.
 type StorageProfile struct {
 	// ImageReference - Specifies information about the image to use. You can specify information about platform images, marketplace images, or virtual machine images. This element is required when you want to use a platform image, marketplace image, or virtual machine image, but is not used in other creation operations.
