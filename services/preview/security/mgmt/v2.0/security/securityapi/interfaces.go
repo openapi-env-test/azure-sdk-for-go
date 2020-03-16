@@ -23,6 +23,35 @@ import (
 	"github.com/Azure/go-autorest/autorest"
 )
 
+// SecureScoresClientAPI contains the set of methods on the SecureScoresClient type.
+type SecureScoresClientAPI interface {
+	Get(ctx context.Context, scope string, secureScoreName string) (result security.SecureScoreItem, err error)
+	List(ctx context.Context, scope string) (result security.SecureScoresListPage, err error)
+	ListComplete(ctx context.Context, scope string) (result security.SecureScoresListIterator, err error)
+}
+
+var _ SecureScoresClientAPI = (*security.SecureScoresClient)(nil)
+
+// SecureScoreControlsClientAPI contains the set of methods on the SecureScoreControlsClient type.
+type SecureScoreControlsClientAPI interface {
+	List(ctx context.Context, scope string, expand security.ExpandControlsEnum) (result security.SecureScoreControlListPage, err error)
+	ListComplete(ctx context.Context, scope string, expand security.ExpandControlsEnum) (result security.SecureScoreControlListIterator, err error)
+	ListBySecureScore(ctx context.Context, scope string, secureScoreName string, expand security.ExpandControlsEnum) (result security.SecureScoreControlListPage, err error)
+	ListBySecureScoreComplete(ctx context.Context, scope string, secureScoreName string, expand security.ExpandControlsEnum) (result security.SecureScoreControlListIterator, err error)
+}
+
+var _ SecureScoreControlsClientAPI = (*security.SecureScoreControlsClient)(nil)
+
+// SecureScoreControlDefinitionsClientAPI contains the set of methods on the SecureScoreControlDefinitionsClient type.
+type SecureScoreControlDefinitionsClientAPI interface {
+	List(ctx context.Context) (result security.SecureScoreControlDefinitionListPage, err error)
+	ListComplete(ctx context.Context) (result security.SecureScoreControlDefinitionListIterator, err error)
+	ListBySubscription(ctx context.Context) (result security.SecureScoreControlDefinitionListPage, err error)
+	ListBySubscriptionComplete(ctx context.Context) (result security.SecureScoreControlDefinitionListIterator, err error)
+}
+
+var _ SecureScoreControlDefinitionsClientAPI = (*security.SecureScoreControlDefinitionsClient)(nil)
+
 // AutomationsClientAPI contains the set of methods on the AutomationsClient type.
 type AutomationsClientAPI interface {
 	CreateOrUpdate(ctx context.Context, resourceGroupName string, automationName string, automation security.Automation) (result security.Automation, err error)
@@ -315,6 +344,7 @@ var _ JitNetworkAccessPoliciesClientAPI = (*security.JitNetworkAccessPoliciesCli
 
 // AdaptiveApplicationControlsClientAPI contains the set of methods on the AdaptiveApplicationControlsClient type.
 type AdaptiveApplicationControlsClientAPI interface {
+	Delete(ctx context.Context, groupName string) (result autorest.Response, err error)
 	Get(ctx context.Context, groupName string) (result security.AppWhitelistingGroup, err error)
 	List(ctx context.Context, includePathRecommendations *bool, summary *bool) (result security.AppWhitelistingGroups, err error)
 	Put(ctx context.Context, groupName string, body security.AppWhitelistingPutGroupData) (result security.AppWhitelistingGroup, err error)
