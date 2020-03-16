@@ -21,6 +21,7 @@ import (
 	"context"
 	"encoding/json"
 	"github.com/Azure/go-autorest/autorest"
+	"github.com/Azure/go-autorest/autorest/azure"
 	"github.com/Azure/go-autorest/autorest/date"
 	"github.com/Azure/go-autorest/autorest/to"
 	"github.com/Azure/go-autorest/tracing"
@@ -285,6 +286,19 @@ func PossibleConnectionTypeValues() []ConnectionType {
 	return []ConnectionType{External, Internal}
 }
 
+// ControlType enumerates the values for control type.
+type ControlType string
+
+const (
+	// ControlTypeBuiltIn Azure Security Center managed assessments
+	ControlTypeBuiltIn ControlType = "BuiltIn"
+)
+
+// PossibleControlTypeValues returns an array of possible values for the ControlType const type.
+func PossibleControlTypeValues() []ControlType {
+	return []ControlType{ControlTypeBuiltIn}
+}
+
 // DataSource enumerates the values for data source.
 type DataSource string
 
@@ -296,6 +310,21 @@ const (
 // PossibleDataSourceValues returns an array of possible values for the DataSource const type.
 func PossibleDataSourceValues() []DataSource {
 	return []DataSource{TwinData}
+}
+
+// Direction enumerates the values for direction.
+type Direction string
+
+const (
+	// Inbound ...
+	Inbound Direction = "Inbound"
+	// Outbound ...
+	Outbound Direction = "Outbound"
+)
+
+// PossibleDirectionValues returns an array of possible values for the Direction const type.
+func PossibleDirectionValues() []Direction {
+	return []Direction{Inbound, Outbound}
 }
 
 // EnforcementMode enumerates the values for enforcement mode.
@@ -396,6 +425,19 @@ const (
 // PossibleExecutableValues returns an array of possible values for the Executable const type.
 func PossibleExecutableValues() []Executable {
 	return []Executable{ExecutableAudit, ExecutableEnforce, ExecutableNone}
+}
+
+// ExpandControlsEnum enumerates the values for expand controls enum.
+type ExpandControlsEnum string
+
+const (
+	// Definition Add definition object for each control
+	Definition ExpandControlsEnum = "definition"
+)
+
+// PossibleExpandControlsEnumValues returns an array of possible values for the ExpandControlsEnum const type.
+func PossibleExpandControlsEnumValues() []ExpandControlsEnum {
+	return []ExpandControlsEnum{Definition}
 }
 
 // ExpandEnum enumerates the values for expand enum.
@@ -1021,6 +1063,21 @@ func PossibleThreatsValues() []Threats {
 	return []Threats{AccountBreach, DataExfiltration, DataSpillage, DenialOfService, ElevationOfPrivilege, MaliciousInsider, MissingCoverage, ThreatResistance}
 }
 
+// TransportProtocol enumerates the values for transport protocol.
+type TransportProtocol string
+
+const (
+	// TransportProtocolTCP ...
+	TransportProtocolTCP TransportProtocol = "TCP"
+	// TransportProtocolUDP ...
+	TransportProtocolUDP TransportProtocol = "UDP"
+)
+
+// PossibleTransportProtocolValues returns an array of possible values for the TransportProtocol const type.
+func PossibleTransportProtocolValues() []TransportProtocol {
+	return []TransportProtocol{TransportProtocolTCP, TransportProtocolUDP}
+}
+
 // Type enumerates the values for type.
 type Type string
 
@@ -1158,6 +1215,268 @@ type AadSolutionProperties struct {
 	Workspace    *ConnectedWorkspace `json:"workspace,omitempty"`
 	// ConnectivityState - Possible values include: 'Discovered', 'NotLicensed', 'Connected'
 	ConnectivityState AadConnectivityState `json:"connectivityState,omitempty"`
+}
+
+// AdaptiveNetworkHardening the resource whose properties describes the Adaptive Network Hardening settings
+// for some Azure resource
+type AdaptiveNetworkHardening struct {
+	autorest.Response `json:"-"`
+	// AdaptiveNetworkHardeningProperties - Properties of the Adaptive Network Hardening resource
+	*AdaptiveNetworkHardeningProperties `json:"properties,omitempty"`
+	// ID - READ-ONLY; Resource Id
+	ID *string `json:"id,omitempty"`
+	// Name - READ-ONLY; Resource name
+	Name *string `json:"name,omitempty"`
+	// Type - READ-ONLY; Resource type
+	Type *string `json:"type,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for AdaptiveNetworkHardening.
+func (anh AdaptiveNetworkHardening) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if anh.AdaptiveNetworkHardeningProperties != nil {
+		objectMap["properties"] = anh.AdaptiveNetworkHardeningProperties
+	}
+	return json.Marshal(objectMap)
+}
+
+// UnmarshalJSON is the custom unmarshaler for AdaptiveNetworkHardening struct.
+func (anh *AdaptiveNetworkHardening) UnmarshalJSON(body []byte) error {
+	var m map[string]*json.RawMessage
+	err := json.Unmarshal(body, &m)
+	if err != nil {
+		return err
+	}
+	for k, v := range m {
+		switch k {
+		case "properties":
+			if v != nil {
+				var adaptiveNetworkHardeningProperties AdaptiveNetworkHardeningProperties
+				err = json.Unmarshal(*v, &adaptiveNetworkHardeningProperties)
+				if err != nil {
+					return err
+				}
+				anh.AdaptiveNetworkHardeningProperties = &adaptiveNetworkHardeningProperties
+			}
+		case "id":
+			if v != nil {
+				var ID string
+				err = json.Unmarshal(*v, &ID)
+				if err != nil {
+					return err
+				}
+				anh.ID = &ID
+			}
+		case "name":
+			if v != nil {
+				var name string
+				err = json.Unmarshal(*v, &name)
+				if err != nil {
+					return err
+				}
+				anh.Name = &name
+			}
+		case "type":
+			if v != nil {
+				var typeVar string
+				err = json.Unmarshal(*v, &typeVar)
+				if err != nil {
+					return err
+				}
+				anh.Type = &typeVar
+			}
+		}
+	}
+
+	return nil
+}
+
+// AdaptiveNetworkHardeningEnforceRequest ...
+type AdaptiveNetworkHardeningEnforceRequest struct {
+	// Rules - The rules to enforce
+	Rules *[]Rule `json:"rules,omitempty"`
+	// NetworkSecurityGroups - The Azure resource IDs of the effective network security groups that will be updated with the created security rules from the Adaptive Network Hardening rules
+	NetworkSecurityGroups *[]string `json:"networkSecurityGroups,omitempty"`
+}
+
+// AdaptiveNetworkHardeningProperties adaptive Network Hardening resource properties
+type AdaptiveNetworkHardeningProperties struct {
+	// Rules - The security rules which are recommended to be effective on the VM
+	Rules *[]Rule `json:"rules,omitempty"`
+	// RulesCalculationTime - The UTC time on which the rules were calculated
+	RulesCalculationTime *date.Time `json:"rulesCalculationTime,omitempty"`
+	// EffectiveNetworkSecurityGroups - The Network Security Groups effective on the network interfaces of the protected resource
+	EffectiveNetworkSecurityGroups *[]EffectiveNetworkSecurityGroups `json:"effectiveNetworkSecurityGroups,omitempty"`
+}
+
+// AdaptiveNetworkHardeningsEnforceFuture an abstraction for monitoring and retrieving the results of a
+// long-running operation.
+type AdaptiveNetworkHardeningsEnforceFuture struct {
+	azure.Future
+}
+
+// Result returns the result of the asynchronous operation.
+// If the operation has not completed it will return an error.
+func (future *AdaptiveNetworkHardeningsEnforceFuture) Result(client AdaptiveNetworkHardeningsClient) (ar autorest.Response, err error) {
+	var done bool
+	done, err = future.DoneWithContext(context.Background(), client)
+	if err != nil {
+		err = autorest.NewErrorWithError(err, "security.AdaptiveNetworkHardeningsEnforceFuture", "Result", future.Response(), "Polling failure")
+		return
+	}
+	if !done {
+		err = azure.NewAsyncOpIncompleteError("security.AdaptiveNetworkHardeningsEnforceFuture")
+		return
+	}
+	ar.Response = future.Response()
+	return
+}
+
+// AdaptiveNetworkHardeningsList response for ListAdaptiveNetworkHardenings API service call
+type AdaptiveNetworkHardeningsList struct {
+	autorest.Response `json:"-"`
+	// Value - A list of Adaptive Network Hardenings resources
+	Value *[]AdaptiveNetworkHardening `json:"value,omitempty"`
+	// NextLink - The URL to get the next set of results
+	NextLink *string `json:"nextLink,omitempty"`
+}
+
+// AdaptiveNetworkHardeningsListIterator provides access to a complete listing of AdaptiveNetworkHardening
+// values.
+type AdaptiveNetworkHardeningsListIterator struct {
+	i    int
+	page AdaptiveNetworkHardeningsListPage
+}
+
+// NextWithContext advances to the next value.  If there was an error making
+// the request the iterator does not advance and the error is returned.
+func (iter *AdaptiveNetworkHardeningsListIterator) NextWithContext(ctx context.Context) (err error) {
+	if tracing.IsEnabled() {
+		ctx = tracing.StartSpan(ctx, fqdn+"/AdaptiveNetworkHardeningsListIterator.NextWithContext")
+		defer func() {
+			sc := -1
+			if iter.Response().Response.Response != nil {
+				sc = iter.Response().Response.Response.StatusCode
+			}
+			tracing.EndSpan(ctx, sc, err)
+		}()
+	}
+	iter.i++
+	if iter.i < len(iter.page.Values()) {
+		return nil
+	}
+	err = iter.page.NextWithContext(ctx)
+	if err != nil {
+		iter.i--
+		return err
+	}
+	iter.i = 0
+	return nil
+}
+
+// Next advances to the next value.  If there was an error making
+// the request the iterator does not advance and the error is returned.
+// Deprecated: Use NextWithContext() instead.
+func (iter *AdaptiveNetworkHardeningsListIterator) Next() error {
+	return iter.NextWithContext(context.Background())
+}
+
+// NotDone returns true if the enumeration should be started or is not yet complete.
+func (iter AdaptiveNetworkHardeningsListIterator) NotDone() bool {
+	return iter.page.NotDone() && iter.i < len(iter.page.Values())
+}
+
+// Response returns the raw server response from the last page request.
+func (iter AdaptiveNetworkHardeningsListIterator) Response() AdaptiveNetworkHardeningsList {
+	return iter.page.Response()
+}
+
+// Value returns the current value or a zero-initialized value if the
+// iterator has advanced beyond the end of the collection.
+func (iter AdaptiveNetworkHardeningsListIterator) Value() AdaptiveNetworkHardening {
+	if !iter.page.NotDone() {
+		return AdaptiveNetworkHardening{}
+	}
+	return iter.page.Values()[iter.i]
+}
+
+// Creates a new instance of the AdaptiveNetworkHardeningsListIterator type.
+func NewAdaptiveNetworkHardeningsListIterator(page AdaptiveNetworkHardeningsListPage) AdaptiveNetworkHardeningsListIterator {
+	return AdaptiveNetworkHardeningsListIterator{page: page}
+}
+
+// IsEmpty returns true if the ListResult contains no values.
+func (anhl AdaptiveNetworkHardeningsList) IsEmpty() bool {
+	return anhl.Value == nil || len(*anhl.Value) == 0
+}
+
+// adaptiveNetworkHardeningsListPreparer prepares a request to retrieve the next set of results.
+// It returns nil if no more results exist.
+func (anhl AdaptiveNetworkHardeningsList) adaptiveNetworkHardeningsListPreparer(ctx context.Context) (*http.Request, error) {
+	if anhl.NextLink == nil || len(to.String(anhl.NextLink)) < 1 {
+		return nil, nil
+	}
+	return autorest.Prepare((&http.Request{}).WithContext(ctx),
+		autorest.AsJSON(),
+		autorest.AsGet(),
+		autorest.WithBaseURL(to.String(anhl.NextLink)))
+}
+
+// AdaptiveNetworkHardeningsListPage contains a page of AdaptiveNetworkHardening values.
+type AdaptiveNetworkHardeningsListPage struct {
+	fn   func(context.Context, AdaptiveNetworkHardeningsList) (AdaptiveNetworkHardeningsList, error)
+	anhl AdaptiveNetworkHardeningsList
+}
+
+// NextWithContext advances to the next page of values.  If there was an error making
+// the request the page does not advance and the error is returned.
+func (page *AdaptiveNetworkHardeningsListPage) NextWithContext(ctx context.Context) (err error) {
+	if tracing.IsEnabled() {
+		ctx = tracing.StartSpan(ctx, fqdn+"/AdaptiveNetworkHardeningsListPage.NextWithContext")
+		defer func() {
+			sc := -1
+			if page.Response().Response.Response != nil {
+				sc = page.Response().Response.Response.StatusCode
+			}
+			tracing.EndSpan(ctx, sc, err)
+		}()
+	}
+	next, err := page.fn(ctx, page.anhl)
+	if err != nil {
+		return err
+	}
+	page.anhl = next
+	return nil
+}
+
+// Next advances to the next page of values.  If there was an error making
+// the request the page does not advance and the error is returned.
+// Deprecated: Use NextWithContext() instead.
+func (page *AdaptiveNetworkHardeningsListPage) Next() error {
+	return page.NextWithContext(context.Background())
+}
+
+// NotDone returns true if the page enumeration should be started or is not yet complete.
+func (page AdaptiveNetworkHardeningsListPage) NotDone() bool {
+	return !page.anhl.IsEmpty()
+}
+
+// Response returns the raw server response from the last page request.
+func (page AdaptiveNetworkHardeningsListPage) Response() AdaptiveNetworkHardeningsList {
+	return page.anhl
+}
+
+// Values returns the slice of values for the current page or nil if there are no values.
+func (page AdaptiveNetworkHardeningsListPage) Values() []AdaptiveNetworkHardening {
+	if page.anhl.IsEmpty() {
+		return nil
+	}
+	return *page.anhl.Value
+}
+
+// Creates a new instance of the AdaptiveNetworkHardeningsListPage type.
+func NewAdaptiveNetworkHardeningsListPage(getNextPage func(context.Context, AdaptiveNetworkHardeningsList) (AdaptiveNetworkHardeningsList, error)) AdaptiveNetworkHardeningsListPage {
+	return AdaptiveNetworkHardeningsListPage{fn: getNextPage}
 }
 
 // BasicAdditionalData details of the sub-assessment
@@ -3874,6 +4193,12 @@ func (ard AzureResourceDetails) AsBasicResourceDetails() (BasicResourceDetails, 
 	return &ard, true
 }
 
+// AzureResourceLink describes an Azure resource with kind
+type AzureResourceLink struct {
+	// ID - READ-ONLY; Azure resource Id
+	ID *string `json:"id,omitempty"`
+}
+
 // CefExternalSecuritySolution represents a security solution which sends CEF logs to an OMS workspace
 type CefExternalSecuritySolution struct {
 	Properties *CefSolutionProperties `json:"properties,omitempty"`
@@ -5478,6 +5803,14 @@ type DiscoveredSecuritySolutionProperties struct {
 	Publisher *string `json:"publisher,omitempty"`
 	// Sku - The security solutions' image sku
 	Sku *string `json:"sku,omitempty"`
+}
+
+// EffectiveNetworkSecurityGroups describes the Network Security Groups effective on a network interface
+type EffectiveNetworkSecurityGroups struct {
+	// NetworkInterface - The Azure resource ID of the network interface
+	NetworkInterface *string `json:"networkInterface,omitempty"`
+	// NetworkSecurityGroups - The Network Security Groups effective on the network interface
+	NetworkSecurityGroups *[]string `json:"networkSecurityGroups,omitempty"`
 }
 
 // ETag entity tag is used for comparing two or more entities from the same requested resource.
@@ -8622,6 +8955,852 @@ func (rd ResourceDetails) AsResourceDetails() (*ResourceDetails, bool) {
 // AsBasicResourceDetails is the BasicResourceDetails implementation for ResourceDetails.
 func (rd ResourceDetails) AsBasicResourceDetails() (BasicResourceDetails, bool) {
 	return &rd, true
+}
+
+// Rule describes remote addresses that is recommended to communicate with the Azure resource on some
+// (Protocol, Port, Direction). All other remote addresses are recommended to be blocked
+type Rule struct {
+	// Name - The name of the rule
+	Name *string `json:"name,omitempty"`
+	// Direction - The rule's direction. Possible values include: 'Inbound', 'Outbound'
+	Direction Direction `json:"direction,omitempty"`
+	// DestinationPort - The rule's destination port
+	DestinationPort *int32 `json:"destinationPort,omitempty"`
+	// Protocols - The rule's transport protocols
+	Protocols *[]TransportProtocol `json:"protocols,omitempty"`
+	// IPAddresses - The remote IP addresses that should be able to communicate with the Azure resource on the rule's destination port and protocol
+	IPAddresses *[]string `json:"ipAddresses,omitempty"`
+}
+
+// ScoreDetails calculation result data
+type ScoreDetails struct {
+	// Max - READ-ONLY; Maximum score applicable
+	Max *int32 `json:"max,omitempty"`
+	// Current - READ-ONLY; Actual score
+	Current *float64 `json:"current,omitempty"`
+}
+
+// SecureScoreControlDefinitionItem secure Score Control's Definition information
+type SecureScoreControlDefinitionItem struct {
+	*SecureScoreControlDefinitionItemProperties `json:"properties,omitempty"`
+	// ID - READ-ONLY; Resource Id
+	ID *string `json:"id,omitempty"`
+	// Name - READ-ONLY; Resource name
+	Name *string `json:"name,omitempty"`
+	// Type - READ-ONLY; Resource type
+	Type *string `json:"type,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for SecureScoreControlDefinitionItem.
+func (sscdi SecureScoreControlDefinitionItem) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if sscdi.SecureScoreControlDefinitionItemProperties != nil {
+		objectMap["properties"] = sscdi.SecureScoreControlDefinitionItemProperties
+	}
+	return json.Marshal(objectMap)
+}
+
+// UnmarshalJSON is the custom unmarshaler for SecureScoreControlDefinitionItem struct.
+func (sscdi *SecureScoreControlDefinitionItem) UnmarshalJSON(body []byte) error {
+	var m map[string]*json.RawMessage
+	err := json.Unmarshal(body, &m)
+	if err != nil {
+		return err
+	}
+	for k, v := range m {
+		switch k {
+		case "properties":
+			if v != nil {
+				var secureScoreControlDefinitionItemProperties SecureScoreControlDefinitionItemProperties
+				err = json.Unmarshal(*v, &secureScoreControlDefinitionItemProperties)
+				if err != nil {
+					return err
+				}
+				sscdi.SecureScoreControlDefinitionItemProperties = &secureScoreControlDefinitionItemProperties
+			}
+		case "id":
+			if v != nil {
+				var ID string
+				err = json.Unmarshal(*v, &ID)
+				if err != nil {
+					return err
+				}
+				sscdi.ID = &ID
+			}
+		case "name":
+			if v != nil {
+				var name string
+				err = json.Unmarshal(*v, &name)
+				if err != nil {
+					return err
+				}
+				sscdi.Name = &name
+			}
+		case "type":
+			if v != nil {
+				var typeVar string
+				err = json.Unmarshal(*v, &typeVar)
+				if err != nil {
+					return err
+				}
+				sscdi.Type = &typeVar
+			}
+		}
+	}
+
+	return nil
+}
+
+// SecureScoreControlDefinitionItemProperties secure Score Control Definition Properties
+type SecureScoreControlDefinitionItemProperties struct {
+	// DisplayName - READ-ONLY; User friendly display name of the control
+	DisplayName *string `json:"displayName,omitempty"`
+	// Description - READ-ONLY; User friendly description of the control
+	Description *string `json:"description,omitempty"`
+	// MaxScore - READ-ONLY; Maximum control score (0..10)
+	MaxScore *int32 `json:"maxScore,omitempty"`
+	// Source - READ-ONLY; Source object from which the control was created
+	Source *SecureScoreControlDefinitionSource `json:"source,omitempty"`
+	// AssessmentDefinitions - READ-ONLY; array of assessments metadata IDs that are included in this control
+	AssessmentDefinitions *[]AzureResourceLink `json:"assessmentDefinitions,omitempty"`
+}
+
+// SecureScoreControlDefinitionList page of a secure score controls definition list
+type SecureScoreControlDefinitionList struct {
+	autorest.Response `json:"-"`
+	// Value - READ-ONLY; Collection of secure score controls definition in this page
+	Value *[]SecureScoreControlDefinitionItem `json:"value,omitempty"`
+	// NextLink - READ-ONLY; The URI to fetch the next page.
+	NextLink *string `json:"nextLink,omitempty"`
+}
+
+// SecureScoreControlDefinitionListIterator provides access to a complete listing of
+// SecureScoreControlDefinitionItem values.
+type SecureScoreControlDefinitionListIterator struct {
+	i    int
+	page SecureScoreControlDefinitionListPage
+}
+
+// NextWithContext advances to the next value.  If there was an error making
+// the request the iterator does not advance and the error is returned.
+func (iter *SecureScoreControlDefinitionListIterator) NextWithContext(ctx context.Context) (err error) {
+	if tracing.IsEnabled() {
+		ctx = tracing.StartSpan(ctx, fqdn+"/SecureScoreControlDefinitionListIterator.NextWithContext")
+		defer func() {
+			sc := -1
+			if iter.Response().Response.Response != nil {
+				sc = iter.Response().Response.Response.StatusCode
+			}
+			tracing.EndSpan(ctx, sc, err)
+		}()
+	}
+	iter.i++
+	if iter.i < len(iter.page.Values()) {
+		return nil
+	}
+	err = iter.page.NextWithContext(ctx)
+	if err != nil {
+		iter.i--
+		return err
+	}
+	iter.i = 0
+	return nil
+}
+
+// Next advances to the next value.  If there was an error making
+// the request the iterator does not advance and the error is returned.
+// Deprecated: Use NextWithContext() instead.
+func (iter *SecureScoreControlDefinitionListIterator) Next() error {
+	return iter.NextWithContext(context.Background())
+}
+
+// NotDone returns true if the enumeration should be started or is not yet complete.
+func (iter SecureScoreControlDefinitionListIterator) NotDone() bool {
+	return iter.page.NotDone() && iter.i < len(iter.page.Values())
+}
+
+// Response returns the raw server response from the last page request.
+func (iter SecureScoreControlDefinitionListIterator) Response() SecureScoreControlDefinitionList {
+	return iter.page.Response()
+}
+
+// Value returns the current value or a zero-initialized value if the
+// iterator has advanced beyond the end of the collection.
+func (iter SecureScoreControlDefinitionListIterator) Value() SecureScoreControlDefinitionItem {
+	if !iter.page.NotDone() {
+		return SecureScoreControlDefinitionItem{}
+	}
+	return iter.page.Values()[iter.i]
+}
+
+// Creates a new instance of the SecureScoreControlDefinitionListIterator type.
+func NewSecureScoreControlDefinitionListIterator(page SecureScoreControlDefinitionListPage) SecureScoreControlDefinitionListIterator {
+	return SecureScoreControlDefinitionListIterator{page: page}
+}
+
+// IsEmpty returns true if the ListResult contains no values.
+func (sscdl SecureScoreControlDefinitionList) IsEmpty() bool {
+	return sscdl.Value == nil || len(*sscdl.Value) == 0
+}
+
+// secureScoreControlDefinitionListPreparer prepares a request to retrieve the next set of results.
+// It returns nil if no more results exist.
+func (sscdl SecureScoreControlDefinitionList) secureScoreControlDefinitionListPreparer(ctx context.Context) (*http.Request, error) {
+	if sscdl.NextLink == nil || len(to.String(sscdl.NextLink)) < 1 {
+		return nil, nil
+	}
+	return autorest.Prepare((&http.Request{}).WithContext(ctx),
+		autorest.AsJSON(),
+		autorest.AsGet(),
+		autorest.WithBaseURL(to.String(sscdl.NextLink)))
+}
+
+// SecureScoreControlDefinitionListPage contains a page of SecureScoreControlDefinitionItem values.
+type SecureScoreControlDefinitionListPage struct {
+	fn    func(context.Context, SecureScoreControlDefinitionList) (SecureScoreControlDefinitionList, error)
+	sscdl SecureScoreControlDefinitionList
+}
+
+// NextWithContext advances to the next page of values.  If there was an error making
+// the request the page does not advance and the error is returned.
+func (page *SecureScoreControlDefinitionListPage) NextWithContext(ctx context.Context) (err error) {
+	if tracing.IsEnabled() {
+		ctx = tracing.StartSpan(ctx, fqdn+"/SecureScoreControlDefinitionListPage.NextWithContext")
+		defer func() {
+			sc := -1
+			if page.Response().Response.Response != nil {
+				sc = page.Response().Response.Response.StatusCode
+			}
+			tracing.EndSpan(ctx, sc, err)
+		}()
+	}
+	next, err := page.fn(ctx, page.sscdl)
+	if err != nil {
+		return err
+	}
+	page.sscdl = next
+	return nil
+}
+
+// Next advances to the next page of values.  If there was an error making
+// the request the page does not advance and the error is returned.
+// Deprecated: Use NextWithContext() instead.
+func (page *SecureScoreControlDefinitionListPage) Next() error {
+	return page.NextWithContext(context.Background())
+}
+
+// NotDone returns true if the page enumeration should be started or is not yet complete.
+func (page SecureScoreControlDefinitionListPage) NotDone() bool {
+	return !page.sscdl.IsEmpty()
+}
+
+// Response returns the raw server response from the last page request.
+func (page SecureScoreControlDefinitionListPage) Response() SecureScoreControlDefinitionList {
+	return page.sscdl
+}
+
+// Values returns the slice of values for the current page or nil if there are no values.
+func (page SecureScoreControlDefinitionListPage) Values() []SecureScoreControlDefinitionItem {
+	if page.sscdl.IsEmpty() {
+		return nil
+	}
+	return *page.sscdl.Value
+}
+
+// Creates a new instance of the SecureScoreControlDefinitionListPage type.
+func NewSecureScoreControlDefinitionListPage(getNextPage func(context.Context, SecureScoreControlDefinitionList) (SecureScoreControlDefinitionList, error)) SecureScoreControlDefinitionListPage {
+	return SecureScoreControlDefinitionListPage{fn: getNextPage}
+}
+
+// SecureScoreControlDefinitionSource representing the source of the control
+type SecureScoreControlDefinitionSource struct {
+	// SourceType - BuiltIn if the control is built-in from Azure Security Center managed assessments, Custom (Future) if the assessment based on custom Azure Policy definition, CustomerManaged (future) for customers who build their own controls. Possible values include: 'ControlTypeBuiltIn'
+	SourceType ControlType `json:"sourceType,omitempty"`
+}
+
+// SecureScoreControlDetails secure score control (calculated) object
+type SecureScoreControlDetails struct {
+	*SecureScoreControlScoreDetails `json:"properties,omitempty"`
+	// ID - READ-ONLY; Resource Id
+	ID *string `json:"id,omitempty"`
+	// Name - READ-ONLY; Resource name
+	Name *string `json:"name,omitempty"`
+	// Type - READ-ONLY; Resource type
+	Type *string `json:"type,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for SecureScoreControlDetails.
+func (sscd SecureScoreControlDetails) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if sscd.SecureScoreControlScoreDetails != nil {
+		objectMap["properties"] = sscd.SecureScoreControlScoreDetails
+	}
+	return json.Marshal(objectMap)
+}
+
+// UnmarshalJSON is the custom unmarshaler for SecureScoreControlDetails struct.
+func (sscd *SecureScoreControlDetails) UnmarshalJSON(body []byte) error {
+	var m map[string]*json.RawMessage
+	err := json.Unmarshal(body, &m)
+	if err != nil {
+		return err
+	}
+	for k, v := range m {
+		switch k {
+		case "properties":
+			if v != nil {
+				var secureScoreControlScoreDetails SecureScoreControlScoreDetails
+				err = json.Unmarshal(*v, &secureScoreControlScoreDetails)
+				if err != nil {
+					return err
+				}
+				sscd.SecureScoreControlScoreDetails = &secureScoreControlScoreDetails
+			}
+		case "id":
+			if v != nil {
+				var ID string
+				err = json.Unmarshal(*v, &ID)
+				if err != nil {
+					return err
+				}
+				sscd.ID = &ID
+			}
+		case "name":
+			if v != nil {
+				var name string
+				err = json.Unmarshal(*v, &name)
+				if err != nil {
+					return err
+				}
+				sscd.Name = &name
+			}
+		case "type":
+			if v != nil {
+				var typeVar string
+				err = json.Unmarshal(*v, &typeVar)
+				if err != nil {
+					return err
+				}
+				sscd.Type = &typeVar
+			}
+		}
+	}
+
+	return nil
+}
+
+// SecureScoreControlList page of a secure score controls list
+type SecureScoreControlList struct {
+	autorest.Response `json:"-"`
+	// Value - READ-ONLY; Collection of secure score controls in this page
+	Value *[]SecureScoreControlDetails `json:"value,omitempty"`
+	// NextLink - READ-ONLY; The URI to fetch the next page.
+	NextLink *string `json:"nextLink,omitempty"`
+}
+
+// SecureScoreControlListIterator provides access to a complete listing of SecureScoreControlDetails
+// values.
+type SecureScoreControlListIterator struct {
+	i    int
+	page SecureScoreControlListPage
+}
+
+// NextWithContext advances to the next value.  If there was an error making
+// the request the iterator does not advance and the error is returned.
+func (iter *SecureScoreControlListIterator) NextWithContext(ctx context.Context) (err error) {
+	if tracing.IsEnabled() {
+		ctx = tracing.StartSpan(ctx, fqdn+"/SecureScoreControlListIterator.NextWithContext")
+		defer func() {
+			sc := -1
+			if iter.Response().Response.Response != nil {
+				sc = iter.Response().Response.Response.StatusCode
+			}
+			tracing.EndSpan(ctx, sc, err)
+		}()
+	}
+	iter.i++
+	if iter.i < len(iter.page.Values()) {
+		return nil
+	}
+	err = iter.page.NextWithContext(ctx)
+	if err != nil {
+		iter.i--
+		return err
+	}
+	iter.i = 0
+	return nil
+}
+
+// Next advances to the next value.  If there was an error making
+// the request the iterator does not advance and the error is returned.
+// Deprecated: Use NextWithContext() instead.
+func (iter *SecureScoreControlListIterator) Next() error {
+	return iter.NextWithContext(context.Background())
+}
+
+// NotDone returns true if the enumeration should be started or is not yet complete.
+func (iter SecureScoreControlListIterator) NotDone() bool {
+	return iter.page.NotDone() && iter.i < len(iter.page.Values())
+}
+
+// Response returns the raw server response from the last page request.
+func (iter SecureScoreControlListIterator) Response() SecureScoreControlList {
+	return iter.page.Response()
+}
+
+// Value returns the current value or a zero-initialized value if the
+// iterator has advanced beyond the end of the collection.
+func (iter SecureScoreControlListIterator) Value() SecureScoreControlDetails {
+	if !iter.page.NotDone() {
+		return SecureScoreControlDetails{}
+	}
+	return iter.page.Values()[iter.i]
+}
+
+// Creates a new instance of the SecureScoreControlListIterator type.
+func NewSecureScoreControlListIterator(page SecureScoreControlListPage) SecureScoreControlListIterator {
+	return SecureScoreControlListIterator{page: page}
+}
+
+// IsEmpty returns true if the ListResult contains no values.
+func (sscl SecureScoreControlList) IsEmpty() bool {
+	return sscl.Value == nil || len(*sscl.Value) == 0
+}
+
+// secureScoreControlListPreparer prepares a request to retrieve the next set of results.
+// It returns nil if no more results exist.
+func (sscl SecureScoreControlList) secureScoreControlListPreparer(ctx context.Context) (*http.Request, error) {
+	if sscl.NextLink == nil || len(to.String(sscl.NextLink)) < 1 {
+		return nil, nil
+	}
+	return autorest.Prepare((&http.Request{}).WithContext(ctx),
+		autorest.AsJSON(),
+		autorest.AsGet(),
+		autorest.WithBaseURL(to.String(sscl.NextLink)))
+}
+
+// SecureScoreControlListPage contains a page of SecureScoreControlDetails values.
+type SecureScoreControlListPage struct {
+	fn   func(context.Context, SecureScoreControlList) (SecureScoreControlList, error)
+	sscl SecureScoreControlList
+}
+
+// NextWithContext advances to the next page of values.  If there was an error making
+// the request the page does not advance and the error is returned.
+func (page *SecureScoreControlListPage) NextWithContext(ctx context.Context) (err error) {
+	if tracing.IsEnabled() {
+		ctx = tracing.StartSpan(ctx, fqdn+"/SecureScoreControlListPage.NextWithContext")
+		defer func() {
+			sc := -1
+			if page.Response().Response.Response != nil {
+				sc = page.Response().Response.Response.StatusCode
+			}
+			tracing.EndSpan(ctx, sc, err)
+		}()
+	}
+	next, err := page.fn(ctx, page.sscl)
+	if err != nil {
+		return err
+	}
+	page.sscl = next
+	return nil
+}
+
+// Next advances to the next page of values.  If there was an error making
+// the request the page does not advance and the error is returned.
+// Deprecated: Use NextWithContext() instead.
+func (page *SecureScoreControlListPage) Next() error {
+	return page.NextWithContext(context.Background())
+}
+
+// NotDone returns true if the page enumeration should be started or is not yet complete.
+func (page SecureScoreControlListPage) NotDone() bool {
+	return !page.sscl.IsEmpty()
+}
+
+// Response returns the raw server response from the last page request.
+func (page SecureScoreControlListPage) Response() SecureScoreControlList {
+	return page.sscl
+}
+
+// Values returns the slice of values for the current page or nil if there are no values.
+func (page SecureScoreControlListPage) Values() []SecureScoreControlDetails {
+	if page.sscl.IsEmpty() {
+		return nil
+	}
+	return *page.sscl.Value
+}
+
+// Creates a new instance of the SecureScoreControlListPage type.
+func NewSecureScoreControlListPage(getNextPage func(context.Context, SecureScoreControlList) (SecureScoreControlList, error)) SecureScoreControlListPage {
+	return SecureScoreControlListPage{fn: getNextPage}
+}
+
+// SecureScoreControlScore calculation result data
+type SecureScoreControlScore struct {
+	// Max - READ-ONLY; Maximum control score (0..10)
+	Max *int32 `json:"max,omitempty"`
+	// Current - READ-ONLY; Actual score for the control = (achieved points / total points) * max score. if total points is zeroed, the return number is 0.00
+	Current *float64 `json:"current,omitempty"`
+}
+
+// SecureScoreControlScoreDetails calculation result data in control level
+type SecureScoreControlScoreDetails struct {
+	// DisplayName - READ-ONLY; User friendly display name of the control
+	DisplayName *string `json:"displayName,omitempty"`
+	// ScoreDetails - Actual score object for the control
+	*ScoreDetails `json:"score,omitempty"`
+	// HealthyResourceCount - READ-ONLY; Number of healthy resources in the control
+	HealthyResourceCount *int32 `json:"healthyResourceCount,omitempty"`
+	// UnhealthyResourceCount - READ-ONLY; Number of unhealthy resources in the control
+	UnhealthyResourceCount *int32 `json:"unhealthyResourceCount,omitempty"`
+	// NotApplicableResourceCount - READ-ONLY; Number of not applicable resources in the control
+	NotApplicableResourceCount *int32                            `json:"notApplicableResourceCount,omitempty"`
+	Definition                 *SecureScoreControlDefinitionItem `json:"definition,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for SecureScoreControlScoreDetails.
+func (sscsd SecureScoreControlScoreDetails) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if sscsd.ScoreDetails != nil {
+		objectMap["score"] = sscsd.ScoreDetails
+	}
+	if sscsd.Definition != nil {
+		objectMap["definition"] = sscsd.Definition
+	}
+	return json.Marshal(objectMap)
+}
+
+// UnmarshalJSON is the custom unmarshaler for SecureScoreControlScoreDetails struct.
+func (sscsd *SecureScoreControlScoreDetails) UnmarshalJSON(body []byte) error {
+	var m map[string]*json.RawMessage
+	err := json.Unmarshal(body, &m)
+	if err != nil {
+		return err
+	}
+	for k, v := range m {
+		switch k {
+		case "displayName":
+			if v != nil {
+				var displayName string
+				err = json.Unmarshal(*v, &displayName)
+				if err != nil {
+					return err
+				}
+				sscsd.DisplayName = &displayName
+			}
+		case "score":
+			if v != nil {
+				var scoreDetails ScoreDetails
+				err = json.Unmarshal(*v, &scoreDetails)
+				if err != nil {
+					return err
+				}
+				sscsd.ScoreDetails = &scoreDetails
+			}
+		case "healthyResourceCount":
+			if v != nil {
+				var healthyResourceCount int32
+				err = json.Unmarshal(*v, &healthyResourceCount)
+				if err != nil {
+					return err
+				}
+				sscsd.HealthyResourceCount = &healthyResourceCount
+			}
+		case "unhealthyResourceCount":
+			if v != nil {
+				var unhealthyResourceCount int32
+				err = json.Unmarshal(*v, &unhealthyResourceCount)
+				if err != nil {
+					return err
+				}
+				sscsd.UnhealthyResourceCount = &unhealthyResourceCount
+			}
+		case "notApplicableResourceCount":
+			if v != nil {
+				var notApplicableResourceCount int32
+				err = json.Unmarshal(*v, &notApplicableResourceCount)
+				if err != nil {
+					return err
+				}
+				sscsd.NotApplicableResourceCount = &notApplicableResourceCount
+			}
+		case "definition":
+			if v != nil {
+				var definition SecureScoreControlDefinitionItem
+				err = json.Unmarshal(*v, &definition)
+				if err != nil {
+					return err
+				}
+				sscsd.Definition = &definition
+			}
+		}
+	}
+
+	return nil
+}
+
+// SecureScoreItem secure score item data model
+type SecureScoreItem struct {
+	autorest.Response `json:"-"`
+	// SecureScoreItemProperties - READ-ONLY; Secure score item
+	*SecureScoreItemProperties `json:"properties,omitempty"`
+	// ID - READ-ONLY; Resource Id
+	ID *string `json:"id,omitempty"`
+	// Name - READ-ONLY; Resource name
+	Name *string `json:"name,omitempty"`
+	// Type - READ-ONLY; Resource type
+	Type *string `json:"type,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for SecureScoreItem.
+func (ssi SecureScoreItem) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	return json.Marshal(objectMap)
+}
+
+// UnmarshalJSON is the custom unmarshaler for SecureScoreItem struct.
+func (ssi *SecureScoreItem) UnmarshalJSON(body []byte) error {
+	var m map[string]*json.RawMessage
+	err := json.Unmarshal(body, &m)
+	if err != nil {
+		return err
+	}
+	for k, v := range m {
+		switch k {
+		case "properties":
+			if v != nil {
+				var secureScoreItemProperties SecureScoreItemProperties
+				err = json.Unmarshal(*v, &secureScoreItemProperties)
+				if err != nil {
+					return err
+				}
+				ssi.SecureScoreItemProperties = &secureScoreItemProperties
+			}
+		case "id":
+			if v != nil {
+				var ID string
+				err = json.Unmarshal(*v, &ID)
+				if err != nil {
+					return err
+				}
+				ssi.ID = &ID
+			}
+		case "name":
+			if v != nil {
+				var name string
+				err = json.Unmarshal(*v, &name)
+				if err != nil {
+					return err
+				}
+				ssi.Name = &name
+			}
+		case "type":
+			if v != nil {
+				var typeVar string
+				err = json.Unmarshal(*v, &typeVar)
+				if err != nil {
+					return err
+				}
+				ssi.Type = &typeVar
+			}
+		}
+	}
+
+	return nil
+}
+
+// SecureScoreItemProperties describes properties of a calculated secure score.
+type SecureScoreItemProperties struct {
+	// DisplayName - READ-ONLY; User friendly display name of the secure score item
+	DisplayName *string `json:"displayName,omitempty"`
+	// ScoreDetails - READ-ONLY; score object
+	*ScoreDetails `json:"score,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for SecureScoreItemProperties.
+func (ssip SecureScoreItemProperties) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	return json.Marshal(objectMap)
+}
+
+// UnmarshalJSON is the custom unmarshaler for SecureScoreItemProperties struct.
+func (ssip *SecureScoreItemProperties) UnmarshalJSON(body []byte) error {
+	var m map[string]*json.RawMessage
+	err := json.Unmarshal(body, &m)
+	if err != nil {
+		return err
+	}
+	for k, v := range m {
+		switch k {
+		case "displayName":
+			if v != nil {
+				var displayName string
+				err = json.Unmarshal(*v, &displayName)
+				if err != nil {
+					return err
+				}
+				ssip.DisplayName = &displayName
+			}
+		case "score":
+			if v != nil {
+				var scoreDetails ScoreDetails
+				err = json.Unmarshal(*v, &scoreDetails)
+				if err != nil {
+					return err
+				}
+				ssip.ScoreDetails = &scoreDetails
+			}
+		}
+	}
+
+	return nil
+}
+
+// SecureScoresList page of a secure scores list
+type SecureScoresList struct {
+	autorest.Response `json:"-"`
+	// Value - READ-ONLY; Collection of secure scores in this page
+	Value *[]SecureScoreItem `json:"value,omitempty"`
+	// NextLink - READ-ONLY; The URI to fetch the next page.
+	NextLink *string `json:"nextLink,omitempty"`
+}
+
+// SecureScoresListIterator provides access to a complete listing of SecureScoreItem values.
+type SecureScoresListIterator struct {
+	i    int
+	page SecureScoresListPage
+}
+
+// NextWithContext advances to the next value.  If there was an error making
+// the request the iterator does not advance and the error is returned.
+func (iter *SecureScoresListIterator) NextWithContext(ctx context.Context) (err error) {
+	if tracing.IsEnabled() {
+		ctx = tracing.StartSpan(ctx, fqdn+"/SecureScoresListIterator.NextWithContext")
+		defer func() {
+			sc := -1
+			if iter.Response().Response.Response != nil {
+				sc = iter.Response().Response.Response.StatusCode
+			}
+			tracing.EndSpan(ctx, sc, err)
+		}()
+	}
+	iter.i++
+	if iter.i < len(iter.page.Values()) {
+		return nil
+	}
+	err = iter.page.NextWithContext(ctx)
+	if err != nil {
+		iter.i--
+		return err
+	}
+	iter.i = 0
+	return nil
+}
+
+// Next advances to the next value.  If there was an error making
+// the request the iterator does not advance and the error is returned.
+// Deprecated: Use NextWithContext() instead.
+func (iter *SecureScoresListIterator) Next() error {
+	return iter.NextWithContext(context.Background())
+}
+
+// NotDone returns true if the enumeration should be started or is not yet complete.
+func (iter SecureScoresListIterator) NotDone() bool {
+	return iter.page.NotDone() && iter.i < len(iter.page.Values())
+}
+
+// Response returns the raw server response from the last page request.
+func (iter SecureScoresListIterator) Response() SecureScoresList {
+	return iter.page.Response()
+}
+
+// Value returns the current value or a zero-initialized value if the
+// iterator has advanced beyond the end of the collection.
+func (iter SecureScoresListIterator) Value() SecureScoreItem {
+	if !iter.page.NotDone() {
+		return SecureScoreItem{}
+	}
+	return iter.page.Values()[iter.i]
+}
+
+// Creates a new instance of the SecureScoresListIterator type.
+func NewSecureScoresListIterator(page SecureScoresListPage) SecureScoresListIterator {
+	return SecureScoresListIterator{page: page}
+}
+
+// IsEmpty returns true if the ListResult contains no values.
+func (ssl SecureScoresList) IsEmpty() bool {
+	return ssl.Value == nil || len(*ssl.Value) == 0
+}
+
+// secureScoresListPreparer prepares a request to retrieve the next set of results.
+// It returns nil if no more results exist.
+func (ssl SecureScoresList) secureScoresListPreparer(ctx context.Context) (*http.Request, error) {
+	if ssl.NextLink == nil || len(to.String(ssl.NextLink)) < 1 {
+		return nil, nil
+	}
+	return autorest.Prepare((&http.Request{}).WithContext(ctx),
+		autorest.AsJSON(),
+		autorest.AsGet(),
+		autorest.WithBaseURL(to.String(ssl.NextLink)))
+}
+
+// SecureScoresListPage contains a page of SecureScoreItem values.
+type SecureScoresListPage struct {
+	fn  func(context.Context, SecureScoresList) (SecureScoresList, error)
+	ssl SecureScoresList
+}
+
+// NextWithContext advances to the next page of values.  If there was an error making
+// the request the page does not advance and the error is returned.
+func (page *SecureScoresListPage) NextWithContext(ctx context.Context) (err error) {
+	if tracing.IsEnabled() {
+		ctx = tracing.StartSpan(ctx, fqdn+"/SecureScoresListPage.NextWithContext")
+		defer func() {
+			sc := -1
+			if page.Response().Response.Response != nil {
+				sc = page.Response().Response.Response.StatusCode
+			}
+			tracing.EndSpan(ctx, sc, err)
+		}()
+	}
+	next, err := page.fn(ctx, page.ssl)
+	if err != nil {
+		return err
+	}
+	page.ssl = next
+	return nil
+}
+
+// Next advances to the next page of values.  If there was an error making
+// the request the page does not advance and the error is returned.
+// Deprecated: Use NextWithContext() instead.
+func (page *SecureScoresListPage) Next() error {
+	return page.NextWithContext(context.Background())
+}
+
+// NotDone returns true if the page enumeration should be started or is not yet complete.
+func (page SecureScoresListPage) NotDone() bool {
+	return !page.ssl.IsEmpty()
+}
+
+// Response returns the raw server response from the last page request.
+func (page SecureScoresListPage) Response() SecureScoresList {
+	return page.ssl
+}
+
+// Values returns the slice of values for the current page or nil if there are no values.
+func (page SecureScoresListPage) Values() []SecureScoreItem {
+	if page.ssl.IsEmpty() {
+		return nil
+	}
+	return *page.ssl.Value
+}
+
+// Creates a new instance of the SecureScoresListPage type.
+func NewSecureScoresListPage(getNextPage func(context.Context, SecureScoresList) (SecureScoresList, error)) SecureScoresListPage {
+	return SecureScoresListPage{fn: getNextPage}
 }
 
 // SensitivityLabel the sensitivity label.
