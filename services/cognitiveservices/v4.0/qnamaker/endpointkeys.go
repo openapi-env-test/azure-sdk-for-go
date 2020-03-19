@@ -76,7 +76,7 @@ func (client EndpointKeysClient) GetKeysPreparer(ctx context.Context) (*http.Req
 
 	preparer := autorest.CreatePreparer(
 		autorest.AsGet(),
-		autorest.WithCustomBaseURL("{Endpoint}/qnamaker/v4.0", urlParameters),
+		autorest.WithCustomBaseURL("https://{Endpoint}/qnamaker/v4.0", urlParameters),
 		autorest.WithPath("/endpointkeys"))
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
 }
@@ -147,7 +147,7 @@ func (client EndpointKeysClient) RefreshKeysPreparer(ctx context.Context, keyTyp
 
 	preparer := autorest.CreatePreparer(
 		autorest.AsPatch(),
-		autorest.WithCustomBaseURL("{Endpoint}/qnamaker/v4.0", urlParameters),
+		autorest.WithCustomBaseURL("https://{Endpoint}/qnamaker/v4.0", urlParameters),
 		autorest.WithPathParameters("/endpointkeys/{keyType}", pathParameters))
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
 }

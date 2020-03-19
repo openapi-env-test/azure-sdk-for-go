@@ -77,7 +77,7 @@ func (client AlterationsClient) GetPreparer(ctx context.Context) (*http.Request,
 
 	preparer := autorest.CreatePreparer(
 		autorest.AsGet(),
-		autorest.WithCustomBaseURL("{Endpoint}/qnamaker/v4.0", urlParameters),
+		autorest.WithCustomBaseURL("https://{Endpoint}/qnamaker/v4.0", urlParameters),
 		autorest.WithPath("/alterations"))
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
 }
@@ -151,7 +151,7 @@ func (client AlterationsClient) ReplacePreparer(ctx context.Context, wordAlterat
 	preparer := autorest.CreatePreparer(
 		autorest.AsContentType("application/json; charset=utf-8"),
 		autorest.AsPut(),
-		autorest.WithCustomBaseURL("{Endpoint}/qnamaker/v4.0", urlParameters),
+		autorest.WithCustomBaseURL("https://{Endpoint}/qnamaker/v4.0", urlParameters),
 		autorest.WithPath("/alterations"),
 		autorest.WithJSON(wordAlterations))
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))

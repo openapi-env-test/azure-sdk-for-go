@@ -97,7 +97,7 @@ func (client KnowledgebaseClient) CreatePreparer(ctx context.Context, createKbPa
 	preparer := autorest.CreatePreparer(
 		autorest.AsContentType("application/json; charset=utf-8"),
 		autorest.AsPost(),
-		autorest.WithCustomBaseURL("{Endpoint}/qnamaker/v4.0", urlParameters),
+		autorest.WithCustomBaseURL("https://{Endpoint}/qnamaker/v4.0", urlParameters),
 		autorest.WithPath("/knowledgebases/create"),
 		autorest.WithJSON(createKbPayload))
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
@@ -169,7 +169,7 @@ func (client KnowledgebaseClient) DeletePreparer(ctx context.Context, kbID strin
 
 	preparer := autorest.CreatePreparer(
 		autorest.AsDelete(),
-		autorest.WithCustomBaseURL("{Endpoint}/qnamaker/v4.0", urlParameters),
+		autorest.WithCustomBaseURL("https://{Endpoint}/qnamaker/v4.0", urlParameters),
 		autorest.WithPathParameters("/knowledgebases/{kbId}", pathParameters))
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
 }
@@ -241,7 +241,7 @@ func (client KnowledgebaseClient) DownloadPreparer(ctx context.Context, kbID str
 
 	preparer := autorest.CreatePreparer(
 		autorest.AsGet(),
-		autorest.WithCustomBaseURL("{Endpoint}/qnamaker/v4.0", urlParameters),
+		autorest.WithCustomBaseURL("https://{Endpoint}/qnamaker/v4.0", urlParameters),
 		autorest.WithPathParameters("/knowledgebases/{kbId}/{environment}/qna", pathParameters))
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
 }
@@ -312,7 +312,7 @@ func (client KnowledgebaseClient) GetDetailsPreparer(ctx context.Context, kbID s
 
 	preparer := autorest.CreatePreparer(
 		autorest.AsGet(),
-		autorest.WithCustomBaseURL("{Endpoint}/qnamaker/v4.0", urlParameters),
+		autorest.WithCustomBaseURL("https://{Endpoint}/qnamaker/v4.0", urlParameters),
 		autorest.WithPathParameters("/knowledgebases/{kbId}", pathParameters))
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
 }
@@ -377,7 +377,7 @@ func (client KnowledgebaseClient) ListAllPreparer(ctx context.Context) (*http.Re
 
 	preparer := autorest.CreatePreparer(
 		autorest.AsGet(),
-		autorest.WithCustomBaseURL("{Endpoint}/qnamaker/v4.0", urlParameters),
+		autorest.WithCustomBaseURL("https://{Endpoint}/qnamaker/v4.0", urlParameters),
 		autorest.WithPath("/knowledgebases"))
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
 }
@@ -448,7 +448,7 @@ func (client KnowledgebaseClient) PublishPreparer(ctx context.Context, kbID stri
 
 	preparer := autorest.CreatePreparer(
 		autorest.AsPost(),
-		autorest.WithCustomBaseURL("{Endpoint}/qnamaker/v4.0", urlParameters),
+		autorest.WithCustomBaseURL("https://{Endpoint}/qnamaker/v4.0", urlParameters),
 		autorest.WithPathParameters("/knowledgebases/{kbId}", pathParameters))
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
 }
@@ -526,7 +526,7 @@ func (client KnowledgebaseClient) ReplacePreparer(ctx context.Context, kbID stri
 	preparer := autorest.CreatePreparer(
 		autorest.AsContentType("application/json; charset=utf-8"),
 		autorest.AsPut(),
-		autorest.WithCustomBaseURL("{Endpoint}/qnamaker/v4.0", urlParameters),
+		autorest.WithCustomBaseURL("https://{Endpoint}/qnamaker/v4.0", urlParameters),
 		autorest.WithPathParameters("/knowledgebases/{kbId}", pathParameters),
 		autorest.WithJSON(replaceKb))
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
@@ -599,7 +599,7 @@ func (client KnowledgebaseClient) UpdatePreparer(ctx context.Context, kbID strin
 	preparer := autorest.CreatePreparer(
 		autorest.AsContentType("application/json; charset=utf-8"),
 		autorest.AsPatch(),
-		autorest.WithCustomBaseURL("{Endpoint}/qnamaker/v4.0", urlParameters),
+		autorest.WithCustomBaseURL("https://{Endpoint}/qnamaker/v4.0", urlParameters),
 		autorest.WithPathParameters("/knowledgebases/{kbId}", pathParameters),
 		autorest.WithJSON(updateKb))
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))

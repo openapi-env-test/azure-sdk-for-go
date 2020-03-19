@@ -82,7 +82,7 @@ func (client OperationsClient) GetDetailsPreparer(ctx context.Context, operation
 
 	preparer := autorest.CreatePreparer(
 		autorest.AsGet(),
-		autorest.WithCustomBaseURL("{Endpoint}/qnamaker/v4.0", urlParameters),
+		autorest.WithCustomBaseURL("https://{Endpoint}/qnamaker/v4.0", urlParameters),
 		autorest.WithPathParameters("/operations/{operationId}", pathParameters))
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
 }

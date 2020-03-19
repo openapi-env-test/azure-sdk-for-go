@@ -76,7 +76,7 @@ func (client EndpointSettingsClient) GetSettingsPreparer(ctx context.Context) (*
 
 	preparer := autorest.CreatePreparer(
 		autorest.AsGet(),
-		autorest.WithCustomBaseURL("{Endpoint}/qnamaker/v4.0", urlParameters),
+		autorest.WithCustomBaseURL("https://{Endpoint}/qnamaker/v4.0", urlParameters),
 		autorest.WithPath("/endpointSettings"))
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
 }
@@ -144,7 +144,7 @@ func (client EndpointSettingsClient) UpdateSettingsPreparer(ctx context.Context,
 	preparer := autorest.CreatePreparer(
 		autorest.AsContentType("application/json; charset=utf-8"),
 		autorest.AsPatch(),
-		autorest.WithCustomBaseURL("{Endpoint}/qnamaker/v4.0", urlParameters),
+		autorest.WithCustomBaseURL("https://{Endpoint}/qnamaker/v4.0", urlParameters),
 		autorest.WithPath("/endpointSettings"),
 		autorest.WithJSON(endpointSettingsPayload))
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
