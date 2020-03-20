@@ -22,17 +22,9 @@ import (
 	"github.com/Azure/azure-sdk-for-go/services/preview/customproviders/mgmt/2018-09-01-preview/customproviders"
 )
 
-// OperationsClientAPI contains the set of methods on the OperationsClient type.
-type OperationsClientAPI interface {
-	List(ctx context.Context) (result customproviders.ResourceProviderOperationListPage, err error)
-	ListComplete(ctx context.Context) (result customproviders.ResourceProviderOperationListIterator, err error)
-}
-
-var _ OperationsClientAPI = (*customproviders.OperationsClient)(nil)
-
 // CustomResourceProviderClientAPI contains the set of methods on the CustomResourceProviderClient type.
 type CustomResourceProviderClientAPI interface {
-	CreateOrUpdate(ctx context.Context, resourceGroupName string, resourceProviderName string, resourceProvider customproviders.CustomRPManifest) (result customproviders.CustomResourceProviderCreateOrUpdateFuture, err error)
+	CreateOrUpdate(ctx context.Context, resourceGroupName string, resourceProviderName string) (result customproviders.CustomResourceProviderCreateOrUpdateFuture, err error)
 	Delete(ctx context.Context, resourceGroupName string, resourceProviderName string) (result customproviders.CustomResourceProviderDeleteFuture, err error)
 	Get(ctx context.Context, resourceGroupName string, resourceProviderName string) (result customproviders.CustomRPManifest, err error)
 	ListByResourceGroup(ctx context.Context, resourceGroupName string) (result customproviders.ListByCustomRPManifestPage, err error)

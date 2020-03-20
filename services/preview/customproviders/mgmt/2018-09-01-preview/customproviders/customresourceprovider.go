@@ -47,8 +47,7 @@ func NewCustomResourceProviderClientWithBaseURI(baseURI string, subscriptionID s
 // Parameters:
 // resourceGroupName - the name of the resource group.
 // resourceProviderName - the name of the resource provider.
-// resourceProvider - the parameters required to create or update a custom resource provider definition.
-func (client CustomResourceProviderClient) CreateOrUpdate(ctx context.Context, resourceGroupName string, resourceProviderName string, resourceProvider CustomRPManifest) (result CustomResourceProviderCreateOrUpdateFuture, err error) {
+func (client CustomResourceProviderClient) CreateOrUpdate(ctx context.Context, resourceGroupName string, resourceProviderName string) (result CustomResourceProviderCreateOrUpdateFuture, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/CustomResourceProviderClient.CreateOrUpdate")
 		defer func() {
@@ -66,7 +65,7 @@ func (client CustomResourceProviderClient) CreateOrUpdate(ctx context.Context, r
 		return result, validation.NewError("customproviders.CustomResourceProviderClient", "CreateOrUpdate", err.Error())
 	}
 
-	req, err := client.CreateOrUpdatePreparer(ctx, resourceGroupName, resourceProviderName, resourceProvider)
+	req, err := client.CreateOrUpdatePreparer(ctx, resourceGroupName, resourceProviderName)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "customproviders.CustomResourceProviderClient", "CreateOrUpdate", nil, "Failure preparing request")
 		return
@@ -82,7 +81,7 @@ func (client CustomResourceProviderClient) CreateOrUpdate(ctx context.Context, r
 }
 
 // CreateOrUpdatePreparer prepares the CreateOrUpdate request.
-func (client CustomResourceProviderClient) CreateOrUpdatePreparer(ctx context.Context, resourceGroupName string, resourceProviderName string, resourceProvider CustomRPManifest) (*http.Request, error) {
+func (client CustomResourceProviderClient) CreateOrUpdatePreparer(ctx context.Context, resourceGroupName string, resourceProviderName string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"resourceGroupName":    autorest.Encode("path", resourceGroupName),
 		"resourceProviderName": autorest.Encode("path", resourceProviderName),
@@ -95,11 +94,9 @@ func (client CustomResourceProviderClient) CreateOrUpdatePreparer(ctx context.Co
 	}
 
 	preparer := autorest.CreatePreparer(
-		autorest.AsContentType("application/json; charset=utf-8"),
 		autorest.AsPut(),
 		autorest.WithBaseURL(client.BaseURI),
 		autorest.WithPathParameters("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CustomProviders/resourceProviders/{resourceProviderName}", pathParameters),
-		autorest.WithJSON(resourceProvider),
 		autorest.WithQueryParameters(queryParameters))
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
 }
