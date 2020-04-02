@@ -100,7 +100,6 @@ func (client ShareSubscriptionsClient) CancelSynchronizationPreparer(ctx context
 	shareSubscriptionSynchronization.Message = nil
 	shareSubscriptionSynchronization.StartTime = nil
 	shareSubscriptionSynchronization.Status = nil
-	shareSubscriptionSynchronization.SynchronizationMode = ""
 	preparer := autorest.CreatePreparer(
 		autorest.AsContentType("application/json; charset=utf-8"),
 		autorest.AsPost(),
@@ -686,7 +685,6 @@ func (client ShareSubscriptionsClient) ListSynchronizationDetailsPreparer(ctx co
 	shareSubscriptionSynchronization.Message = nil
 	shareSubscriptionSynchronization.StartTime = nil
 	shareSubscriptionSynchronization.Status = nil
-	shareSubscriptionSynchronization.SynchronizationMode = ""
 	preparer := autorest.CreatePreparer(
 		autorest.AsContentType("application/json; charset=utf-8"),
 		autorest.AsPost(),
