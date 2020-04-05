@@ -21,6 +21,7 @@ import (
 	"context"
 	"encoding/json"
 	"github.com/Azure/go-autorest/autorest"
+	"github.com/Azure/go-autorest/autorest/azure"
 	"github.com/Azure/go-autorest/autorest/date"
 	"github.com/Azure/go-autorest/autorest/to"
 	"github.com/Azure/go-autorest/tracing"
@@ -97,6 +98,42 @@ const (
 // PossibleAlertNotificationsValues returns an array of possible values for the AlertNotifications const type.
 func PossibleAlertNotificationsValues() []AlertNotifications {
 	return []AlertNotifications{Off, On}
+}
+
+// AlertSeverity enumerates the values for alert severity.
+type AlertSeverity string
+
+const (
+	// High High
+	High AlertSeverity = "High"
+	// Informational Informational
+	Informational AlertSeverity = "Informational"
+	// Low Low
+	Low AlertSeverity = "Low"
+	// Medium Medium
+	Medium AlertSeverity = "Medium"
+)
+
+// PossibleAlertSeverityValues returns an array of possible values for the AlertSeverity const type.
+func PossibleAlertSeverityValues() []AlertSeverity {
+	return []AlertSeverity{High, Informational, Low, Medium}
+}
+
+// AlertStatus enumerates the values for alert status.
+type AlertStatus string
+
+const (
+	// Active An alert which doesn't specify a value is assigned the status 'Active'
+	Active AlertStatus = "Active"
+	// Dismissed Alert dismissed as false positive
+	Dismissed AlertStatus = "Dismissed"
+	// Resolved Alert closed after handling
+	Resolved AlertStatus = "Resolved"
+)
+
+// PossibleAlertStatusValues returns an array of possible values for the AlertStatus const type.
+func PossibleAlertStatusValues() []AlertStatus {
+	return []AlertStatus{Active, Dismissed, Resolved}
 }
 
 // AlertsToAdmins enumerates the values for alerts to admins.
@@ -298,6 +335,21 @@ func PossibleDataSourceValues() []DataSource {
 	return []DataSource{TwinData}
 }
 
+// Direction enumerates the values for direction.
+type Direction string
+
+const (
+	// Inbound ...
+	Inbound Direction = "Inbound"
+	// Outbound ...
+	Outbound Direction = "Outbound"
+)
+
+// PossibleDirectionValues returns an array of possible values for the Direction const type.
+func PossibleDirectionValues() []Direction {
+	return []Direction{Inbound, Outbound}
+}
+
 // EnforcementMode enumerates the values for enforcement mode.
 type EnforcementMode string
 
@@ -489,17 +541,81 @@ func PossibleFileTypeValues() []FileType {
 type ImplementationEffort string
 
 const (
-	// High ...
-	High ImplementationEffort = "High"
-	// Low ...
-	Low ImplementationEffort = "Low"
-	// Moderate ...
-	Moderate ImplementationEffort = "Moderate"
+	// ImplementationEffortHigh ...
+	ImplementationEffortHigh ImplementationEffort = "High"
+	// ImplementationEffortLow ...
+	ImplementationEffortLow ImplementationEffort = "Low"
+	// ImplementationEffortModerate ...
+	ImplementationEffortModerate ImplementationEffort = "Moderate"
 )
 
 // PossibleImplementationEffortValues returns an array of possible values for the ImplementationEffort const type.
 func PossibleImplementationEffortValues() []ImplementationEffort {
-	return []ImplementationEffort{High, Low, Moderate}
+	return []ImplementationEffort{ImplementationEffortHigh, ImplementationEffortLow, ImplementationEffortModerate}
+}
+
+// Intent enumerates the values for intent.
+type Intent string
+
+const (
+	// IntentCollection Collection consists of techniques used to identify and gather information, such as
+	// sensitive files, from a target network prior to exfiltration.
+	IntentCollection Intent = "Collection"
+	// IntentCommandAndControl The command and control tactic represents how adversaries communicate with
+	// systems under their control within a target network.
+	IntentCommandAndControl Intent = "CommandAndControl"
+	// IntentCredentialAccess Credential access represents techniques resulting in access to or control over
+	// system, domain, or service credentials that are used within an enterprise environment.
+	IntentCredentialAccess Intent = "CredentialAccess"
+	// IntentDefenseEvasion Defense evasion consists of techniques an adversary may use to evade detection or
+	// avoid other defenses.
+	IntentDefenseEvasion Intent = "DefenseEvasion"
+	// IntentDiscovery Discovery consists of techniques that allow the adversary to gain knowledge about the
+	// system and internal network.
+	IntentDiscovery Intent = "Discovery"
+	// IntentExecution The execution tactic represents techniques that result in execution of
+	// adversary-controlled code on a local or remote system.
+	IntentExecution Intent = "Execution"
+	// IntentExfiltration Exfiltration refers to techniques and attributes that result or aid in the adversary
+	// removing files and information from a target network.
+	IntentExfiltration Intent = "Exfiltration"
+	// IntentExploitation Exploitation is the stage where an attacker manages to get a foothold on the attacked
+	// resource. This stage is relevant for compute hosts and resources such as user accounts, certificates
+	// etc.
+	IntentExploitation Intent = "Exploitation"
+	// IntentImpact Impact events primarily try to directly reduce the availability or integrity of a system,
+	// service, or network; including manipulation of data to impact a business or operational process.
+	IntentImpact Intent = "Impact"
+	// IntentInitialAccess InitialAccess is the stage where an attacker manages to get foothold on the attacked
+	// resource.
+	IntentInitialAccess Intent = "InitialAccess"
+	// IntentLateralMovement Lateral movement consists of techniques that enable an adversary to access and
+	// control remote systems on a network and could, but does not necessarily, include execution of tools on
+	// remote systems.
+	IntentLateralMovement Intent = "LateralMovement"
+	// IntentPersistence Persistence is any access, action, or configuration change to a system that gives a
+	// threat actor a persistent presence on that system.
+	IntentPersistence Intent = "Persistence"
+	// IntentPreAttack PreAttack could be either an attempt to access a certain resource regardless of a
+	// malicious intent, or a failed attempt to gain access to a target system to gather information prior to
+	// exploitation. This step is usually detected as an attempt, originating from outside the network, to scan
+	// the target system and find a way in.  Further details on the PreAttack stage can be read in [MITRE
+	// Pre-Att&ck matrix](https://attack.mitre.org/matrices/pre/).
+	IntentPreAttack Intent = "PreAttack"
+	// IntentPrivilegeEscalation Privilege escalation is the result of actions that allow an adversary to
+	// obtain a higher level of permissions on a system or network.
+	IntentPrivilegeEscalation Intent = "PrivilegeEscalation"
+	// IntentProbing Probing could be either an attempt to access a certain resource regardless of a malicious
+	// intent, or a failed attempt to gain access to a target system to gather information prior to
+	// exploitation.
+	IntentProbing Intent = "Probing"
+	// IntentUnknown Unknown
+	IntentUnknown Intent = "Unknown"
+)
+
+// PossibleIntentValues returns an array of possible values for the Intent const type.
+func PossibleIntentValues() []Intent {
+	return []Intent{IntentCollection, IntentCommandAndControl, IntentCredentialAccess, IntentDefenseEvasion, IntentDiscovery, IntentExecution, IntentExfiltration, IntentExploitation, IntentImpact, IntentInitialAccess, IntentLateralMovement, IntentPersistence, IntentPreAttack, IntentPrivilegeEscalation, IntentProbing, IntentUnknown}
 }
 
 // Issue enumerates the values for issue.
@@ -660,6 +776,27 @@ const (
 // PossibleProvisioningStateValues returns an array of possible values for the ProvisioningState const type.
 func PossibleProvisioningStateValues() []ProvisioningState {
 	return []ProvisioningState{ProvisioningStateCanceled, ProvisioningStateDeprovisioning, ProvisioningStateFailed, ProvisioningStateProvisioning, ProvisioningStateSucceeded}
+}
+
+// Rank enumerates the values for rank.
+type Rank string
+
+const (
+	// RankCritical ...
+	RankCritical Rank = "Critical"
+	// RankHigh ...
+	RankHigh Rank = "High"
+	// RankLow ...
+	RankLow Rank = "Low"
+	// RankMedium ...
+	RankMedium Rank = "Medium"
+	// RankNone ...
+	RankNone Rank = "None"
+)
+
+// PossibleRankValues returns an array of possible values for the Rank const type.
+func PossibleRankValues() []Rank {
+	return []Rank{RankCritical, RankHigh, RankLow, RankMedium, RankNone}
 }
 
 // RecommendationAction enumerates the values for recommendation action.
@@ -1021,6 +1158,21 @@ func PossibleThreatsValues() []Threats {
 	return []Threats{AccountBreach, DataExfiltration, DataSpillage, DenialOfService, ElevationOfPrivilege, MaliciousInsider, MissingCoverage, ThreatResistance}
 }
 
+// TransportProtocol enumerates the values for transport protocol.
+type TransportProtocol string
+
+const (
+	// TransportProtocolTCP ...
+	TransportProtocolTCP TransportProtocol = "TCP"
+	// TransportProtocolUDP ...
+	TransportProtocolUDP TransportProtocol = "UDP"
+)
+
+// PossibleTransportProtocolValues returns an array of possible values for the TransportProtocol const type.
+func PossibleTransportProtocolValues() []TransportProtocol {
+	return []TransportProtocol{TransportProtocolTCP, TransportProtocolUDP}
+}
+
 // Type enumerates the values for type.
 type Type string
 
@@ -1042,6 +1194,23 @@ const (
 // PossibleTypeValues returns an array of possible values for the Type const type.
 func PossibleTypeValues() []Type {
 	return []Type{BinarySignature, File, FileHash, ProductSignature, PublisherSignature, VersionAndAboveSignature}
+}
+
+// TypeBasicResourceIdentifier enumerates the values for type basic resource identifier.
+type TypeBasicResourceIdentifier string
+
+const (
+	// TypeAzureResource ...
+	TypeAzureResource TypeBasicResourceIdentifier = "AzureResource"
+	// TypeLogAnalytics ...
+	TypeLogAnalytics TypeBasicResourceIdentifier = "LogAnalytics"
+	// TypeResourceIdentifier ...
+	TypeResourceIdentifier TypeBasicResourceIdentifier = "ResourceIdentifier"
+)
+
+// PossibleTypeBasicResourceIdentifierValues returns an array of possible values for the TypeBasicResourceIdentifier const type.
+func PossibleTypeBasicResourceIdentifierValues() []TypeBasicResourceIdentifier {
+	return []TypeBasicResourceIdentifier{TypeAzureResource, TypeLogAnalytics, TypeResourceIdentifier}
 }
 
 // UnmaskedIPLoggingStatus enumerates the values for unmasked ip logging status.
@@ -1158,6 +1327,268 @@ type AadSolutionProperties struct {
 	Workspace    *ConnectedWorkspace `json:"workspace,omitempty"`
 	// ConnectivityState - Possible values include: 'Discovered', 'NotLicensed', 'Connected'
 	ConnectivityState AadConnectivityState `json:"connectivityState,omitempty"`
+}
+
+// AdaptiveNetworkHardening the resource whose properties describes the Adaptive Network Hardening settings
+// for some Azure resource
+type AdaptiveNetworkHardening struct {
+	autorest.Response `json:"-"`
+	// AdaptiveNetworkHardeningProperties - Properties of the Adaptive Network Hardening resource
+	*AdaptiveNetworkHardeningProperties `json:"properties,omitempty"`
+	// ID - READ-ONLY; Resource Id
+	ID *string `json:"id,omitempty"`
+	// Name - READ-ONLY; Resource name
+	Name *string `json:"name,omitempty"`
+	// Type - READ-ONLY; Resource type
+	Type *string `json:"type,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for AdaptiveNetworkHardening.
+func (anh AdaptiveNetworkHardening) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if anh.AdaptiveNetworkHardeningProperties != nil {
+		objectMap["properties"] = anh.AdaptiveNetworkHardeningProperties
+	}
+	return json.Marshal(objectMap)
+}
+
+// UnmarshalJSON is the custom unmarshaler for AdaptiveNetworkHardening struct.
+func (anh *AdaptiveNetworkHardening) UnmarshalJSON(body []byte) error {
+	var m map[string]*json.RawMessage
+	err := json.Unmarshal(body, &m)
+	if err != nil {
+		return err
+	}
+	for k, v := range m {
+		switch k {
+		case "properties":
+			if v != nil {
+				var adaptiveNetworkHardeningProperties AdaptiveNetworkHardeningProperties
+				err = json.Unmarshal(*v, &adaptiveNetworkHardeningProperties)
+				if err != nil {
+					return err
+				}
+				anh.AdaptiveNetworkHardeningProperties = &adaptiveNetworkHardeningProperties
+			}
+		case "id":
+			if v != nil {
+				var ID string
+				err = json.Unmarshal(*v, &ID)
+				if err != nil {
+					return err
+				}
+				anh.ID = &ID
+			}
+		case "name":
+			if v != nil {
+				var name string
+				err = json.Unmarshal(*v, &name)
+				if err != nil {
+					return err
+				}
+				anh.Name = &name
+			}
+		case "type":
+			if v != nil {
+				var typeVar string
+				err = json.Unmarshal(*v, &typeVar)
+				if err != nil {
+					return err
+				}
+				anh.Type = &typeVar
+			}
+		}
+	}
+
+	return nil
+}
+
+// AdaptiveNetworkHardeningEnforceRequest ...
+type AdaptiveNetworkHardeningEnforceRequest struct {
+	// Rules - The rules to enforce
+	Rules *[]Rule `json:"rules,omitempty"`
+	// NetworkSecurityGroups - The Azure resource IDs of the effective network security groups that will be updated with the created security rules from the Adaptive Network Hardening rules
+	NetworkSecurityGroups *[]string `json:"networkSecurityGroups,omitempty"`
+}
+
+// AdaptiveNetworkHardeningProperties adaptive Network Hardening resource properties
+type AdaptiveNetworkHardeningProperties struct {
+	// Rules - The security rules which are recommended to be effective on the VM
+	Rules *[]Rule `json:"rules,omitempty"`
+	// RulesCalculationTime - The UTC time on which the rules were calculated
+	RulesCalculationTime *date.Time `json:"rulesCalculationTime,omitempty"`
+	// EffectiveNetworkSecurityGroups - The Network Security Groups effective on the network interfaces of the protected resource
+	EffectiveNetworkSecurityGroups *[]EffectiveNetworkSecurityGroups `json:"effectiveNetworkSecurityGroups,omitempty"`
+}
+
+// AdaptiveNetworkHardeningsEnforceFuture an abstraction for monitoring and retrieving the results of a
+// long-running operation.
+type AdaptiveNetworkHardeningsEnforceFuture struct {
+	azure.Future
+}
+
+// Result returns the result of the asynchronous operation.
+// If the operation has not completed it will return an error.
+func (future *AdaptiveNetworkHardeningsEnforceFuture) Result(client AdaptiveNetworkHardeningsClient) (ar autorest.Response, err error) {
+	var done bool
+	done, err = future.DoneWithContext(context.Background(), client)
+	if err != nil {
+		err = autorest.NewErrorWithError(err, "security.AdaptiveNetworkHardeningsEnforceFuture", "Result", future.Response(), "Polling failure")
+		return
+	}
+	if !done {
+		err = azure.NewAsyncOpIncompleteError("security.AdaptiveNetworkHardeningsEnforceFuture")
+		return
+	}
+	ar.Response = future.Response()
+	return
+}
+
+// AdaptiveNetworkHardeningsList response for ListAdaptiveNetworkHardenings API service call
+type AdaptiveNetworkHardeningsList struct {
+	autorest.Response `json:"-"`
+	// Value - A list of Adaptive Network Hardenings resources
+	Value *[]AdaptiveNetworkHardening `json:"value,omitempty"`
+	// NextLink - The URL to get the next set of results
+	NextLink *string `json:"nextLink,omitempty"`
+}
+
+// AdaptiveNetworkHardeningsListIterator provides access to a complete listing of AdaptiveNetworkHardening
+// values.
+type AdaptiveNetworkHardeningsListIterator struct {
+	i    int
+	page AdaptiveNetworkHardeningsListPage
+}
+
+// NextWithContext advances to the next value.  If there was an error making
+// the request the iterator does not advance and the error is returned.
+func (iter *AdaptiveNetworkHardeningsListIterator) NextWithContext(ctx context.Context) (err error) {
+	if tracing.IsEnabled() {
+		ctx = tracing.StartSpan(ctx, fqdn+"/AdaptiveNetworkHardeningsListIterator.NextWithContext")
+		defer func() {
+			sc := -1
+			if iter.Response().Response.Response != nil {
+				sc = iter.Response().Response.Response.StatusCode
+			}
+			tracing.EndSpan(ctx, sc, err)
+		}()
+	}
+	iter.i++
+	if iter.i < len(iter.page.Values()) {
+		return nil
+	}
+	err = iter.page.NextWithContext(ctx)
+	if err != nil {
+		iter.i--
+		return err
+	}
+	iter.i = 0
+	return nil
+}
+
+// Next advances to the next value.  If there was an error making
+// the request the iterator does not advance and the error is returned.
+// Deprecated: Use NextWithContext() instead.
+func (iter *AdaptiveNetworkHardeningsListIterator) Next() error {
+	return iter.NextWithContext(context.Background())
+}
+
+// NotDone returns true if the enumeration should be started or is not yet complete.
+func (iter AdaptiveNetworkHardeningsListIterator) NotDone() bool {
+	return iter.page.NotDone() && iter.i < len(iter.page.Values())
+}
+
+// Response returns the raw server response from the last page request.
+func (iter AdaptiveNetworkHardeningsListIterator) Response() AdaptiveNetworkHardeningsList {
+	return iter.page.Response()
+}
+
+// Value returns the current value or a zero-initialized value if the
+// iterator has advanced beyond the end of the collection.
+func (iter AdaptiveNetworkHardeningsListIterator) Value() AdaptiveNetworkHardening {
+	if !iter.page.NotDone() {
+		return AdaptiveNetworkHardening{}
+	}
+	return iter.page.Values()[iter.i]
+}
+
+// Creates a new instance of the AdaptiveNetworkHardeningsListIterator type.
+func NewAdaptiveNetworkHardeningsListIterator(page AdaptiveNetworkHardeningsListPage) AdaptiveNetworkHardeningsListIterator {
+	return AdaptiveNetworkHardeningsListIterator{page: page}
+}
+
+// IsEmpty returns true if the ListResult contains no values.
+func (anhl AdaptiveNetworkHardeningsList) IsEmpty() bool {
+	return anhl.Value == nil || len(*anhl.Value) == 0
+}
+
+// adaptiveNetworkHardeningsListPreparer prepares a request to retrieve the next set of results.
+// It returns nil if no more results exist.
+func (anhl AdaptiveNetworkHardeningsList) adaptiveNetworkHardeningsListPreparer(ctx context.Context) (*http.Request, error) {
+	if anhl.NextLink == nil || len(to.String(anhl.NextLink)) < 1 {
+		return nil, nil
+	}
+	return autorest.Prepare((&http.Request{}).WithContext(ctx),
+		autorest.AsJSON(),
+		autorest.AsGet(),
+		autorest.WithBaseURL(to.String(anhl.NextLink)))
+}
+
+// AdaptiveNetworkHardeningsListPage contains a page of AdaptiveNetworkHardening values.
+type AdaptiveNetworkHardeningsListPage struct {
+	fn   func(context.Context, AdaptiveNetworkHardeningsList) (AdaptiveNetworkHardeningsList, error)
+	anhl AdaptiveNetworkHardeningsList
+}
+
+// NextWithContext advances to the next page of values.  If there was an error making
+// the request the page does not advance and the error is returned.
+func (page *AdaptiveNetworkHardeningsListPage) NextWithContext(ctx context.Context) (err error) {
+	if tracing.IsEnabled() {
+		ctx = tracing.StartSpan(ctx, fqdn+"/AdaptiveNetworkHardeningsListPage.NextWithContext")
+		defer func() {
+			sc := -1
+			if page.Response().Response.Response != nil {
+				sc = page.Response().Response.Response.StatusCode
+			}
+			tracing.EndSpan(ctx, sc, err)
+		}()
+	}
+	next, err := page.fn(ctx, page.anhl)
+	if err != nil {
+		return err
+	}
+	page.anhl = next
+	return nil
+}
+
+// Next advances to the next page of values.  If there was an error making
+// the request the page does not advance and the error is returned.
+// Deprecated: Use NextWithContext() instead.
+func (page *AdaptiveNetworkHardeningsListPage) Next() error {
+	return page.NextWithContext(context.Background())
+}
+
+// NotDone returns true if the page enumeration should be started or is not yet complete.
+func (page AdaptiveNetworkHardeningsListPage) NotDone() bool {
+	return !page.anhl.IsEmpty()
+}
+
+// Response returns the raw server response from the last page request.
+func (page AdaptiveNetworkHardeningsListPage) Response() AdaptiveNetworkHardeningsList {
+	return page.anhl
+}
+
+// Values returns the slice of values for the current page or nil if there are no values.
+func (page AdaptiveNetworkHardeningsListPage) Values() []AdaptiveNetworkHardening {
+	if page.anhl.IsEmpty() {
+		return nil
+	}
+	return *page.anhl.Value
+}
+
+// Creates a new instance of the AdaptiveNetworkHardeningsListPage type.
+func NewAdaptiveNetworkHardeningsListPage(getNextPage func(context.Context, AdaptiveNetworkHardeningsList) (AdaptiveNetworkHardeningsList, error)) AdaptiveNetworkHardeningsListPage {
+	return AdaptiveNetworkHardeningsListPage{fn: getNextPage}
 }
 
 // BasicAdditionalData details of the sub-assessment
@@ -1335,7 +1766,10 @@ func (atps *AdvancedThreatProtectionSetting) UnmarshalJSON(body []byte) error {
 // Alert security alert
 type Alert struct {
 	autorest.Response `json:"-"`
-	*AlertProperties  `json:"properties,omitempty"`
+	// AdditionalProperties - Unmatched properties from the message are deserialized this collection
+	AdditionalProperties map[string]interface{} `json:""`
+	// AlertProperties - describes security alert properties.
+	*AlertProperties `json:"properties,omitempty"`
 	// ID - READ-ONLY; Resource Id
 	ID *string `json:"id,omitempty"`
 	// Name - READ-ONLY; Resource name
@@ -1350,6 +1784,9 @@ func (a Alert) MarshalJSON() ([]byte, error) {
 	if a.AlertProperties != nil {
 		objectMap["properties"] = a.AlertProperties
 	}
+	for k, v := range a.AdditionalProperties {
+		objectMap[k] = v
+	}
 	return json.Marshal(objectMap)
 }
 
@@ -1362,6 +1799,18 @@ func (a *Alert) UnmarshalJSON(body []byte) error {
 	}
 	for k, v := range m {
 		switch k {
+		default:
+			if v != nil {
+				var additionalProperties interface{}
+				err = json.Unmarshal(*v, &additionalProperties)
+				if err != nil {
+					return err
+				}
+				if a.AdditionalProperties == nil {
+					a.AdditionalProperties = make(map[string]interface{})
+				}
+				a.AdditionalProperties[k] = additionalProperties
+			}
 		case "properties":
 			if v != nil {
 				var alertProperties AlertProperties
@@ -1402,14 +1851,6 @@ func (a *Alert) UnmarshalJSON(body []byte) error {
 	}
 
 	return nil
-}
-
-// AlertConfidenceReason factors that increase our confidence that the alert is a true positive
-type AlertConfidenceReason struct {
-	// Type - READ-ONLY; Type of confidence factor
-	Type *string `json:"type,omitempty"`
-	// Reason - READ-ONLY; description of the confidence reason
-	Reason *string `json:"reason,omitempty"`
 }
 
 // AlertEntity changing set of properties depending on the entity type.
@@ -1468,7 +1909,8 @@ func (ae *AlertEntity) UnmarshalJSON(body []byte) error {
 // AlertList list of security alerts
 type AlertList struct {
 	autorest.Response `json:"-"`
-	Value             *[]Alert `json:"value,omitempty"`
+	// Value - describes security alert properties.
+	Value *[]Alert `json:"value,omitempty"`
 	// NextLink - READ-ONLY; The URI to fetch the next page.
 	NextLink *string `json:"nextLink,omitempty"`
 }
@@ -1612,51 +2054,52 @@ func NewAlertListPage(getNextPage func(context.Context, AlertList) (AlertList, e
 
 // AlertProperties describes security alert properties.
 type AlertProperties struct {
-	// State - READ-ONLY; State of the alert (Active, Dismissed etc.)
-	State *string `json:"state,omitempty"`
-	// ReportedTimeUtc - READ-ONLY; The time the incident was reported to Microsoft.Security in UTC
-	ReportedTimeUtc *date.Time `json:"reportedTimeUtc,omitempty"`
-	// VendorName - READ-ONLY; Name of the vendor that discovered the incident
-	VendorName *string `json:"vendorName,omitempty"`
-	// AlertName - READ-ONLY; Name of the alert type
-	AlertName *string `json:"alertName,omitempty"`
-	// AlertDisplayName - READ-ONLY; Display name of the alert type
+	// AlertType - READ-ONLY; Unique identifier for the detection logic (all alert instances from the same detection logic will have the same alertType).
+	AlertType *string `json:"alertType,omitempty"`
+	// SystemAlertID - READ-ONLY; Unique identifier for the alert.
+	SystemAlertID *string `json:"systemAlertId,omitempty"`
+	// ProductComponentName - READ-ONLY; The name of Azure Security Center pricing tier which powering this alert. Learn more: https://docs.microsoft.com/en-us/azure/security-center/security-center-pricing
+	ProductComponentName *string `json:"productComponentName,omitempty"`
+	// AlertDisplayName - READ-ONLY; The display name of the alert.
 	AlertDisplayName *string `json:"alertDisplayName,omitempty"`
-	// DetectedTimeUtc - READ-ONLY; The time the incident was detected by the vendor
-	DetectedTimeUtc *date.Time `json:"detectedTimeUtc,omitempty"`
-	// Description - READ-ONLY; Description of the incident and what it means
+	// Description - READ-ONLY; Description of the suspicious activity that was detected.
 	Description *string `json:"description,omitempty"`
-	// RemediationSteps - READ-ONLY; Recommended steps to reradiate the incident
-	RemediationSteps *string `json:"remediationSteps,omitempty"`
-	// ActionTaken - READ-ONLY; The action that was taken as a response to the alert (Active, Blocked etc.)
-	ActionTaken *string `json:"actionTaken,omitempty"`
-	// ReportedSeverity - READ-ONLY; Estimated severity of this alert. Possible values include: 'ReportedSeverityInformational', 'ReportedSeverityLow', 'ReportedSeverityMedium', 'ReportedSeverityHigh'
-	ReportedSeverity ReportedSeverity `json:"reportedSeverity,omitempty"`
-	// CompromisedEntity - READ-ONLY; The entity that the incident happened on
-	CompromisedEntity *string `json:"compromisedEntity,omitempty"`
-	// AssociatedResource - READ-ONLY; Azure resource ID of the associated resource
-	AssociatedResource *string                `json:"associatedResource,omitempty"`
-	ExtendedProperties map[string]interface{} `json:"extendedProperties"`
-	// SystemSource - READ-ONLY; The type of the alerted resource (Azure, Non-Azure)
-	SystemSource *string `json:"systemSource,omitempty"`
-	// CanBeInvestigated - READ-ONLY; Whether this alert can be investigated with Azure Security Center
-	CanBeInvestigated *bool `json:"canBeInvestigated,omitempty"`
-	// IsIncident - READ-ONLY; Whether this alert is for incident type or not (otherwise - single alert)
-	IsIncident *bool `json:"isIncident,omitempty"`
-	// Entities - objects that are related to this alerts
+	// Severity - READ-ONLY; The risk level of the threat that was detected. Possible Values: Informational, Low, Medium, and High. Learn more: https://docs.microsoft.com/en-us/azure/security-center/security-center-alerts-overview#how-are-alerts-classified. Possible values include: 'Informational', 'Low', 'Medium', 'High'
+	Severity AlertSeverity `json:"severity,omitempty"`
+	// Intent - READ-ONLY; The kill chain related intent behind the alert. For list of supported values, and explanations of Azure Security Center's supported kill chain intents. Possible values include: 'IntentUnknown', 'IntentPreAttack', 'IntentInitialAccess', 'IntentPersistence', 'IntentPrivilegeEscalation', 'IntentDefenseEvasion', 'IntentCredentialAccess', 'IntentDiscovery', 'IntentLateralMovement', 'IntentExecution', 'IntentCollection', 'IntentExfiltration', 'IntentCommandAndControl', 'IntentImpact', 'IntentProbing', 'IntentExploitation'
+	Intent Intent `json:"intent,omitempty"`
+	// StartTimeUtc - READ-ONLY; The UTC time of the first event or activity included in the alert in ISO8601 format.
+	StartTimeUtc *date.Time `json:"startTimeUtc,omitempty"`
+	// EndTimeUtc - READ-ONLY; The UTC time of the last event or activity included in the alert in ISO8601 format.
+	EndTimeUtc *date.Time `json:"endTimeUtc,omitempty"`
+	// ResourceIdentifiers - READ-ONLY; The resource identifiers for this alert which can be used to direct the alert to the right product exposure group (tenant, workspace, subscription etc.). There can be multiple identifiers of different type per alert.
+	ResourceIdentifiers *[]BasicResourceIdentifier `json:"resourceIdentifiers,omitempty"`
+	// RemediationSteps - READ-ONLY; Manual action items to take to remediate the alert.
+	RemediationSteps *[]string `json:"remediationSteps,omitempty"`
+	// VendorName - READ-ONLY; The name of the vendor that raises the alert.
+	VendorName *string `json:"vendorName,omitempty"`
+	// Status - READ-ONLY; The life cycle status of the alert. Supported statuses are: Active, Resolved, Dismissed. Possible values include: 'Active', 'Resolved', 'Dismissed'
+	Status AlertStatus `json:"status,omitempty"`
+	// ExtendedLinks - READ-ONLY; Links related to the alert
+	ExtendedLinks *[]map[string]interface{} `json:"extendedLinks,omitempty"`
+	// AlertURI - READ-ONLY; A direct link to the alert page in Azure Portal.
+	AlertURI *string `json:"alertUri,omitempty"`
+	// TimeGenerated - READ-ONLY; The UTC time the alert was generated in ISO8601 format.
+	TimeGenerated *date.Time `json:"timeGenerated,omitempty"`
+	// ProductName - READ-ONLY; The name of the product which published this alert (Azure Security Center, Azure ATP, Microsoft Defender ATP, O365 ATP, MCAS, and so on).
+	ProductName *string `json:"productName,omitempty"`
+	// ProcessingEndTime - READ-ONLY; The UTC processing end time of the alert in ISO8601 format.
+	ProcessingEndTime *date.Time `json:"processingEndTime,omitempty"`
+	// Entities - READ-ONLY; A list of entities related to the alert.
 	Entities *[]AlertEntity `json:"entities,omitempty"`
-	// ConfidenceScore - READ-ONLY; level of confidence we have on the alert
-	ConfidenceScore *float64 `json:"confidenceScore,omitempty"`
-	// ConfidenceReasons - reasons the alert got the confidenceScore value
-	ConfidenceReasons *[]AlertConfidenceReason `json:"confidenceReasons,omitempty"`
-	// SubscriptionID - READ-ONLY; Azure subscription ID of the resource that had the security alert or the subscription ID of the workspace that this resource reports to
-	SubscriptionID *string `json:"subscriptionId,omitempty"`
-	// InstanceID - READ-ONLY; Instance ID of the alert.
-	InstanceID *string `json:"instanceId,omitempty"`
-	// WorkspaceArmID - READ-ONLY; Azure resource ID of the workspace that the alert was reported to.
-	WorkspaceArmID *string `json:"workspaceArmId,omitempty"`
-	// CorrelationKey - READ-ONLY; Alerts with the same CorrelationKey will be grouped together in Ibiza.
+	// IsIncident - READ-ONLY; This field determines whether the alert is an incident (a compound grouping of several alerts) or a single alert.
+	IsIncident *bool `json:"isIncident,omitempty"`
+	// CorrelationKey - READ-ONLY; Key for corelating related alerts. Alerts with the same correlation key considered to be related.
 	CorrelationKey *string `json:"correlationKey,omitempty"`
+	// ExtendedProperties - Custom properties for the alert.
+	ExtendedProperties map[string]interface{} `json:"extendedProperties"`
+	// CompromisedEntity - READ-ONLY; The display name of the resource most related to this alert.
+	CompromisedEntity *string `json:"compromisedEntity,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for AlertProperties.
@@ -1665,13 +2108,228 @@ func (ap AlertProperties) MarshalJSON() ([]byte, error) {
 	if ap.ExtendedProperties != nil {
 		objectMap["extendedProperties"] = ap.ExtendedProperties
 	}
-	if ap.Entities != nil {
-		objectMap["entities"] = ap.Entities
-	}
-	if ap.ConfidenceReasons != nil {
-		objectMap["confidenceReasons"] = ap.ConfidenceReasons
-	}
 	return json.Marshal(objectMap)
+}
+
+// UnmarshalJSON is the custom unmarshaler for AlertProperties struct.
+func (ap *AlertProperties) UnmarshalJSON(body []byte) error {
+	var m map[string]*json.RawMessage
+	err := json.Unmarshal(body, &m)
+	if err != nil {
+		return err
+	}
+	for k, v := range m {
+		switch k {
+		case "alertType":
+			if v != nil {
+				var alertType string
+				err = json.Unmarshal(*v, &alertType)
+				if err != nil {
+					return err
+				}
+				ap.AlertType = &alertType
+			}
+		case "systemAlertId":
+			if v != nil {
+				var systemAlertID string
+				err = json.Unmarshal(*v, &systemAlertID)
+				if err != nil {
+					return err
+				}
+				ap.SystemAlertID = &systemAlertID
+			}
+		case "productComponentName":
+			if v != nil {
+				var productComponentName string
+				err = json.Unmarshal(*v, &productComponentName)
+				if err != nil {
+					return err
+				}
+				ap.ProductComponentName = &productComponentName
+			}
+		case "alertDisplayName":
+			if v != nil {
+				var alertDisplayName string
+				err = json.Unmarshal(*v, &alertDisplayName)
+				if err != nil {
+					return err
+				}
+				ap.AlertDisplayName = &alertDisplayName
+			}
+		case "description":
+			if v != nil {
+				var description string
+				err = json.Unmarshal(*v, &description)
+				if err != nil {
+					return err
+				}
+				ap.Description = &description
+			}
+		case "severity":
+			if v != nil {
+				var severity AlertSeverity
+				err = json.Unmarshal(*v, &severity)
+				if err != nil {
+					return err
+				}
+				ap.Severity = severity
+			}
+		case "intent":
+			if v != nil {
+				var intent Intent
+				err = json.Unmarshal(*v, &intent)
+				if err != nil {
+					return err
+				}
+				ap.Intent = intent
+			}
+		case "startTimeUtc":
+			if v != nil {
+				var startTimeUtc date.Time
+				err = json.Unmarshal(*v, &startTimeUtc)
+				if err != nil {
+					return err
+				}
+				ap.StartTimeUtc = &startTimeUtc
+			}
+		case "endTimeUtc":
+			if v != nil {
+				var endTimeUtc date.Time
+				err = json.Unmarshal(*v, &endTimeUtc)
+				if err != nil {
+					return err
+				}
+				ap.EndTimeUtc = &endTimeUtc
+			}
+		case "resourceIdentifiers":
+			if v != nil {
+				resourceIdentifiers, err := unmarshalBasicResourceIdentifierArray(*v)
+				if err != nil {
+					return err
+				}
+				ap.ResourceIdentifiers = &resourceIdentifiers
+			}
+		case "remediationSteps":
+			if v != nil {
+				var remediationSteps []string
+				err = json.Unmarshal(*v, &remediationSteps)
+				if err != nil {
+					return err
+				}
+				ap.RemediationSteps = &remediationSteps
+			}
+		case "vendorName":
+			if v != nil {
+				var vendorName string
+				err = json.Unmarshal(*v, &vendorName)
+				if err != nil {
+					return err
+				}
+				ap.VendorName = &vendorName
+			}
+		case "status":
+			if v != nil {
+				var status AlertStatus
+				err = json.Unmarshal(*v, &status)
+				if err != nil {
+					return err
+				}
+				ap.Status = status
+			}
+		case "extendedLinks":
+			if v != nil {
+				var extendedLinks []map[string]interface{}
+				err = json.Unmarshal(*v, &extendedLinks)
+				if err != nil {
+					return err
+				}
+				ap.ExtendedLinks = &extendedLinks
+			}
+		case "alertUri":
+			if v != nil {
+				var alertURI string
+				err = json.Unmarshal(*v, &alertURI)
+				if err != nil {
+					return err
+				}
+				ap.AlertURI = &alertURI
+			}
+		case "timeGenerated":
+			if v != nil {
+				var timeGenerated date.Time
+				err = json.Unmarshal(*v, &timeGenerated)
+				if err != nil {
+					return err
+				}
+				ap.TimeGenerated = &timeGenerated
+			}
+		case "productName":
+			if v != nil {
+				var productName string
+				err = json.Unmarshal(*v, &productName)
+				if err != nil {
+					return err
+				}
+				ap.ProductName = &productName
+			}
+		case "processingEndTime":
+			if v != nil {
+				var processingEndTime date.Time
+				err = json.Unmarshal(*v, &processingEndTime)
+				if err != nil {
+					return err
+				}
+				ap.ProcessingEndTime = &processingEndTime
+			}
+		case "entities":
+			if v != nil {
+				var entities []AlertEntity
+				err = json.Unmarshal(*v, &entities)
+				if err != nil {
+					return err
+				}
+				ap.Entities = &entities
+			}
+		case "isIncident":
+			if v != nil {
+				var isIncident bool
+				err = json.Unmarshal(*v, &isIncident)
+				if err != nil {
+					return err
+				}
+				ap.IsIncident = &isIncident
+			}
+		case "correlationKey":
+			if v != nil {
+				var correlationKey string
+				err = json.Unmarshal(*v, &correlationKey)
+				if err != nil {
+					return err
+				}
+				ap.CorrelationKey = &correlationKey
+			}
+		case "extendedProperties":
+			if v != nil {
+				var extendedProperties map[string]interface{}
+				err = json.Unmarshal(*v, &extendedProperties)
+				if err != nil {
+					return err
+				}
+				ap.ExtendedProperties = extendedProperties
+			}
+		case "compromisedEntity":
+			if v != nil {
+				var compromisedEntity string
+				err = json.Unmarshal(*v, &compromisedEntity)
+				if err != nil {
+					return err
+				}
+				ap.CompromisedEntity = &compromisedEntity
+			}
+		}
+	}
+
+	return nil
 }
 
 // AllowedConnectionsList list of all possible traffic between Azure resources
@@ -2678,7 +3336,7 @@ type AssessmentMetadataProperties struct {
 	Severity Severity `json:"severity,omitempty"`
 	// UserImpact - The user impact of the assessment. Possible values include: 'UserImpactLow', 'UserImpactModerate', 'UserImpactHigh'
 	UserImpact UserImpact `json:"userImpact,omitempty"`
-	// ImplementationEffort - The implementation effort required to remediate this assessment. Possible values include: 'Low', 'Moderate', 'High'
+	// ImplementationEffort - The implementation effort required to remediate this assessment. Possible values include: 'ImplementationEffortLow', 'ImplementationEffortModerate', 'ImplementationEffortHigh'
 	ImplementationEffort ImplementationEffort `json:"implementationEffort,omitempty"`
 	Threats              *[]Threats           `json:"threats,omitempty"`
 	// Preview - True if this assessment is in preview release status
@@ -3872,6 +4530,94 @@ func (ard AzureResourceDetails) AsResourceDetails() (*ResourceDetails, bool) {
 // AsBasicResourceDetails is the BasicResourceDetails implementation for AzureResourceDetails.
 func (ard AzureResourceDetails) AsBasicResourceDetails() (BasicResourceDetails, bool) {
 	return &ard, true
+}
+
+// AzureResourceIdentifier azure resource identifier.
+type AzureResourceIdentifier struct {
+	// AzureResourceID - READ-ONLY; ARM resource identifier for the cloud resource being alerted on
+	AzureResourceID *string `json:"azureResourceId,omitempty"`
+	// AdditionalProperties - Unmatched properties from the message are deserialized this collection
+	AdditionalProperties map[string]interface{} `json:""`
+	// Type - Possible values include: 'TypeResourceIdentifier', 'TypeAzureResource', 'TypeLogAnalytics'
+	Type TypeBasicResourceIdentifier `json:"type,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for AzureResourceIdentifier.
+func (ari AzureResourceIdentifier) MarshalJSON() ([]byte, error) {
+	ari.Type = TypeAzureResource
+	objectMap := make(map[string]interface{})
+	if ari.Type != "" {
+		objectMap["type"] = ari.Type
+	}
+	for k, v := range ari.AdditionalProperties {
+		objectMap[k] = v
+	}
+	return json.Marshal(objectMap)
+}
+
+// AsAzureResourceIdentifier is the BasicResourceIdentifier implementation for AzureResourceIdentifier.
+func (ari AzureResourceIdentifier) AsAzureResourceIdentifier() (*AzureResourceIdentifier, bool) {
+	return &ari, true
+}
+
+// AsLogAnalyticsIdentifier is the BasicResourceIdentifier implementation for AzureResourceIdentifier.
+func (ari AzureResourceIdentifier) AsLogAnalyticsIdentifier() (*LogAnalyticsIdentifier, bool) {
+	return nil, false
+}
+
+// AsResourceIdentifier is the BasicResourceIdentifier implementation for AzureResourceIdentifier.
+func (ari AzureResourceIdentifier) AsResourceIdentifier() (*ResourceIdentifier, bool) {
+	return nil, false
+}
+
+// AsBasicResourceIdentifier is the BasicResourceIdentifier implementation for AzureResourceIdentifier.
+func (ari AzureResourceIdentifier) AsBasicResourceIdentifier() (BasicResourceIdentifier, bool) {
+	return &ari, true
+}
+
+// UnmarshalJSON is the custom unmarshaler for AzureResourceIdentifier struct.
+func (ari *AzureResourceIdentifier) UnmarshalJSON(body []byte) error {
+	var m map[string]*json.RawMessage
+	err := json.Unmarshal(body, &m)
+	if err != nil {
+		return err
+	}
+	for k, v := range m {
+		switch k {
+		case "azureResourceId":
+			if v != nil {
+				var azureResourceID string
+				err = json.Unmarshal(*v, &azureResourceID)
+				if err != nil {
+					return err
+				}
+				ari.AzureResourceID = &azureResourceID
+			}
+		default:
+			if v != nil {
+				var additionalProperties interface{}
+				err = json.Unmarshal(*v, &additionalProperties)
+				if err != nil {
+					return err
+				}
+				if ari.AdditionalProperties == nil {
+					ari.AdditionalProperties = make(map[string]interface{})
+				}
+				ari.AdditionalProperties[k] = additionalProperties
+			}
+		case "type":
+			if v != nil {
+				var typeVar TypeBasicResourceIdentifier
+				err = json.Unmarshal(*v, &typeVar)
+				if err != nil {
+					return err
+				}
+				ari.Type = typeVar
+			}
+		}
+	}
+
+	return nil
 }
 
 // CefExternalSecuritySolution represents a security solution which sends CEF logs to an OMS workspace
@@ -5480,6 +6226,14 @@ type DiscoveredSecuritySolutionProperties struct {
 	Sku *string `json:"sku,omitempty"`
 }
 
+// EffectiveNetworkSecurityGroups describes the Network Security Groups effective on a network interface
+type EffectiveNetworkSecurityGroups struct {
+	// NetworkInterface - The Azure resource ID of the network interface
+	NetworkInterface *string `json:"networkInterface,omitempty"`
+	// NetworkSecurityGroups - The Network Security Groups effective on the network interface
+	NetworkSecurityGroups *[]string `json:"networkSecurityGroups,omitempty"`
+}
+
 // ETag entity tag is used for comparing two or more entities from the same requested resource.
 type ETag struct {
 	// Etag - Entity tag is used for comparing two or more entities from the same requested resource.
@@ -6131,6 +6885,8 @@ func (ippp InformationProtectionPolicyProperties) MarshalJSON() ([]byte, error) 
 type InformationType struct {
 	// DisplayName - The name of the information type.
 	DisplayName *string `json:"displayName,omitempty"`
+	// Description - The description of the information type.
+	Description *string `json:"description,omitempty"`
 	// Order - The order of the information type.
 	Order *float64 `json:"order,omitempty"`
 	// RecommendedLabelID - The recommended label id to be associated with this information type.
@@ -7457,6 +8213,127 @@ type Location struct {
 	Location *string `json:"location,omitempty"`
 }
 
+// LogAnalyticsIdentifier represents a Log Analytics workspace scope identifier.
+type LogAnalyticsIdentifier struct {
+	// WorkspaceID - READ-ONLY; The LogAnalytics workspace id that stores this alert.
+	WorkspaceID *string `json:"workspaceId,omitempty"`
+	// WorkspaceSubscriptionID - READ-ONLY; The azure subscription id for the LogAnalytics workspace storing this alert.
+	WorkspaceSubscriptionID *string `json:"workspaceSubscriptionId,omitempty"`
+	// WorkspaceResourceGroup - READ-ONLY; The azure resource group for the LogAnalytics workspace storing this alert
+	WorkspaceResourceGroup *string `json:"workspaceResourceGroup,omitempty"`
+	// AgentID - READ-ONLY; (optional) The LogAnalytics agent id reporting the event that this alert is based on.
+	AgentID *string `json:"agentId,omitempty"`
+	// AdditionalProperties - Unmatched properties from the message are deserialized this collection
+	AdditionalProperties map[string]interface{} `json:""`
+	// Type - Possible values include: 'TypeResourceIdentifier', 'TypeAzureResource', 'TypeLogAnalytics'
+	Type TypeBasicResourceIdentifier `json:"type,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for LogAnalyticsIdentifier.
+func (lai LogAnalyticsIdentifier) MarshalJSON() ([]byte, error) {
+	lai.Type = TypeLogAnalytics
+	objectMap := make(map[string]interface{})
+	if lai.Type != "" {
+		objectMap["type"] = lai.Type
+	}
+	for k, v := range lai.AdditionalProperties {
+		objectMap[k] = v
+	}
+	return json.Marshal(objectMap)
+}
+
+// AsAzureResourceIdentifier is the BasicResourceIdentifier implementation for LogAnalyticsIdentifier.
+func (lai LogAnalyticsIdentifier) AsAzureResourceIdentifier() (*AzureResourceIdentifier, bool) {
+	return nil, false
+}
+
+// AsLogAnalyticsIdentifier is the BasicResourceIdentifier implementation for LogAnalyticsIdentifier.
+func (lai LogAnalyticsIdentifier) AsLogAnalyticsIdentifier() (*LogAnalyticsIdentifier, bool) {
+	return &lai, true
+}
+
+// AsResourceIdentifier is the BasicResourceIdentifier implementation for LogAnalyticsIdentifier.
+func (lai LogAnalyticsIdentifier) AsResourceIdentifier() (*ResourceIdentifier, bool) {
+	return nil, false
+}
+
+// AsBasicResourceIdentifier is the BasicResourceIdentifier implementation for LogAnalyticsIdentifier.
+func (lai LogAnalyticsIdentifier) AsBasicResourceIdentifier() (BasicResourceIdentifier, bool) {
+	return &lai, true
+}
+
+// UnmarshalJSON is the custom unmarshaler for LogAnalyticsIdentifier struct.
+func (lai *LogAnalyticsIdentifier) UnmarshalJSON(body []byte) error {
+	var m map[string]*json.RawMessage
+	err := json.Unmarshal(body, &m)
+	if err != nil {
+		return err
+	}
+	for k, v := range m {
+		switch k {
+		case "workspaceId":
+			if v != nil {
+				var workspaceID string
+				err = json.Unmarshal(*v, &workspaceID)
+				if err != nil {
+					return err
+				}
+				lai.WorkspaceID = &workspaceID
+			}
+		case "workspaceSubscriptionId":
+			if v != nil {
+				var workspaceSubscriptionID string
+				err = json.Unmarshal(*v, &workspaceSubscriptionID)
+				if err != nil {
+					return err
+				}
+				lai.WorkspaceSubscriptionID = &workspaceSubscriptionID
+			}
+		case "workspaceResourceGroup":
+			if v != nil {
+				var workspaceResourceGroup string
+				err = json.Unmarshal(*v, &workspaceResourceGroup)
+				if err != nil {
+					return err
+				}
+				lai.WorkspaceResourceGroup = &workspaceResourceGroup
+			}
+		case "agentId":
+			if v != nil {
+				var agentID string
+				err = json.Unmarshal(*v, &agentID)
+				if err != nil {
+					return err
+				}
+				lai.AgentID = &agentID
+			}
+		default:
+			if v != nil {
+				var additionalProperties interface{}
+				err = json.Unmarshal(*v, &additionalProperties)
+				if err != nil {
+					return err
+				}
+				if lai.AdditionalProperties == nil {
+					lai.AdditionalProperties = make(map[string]interface{})
+				}
+				lai.AdditionalProperties[k] = additionalProperties
+			}
+		case "type":
+			if v != nil {
+				var typeVar TypeBasicResourceIdentifier
+				err = json.Unmarshal(*v, &typeVar)
+				if err != nil {
+					return err
+				}
+				lai.Type = typeVar
+			}
+		}
+	}
+
+	return nil
+}
+
 // OnPremiseResourceDetails details of the On Premise resource that was assessed
 type OnPremiseResourceDetails struct {
 	// WorkspaceID - Azure resource Id of the workspace the machine is attached to
@@ -8624,10 +9501,156 @@ func (rd ResourceDetails) AsBasicResourceDetails() (BasicResourceDetails, bool) 
 	return &rd, true
 }
 
+// BasicResourceIdentifier a resource identifier for an alert which can be used to direct the alert to the right
+// product exposure group (tenant, workspace, subscription etc.).
+type BasicResourceIdentifier interface {
+	AsAzureResourceIdentifier() (*AzureResourceIdentifier, bool)
+	AsLogAnalyticsIdentifier() (*LogAnalyticsIdentifier, bool)
+	AsResourceIdentifier() (*ResourceIdentifier, bool)
+}
+
+// ResourceIdentifier a resource identifier for an alert which can be used to direct the alert to the right
+// product exposure group (tenant, workspace, subscription etc.).
+type ResourceIdentifier struct {
+	// AdditionalProperties - Unmatched properties from the message are deserialized this collection
+	AdditionalProperties map[string]interface{} `json:""`
+	// Type - Possible values include: 'TypeResourceIdentifier', 'TypeAzureResource', 'TypeLogAnalytics'
+	Type TypeBasicResourceIdentifier `json:"type,omitempty"`
+}
+
+func unmarshalBasicResourceIdentifier(body []byte) (BasicResourceIdentifier, error) {
+	var m map[string]interface{}
+	err := json.Unmarshal(body, &m)
+	if err != nil {
+		return nil, err
+	}
+
+	switch m["type"] {
+	case string(TypeAzureResource):
+		var ari AzureResourceIdentifier
+		err := json.Unmarshal(body, &ari)
+		return ari, err
+	case string(TypeLogAnalytics):
+		var lai LogAnalyticsIdentifier
+		err := json.Unmarshal(body, &lai)
+		return lai, err
+	default:
+		var ri ResourceIdentifier
+		err := json.Unmarshal(body, &ri)
+		return ri, err
+	}
+}
+func unmarshalBasicResourceIdentifierArray(body []byte) ([]BasicResourceIdentifier, error) {
+	var rawMessages []*json.RawMessage
+	err := json.Unmarshal(body, &rawMessages)
+	if err != nil {
+		return nil, err
+	}
+
+	riArray := make([]BasicResourceIdentifier, len(rawMessages))
+
+	for index, rawMessage := range rawMessages {
+		ri, err := unmarshalBasicResourceIdentifier(*rawMessage)
+		if err != nil {
+			return nil, err
+		}
+		riArray[index] = ri
+	}
+	return riArray, nil
+}
+
+// MarshalJSON is the custom marshaler for ResourceIdentifier.
+func (ri ResourceIdentifier) MarshalJSON() ([]byte, error) {
+	ri.Type = TypeResourceIdentifier
+	objectMap := make(map[string]interface{})
+	if ri.Type != "" {
+		objectMap["type"] = ri.Type
+	}
+	for k, v := range ri.AdditionalProperties {
+		objectMap[k] = v
+	}
+	return json.Marshal(objectMap)
+}
+
+// AsAzureResourceIdentifier is the BasicResourceIdentifier implementation for ResourceIdentifier.
+func (ri ResourceIdentifier) AsAzureResourceIdentifier() (*AzureResourceIdentifier, bool) {
+	return nil, false
+}
+
+// AsLogAnalyticsIdentifier is the BasicResourceIdentifier implementation for ResourceIdentifier.
+func (ri ResourceIdentifier) AsLogAnalyticsIdentifier() (*LogAnalyticsIdentifier, bool) {
+	return nil, false
+}
+
+// AsResourceIdentifier is the BasicResourceIdentifier implementation for ResourceIdentifier.
+func (ri ResourceIdentifier) AsResourceIdentifier() (*ResourceIdentifier, bool) {
+	return &ri, true
+}
+
+// AsBasicResourceIdentifier is the BasicResourceIdentifier implementation for ResourceIdentifier.
+func (ri ResourceIdentifier) AsBasicResourceIdentifier() (BasicResourceIdentifier, bool) {
+	return &ri, true
+}
+
+// UnmarshalJSON is the custom unmarshaler for ResourceIdentifier struct.
+func (ri *ResourceIdentifier) UnmarshalJSON(body []byte) error {
+	var m map[string]*json.RawMessage
+	err := json.Unmarshal(body, &m)
+	if err != nil {
+		return err
+	}
+	for k, v := range m {
+		switch k {
+		default:
+			if v != nil {
+				var additionalProperties interface{}
+				err = json.Unmarshal(*v, &additionalProperties)
+				if err != nil {
+					return err
+				}
+				if ri.AdditionalProperties == nil {
+					ri.AdditionalProperties = make(map[string]interface{})
+				}
+				ri.AdditionalProperties[k] = additionalProperties
+			}
+		case "type":
+			if v != nil {
+				var typeVar TypeBasicResourceIdentifier
+				err = json.Unmarshal(*v, &typeVar)
+				if err != nil {
+					return err
+				}
+				ri.Type = typeVar
+			}
+		}
+	}
+
+	return nil
+}
+
+// Rule describes remote addresses that is recommended to communicate with the Azure resource on some
+// (Protocol, Port, Direction). All other remote addresses are recommended to be blocked
+type Rule struct {
+	// Name - The name of the rule
+	Name *string `json:"name,omitempty"`
+	// Direction - The rule's direction. Possible values include: 'Inbound', 'Outbound'
+	Direction Direction `json:"direction,omitempty"`
+	// DestinationPort - The rule's destination port
+	DestinationPort *int32 `json:"destinationPort,omitempty"`
+	// Protocols - The rule's transport protocols
+	Protocols *[]TransportProtocol `json:"protocols,omitempty"`
+	// IPAddresses - The remote IP addresses that should be able to communicate with the Azure resource on the rule's destination port and protocol
+	IPAddresses *[]string `json:"ipAddresses,omitempty"`
+}
+
 // SensitivityLabel the sensitivity label.
 type SensitivityLabel struct {
 	// DisplayName - The name of the sensitivity label.
 	DisplayName *string `json:"displayName,omitempty"`
+	// Description - The description of the sensitivity label.
+	Description *string `json:"description,omitempty"`
+	// Rank - The rank of the sensitivity label. Possible values include: 'RankNone', 'RankLow', 'RankMedium', 'RankHigh', 'RankCritical'
+	Rank Rank `json:"rank,omitempty"`
 	// Order - The order of the sensitivity label.
 	Order *float64 `json:"order,omitempty"`
 	// Enabled - Indicates whether the label is enabled or not.
