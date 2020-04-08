@@ -36,7 +36,8 @@ func NewRecommendationsClient(subscriptionID string) RecommendationsClient {
 	return NewRecommendationsClientWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
-// NewRecommendationsClientWithBaseURI creates an instance of the RecommendationsClient client.
+// NewRecommendationsClientWithBaseURI creates an instance of the RecommendationsClient client using a custom endpoint.
+// Use this when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure stack).
 func NewRecommendationsClientWithBaseURI(baseURI string, subscriptionID string) RecommendationsClient {
 	return RecommendationsClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -97,8 +98,7 @@ func (client RecommendationsClient) GeneratePreparer(ctx context.Context) (*http
 // GenerateSender sends the Generate request. The method will close the
 // http.Response Body if it receives an error.
 func (client RecommendationsClient) GenerateSender(req *http.Request) (*http.Response, error) {
-	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
-	return autorest.SendWithSender(client, req, sd...)
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // GenerateResponder handles the response to the Generate request. The method always
@@ -173,8 +173,7 @@ func (client RecommendationsClient) GetPreparer(ctx context.Context, resourceURI
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client RecommendationsClient) GetSender(req *http.Request) (*http.Response, error) {
-	sd := autorest.GetSendDecorators(req.Context(), autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
-	return autorest.SendWithSender(client, req, sd...)
+	return client.Send(req, autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
 }
 
 // GetResponder handles the response to the Get request. The method always
@@ -251,8 +250,7 @@ func (client RecommendationsClient) GetGenerateStatusPreparer(ctx context.Contex
 // GetGenerateStatusSender sends the GetGenerateStatus request. The method will close the
 // http.Response Body if it receives an error.
 func (client RecommendationsClient) GetGenerateStatusSender(req *http.Request) (*http.Response, error) {
-	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
-	return autorest.SendWithSender(client, req, sd...)
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // GetGenerateStatusResponder handles the response to the GetGenerateStatus request. The method always
@@ -270,7 +268,9 @@ func (client RecommendationsClient) GetGenerateStatusResponder(resp *http.Respon
 // List obtains cached recommendations for a subscription. The recommendations are generated or computed by invoking
 // generateRecommendations.
 // Parameters:
-// filter - the filter to apply to the recommendations.
+// filter - the filter to apply to the recommendations.<br>Filter can be applied to properties ['ResourceId',
+// 'ResourceGroup', 'RecommendationTypeGuid', '[Category](#category)'] with operators ['eq', 'and',
+// 'or'].<br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup'
 // top - the number of recommendations per page if a paged version of this API is being used.
 // skipToken - the page-continuation token to use with a paged version of this API.
 func (client RecommendationsClient) List(ctx context.Context, filter string, top *int32, skipToken string) (result ResourceRecommendationBaseListResultPage, err error) {
@@ -337,8 +337,7 @@ func (client RecommendationsClient) ListPreparer(ctx context.Context, filter str
 // ListSender sends the List request. The method will close the
 // http.Response Body if it receives an error.
 func (client RecommendationsClient) ListSender(req *http.Request) (*http.Response, error) {
-	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
-	return autorest.SendWithSender(client, req, sd...)
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // ListResponder handles the response to the List request. The method always
