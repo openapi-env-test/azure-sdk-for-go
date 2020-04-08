@@ -90,7 +90,7 @@ func (client VirtualMachinesClient) CapturePreparer(ctx context.Context, resourc
 		"vmName":            autorest.Encode("path", VMName),
 	}
 
-	const APIVersion = "2019-07-01"
+	const APIVersion = "2019-12-01"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -131,7 +131,11 @@ func (client VirtualMachinesClient) CaptureResponder(resp *http.Response) (resul
 }
 
 // ConvertToManagedDisks converts virtual machine disks from blob-based to managed disks. Virtual machine must be
-// stop-deallocated before invoking this operation.
+// stop-deallocated before invoking this operation. <br>For Windows, please refer to [Convert a virtual machine from
+// unmanaged disks to managed
+// disks.](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/convert-unmanaged-to-managed-disks).<br>For
+// Linux, please refer to [Convert a virtual machine from unmanaged disks to managed
+// disks.](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/convert-unmanaged-to-managed-disks).
 // Parameters:
 // resourceGroupName - the name of the resource group.
 // VMName - the name of the virtual machine.
@@ -169,7 +173,7 @@ func (client VirtualMachinesClient) ConvertToManagedDisksPreparer(ctx context.Co
 		"vmName":            autorest.Encode("path", VMName),
 	}
 
-	const APIVersion = "2019-07-01"
+	const APIVersion = "2019-12-01"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -267,7 +271,7 @@ func (client VirtualMachinesClient) CreateOrUpdatePreparer(ctx context.Context, 
 		"vmName":            autorest.Encode("path", VMName),
 	}
 
-	const APIVersion = "2019-07-01"
+	const APIVersion = "2019-12-01"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -347,7 +351,7 @@ func (client VirtualMachinesClient) DeallocatePreparer(ctx context.Context, reso
 		"vmName":            autorest.Encode("path", VMName),
 	}
 
-	const APIVersion = "2019-07-01"
+	const APIVersion = "2019-12-01"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -422,7 +426,7 @@ func (client VirtualMachinesClient) DeletePreparer(ctx context.Context, resource
 		"vmName":            autorest.Encode("path", VMName),
 	}
 
-	const APIVersion = "2019-07-01"
+	const APIVersion = "2019-12-01"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -507,7 +511,7 @@ func (client VirtualMachinesClient) GeneralizePreparer(ctx context.Context, reso
 		"vmName":            autorest.Encode("path", VMName),
 	}
 
-	const APIVersion = "2019-07-01"
+	const APIVersion = "2019-12-01"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -583,7 +587,7 @@ func (client VirtualMachinesClient) GetPreparer(ctx context.Context, resourceGro
 		"vmName":            autorest.Encode("path", VMName),
 	}
 
-	const APIVersion = "2019-07-01"
+	const APIVersion = "2019-12-01"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -662,7 +666,7 @@ func (client VirtualMachinesClient) InstanceViewPreparer(ctx context.Context, re
 		"vmName":            autorest.Encode("path", VMName),
 	}
 
-	const APIVersion = "2019-07-01"
+	const APIVersion = "2019-12-01"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -738,7 +742,7 @@ func (client VirtualMachinesClient) ListPreparer(ctx context.Context, resourceGr
 		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2019-07-01"
+	const APIVersion = "2019-12-01"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -850,7 +854,7 @@ func (client VirtualMachinesClient) ListAllPreparer(ctx context.Context, statusO
 		"subscriptionId": autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2019-07-01"
+	const APIVersion = "2019-12-01"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -966,7 +970,7 @@ func (client VirtualMachinesClient) ListAvailableSizesPreparer(ctx context.Conte
 		"vmName":            autorest.Encode("path", VMName),
 	}
 
-	const APIVersion = "2019-07-01"
+	const APIVersion = "2019-12-01"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -1047,7 +1051,7 @@ func (client VirtualMachinesClient) ListByLocationPreparer(ctx context.Context, 
 		"subscriptionId": autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2019-07-01"
+	const APIVersion = "2019-12-01"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -1116,7 +1120,8 @@ func (client VirtualMachinesClient) ListByLocationComplete(ctx context.Context, 
 	return
 }
 
-// PerformMaintenance the operation to perform maintenance on a virtual machine.
+// PerformMaintenance shuts down the virtual machine, moves it to a already updated node, and powers it back on during
+// the self-service phase of planned maintenance.
 // Parameters:
 // resourceGroupName - the name of the resource group.
 // VMName - the name of the virtual machine.
@@ -1154,7 +1159,7 @@ func (client VirtualMachinesClient) PerformMaintenancePreparer(ctx context.Conte
 		"vmName":            autorest.Encode("path", VMName),
 	}
 
-	const APIVersion = "2019-07-01"
+	const APIVersion = "2019-12-01"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -1233,7 +1238,7 @@ func (client VirtualMachinesClient) PowerOffPreparer(ctx context.Context, resour
 		"vmName":            autorest.Encode("path", VMName),
 	}
 
-	const APIVersion = "2019-07-01"
+	const APIVersion = "2019-12-01"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -1313,7 +1318,7 @@ func (client VirtualMachinesClient) ReapplyPreparer(ctx context.Context, resourc
 		"vmName":            autorest.Encode("path", VMName),
 	}
 
-	const APIVersion = "2019-07-01"
+	const APIVersion = "2019-12-01"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -1388,7 +1393,7 @@ func (client VirtualMachinesClient) RedeployPreparer(ctx context.Context, resour
 		"vmName":            autorest.Encode("path", VMName),
 	}
 
-	const APIVersion = "2019-07-01"
+	const APIVersion = "2019-12-01"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -1464,7 +1469,7 @@ func (client VirtualMachinesClient) ReimagePreparer(ctx context.Context, resourc
 		"vmName":            autorest.Encode("path", VMName),
 	}
 
-	const APIVersion = "2019-07-01"
+	const APIVersion = "2019-12-01"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -1544,7 +1549,7 @@ func (client VirtualMachinesClient) RestartPreparer(ctx context.Context, resourc
 		"vmName":            autorest.Encode("path", VMName),
 	}
 
-	const APIVersion = "2019-07-01"
+	const APIVersion = "2019-12-01"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -1626,7 +1631,7 @@ func (client VirtualMachinesClient) RunCommandPreparer(ctx context.Context, reso
 		"vmName":            autorest.Encode("path", VMName),
 	}
 
-	const APIVersion = "2019-07-01"
+	const APIVersion = "2019-12-01"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -1704,7 +1709,7 @@ func (client VirtualMachinesClient) StartPreparer(ctx context.Context, resourceG
 		"vmName":            autorest.Encode("path", VMName),
 	}
 
-	const APIVersion = "2019-07-01"
+	const APIVersion = "2019-12-01"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -1780,7 +1785,7 @@ func (client VirtualMachinesClient) UpdatePreparer(ctx context.Context, resource
 		"vmName":            autorest.Encode("path", VMName),
 	}
 
-	const APIVersion = "2019-07-01"
+	const APIVersion = "2019-12-01"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
