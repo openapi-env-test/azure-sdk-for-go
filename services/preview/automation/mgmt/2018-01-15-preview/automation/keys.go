@@ -110,7 +110,8 @@ func (client KeysClient) ListByAutomationAccountPreparer(ctx context.Context, re
 // ListByAutomationAccountSender sends the ListByAutomationAccount request. The method will close the
 // http.Response Body if it receives an error.
 func (client KeysClient) ListByAutomationAccountSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListByAutomationAccountResponder handles the response to the ListByAutomationAccount request. The method always
