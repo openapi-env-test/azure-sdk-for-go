@@ -128,7 +128,8 @@ func (client ReportsClient) GetLatencyScorecardsPreparer(ctx context.Context, re
 // GetLatencyScorecardsSender sends the GetLatencyScorecards request. The method will close the
 // http.Response Body if it receives an error.
 func (client ReportsClient) GetLatencyScorecardsSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetLatencyScorecardsResponder handles the response to the GetLatencyScorecards request. The method always
@@ -235,7 +236,8 @@ func (client ReportsClient) GetTimeseriesPreparer(ctx context.Context, resourceG
 // GetTimeseriesSender sends the GetTimeseries request. The method will close the
 // http.Response Body if it receives an error.
 func (client ReportsClient) GetTimeseriesSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetTimeseriesResponder handles the response to the GetTimeseries request. The method always
