@@ -180,6 +180,40 @@ func PossibleDataStatusValues() []DataStatus {
 	return []DataStatus{NotPresent, Present}
 }
 
+// DynamicThresholdOperator enumerates the values for dynamic threshold operator.
+type DynamicThresholdOperator string
+
+const (
+	// DynamicThresholdOperatorGreaterOrLessThan ...
+	DynamicThresholdOperatorGreaterOrLessThan DynamicThresholdOperator = "GreaterOrLessThan"
+	// DynamicThresholdOperatorGreaterThan ...
+	DynamicThresholdOperatorGreaterThan DynamicThresholdOperator = "GreaterThan"
+	// DynamicThresholdOperatorLessThan ...
+	DynamicThresholdOperatorLessThan DynamicThresholdOperator = "LessThan"
+)
+
+// PossibleDynamicThresholdOperatorValues returns an array of possible values for the DynamicThresholdOperator const type.
+func PossibleDynamicThresholdOperatorValues() []DynamicThresholdOperator {
+	return []DynamicThresholdOperator{DynamicThresholdOperatorGreaterOrLessThan, DynamicThresholdOperatorGreaterThan, DynamicThresholdOperatorLessThan}
+}
+
+// DynamicThresholdSensitivity enumerates the values for dynamic threshold sensitivity.
+type DynamicThresholdSensitivity string
+
+const (
+	// High ...
+	High DynamicThresholdSensitivity = "High"
+	// Low ...
+	Low DynamicThresholdSensitivity = "Low"
+	// Medium ...
+	Medium DynamicThresholdSensitivity = "Medium"
+)
+
+// PossibleDynamicThresholdSensitivityValues returns an array of possible values for the DynamicThresholdSensitivity const type.
+func PossibleDynamicThresholdSensitivityValues() []DynamicThresholdSensitivity {
+	return []DynamicThresholdSensitivity{High, Low, Medium}
+}
+
 // Enabled enumerates the values for enabled.
 type Enabled string
 
@@ -354,6 +388,29 @@ func PossibleOnboardingStatusValues() []OnboardingStatus {
 	return []OnboardingStatus{NotOnboarded, Onboarded, Unknown}
 }
 
+// Operator enumerates the values for operator.
+type Operator string
+
+const (
+	// OperatorEquals ...
+	OperatorEquals Operator = "Equals"
+	// OperatorGreaterThan ...
+	OperatorGreaterThan Operator = "GreaterThan"
+	// OperatorGreaterThanOrEqual ...
+	OperatorGreaterThanOrEqual Operator = "GreaterThanOrEqual"
+	// OperatorLessThan ...
+	OperatorLessThan Operator = "LessThan"
+	// OperatorLessThanOrEqual ...
+	OperatorLessThanOrEqual Operator = "LessThanOrEqual"
+	// OperatorNotEquals ...
+	OperatorNotEquals Operator = "NotEquals"
+)
+
+// PossibleOperatorValues returns an array of possible values for the Operator const type.
+func PossibleOperatorValues() []Operator {
+	return []Operator{OperatorEquals, OperatorGreaterThan, OperatorGreaterThanOrEqual, OperatorLessThan, OperatorLessThanOrEqual, OperatorNotEquals}
+}
+
 // ProvisioningState enumerates the values for provisioning state.
 type ProvisioningState string
 
@@ -483,17 +540,17 @@ func PossibleScaleTypeValues() []ScaleType {
 type Sensitivity string
 
 const (
-	// High ...
-	High Sensitivity = "High"
-	// Low ...
-	Low Sensitivity = "Low"
-	// Medium ...
-	Medium Sensitivity = "Medium"
+	// SensitivityHigh ...
+	SensitivityHigh Sensitivity = "High"
+	// SensitivityLow ...
+	SensitivityLow Sensitivity = "Low"
+	// SensitivityMedium ...
+	SensitivityMedium Sensitivity = "Medium"
 )
 
 // PossibleSensitivityValues returns an array of possible values for the Sensitivity const type.
 func PossibleSensitivityValues() []Sensitivity {
-	return []Sensitivity{High, Low, Medium}
+	return []Sensitivity{SensitivityHigh, SensitivityLow, SensitivityMedium}
 }
 
 // TimeAggregationOperator enumerates the values for time aggregation operator.
@@ -1779,7 +1836,7 @@ type AzureFunctionReceiver struct {
 
 // Baseline the baseline values for a single sensitivity value.
 type Baseline struct {
-	// Sensitivity - the sensitivity of the baseline. Possible values include: 'Low', 'Medium', 'High'
+	// Sensitivity - the sensitivity of the baseline. Possible values include: 'SensitivityLow', 'SensitivityMedium', 'SensitivityHigh'
 	Sensitivity Sensitivity `json:"sensitivity,omitempty"`
 	// LowThresholds - The low thresholds of the baseline.
 	LowThresholds *[]float64 `json:"lowThresholds,omitempty"`
@@ -2108,10 +2165,10 @@ type Dimension struct {
 
 // DynamicMetricCriteria criterion for dynamic threshold.
 type DynamicMetricCriteria struct {
-	// Operator - The operator used to compare the metric value against the threshold.
-	Operator interface{} `json:"operator,omitempty"`
-	// AlertSensitivity - The extent of deviation required to trigger an alert. This will affect how tight the threshold is to the metric series pattern.
-	AlertSensitivity interface{} `json:"alertSensitivity,omitempty"`
+	// Operator - The operator used to compare the metric value against the threshold. Possible values include: 'DynamicThresholdOperatorGreaterThan', 'DynamicThresholdOperatorLessThan', 'DynamicThresholdOperatorGreaterOrLessThan'
+	Operator DynamicThresholdOperator `json:"operator,omitempty"`
+	// AlertSensitivity - The extent of deviation required to trigger an alert. This will affect how tight the threshold is to the metric series pattern. Possible values include: 'Low', 'Medium', 'High'
+	AlertSensitivity DynamicThresholdSensitivity `json:"alertSensitivity,omitempty"`
 	// FailingPeriods - The minimum number of violations required within the selected lookback time window required to raise an alert.
 	FailingPeriods *DynamicThresholdFailingPeriods `json:"failingPeriods,omitempty"`
 	// IgnoreDataBefore - Use this option to set the date from which to start learning the metric historical data and calculate the dynamic thresholds (in ISO8601 format)
@@ -2136,10 +2193,10 @@ type DynamicMetricCriteria struct {
 func (dmc DynamicMetricCriteria) MarshalJSON() ([]byte, error) {
 	dmc.CriterionType = CriterionTypeDynamicThresholdCriterion
 	objectMap := make(map[string]interface{})
-	if dmc.Operator != nil {
+	if dmc.Operator != "" {
 		objectMap["operator"] = dmc.Operator
 	}
-	if dmc.AlertSensitivity != nil {
+	if dmc.AlertSensitivity != "" {
 		objectMap["alertSensitivity"] = dmc.AlertSensitivity
 	}
 	if dmc.FailingPeriods != nil {
@@ -2203,7 +2260,7 @@ func (dmc *DynamicMetricCriteria) UnmarshalJSON(body []byte) error {
 		switch k {
 		case "operator":
 			if v != nil {
-				var operator interface{}
+				var operator DynamicThresholdOperator
 				err = json.Unmarshal(*v, &operator)
 				if err != nil {
 					return err
@@ -2212,7 +2269,7 @@ func (dmc *DynamicMetricCriteria) UnmarshalJSON(body []byte) error {
 			}
 		case "alertSensitivity":
 			if v != nil {
-				var alertSensitivity interface{}
+				var alertSensitivity DynamicThresholdSensitivity
 				err = json.Unmarshal(*v, &alertSensitivity)
 				if err != nil {
 					return err
@@ -3600,7 +3657,7 @@ func (mamrmmc *MetricAlertMultipleResourceMultipleMetricCriteria) UnmarshalJSON(
 	return nil
 }
 
-// MetricAlertProperties an alert rule.
+// MetricAlertProperties an alert rule properties.
 type MetricAlertProperties struct {
 	// Description - the description of the metric alert that will be included in the alert email.
 	Description *string `json:"description,omitempty"`
@@ -3620,7 +3677,7 @@ type MetricAlertProperties struct {
 	TargetResourceRegion *string `json:"targetResourceRegion,omitempty"`
 	// Criteria - defines the specific alert criteria information.
 	Criteria BasicMetricAlertCriteria `json:"criteria,omitempty"`
-	// AutoMitigate - the flag that indicates whether the alert should be auto resolved or not.
+	// AutoMitigate - the flag that indicates whether the alert should be auto resolved or not. The default is true.
 	AutoMitigate *bool `json:"autoMitigate,omitempty"`
 	// Actions - the array of actions that are performed when the alert rule becomes active, and when an alert condition is resolved.
 	Actions *[]MetricAlertAction `json:"actions,omitempty"`
@@ -3750,6 +3807,156 @@ func (mapVar *MetricAlertProperties) UnmarshalJSON(body []byte) error {
 	return nil
 }
 
+// MetricAlertPropertiesPatch an alert rule properties for patch.
+type MetricAlertPropertiesPatch struct {
+	// Description - the description of the metric alert that will be included in the alert email.
+	Description *string `json:"description,omitempty"`
+	// Severity - Alert severity {0, 1, 2, 3, 4}
+	Severity *int32 `json:"severity,omitempty"`
+	// Enabled - the flag that indicates whether the metric alert is enabled.
+	Enabled *bool `json:"enabled,omitempty"`
+	// Scopes - the list of resource id's that this metric alert is scoped to.
+	Scopes *[]string `json:"scopes,omitempty"`
+	// EvaluationFrequency - how often the metric alert is evaluated represented in ISO 8601 duration format.
+	EvaluationFrequency *string `json:"evaluationFrequency,omitempty"`
+	// WindowSize - the period of time (in ISO 8601 duration format) that is used to monitor alert activity based on the threshold.
+	WindowSize *string `json:"windowSize,omitempty"`
+	// TargetResourceType - READ-ONLY; the resource type of the target resource(s) on which the alert is created/updated. Mandatory for MultipleResourceMultipleMetricCriteria.
+	TargetResourceType *string `json:"targetResourceType,omitempty"`
+	// TargetResourceRegion - READ-ONLY; the region of the target resource(s) on which the alert is created/updated. Mandatory for MultipleResourceMultipleMetricCriteria.
+	TargetResourceRegion *string `json:"targetResourceRegion,omitempty"`
+	// Criteria - defines the specific alert criteria information.
+	Criteria BasicMetricAlertCriteria `json:"criteria,omitempty"`
+	// AutoMitigate - the flag that indicates whether the alert should be auto resolved or not. The default is true.
+	AutoMitigate *bool `json:"autoMitigate,omitempty"`
+	// Actions - the array of actions that are performed when the alert rule becomes active, and when an alert condition is resolved.
+	Actions *[]MetricAlertAction `json:"actions,omitempty"`
+	// LastUpdatedTime - READ-ONLY; Last time the rule was updated in ISO8601 format.
+	LastUpdatedTime *date.Time `json:"lastUpdatedTime,omitempty"`
+}
+
+// UnmarshalJSON is the custom unmarshaler for MetricAlertPropertiesPatch struct.
+func (mapp *MetricAlertPropertiesPatch) UnmarshalJSON(body []byte) error {
+	var m map[string]*json.RawMessage
+	err := json.Unmarshal(body, &m)
+	if err != nil {
+		return err
+	}
+	for k, v := range m {
+		switch k {
+		case "description":
+			if v != nil {
+				var description string
+				err = json.Unmarshal(*v, &description)
+				if err != nil {
+					return err
+				}
+				mapp.Description = &description
+			}
+		case "severity":
+			if v != nil {
+				var severity int32
+				err = json.Unmarshal(*v, &severity)
+				if err != nil {
+					return err
+				}
+				mapp.Severity = &severity
+			}
+		case "enabled":
+			if v != nil {
+				var enabled bool
+				err = json.Unmarshal(*v, &enabled)
+				if err != nil {
+					return err
+				}
+				mapp.Enabled = &enabled
+			}
+		case "scopes":
+			if v != nil {
+				var scopes []string
+				err = json.Unmarshal(*v, &scopes)
+				if err != nil {
+					return err
+				}
+				mapp.Scopes = &scopes
+			}
+		case "evaluationFrequency":
+			if v != nil {
+				var evaluationFrequency string
+				err = json.Unmarshal(*v, &evaluationFrequency)
+				if err != nil {
+					return err
+				}
+				mapp.EvaluationFrequency = &evaluationFrequency
+			}
+		case "windowSize":
+			if v != nil {
+				var windowSize string
+				err = json.Unmarshal(*v, &windowSize)
+				if err != nil {
+					return err
+				}
+				mapp.WindowSize = &windowSize
+			}
+		case "targetResourceType":
+			if v != nil {
+				var targetResourceType string
+				err = json.Unmarshal(*v, &targetResourceType)
+				if err != nil {
+					return err
+				}
+				mapp.TargetResourceType = &targetResourceType
+			}
+		case "targetResourceRegion":
+			if v != nil {
+				var targetResourceRegion string
+				err = json.Unmarshal(*v, &targetResourceRegion)
+				if err != nil {
+					return err
+				}
+				mapp.TargetResourceRegion = &targetResourceRegion
+			}
+		case "criteria":
+			if v != nil {
+				criteria, err := unmarshalBasicMetricAlertCriteria(*v)
+				if err != nil {
+					return err
+				}
+				mapp.Criteria = criteria
+			}
+		case "autoMitigate":
+			if v != nil {
+				var autoMitigate bool
+				err = json.Unmarshal(*v, &autoMitigate)
+				if err != nil {
+					return err
+				}
+				mapp.AutoMitigate = &autoMitigate
+			}
+		case "actions":
+			if v != nil {
+				var actions []MetricAlertAction
+				err = json.Unmarshal(*v, &actions)
+				if err != nil {
+					return err
+				}
+				mapp.Actions = &actions
+			}
+		case "lastUpdatedTime":
+			if v != nil {
+				var lastUpdatedTime date.Time
+				err = json.Unmarshal(*v, &lastUpdatedTime)
+				if err != nil {
+					return err
+				}
+				mapp.LastUpdatedTime = &lastUpdatedTime
+			}
+		}
+	}
+
+	return nil
+}
+
 // MetricAlertResource the metric alert resource.
 type MetricAlertResource struct {
 	autorest.Response `json:"-"`
@@ -3862,8 +4069,8 @@ type MetricAlertResourceCollection struct {
 type MetricAlertResourcePatch struct {
 	// Tags - Resource tags
 	Tags map[string]*string `json:"tags"`
-	// MetricAlertProperties - The alert rule properties of the resource.
-	*MetricAlertProperties `json:"properties,omitempty"`
+	// MetricAlertPropertiesPatch - The alert rule properties of the resource.
+	*MetricAlertPropertiesPatch `json:"properties,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for MetricAlertResourcePatch.
@@ -3872,8 +4079,8 @@ func (marp MetricAlertResourcePatch) MarshalJSON() ([]byte, error) {
 	if marp.Tags != nil {
 		objectMap["tags"] = marp.Tags
 	}
-	if marp.MetricAlertProperties != nil {
-		objectMap["properties"] = marp.MetricAlertProperties
+	if marp.MetricAlertPropertiesPatch != nil {
+		objectMap["properties"] = marp.MetricAlertPropertiesPatch
 	}
 	return json.Marshal(objectMap)
 }
@@ -3898,12 +4105,12 @@ func (marp *MetricAlertResourcePatch) UnmarshalJSON(body []byte) error {
 			}
 		case "properties":
 			if v != nil {
-				var metricAlertProperties MetricAlertProperties
-				err = json.Unmarshal(*v, &metricAlertProperties)
+				var metricAlertPropertiesPatch MetricAlertPropertiesPatch
+				err = json.Unmarshal(*v, &metricAlertPropertiesPatch)
 				if err != nil {
 					return err
 				}
-				marp.MetricAlertProperties = &metricAlertProperties
+				marp.MetricAlertPropertiesPatch = &metricAlertPropertiesPatch
 			}
 		}
 	}
@@ -4058,8 +4265,8 @@ type MetricAvailability struct {
 
 // MetricCriteria criterion to filter metrics.
 type MetricCriteria struct {
-	// Operator - the criteria operator.
-	Operator interface{} `json:"operator,omitempty"`
+	// Operator - the criteria operator. Possible values include: 'OperatorEquals', 'OperatorNotEquals', 'OperatorGreaterThan', 'OperatorGreaterThanOrEqual', 'OperatorLessThan', 'OperatorLessThanOrEqual'
+	Operator Operator `json:"operator,omitempty"`
 	// Threshold - the criteria threshold value that activates the alert.
 	Threshold *float64 `json:"threshold,omitempty"`
 	// AdditionalProperties - Unmatched properties from the message are deserialized this collection
@@ -4082,7 +4289,7 @@ type MetricCriteria struct {
 func (mc MetricCriteria) MarshalJSON() ([]byte, error) {
 	mc.CriterionType = CriterionTypeStaticThresholdCriterion
 	objectMap := make(map[string]interface{})
-	if mc.Operator != nil {
+	if mc.Operator != "" {
 		objectMap["operator"] = mc.Operator
 	}
 	if mc.Threshold != nil {
@@ -4143,7 +4350,7 @@ func (mc *MetricCriteria) UnmarshalJSON(body []byte) error {
 		switch k {
 		case "operator":
 			if v != nil {
-				var operator interface{}
+				var operator Operator
 				err = json.Unmarshal(*v, &operator)
 				if err != nil {
 					return err
@@ -5569,6 +5776,16 @@ type WebhookReceiver struct {
 	Name *string `json:"name,omitempty"`
 	// ServiceURI - The URI where webhooks should be sent.
 	ServiceURI *string `json:"serviceUri,omitempty"`
+}
+
+// WebtestLocationAvailabilityCriteria specifies the metric alert rule criteria for a web test resource.
+type WebtestLocationAvailabilityCriteria struct {
+	// WebTestID - The Application Insights web test Id.
+	WebTestID *string `json:"webTestId,omitempty"`
+	// ComponentID - The Application Insights resource Id.
+	ComponentID *string `json:"componentId,omitempty"`
+	// FailedLocationCount - The number of failed locations.
+	FailedLocationCount *float64 `json:"failedLocationCount,omitempty"`
 }
 
 // WorkspaceInfo information about a Log Analytics Workspace.
