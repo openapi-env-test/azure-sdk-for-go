@@ -124,7 +124,8 @@ func (client SourceControlSyncJobClient) CreatePreparer(ctx context.Context, res
 // CreateSender sends the Create request. The method will close the
 // http.Response Body if it receives an error.
 func (client SourceControlSyncJobClient) CreateSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // CreateResponder handles the response to the Create request. The method always
@@ -212,7 +213,8 @@ func (client SourceControlSyncJobClient) GetPreparer(ctx context.Context, resour
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client SourceControlSyncJobClient) GetSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetResponder handles the response to the Get request. The method always
@@ -303,7 +305,8 @@ func (client SourceControlSyncJobClient) ListByAutomationAccountPreparer(ctx con
 // ListByAutomationAccountSender sends the ListByAutomationAccount request. The method will close the
 // http.Response Body if it receives an error.
 func (client SourceControlSyncJobClient) ListByAutomationAccountSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListByAutomationAccountResponder handles the response to the ListByAutomationAccount request. The method always
