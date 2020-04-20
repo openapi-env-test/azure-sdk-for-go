@@ -119,7 +119,8 @@ func (client JobStreamClient) GetPreparer(ctx context.Context, resourceGroupName
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client JobStreamClient) GetSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetResponder handles the response to the Get request. The method always
@@ -215,7 +216,8 @@ func (client JobStreamClient) ListByJobPreparer(ctx context.Context, resourceGro
 // ListByJobSender sends the ListByJob request. The method will close the
 // http.Response Body if it receives an error.
 func (client JobStreamClient) ListByJobSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListByJobResponder handles the response to the ListByJob request. The method always
