@@ -158,7 +158,7 @@ var _ SettingsClientAPI = (*security.SettingsClient)(nil)
 
 // InformationProtectionPoliciesClientAPI contains the set of methods on the InformationProtectionPoliciesClient type.
 type InformationProtectionPoliciesClientAPI interface {
-	CreateOrUpdate(ctx context.Context, scope string, informationProtectionPolicyName string) (result security.InformationProtectionPolicy, err error)
+	CreateOrUpdate(ctx context.Context, scope string, informationProtectionPolicyName string, informationProtectionPolicy security.InformationProtectionPolicy) (result security.InformationProtectionPolicy, err error)
 	Get(ctx context.Context, scope string, informationProtectionPolicyName string) (result security.InformationProtectionPolicy, err error)
 	List(ctx context.Context, scope string) (result security.InformationProtectionPolicyListPage, err error)
 	ListComplete(ctx context.Context, scope string) (result security.InformationProtectionPolicyListIterator, err error)
@@ -268,14 +268,14 @@ var _ TasksClientAPI = (*security.TasksClient)(nil)
 type AlertsClientAPI interface {
 	GetResourceGroupLevelAlerts(ctx context.Context, alertName string, resourceGroupName string) (result security.Alert, err error)
 	GetSubscriptionLevelAlert(ctx context.Context, alertName string) (result security.Alert, err error)
-	List(ctx context.Context, filter string, selectParameter string, expand string) (result security.AlertListPage, err error)
-	ListComplete(ctx context.Context, filter string, selectParameter string, expand string) (result security.AlertListIterator, err error)
-	ListByResourceGroup(ctx context.Context, resourceGroupName string, filter string, selectParameter string, expand string) (result security.AlertListPage, err error)
-	ListByResourceGroupComplete(ctx context.Context, resourceGroupName string, filter string, selectParameter string, expand string) (result security.AlertListIterator, err error)
-	ListResourceGroupLevelAlertsByRegion(ctx context.Context, resourceGroupName string, filter string, selectParameter string, expand string) (result security.AlertListPage, err error)
-	ListResourceGroupLevelAlertsByRegionComplete(ctx context.Context, resourceGroupName string, filter string, selectParameter string, expand string) (result security.AlertListIterator, err error)
-	ListSubscriptionLevelAlertsByRegion(ctx context.Context, filter string, selectParameter string, expand string) (result security.AlertListPage, err error)
-	ListSubscriptionLevelAlertsByRegionComplete(ctx context.Context, filter string, selectParameter string, expand string) (result security.AlertListIterator, err error)
+	List(ctx context.Context, filter string, selectParameter string, expand string, autoDismissRuleName string) (result security.AlertListPage, err error)
+	ListComplete(ctx context.Context, filter string, selectParameter string, expand string, autoDismissRuleName string) (result security.AlertListIterator, err error)
+	ListByResourceGroup(ctx context.Context, resourceGroupName string, filter string, selectParameter string, expand string, autoDismissRuleName string) (result security.AlertListPage, err error)
+	ListByResourceGroupComplete(ctx context.Context, resourceGroupName string, filter string, selectParameter string, expand string, autoDismissRuleName string) (result security.AlertListIterator, err error)
+	ListResourceGroupLevelAlertsByRegion(ctx context.Context, resourceGroupName string, filter string, selectParameter string, expand string, autoDismissRuleName string) (result security.AlertListPage, err error)
+	ListResourceGroupLevelAlertsByRegionComplete(ctx context.Context, resourceGroupName string, filter string, selectParameter string, expand string, autoDismissRuleName string) (result security.AlertListIterator, err error)
+	ListSubscriptionLevelAlertsByRegion(ctx context.Context, filter string, selectParameter string, expand string, autoDismissRuleName string) (result security.AlertListPage, err error)
+	ListSubscriptionLevelAlertsByRegionComplete(ctx context.Context, filter string, selectParameter string, expand string, autoDismissRuleName string) (result security.AlertListIterator, err error)
 	UpdateResourceGroupLevelAlertStateToDismiss(ctx context.Context, alertName string, resourceGroupName string) (result autorest.Response, err error)
 	UpdateResourceGroupLevelAlertStateToReactivate(ctx context.Context, alertName string, resourceGroupName string) (result autorest.Response, err error)
 	UpdateSubscriptionLevelAlertStateToDismiss(ctx context.Context, alertName string) (result autorest.Response, err error)
@@ -315,6 +315,7 @@ var _ JitNetworkAccessPoliciesClientAPI = (*security.JitNetworkAccessPoliciesCli
 
 // AdaptiveApplicationControlsClientAPI contains the set of methods on the AdaptiveApplicationControlsClient type.
 type AdaptiveApplicationControlsClientAPI interface {
+	Delete(ctx context.Context, groupName string) (result autorest.Response, err error)
 	Get(ctx context.Context, groupName string) (result security.AppWhitelistingGroup, err error)
 	List(ctx context.Context, includePathRecommendations *bool, summary *bool) (result security.AppWhitelistingGroups, err error)
 	Put(ctx context.Context, groupName string, body security.AppWhitelistingPutGroupData) (result security.AppWhitelistingGroup, err error)
@@ -364,3 +365,14 @@ type AdaptiveNetworkHardeningsClientAPI interface {
 }
 
 var _ AdaptiveNetworkHardeningsClientAPI = (*security.AdaptiveNetworkHardeningsClient)(nil)
+
+// AlertsSuppressionRulesClientAPI contains the set of methods on the AlertsSuppressionRulesClient type.
+type AlertsSuppressionRulesClientAPI interface {
+	Delete(ctx context.Context, alertsSuppressionRuleName string) (result autorest.Response, err error)
+	Get(ctx context.Context, alertsSuppressionRuleName string) (result security.AlertsSuppressionRule, err error)
+	List(ctx context.Context, alertType string) (result security.AlertsSuppressionRulesListPage, err error)
+	ListComplete(ctx context.Context, alertType string) (result security.AlertsSuppressionRulesListIterator, err error)
+	Update(ctx context.Context, alertsSuppressionRuleName string, alertsSuppressionRule security.AlertsSuppressionRule) (result security.AlertsSuppressionRule, err error)
+}
+
+var _ AlertsSuppressionRulesClientAPI = (*security.AlertsSuppressionRulesClient)(nil)
