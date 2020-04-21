@@ -540,6 +540,27 @@ func PossibleProtocolValues() []Protocol {
 	return []Protocol{All, TCP, UDP}
 }
 
+// Rank enumerates the values for rank.
+type Rank string
+
+const (
+	// RankCritical ...
+	RankCritical Rank = "Critical"
+	// RankHigh ...
+	RankHigh Rank = "High"
+	// RankLow ...
+	RankLow Rank = "Low"
+	// RankMedium ...
+	RankMedium Rank = "Medium"
+	// RankNone ...
+	RankNone Rank = "None"
+)
+
+// PossibleRankValues returns an array of possible values for the Rank const type.
+func PossibleRankValues() []Rank {
+	return []Rank{RankCritical, RankHigh, RankLow, RankMedium, RankNone}
+}
+
 // RecommendationAction enumerates the values for recommendation action.
 type RecommendationAction string
 
@@ -610,6 +631,23 @@ const (
 // PossibleReportedSeverityValues returns an array of possible values for the ReportedSeverity const type.
 func PossibleReportedSeverityValues() []ReportedSeverity {
 	return []ReportedSeverity{High, Information, Low, Silent}
+}
+
+// RuleState enumerates the values for rule state.
+type RuleState string
+
+const (
+	// Disabled ...
+	Disabled RuleState = "Disabled"
+	// Enabled ...
+	Enabled RuleState = "Enabled"
+	// Expired ...
+	Expired RuleState = "Expired"
+)
+
+// PossibleRuleStateValues returns an array of possible values for the RuleState const type.
+func PossibleRuleStateValues() []RuleState {
+	return []RuleState{Disabled, Enabled, Expired}
 }
 
 // Script enumerates the values for script.
@@ -738,17 +776,17 @@ func PossibleStatusValues() []Status {
 type StatusReason string
 
 const (
-	// Expired ...
-	Expired StatusReason = "Expired"
-	// NewerRequestInitiated ...
-	NewerRequestInitiated StatusReason = "NewerRequestInitiated"
-	// UserRequested ...
-	UserRequested StatusReason = "UserRequested"
+	// StatusReasonExpired ...
+	StatusReasonExpired StatusReason = "Expired"
+	// StatusReasonNewerRequestInitiated ...
+	StatusReasonNewerRequestInitiated StatusReason = "NewerRequestInitiated"
+	// StatusReasonUserRequested ...
+	StatusReasonUserRequested StatusReason = "UserRequested"
 )
 
 // PossibleStatusReasonValues returns an array of possible values for the StatusReason const type.
 func PossibleStatusReasonValues() []StatusReason {
-	return []StatusReason{Expired, NewerRequestInitiated, UserRequested}
+	return []StatusReason{StatusReasonExpired, StatusReasonNewerRequestInitiated, StatusReasonUserRequested}
 }
 
 // SubAssessmentStatusCode enumerates the values for sub assessment status code.
@@ -1664,6 +1702,242 @@ func (ap AlertProperties) MarshalJSON() ([]byte, error) {
 		objectMap["confidenceReasons"] = ap.ConfidenceReasons
 	}
 	return json.Marshal(objectMap)
+}
+
+// AlertsSuppressionRule describes the suppression rule
+type AlertsSuppressionRule struct {
+	autorest.Response                `json:"-"`
+	*AlertsSuppressionRuleProperties `json:"properties,omitempty"`
+	// ID - READ-ONLY; Resource Id
+	ID *string `json:"id,omitempty"`
+	// Name - READ-ONLY; Resource name
+	Name *string `json:"name,omitempty"`
+	// Type - READ-ONLY; Resource type
+	Type *string `json:"type,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for AlertsSuppressionRule.
+func (asr AlertsSuppressionRule) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if asr.AlertsSuppressionRuleProperties != nil {
+		objectMap["properties"] = asr.AlertsSuppressionRuleProperties
+	}
+	return json.Marshal(objectMap)
+}
+
+// UnmarshalJSON is the custom unmarshaler for AlertsSuppressionRule struct.
+func (asr *AlertsSuppressionRule) UnmarshalJSON(body []byte) error {
+	var m map[string]*json.RawMessage
+	err := json.Unmarshal(body, &m)
+	if err != nil {
+		return err
+	}
+	for k, v := range m {
+		switch k {
+		case "properties":
+			if v != nil {
+				var alertsSuppressionRuleProperties AlertsSuppressionRuleProperties
+				err = json.Unmarshal(*v, &alertsSuppressionRuleProperties)
+				if err != nil {
+					return err
+				}
+				asr.AlertsSuppressionRuleProperties = &alertsSuppressionRuleProperties
+			}
+		case "id":
+			if v != nil {
+				var ID string
+				err = json.Unmarshal(*v, &ID)
+				if err != nil {
+					return err
+				}
+				asr.ID = &ID
+			}
+		case "name":
+			if v != nil {
+				var name string
+				err = json.Unmarshal(*v, &name)
+				if err != nil {
+					return err
+				}
+				asr.Name = &name
+			}
+		case "type":
+			if v != nil {
+				var typeVar string
+				err = json.Unmarshal(*v, &typeVar)
+				if err != nil {
+					return err
+				}
+				asr.Type = &typeVar
+			}
+		}
+	}
+
+	return nil
+}
+
+// AlertsSuppressionRuleProperties describes AlertsSuppressionRule properties
+type AlertsSuppressionRuleProperties struct {
+	// AlertType - Type of the alert to automatically suppress. For all alert types, use '*'
+	AlertType *string `json:"alertType,omitempty"`
+	// LastModifiedUtc - READ-ONLY; The last time this rule was modified
+	LastModifiedUtc *date.Time `json:"lastModifiedUtc,omitempty"`
+	// ExpirationDateUtc - Expiration date of the rule, if value is not provided or provided as null this field will default to the maximum allowed expiration date.
+	ExpirationDateUtc *date.Time `json:"expirationDateUtc,omitempty"`
+	// Reason - The reason for dismissing the alert
+	Reason *string `json:"reason,omitempty"`
+	// State - Possible states of the rule. Possible values include: 'Enabled', 'Disabled', 'Expired'
+	State RuleState `json:"state,omitempty"`
+	// Comment - Any comment regarding the rule
+	Comment *string `json:"comment,omitempty"`
+	// SuppressionAlertsScope - The suppression conditions
+	SuppressionAlertsScope *SuppressionAlertsScope `json:"suppressionAlertsScope,omitempty"`
+}
+
+// AlertsSuppressionRulesList suppression rules list for subscription.
+type AlertsSuppressionRulesList struct {
+	autorest.Response `json:"-"`
+	Value             *[]AlertsSuppressionRule `json:"value,omitempty"`
+	// NextLink - READ-ONLY; URI to fetch the next page.
+	NextLink *string `json:"nextLink,omitempty"`
+}
+
+// AlertsSuppressionRulesListIterator provides access to a complete listing of AlertsSuppressionRule
+// values.
+type AlertsSuppressionRulesListIterator struct {
+	i    int
+	page AlertsSuppressionRulesListPage
+}
+
+// NextWithContext advances to the next value.  If there was an error making
+// the request the iterator does not advance and the error is returned.
+func (iter *AlertsSuppressionRulesListIterator) NextWithContext(ctx context.Context) (err error) {
+	if tracing.IsEnabled() {
+		ctx = tracing.StartSpan(ctx, fqdn+"/AlertsSuppressionRulesListIterator.NextWithContext")
+		defer func() {
+			sc := -1
+			if iter.Response().Response.Response != nil {
+				sc = iter.Response().Response.Response.StatusCode
+			}
+			tracing.EndSpan(ctx, sc, err)
+		}()
+	}
+	iter.i++
+	if iter.i < len(iter.page.Values()) {
+		return nil
+	}
+	err = iter.page.NextWithContext(ctx)
+	if err != nil {
+		iter.i--
+		return err
+	}
+	iter.i = 0
+	return nil
+}
+
+// Next advances to the next value.  If there was an error making
+// the request the iterator does not advance and the error is returned.
+// Deprecated: Use NextWithContext() instead.
+func (iter *AlertsSuppressionRulesListIterator) Next() error {
+	return iter.NextWithContext(context.Background())
+}
+
+// NotDone returns true if the enumeration should be started or is not yet complete.
+func (iter AlertsSuppressionRulesListIterator) NotDone() bool {
+	return iter.page.NotDone() && iter.i < len(iter.page.Values())
+}
+
+// Response returns the raw server response from the last page request.
+func (iter AlertsSuppressionRulesListIterator) Response() AlertsSuppressionRulesList {
+	return iter.page.Response()
+}
+
+// Value returns the current value or a zero-initialized value if the
+// iterator has advanced beyond the end of the collection.
+func (iter AlertsSuppressionRulesListIterator) Value() AlertsSuppressionRule {
+	if !iter.page.NotDone() {
+		return AlertsSuppressionRule{}
+	}
+	return iter.page.Values()[iter.i]
+}
+
+// Creates a new instance of the AlertsSuppressionRulesListIterator type.
+func NewAlertsSuppressionRulesListIterator(page AlertsSuppressionRulesListPage) AlertsSuppressionRulesListIterator {
+	return AlertsSuppressionRulesListIterator{page: page}
+}
+
+// IsEmpty returns true if the ListResult contains no values.
+func (asrl AlertsSuppressionRulesList) IsEmpty() bool {
+	return asrl.Value == nil || len(*asrl.Value) == 0
+}
+
+// alertsSuppressionRulesListPreparer prepares a request to retrieve the next set of results.
+// It returns nil if no more results exist.
+func (asrl AlertsSuppressionRulesList) alertsSuppressionRulesListPreparer(ctx context.Context) (*http.Request, error) {
+	if asrl.NextLink == nil || len(to.String(asrl.NextLink)) < 1 {
+		return nil, nil
+	}
+	return autorest.Prepare((&http.Request{}).WithContext(ctx),
+		autorest.AsJSON(),
+		autorest.AsGet(),
+		autorest.WithBaseURL(to.String(asrl.NextLink)))
+}
+
+// AlertsSuppressionRulesListPage contains a page of AlertsSuppressionRule values.
+type AlertsSuppressionRulesListPage struct {
+	fn   func(context.Context, AlertsSuppressionRulesList) (AlertsSuppressionRulesList, error)
+	asrl AlertsSuppressionRulesList
+}
+
+// NextWithContext advances to the next page of values.  If there was an error making
+// the request the page does not advance and the error is returned.
+func (page *AlertsSuppressionRulesListPage) NextWithContext(ctx context.Context) (err error) {
+	if tracing.IsEnabled() {
+		ctx = tracing.StartSpan(ctx, fqdn+"/AlertsSuppressionRulesListPage.NextWithContext")
+		defer func() {
+			sc := -1
+			if page.Response().Response.Response != nil {
+				sc = page.Response().Response.Response.StatusCode
+			}
+			tracing.EndSpan(ctx, sc, err)
+		}()
+	}
+	next, err := page.fn(ctx, page.asrl)
+	if err != nil {
+		return err
+	}
+	page.asrl = next
+	return nil
+}
+
+// Next advances to the next page of values.  If there was an error making
+// the request the page does not advance and the error is returned.
+// Deprecated: Use NextWithContext() instead.
+func (page *AlertsSuppressionRulesListPage) Next() error {
+	return page.NextWithContext(context.Background())
+}
+
+// NotDone returns true if the page enumeration should be started or is not yet complete.
+func (page AlertsSuppressionRulesListPage) NotDone() bool {
+	return !page.asrl.IsEmpty()
+}
+
+// Response returns the raw server response from the last page request.
+func (page AlertsSuppressionRulesListPage) Response() AlertsSuppressionRulesList {
+	return page.asrl
+}
+
+// Values returns the slice of values for the current page or nil if there are no values.
+func (page AlertsSuppressionRulesListPage) Values() []AlertsSuppressionRule {
+	if page.asrl.IsEmpty() {
+		return nil
+	}
+	return *page.asrl.Value
+}
+
+// Creates a new instance of the AlertsSuppressionRulesListPage type.
+func NewAlertsSuppressionRulesListPage(getNextPage func(context.Context, AlertsSuppressionRulesList) (AlertsSuppressionRulesList, error)) AlertsSuppressionRulesListPage {
+	return AlertsSuppressionRulesListPage{fn: getNextPage}
 }
 
 // AllowedConnectionsList list of all possible traffic between Azure resources
@@ -5277,6 +5551,8 @@ func NewInformationProtectionPolicyListPage(getNextPage func(context.Context, In
 type InformationProtectionPolicyProperties struct {
 	// LastModifiedUtc - READ-ONLY; Describes the last UTC time the policy was modified.
 	LastModifiedUtc *date.Time `json:"lastModifiedUtc,omitempty"`
+	// Version - READ-ONLY; Describes the version of the policy.
+	Version *string `json:"version,omitempty"`
 	// Labels - Dictionary of sensitivity labels.
 	Labels map[string]*SensitivityLabel `json:"labels"`
 	// InformationTypes - The sensitivity information types.
@@ -5299,8 +5575,10 @@ func (ippp InformationProtectionPolicyProperties) MarshalJSON() ([]byte, error) 
 type InformationType struct {
 	// DisplayName - The name of the information type.
 	DisplayName *string `json:"displayName,omitempty"`
+	// Description - The description of the information type.
+	Description *string `json:"description,omitempty"`
 	// Order - The order of the information type.
-	Order *float64 `json:"order,omitempty"`
+	Order *int32 `json:"order,omitempty"`
 	// RecommendedLabelID - The recommended label id to be associated with this information type.
 	RecommendedLabelID *uuid.UUID `json:"recommendedLabelId,omitempty"`
 	// Enabled - Indicates whether the information type is enabled or not.
@@ -5634,7 +5912,7 @@ type JitNetworkAccessRequestPort struct {
 	EndTimeUtc *date.Time `json:"endTimeUtc,omitempty"`
 	// Status - The status of the port. Possible values include: 'Revoked', 'Initiated'
 	Status Status `json:"status,omitempty"`
-	// StatusReason - A description of why the `status` has its value. Possible values include: 'Expired', 'UserRequested', 'NewerRequestInitiated'
+	// StatusReason - A description of why the `status` has its value. Possible values include: 'StatusReasonExpired', 'StatusReasonUserRequested', 'StatusReasonNewerRequestInitiated'
 	StatusReason StatusReason `json:"statusReason,omitempty"`
 	// MappedPort - The port which is mapped to this port's `number` in the Azure Firewall, if applicable
 	MappedPort *int32 `json:"mappedPort,omitempty"`
@@ -6981,12 +7259,72 @@ type Rule struct {
 	IPAddresses *[]string `json:"ipAddresses,omitempty"`
 }
 
+// ScopeElement a more specific scope used to identify the alerts to suppress.
+type ScopeElement struct {
+	// AdditionalProperties - Unmatched properties from the message are deserialized this collection
+	AdditionalProperties map[string]interface{} `json:""`
+	// Field - The alert entity type to suppress by.
+	Field *string `json:"field,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for ScopeElement.
+func (se ScopeElement) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if se.Field != nil {
+		objectMap["field"] = se.Field
+	}
+	for k, v := range se.AdditionalProperties {
+		objectMap[k] = v
+	}
+	return json.Marshal(objectMap)
+}
+
+// UnmarshalJSON is the custom unmarshaler for ScopeElement struct.
+func (se *ScopeElement) UnmarshalJSON(body []byte) error {
+	var m map[string]*json.RawMessage
+	err := json.Unmarshal(body, &m)
+	if err != nil {
+		return err
+	}
+	for k, v := range m {
+		switch k {
+		default:
+			if v != nil {
+				var additionalProperties interface{}
+				err = json.Unmarshal(*v, &additionalProperties)
+				if err != nil {
+					return err
+				}
+				if se.AdditionalProperties == nil {
+					se.AdditionalProperties = make(map[string]interface{})
+				}
+				se.AdditionalProperties[k] = additionalProperties
+			}
+		case "field":
+			if v != nil {
+				var field string
+				err = json.Unmarshal(*v, &field)
+				if err != nil {
+					return err
+				}
+				se.Field = &field
+			}
+		}
+	}
+
+	return nil
+}
+
 // SensitivityLabel the sensitivity label.
 type SensitivityLabel struct {
 	// DisplayName - The name of the sensitivity label.
 	DisplayName *string `json:"displayName,omitempty"`
+	// Description - The description of the sensitivity label.
+	Description *string `json:"description,omitempty"`
+	// Rank - The rank of the sensitivity label. Possible values include: 'RankNone', 'RankLow', 'RankMedium', 'RankHigh', 'RankCritical'
+	Rank Rank `json:"rank,omitempty"`
 	// Order - The order of the sensitivity label.
-	Order *float64 `json:"order,omitempty"`
+	Order *int32 `json:"order,omitempty"`
 	// Enabled - Indicates whether the label is enabled or not.
 	Enabled *bool `json:"enabled,omitempty"`
 }
@@ -7614,6 +7952,12 @@ type SubAssessmentStatus struct {
 	Description *string `json:"description,omitempty"`
 	// Severity - READ-ONLY; The sub-assessment severity level. Possible values include: 'SeverityLow', 'SeverityMedium', 'SeverityHigh'
 	Severity Severity `json:"severity,omitempty"`
+}
+
+// SuppressionAlertsScope ...
+type SuppressionAlertsScope struct {
+	// AllOf - All the conditions inside need to be true in order to suppress the alert
+	AllOf *[]ScopeElement `json:"allOf,omitempty"`
 }
 
 // Tags a list of key value pairs that describe the resource.
