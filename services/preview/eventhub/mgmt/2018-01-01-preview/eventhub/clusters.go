@@ -107,8 +107,9 @@ func (client ClustersClient) DeletePreparer(ctx context.Context, resourceGroupNa
 // DeleteSender sends the Delete request. The method will close the
 // http.Response Body if it receives an error.
 func (client ClustersClient) DeleteSender(req *http.Request) (future ClustersDeleteFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -198,7 +199,8 @@ func (client ClustersClient) GetPreparer(ctx context.Context, resourceGroupName 
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client ClustersClient) GetSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetResponder handles the response to the Get request. The method always
@@ -269,7 +271,8 @@ func (client ClustersClient) ListAvailableClustersPreparer(ctx context.Context) 
 // ListAvailableClustersSender sends the ListAvailableClusters request. The method will close the
 // http.Response Body if it receives an error.
 func (client ClustersClient) ListAvailableClustersSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListAvailableClustersResponder handles the response to the ListAvailableClusters request. The method always
@@ -351,7 +354,8 @@ func (client ClustersClient) ListByResourceGroupPreparer(ctx context.Context, re
 // ListByResourceGroupSender sends the ListByResourceGroup request. The method will close the
 // http.Response Body if it receives an error.
 func (client ClustersClient) ListByResourceGroupSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListByResourceGroupResponder handles the response to the ListByResourceGroup request. The method always
@@ -474,7 +478,8 @@ func (client ClustersClient) ListNamespacesPreparer(ctx context.Context, resourc
 // ListNamespacesSender sends the ListNamespaces request. The method will close the
 // http.Response Body if it receives an error.
 func (client ClustersClient) ListNamespacesSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListNamespacesResponder handles the response to the ListNamespaces request. The method always
@@ -557,8 +562,9 @@ func (client ClustersClient) PatchPreparer(ctx context.Context, resourceGroupNam
 // PatchSender sends the Patch request. The method will close the
 // http.Response Body if it receives an error.
 func (client ClustersClient) PatchSender(req *http.Request) (future ClustersPatchFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -643,8 +649,9 @@ func (client ClustersClient) PutPreparer(ctx context.Context, resourceGroupName 
 // PutSender sends the Put request. The method will close the
 // http.Response Body if it receives an error.
 func (client ClustersClient) PutSender(req *http.Request) (future ClustersPutFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
