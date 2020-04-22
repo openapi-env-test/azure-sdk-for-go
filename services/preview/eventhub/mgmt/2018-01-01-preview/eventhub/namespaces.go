@@ -46,7 +46,7 @@ func NewNamespacesClientWithBaseURI(baseURI string, subscriptionID string) Names
 // CreateOrUpdate creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This
 // operation is idempotent.
 // Parameters:
-// resourceGroupName - name of the resource group within the Azure subscription.
+// resourceGroupName - name of the resource group within the azure subscription.
 // namespaceName - the Namespace name
 // parameters - parameters for creating a namespace resource.
 func (client NamespacesClient) CreateOrUpdate(ctx context.Context, resourceGroupName string, namespaceName string, parameters EHNamespace) (result NamespacesCreateOrUpdateFuture, err error) {
@@ -124,9 +124,8 @@ func (client NamespacesClient) CreateOrUpdatePreparer(ctx context.Context, resou
 // CreateOrUpdateSender sends the CreateOrUpdate request. The method will close the
 // http.Response Body if it receives an error.
 func (client NamespacesClient) CreateOrUpdateSender(req *http.Request) (future NamespacesCreateOrUpdateFuture, err error) {
-	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = autorest.SendWithSender(client, req, sd...)
+	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
 	if err != nil {
 		return
 	}
@@ -149,7 +148,7 @@ func (client NamespacesClient) CreateOrUpdateResponder(resp *http.Response) (res
 
 // CreateOrUpdateIPFilterRule creates or updates an IpFilterRule for a Namespace.
 // Parameters:
-// resourceGroupName - name of the resource group within the Azure subscription.
+// resourceGroupName - name of the resource group within the azure subscription.
 // namespaceName - the Namespace name
 // IPFilterRuleName - the IP Filter Rule name.
 // parameters - the Namespace IpFilterRule.
@@ -224,8 +223,7 @@ func (client NamespacesClient) CreateOrUpdateIPFilterRulePreparer(ctx context.Co
 // CreateOrUpdateIPFilterRuleSender sends the CreateOrUpdateIPFilterRule request. The method will close the
 // http.Response Body if it receives an error.
 func (client NamespacesClient) CreateOrUpdateIPFilterRuleSender(req *http.Request) (*http.Response, error) {
-	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
-	return autorest.SendWithSender(client, req, sd...)
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // CreateOrUpdateIPFilterRuleResponder handles the response to the CreateOrUpdateIPFilterRule request. The method always
@@ -243,7 +241,7 @@ func (client NamespacesClient) CreateOrUpdateIPFilterRuleResponder(resp *http.Re
 
 // CreateOrUpdateNetworkRuleSet create or update NetworkRuleSet for a Namespace.
 // Parameters:
-// resourceGroupName - name of the resource group within the Azure subscription.
+// resourceGroupName - name of the resource group within the azure subscription.
 // namespaceName - the Namespace name
 // parameters - the Namespace IpFilterRule.
 func (client NamespacesClient) CreateOrUpdateNetworkRuleSet(ctx context.Context, resourceGroupName string, namespaceName string, parameters NetworkRuleSet) (result NetworkRuleSet, err error) {
@@ -314,8 +312,7 @@ func (client NamespacesClient) CreateOrUpdateNetworkRuleSetPreparer(ctx context.
 // CreateOrUpdateNetworkRuleSetSender sends the CreateOrUpdateNetworkRuleSet request. The method will close the
 // http.Response Body if it receives an error.
 func (client NamespacesClient) CreateOrUpdateNetworkRuleSetSender(req *http.Request) (*http.Response, error) {
-	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
-	return autorest.SendWithSender(client, req, sd...)
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // CreateOrUpdateNetworkRuleSetResponder handles the response to the CreateOrUpdateNetworkRuleSet request. The method always
@@ -333,7 +330,7 @@ func (client NamespacesClient) CreateOrUpdateNetworkRuleSetResponder(resp *http.
 
 // CreateOrUpdateVirtualNetworkRule creates or updates an VirtualNetworkRule for a Namespace.
 // Parameters:
-// resourceGroupName - name of the resource group within the Azure subscription.
+// resourceGroupName - name of the resource group within the azure subscription.
 // namespaceName - the Namespace name
 // virtualNetworkRuleName - the Virtual Network Rule name.
 // parameters - the Namespace VirtualNetworkRule.
@@ -408,8 +405,7 @@ func (client NamespacesClient) CreateOrUpdateVirtualNetworkRulePreparer(ctx cont
 // CreateOrUpdateVirtualNetworkRuleSender sends the CreateOrUpdateVirtualNetworkRule request. The method will close the
 // http.Response Body if it receives an error.
 func (client NamespacesClient) CreateOrUpdateVirtualNetworkRuleSender(req *http.Request) (*http.Response, error) {
-	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
-	return autorest.SendWithSender(client, req, sd...)
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // CreateOrUpdateVirtualNetworkRuleResponder handles the response to the CreateOrUpdateVirtualNetworkRule request. The method always
@@ -427,7 +423,7 @@ func (client NamespacesClient) CreateOrUpdateVirtualNetworkRuleResponder(resp *h
 
 // Delete deletes an existing namespace. This operation also removes all associated resources under the namespace.
 // Parameters:
-// resourceGroupName - name of the resource group within the Azure subscription.
+// resourceGroupName - name of the resource group within the azure subscription.
 // namespaceName - the Namespace name
 func (client NamespacesClient) Delete(ctx context.Context, resourceGroupName string, namespaceName string) (result NamespacesDeleteFuture, err error) {
 	if tracing.IsEnabled() {
@@ -489,9 +485,8 @@ func (client NamespacesClient) DeletePreparer(ctx context.Context, resourceGroup
 // DeleteSender sends the Delete request. The method will close the
 // http.Response Body if it receives an error.
 func (client NamespacesClient) DeleteSender(req *http.Request) (future NamespacesDeleteFuture, err error) {
-	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = autorest.SendWithSender(client, req, sd...)
+	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
 	if err != nil {
 		return
 	}
@@ -513,7 +508,7 @@ func (client NamespacesClient) DeleteResponder(resp *http.Response) (result auto
 
 // DeleteIPFilterRule deletes an IpFilterRule for a Namespace.
 // Parameters:
-// resourceGroupName - name of the resource group within the Azure subscription.
+// resourceGroupName - name of the resource group within the azure subscription.
 // namespaceName - the Namespace name
 // IPFilterRuleName - the IP Filter Rule name.
 func (client NamespacesClient) DeleteIPFilterRule(ctx context.Context, resourceGroupName string, namespaceName string, IPFilterRuleName string) (result autorest.Response, err error) {
@@ -585,8 +580,7 @@ func (client NamespacesClient) DeleteIPFilterRulePreparer(ctx context.Context, r
 // DeleteIPFilterRuleSender sends the DeleteIPFilterRule request. The method will close the
 // http.Response Body if it receives an error.
 func (client NamespacesClient) DeleteIPFilterRuleSender(req *http.Request) (*http.Response, error) {
-	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
-	return autorest.SendWithSender(client, req, sd...)
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // DeleteIPFilterRuleResponder handles the response to the DeleteIPFilterRule request. The method always
@@ -603,7 +597,7 @@ func (client NamespacesClient) DeleteIPFilterRuleResponder(resp *http.Response) 
 
 // DeleteVirtualNetworkRule deletes an VirtualNetworkRule for a Namespace.
 // Parameters:
-// resourceGroupName - name of the resource group within the Azure subscription.
+// resourceGroupName - name of the resource group within the azure subscription.
 // namespaceName - the Namespace name
 // virtualNetworkRuleName - the Virtual Network Rule name.
 func (client NamespacesClient) DeleteVirtualNetworkRule(ctx context.Context, resourceGroupName string, namespaceName string, virtualNetworkRuleName string) (result autorest.Response, err error) {
@@ -675,8 +669,7 @@ func (client NamespacesClient) DeleteVirtualNetworkRulePreparer(ctx context.Cont
 // DeleteVirtualNetworkRuleSender sends the DeleteVirtualNetworkRule request. The method will close the
 // http.Response Body if it receives an error.
 func (client NamespacesClient) DeleteVirtualNetworkRuleSender(req *http.Request) (*http.Response, error) {
-	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
-	return autorest.SendWithSender(client, req, sd...)
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // DeleteVirtualNetworkRuleResponder handles the response to the DeleteVirtualNetworkRule request. The method always
@@ -693,7 +686,7 @@ func (client NamespacesClient) DeleteVirtualNetworkRuleResponder(resp *http.Resp
 
 // Get gets the description of the specified namespace.
 // Parameters:
-// resourceGroupName - name of the resource group within the Azure subscription.
+// resourceGroupName - name of the resource group within the azure subscription.
 // namespaceName - the Namespace name
 func (client NamespacesClient) Get(ctx context.Context, resourceGroupName string, namespaceName string) (result EHNamespace, err error) {
 	if tracing.IsEnabled() {
@@ -761,8 +754,7 @@ func (client NamespacesClient) GetPreparer(ctx context.Context, resourceGroupNam
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client NamespacesClient) GetSender(req *http.Request) (*http.Response, error) {
-	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
-	return autorest.SendWithSender(client, req, sd...)
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // GetResponder handles the response to the Get request. The method always
@@ -780,7 +772,7 @@ func (client NamespacesClient) GetResponder(resp *http.Response) (result EHNames
 
 // GetIPFilterRule gets an IpFilterRule for a Namespace by rule name.
 // Parameters:
-// resourceGroupName - name of the resource group within the Azure subscription.
+// resourceGroupName - name of the resource group within the azure subscription.
 // namespaceName - the Namespace name
 // IPFilterRuleName - the IP Filter Rule name.
 func (client NamespacesClient) GetIPFilterRule(ctx context.Context, resourceGroupName string, namespaceName string, IPFilterRuleName string) (result IPFilterRule, err error) {
@@ -852,8 +844,7 @@ func (client NamespacesClient) GetIPFilterRulePreparer(ctx context.Context, reso
 // GetIPFilterRuleSender sends the GetIPFilterRule request. The method will close the
 // http.Response Body if it receives an error.
 func (client NamespacesClient) GetIPFilterRuleSender(req *http.Request) (*http.Response, error) {
-	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
-	return autorest.SendWithSender(client, req, sd...)
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // GetIPFilterRuleResponder handles the response to the GetIPFilterRule request. The method always
@@ -871,7 +862,7 @@ func (client NamespacesClient) GetIPFilterRuleResponder(resp *http.Response) (re
 
 // GetNetworkRuleSet gets NetworkRuleSet for a Namespace.
 // Parameters:
-// resourceGroupName - name of the resource group within the Azure subscription.
+// resourceGroupName - name of the resource group within the azure subscription.
 // namespaceName - the Namespace name
 func (client NamespacesClient) GetNetworkRuleSet(ctx context.Context, resourceGroupName string, namespaceName string) (result NetworkRuleSet, err error) {
 	if tracing.IsEnabled() {
@@ -939,8 +930,7 @@ func (client NamespacesClient) GetNetworkRuleSetPreparer(ctx context.Context, re
 // GetNetworkRuleSetSender sends the GetNetworkRuleSet request. The method will close the
 // http.Response Body if it receives an error.
 func (client NamespacesClient) GetNetworkRuleSetSender(req *http.Request) (*http.Response, error) {
-	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
-	return autorest.SendWithSender(client, req, sd...)
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // GetNetworkRuleSetResponder handles the response to the GetNetworkRuleSet request. The method always
@@ -958,7 +948,7 @@ func (client NamespacesClient) GetNetworkRuleSetResponder(resp *http.Response) (
 
 // GetVirtualNetworkRule gets an VirtualNetworkRule for a Namespace by rule name.
 // Parameters:
-// resourceGroupName - name of the resource group within the Azure subscription.
+// resourceGroupName - name of the resource group within the azure subscription.
 // namespaceName - the Namespace name
 // virtualNetworkRuleName - the Virtual Network Rule name.
 func (client NamespacesClient) GetVirtualNetworkRule(ctx context.Context, resourceGroupName string, namespaceName string, virtualNetworkRuleName string) (result VirtualNetworkRule, err error) {
@@ -1030,8 +1020,7 @@ func (client NamespacesClient) GetVirtualNetworkRulePreparer(ctx context.Context
 // GetVirtualNetworkRuleSender sends the GetVirtualNetworkRule request. The method will close the
 // http.Response Body if it receives an error.
 func (client NamespacesClient) GetVirtualNetworkRuleSender(req *http.Request) (*http.Response, error) {
-	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
-	return autorest.SendWithSender(client, req, sd...)
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // GetVirtualNetworkRuleResponder handles the response to the GetVirtualNetworkRule request. The method always
@@ -1103,8 +1092,7 @@ func (client NamespacesClient) ListPreparer(ctx context.Context) (*http.Request,
 // ListSender sends the List request. The method will close the
 // http.Response Body if it receives an error.
 func (client NamespacesClient) ListSender(req *http.Request) (*http.Response, error) {
-	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
-	return autorest.SendWithSender(client, req, sd...)
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // ListResponder handles the response to the List request. The method always
@@ -1159,7 +1147,7 @@ func (client NamespacesClient) ListComplete(ctx context.Context) (result EHNames
 
 // ListByResourceGroup lists the available Namespaces within a resource group.
 // Parameters:
-// resourceGroupName - name of the resource group within the Azure subscription.
+// resourceGroupName - name of the resource group within the azure subscription.
 func (client NamespacesClient) ListByResourceGroup(ctx context.Context, resourceGroupName string) (result EHNamespaceListResultPage, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/NamespacesClient.ListByResourceGroup")
@@ -1223,8 +1211,7 @@ func (client NamespacesClient) ListByResourceGroupPreparer(ctx context.Context, 
 // ListByResourceGroupSender sends the ListByResourceGroup request. The method will close the
 // http.Response Body if it receives an error.
 func (client NamespacesClient) ListByResourceGroupSender(req *http.Request) (*http.Response, error) {
-	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
-	return autorest.SendWithSender(client, req, sd...)
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // ListByResourceGroupResponder handles the response to the ListByResourceGroup request. The method always
@@ -1279,7 +1266,7 @@ func (client NamespacesClient) ListByResourceGroupComplete(ctx context.Context, 
 
 // ListIPFilterRules gets a list of IP Filter rules for a Namespace.
 // Parameters:
-// resourceGroupName - name of the resource group within the Azure subscription.
+// resourceGroupName - name of the resource group within the azure subscription.
 // namespaceName - the Namespace name
 func (client NamespacesClient) ListIPFilterRules(ctx context.Context, resourceGroupName string, namespaceName string) (result IPFilterRuleListResultPage, err error) {
 	if tracing.IsEnabled() {
@@ -1348,8 +1335,7 @@ func (client NamespacesClient) ListIPFilterRulesPreparer(ctx context.Context, re
 // ListIPFilterRulesSender sends the ListIPFilterRules request. The method will close the
 // http.Response Body if it receives an error.
 func (client NamespacesClient) ListIPFilterRulesSender(req *http.Request) (*http.Response, error) {
-	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
-	return autorest.SendWithSender(client, req, sd...)
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // ListIPFilterRulesResponder handles the response to the ListIPFilterRules request. The method always
@@ -1404,7 +1390,7 @@ func (client NamespacesClient) ListIPFilterRulesComplete(ctx context.Context, re
 
 // ListVirtualNetworkRules gets a list of VirtualNetwork rules for a Namespace.
 // Parameters:
-// resourceGroupName - name of the resource group within the Azure subscription.
+// resourceGroupName - name of the resource group within the azure subscription.
 // namespaceName - the Namespace name
 func (client NamespacesClient) ListVirtualNetworkRules(ctx context.Context, resourceGroupName string, namespaceName string) (result VirtualNetworkRuleListResultPage, err error) {
 	if tracing.IsEnabled() {
@@ -1473,8 +1459,7 @@ func (client NamespacesClient) ListVirtualNetworkRulesPreparer(ctx context.Conte
 // ListVirtualNetworkRulesSender sends the ListVirtualNetworkRules request. The method will close the
 // http.Response Body if it receives an error.
 func (client NamespacesClient) ListVirtualNetworkRulesSender(req *http.Request) (*http.Response, error) {
-	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
-	return autorest.SendWithSender(client, req, sd...)
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // ListVirtualNetworkRulesResponder handles the response to the ListVirtualNetworkRules request. The method always
@@ -1530,7 +1515,7 @@ func (client NamespacesClient) ListVirtualNetworkRulesComplete(ctx context.Conte
 // Update creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation
 // is idempotent.
 // Parameters:
-// resourceGroupName - name of the resource group within the Azure subscription.
+// resourceGroupName - name of the resource group within the azure subscription.
 // namespaceName - the Namespace name
 // parameters - parameters for updating a namespace resource.
 func (client NamespacesClient) Update(ctx context.Context, resourceGroupName string, namespaceName string, parameters EHNamespace) (result EHNamespace, err error) {
@@ -1601,8 +1586,7 @@ func (client NamespacesClient) UpdatePreparer(ctx context.Context, resourceGroup
 // UpdateSender sends the Update request. The method will close the
 // http.Response Body if it receives an error.
 func (client NamespacesClient) UpdateSender(req *http.Request) (*http.Response, error) {
-	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
-	return autorest.SendWithSender(client, req, sd...)
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // UpdateResponder handles the response to the Update request. The method always
