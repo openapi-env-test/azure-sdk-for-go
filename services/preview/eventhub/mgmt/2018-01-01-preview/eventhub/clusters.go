@@ -26,8 +26,7 @@ import (
 	"net/http"
 )
 
-// ClustersClient is the azure Event Hubs client for managing Event Hubs Cluster, IPFilter Rules and
-// VirtualNetworkRules resources.
+// ClustersClient is the client for the Clusters methods of the Eventhub service.
 type ClustersClient struct {
 	BaseClient
 }
@@ -45,7 +44,7 @@ func NewClustersClientWithBaseURI(baseURI string, subscriptionID string) Cluster
 
 // Delete deletes an existing Event Hubs Cluster. This operation is idempotent.
 // Parameters:
-// resourceGroupName - name of the resource group within the Azure subscription.
+// resourceGroupName - name of the resource group within the azure subscription.
 // clusterName - the name of the Event Hubs Cluster.
 func (client ClustersClient) Delete(ctx context.Context, resourceGroupName string, clusterName string) (result ClustersDeleteFuture, err error) {
 	if tracing.IsEnabled() {
@@ -107,9 +106,8 @@ func (client ClustersClient) DeletePreparer(ctx context.Context, resourceGroupNa
 // DeleteSender sends the Delete request. The method will close the
 // http.Response Body if it receives an error.
 func (client ClustersClient) DeleteSender(req *http.Request) (future ClustersDeleteFuture, err error) {
-	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = autorest.SendWithSender(client, req, sd...)
+	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
 	if err != nil {
 		return
 	}
@@ -131,7 +129,7 @@ func (client ClustersClient) DeleteResponder(resp *http.Response) (result autore
 
 // Get gets the resource description of the specified Event Hubs Cluster.
 // Parameters:
-// resourceGroupName - name of the resource group within the Azure subscription.
+// resourceGroupName - name of the resource group within the azure subscription.
 // clusterName - the name of the Event Hubs Cluster.
 func (client ClustersClient) Get(ctx context.Context, resourceGroupName string, clusterName string) (result Cluster, err error) {
 	if tracing.IsEnabled() {
@@ -199,8 +197,7 @@ func (client ClustersClient) GetPreparer(ctx context.Context, resourceGroupName 
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client ClustersClient) GetSender(req *http.Request) (*http.Response, error) {
-	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
-	return autorest.SendWithSender(client, req, sd...)
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // GetResponder handles the response to the Get request. The method always
@@ -271,8 +268,7 @@ func (client ClustersClient) ListAvailableClustersPreparer(ctx context.Context) 
 // ListAvailableClustersSender sends the ListAvailableClusters request. The method will close the
 // http.Response Body if it receives an error.
 func (client ClustersClient) ListAvailableClustersSender(req *http.Request) (*http.Response, error) {
-	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
-	return autorest.SendWithSender(client, req, sd...)
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // ListAvailableClustersResponder handles the response to the ListAvailableClusters request. The method always
@@ -290,7 +286,7 @@ func (client ClustersClient) ListAvailableClustersResponder(resp *http.Response)
 
 // ListByResourceGroup lists the available Event Hubs Clusters within an ARM resource group.
 // Parameters:
-// resourceGroupName - name of the resource group within the Azure subscription.
+// resourceGroupName - name of the resource group within the azure subscription.
 func (client ClustersClient) ListByResourceGroup(ctx context.Context, resourceGroupName string) (result ClusterListResultPage, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/ClustersClient.ListByResourceGroup")
@@ -354,8 +350,7 @@ func (client ClustersClient) ListByResourceGroupPreparer(ctx context.Context, re
 // ListByResourceGroupSender sends the ListByResourceGroup request. The method will close the
 // http.Response Body if it receives an error.
 func (client ClustersClient) ListByResourceGroupSender(req *http.Request) (*http.Response, error) {
-	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
-	return autorest.SendWithSender(client, req, sd...)
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // ListByResourceGroupResponder handles the response to the ListByResourceGroup request. The method always
@@ -410,7 +405,7 @@ func (client ClustersClient) ListByResourceGroupComplete(ctx context.Context, re
 
 // ListNamespaces list all Event Hubs Namespace IDs in an Event Hubs Dedicated Cluster.
 // Parameters:
-// resourceGroupName - name of the resource group within the Azure subscription.
+// resourceGroupName - name of the resource group within the azure subscription.
 // clusterName - the name of the Event Hubs Cluster.
 func (client ClustersClient) ListNamespaces(ctx context.Context, resourceGroupName string, clusterName string) (result EHNamespaceIDListResult, err error) {
 	if tracing.IsEnabled() {
@@ -478,8 +473,7 @@ func (client ClustersClient) ListNamespacesPreparer(ctx context.Context, resourc
 // ListNamespacesSender sends the ListNamespaces request. The method will close the
 // http.Response Body if it receives an error.
 func (client ClustersClient) ListNamespacesSender(req *http.Request) (*http.Response, error) {
-	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
-	return autorest.SendWithSender(client, req, sd...)
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // ListNamespacesResponder handles the response to the ListNamespaces request. The method always
@@ -497,7 +491,7 @@ func (client ClustersClient) ListNamespacesResponder(resp *http.Response) (resul
 
 // Patch modifies mutable properties on the Event Hubs Cluster. This operation is idempotent.
 // Parameters:
-// resourceGroupName - name of the resource group within the Azure subscription.
+// resourceGroupName - name of the resource group within the azure subscription.
 // clusterName - the name of the Event Hubs Cluster.
 // parameters - the properties of the Event Hubs Cluster which should be updated.
 func (client ClustersClient) Patch(ctx context.Context, resourceGroupName string, clusterName string, parameters Cluster) (result ClustersPatchFuture, err error) {
@@ -562,9 +556,8 @@ func (client ClustersClient) PatchPreparer(ctx context.Context, resourceGroupNam
 // PatchSender sends the Patch request. The method will close the
 // http.Response Body if it receives an error.
 func (client ClustersClient) PatchSender(req *http.Request) (future ClustersPatchFuture, err error) {
-	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = autorest.SendWithSender(client, req, sd...)
+	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
 	if err != nil {
 		return
 	}
@@ -587,7 +580,7 @@ func (client ClustersClient) PatchResponder(resp *http.Response) (result Cluster
 
 // Put creates or updates an instance of an Event Hubs Cluster.
 // Parameters:
-// resourceGroupName - name of the resource group within the Azure subscription.
+// resourceGroupName - name of the resource group within the azure subscription.
 // clusterName - the name of the Event Hubs Cluster.
 func (client ClustersClient) Put(ctx context.Context, resourceGroupName string, clusterName string) (result ClustersPutFuture, err error) {
 	if tracing.IsEnabled() {
@@ -649,9 +642,8 @@ func (client ClustersClient) PutPreparer(ctx context.Context, resourceGroupName 
 // PutSender sends the Put request. The method will close the
 // http.Response Body if it receives an error.
 func (client ClustersClient) PutSender(req *http.Request) (future ClustersPutFuture, err error) {
-	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = autorest.SendWithSender(client, req, sd...)
+	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
 	if err != nil {
 		return
 	}
