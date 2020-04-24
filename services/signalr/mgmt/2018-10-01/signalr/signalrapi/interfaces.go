@@ -48,6 +48,23 @@ type ClientAPI interface {
 
 var _ ClientAPI = (*signalr.Client)(nil)
 
+// PrivateEndpointConnectionsClientAPI contains the set of methods on the PrivateEndpointConnectionsClient type.
+type PrivateEndpointConnectionsClientAPI interface {
+	Create(ctx context.Context, privateEndpointConnectionName string, resourceGroupName string, resourceName string, parameters *signalr.PrivateEndpointConnection) (result signalr.PrivateEndpointConnectionsCreateFuture, err error)
+	Delete(ctx context.Context, privateEndpointConnectionName string, resourceGroupName string, resourceName string) (result signalr.PrivateEndpointConnectionsDeleteFuture, err error)
+	Get(ctx context.Context, privateEndpointConnectionName string, resourceGroupName string, resourceName string) (result signalr.PrivateEndpointConnection, err error)
+}
+
+var _ PrivateEndpointConnectionsClientAPI = (*signalr.PrivateEndpointConnectionsClient)(nil)
+
+// PrivateLinkResourcesClientAPI contains the set of methods on the PrivateLinkResourcesClient type.
+type PrivateLinkResourcesClientAPI interface {
+	List(ctx context.Context, resourceGroupName string, resourceName string) (result signalr.PrivateLinkResourceListPage, err error)
+	ListComplete(ctx context.Context, resourceGroupName string, resourceName string) (result signalr.PrivateLinkResourceListIterator, err error)
+}
+
+var _ PrivateLinkResourcesClientAPI = (*signalr.PrivateLinkResourcesClient)(nil)
+
 // UsagesClientAPI contains the set of methods on the UsagesClient type.
 type UsagesClientAPI interface {
 	List(ctx context.Context, location string) (result signalr.UsageListPage, err error)
