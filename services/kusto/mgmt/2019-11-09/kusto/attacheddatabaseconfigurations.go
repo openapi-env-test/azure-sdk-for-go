@@ -113,8 +113,9 @@ func (client AttachedDatabaseConfigurationsClient) CreateOrUpdatePreparer(ctx co
 // CreateOrUpdateSender sends the CreateOrUpdate request. The method will close the
 // http.Response Body if it receives an error.
 func (client AttachedDatabaseConfigurationsClient) CreateOrUpdateSender(req *http.Request) (future AttachedDatabaseConfigurationsCreateOrUpdateFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -191,8 +192,9 @@ func (client AttachedDatabaseConfigurationsClient) DeletePreparer(ctx context.Co
 // DeleteSender sends the Delete request. The method will close the
 // http.Response Body if it receives an error.
 func (client AttachedDatabaseConfigurationsClient) DeleteSender(req *http.Request) (future AttachedDatabaseConfigurationsDeleteFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -274,7 +276,8 @@ func (client AttachedDatabaseConfigurationsClient) GetPreparer(ctx context.Conte
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client AttachedDatabaseConfigurationsClient) GetSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetResponder handles the response to the Get request. The method always
@@ -350,7 +353,8 @@ func (client AttachedDatabaseConfigurationsClient) ListByClusterPreparer(ctx con
 // ListByClusterSender sends the ListByCluster request. The method will close the
 // http.Response Body if it receives an error.
 func (client AttachedDatabaseConfigurationsClient) ListByClusterSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListByClusterResponder handles the response to the ListByCluster request. The method always
