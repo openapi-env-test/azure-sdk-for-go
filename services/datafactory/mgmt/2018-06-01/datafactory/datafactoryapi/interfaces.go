@@ -33,7 +33,6 @@ var _ OperationsClientAPI = (*datafactory.OperationsClient)(nil)
 
 // FactoriesClientAPI contains the set of methods on the FactoriesClient type.
 type FactoriesClientAPI interface {
-	ConfigureFactoryRepo(ctx context.Context, locationID string, factoryRepoUpdate datafactory.FactoryRepoUpdate) (result datafactory.Factory, err error)
 	CreateOrUpdate(ctx context.Context, resourceGroupName string, factoryName string, factory datafactory.Factory, ifMatch string) (result datafactory.Factory, err error)
 	Delete(ctx context.Context, resourceGroupName string, factoryName string) (result autorest.Response, err error)
 	Get(ctx context.Context, resourceGroupName string, factoryName string, ifNoneMatch string) (result datafactory.Factory, err error)
