@@ -834,6 +834,94 @@ func (client FactoriesClient) ListByResourceGroupComplete(ctx context.Context, r
 	return
 }
 
+// ResetFactoryRepo reset a factory's repo information.
+// Parameters:
+// locationID - the location identifier.
+// factoryRepoUpdate - update factory repo request definition.
+func (client FactoriesClient) ResetFactoryRepo(ctx context.Context, locationID string, factoryRepoUpdate FactoryRepoUpdate) (result Factory, err error) {
+	if tracing.IsEnabled() {
+		ctx = tracing.StartSpan(ctx, fqdn+"/FactoriesClient.ResetFactoryRepo")
+		defer func() {
+			sc := -1
+			if result.Response.Response != nil {
+				sc = result.Response.Response.StatusCode
+			}
+			tracing.EndSpan(ctx, sc, err)
+		}()
+	}
+	if err := validation.Validate([]validation.Validation{
+		{TargetValue: factoryRepoUpdate,
+			Constraints: []validation.Constraint{{Target: "factoryRepoUpdate.RepoConfiguration", Name: validation.Null, Rule: false,
+				Chain: []validation.Constraint{{Target: "factoryRepoUpdate.RepoConfiguration.AccountName", Name: validation.Null, Rule: true, Chain: nil},
+					{Target: "factoryRepoUpdate.RepoConfiguration.RepositoryName", Name: validation.Null, Rule: true, Chain: nil},
+					{Target: "factoryRepoUpdate.RepoConfiguration.CollaborationBranch", Name: validation.Null, Rule: true, Chain: nil},
+					{Target: "factoryRepoUpdate.RepoConfiguration.RootFolder", Name: validation.Null, Rule: true, Chain: nil},
+				}}}}}); err != nil {
+		return result, validation.NewError("datafactory.FactoriesClient", "ResetFactoryRepo", err.Error())
+	}
+
+	req, err := client.ResetFactoryRepoPreparer(ctx, locationID, factoryRepoUpdate)
+	if err != nil {
+		err = autorest.NewErrorWithError(err, "datafactory.FactoriesClient", "ResetFactoryRepo", nil, "Failure preparing request")
+		return
+	}
+
+	resp, err := client.ResetFactoryRepoSender(req)
+	if err != nil {
+		result.Response = autorest.Response{Response: resp}
+		err = autorest.NewErrorWithError(err, "datafactory.FactoriesClient", "ResetFactoryRepo", resp, "Failure sending request")
+		return
+	}
+
+	result, err = client.ResetFactoryRepoResponder(resp)
+	if err != nil {
+		err = autorest.NewErrorWithError(err, "datafactory.FactoriesClient", "ResetFactoryRepo", resp, "Failure responding to request")
+	}
+
+	return
+}
+
+// ResetFactoryRepoPreparer prepares the ResetFactoryRepo request.
+func (client FactoriesClient) ResetFactoryRepoPreparer(ctx context.Context, locationID string, factoryRepoUpdate FactoryRepoUpdate) (*http.Request, error) {
+	pathParameters := map[string]interface{}{
+		"locationId":     autorest.Encode("path", locationID),
+		"subscriptionId": autorest.Encode("path", client.SubscriptionID),
+	}
+
+	const APIVersion = "2018-06-01"
+	queryParameters := map[string]interface{}{
+		"api-version": APIVersion,
+	}
+
+	preparer := autorest.CreatePreparer(
+		autorest.AsContentType("application/json; charset=utf-8"),
+		autorest.AsPost(),
+		autorest.WithBaseURL(client.BaseURI),
+		autorest.WithPathParameters("/subscriptions/{subscriptionId}/providers/Microsoft.DataFactory/locations/{locationId}/resetFactoryRepo", pathParameters),
+		autorest.WithJSON(factoryRepoUpdate),
+		autorest.WithQueryParameters(queryParameters))
+	return preparer.Prepare((&http.Request{}).WithContext(ctx))
+}
+
+// ResetFactoryRepoSender sends the ResetFactoryRepo request. The method will close the
+// http.Response Body if it receives an error.
+func (client FactoriesClient) ResetFactoryRepoSender(req *http.Request) (*http.Response, error) {
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+}
+
+// ResetFactoryRepoResponder handles the response to the ResetFactoryRepo request. The method always
+// closes the http.Response Body.
+func (client FactoriesClient) ResetFactoryRepoResponder(resp *http.Response) (result Factory, err error) {
+	err = autorest.Respond(
+		resp,
+		client.ByInspecting(),
+		azure.WithErrorUnlessStatusCode(http.StatusOK),
+		autorest.ByUnmarshallingJSON(&result),
+		autorest.ByClosing())
+	result.Response = autorest.Response{Response: resp}
+	return
+}
+
 // Update updates a factory.
 // Parameters:
 // resourceGroupName - the resource group name.
