@@ -1321,7 +1321,7 @@ type DatabaseProperties struct {
 	CatalogCollation CatalogCollationType `json:"catalogCollation,omitempty"`
 	// ZoneRedundant - Whether or not this database is zone redundant, which means the replicas of this database will be spread across multiple availability zones.
 	ZoneRedundant *bool `json:"zoneRedundant,omitempty"`
-	// LicenseType - The license type to apply for this database. Possible values include: 'LicenseIncluded', 'BasePrice'
+	// LicenseType - The license type to apply for this database. `LicenseIncluded` if you need a license, or `BasePrice` if you have a license and are eligible for the Azure Hybrid Benefit. Possible values include: 'LicenseIncluded', 'BasePrice'
 	LicenseType DatabaseLicenseType `json:"licenseType,omitempty"`
 	// MaxLogSizeBytes - READ-ONLY; The max log size for this database.
 	MaxLogSizeBytes *int64 `json:"maxLogSizeBytes,omitempty"`
@@ -1341,6 +1341,8 @@ type DatabaseProperties struct {
 	PausedDate *date.Time `json:"pausedDate,omitempty"`
 	// ResumedDate - READ-ONLY; The date when database was resumed by user action or database login (ISO8601 format). Null if the database is paused.
 	ResumedDate *date.Time `json:"resumedDate,omitempty"`
+	// MaintenanceConfigurationID - Maintenance configuration id assigned to the database
+	MaintenanceConfigurationID *string `json:"maintenanceConfigurationId,omitempty"`
 }
 
 // DatabasesCreateOrUpdateFuture an abstraction for monitoring and retrieving the results of a long-running
@@ -2623,6 +2625,8 @@ type ElasticPoolProperties struct {
 	ZoneRedundant *bool `json:"zoneRedundant,omitempty"`
 	// LicenseType - The license type to apply for this elastic pool. Possible values include: 'ElasticPoolLicenseTypeLicenseIncluded', 'ElasticPoolLicenseTypeBasePrice'
 	LicenseType ElasticPoolLicenseType `json:"licenseType,omitempty"`
+	// MaintenanceConfigurationID - Maintenance configuration id assigned to the elastic pool.
+	MaintenanceConfigurationID *string `json:"maintenanceConfigurationId,omitempty"`
 }
 
 // ElasticPoolsCreateOrUpdateFuture an abstraction for monitoring and retrieving the results of a
@@ -2782,6 +2786,8 @@ type ElasticPoolUpdateProperties struct {
 	ZoneRedundant *bool `json:"zoneRedundant,omitempty"`
 	// LicenseType - The license type to apply for this elastic pool. Possible values include: 'ElasticPoolLicenseTypeLicenseIncluded', 'ElasticPoolLicenseTypeBasePrice'
 	LicenseType ElasticPoolLicenseType `json:"licenseType,omitempty"`
+	// MaintenanceConfigurationID - Maintenance configuration id assigned to the elastic pool.
+	MaintenanceConfigurationID *string `json:"maintenanceConfigurationId,omitempty"`
 }
 
 // InstanceFailoverGroup an instance failover group.
