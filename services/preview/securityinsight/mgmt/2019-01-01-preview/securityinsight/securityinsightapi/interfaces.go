@@ -184,7 +184,9 @@ var _ OfficeConsentsClientAPI = (*securityinsight.OfficeConsentsClient)(nil)
 
 // ProductSettingsClientAPI contains the set of methods on the ProductSettingsClient type.
 type ProductSettingsClientAPI interface {
+	Delete(ctx context.Context, resourceGroupName string, operationalInsightsResourceProvider string, workspaceName string, settingsName string) (result autorest.Response, err error)
 	Get(ctx context.Context, resourceGroupName string, operationalInsightsResourceProvider string, workspaceName string, settingsName string) (result securityinsight.SettingsModel, err error)
+	GetAll(ctx context.Context, resourceGroupName string, operationalInsightsResourceProvider string, workspaceName string) (result securityinsight.SettingList, err error)
 	Update(ctx context.Context, resourceGroupName string, operationalInsightsResourceProvider string, workspaceName string, settingsName string, settings securityinsight.BasicSettings) (result securityinsight.SettingsModel, err error)
 }
 
