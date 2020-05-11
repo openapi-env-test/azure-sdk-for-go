@@ -208,6 +208,86 @@ func (client ManagedInstancesClient) DeleteResponder(resp *http.Response) (resul
 	return
 }
 
+// Failover failovers a managed instance.
+// Parameters:
+// resourceGroupName - the name of the resource group that contains the resource. You can obtain this value
+// from the Azure Resource Manager API or the portal.
+// managedInstanceName - the name of the managed instance to failover.
+// replicaType - the type of replica to be failed over.
+func (client ManagedInstancesClient) Failover(ctx context.Context, resourceGroupName string, managedInstanceName string, replicaType ReplicaType) (result ManagedInstancesFailoverFuture, err error) {
+	if tracing.IsEnabled() {
+		ctx = tracing.StartSpan(ctx, fqdn+"/ManagedInstancesClient.Failover")
+		defer func() {
+			sc := -1
+			if result.Response() != nil {
+				sc = result.Response().StatusCode
+			}
+			tracing.EndSpan(ctx, sc, err)
+		}()
+	}
+	req, err := client.FailoverPreparer(ctx, resourceGroupName, managedInstanceName, replicaType)
+	if err != nil {
+		err = autorest.NewErrorWithError(err, "sql.ManagedInstancesClient", "Failover", nil, "Failure preparing request")
+		return
+	}
+
+	result, err = client.FailoverSender(req)
+	if err != nil {
+		err = autorest.NewErrorWithError(err, "sql.ManagedInstancesClient", "Failover", result.Response(), "Failure sending request")
+		return
+	}
+
+	return
+}
+
+// FailoverPreparer prepares the Failover request.
+func (client ManagedInstancesClient) FailoverPreparer(ctx context.Context, resourceGroupName string, managedInstanceName string, replicaType ReplicaType) (*http.Request, error) {
+	pathParameters := map[string]interface{}{
+		"managedInstanceName": autorest.Encode("path", managedInstanceName),
+		"resourceGroupName":   autorest.Encode("path", resourceGroupName),
+		"subscriptionId":      autorest.Encode("path", client.SubscriptionID),
+	}
+
+	const APIVersion = "2019-06-01-preview"
+	queryParameters := map[string]interface{}{
+		"api-version": APIVersion,
+	}
+	if len(string(replicaType)) > 0 {
+		queryParameters["replicaType"] = autorest.Encode("query", replicaType)
+	}
+
+	preparer := autorest.CreatePreparer(
+		autorest.AsPost(),
+		autorest.WithBaseURL(client.BaseURI),
+		autorest.WithPathParameters("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/failover", pathParameters),
+		autorest.WithQueryParameters(queryParameters))
+	return preparer.Prepare((&http.Request{}).WithContext(ctx))
+}
+
+// FailoverSender sends the Failover request. The method will close the
+// http.Response Body if it receives an error.
+func (client ManagedInstancesClient) FailoverSender(req *http.Request) (future ManagedInstancesFailoverFuture, err error) {
+	var resp *http.Response
+	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	if err != nil {
+		return
+	}
+	future.Future, err = azure.NewFutureFromResponse(resp)
+	return
+}
+
+// FailoverResponder handles the response to the Failover request. The method always
+// closes the http.Response Body.
+func (client ManagedInstancesClient) FailoverResponder(resp *http.Response) (result autorest.Response, err error) {
+	err = autorest.Respond(
+		resp,
+		client.ByInspecting(),
+		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusAccepted),
+		autorest.ByClosing())
+	result.Response = resp
+	return
+}
+
 // Get gets a managed instance.
 // Parameters:
 // resourceGroupName - the name of the resource group that contains the resource. You can obtain this value
