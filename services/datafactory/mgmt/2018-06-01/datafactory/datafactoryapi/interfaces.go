@@ -43,6 +43,7 @@ type FactoriesClientAPI interface {
 	ListComplete(ctx context.Context) (result datafactory.FactoryListResponseIterator, err error)
 	ListByResourceGroup(ctx context.Context, resourceGroupName string) (result datafactory.FactoryListResponsePage, err error)
 	ListByResourceGroupComplete(ctx context.Context, resourceGroupName string) (result datafactory.FactoryListResponseIterator, err error)
+	ResetFactoryRepo(ctx context.Context, locationID string, factoryRepoUpdate datafactory.FactoryRepoUpdate) (result datafactory.Factory, err error)
 	Update(ctx context.Context, resourceGroupName string, factoryName string, factoryUpdateParameters datafactory.FactoryUpdateParameters) (result datafactory.Factory, err error)
 }
 
