@@ -131,6 +131,114 @@ func (client FactoriesClient) ConfigureFactoryRepoResponder(resp *http.Response)
 	return
 }
 
+// CreateOrUpdate creates or updates a factory.
+// Parameters:
+// resourceGroupName - the resource group name.
+// factoryName - the factory name.
+// factory - factory resource definition.
+// ifMatch - eTag of the factory entity. Should only be specified for update, for which it should match
+// existing entity or can be * for unconditional update.
+func (client FactoriesClient) CreateOrUpdate(ctx context.Context, resourceGroupName string, factoryName string, factory Factory, ifMatch string) (result Factory, err error) {
+	if tracing.IsEnabled() {
+		ctx = tracing.StartSpan(ctx, fqdn+"/FactoriesClient.CreateOrUpdate")
+		defer func() {
+			sc := -1
+			if result.Response.Response != nil {
+				sc = result.Response.Response.StatusCode
+			}
+			tracing.EndSpan(ctx, sc, err)
+		}()
+	}
+	if err := validation.Validate([]validation.Validation{
+		{TargetValue: resourceGroupName,
+			Constraints: []validation.Constraint{{Target: "resourceGroupName", Name: validation.MaxLength, Rule: 90, Chain: nil},
+				{Target: "resourceGroupName", Name: validation.MinLength, Rule: 1, Chain: nil},
+				{Target: "resourceGroupName", Name: validation.Pattern, Rule: `^[-\w\._\(\)]+$`, Chain: nil}}},
+		{TargetValue: factoryName,
+			Constraints: []validation.Constraint{{Target: "factoryName", Name: validation.MaxLength, Rule: 63, Chain: nil},
+				{Target: "factoryName", Name: validation.MinLength, Rule: 3, Chain: nil},
+				{Target: "factoryName", Name: validation.Pattern, Rule: `^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$`, Chain: nil}}},
+		{TargetValue: factory,
+			Constraints: []validation.Constraint{{Target: "factory.Identity", Name: validation.Null, Rule: false,
+				Chain: []validation.Constraint{{Target: "factory.Identity.Type", Name: validation.Null, Rule: true, Chain: nil}}},
+				{Target: "factory.FactoryProperties", Name: validation.Null, Rule: false,
+					Chain: []validation.Constraint{{Target: "factory.FactoryProperties.RepoConfiguration", Name: validation.Null, Rule: false,
+						Chain: []validation.Constraint{{Target: "factory.FactoryProperties.RepoConfiguration.AccountName", Name: validation.Null, Rule: true, Chain: nil},
+							{Target: "factory.FactoryProperties.RepoConfiguration.RepositoryName", Name: validation.Null, Rule: true, Chain: nil},
+							{Target: "factory.FactoryProperties.RepoConfiguration.CollaborationBranch", Name: validation.Null, Rule: true, Chain: nil},
+							{Target: "factory.FactoryProperties.RepoConfiguration.RootFolder", Name: validation.Null, Rule: true, Chain: nil},
+						}},
+					}}}}}); err != nil {
+		return result, validation.NewError("datafactory.FactoriesClient", "CreateOrUpdate", err.Error())
+	}
+
+	req, err := client.CreateOrUpdatePreparer(ctx, resourceGroupName, factoryName, factory, ifMatch)
+	if err != nil {
+		err = autorest.NewErrorWithError(err, "datafactory.FactoriesClient", "CreateOrUpdate", nil, "Failure preparing request")
+		return
+	}
+
+	resp, err := client.CreateOrUpdateSender(req)
+	if err != nil {
+		result.Response = autorest.Response{Response: resp}
+		err = autorest.NewErrorWithError(err, "datafactory.FactoriesClient", "CreateOrUpdate", resp, "Failure sending request")
+		return
+	}
+
+	result, err = client.CreateOrUpdateResponder(resp)
+	if err != nil {
+		err = autorest.NewErrorWithError(err, "datafactory.FactoriesClient", "CreateOrUpdate", resp, "Failure responding to request")
+	}
+
+	return
+}
+
+// CreateOrUpdatePreparer prepares the CreateOrUpdate request.
+func (client FactoriesClient) CreateOrUpdatePreparer(ctx context.Context, resourceGroupName string, factoryName string, factory Factory, ifMatch string) (*http.Request, error) {
+	pathParameters := map[string]interface{}{
+		"factoryName":       autorest.Encode("path", factoryName),
+		"resourceGroupName": autorest.Encode("path", resourceGroupName),
+		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
+	}
+
+	const APIVersion = "2018-06-01"
+	queryParameters := map[string]interface{}{
+		"api-version": APIVersion,
+	}
+
+	preparer := autorest.CreatePreparer(
+		autorest.AsContentType("application/json; charset=utf-8"),
+		autorest.AsPut(),
+		autorest.WithBaseURL(client.BaseURI),
+		autorest.WithPathParameters("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}", pathParameters),
+		autorest.WithJSON(factory),
+		autorest.WithQueryParameters(queryParameters))
+	if len(ifMatch) > 0 {
+		preparer = autorest.DecoratePreparer(preparer,
+			autorest.WithHeader("If-Match", autorest.String(ifMatch)))
+	}
+	return preparer.Prepare((&http.Request{}).WithContext(ctx))
+}
+
+// CreateOrUpdateSender sends the CreateOrUpdate request. The method will close the
+// http.Response Body if it receives an error.
+func (client FactoriesClient) CreateOrUpdateSender(req *http.Request) (*http.Response, error) {
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+}
+
+// CreateOrUpdateResponder handles the response to the CreateOrUpdate request. The method always
+// closes the http.Response Body.
+func (client FactoriesClient) CreateOrUpdateResponder(resp *http.Response) (result Factory, err error) {
+	err = autorest.Respond(
+		resp,
+		client.ByInspecting(),
+		azure.WithErrorUnlessStatusCode(http.StatusOK),
+		autorest.ByUnmarshallingJSON(&result),
+		autorest.ByClosing())
+	result.Response = autorest.Response{Response: resp}
+	return
+}
+
 // GetDataPlaneAccess get Data Plane access.
 // Parameters:
 // resourceGroupName - the resource group name.

@@ -34,6 +34,7 @@ var _ OperationsClientAPI = (*datafactory.OperationsClient)(nil)
 // FactoriesClientAPI contains the set of methods on the FactoriesClient type.
 type FactoriesClientAPI interface {
 	ConfigureFactoryRepo(ctx context.Context, locationID string, factoryRepoUpdate datafactory.FactoryRepoUpdate) (result datafactory.Factory, err error)
+	CreateOrUpdate(ctx context.Context, resourceGroupName string, factoryName string, factory datafactory.Factory, ifMatch string) (result datafactory.Factory, err error)
 	GetDataPlaneAccess(ctx context.Context, resourceGroupName string, factoryName string, policy datafactory.UserAccessPolicy) (result datafactory.AccessPolicyResponse, err error)
 	GetGitHubAccessToken(ctx context.Context, resourceGroupName string, factoryName string, gitHubAccessTokenRequest datafactory.GitHubAccessTokenRequest) (result datafactory.GitHubAccessTokenResponse, err error)
 	List(ctx context.Context) (result datafactory.FactoryListResponsePage, err error)
