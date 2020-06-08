@@ -79,16 +79,10 @@ func (client OperationsClient) List(ctx context.Context) (result OperationEntity
 
 // ListPreparer prepares the List request.
 func (client OperationsClient) ListPreparer(ctx context.Context) (*http.Request, error) {
-	const APIVersion = "2016-05-01-preview"
-	queryParameters := map[string]interface{}{
-		"api-version": APIVersion,
-	}
-
 	preparer := autorest.CreatePreparer(
 		autorest.AsGet(),
 		autorest.WithBaseURL(client.BaseURI),
-		autorest.WithPath("/providers/Microsoft.MachineLearning/operations"),
-		autorest.WithQueryParameters(queryParameters))
+		autorest.WithPath("/providers/Microsoft.MachineLearning/operations"))
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
 }
 
@@ -103,7 +97,6 @@ func (client OperationsClient) ListSender(req *http.Request) (*http.Response, er
 func (client OperationsClient) ListResponder(resp *http.Response) (result OperationEntityListResult, err error) {
 	err = autorest.Respond(
 		resp,
-		client.ByInspecting(),
 		azure.WithErrorUnlessStatusCode(http.StatusOK),
 		autorest.ByUnmarshallingJSON(&result),
 		autorest.ByClosing())
