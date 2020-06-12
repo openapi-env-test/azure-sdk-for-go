@@ -91,7 +91,7 @@ func (client ServicesClient) CheckDeviceServiceNameAvailabilityPreparer(ctx cont
 		"subscriptionId": autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2019-06-01"
+	const APIVersion = "2019-06-02"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -117,7 +117,6 @@ func (client ServicesClient) CheckDeviceServiceNameAvailabilitySender(req *http.
 func (client ServicesClient) CheckDeviceServiceNameAvailabilityResponder(resp *http.Response) (result DeviceServiceNameAvailabilityInfo, err error) {
 	err = autorest.Respond(
 		resp,
-		client.ByInspecting(),
 		azure.WithErrorUnlessStatusCode(http.StatusOK),
 		autorest.ByUnmarshallingJSON(&result),
 		autorest.ByClosing())
@@ -174,7 +173,7 @@ func (client ServicesClient) CreateOrUpdatePreparer(ctx context.Context, resourc
 		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2019-06-01"
+	const APIVersion = "2019-06-02"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -205,7 +204,6 @@ func (client ServicesClient) CreateOrUpdateSender(req *http.Request) (*http.Resp
 func (client ServicesClient) CreateOrUpdateResponder(resp *http.Response) (result DeviceService, err error) {
 	err = autorest.Respond(
 		resp,
-		client.ByInspecting(),
 		azure.WithErrorUnlessStatusCode(http.StatusOK),
 		autorest.ByUnmarshallingJSON(&result),
 		autorest.ByClosing())
@@ -257,7 +255,7 @@ func (client ServicesClient) DeletePreparer(ctx context.Context, resourceGroupNa
 		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2019-06-01"
+	const APIVersion = "2019-06-02"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -281,7 +279,6 @@ func (client ServicesClient) DeleteSender(req *http.Request) (*http.Response, er
 func (client ServicesClient) DeleteResponder(resp *http.Response) (result DeviceService, err error) {
 	err = autorest.Respond(
 		resp,
-		client.ByInspecting(),
 		azure.WithErrorUnlessStatusCode(http.StatusOK),
 		autorest.ByUnmarshallingJSON(&result),
 		autorest.ByClosing())
@@ -333,7 +330,7 @@ func (client ServicesClient) GetPreparer(ctx context.Context, resourceGroupName 
 		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2019-06-01"
+	const APIVersion = "2019-06-02"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -357,7 +354,6 @@ func (client ServicesClient) GetSender(req *http.Request) (*http.Response, error
 func (client ServicesClient) GetResponder(resp *http.Response) (result DeviceService, err error) {
 	err = autorest.Respond(
 		resp,
-		client.ByInspecting(),
 		azure.WithErrorUnlessStatusCode(http.StatusOK),
 		autorest.ByUnmarshallingJSON(&result),
 		autorest.ByClosing())
@@ -405,7 +401,7 @@ func (client ServicesClient) ListPreparer(ctx context.Context) (*http.Request, e
 		"subscriptionId": autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2019-06-01"
+	const APIVersion = "2019-06-02"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -429,7 +425,6 @@ func (client ServicesClient) ListSender(req *http.Request) (*http.Response, erro
 func (client ServicesClient) ListResponder(resp *http.Response) (result DeviceServiceDescriptionListResult, err error) {
 	err = autorest.Respond(
 		resp,
-		client.ByInspecting(),
 		azure.WithErrorUnlessStatusCode(http.StatusOK),
 		autorest.ByUnmarshallingJSON(&result),
 		autorest.ByClosing())
@@ -517,7 +512,7 @@ func (client ServicesClient) ListByResourceGroupPreparer(ctx context.Context, re
 		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2019-06-01"
+	const APIVersion = "2019-06-02"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -541,7 +536,6 @@ func (client ServicesClient) ListByResourceGroupSender(req *http.Request) (*http
 func (client ServicesClient) ListByResourceGroupResponder(resp *http.Response) (result DeviceServiceDescriptionListResult, err error) {
 	err = autorest.Respond(
 		resp,
-		client.ByInspecting(),
 		azure.WithErrorUnlessStatusCode(http.StatusOK),
 		autorest.ByUnmarshallingJSON(&result),
 		autorest.ByClosing())
@@ -635,7 +629,7 @@ func (client ServicesClient) UpdatePreparer(ctx context.Context, resourceGroupNa
 		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2019-06-01"
+	const APIVersion = "2019-06-02"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -666,7 +660,6 @@ func (client ServicesClient) UpdateSender(req *http.Request) (*http.Response, er
 func (client ServicesClient) UpdateResponder(resp *http.Response) (result DeviceService, err error) {
 	err = autorest.Respond(
 		resp,
-		client.ByInspecting(),
 		azure.WithErrorUnlessStatusCode(http.StatusOK),
 		autorest.ByUnmarshallingJSON(&result),
 		autorest.ByClosing())
