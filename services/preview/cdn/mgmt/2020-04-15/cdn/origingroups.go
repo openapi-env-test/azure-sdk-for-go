@@ -347,6 +347,9 @@ func (client OriginGroupsClient) ListByEndpoint(ctx context.Context, resourceGro
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "cdn.OriginGroupsClient", "ListByEndpoint", resp, "Failure responding to request")
 	}
+	if result.oglr.hasNextLink() && result.oglr.IsEmpty() {
+		err = result.NextWithContext(ctx)
+	}
 
 	return
 }

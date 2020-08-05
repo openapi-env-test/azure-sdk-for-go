@@ -45,7 +45,6 @@ type ProfilesClientAPI interface {
 	ListResourceUsage(ctx context.Context, resourceGroupName string, profileName string) (result cdn.ResourceUsageListResultPage, err error)
 	ListResourceUsageComplete(ctx context.Context, resourceGroupName string, profileName string) (result cdn.ResourceUsageListResultIterator, err error)
 	ListSupportedOptimizationTypes(ctx context.Context, resourceGroupName string, profileName string) (result cdn.SupportedOptimizationTypesListResult, err error)
-	Update(ctx context.Context, resourceGroupName string, profileName string, profileUpdateParameters cdn.ProfileUpdateParameters) (result cdn.ProfilesUpdateFuture, err error)
 }
 
 var _ ProfilesClientAPI = (*cdn.ProfilesClient)(nil)

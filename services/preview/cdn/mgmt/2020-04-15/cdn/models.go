@@ -30,1079 +30,6 @@ import (
 // The package's fully qualified name.
 const fqdn = "github.com/Azure/azure-sdk-for-go/services/preview/cdn/mgmt/2020-04-15/cdn"
 
-// ActionType enumerates the values for action type.
-type ActionType string
-
-const (
-	// Allow ...
-	Allow ActionType = "Allow"
-	// Block ...
-	Block ActionType = "Block"
-	// Log ...
-	Log ActionType = "Log"
-	// Redirect ...
-	Redirect ActionType = "Redirect"
-)
-
-// PossibleActionTypeValues returns an array of possible values for the ActionType const type.
-func PossibleActionTypeValues() []ActionType {
-	return []ActionType{Allow, Block, Log, Redirect}
-}
-
-// Algorithm enumerates the values for algorithm.
-type Algorithm string
-
-const (
-	// SHA256 ...
-	SHA256 Algorithm = "SHA256"
-)
-
-// PossibleAlgorithmValues returns an array of possible values for the Algorithm const type.
-func PossibleAlgorithmValues() []Algorithm {
-	return []Algorithm{SHA256}
-}
-
-// CacheBehavior enumerates the values for cache behavior.
-type CacheBehavior string
-
-const (
-	// BypassCache ...
-	BypassCache CacheBehavior = "BypassCache"
-	// Override ...
-	Override CacheBehavior = "Override"
-	// SetIfMissing ...
-	SetIfMissing CacheBehavior = "SetIfMissing"
-)
-
-// PossibleCacheBehaviorValues returns an array of possible values for the CacheBehavior const type.
-func PossibleCacheBehaviorValues() []CacheBehavior {
-	return []CacheBehavior{BypassCache, Override, SetIfMissing}
-}
-
-// CertificateSource enumerates the values for certificate source.
-type CertificateSource string
-
-const (
-	// CertificateSourceAzureKeyVault ...
-	CertificateSourceAzureKeyVault CertificateSource = "AzureKeyVault"
-	// CertificateSourceCdn ...
-	CertificateSourceCdn CertificateSource = "Cdn"
-	// CertificateSourceCustomDomainHTTPSParameters ...
-	CertificateSourceCustomDomainHTTPSParameters CertificateSource = "CustomDomainHttpsParameters"
-)
-
-// PossibleCertificateSourceValues returns an array of possible values for the CertificateSource const type.
-func PossibleCertificateSourceValues() []CertificateSource {
-	return []CertificateSource{CertificateSourceAzureKeyVault, CertificateSourceCdn, CertificateSourceCustomDomainHTTPSParameters}
-}
-
-// CertificateType enumerates the values for certificate type.
-type CertificateType string
-
-const (
-	// Dedicated ...
-	Dedicated CertificateType = "Dedicated"
-	// Shared ...
-	Shared CertificateType = "Shared"
-)
-
-// PossibleCertificateTypeValues returns an array of possible values for the CertificateType const type.
-func PossibleCertificateTypeValues() []CertificateType {
-	return []CertificateType{Dedicated, Shared}
-}
-
-// CookiesOperator enumerates the values for cookies operator.
-type CookiesOperator string
-
-const (
-	// Any ...
-	Any CookiesOperator = "Any"
-	// BeginsWith ...
-	BeginsWith CookiesOperator = "BeginsWith"
-	// Contains ...
-	Contains CookiesOperator = "Contains"
-	// EndsWith ...
-	EndsWith CookiesOperator = "EndsWith"
-	// Equal ...
-	Equal CookiesOperator = "Equal"
-	// GreaterThan ...
-	GreaterThan CookiesOperator = "GreaterThan"
-	// GreaterThanOrEqual ...
-	GreaterThanOrEqual CookiesOperator = "GreaterThanOrEqual"
-	// LessThan ...
-	LessThan CookiesOperator = "LessThan"
-	// LessThanOrEqual ...
-	LessThanOrEqual CookiesOperator = "LessThanOrEqual"
-)
-
-// PossibleCookiesOperatorValues returns an array of possible values for the CookiesOperator const type.
-func PossibleCookiesOperatorValues() []CookiesOperator {
-	return []CookiesOperator{Any, BeginsWith, Contains, EndsWith, Equal, GreaterThan, GreaterThanOrEqual, LessThan, LessThanOrEqual}
-}
-
-// CustomDomainResourceState enumerates the values for custom domain resource state.
-type CustomDomainResourceState string
-
-const (
-	// Active ...
-	Active CustomDomainResourceState = "Active"
-	// Creating ...
-	Creating CustomDomainResourceState = "Creating"
-	// Deleting ...
-	Deleting CustomDomainResourceState = "Deleting"
-)
-
-// PossibleCustomDomainResourceStateValues returns an array of possible values for the CustomDomainResourceState const type.
-func PossibleCustomDomainResourceStateValues() []CustomDomainResourceState {
-	return []CustomDomainResourceState{Active, Creating, Deleting}
-}
-
-// CustomHTTPSProvisioningState enumerates the values for custom https provisioning state.
-type CustomHTTPSProvisioningState string
-
-const (
-	// Disabled ...
-	Disabled CustomHTTPSProvisioningState = "Disabled"
-	// Disabling ...
-	Disabling CustomHTTPSProvisioningState = "Disabling"
-	// Enabled ...
-	Enabled CustomHTTPSProvisioningState = "Enabled"
-	// Enabling ...
-	Enabling CustomHTTPSProvisioningState = "Enabling"
-	// Failed ...
-	Failed CustomHTTPSProvisioningState = "Failed"
-)
-
-// PossibleCustomHTTPSProvisioningStateValues returns an array of possible values for the CustomHTTPSProvisioningState const type.
-func PossibleCustomHTTPSProvisioningStateValues() []CustomHTTPSProvisioningState {
-	return []CustomHTTPSProvisioningState{Disabled, Disabling, Enabled, Enabling, Failed}
-}
-
-// CustomHTTPSProvisioningSubstate enumerates the values for custom https provisioning substate.
-type CustomHTTPSProvisioningSubstate string
-
-const (
-	// CertificateDeleted ...
-	CertificateDeleted CustomHTTPSProvisioningSubstate = "CertificateDeleted"
-	// CertificateDeployed ...
-	CertificateDeployed CustomHTTPSProvisioningSubstate = "CertificateDeployed"
-	// DeletingCertificate ...
-	DeletingCertificate CustomHTTPSProvisioningSubstate = "DeletingCertificate"
-	// DeployingCertificate ...
-	DeployingCertificate CustomHTTPSProvisioningSubstate = "DeployingCertificate"
-	// DomainControlValidationRequestApproved ...
-	DomainControlValidationRequestApproved CustomHTTPSProvisioningSubstate = "DomainControlValidationRequestApproved"
-	// DomainControlValidationRequestRejected ...
-	DomainControlValidationRequestRejected CustomHTTPSProvisioningSubstate = "DomainControlValidationRequestRejected"
-	// DomainControlValidationRequestTimedOut ...
-	DomainControlValidationRequestTimedOut CustomHTTPSProvisioningSubstate = "DomainControlValidationRequestTimedOut"
-	// IssuingCertificate ...
-	IssuingCertificate CustomHTTPSProvisioningSubstate = "IssuingCertificate"
-	// PendingDomainControlValidationREquestApproval ...
-	PendingDomainControlValidationREquestApproval CustomHTTPSProvisioningSubstate = "PendingDomainControlValidationREquestApproval"
-	// SubmittingDomainControlValidationRequest ...
-	SubmittingDomainControlValidationRequest CustomHTTPSProvisioningSubstate = "SubmittingDomainControlValidationRequest"
-)
-
-// PossibleCustomHTTPSProvisioningSubstateValues returns an array of possible values for the CustomHTTPSProvisioningSubstate const type.
-func PossibleCustomHTTPSProvisioningSubstateValues() []CustomHTTPSProvisioningSubstate {
-	return []CustomHTTPSProvisioningSubstate{CertificateDeleted, CertificateDeployed, DeletingCertificate, DeployingCertificate, DomainControlValidationRequestApproved, DomainControlValidationRequestRejected, DomainControlValidationRequestTimedOut, IssuingCertificate, PendingDomainControlValidationREquestApproval, SubmittingDomainControlValidationRequest}
-}
-
-// CustomRuleEnabledState enumerates the values for custom rule enabled state.
-type CustomRuleEnabledState string
-
-const (
-	// CustomRuleEnabledStateDisabled ...
-	CustomRuleEnabledStateDisabled CustomRuleEnabledState = "Disabled"
-	// CustomRuleEnabledStateEnabled ...
-	CustomRuleEnabledStateEnabled CustomRuleEnabledState = "Enabled"
-)
-
-// PossibleCustomRuleEnabledStateValues returns an array of possible values for the CustomRuleEnabledState const type.
-func PossibleCustomRuleEnabledStateValues() []CustomRuleEnabledState {
-	return []CustomRuleEnabledState{CustomRuleEnabledStateDisabled, CustomRuleEnabledStateEnabled}
-}
-
-// DestinationProtocol enumerates the values for destination protocol.
-type DestinationProtocol string
-
-const (
-	// HTTP ...
-	HTTP DestinationProtocol = "Http"
-	// HTTPS ...
-	HTTPS DestinationProtocol = "Https"
-	// MatchRequest ...
-	MatchRequest DestinationProtocol = "MatchRequest"
-)
-
-// PossibleDestinationProtocolValues returns an array of possible values for the DestinationProtocol const type.
-func PossibleDestinationProtocolValues() []DestinationProtocol {
-	return []DestinationProtocol{HTTP, HTTPS, MatchRequest}
-}
-
-// EndpointResourceState enumerates the values for endpoint resource state.
-type EndpointResourceState string
-
-const (
-	// EndpointResourceStateCreating ...
-	EndpointResourceStateCreating EndpointResourceState = "Creating"
-	// EndpointResourceStateDeleting ...
-	EndpointResourceStateDeleting EndpointResourceState = "Deleting"
-	// EndpointResourceStateRunning ...
-	EndpointResourceStateRunning EndpointResourceState = "Running"
-	// EndpointResourceStateStarting ...
-	EndpointResourceStateStarting EndpointResourceState = "Starting"
-	// EndpointResourceStateStopped ...
-	EndpointResourceStateStopped EndpointResourceState = "Stopped"
-	// EndpointResourceStateStopping ...
-	EndpointResourceStateStopping EndpointResourceState = "Stopping"
-)
-
-// PossibleEndpointResourceStateValues returns an array of possible values for the EndpointResourceState const type.
-func PossibleEndpointResourceStateValues() []EndpointResourceState {
-	return []EndpointResourceState{EndpointResourceStateCreating, EndpointResourceStateDeleting, EndpointResourceStateRunning, EndpointResourceStateStarting, EndpointResourceStateStopped, EndpointResourceStateStopping}
-}
-
-// GeoFilterActions enumerates the values for geo filter actions.
-type GeoFilterActions string
-
-const (
-	// GeoFilterActionsAllow ...
-	GeoFilterActionsAllow GeoFilterActions = "Allow"
-	// GeoFilterActionsBlock ...
-	GeoFilterActionsBlock GeoFilterActions = "Block"
-)
-
-// PossibleGeoFilterActionsValues returns an array of possible values for the GeoFilterActions const type.
-func PossibleGeoFilterActionsValues() []GeoFilterActions {
-	return []GeoFilterActions{GeoFilterActionsAllow, GeoFilterActionsBlock}
-}
-
-// HeaderAction enumerates the values for header action.
-type HeaderAction string
-
-const (
-	// Append ...
-	Append HeaderAction = "Append"
-	// Delete ...
-	Delete HeaderAction = "Delete"
-	// Overwrite ...
-	Overwrite HeaderAction = "Overwrite"
-)
-
-// PossibleHeaderActionValues returns an array of possible values for the HeaderAction const type.
-func PossibleHeaderActionValues() []HeaderAction {
-	return []HeaderAction{Append, Delete, Overwrite}
-}
-
-// HealthProbeRequestType enumerates the values for health probe request type.
-type HealthProbeRequestType string
-
-const (
-	// GET ...
-	GET HealthProbeRequestType = "GET"
-	// HEAD ...
-	HEAD HealthProbeRequestType = "HEAD"
-	// NotSet ...
-	NotSet HealthProbeRequestType = "NotSet"
-)
-
-// PossibleHealthProbeRequestTypeValues returns an array of possible values for the HealthProbeRequestType const type.
-func PossibleHealthProbeRequestTypeValues() []HealthProbeRequestType {
-	return []HealthProbeRequestType{GET, HEAD, NotSet}
-}
-
-// ManagedRuleEnabledState enumerates the values for managed rule enabled state.
-type ManagedRuleEnabledState string
-
-const (
-	// ManagedRuleEnabledStateDisabled ...
-	ManagedRuleEnabledStateDisabled ManagedRuleEnabledState = "Disabled"
-	// ManagedRuleEnabledStateEnabled ...
-	ManagedRuleEnabledStateEnabled ManagedRuleEnabledState = "Enabled"
-)
-
-// PossibleManagedRuleEnabledStateValues returns an array of possible values for the ManagedRuleEnabledState const type.
-func PossibleManagedRuleEnabledStateValues() []ManagedRuleEnabledState {
-	return []ManagedRuleEnabledState{ManagedRuleEnabledStateDisabled, ManagedRuleEnabledStateEnabled}
-}
-
-// MatchVariable enumerates the values for match variable.
-type MatchVariable string
-
-const (
-	// Cookies ...
-	Cookies MatchVariable = "Cookies"
-	// PostArgs ...
-	PostArgs MatchVariable = "PostArgs"
-	// QueryString ...
-	QueryString MatchVariable = "QueryString"
-	// RemoteAddr ...
-	RemoteAddr MatchVariable = "RemoteAddr"
-	// RequestBody ...
-	RequestBody MatchVariable = "RequestBody"
-	// RequestHeader ...
-	RequestHeader MatchVariable = "RequestHeader"
-	// RequestMethod ...
-	RequestMethod MatchVariable = "RequestMethod"
-	// RequestURI ...
-	RequestURI MatchVariable = "RequestUri"
-	// SocketAddr ...
-	SocketAddr MatchVariable = "SocketAddr"
-)
-
-// PossibleMatchVariableValues returns an array of possible values for the MatchVariable const type.
-func PossibleMatchVariableValues() []MatchVariable {
-	return []MatchVariable{Cookies, PostArgs, QueryString, RemoteAddr, RequestBody, RequestHeader, RequestMethod, RequestURI, SocketAddr}
-}
-
-// MinimumTLSVersion enumerates the values for minimum tls version.
-type MinimumTLSVersion string
-
-const (
-	// None ...
-	None MinimumTLSVersion = "None"
-	// TLS10 ...
-	TLS10 MinimumTLSVersion = "TLS10"
-	// TLS12 ...
-	TLS12 MinimumTLSVersion = "TLS12"
-)
-
-// PossibleMinimumTLSVersionValues returns an array of possible values for the MinimumTLSVersion const type.
-func PossibleMinimumTLSVersionValues() []MinimumTLSVersion {
-	return []MinimumTLSVersion{None, TLS10, TLS12}
-}
-
-// Name enumerates the values for name.
-type Name string
-
-const (
-	// NameCookies ...
-	NameCookies Name = "Cookies"
-	// NameDeliveryRuleCondition ...
-	NameDeliveryRuleCondition Name = "DeliveryRuleCondition"
-	// NameHTTPVersion ...
-	NameHTTPVersion Name = "HttpVersion"
-	// NameIsDevice ...
-	NameIsDevice Name = "IsDevice"
-	// NamePostArgs ...
-	NamePostArgs Name = "PostArgs"
-	// NameQueryString ...
-	NameQueryString Name = "QueryString"
-	// NameRemoteAddress ...
-	NameRemoteAddress Name = "RemoteAddress"
-	// NameRequestBody ...
-	NameRequestBody Name = "RequestBody"
-	// NameRequestHeader ...
-	NameRequestHeader Name = "RequestHeader"
-	// NameRequestMethod ...
-	NameRequestMethod Name = "RequestMethod"
-	// NameRequestScheme ...
-	NameRequestScheme Name = "RequestScheme"
-	// NameRequestURI ...
-	NameRequestURI Name = "RequestUri"
-	// NameURLFileExtension ...
-	NameURLFileExtension Name = "UrlFileExtension"
-	// NameURLFileName ...
-	NameURLFileName Name = "UrlFileName"
-	// NameURLPath ...
-	NameURLPath Name = "UrlPath"
-)
-
-// PossibleNameValues returns an array of possible values for the Name const type.
-func PossibleNameValues() []Name {
-	return []Name{NameCookies, NameDeliveryRuleCondition, NameHTTPVersion, NameIsDevice, NamePostArgs, NameQueryString, NameRemoteAddress, NameRequestBody, NameRequestHeader, NameRequestMethod, NameRequestScheme, NameRequestURI, NameURLFileExtension, NameURLFileName, NameURLPath}
-}
-
-// NameBasicDeliveryRuleAction enumerates the values for name basic delivery rule action.
-type NameBasicDeliveryRuleAction string
-
-const (
-	// NameCacheExpiration ...
-	NameCacheExpiration NameBasicDeliveryRuleAction = "CacheExpiration"
-	// NameCacheKeyQueryString ...
-	NameCacheKeyQueryString NameBasicDeliveryRuleAction = "CacheKeyQueryString"
-	// NameDeliveryRuleAction ...
-	NameDeliveryRuleAction NameBasicDeliveryRuleAction = "DeliveryRuleAction"
-	// NameModifyRequestHeader ...
-	NameModifyRequestHeader NameBasicDeliveryRuleAction = "ModifyRequestHeader"
-	// NameModifyResponseHeader ...
-	NameModifyResponseHeader NameBasicDeliveryRuleAction = "ModifyResponseHeader"
-	// NameURLRedirect ...
-	NameURLRedirect NameBasicDeliveryRuleAction = "UrlRedirect"
-	// NameURLRewrite ...
-	NameURLRewrite NameBasicDeliveryRuleAction = "UrlRewrite"
-)
-
-// PossibleNameBasicDeliveryRuleActionValues returns an array of possible values for the NameBasicDeliveryRuleAction const type.
-func PossibleNameBasicDeliveryRuleActionValues() []NameBasicDeliveryRuleAction {
-	return []NameBasicDeliveryRuleAction{NameCacheExpiration, NameCacheKeyQueryString, NameDeliveryRuleAction, NameModifyRequestHeader, NameModifyResponseHeader, NameURLRedirect, NameURLRewrite}
-}
-
-// OdataType enumerates the values for odata type.
-type OdataType string
-
-const (
-	// MicrosoftAzureCdnModelsDeliveryRuleURLSigningActionParameters ...
-	MicrosoftAzureCdnModelsDeliveryRuleURLSigningActionParameters OdataType = "#Microsoft.Azure.Cdn.Models.DeliveryRuleUrlSigningActionParameters"
-)
-
-// PossibleOdataTypeValues returns an array of possible values for the OdataType const type.
-func PossibleOdataTypeValues() []OdataType {
-	return []OdataType{MicrosoftAzureCdnModelsDeliveryRuleURLSigningActionParameters}
-}
-
-// Operator enumerates the values for operator.
-type Operator string
-
-const (
-	// OperatorAny ...
-	OperatorAny Operator = "Any"
-	// OperatorBeginsWith ...
-	OperatorBeginsWith Operator = "BeginsWith"
-	// OperatorContains ...
-	OperatorContains Operator = "Contains"
-	// OperatorEndsWith ...
-	OperatorEndsWith Operator = "EndsWith"
-	// OperatorEqual ...
-	OperatorEqual Operator = "Equal"
-	// OperatorGeoMatch ...
-	OperatorGeoMatch Operator = "GeoMatch"
-	// OperatorGreaterThan ...
-	OperatorGreaterThan Operator = "GreaterThan"
-	// OperatorGreaterThanOrEqual ...
-	OperatorGreaterThanOrEqual Operator = "GreaterThanOrEqual"
-	// OperatorIPMatch ...
-	OperatorIPMatch Operator = "IPMatch"
-	// OperatorLessThan ...
-	OperatorLessThan Operator = "LessThan"
-	// OperatorLessThanOrEqual ...
-	OperatorLessThanOrEqual Operator = "LessThanOrEqual"
-	// OperatorRegEx ...
-	OperatorRegEx Operator = "RegEx"
-)
-
-// PossibleOperatorValues returns an array of possible values for the Operator const type.
-func PossibleOperatorValues() []Operator {
-	return []Operator{OperatorAny, OperatorBeginsWith, OperatorContains, OperatorEndsWith, OperatorEqual, OperatorGeoMatch, OperatorGreaterThan, OperatorGreaterThanOrEqual, OperatorIPMatch, OperatorLessThan, OperatorLessThanOrEqual, OperatorRegEx}
-}
-
-// OptimizationType enumerates the values for optimization type.
-type OptimizationType string
-
-const (
-	// DynamicSiteAcceleration ...
-	DynamicSiteAcceleration OptimizationType = "DynamicSiteAcceleration"
-	// GeneralMediaStreaming ...
-	GeneralMediaStreaming OptimizationType = "GeneralMediaStreaming"
-	// GeneralWebDelivery ...
-	GeneralWebDelivery OptimizationType = "GeneralWebDelivery"
-	// LargeFileDownload ...
-	LargeFileDownload OptimizationType = "LargeFileDownload"
-	// VideoOnDemandMediaStreaming ...
-	VideoOnDemandMediaStreaming OptimizationType = "VideoOnDemandMediaStreaming"
-)
-
-// PossibleOptimizationTypeValues returns an array of possible values for the OptimizationType const type.
-func PossibleOptimizationTypeValues() []OptimizationType {
-	return []OptimizationType{DynamicSiteAcceleration, GeneralMediaStreaming, GeneralWebDelivery, LargeFileDownload, VideoOnDemandMediaStreaming}
-}
-
-// OriginGroupResourceState enumerates the values for origin group resource state.
-type OriginGroupResourceState string
-
-const (
-	// OriginGroupResourceStateActive ...
-	OriginGroupResourceStateActive OriginGroupResourceState = "Active"
-	// OriginGroupResourceStateCreating ...
-	OriginGroupResourceStateCreating OriginGroupResourceState = "Creating"
-	// OriginGroupResourceStateDeleting ...
-	OriginGroupResourceStateDeleting OriginGroupResourceState = "Deleting"
-)
-
-// PossibleOriginGroupResourceStateValues returns an array of possible values for the OriginGroupResourceState const type.
-func PossibleOriginGroupResourceStateValues() []OriginGroupResourceState {
-	return []OriginGroupResourceState{OriginGroupResourceStateActive, OriginGroupResourceStateCreating, OriginGroupResourceStateDeleting}
-}
-
-// OriginResourceState enumerates the values for origin resource state.
-type OriginResourceState string
-
-const (
-	// OriginResourceStateActive ...
-	OriginResourceStateActive OriginResourceState = "Active"
-	// OriginResourceStateCreating ...
-	OriginResourceStateCreating OriginResourceState = "Creating"
-	// OriginResourceStateDeleting ...
-	OriginResourceStateDeleting OriginResourceState = "Deleting"
-)
-
-// PossibleOriginResourceStateValues returns an array of possible values for the OriginResourceState const type.
-func PossibleOriginResourceStateValues() []OriginResourceState {
-	return []OriginResourceState{OriginResourceStateActive, OriginResourceStateCreating, OriginResourceStateDeleting}
-}
-
-// ParamIndicator enumerates the values for param indicator.
-type ParamIndicator string
-
-const (
-	// Expires ...
-	Expires ParamIndicator = "Expires"
-	// KeyID ...
-	KeyID ParamIndicator = "KeyId"
-	// Signature ...
-	Signature ParamIndicator = "Signature"
-)
-
-// PossibleParamIndicatorValues returns an array of possible values for the ParamIndicator const type.
-func PossibleParamIndicatorValues() []ParamIndicator {
-	return []ParamIndicator{Expires, KeyID, Signature}
-}
-
-// PolicyEnabledState enumerates the values for policy enabled state.
-type PolicyEnabledState string
-
-const (
-	// PolicyEnabledStateDisabled ...
-	PolicyEnabledStateDisabled PolicyEnabledState = "Disabled"
-	// PolicyEnabledStateEnabled ...
-	PolicyEnabledStateEnabled PolicyEnabledState = "Enabled"
-)
-
-// PossiblePolicyEnabledStateValues returns an array of possible values for the PolicyEnabledState const type.
-func PossiblePolicyEnabledStateValues() []PolicyEnabledState {
-	return []PolicyEnabledState{PolicyEnabledStateDisabled, PolicyEnabledStateEnabled}
-}
-
-// PolicyMode enumerates the values for policy mode.
-type PolicyMode string
-
-const (
-	// Detection ...
-	Detection PolicyMode = "Detection"
-	// Prevention ...
-	Prevention PolicyMode = "Prevention"
-)
-
-// PossiblePolicyModeValues returns an array of possible values for the PolicyMode const type.
-func PossiblePolicyModeValues() []PolicyMode {
-	return []PolicyMode{Detection, Prevention}
-}
-
-// PolicyResourceState enumerates the values for policy resource state.
-type PolicyResourceState string
-
-const (
-	// PolicyResourceStateCreating ...
-	PolicyResourceStateCreating PolicyResourceState = "Creating"
-	// PolicyResourceStateDeleting ...
-	PolicyResourceStateDeleting PolicyResourceState = "Deleting"
-	// PolicyResourceStateDisabled ...
-	PolicyResourceStateDisabled PolicyResourceState = "Disabled"
-	// PolicyResourceStateDisabling ...
-	PolicyResourceStateDisabling PolicyResourceState = "Disabling"
-	// PolicyResourceStateEnabled ...
-	PolicyResourceStateEnabled PolicyResourceState = "Enabled"
-	// PolicyResourceStateEnabling ...
-	PolicyResourceStateEnabling PolicyResourceState = "Enabling"
-)
-
-// PossiblePolicyResourceStateValues returns an array of possible values for the PolicyResourceState const type.
-func PossiblePolicyResourceStateValues() []PolicyResourceState {
-	return []PolicyResourceState{PolicyResourceStateCreating, PolicyResourceStateDeleting, PolicyResourceStateDisabled, PolicyResourceStateDisabling, PolicyResourceStateEnabled, PolicyResourceStateEnabling}
-}
-
-// PostArgsOperator enumerates the values for post args operator.
-type PostArgsOperator string
-
-const (
-	// PostArgsOperatorAny ...
-	PostArgsOperatorAny PostArgsOperator = "Any"
-	// PostArgsOperatorBeginsWith ...
-	PostArgsOperatorBeginsWith PostArgsOperator = "BeginsWith"
-	// PostArgsOperatorContains ...
-	PostArgsOperatorContains PostArgsOperator = "Contains"
-	// PostArgsOperatorEndsWith ...
-	PostArgsOperatorEndsWith PostArgsOperator = "EndsWith"
-	// PostArgsOperatorEqual ...
-	PostArgsOperatorEqual PostArgsOperator = "Equal"
-	// PostArgsOperatorGreaterThan ...
-	PostArgsOperatorGreaterThan PostArgsOperator = "GreaterThan"
-	// PostArgsOperatorGreaterThanOrEqual ...
-	PostArgsOperatorGreaterThanOrEqual PostArgsOperator = "GreaterThanOrEqual"
-	// PostArgsOperatorLessThan ...
-	PostArgsOperatorLessThan PostArgsOperator = "LessThan"
-	// PostArgsOperatorLessThanOrEqual ...
-	PostArgsOperatorLessThanOrEqual PostArgsOperator = "LessThanOrEqual"
-)
-
-// PossiblePostArgsOperatorValues returns an array of possible values for the PostArgsOperator const type.
-func PossiblePostArgsOperatorValues() []PostArgsOperator {
-	return []PostArgsOperator{PostArgsOperatorAny, PostArgsOperatorBeginsWith, PostArgsOperatorContains, PostArgsOperatorEndsWith, PostArgsOperatorEqual, PostArgsOperatorGreaterThan, PostArgsOperatorGreaterThanOrEqual, PostArgsOperatorLessThan, PostArgsOperatorLessThanOrEqual}
-}
-
-// PrivateEndpointStatus enumerates the values for private endpoint status.
-type PrivateEndpointStatus string
-
-const (
-	// Approved ...
-	Approved PrivateEndpointStatus = "Approved"
-	// Disconnected ...
-	Disconnected PrivateEndpointStatus = "Disconnected"
-	// Pending ...
-	Pending PrivateEndpointStatus = "Pending"
-	// Rejected ...
-	Rejected PrivateEndpointStatus = "Rejected"
-	// Timeout ...
-	Timeout PrivateEndpointStatus = "Timeout"
-)
-
-// PossiblePrivateEndpointStatusValues returns an array of possible values for the PrivateEndpointStatus const type.
-func PossiblePrivateEndpointStatusValues() []PrivateEndpointStatus {
-	return []PrivateEndpointStatus{Approved, Disconnected, Pending, Rejected, Timeout}
-}
-
-// ProbeProtocol enumerates the values for probe protocol.
-type ProbeProtocol string
-
-const (
-	// ProbeProtocolHTTP ...
-	ProbeProtocolHTTP ProbeProtocol = "Http"
-	// ProbeProtocolHTTPS ...
-	ProbeProtocolHTTPS ProbeProtocol = "Https"
-	// ProbeProtocolNotSet ...
-	ProbeProtocolNotSet ProbeProtocol = "NotSet"
-)
-
-// PossibleProbeProtocolValues returns an array of possible values for the ProbeProtocol const type.
-func PossibleProbeProtocolValues() []ProbeProtocol {
-	return []ProbeProtocol{ProbeProtocolHTTP, ProbeProtocolHTTPS, ProbeProtocolNotSet}
-}
-
-// ProfileResourceState enumerates the values for profile resource state.
-type ProfileResourceState string
-
-const (
-	// ProfileResourceStateActive ...
-	ProfileResourceStateActive ProfileResourceState = "Active"
-	// ProfileResourceStateCreating ...
-	ProfileResourceStateCreating ProfileResourceState = "Creating"
-	// ProfileResourceStateDeleting ...
-	ProfileResourceStateDeleting ProfileResourceState = "Deleting"
-	// ProfileResourceStateDisabled ...
-	ProfileResourceStateDisabled ProfileResourceState = "Disabled"
-)
-
-// PossibleProfileResourceStateValues returns an array of possible values for the ProfileResourceState const type.
-func PossibleProfileResourceStateValues() []ProfileResourceState {
-	return []ProfileResourceState{ProfileResourceStateActive, ProfileResourceStateCreating, ProfileResourceStateDeleting, ProfileResourceStateDisabled}
-}
-
-// ProtocolType enumerates the values for protocol type.
-type ProtocolType string
-
-const (
-	// IPBased ...
-	IPBased ProtocolType = "IPBased"
-	// ServerNameIndication ...
-	ServerNameIndication ProtocolType = "ServerNameIndication"
-)
-
-// PossibleProtocolTypeValues returns an array of possible values for the ProtocolType const type.
-func PossibleProtocolTypeValues() []ProtocolType {
-	return []ProtocolType{IPBased, ServerNameIndication}
-}
-
-// ProvisioningState enumerates the values for provisioning state.
-type ProvisioningState string
-
-const (
-	// ProvisioningStateCreating ...
-	ProvisioningStateCreating ProvisioningState = "Creating"
-	// ProvisioningStateFailed ...
-	ProvisioningStateFailed ProvisioningState = "Failed"
-	// ProvisioningStateSucceeded ...
-	ProvisioningStateSucceeded ProvisioningState = "Succeeded"
-)
-
-// PossibleProvisioningStateValues returns an array of possible values for the ProvisioningState const type.
-func PossibleProvisioningStateValues() []ProvisioningState {
-	return []ProvisioningState{ProvisioningStateCreating, ProvisioningStateFailed, ProvisioningStateSucceeded}
-}
-
-// QueryStringBehavior enumerates the values for query string behavior.
-type QueryStringBehavior string
-
-const (
-	// Exclude ...
-	Exclude QueryStringBehavior = "Exclude"
-	// ExcludeAll ...
-	ExcludeAll QueryStringBehavior = "ExcludeAll"
-	// Include ...
-	Include QueryStringBehavior = "Include"
-	// IncludeAll ...
-	IncludeAll QueryStringBehavior = "IncludeAll"
-)
-
-// PossibleQueryStringBehaviorValues returns an array of possible values for the QueryStringBehavior const type.
-func PossibleQueryStringBehaviorValues() []QueryStringBehavior {
-	return []QueryStringBehavior{Exclude, ExcludeAll, Include, IncludeAll}
-}
-
-// QueryStringCachingBehavior enumerates the values for query string caching behavior.
-type QueryStringCachingBehavior string
-
-const (
-	// QueryStringCachingBehaviorBypassCaching ...
-	QueryStringCachingBehaviorBypassCaching QueryStringCachingBehavior = "BypassCaching"
-	// QueryStringCachingBehaviorIgnoreQueryString ...
-	QueryStringCachingBehaviorIgnoreQueryString QueryStringCachingBehavior = "IgnoreQueryString"
-	// QueryStringCachingBehaviorNotSet ...
-	QueryStringCachingBehaviorNotSet QueryStringCachingBehavior = "NotSet"
-	// QueryStringCachingBehaviorUseQueryString ...
-	QueryStringCachingBehaviorUseQueryString QueryStringCachingBehavior = "UseQueryString"
-)
-
-// PossibleQueryStringCachingBehaviorValues returns an array of possible values for the QueryStringCachingBehavior const type.
-func PossibleQueryStringCachingBehaviorValues() []QueryStringCachingBehavior {
-	return []QueryStringCachingBehavior{QueryStringCachingBehaviorBypassCaching, QueryStringCachingBehaviorIgnoreQueryString, QueryStringCachingBehaviorNotSet, QueryStringCachingBehaviorUseQueryString}
-}
-
-// QueryStringOperator enumerates the values for query string operator.
-type QueryStringOperator string
-
-const (
-	// QueryStringOperatorAny ...
-	QueryStringOperatorAny QueryStringOperator = "Any"
-	// QueryStringOperatorBeginsWith ...
-	QueryStringOperatorBeginsWith QueryStringOperator = "BeginsWith"
-	// QueryStringOperatorContains ...
-	QueryStringOperatorContains QueryStringOperator = "Contains"
-	// QueryStringOperatorEndsWith ...
-	QueryStringOperatorEndsWith QueryStringOperator = "EndsWith"
-	// QueryStringOperatorEqual ...
-	QueryStringOperatorEqual QueryStringOperator = "Equal"
-	// QueryStringOperatorGreaterThan ...
-	QueryStringOperatorGreaterThan QueryStringOperator = "GreaterThan"
-	// QueryStringOperatorGreaterThanOrEqual ...
-	QueryStringOperatorGreaterThanOrEqual QueryStringOperator = "GreaterThanOrEqual"
-	// QueryStringOperatorLessThan ...
-	QueryStringOperatorLessThan QueryStringOperator = "LessThan"
-	// QueryStringOperatorLessThanOrEqual ...
-	QueryStringOperatorLessThanOrEqual QueryStringOperator = "LessThanOrEqual"
-)
-
-// PossibleQueryStringOperatorValues returns an array of possible values for the QueryStringOperator const type.
-func PossibleQueryStringOperatorValues() []QueryStringOperator {
-	return []QueryStringOperator{QueryStringOperatorAny, QueryStringOperatorBeginsWith, QueryStringOperatorContains, QueryStringOperatorEndsWith, QueryStringOperatorEqual, QueryStringOperatorGreaterThan, QueryStringOperatorGreaterThanOrEqual, QueryStringOperatorLessThan, QueryStringOperatorLessThanOrEqual}
-}
-
-// RedirectType enumerates the values for redirect type.
-type RedirectType string
-
-const (
-	// Found ...
-	Found RedirectType = "Found"
-	// Moved ...
-	Moved RedirectType = "Moved"
-	// PermanentRedirect ...
-	PermanentRedirect RedirectType = "PermanentRedirect"
-	// TemporaryRedirect ...
-	TemporaryRedirect RedirectType = "TemporaryRedirect"
-)
-
-// PossibleRedirectTypeValues returns an array of possible values for the RedirectType const type.
-func PossibleRedirectTypeValues() []RedirectType {
-	return []RedirectType{Found, Moved, PermanentRedirect, TemporaryRedirect}
-}
-
-// RemoteAddressOperator enumerates the values for remote address operator.
-type RemoteAddressOperator string
-
-const (
-	// RemoteAddressOperatorAny ...
-	RemoteAddressOperatorAny RemoteAddressOperator = "Any"
-	// RemoteAddressOperatorGeoMatch ...
-	RemoteAddressOperatorGeoMatch RemoteAddressOperator = "GeoMatch"
-	// RemoteAddressOperatorIPMatch ...
-	RemoteAddressOperatorIPMatch RemoteAddressOperator = "IPMatch"
-)
-
-// PossibleRemoteAddressOperatorValues returns an array of possible values for the RemoteAddressOperator const type.
-func PossibleRemoteAddressOperatorValues() []RemoteAddressOperator {
-	return []RemoteAddressOperator{RemoteAddressOperatorAny, RemoteAddressOperatorGeoMatch, RemoteAddressOperatorIPMatch}
-}
-
-// RequestBodyOperator enumerates the values for request body operator.
-type RequestBodyOperator string
-
-const (
-	// RequestBodyOperatorAny ...
-	RequestBodyOperatorAny RequestBodyOperator = "Any"
-	// RequestBodyOperatorBeginsWith ...
-	RequestBodyOperatorBeginsWith RequestBodyOperator = "BeginsWith"
-	// RequestBodyOperatorContains ...
-	RequestBodyOperatorContains RequestBodyOperator = "Contains"
-	// RequestBodyOperatorEndsWith ...
-	RequestBodyOperatorEndsWith RequestBodyOperator = "EndsWith"
-	// RequestBodyOperatorEqual ...
-	RequestBodyOperatorEqual RequestBodyOperator = "Equal"
-	// RequestBodyOperatorGreaterThan ...
-	RequestBodyOperatorGreaterThan RequestBodyOperator = "GreaterThan"
-	// RequestBodyOperatorGreaterThanOrEqual ...
-	RequestBodyOperatorGreaterThanOrEqual RequestBodyOperator = "GreaterThanOrEqual"
-	// RequestBodyOperatorLessThan ...
-	RequestBodyOperatorLessThan RequestBodyOperator = "LessThan"
-	// RequestBodyOperatorLessThanOrEqual ...
-	RequestBodyOperatorLessThanOrEqual RequestBodyOperator = "LessThanOrEqual"
-)
-
-// PossibleRequestBodyOperatorValues returns an array of possible values for the RequestBodyOperator const type.
-func PossibleRequestBodyOperatorValues() []RequestBodyOperator {
-	return []RequestBodyOperator{RequestBodyOperatorAny, RequestBodyOperatorBeginsWith, RequestBodyOperatorContains, RequestBodyOperatorEndsWith, RequestBodyOperatorEqual, RequestBodyOperatorGreaterThan, RequestBodyOperatorGreaterThanOrEqual, RequestBodyOperatorLessThan, RequestBodyOperatorLessThanOrEqual}
-}
-
-// RequestHeaderOperator enumerates the values for request header operator.
-type RequestHeaderOperator string
-
-const (
-	// RequestHeaderOperatorAny ...
-	RequestHeaderOperatorAny RequestHeaderOperator = "Any"
-	// RequestHeaderOperatorBeginsWith ...
-	RequestHeaderOperatorBeginsWith RequestHeaderOperator = "BeginsWith"
-	// RequestHeaderOperatorContains ...
-	RequestHeaderOperatorContains RequestHeaderOperator = "Contains"
-	// RequestHeaderOperatorEndsWith ...
-	RequestHeaderOperatorEndsWith RequestHeaderOperator = "EndsWith"
-	// RequestHeaderOperatorEqual ...
-	RequestHeaderOperatorEqual RequestHeaderOperator = "Equal"
-	// RequestHeaderOperatorGreaterThan ...
-	RequestHeaderOperatorGreaterThan RequestHeaderOperator = "GreaterThan"
-	// RequestHeaderOperatorGreaterThanOrEqual ...
-	RequestHeaderOperatorGreaterThanOrEqual RequestHeaderOperator = "GreaterThanOrEqual"
-	// RequestHeaderOperatorLessThan ...
-	RequestHeaderOperatorLessThan RequestHeaderOperator = "LessThan"
-	// RequestHeaderOperatorLessThanOrEqual ...
-	RequestHeaderOperatorLessThanOrEqual RequestHeaderOperator = "LessThanOrEqual"
-)
-
-// PossibleRequestHeaderOperatorValues returns an array of possible values for the RequestHeaderOperator const type.
-func PossibleRequestHeaderOperatorValues() []RequestHeaderOperator {
-	return []RequestHeaderOperator{RequestHeaderOperatorAny, RequestHeaderOperatorBeginsWith, RequestHeaderOperatorContains, RequestHeaderOperatorEndsWith, RequestHeaderOperatorEqual, RequestHeaderOperatorGreaterThan, RequestHeaderOperatorGreaterThanOrEqual, RequestHeaderOperatorLessThan, RequestHeaderOperatorLessThanOrEqual}
-}
-
-// RequestURIOperator enumerates the values for request uri operator.
-type RequestURIOperator string
-
-const (
-	// RequestURIOperatorAny ...
-	RequestURIOperatorAny RequestURIOperator = "Any"
-	// RequestURIOperatorBeginsWith ...
-	RequestURIOperatorBeginsWith RequestURIOperator = "BeginsWith"
-	// RequestURIOperatorContains ...
-	RequestURIOperatorContains RequestURIOperator = "Contains"
-	// RequestURIOperatorEndsWith ...
-	RequestURIOperatorEndsWith RequestURIOperator = "EndsWith"
-	// RequestURIOperatorEqual ...
-	RequestURIOperatorEqual RequestURIOperator = "Equal"
-	// RequestURIOperatorGreaterThan ...
-	RequestURIOperatorGreaterThan RequestURIOperator = "GreaterThan"
-	// RequestURIOperatorGreaterThanOrEqual ...
-	RequestURIOperatorGreaterThanOrEqual RequestURIOperator = "GreaterThanOrEqual"
-	// RequestURIOperatorLessThan ...
-	RequestURIOperatorLessThan RequestURIOperator = "LessThan"
-	// RequestURIOperatorLessThanOrEqual ...
-	RequestURIOperatorLessThanOrEqual RequestURIOperator = "LessThanOrEqual"
-)
-
-// PossibleRequestURIOperatorValues returns an array of possible values for the RequestURIOperator const type.
-func PossibleRequestURIOperatorValues() []RequestURIOperator {
-	return []RequestURIOperator{RequestURIOperatorAny, RequestURIOperatorBeginsWith, RequestURIOperatorContains, RequestURIOperatorEndsWith, RequestURIOperatorEqual, RequestURIOperatorGreaterThan, RequestURIOperatorGreaterThanOrEqual, RequestURIOperatorLessThan, RequestURIOperatorLessThanOrEqual}
-}
-
-// ResourceType enumerates the values for resource type.
-type ResourceType string
-
-const (
-	// MicrosoftCdnProfilesEndpoints ...
-	MicrosoftCdnProfilesEndpoints ResourceType = "Microsoft.Cdn/Profiles/Endpoints"
-)
-
-// PossibleResourceTypeValues returns an array of possible values for the ResourceType const type.
-func PossibleResourceTypeValues() []ResourceType {
-	return []ResourceType{MicrosoftCdnProfilesEndpoints}
-}
-
-// ResponseBasedDetectedErrorTypes enumerates the values for response based detected error types.
-type ResponseBasedDetectedErrorTypes string
-
-const (
-	// ResponseBasedDetectedErrorTypesNone ...
-	ResponseBasedDetectedErrorTypesNone ResponseBasedDetectedErrorTypes = "None"
-	// ResponseBasedDetectedErrorTypesTCPAndHTTPErrors ...
-	ResponseBasedDetectedErrorTypesTCPAndHTTPErrors ResponseBasedDetectedErrorTypes = "TcpAndHttpErrors"
-	// ResponseBasedDetectedErrorTypesTCPErrorsOnly ...
-	ResponseBasedDetectedErrorTypesTCPErrorsOnly ResponseBasedDetectedErrorTypes = "TcpErrorsOnly"
-)
-
-// PossibleResponseBasedDetectedErrorTypesValues returns an array of possible values for the ResponseBasedDetectedErrorTypes const type.
-func PossibleResponseBasedDetectedErrorTypesValues() []ResponseBasedDetectedErrorTypes {
-	return []ResponseBasedDetectedErrorTypes{ResponseBasedDetectedErrorTypesNone, ResponseBasedDetectedErrorTypesTCPAndHTTPErrors, ResponseBasedDetectedErrorTypesTCPErrorsOnly}
-}
-
-// SkuName enumerates the values for sku name.
-type SkuName string
-
-const (
-	// CustomVerizon ...
-	CustomVerizon SkuName = "Custom_Verizon"
-	// PremiumChinaCdn ...
-	PremiumChinaCdn SkuName = "Premium_ChinaCdn"
-	// PremiumVerizon ...
-	PremiumVerizon SkuName = "Premium_Verizon"
-	// StandardAkamai ...
-	StandardAkamai SkuName = "Standard_Akamai"
-	// StandardChinaCdn ...
-	StandardChinaCdn SkuName = "Standard_ChinaCdn"
-	// StandardMicrosoft ...
-	StandardMicrosoft SkuName = "Standard_Microsoft"
-	// StandardVerizon ...
-	StandardVerizon SkuName = "Standard_Verizon"
-)
-
-// PossibleSkuNameValues returns an array of possible values for the SkuName const type.
-func PossibleSkuNameValues() []SkuName {
-	return []SkuName{CustomVerizon, PremiumChinaCdn, PremiumVerizon, StandardAkamai, StandardChinaCdn, StandardMicrosoft, StandardVerizon}
-}
-
-// Transform enumerates the values for transform.
-type Transform string
-
-const (
-	// Lowercase ...
-	Lowercase Transform = "Lowercase"
-	// Uppercase ...
-	Uppercase Transform = "Uppercase"
-)
-
-// PossibleTransformValues returns an array of possible values for the Transform const type.
-func PossibleTransformValues() []Transform {
-	return []Transform{Lowercase, Uppercase}
-}
-
-// TransformType enumerates the values for transform type.
-type TransformType string
-
-const (
-	// TransformTypeLowercase ...
-	TransformTypeLowercase TransformType = "Lowercase"
-	// TransformTypeRemoveNulls ...
-	TransformTypeRemoveNulls TransformType = "RemoveNulls"
-	// TransformTypeTrim ...
-	TransformTypeTrim TransformType = "Trim"
-	// TransformTypeUppercase ...
-	TransformTypeUppercase TransformType = "Uppercase"
-	// TransformTypeURLDecode ...
-	TransformTypeURLDecode TransformType = "UrlDecode"
-	// TransformTypeURLEncode ...
-	TransformTypeURLEncode TransformType = "UrlEncode"
-)
-
-// PossibleTransformTypeValues returns an array of possible values for the TransformType const type.
-func PossibleTransformTypeValues() []TransformType {
-	return []TransformType{TransformTypeLowercase, TransformTypeRemoveNulls, TransformTypeTrim, TransformTypeUppercase, TransformTypeURLDecode, TransformTypeURLEncode}
-}
-
-// URLFileExtensionOperator enumerates the values for url file extension operator.
-type URLFileExtensionOperator string
-
-const (
-	// URLFileExtensionOperatorAny ...
-	URLFileExtensionOperatorAny URLFileExtensionOperator = "Any"
-	// URLFileExtensionOperatorBeginsWith ...
-	URLFileExtensionOperatorBeginsWith URLFileExtensionOperator = "BeginsWith"
-	// URLFileExtensionOperatorContains ...
-	URLFileExtensionOperatorContains URLFileExtensionOperator = "Contains"
-	// URLFileExtensionOperatorEndsWith ...
-	URLFileExtensionOperatorEndsWith URLFileExtensionOperator = "EndsWith"
-	// URLFileExtensionOperatorEqual ...
-	URLFileExtensionOperatorEqual URLFileExtensionOperator = "Equal"
-	// URLFileExtensionOperatorGreaterThan ...
-	URLFileExtensionOperatorGreaterThan URLFileExtensionOperator = "GreaterThan"
-	// URLFileExtensionOperatorGreaterThanOrEqual ...
-	URLFileExtensionOperatorGreaterThanOrEqual URLFileExtensionOperator = "GreaterThanOrEqual"
-	// URLFileExtensionOperatorLessThan ...
-	URLFileExtensionOperatorLessThan URLFileExtensionOperator = "LessThan"
-	// URLFileExtensionOperatorLessThanOrEqual ...
-	URLFileExtensionOperatorLessThanOrEqual URLFileExtensionOperator = "LessThanOrEqual"
-)
-
-// PossibleURLFileExtensionOperatorValues returns an array of possible values for the URLFileExtensionOperator const type.
-func PossibleURLFileExtensionOperatorValues() []URLFileExtensionOperator {
-	return []URLFileExtensionOperator{URLFileExtensionOperatorAny, URLFileExtensionOperatorBeginsWith, URLFileExtensionOperatorContains, URLFileExtensionOperatorEndsWith, URLFileExtensionOperatorEqual, URLFileExtensionOperatorGreaterThan, URLFileExtensionOperatorGreaterThanOrEqual, URLFileExtensionOperatorLessThan, URLFileExtensionOperatorLessThanOrEqual}
-}
-
-// URLFileNameOperator enumerates the values for url file name operator.
-type URLFileNameOperator string
-
-const (
-	// URLFileNameOperatorAny ...
-	URLFileNameOperatorAny URLFileNameOperator = "Any"
-	// URLFileNameOperatorBeginsWith ...
-	URLFileNameOperatorBeginsWith URLFileNameOperator = "BeginsWith"
-	// URLFileNameOperatorContains ...
-	URLFileNameOperatorContains URLFileNameOperator = "Contains"
-	// URLFileNameOperatorEndsWith ...
-	URLFileNameOperatorEndsWith URLFileNameOperator = "EndsWith"
-	// URLFileNameOperatorEqual ...
-	URLFileNameOperatorEqual URLFileNameOperator = "Equal"
-	// URLFileNameOperatorGreaterThan ...
-	URLFileNameOperatorGreaterThan URLFileNameOperator = "GreaterThan"
-	// URLFileNameOperatorGreaterThanOrEqual ...
-	URLFileNameOperatorGreaterThanOrEqual URLFileNameOperator = "GreaterThanOrEqual"
-	// URLFileNameOperatorLessThan ...
-	URLFileNameOperatorLessThan URLFileNameOperator = "LessThan"
-	// URLFileNameOperatorLessThanOrEqual ...
-	URLFileNameOperatorLessThanOrEqual URLFileNameOperator = "LessThanOrEqual"
-)
-
-// PossibleURLFileNameOperatorValues returns an array of possible values for the URLFileNameOperator const type.
-func PossibleURLFileNameOperatorValues() []URLFileNameOperator {
-	return []URLFileNameOperator{URLFileNameOperatorAny, URLFileNameOperatorBeginsWith, URLFileNameOperatorContains, URLFileNameOperatorEndsWith, URLFileNameOperatorEqual, URLFileNameOperatorGreaterThan, URLFileNameOperatorGreaterThanOrEqual, URLFileNameOperatorLessThan, URLFileNameOperatorLessThanOrEqual}
-}
-
-// URLPathOperator enumerates the values for url path operator.
-type URLPathOperator string
-
-const (
-	// URLPathOperatorAny ...
-	URLPathOperatorAny URLPathOperator = "Any"
-	// URLPathOperatorBeginsWith ...
-	URLPathOperatorBeginsWith URLPathOperator = "BeginsWith"
-	// URLPathOperatorContains ...
-	URLPathOperatorContains URLPathOperator = "Contains"
-	// URLPathOperatorEndsWith ...
-	URLPathOperatorEndsWith URLPathOperator = "EndsWith"
-	// URLPathOperatorEqual ...
-	URLPathOperatorEqual URLPathOperator = "Equal"
-	// URLPathOperatorGreaterThan ...
-	URLPathOperatorGreaterThan URLPathOperator = "GreaterThan"
-	// URLPathOperatorGreaterThanOrEqual ...
-	URLPathOperatorGreaterThanOrEqual URLPathOperator = "GreaterThanOrEqual"
-	// URLPathOperatorLessThan ...
-	URLPathOperatorLessThan URLPathOperator = "LessThan"
-	// URLPathOperatorLessThanOrEqual ...
-	URLPathOperatorLessThanOrEqual URLPathOperator = "LessThanOrEqual"
-	// URLPathOperatorWildcard ...
-	URLPathOperatorWildcard URLPathOperator = "Wildcard"
-)
-
-// PossibleURLPathOperatorValues returns an array of possible values for the URLPathOperator const type.
-func PossibleURLPathOperatorValues() []URLPathOperator {
-	return []URLPathOperator{URLPathOperatorAny, URLPathOperatorBeginsWith, URLPathOperatorContains, URLPathOperatorEndsWith, URLPathOperatorEqual, URLPathOperatorGreaterThan, URLPathOperatorGreaterThanOrEqual, URLPathOperatorLessThan, URLPathOperatorLessThanOrEqual, URLPathOperatorWildcard}
-}
-
 // CacheExpirationActionParameters defines the parameters for the cache expiration action.
 type CacheExpirationActionParameters struct {
 	OdataType *string `json:"@odata.type,omitempty"`
@@ -1173,8 +100,8 @@ type CookiesMatchConditionParameters struct {
 	Transforms *[]Transform `json:"transforms,omitempty"`
 }
 
-// CustomDomain friendly domain name mapping to the endpoint hostname that the customer provides for
-// branding purposes, e.g. www.contoso.com.
+// CustomDomain friendly domain name mapping to the endpoint hostname that the customer provides for branding
+// purposes, e.g. www.contoso.com.
 type CustomDomain struct {
 	autorest.Response       `json:"-"`
 	*CustomDomainProperties `json:"properties,omitempty"`
@@ -1350,6 +277,15 @@ type CustomDomainListResult struct {
 	NextLink *string `json:"nextLink,omitempty"`
 }
 
+// MarshalJSON is the custom marshaler for CustomDomainListResult.
+func (cdlr CustomDomainListResult) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if cdlr.NextLink != nil {
+		objectMap["nextLink"] = cdlr.NextLink
+	}
+	return json.Marshal(objectMap)
+}
+
 // CustomDomainListResultIterator provides access to a complete listing of CustomDomain values.
 type CustomDomainListResultIterator struct {
 	i    int
@@ -1418,10 +354,15 @@ func (cdlr CustomDomainListResult) IsEmpty() bool {
 	return cdlr.Value == nil || len(*cdlr.Value) == 0
 }
 
+// hasNextLink returns true if the NextLink is not empty.
+func (cdlr CustomDomainListResult) hasNextLink() bool {
+	return cdlr.NextLink != nil && len(*cdlr.NextLink) != 0
+}
+
 // customDomainListResultPreparer prepares a request to retrieve the next set of results.
 // It returns nil if no more results exist.
 func (cdlr CustomDomainListResult) customDomainListResultPreparer(ctx context.Context) (*http.Request, error) {
-	if cdlr.NextLink == nil || len(to.String(cdlr.NextLink)) < 1 {
+	if !cdlr.hasNextLink() {
 		return nil, nil
 	}
 	return autorest.Prepare((&http.Request{}).WithContext(ctx),
@@ -1449,11 +390,16 @@ func (page *CustomDomainListResultPage) NextWithContext(ctx context.Context) (er
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	next, err := page.fn(ctx, page.cdlr)
-	if err != nil {
-		return err
+	for {
+		next, err := page.fn(ctx, page.cdlr)
+		if err != nil {
+			return err
+		}
+		page.cdlr = next
+		if !next.hasNextLink() || !next.IsEmpty() {
+			break
+		}
 	}
-	page.cdlr = next
 	return nil
 }
 
@@ -1539,6 +485,18 @@ type CustomDomainProperties struct {
 	ValidationData *string `json:"validationData,omitempty"`
 	// ProvisioningState - READ-ONLY; Provisioning status of the custom domain.
 	ProvisioningState *string `json:"provisioningState,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for CustomDomainProperties.
+func (cdp CustomDomainProperties) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if cdp.HostName != nil {
+		objectMap["hostName"] = cdp.HostName
+	}
+	if cdp.ValidationData != nil {
+		objectMap["validationData"] = cdp.ValidationData
+	}
+	return json.Marshal(objectMap)
 }
 
 // CustomDomainPropertiesParameters the JSON object that contains the properties of the custom domain to
@@ -1678,8 +636,8 @@ func (dco *DeepCreatedOrigin) UnmarshalJSON(body []byte) error {
 	return nil
 }
 
-// DeepCreatedOriginGroup the origin group for CDN content which is added when creating a CDN endpoint.
-// Traffic is sent to the origins within the origin group based on origin health.
+// DeepCreatedOriginGroup the origin group for CDN content which is added when creating a CDN endpoint. Traffic
+// is sent to the origins within the origin group based on origin health.
 type DeepCreatedOriginGroup struct {
 	// Name - Origin group name which must be unique within the endpoint.
 	Name                              *string `json:"name,omitempty"`
@@ -1833,6 +791,7 @@ func (dr *DeliveryRule) UnmarshalJSON(body []byte) error {
 // BasicDeliveryRuleAction an action for the delivery rule.
 type BasicDeliveryRuleAction interface {
 	AsURLRedirectAction() (*URLRedirectAction, bool)
+	AsURLSigningAction() (*URLSigningAction, bool)
 	AsURLRewriteAction() (*URLRewriteAction, bool)
 	AsDeliveryRuleRequestHeaderAction() (*DeliveryRuleRequestHeaderAction, bool)
 	AsDeliveryRuleResponseHeaderAction() (*DeliveryRuleResponseHeaderAction, bool)
@@ -1843,7 +802,7 @@ type BasicDeliveryRuleAction interface {
 
 // DeliveryRuleAction an action for the delivery rule.
 type DeliveryRuleAction struct {
-	// Name - Possible values include: 'NameDeliveryRuleAction', 'NameURLRedirect', 'NameURLRewrite', 'NameModifyRequestHeader', 'NameModifyResponseHeader', 'NameCacheExpiration', 'NameCacheKeyQueryString'
+	// Name - Possible values include: 'NameDeliveryRuleAction', 'NameURLRedirect', 'NameURLSigning', 'NameURLRewrite', 'NameModifyRequestHeader', 'NameModifyResponseHeader', 'NameCacheExpiration', 'NameCacheKeyQueryString'
 	Name NameBasicDeliveryRuleAction `json:"name,omitempty"`
 }
 
@@ -1859,6 +818,10 @@ func unmarshalBasicDeliveryRuleAction(body []byte) (BasicDeliveryRuleAction, err
 		var ura URLRedirectAction
 		err := json.Unmarshal(body, &ura)
 		return ura, err
+	case string(NameURLSigning):
+		var usa URLSigningAction
+		err := json.Unmarshal(body, &usa)
+		return usa, err
 	case string(NameURLRewrite):
 		var ura URLRewriteAction
 		err := json.Unmarshal(body, &ura)
@@ -1919,6 +882,11 @@ func (dra DeliveryRuleAction) AsURLRedirectAction() (*URLRedirectAction, bool) {
 	return nil, false
 }
 
+// AsURLSigningAction is the BasicDeliveryRuleAction implementation for DeliveryRuleAction.
+func (dra DeliveryRuleAction) AsURLSigningAction() (*URLSigningAction, bool) {
+	return nil, false
+}
+
 // AsURLRewriteAction is the BasicDeliveryRuleAction implementation for DeliveryRuleAction.
 func (dra DeliveryRuleAction) AsURLRewriteAction() (*URLRewriteAction, bool) {
 	return nil, false
@@ -1958,7 +926,7 @@ func (dra DeliveryRuleAction) AsBasicDeliveryRuleAction() (BasicDeliveryRuleActi
 type DeliveryRuleCacheExpirationAction struct {
 	// Parameters - Defines the parameters for the action.
 	Parameters *CacheExpirationActionParameters `json:"parameters,omitempty"`
-	// Name - Possible values include: 'NameDeliveryRuleAction', 'NameURLRedirect', 'NameURLRewrite', 'NameModifyRequestHeader', 'NameModifyResponseHeader', 'NameCacheExpiration', 'NameCacheKeyQueryString'
+	// Name - Possible values include: 'NameDeliveryRuleAction', 'NameURLRedirect', 'NameURLSigning', 'NameURLRewrite', 'NameModifyRequestHeader', 'NameModifyResponseHeader', 'NameCacheExpiration', 'NameCacheKeyQueryString'
 	Name NameBasicDeliveryRuleAction `json:"name,omitempty"`
 }
 
@@ -1977,6 +945,11 @@ func (drcea DeliveryRuleCacheExpirationAction) MarshalJSON() ([]byte, error) {
 
 // AsURLRedirectAction is the BasicDeliveryRuleAction implementation for DeliveryRuleCacheExpirationAction.
 func (drcea DeliveryRuleCacheExpirationAction) AsURLRedirectAction() (*URLRedirectAction, bool) {
+	return nil, false
+}
+
+// AsURLSigningAction is the BasicDeliveryRuleAction implementation for DeliveryRuleCacheExpirationAction.
+func (drcea DeliveryRuleCacheExpirationAction) AsURLSigningAction() (*URLSigningAction, bool) {
 	return nil, false
 }
 
@@ -2019,7 +992,7 @@ func (drcea DeliveryRuleCacheExpirationAction) AsBasicDeliveryRuleAction() (Basi
 type DeliveryRuleCacheKeyQueryStringAction struct {
 	// Parameters - Defines the parameters for the action.
 	Parameters *CacheKeyQueryStringActionParameters `json:"parameters,omitempty"`
-	// Name - Possible values include: 'NameDeliveryRuleAction', 'NameURLRedirect', 'NameURLRewrite', 'NameModifyRequestHeader', 'NameModifyResponseHeader', 'NameCacheExpiration', 'NameCacheKeyQueryString'
+	// Name - Possible values include: 'NameDeliveryRuleAction', 'NameURLRedirect', 'NameURLSigning', 'NameURLRewrite', 'NameModifyRequestHeader', 'NameModifyResponseHeader', 'NameCacheExpiration', 'NameCacheKeyQueryString'
 	Name NameBasicDeliveryRuleAction `json:"name,omitempty"`
 }
 
@@ -2038,6 +1011,11 @@ func (drckqsa DeliveryRuleCacheKeyQueryStringAction) MarshalJSON() ([]byte, erro
 
 // AsURLRedirectAction is the BasicDeliveryRuleAction implementation for DeliveryRuleCacheKeyQueryStringAction.
 func (drckqsa DeliveryRuleCacheKeyQueryStringAction) AsURLRedirectAction() (*URLRedirectAction, bool) {
+	return nil, false
+}
+
+// AsURLSigningAction is the BasicDeliveryRuleAction implementation for DeliveryRuleCacheKeyQueryStringAction.
+func (drckqsa DeliveryRuleCacheKeyQueryStringAction) AsURLSigningAction() (*URLSigningAction, bool) {
 	return nil, false
 }
 
@@ -2991,7 +1969,7 @@ func (drrbc DeliveryRuleRequestBodyCondition) AsBasicDeliveryRuleCondition() (Ba
 type DeliveryRuleRequestHeaderAction struct {
 	// Parameters - Defines the parameters for the action.
 	Parameters *HeaderActionParameters `json:"parameters,omitempty"`
-	// Name - Possible values include: 'NameDeliveryRuleAction', 'NameURLRedirect', 'NameURLRewrite', 'NameModifyRequestHeader', 'NameModifyResponseHeader', 'NameCacheExpiration', 'NameCacheKeyQueryString'
+	// Name - Possible values include: 'NameDeliveryRuleAction', 'NameURLRedirect', 'NameURLSigning', 'NameURLRewrite', 'NameModifyRequestHeader', 'NameModifyResponseHeader', 'NameCacheExpiration', 'NameCacheKeyQueryString'
 	Name NameBasicDeliveryRuleAction `json:"name,omitempty"`
 }
 
@@ -3010,6 +1988,11 @@ func (drrha DeliveryRuleRequestHeaderAction) MarshalJSON() ([]byte, error) {
 
 // AsURLRedirectAction is the BasicDeliveryRuleAction implementation for DeliveryRuleRequestHeaderAction.
 func (drrha DeliveryRuleRequestHeaderAction) AsURLRedirectAction() (*URLRedirectAction, bool) {
+	return nil, false
+}
+
+// AsURLSigningAction is the BasicDeliveryRuleAction implementation for DeliveryRuleRequestHeaderAction.
+func (drrha DeliveryRuleRequestHeaderAction) AsURLSigningAction() (*URLSigningAction, bool) {
 	return nil, false
 }
 
@@ -3456,7 +2439,7 @@ func (drruc DeliveryRuleRequestURICondition) AsBasicDeliveryRuleCondition() (Bas
 type DeliveryRuleResponseHeaderAction struct {
 	// Parameters - Defines the parameters for the action.
 	Parameters *HeaderActionParameters `json:"parameters,omitempty"`
-	// Name - Possible values include: 'NameDeliveryRuleAction', 'NameURLRedirect', 'NameURLRewrite', 'NameModifyRequestHeader', 'NameModifyResponseHeader', 'NameCacheExpiration', 'NameCacheKeyQueryString'
+	// Name - Possible values include: 'NameDeliveryRuleAction', 'NameURLRedirect', 'NameURLSigning', 'NameURLRewrite', 'NameModifyRequestHeader', 'NameModifyResponseHeader', 'NameCacheExpiration', 'NameCacheKeyQueryString'
 	Name NameBasicDeliveryRuleAction `json:"name,omitempty"`
 }
 
@@ -3475,6 +2458,11 @@ func (drrha DeliveryRuleResponseHeaderAction) MarshalJSON() ([]byte, error) {
 
 // AsURLRedirectAction is the BasicDeliveryRuleAction implementation for DeliveryRuleResponseHeaderAction.
 func (drrha DeliveryRuleResponseHeaderAction) AsURLRedirectAction() (*URLRedirectAction, bool) {
+	return nil, false
+}
+
+// AsURLSigningAction is the BasicDeliveryRuleAction implementation for DeliveryRuleResponseHeaderAction.
+func (drrha DeliveryRuleResponseHeaderAction) AsURLSigningAction() (*URLSigningAction, bool) {
 	return nil, false
 }
 
@@ -3893,14 +2881,23 @@ type EdgeNodeProperties struct {
 	IPAddressGroups *[]IPAddressGroup `json:"ipAddressGroups,omitempty"`
 }
 
-// EdgenodeResult result of the request to list CDN edgenodes. It contains a list of ip address group and a
-// URL link to get the next set of results.
+// EdgenodeResult result of the request to list CDN edgenodes. It contains a list of ip address group and a URL
+// link to get the next set of results.
 type EdgenodeResult struct {
 	autorest.Response `json:"-"`
 	// Value - READ-ONLY; Edge node of CDN service.
 	Value *[]EdgeNode `json:"value,omitempty"`
 	// NextLink - URL to get the next set of edgenode list results if there are any.
 	NextLink *string `json:"nextLink,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for EdgenodeResult.
+func (er EdgenodeResult) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if er.NextLink != nil {
+		objectMap["nextLink"] = er.NextLink
+	}
+	return json.Marshal(objectMap)
 }
 
 // EdgenodeResultIterator provides access to a complete listing of EdgeNode values.
@@ -3971,10 +2968,15 @@ func (er EdgenodeResult) IsEmpty() bool {
 	return er.Value == nil || len(*er.Value) == 0
 }
 
+// hasNextLink returns true if the NextLink is not empty.
+func (er EdgenodeResult) hasNextLink() bool {
+	return er.NextLink != nil && len(*er.NextLink) != 0
+}
+
 // edgenodeResultPreparer prepares a request to retrieve the next set of results.
 // It returns nil if no more results exist.
 func (er EdgenodeResult) edgenodeResultPreparer(ctx context.Context) (*http.Request, error) {
-	if er.NextLink == nil || len(to.String(er.NextLink)) < 1 {
+	if !er.hasNextLink() {
 		return nil, nil
 	}
 	return autorest.Prepare((&http.Request{}).WithContext(ctx),
@@ -4002,11 +3004,16 @@ func (page *EdgenodeResultPage) NextWithContext(ctx context.Context) (err error)
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	next, err := page.fn(ctx, page.er)
-	if err != nil {
-		return err
+	for {
+		next, err := page.fn(ctx, page.er)
+		if err != nil {
+			return err
+		}
+		page.er = next
+		if !next.hasNextLink() || !next.IsEmpty() {
+			break
+		}
 	}
-	page.er = next
 	return nil
 }
 
@@ -4142,14 +3149,23 @@ func (e *Endpoint) UnmarshalJSON(body []byte) error {
 	return nil
 }
 
-// EndpointListResult result of the request to list endpoints. It contains a list of endpoint objects and a
-// URL link to get the next set of results.
+// EndpointListResult result of the request to list endpoints. It contains a list of endpoint objects and a URL
+// link to get the next set of results.
 type EndpointListResult struct {
 	autorest.Response `json:"-"`
 	// Value - READ-ONLY; List of CDN endpoints within a profile
 	Value *[]Endpoint `json:"value,omitempty"`
 	// NextLink - URL to get the next set of endpoint objects if there is any.
 	NextLink *string `json:"nextLink,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for EndpointListResult.
+func (elr EndpointListResult) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if elr.NextLink != nil {
+		objectMap["nextLink"] = elr.NextLink
+	}
+	return json.Marshal(objectMap)
 }
 
 // EndpointListResultIterator provides access to a complete listing of Endpoint values.
@@ -4220,10 +3236,15 @@ func (elr EndpointListResult) IsEmpty() bool {
 	return elr.Value == nil || len(*elr.Value) == 0
 }
 
+// hasNextLink returns true if the NextLink is not empty.
+func (elr EndpointListResult) hasNextLink() bool {
+	return elr.NextLink != nil && len(*elr.NextLink) != 0
+}
+
 // endpointListResultPreparer prepares a request to retrieve the next set of results.
 // It returns nil if no more results exist.
 func (elr EndpointListResult) endpointListResultPreparer(ctx context.Context) (*http.Request, error) {
-	if elr.NextLink == nil || len(to.String(elr.NextLink)) < 1 {
+	if !elr.hasNextLink() {
 		return nil, nil
 	}
 	return autorest.Prepare((&http.Request{}).WithContext(ctx),
@@ -4251,11 +3272,16 @@ func (page *EndpointListResultPage) NextWithContext(ctx context.Context) (err er
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	next, err := page.fn(ctx, page.elr)
-	if err != nil {
-		return err
+	for {
+		next, err := page.fn(ctx, page.elr)
+		if err != nil {
+			return err
+		}
+		page.elr = next
+		if !next.hasNextLink() || !next.IsEmpty() {
+			break
+		}
 	}
-	page.elr = next
 	return nil
 }
 
@@ -4331,6 +3357,60 @@ type EndpointProperties struct {
 	WebApplicationFirewallPolicyLink *EndpointPropertiesUpdateParametersWebApplicationFirewallPolicyLink `json:"webApplicationFirewallPolicyLink,omitempty"`
 }
 
+// MarshalJSON is the custom marshaler for EndpointProperties.
+func (ep EndpointProperties) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if ep.Origins != nil {
+		objectMap["origins"] = ep.Origins
+	}
+	if ep.OriginGroups != nil {
+		objectMap["originGroups"] = ep.OriginGroups
+	}
+	if ep.OriginPath != nil {
+		objectMap["originPath"] = ep.OriginPath
+	}
+	if ep.ContentTypesToCompress != nil {
+		objectMap["contentTypesToCompress"] = ep.ContentTypesToCompress
+	}
+	if ep.OriginHostHeader != nil {
+		objectMap["originHostHeader"] = ep.OriginHostHeader
+	}
+	if ep.IsCompressionEnabled != nil {
+		objectMap["isCompressionEnabled"] = ep.IsCompressionEnabled
+	}
+	if ep.IsHTTPAllowed != nil {
+		objectMap["isHttpAllowed"] = ep.IsHTTPAllowed
+	}
+	if ep.IsHTTPSAllowed != nil {
+		objectMap["isHttpsAllowed"] = ep.IsHTTPSAllowed
+	}
+	if ep.QueryStringCachingBehavior != "" {
+		objectMap["queryStringCachingBehavior"] = ep.QueryStringCachingBehavior
+	}
+	if ep.OptimizationType != "" {
+		objectMap["optimizationType"] = ep.OptimizationType
+	}
+	if ep.ProbePath != nil {
+		objectMap["probePath"] = ep.ProbePath
+	}
+	if ep.GeoFilters != nil {
+		objectMap["geoFilters"] = ep.GeoFilters
+	}
+	if ep.DefaultOriginGroup != nil {
+		objectMap["defaultOriginGroup"] = ep.DefaultOriginGroup
+	}
+	if ep.URLSigningKeys != nil {
+		objectMap["urlSigningKeys"] = ep.URLSigningKeys
+	}
+	if ep.DeliveryPolicy != nil {
+		objectMap["deliveryPolicy"] = ep.DeliveryPolicy
+	}
+	if ep.WebApplicationFirewallPolicyLink != nil {
+		objectMap["webApplicationFirewallPolicyLink"] = ep.WebApplicationFirewallPolicyLink
+	}
+	return json.Marshal(objectMap)
+}
+
 // EndpointPropertiesUpdateParameters the JSON object containing endpoint update parameters.
 type EndpointPropertiesUpdateParameters struct {
 	// OriginPath - A directory path on the origin that CDN can use to retrieve content from, e.g. contoso.cloudapp.net/originpath.
@@ -4363,8 +3443,8 @@ type EndpointPropertiesUpdateParameters struct {
 	WebApplicationFirewallPolicyLink *EndpointPropertiesUpdateParametersWebApplicationFirewallPolicyLink `json:"webApplicationFirewallPolicyLink,omitempty"`
 }
 
-// EndpointPropertiesUpdateParametersDeliveryPolicy a policy that specifies the delivery rules to be used
-// for an endpoint.
+// EndpointPropertiesUpdateParametersDeliveryPolicy a policy that specifies the delivery rules to be used for
+// an endpoint.
 type EndpointPropertiesUpdateParametersDeliveryPolicy struct {
 	// Description - User-friendly description of the policy.
 	Description *string `json:"description,omitempty"`
@@ -4379,8 +3459,7 @@ type EndpointPropertiesUpdateParametersWebApplicationFirewallPolicyLink struct {
 	ID *string `json:"id,omitempty"`
 }
 
-// EndpointsCreateFuture an abstraction for monitoring and retrieving the results of a long-running
-// operation.
+// EndpointsCreateFuture an abstraction for monitoring and retrieving the results of a long-running operation.
 type EndpointsCreateFuture struct {
 	azure.Future
 }
@@ -4408,8 +3487,7 @@ func (future *EndpointsCreateFuture) Result(client EndpointsClient) (e Endpoint,
 	return
 }
 
-// EndpointsDeleteFuture an abstraction for monitoring and retrieving the results of a long-running
-// operation.
+// EndpointsDeleteFuture an abstraction for monitoring and retrieving the results of a long-running operation.
 type EndpointsDeleteFuture struct {
 	azure.Future
 }
@@ -4477,8 +3555,7 @@ func (future *EndpointsPurgeContentFuture) Result(client EndpointsClient) (ar au
 	return
 }
 
-// EndpointsStartFuture an abstraction for monitoring and retrieving the results of a long-running
-// operation.
+// EndpointsStartFuture an abstraction for monitoring and retrieving the results of a long-running operation.
 type EndpointsStartFuture struct {
 	azure.Future
 }
@@ -4506,8 +3583,7 @@ func (future *EndpointsStartFuture) Result(client EndpointsClient) (e Endpoint, 
 	return
 }
 
-// EndpointsStopFuture an abstraction for monitoring and retrieving the results of a long-running
-// operation.
+// EndpointsStopFuture an abstraction for monitoring and retrieving the results of a long-running operation.
 type EndpointsStopFuture struct {
 	azure.Future
 }
@@ -4535,8 +3611,7 @@ func (future *EndpointsStopFuture) Result(client EndpointsClient) (e Endpoint, e
 	return
 }
 
-// EndpointsUpdateFuture an abstraction for monitoring and retrieving the results of a long-running
-// operation.
+// EndpointsUpdateFuture an abstraction for monitoring and retrieving the results of a long-running operation.
 type EndpointsUpdateFuture struct {
 	azure.Future
 }
@@ -4622,8 +3697,8 @@ func (eup *EndpointUpdateParameters) UnmarshalJSON(body []byte) error {
 	return nil
 }
 
-// ErrorResponse error response indicates CDN service is not able to process the incoming request. The
-// reason is provided in the error message.
+// ErrorResponse error response indicates CDN service is not able to process the incoming request. The reason
+// is provided in the error message.
 type ErrorResponse struct {
 	// Code - READ-ONLY; Error code.
 	Code *string `json:"code,omitempty"`
@@ -4747,8 +3822,8 @@ type LoadParameters struct {
 	ContentPaths *[]string `json:"contentPaths,omitempty"`
 }
 
-// ManagedHTTPSParameters defines the certificate source parameters using CDN managed certificate for
-// enabling SSL.
+// ManagedHTTPSParameters defines the certificate source parameters using CDN managed certificate for enabling
+// SSL.
 type ManagedHTTPSParameters struct {
 	// CertificateSourceParameters - Defines the certificate source parameters using CDN managed certificate for enabling SSL.
 	CertificateSourceParameters *CertificateSourceParameters `json:"certificateSourceParameters,omitempty"`
@@ -4942,6 +4017,15 @@ type ManagedRuleSetDefinitionList struct {
 	NextLink *string `json:"nextLink,omitempty"`
 }
 
+// MarshalJSON is the custom marshaler for ManagedRuleSetDefinitionList.
+func (mrsdl ManagedRuleSetDefinitionList) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if mrsdl.NextLink != nil {
+		objectMap["nextLink"] = mrsdl.NextLink
+	}
+	return json.Marshal(objectMap)
+}
+
 // ManagedRuleSetDefinitionListIterator provides access to a complete listing of ManagedRuleSetDefinition
 // values.
 type ManagedRuleSetDefinitionListIterator struct {
@@ -5011,10 +4095,15 @@ func (mrsdl ManagedRuleSetDefinitionList) IsEmpty() bool {
 	return mrsdl.Value == nil || len(*mrsdl.Value) == 0
 }
 
+// hasNextLink returns true if the NextLink is not empty.
+func (mrsdl ManagedRuleSetDefinitionList) hasNextLink() bool {
+	return mrsdl.NextLink != nil && len(*mrsdl.NextLink) != 0
+}
+
 // managedRuleSetDefinitionListPreparer prepares a request to retrieve the next set of results.
 // It returns nil if no more results exist.
 func (mrsdl ManagedRuleSetDefinitionList) managedRuleSetDefinitionListPreparer(ctx context.Context) (*http.Request, error) {
-	if mrsdl.NextLink == nil || len(to.String(mrsdl.NextLink)) < 1 {
+	if !mrsdl.hasNextLink() {
 		return nil, nil
 	}
 	return autorest.Prepare((&http.Request{}).WithContext(ctx),
@@ -5042,11 +4131,16 @@ func (page *ManagedRuleSetDefinitionListPage) NextWithContext(ctx context.Contex
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	next, err := page.fn(ctx, page.mrsdl)
-	if err != nil {
-		return err
+	for {
+		next, err := page.fn(ctx, page.mrsdl)
+		if err != nil {
+			return err
+		}
+		page.mrsdl = next
+		if !next.hasNextLink() || !next.IsEmpty() {
+			break
+		}
 	}
-	page.mrsdl = next
 	return nil
 }
 
@@ -5122,6 +4216,15 @@ type Operation struct {
 	Display *OperationDisplay `json:"display,omitempty"`
 }
 
+// MarshalJSON is the custom marshaler for Operation.
+func (o Operation) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if o.Display != nil {
+		objectMap["display"] = o.Display
+	}
+	return json.Marshal(objectMap)
+}
+
 // OperationDisplay the object that represents the operation.
 type OperationDisplay struct {
 	// Provider - READ-ONLY; Service provider: Microsoft.Cdn
@@ -5132,14 +4235,23 @@ type OperationDisplay struct {
 	Operation *string `json:"operation,omitempty"`
 }
 
-// OperationsListResult result of the request to list CDN operations. It contains a list of operations and
-// a URL link to get the next set of results.
+// OperationsListResult result of the request to list CDN operations. It contains a list of operations and a
+// URL link to get the next set of results.
 type OperationsListResult struct {
 	autorest.Response `json:"-"`
 	// Value - READ-ONLY; List of CDN operations supported by the CDN resource provider.
 	Value *[]Operation `json:"value,omitempty"`
 	// NextLink - URL to get the next set of operation list results if there are any.
 	NextLink *string `json:"nextLink,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for OperationsListResult.
+func (olr OperationsListResult) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if olr.NextLink != nil {
+		objectMap["nextLink"] = olr.NextLink
+	}
+	return json.Marshal(objectMap)
 }
 
 // OperationsListResultIterator provides access to a complete listing of Operation values.
@@ -5210,10 +4322,15 @@ func (olr OperationsListResult) IsEmpty() bool {
 	return olr.Value == nil || len(*olr.Value) == 0
 }
 
+// hasNextLink returns true if the NextLink is not empty.
+func (olr OperationsListResult) hasNextLink() bool {
+	return olr.NextLink != nil && len(*olr.NextLink) != 0
+}
+
 // operationsListResultPreparer prepares a request to retrieve the next set of results.
 // It returns nil if no more results exist.
 func (olr OperationsListResult) operationsListResultPreparer(ctx context.Context) (*http.Request, error) {
-	if olr.NextLink == nil || len(to.String(olr.NextLink)) < 1 {
+	if !olr.hasNextLink() {
 		return nil, nil
 	}
 	return autorest.Prepare((&http.Request{}).WithContext(ctx),
@@ -5241,11 +4358,16 @@ func (page *OperationsListResultPage) NextWithContext(ctx context.Context) (err 
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	next, err := page.fn(ctx, page.olr)
-	if err != nil {
-		return err
+	for {
+		next, err := page.fn(ctx, page.olr)
+		if err != nil {
+			return err
+		}
+		page.olr = next
+		if !next.hasNextLink() || !next.IsEmpty() {
+			break
+		}
 	}
-	page.olr = next
 	return nil
 }
 
@@ -5279,9 +4401,9 @@ func NewOperationsListResultPage(getNextPage func(context.Context, OperationsLis
 	return OperationsListResultPage{fn: getNextPage}
 }
 
-// Origin CDN origin is the source of the content being delivered via CDN. When the edge nodes represented
-// by an endpoint do not have the requested content cached, they attempt to fetch it from one or more of
-// the configured origins.
+// Origin CDN origin is the source of the content being delivered via CDN. When the edge nodes represented by
+// an endpoint do not have the requested content cached, they attempt to fetch it from one or more of the
+// configured origins.
 type Origin struct {
 	autorest.Response `json:"-"`
 	*OriginProperties `json:"properties,omitempty"`
@@ -5353,8 +4475,8 @@ func (o *Origin) UnmarshalJSON(body []byte) error {
 	return nil
 }
 
-// OriginGroup origin group comprising of origins is used for load balancing to origins when the content
-// cannot be served from CDN.
+// OriginGroup origin group comprising of origins is used for load balancing to origins when the content cannot
+// be served from CDN.
 type OriginGroup struct {
 	autorest.Response      `json:"-"`
 	*OriginGroupProperties `json:"properties,omitempty"`
@@ -5436,6 +4558,15 @@ type OriginGroupListResult struct {
 	NextLink *string `json:"nextLink,omitempty"`
 }
 
+// MarshalJSON is the custom marshaler for OriginGroupListResult.
+func (oglr OriginGroupListResult) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if oglr.NextLink != nil {
+		objectMap["nextLink"] = oglr.NextLink
+	}
+	return json.Marshal(objectMap)
+}
+
 // OriginGroupListResultIterator provides access to a complete listing of OriginGroup values.
 type OriginGroupListResultIterator struct {
 	i    int
@@ -5504,10 +4635,15 @@ func (oglr OriginGroupListResult) IsEmpty() bool {
 	return oglr.Value == nil || len(*oglr.Value) == 0
 }
 
+// hasNextLink returns true if the NextLink is not empty.
+func (oglr OriginGroupListResult) hasNextLink() bool {
+	return oglr.NextLink != nil && len(*oglr.NextLink) != 0
+}
+
 // originGroupListResultPreparer prepares a request to retrieve the next set of results.
 // It returns nil if no more results exist.
 func (oglr OriginGroupListResult) originGroupListResultPreparer(ctx context.Context) (*http.Request, error) {
-	if oglr.NextLink == nil || len(to.String(oglr.NextLink)) < 1 {
+	if !oglr.hasNextLink() {
 		return nil, nil
 	}
 	return autorest.Prepare((&http.Request{}).WithContext(ctx),
@@ -5535,11 +4671,16 @@ func (page *OriginGroupListResultPage) NextWithContext(ctx context.Context) (err
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	next, err := page.fn(ctx, page.oglr)
-	if err != nil {
-		return err
+	for {
+		next, err := page.fn(ctx, page.oglr)
+		if err != nil {
+			return err
+		}
+		page.oglr = next
+		if !next.hasNextLink() || !next.IsEmpty() {
+			break
+		}
 	}
-	page.oglr = next
 	return nil
 }
 
@@ -5587,6 +4728,24 @@ type OriginGroupProperties struct {
 	TrafficRestorationTimeToHealedOrNewEndpointsInMinutes *int32 `json:"trafficRestorationTimeToHealedOrNewEndpointsInMinutes,omitempty"`
 	// ResponseBasedOriginErrorDetectionSettings - The JSON object that contains the properties to determine origin health using real requests/responses. This property is currently not supported.
 	ResponseBasedOriginErrorDetectionSettings *ResponseBasedOriginErrorDetectionParameters `json:"responseBasedOriginErrorDetectionSettings,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for OriginGroupProperties.
+func (ogp OriginGroupProperties) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if ogp.HealthProbeSettings != nil {
+		objectMap["healthProbeSettings"] = ogp.HealthProbeSettings
+	}
+	if ogp.Origins != nil {
+		objectMap["origins"] = ogp.Origins
+	}
+	if ogp.TrafficRestorationTimeToHealedOrNewEndpointsInMinutes != nil {
+		objectMap["trafficRestorationTimeToHealedOrNewEndpointsInMinutes"] = ogp.TrafficRestorationTimeToHealedOrNewEndpointsInMinutes
+	}
+	if ogp.ResponseBasedOriginErrorDetectionSettings != nil {
+		objectMap["responseBasedOriginErrorDetectionSettings"] = ogp.ResponseBasedOriginErrorDetectionSettings
+	}
+	return json.Marshal(objectMap)
 }
 
 // OriginGroupsCreateFuture an abstraction for monitoring and retrieving the results of a long-running
@@ -5720,14 +4879,23 @@ type OriginGroupUpdatePropertiesParameters struct {
 	ResponseBasedOriginErrorDetectionSettings *ResponseBasedOriginErrorDetectionParameters `json:"responseBasedOriginErrorDetectionSettings,omitempty"`
 }
 
-// OriginListResult result of the request to list origins. It contains a list of origin objects and a URL
-// link to get the next set of results.
+// OriginListResult result of the request to list origins. It contains a list of origin objects and a URL link
+// to get the next set of results.
 type OriginListResult struct {
 	autorest.Response `json:"-"`
 	// Value - READ-ONLY; List of CDN origins within an endpoint
 	Value *[]Origin `json:"value,omitempty"`
 	// NextLink - URL to get the next set of origin objects if there are any.
 	NextLink *string `json:"nextLink,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for OriginListResult.
+func (olr OriginListResult) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if olr.NextLink != nil {
+		objectMap["nextLink"] = olr.NextLink
+	}
+	return json.Marshal(objectMap)
 }
 
 // OriginListResultIterator provides access to a complete listing of Origin values.
@@ -5798,10 +4966,15 @@ func (olr OriginListResult) IsEmpty() bool {
 	return olr.Value == nil || len(*olr.Value) == 0
 }
 
+// hasNextLink returns true if the NextLink is not empty.
+func (olr OriginListResult) hasNextLink() bool {
+	return olr.NextLink != nil && len(*olr.NextLink) != 0
+}
+
 // originListResultPreparer prepares a request to retrieve the next set of results.
 // It returns nil if no more results exist.
 func (olr OriginListResult) originListResultPreparer(ctx context.Context) (*http.Request, error) {
-	if olr.NextLink == nil || len(to.String(olr.NextLink)) < 1 {
+	if !olr.hasNextLink() {
 		return nil, nil
 	}
 	return autorest.Prepare((&http.Request{}).WithContext(ctx),
@@ -5829,11 +5002,16 @@ func (page *OriginListResultPage) NextWithContext(ctx context.Context) (err erro
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	next, err := page.fn(ctx, page.olr)
-	if err != nil {
-		return err
+	for {
+		next, err := page.fn(ctx, page.olr)
+		if err != nil {
+			return err
+		}
+		page.olr = next
+		if !next.hasNextLink() || !next.IsEmpty() {
+			break
+		}
 	}
-	page.olr = next
 	return nil
 }
 
@@ -5899,8 +5077,46 @@ type OriginProperties struct {
 	PrivateLinkApprovalMessage *string `json:"privateLinkApprovalMessage,omitempty"`
 }
 
-// OriginsCreateFuture an abstraction for monitoring and retrieving the results of a long-running
-// operation.
+// MarshalJSON is the custom marshaler for OriginProperties.
+func (op OriginProperties) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if op.HostName != nil {
+		objectMap["hostName"] = op.HostName
+	}
+	if op.HTTPPort != nil {
+		objectMap["httpPort"] = op.HTTPPort
+	}
+	if op.HTTPSPort != nil {
+		objectMap["httpsPort"] = op.HTTPSPort
+	}
+	if op.OriginHostHeader != nil {
+		objectMap["originHostHeader"] = op.OriginHostHeader
+	}
+	if op.Priority != nil {
+		objectMap["priority"] = op.Priority
+	}
+	if op.Weight != nil {
+		objectMap["weight"] = op.Weight
+	}
+	if op.Enabled != nil {
+		objectMap["enabled"] = op.Enabled
+	}
+	if op.PrivateLinkAlias != nil {
+		objectMap["privateLinkAlias"] = op.PrivateLinkAlias
+	}
+	if op.PrivateLinkResourceID != nil {
+		objectMap["privateLinkResourceId"] = op.PrivateLinkResourceID
+	}
+	if op.PrivateLinkLocation != nil {
+		objectMap["privateLinkLocation"] = op.PrivateLinkLocation
+	}
+	if op.PrivateLinkApprovalMessage != nil {
+		objectMap["privateLinkApprovalMessage"] = op.PrivateLinkApprovalMessage
+	}
+	return json.Marshal(objectMap)
+}
+
+// OriginsCreateFuture an abstraction for monitoring and retrieving the results of a long-running operation.
 type OriginsCreateFuture struct {
 	azure.Future
 }
@@ -5928,8 +5144,7 @@ func (future *OriginsCreateFuture) Result(client OriginsClient) (o Origin, err e
 	return
 }
 
-// OriginsDeleteFuture an abstraction for monitoring and retrieving the results of a long-running
-// operation.
+// OriginsDeleteFuture an abstraction for monitoring and retrieving the results of a long-running operation.
 type OriginsDeleteFuture struct {
 	azure.Future
 }
@@ -5951,8 +5166,7 @@ func (future *OriginsDeleteFuture) Result(client OriginsClient) (ar autorest.Res
 	return
 }
 
-// OriginsUpdateFuture an abstraction for monitoring and retrieving the results of a long-running
-// operation.
+// OriginsUpdateFuture an abstraction for monitoring and retrieving the results of a long-running operation.
 type OriginsUpdateFuture struct {
 	azure.Future
 }
@@ -6073,8 +5287,7 @@ func (future *PoliciesCreateOrUpdateFuture) Result(client PoliciesClient) (wafp 
 	return
 }
 
-// PoliciesUpdateFuture an abstraction for monitoring and retrieving the results of a long-running
-// operation.
+// PoliciesUpdateFuture an abstraction for monitoring and retrieving the results of a long-running operation.
 type PoliciesUpdateFuture struct {
 	azure.Future
 }
@@ -6131,8 +5344,8 @@ type PostArgsMatchConditionParameters struct {
 	Transforms *[]Transform `json:"transforms,omitempty"`
 }
 
-// Profile CDN profile is a logical grouping of endpoints that share the same settings, such as CDN
-// provider and pricing tier.
+// Profile CDN profile is a logical grouping of endpoints that share the same settings, such as CDN provider
+// and pricing tier.
 type Profile struct {
 	autorest.Response `json:"-"`
 	// Sku - The pricing tier (defines a CDN provider, feature list and rate) of the CDN profile.
@@ -6246,14 +5459,23 @@ func (p *Profile) UnmarshalJSON(body []byte) error {
 	return nil
 }
 
-// ProfileListResult result of the request to list profiles. It contains a list of profile objects and a
-// URL link to get the next set of results.
+// ProfileListResult result of the request to list profiles. It contains a list of profile objects and a URL
+// link to get the next set of results.
 type ProfileListResult struct {
 	autorest.Response `json:"-"`
 	// Value - READ-ONLY; List of CDN profiles within a resource group.
 	Value *[]Profile `json:"value,omitempty"`
 	// NextLink - URL to get the next set of profile objects if there are any.
 	NextLink *string `json:"nextLink,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for ProfileListResult.
+func (plr ProfileListResult) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if plr.NextLink != nil {
+		objectMap["nextLink"] = plr.NextLink
+	}
+	return json.Marshal(objectMap)
 }
 
 // ProfileListResultIterator provides access to a complete listing of Profile values.
@@ -6324,10 +5546,15 @@ func (plr ProfileListResult) IsEmpty() bool {
 	return plr.Value == nil || len(*plr.Value) == 0
 }
 
+// hasNextLink returns true if the NextLink is not empty.
+func (plr ProfileListResult) hasNextLink() bool {
+	return plr.NextLink != nil && len(*plr.NextLink) != 0
+}
+
 // profileListResultPreparer prepares a request to retrieve the next set of results.
 // It returns nil if no more results exist.
 func (plr ProfileListResult) profileListResultPreparer(ctx context.Context) (*http.Request, error) {
-	if plr.NextLink == nil || len(to.String(plr.NextLink)) < 1 {
+	if !plr.hasNextLink() {
 		return nil, nil
 	}
 	return autorest.Prepare((&http.Request{}).WithContext(ctx),
@@ -6355,11 +5582,16 @@ func (page *ProfileListResultPage) NextWithContext(ctx context.Context) (err err
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	next, err := page.fn(ctx, page.plr)
-	if err != nil {
-		return err
+	for {
+		next, err := page.fn(ctx, page.plr)
+		if err != nil {
+			return err
+		}
+		page.plr = next
+		if !next.hasNextLink() || !next.IsEmpty() {
+			break
+		}
 	}
-	page.plr = next
 	return nil
 }
 
@@ -6401,8 +5633,7 @@ type ProfileProperties struct {
 	ProvisioningState *string `json:"provisioningState,omitempty"`
 }
 
-// ProfilesCreateFuture an abstraction for monitoring and retrieving the results of a long-running
-// operation.
+// ProfilesCreateFuture an abstraction for monitoring and retrieving the results of a long-running operation.
 type ProfilesCreateFuture struct {
 	azure.Future
 }
@@ -6430,8 +5661,7 @@ func (future *ProfilesCreateFuture) Result(client ProfilesClient) (p Profile, er
 	return
 }
 
-// ProfilesDeleteFuture an abstraction for monitoring and retrieving the results of a long-running
-// operation.
+// ProfilesDeleteFuture an abstraction for monitoring and retrieving the results of a long-running operation.
 type ProfilesDeleteFuture struct {
 	azure.Future
 }
@@ -6450,35 +5680,6 @@ func (future *ProfilesDeleteFuture) Result(client ProfilesClient) (ar autorest.R
 		return
 	}
 	ar.Response = future.Response()
-	return
-}
-
-// ProfilesUpdateFuture an abstraction for monitoring and retrieving the results of a long-running
-// operation.
-type ProfilesUpdateFuture struct {
-	azure.Future
-}
-
-// Result returns the result of the asynchronous operation.
-// If the operation has not completed it will return an error.
-func (future *ProfilesUpdateFuture) Result(client ProfilesClient) (p Profile, err error) {
-	var done bool
-	done, err = future.DoneWithContext(context.Background(), client)
-	if err != nil {
-		err = autorest.NewErrorWithError(err, "cdn.ProfilesUpdateFuture", "Result", future.Response(), "Polling failure")
-		return
-	}
-	if !done {
-		err = azure.NewAsyncOpIncompleteError("cdn.ProfilesUpdateFuture")
-		return
-	}
-	sender := autorest.DecorateSender(client, autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
-	if p.Response.Response, err = future.GetResult(sender); err == nil && p.Response.Response.StatusCode != http.StatusNoContent {
-		p, err = client.UpdateResponder(p.Response.Response)
-		if err != nil {
-			err = autorest.NewErrorWithError(err, "cdn.ProfilesUpdateFuture", "Result", p.Response.Response, "Failure responding to request")
-		}
-	}
 	return
 }
 
@@ -6664,6 +5865,15 @@ type ResourceUsageListResult struct {
 	NextLink *string `json:"nextLink,omitempty"`
 }
 
+// MarshalJSON is the custom marshaler for ResourceUsageListResult.
+func (rulr ResourceUsageListResult) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if rulr.NextLink != nil {
+		objectMap["nextLink"] = rulr.NextLink
+	}
+	return json.Marshal(objectMap)
+}
+
 // ResourceUsageListResultIterator provides access to a complete listing of ResourceUsage values.
 type ResourceUsageListResultIterator struct {
 	i    int
@@ -6732,10 +5942,15 @@ func (rulr ResourceUsageListResult) IsEmpty() bool {
 	return rulr.Value == nil || len(*rulr.Value) == 0
 }
 
+// hasNextLink returns true if the NextLink is not empty.
+func (rulr ResourceUsageListResult) hasNextLink() bool {
+	return rulr.NextLink != nil && len(*rulr.NextLink) != 0
+}
+
 // resourceUsageListResultPreparer prepares a request to retrieve the next set of results.
 // It returns nil if no more results exist.
 func (rulr ResourceUsageListResult) resourceUsageListResultPreparer(ctx context.Context) (*http.Request, error) {
-	if rulr.NextLink == nil || len(to.String(rulr.NextLink)) < 1 {
+	if !rulr.hasNextLink() {
 		return nil, nil
 	}
 	return autorest.Prepare((&http.Request{}).WithContext(ctx),
@@ -6763,11 +5978,16 @@ func (page *ResourceUsageListResultPage) NextWithContext(ctx context.Context) (e
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	next, err := page.fn(ctx, page.rulr)
-	if err != nil {
-		return err
+	for {
+		next, err := page.fn(ctx, page.rulr)
+		if err != nil {
+			return err
+		}
+		page.rulr = next
+		if !next.hasNextLink() || !next.IsEmpty() {
+			break
+		}
 	}
-	page.rulr = next
 	return nil
 }
 
@@ -6801,8 +6021,8 @@ func NewResourceUsageListResultPage(getNextPage func(context.Context, ResourceUs
 	return ResourceUsageListResultPage{fn: getNextPage}
 }
 
-// ResponseBasedOriginErrorDetectionParameters the JSON object that contains the properties to determine
-// origin health using real requests/responses.
+// ResponseBasedOriginErrorDetectionParameters the JSON object that contains the properties to determine origin
+// health using real requests/responses.
 type ResponseBasedOriginErrorDetectionParameters struct {
 	// ResponseBasedDetectedErrorTypes - Type of response errors for real user requests for which origin will be deemed unhealthy. Possible values include: 'ResponseBasedDetectedErrorTypesNone', 'ResponseBasedDetectedErrorTypesTCPErrorsOnly', 'ResponseBasedDetectedErrorTypesTCPAndHTTPErrors'
 	ResponseBasedDetectedErrorTypes ResponseBasedDetectedErrorTypes `json:"responseBasedDetectedErrorTypes,omitempty"`
@@ -6901,7 +6121,7 @@ type URLPathMatchConditionParameters struct {
 type URLRedirectAction struct {
 	// Parameters - Defines the parameters for the action.
 	Parameters *URLRedirectActionParameters `json:"parameters,omitempty"`
-	// Name - Possible values include: 'NameDeliveryRuleAction', 'NameURLRedirect', 'NameURLRewrite', 'NameModifyRequestHeader', 'NameModifyResponseHeader', 'NameCacheExpiration', 'NameCacheKeyQueryString'
+	// Name - Possible values include: 'NameDeliveryRuleAction', 'NameURLRedirect', 'NameURLSigning', 'NameURLRewrite', 'NameModifyRequestHeader', 'NameModifyResponseHeader', 'NameCacheExpiration', 'NameCacheKeyQueryString'
 	Name NameBasicDeliveryRuleAction `json:"name,omitempty"`
 }
 
@@ -6921,6 +6141,11 @@ func (ura URLRedirectAction) MarshalJSON() ([]byte, error) {
 // AsURLRedirectAction is the BasicDeliveryRuleAction implementation for URLRedirectAction.
 func (ura URLRedirectAction) AsURLRedirectAction() (*URLRedirectAction, bool) {
 	return &ura, true
+}
+
+// AsURLSigningAction is the BasicDeliveryRuleAction implementation for URLRedirectAction.
+func (ura URLRedirectAction) AsURLSigningAction() (*URLSigningAction, bool) {
+	return nil, false
 }
 
 // AsURLRewriteAction is the BasicDeliveryRuleAction implementation for URLRedirectAction.
@@ -6979,7 +6204,7 @@ type URLRedirectActionParameters struct {
 type URLRewriteAction struct {
 	// Parameters - Defines the parameters for the action.
 	Parameters *URLRewriteActionParameters `json:"parameters,omitempty"`
-	// Name - Possible values include: 'NameDeliveryRuleAction', 'NameURLRedirect', 'NameURLRewrite', 'NameModifyRequestHeader', 'NameModifyResponseHeader', 'NameCacheExpiration', 'NameCacheKeyQueryString'
+	// Name - Possible values include: 'NameDeliveryRuleAction', 'NameURLRedirect', 'NameURLSigning', 'NameURLRewrite', 'NameModifyRequestHeader', 'NameModifyResponseHeader', 'NameCacheExpiration', 'NameCacheKeyQueryString'
 	Name NameBasicDeliveryRuleAction `json:"name,omitempty"`
 }
 
@@ -6998,6 +6223,11 @@ func (ura URLRewriteAction) MarshalJSON() ([]byte, error) {
 
 // AsURLRedirectAction is the BasicDeliveryRuleAction implementation for URLRewriteAction.
 func (ura URLRewriteAction) AsURLRedirectAction() (*URLRedirectAction, bool) {
+	return nil, false
+}
+
+// AsURLSigningAction is the BasicDeliveryRuleAction implementation for URLRewriteAction.
+func (ura URLRewriteAction) AsURLSigningAction() (*URLSigningAction, bool) {
 	return nil, false
 }
 
@@ -7047,6 +6277,72 @@ type URLRewriteActionParameters struct {
 	PreserveUnmatchedPath *bool `json:"preserveUnmatchedPath,omitempty"`
 }
 
+// URLSigningAction defines the url signing action for the delivery rule.
+type URLSigningAction struct {
+	// Parameters - Defines the parameters for the action.
+	Parameters *URLSigningActionParameters `json:"parameters,omitempty"`
+	// Name - Possible values include: 'NameDeliveryRuleAction', 'NameURLRedirect', 'NameURLSigning', 'NameURLRewrite', 'NameModifyRequestHeader', 'NameModifyResponseHeader', 'NameCacheExpiration', 'NameCacheKeyQueryString'
+	Name NameBasicDeliveryRuleAction `json:"name,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for URLSigningAction.
+func (usa URLSigningAction) MarshalJSON() ([]byte, error) {
+	usa.Name = NameURLSigning
+	objectMap := make(map[string]interface{})
+	if usa.Parameters != nil {
+		objectMap["parameters"] = usa.Parameters
+	}
+	if usa.Name != "" {
+		objectMap["name"] = usa.Name
+	}
+	return json.Marshal(objectMap)
+}
+
+// AsURLRedirectAction is the BasicDeliveryRuleAction implementation for URLSigningAction.
+func (usa URLSigningAction) AsURLRedirectAction() (*URLRedirectAction, bool) {
+	return nil, false
+}
+
+// AsURLSigningAction is the BasicDeliveryRuleAction implementation for URLSigningAction.
+func (usa URLSigningAction) AsURLSigningAction() (*URLSigningAction, bool) {
+	return &usa, true
+}
+
+// AsURLRewriteAction is the BasicDeliveryRuleAction implementation for URLSigningAction.
+func (usa URLSigningAction) AsURLRewriteAction() (*URLRewriteAction, bool) {
+	return nil, false
+}
+
+// AsDeliveryRuleRequestHeaderAction is the BasicDeliveryRuleAction implementation for URLSigningAction.
+func (usa URLSigningAction) AsDeliveryRuleRequestHeaderAction() (*DeliveryRuleRequestHeaderAction, bool) {
+	return nil, false
+}
+
+// AsDeliveryRuleResponseHeaderAction is the BasicDeliveryRuleAction implementation for URLSigningAction.
+func (usa URLSigningAction) AsDeliveryRuleResponseHeaderAction() (*DeliveryRuleResponseHeaderAction, bool) {
+	return nil, false
+}
+
+// AsDeliveryRuleCacheExpirationAction is the BasicDeliveryRuleAction implementation for URLSigningAction.
+func (usa URLSigningAction) AsDeliveryRuleCacheExpirationAction() (*DeliveryRuleCacheExpirationAction, bool) {
+	return nil, false
+}
+
+// AsDeliveryRuleCacheKeyQueryStringAction is the BasicDeliveryRuleAction implementation for URLSigningAction.
+func (usa URLSigningAction) AsDeliveryRuleCacheKeyQueryStringAction() (*DeliveryRuleCacheKeyQueryStringAction, bool) {
+	return nil, false
+}
+
+// AsDeliveryRuleAction is the BasicDeliveryRuleAction implementation for URLSigningAction.
+func (usa URLSigningAction) AsDeliveryRuleAction() (*DeliveryRuleAction, bool) {
+	return nil, false
+}
+
+// AsBasicDeliveryRuleAction is the BasicDeliveryRuleAction implementation for URLSigningAction.
+func (usa URLSigningAction) AsBasicDeliveryRuleAction() (BasicDeliveryRuleAction, bool) {
+	return &usa, true
+}
+
 // URLSigningActionParameters defines the parameters for the Url Signing action.
 type URLSigningActionParameters struct {
 	// OdataType - Possible values include: 'MicrosoftAzureCdnModelsDeliveryRuleURLSigningActionParameters'
@@ -7077,8 +6373,8 @@ type URLSigningParamIdentifier struct {
 	ParamName *string `json:"paramName,omitempty"`
 }
 
-// UserManagedHTTPSParameters defines the certificate source parameters using user's keyvault certificate
-// for enabling SSL.
+// UserManagedHTTPSParameters defines the certificate source parameters using user's keyvault certificate for
+// enabling SSL.
 type UserManagedHTTPSParameters struct {
 	// CertificateSourceParameters - Defines the certificate source parameters using user's keyvault certificate for enabling SSL.
 	CertificateSourceParameters *KeyVaultCertificateSourceParameters `json:"certificateSourceParameters,omitempty"`
@@ -7292,14 +6588,23 @@ func (wafp *WebApplicationFirewallPolicy) UnmarshalJSON(body []byte) error {
 	return nil
 }
 
-// WebApplicationFirewallPolicyList defines a list of WebApplicationFirewallPolicies for Azure CDN. It
-// contains a list of WebApplicationFirewallPolicy objects and a URL link to get the next set of results.
+// WebApplicationFirewallPolicyList defines a list of WebApplicationFirewallPolicies for Azure CDN. It contains
+// a list of WebApplicationFirewallPolicy objects and a URL link to get the next set of results.
 type WebApplicationFirewallPolicyList struct {
 	autorest.Response `json:"-"`
 	// Value - READ-ONLY; List of Azure CDN WebApplicationFirewallPolicies within a resource group.
 	Value *[]WebApplicationFirewallPolicy `json:"value,omitempty"`
 	// NextLink - URL to get the next set of WebApplicationFirewallPolicy objects if there are any.
 	NextLink *string `json:"nextLink,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for WebApplicationFirewallPolicyList.
+func (wafpl WebApplicationFirewallPolicyList) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if wafpl.NextLink != nil {
+		objectMap["nextLink"] = wafpl.NextLink
+	}
+	return json.Marshal(objectMap)
 }
 
 // WebApplicationFirewallPolicyListIterator provides access to a complete listing of
@@ -7371,10 +6676,15 @@ func (wafpl WebApplicationFirewallPolicyList) IsEmpty() bool {
 	return wafpl.Value == nil || len(*wafpl.Value) == 0
 }
 
+// hasNextLink returns true if the NextLink is not empty.
+func (wafpl WebApplicationFirewallPolicyList) hasNextLink() bool {
+	return wafpl.NextLink != nil && len(*wafpl.NextLink) != 0
+}
+
 // webApplicationFirewallPolicyListPreparer prepares a request to retrieve the next set of results.
 // It returns nil if no more results exist.
 func (wafpl WebApplicationFirewallPolicyList) webApplicationFirewallPolicyListPreparer(ctx context.Context) (*http.Request, error) {
-	if wafpl.NextLink == nil || len(to.String(wafpl.NextLink)) < 1 {
+	if !wafpl.hasNextLink() {
 		return nil, nil
 	}
 	return autorest.Prepare((&http.Request{}).WithContext(ctx),
@@ -7402,11 +6712,16 @@ func (page *WebApplicationFirewallPolicyListPage) NextWithContext(ctx context.Co
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	next, err := page.fn(ctx, page.wafpl)
-	if err != nil {
-		return err
+	for {
+		next, err := page.fn(ctx, page.wafpl)
+		if err != nil {
+			return err
+		}
+		page.wafpl = next
+		if !next.hasNextLink() || !next.IsEmpty() {
+			break
+		}
 	}
-	page.wafpl = next
 	return nil
 }
 
@@ -7440,8 +6755,7 @@ func NewWebApplicationFirewallPolicyListPage(getNextPage func(context.Context, W
 	return WebApplicationFirewallPolicyListPage{fn: getNextPage}
 }
 
-// WebApplicationFirewallPolicyPatchParameters properties required to update a
-// CdnWebApplicationFirewallPolicy.
+// WebApplicationFirewallPolicyPatchParameters properties required to update a CdnWebApplicationFirewallPolicy.
 type WebApplicationFirewallPolicyPatchParameters struct {
 	// Tags - CdnWebApplicationFirewallPolicy tags
 	Tags map[string]*string `json:"tags"`
@@ -7472,4 +6786,22 @@ type WebApplicationFirewallPolicyProperties struct {
 	ProvisioningState ProvisioningState `json:"provisioningState,omitempty"`
 	// ResourceState - READ-ONLY; Possible values include: 'PolicyResourceStateCreating', 'PolicyResourceStateEnabling', 'PolicyResourceStateEnabled', 'PolicyResourceStateDisabling', 'PolicyResourceStateDisabled', 'PolicyResourceStateDeleting'
 	ResourceState PolicyResourceState `json:"resourceState,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for WebApplicationFirewallPolicyProperties.
+func (wafpp WebApplicationFirewallPolicyProperties) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if wafpp.PolicySettings != nil {
+		objectMap["policySettings"] = wafpp.PolicySettings
+	}
+	if wafpp.RateLimitRules != nil {
+		objectMap["rateLimitRules"] = wafpp.RateLimitRules
+	}
+	if wafpp.CustomRules != nil {
+		objectMap["customRules"] = wafpp.CustomRules
+	}
+	if wafpp.ManagedRules != nil {
+		objectMap["managedRules"] = wafpp.ManagedRules
+	}
+	return json.Marshal(objectMap)
 }
