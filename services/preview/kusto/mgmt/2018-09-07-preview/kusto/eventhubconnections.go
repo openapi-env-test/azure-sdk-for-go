@@ -115,9 +115,8 @@ func (client EventHubConnectionsClient) CreateOrUpdatePreparer(ctx context.Conte
 // CreateOrUpdateSender sends the CreateOrUpdate request. The method will close the
 // http.Response Body if it receives an error.
 func (client EventHubConnectionsClient) CreateOrUpdateSender(req *http.Request) (future EventHubConnectionsCreateOrUpdateFuture, err error) {
-	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = autorest.SendWithSender(client, req, sd...)
+	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
 	if err != nil {
 		return
 	}
@@ -130,7 +129,6 @@ func (client EventHubConnectionsClient) CreateOrUpdateSender(req *http.Request) 
 func (client EventHubConnectionsClient) CreateOrUpdateResponder(resp *http.Response) (result EventHubConnection, err error) {
 	err = autorest.Respond(
 		resp,
-		client.ByInspecting(),
 		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusCreated, http.StatusAccepted),
 		autorest.ByUnmarshallingJSON(&result),
 		autorest.ByClosing())
@@ -196,9 +194,8 @@ func (client EventHubConnectionsClient) DeletePreparer(ctx context.Context, reso
 // DeleteSender sends the Delete request. The method will close the
 // http.Response Body if it receives an error.
 func (client EventHubConnectionsClient) DeleteSender(req *http.Request) (future EventHubConnectionsDeleteFuture, err error) {
-	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = autorest.SendWithSender(client, req, sd...)
+	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
 	if err != nil {
 		return
 	}
@@ -211,7 +208,6 @@ func (client EventHubConnectionsClient) DeleteSender(req *http.Request) (future 
 func (client EventHubConnectionsClient) DeleteResponder(resp *http.Response) (result autorest.Response, err error) {
 	err = autorest.Respond(
 		resp,
-		client.ByInspecting(),
 		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusAccepted, http.StatusNoContent),
 		autorest.ByClosing())
 	result.Response = resp
@@ -292,8 +288,7 @@ func (client EventHubConnectionsClient) EventhubConnectionValidationPreparer(ctx
 // EventhubConnectionValidationSender sends the EventhubConnectionValidation request. The method will close the
 // http.Response Body if it receives an error.
 func (client EventHubConnectionsClient) EventhubConnectionValidationSender(req *http.Request) (*http.Response, error) {
-	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
-	return autorest.SendWithSender(client, req, sd...)
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // EventhubConnectionValidationResponder handles the response to the EventhubConnectionValidation request. The method always
@@ -301,7 +296,6 @@ func (client EventHubConnectionsClient) EventhubConnectionValidationSender(req *
 func (client EventHubConnectionsClient) EventhubConnectionValidationResponder(resp *http.Response) (result EventHubConnectionValidationListResult, err error) {
 	err = autorest.Respond(
 		resp,
-		client.ByInspecting(),
 		azure.WithErrorUnlessStatusCode(http.StatusOK),
 		autorest.ByUnmarshallingJSON(&result),
 		autorest.ByClosing())
@@ -373,8 +367,7 @@ func (client EventHubConnectionsClient) GetPreparer(ctx context.Context, resourc
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client EventHubConnectionsClient) GetSender(req *http.Request) (*http.Response, error) {
-	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
-	return autorest.SendWithSender(client, req, sd...)
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // GetResponder handles the response to the Get request. The method always
@@ -382,7 +375,6 @@ func (client EventHubConnectionsClient) GetSender(req *http.Request) (*http.Resp
 func (client EventHubConnectionsClient) GetResponder(resp *http.Response) (result EventHubConnection, err error) {
 	err = autorest.Respond(
 		resp,
-		client.ByInspecting(),
 		azure.WithErrorUnlessStatusCode(http.StatusOK),
 		autorest.ByUnmarshallingJSON(&result),
 		autorest.ByClosing())
@@ -452,8 +444,7 @@ func (client EventHubConnectionsClient) ListByDatabasePreparer(ctx context.Conte
 // ListByDatabaseSender sends the ListByDatabase request. The method will close the
 // http.Response Body if it receives an error.
 func (client EventHubConnectionsClient) ListByDatabaseSender(req *http.Request) (*http.Response, error) {
-	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
-	return autorest.SendWithSender(client, req, sd...)
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // ListByDatabaseResponder handles the response to the ListByDatabase request. The method always
@@ -461,7 +452,6 @@ func (client EventHubConnectionsClient) ListByDatabaseSender(req *http.Request) 
 func (client EventHubConnectionsClient) ListByDatabaseResponder(resp *http.Response) (result EventHubConnectionListResult, err error) {
 	err = autorest.Respond(
 		resp,
-		client.ByInspecting(),
 		azure.WithErrorUnlessStatusCode(http.StatusOK),
 		autorest.ByUnmarshallingJSON(&result),
 		autorest.ByClosing())
@@ -530,9 +520,8 @@ func (client EventHubConnectionsClient) UpdatePreparer(ctx context.Context, reso
 // UpdateSender sends the Update request. The method will close the
 // http.Response Body if it receives an error.
 func (client EventHubConnectionsClient) UpdateSender(req *http.Request) (future EventHubConnectionsUpdateFuture, err error) {
-	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = autorest.SendWithSender(client, req, sd...)
+	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
 	if err != nil {
 		return
 	}
@@ -545,7 +534,6 @@ func (client EventHubConnectionsClient) UpdateSender(req *http.Request) (future 
 func (client EventHubConnectionsClient) UpdateResponder(resp *http.Response) (result EventHubConnection, err error) {
 	err = autorest.Respond(
 		resp,
-		client.ByInspecting(),
 		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusCreated, http.StatusAccepted),
 		autorest.ByUnmarshallingJSON(&result),
 		autorest.ByClosing())
