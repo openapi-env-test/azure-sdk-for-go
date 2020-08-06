@@ -117,8 +117,7 @@ func (client DatabasePrincipalAssignmentsClient) CheckNameAvailabilityPreparer(c
 // CheckNameAvailabilitySender sends the CheckNameAvailability request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabasePrincipalAssignmentsClient) CheckNameAvailabilitySender(req *http.Request) (*http.Response, error) {
-	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
-	return autorest.SendWithSender(client, req, sd...)
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // CheckNameAvailabilityResponder handles the response to the CheckNameAvailability request. The method always
@@ -126,7 +125,6 @@ func (client DatabasePrincipalAssignmentsClient) CheckNameAvailabilitySender(req
 func (client DatabasePrincipalAssignmentsClient) CheckNameAvailabilityResponder(resp *http.Response) (result CheckNameResult, err error) {
 	err = autorest.Respond(
 		resp,
-		client.ByInspecting(),
 		azure.WithErrorUnlessStatusCode(http.StatusOK),
 		autorest.ByUnmarshallingJSON(&result),
 		autorest.ByClosing())
@@ -202,9 +200,8 @@ func (client DatabasePrincipalAssignmentsClient) CreateOrUpdatePreparer(ctx cont
 // CreateOrUpdateSender sends the CreateOrUpdate request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabasePrincipalAssignmentsClient) CreateOrUpdateSender(req *http.Request) (future DatabasePrincipalAssignmentsCreateOrUpdateFuture, err error) {
-	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = autorest.SendWithSender(client, req, sd...)
+	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
 	if err != nil {
 		return
 	}
@@ -217,7 +214,6 @@ func (client DatabasePrincipalAssignmentsClient) CreateOrUpdateSender(req *http.
 func (client DatabasePrincipalAssignmentsClient) CreateOrUpdateResponder(resp *http.Response) (result DatabasePrincipalAssignment, err error) {
 	err = autorest.Respond(
 		resp,
-		client.ByInspecting(),
 		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusCreated),
 		autorest.ByUnmarshallingJSON(&result),
 		autorest.ByClosing())
@@ -283,9 +279,8 @@ func (client DatabasePrincipalAssignmentsClient) DeletePreparer(ctx context.Cont
 // DeleteSender sends the Delete request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabasePrincipalAssignmentsClient) DeleteSender(req *http.Request) (future DatabasePrincipalAssignmentsDeleteFuture, err error) {
-	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = autorest.SendWithSender(client, req, sd...)
+	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
 	if err != nil {
 		return
 	}
@@ -298,7 +293,6 @@ func (client DatabasePrincipalAssignmentsClient) DeleteSender(req *http.Request)
 func (client DatabasePrincipalAssignmentsClient) DeleteResponder(resp *http.Response) (result autorest.Response, err error) {
 	err = autorest.Respond(
 		resp,
-		client.ByInspecting(),
 		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusAccepted, http.StatusNoContent),
 		autorest.ByClosing())
 	result.Response = resp
@@ -369,8 +363,7 @@ func (client DatabasePrincipalAssignmentsClient) GetPreparer(ctx context.Context
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabasePrincipalAssignmentsClient) GetSender(req *http.Request) (*http.Response, error) {
-	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
-	return autorest.SendWithSender(client, req, sd...)
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // GetResponder handles the response to the Get request. The method always
@@ -378,7 +371,6 @@ func (client DatabasePrincipalAssignmentsClient) GetSender(req *http.Request) (*
 func (client DatabasePrincipalAssignmentsClient) GetResponder(resp *http.Response) (result DatabasePrincipalAssignment, err error) {
 	err = autorest.Respond(
 		resp,
-		client.ByInspecting(),
 		azure.WithErrorUnlessStatusCode(http.StatusOK),
 		autorest.ByUnmarshallingJSON(&result),
 		autorest.ByClosing())
@@ -448,8 +440,7 @@ func (client DatabasePrincipalAssignmentsClient) ListPreparer(ctx context.Contex
 // ListSender sends the List request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabasePrincipalAssignmentsClient) ListSender(req *http.Request) (*http.Response, error) {
-	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
-	return autorest.SendWithSender(client, req, sd...)
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // ListResponder handles the response to the List request. The method always
@@ -457,7 +448,6 @@ func (client DatabasePrincipalAssignmentsClient) ListSender(req *http.Request) (
 func (client DatabasePrincipalAssignmentsClient) ListResponder(resp *http.Response) (result DatabasePrincipalAssignmentListResult, err error) {
 	err = autorest.Respond(
 		resp,
-		client.ByInspecting(),
 		azure.WithErrorUnlessStatusCode(http.StatusOK),
 		autorest.ByUnmarshallingJSON(&result),
 		autorest.ByClosing())

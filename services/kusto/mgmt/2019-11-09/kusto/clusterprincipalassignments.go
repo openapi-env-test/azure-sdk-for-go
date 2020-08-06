@@ -115,8 +115,7 @@ func (client ClusterPrincipalAssignmentsClient) CheckNameAvailabilityPreparer(ct
 // CheckNameAvailabilitySender sends the CheckNameAvailability request. The method will close the
 // http.Response Body if it receives an error.
 func (client ClusterPrincipalAssignmentsClient) CheckNameAvailabilitySender(req *http.Request) (*http.Response, error) {
-	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
-	return autorest.SendWithSender(client, req, sd...)
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // CheckNameAvailabilityResponder handles the response to the CheckNameAvailability request. The method always
@@ -124,7 +123,6 @@ func (client ClusterPrincipalAssignmentsClient) CheckNameAvailabilitySender(req 
 func (client ClusterPrincipalAssignmentsClient) CheckNameAvailabilityResponder(resp *http.Response) (result CheckNameResult, err error) {
 	err = autorest.Respond(
 		resp,
-		client.ByInspecting(),
 		azure.WithErrorUnlessStatusCode(http.StatusOK),
 		autorest.ByUnmarshallingJSON(&result),
 		autorest.ByClosing())
@@ -198,9 +196,8 @@ func (client ClusterPrincipalAssignmentsClient) CreateOrUpdatePreparer(ctx conte
 // CreateOrUpdateSender sends the CreateOrUpdate request. The method will close the
 // http.Response Body if it receives an error.
 func (client ClusterPrincipalAssignmentsClient) CreateOrUpdateSender(req *http.Request) (future ClusterPrincipalAssignmentsCreateOrUpdateFuture, err error) {
-	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = autorest.SendWithSender(client, req, sd...)
+	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
 	if err != nil {
 		return
 	}
@@ -213,7 +210,6 @@ func (client ClusterPrincipalAssignmentsClient) CreateOrUpdateSender(req *http.R
 func (client ClusterPrincipalAssignmentsClient) CreateOrUpdateResponder(resp *http.Response) (result ClusterPrincipalAssignment, err error) {
 	err = autorest.Respond(
 		resp,
-		client.ByInspecting(),
 		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusCreated),
 		autorest.ByUnmarshallingJSON(&result),
 		autorest.ByClosing())
@@ -277,9 +273,8 @@ func (client ClusterPrincipalAssignmentsClient) DeletePreparer(ctx context.Conte
 // DeleteSender sends the Delete request. The method will close the
 // http.Response Body if it receives an error.
 func (client ClusterPrincipalAssignmentsClient) DeleteSender(req *http.Request) (future ClusterPrincipalAssignmentsDeleteFuture, err error) {
-	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = autorest.SendWithSender(client, req, sd...)
+	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
 	if err != nil {
 		return
 	}
@@ -292,7 +287,6 @@ func (client ClusterPrincipalAssignmentsClient) DeleteSender(req *http.Request) 
 func (client ClusterPrincipalAssignmentsClient) DeleteResponder(resp *http.Response) (result autorest.Response, err error) {
 	err = autorest.Respond(
 		resp,
-		client.ByInspecting(),
 		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusAccepted, http.StatusNoContent),
 		autorest.ByClosing())
 	result.Response = resp
@@ -361,8 +355,7 @@ func (client ClusterPrincipalAssignmentsClient) GetPreparer(ctx context.Context,
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client ClusterPrincipalAssignmentsClient) GetSender(req *http.Request) (*http.Response, error) {
-	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
-	return autorest.SendWithSender(client, req, sd...)
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // GetResponder handles the response to the Get request. The method always
@@ -370,7 +363,6 @@ func (client ClusterPrincipalAssignmentsClient) GetSender(req *http.Request) (*h
 func (client ClusterPrincipalAssignmentsClient) GetResponder(resp *http.Response) (result ClusterPrincipalAssignment, err error) {
 	err = autorest.Respond(
 		resp,
-		client.ByInspecting(),
 		azure.WithErrorUnlessStatusCode(http.StatusOK),
 		autorest.ByUnmarshallingJSON(&result),
 		autorest.ByClosing())
@@ -438,8 +430,7 @@ func (client ClusterPrincipalAssignmentsClient) ListPreparer(ctx context.Context
 // ListSender sends the List request. The method will close the
 // http.Response Body if it receives an error.
 func (client ClusterPrincipalAssignmentsClient) ListSender(req *http.Request) (*http.Response, error) {
-	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
-	return autorest.SendWithSender(client, req, sd...)
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // ListResponder handles the response to the List request. The method always
@@ -447,7 +438,6 @@ func (client ClusterPrincipalAssignmentsClient) ListSender(req *http.Request) (*
 func (client ClusterPrincipalAssignmentsClient) ListResponder(resp *http.Response) (result ClusterPrincipalAssignmentListResult, err error) {
 	err = autorest.Respond(
 		resp,
-		client.ByInspecting(),
 		azure.WithErrorUnlessStatusCode(http.StatusOK),
 		autorest.ByUnmarshallingJSON(&result),
 		autorest.ByClosing())
