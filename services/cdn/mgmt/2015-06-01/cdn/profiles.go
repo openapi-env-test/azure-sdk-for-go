@@ -121,7 +121,6 @@ func (client ProfilesClient) CreateSender(req *http.Request) (future ProfilesCre
 func (client ProfilesClient) CreateResponder(resp *http.Response) (result Profile, err error) {
 	err = autorest.Respond(
 		resp,
-		client.ByInspecting(),
 		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusCreated, http.StatusAccepted),
 		autorest.ByUnmarshallingJSON(&result),
 		autorest.ByClosing())
@@ -197,7 +196,6 @@ func (client ProfilesClient) DeleteIfExistsSender(req *http.Request) (future Pro
 func (client ProfilesClient) DeleteIfExistsResponder(resp *http.Response) (result autorest.Response, err error) {
 	err = autorest.Respond(
 		resp,
-		client.ByInspecting(),
 		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusAccepted, http.StatusNoContent),
 		autorest.ByClosing())
 	result.Response = resp
@@ -272,7 +270,6 @@ func (client ProfilesClient) GenerateSsoURISender(req *http.Request) (*http.Resp
 func (client ProfilesClient) GenerateSsoURIResponder(resp *http.Response) (result SsoURI, err error) {
 	err = autorest.Respond(
 		resp,
-		client.ByInspecting(),
 		azure.WithErrorUnlessStatusCode(http.StatusOK),
 		autorest.ByUnmarshallingJSON(&result),
 		autorest.ByClosing())
@@ -348,7 +345,6 @@ func (client ProfilesClient) GetSender(req *http.Request) (*http.Response, error
 func (client ProfilesClient) GetResponder(resp *http.Response) (result Profile, err error) {
 	err = autorest.Respond(
 		resp,
-		client.ByInspecting(),
 		azure.WithErrorUnlessStatusCode(http.StatusOK),
 		autorest.ByUnmarshallingJSON(&result),
 		autorest.ByClosing())
@@ -422,7 +418,6 @@ func (client ProfilesClient) ListByResourceGroupSender(req *http.Request) (*http
 func (client ProfilesClient) ListByResourceGroupResponder(resp *http.Response) (result ProfileListResult, err error) {
 	err = autorest.Respond(
 		resp,
-		client.ByInspecting(),
 		azure.WithErrorUnlessStatusCode(http.StatusOK),
 		autorest.ByUnmarshallingJSON(&result),
 		autorest.ByClosing())
@@ -493,87 +488,7 @@ func (client ProfilesClient) ListBySubscriptionIDSender(req *http.Request) (*htt
 func (client ProfilesClient) ListBySubscriptionIDResponder(resp *http.Response) (result ProfileListResult, err error) {
 	err = autorest.Respond(
 		resp,
-		client.ByInspecting(),
 		azure.WithErrorUnlessStatusCode(http.StatusOK),
-		autorest.ByUnmarshallingJSON(&result),
-		autorest.ByClosing())
-	result.Response = autorest.Response{Response: resp}
-	return
-}
-
-// Update sends the update request.
-// Parameters:
-// profileName - name of the CDN profile within the resource group.
-// profileProperties - profile properties needed for update.
-// resourceGroupName - name of the resource group within the Azure subscription.
-func (client ProfilesClient) Update(ctx context.Context, profileName string, profileProperties ProfileUpdateParameters, resourceGroupName string) (result ProfilesUpdateFuture, err error) {
-	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/ProfilesClient.Update")
-		defer func() {
-			sc := -1
-			if result.Response() != nil {
-				sc = result.Response().StatusCode
-			}
-			tracing.EndSpan(ctx, sc, err)
-		}()
-	}
-	req, err := client.UpdatePreparer(ctx, profileName, profileProperties, resourceGroupName)
-	if err != nil {
-		err = autorest.NewErrorWithError(err, "cdn.ProfilesClient", "Update", nil, "Failure preparing request")
-		return
-	}
-
-	result, err = client.UpdateSender(req)
-	if err != nil {
-		err = autorest.NewErrorWithError(err, "cdn.ProfilesClient", "Update", result.Response(), "Failure sending request")
-		return
-	}
-
-	return
-}
-
-// UpdatePreparer prepares the Update request.
-func (client ProfilesClient) UpdatePreparer(ctx context.Context, profileName string, profileProperties ProfileUpdateParameters, resourceGroupName string) (*http.Request, error) {
-	pathParameters := map[string]interface{}{
-		"profileName":       autorest.Encode("path", profileName),
-		"resourceGroupName": autorest.Encode("path", resourceGroupName),
-		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
-	}
-
-	const APIVersion = "2015-06-01"
-	queryParameters := map[string]interface{}{
-		"api-version": APIVersion,
-	}
-
-	preparer := autorest.CreatePreparer(
-		autorest.AsContentType("application/json; charset=utf-8"),
-		autorest.AsPatch(),
-		autorest.WithBaseURL(client.BaseURI),
-		autorest.WithPathParameters("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}", pathParameters),
-		autorest.WithJSON(profileProperties),
-		autorest.WithQueryParameters(queryParameters))
-	return preparer.Prepare((&http.Request{}).WithContext(ctx))
-}
-
-// UpdateSender sends the Update request. The method will close the
-// http.Response Body if it receives an error.
-func (client ProfilesClient) UpdateSender(req *http.Request) (future ProfilesUpdateFuture, err error) {
-	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
-	if err != nil {
-		return
-	}
-	future.Future, err = azure.NewFutureFromResponse(resp)
-	return
-}
-
-// UpdateResponder handles the response to the Update request. The method always
-// closes the http.Response Body.
-func (client ProfilesClient) UpdateResponder(resp *http.Response) (result Profile, err error) {
-	err = autorest.Respond(
-		resp,
-		client.ByInspecting(),
-		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusAccepted),
 		autorest.ByUnmarshallingJSON(&result),
 		autorest.ByClosing())
 	result.Response = autorest.Response{Response: resp}
