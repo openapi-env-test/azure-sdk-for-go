@@ -820,7 +820,6 @@ func (eup *EndpointUpdateParameters) UnmarshalJSON(body []byte) error {
 
 // ErrorResponse ...
 type ErrorResponse struct {
-	autorest.Response `json:"-"`
 	// Code - Error code
 	Code *string `json:"code,omitempty"`
 	// Message - Error message indicating why the operation failed.
