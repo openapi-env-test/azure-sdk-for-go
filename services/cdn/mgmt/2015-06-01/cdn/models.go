@@ -1357,34 +1357,6 @@ func (future *ProfilesDeleteIfExistsFuture) Result(client ProfilesClient) (ar au
 	return
 }
 
-// ProfilesUpdateFuture an abstraction for monitoring and retrieving the results of a long-running operation.
-type ProfilesUpdateFuture struct {
-	azure.Future
-}
-
-// Result returns the result of the asynchronous operation.
-// If the operation has not completed it will return an error.
-func (future *ProfilesUpdateFuture) Result(client ProfilesClient) (p Profile, err error) {
-	var done bool
-	done, err = future.DoneWithContext(context.Background(), client)
-	if err != nil {
-		err = autorest.NewErrorWithError(err, "cdn.ProfilesUpdateFuture", "Result", future.Response(), "Polling failure")
-		return
-	}
-	if !done {
-		err = azure.NewAsyncOpIncompleteError("cdn.ProfilesUpdateFuture")
-		return
-	}
-	sender := autorest.DecorateSender(client, autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
-	if p.Response.Response, err = future.GetResult(sender); err == nil && p.Response.Response.StatusCode != http.StatusNoContent {
-		p, err = client.UpdateResponder(p.Response.Response)
-		if err != nil {
-			err = autorest.NewErrorWithError(err, "cdn.ProfilesUpdateFuture", "Result", p.Response.Response, "Failure responding to request")
-		}
-	}
-	return
-}
-
 // ProfileUpdateParameters profile properties required for profile update.
 type ProfileUpdateParameters struct {
 	// Tags - Profile tags
