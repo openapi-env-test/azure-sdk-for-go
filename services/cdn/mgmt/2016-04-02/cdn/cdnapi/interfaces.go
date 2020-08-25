@@ -68,7 +68,6 @@ type CustomDomainsClientAPI interface {
 	DeleteIfExists(ctx context.Context, customDomainName string, endpointName string, profileName string, resourceGroupName string) (result cdn.CustomDomainsDeleteIfExistsFuture, err error)
 	Get(ctx context.Context, customDomainName string, endpointName string, profileName string, resourceGroupName string) (result cdn.CustomDomain, err error)
 	ListByEndpoint(ctx context.Context, endpointName string, profileName string, resourceGroupName string) (result cdn.CustomDomainListResult, err error)
-	Update(ctx context.Context, customDomainName string, customDomainProperties cdn.CustomDomainParameters, endpointName string, profileName string, resourceGroupName string) (result cdn.ErrorResponse, err error)
 }
 
 var _ CustomDomainsClientAPI = (*cdn.CustomDomainsClient)(nil)
