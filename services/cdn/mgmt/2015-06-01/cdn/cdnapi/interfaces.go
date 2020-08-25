@@ -30,7 +30,6 @@ type ProfilesClientAPI interface {
 	Get(ctx context.Context, profileName string, resourceGroupName string) (result cdn.Profile, err error)
 	ListByResourceGroup(ctx context.Context, resourceGroupName string) (result cdn.ProfileListResult, err error)
 	ListBySubscriptionID(ctx context.Context) (result cdn.ProfileListResult, err error)
-	Update(ctx context.Context, profileName string, profileProperties cdn.ProfileUpdateParameters, resourceGroupName string) (result cdn.ProfilesUpdateFuture, err error)
 }
 
 var _ ProfilesClientAPI = (*cdn.ProfilesClient)(nil)
