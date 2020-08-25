@@ -1932,8 +1932,8 @@ func (oup *OriginUpdateParameters) UnmarshalJSON(body []byte) error {
 // and pricing tier.
 type Profile struct {
 	autorest.Response `json:"-"`
-	// Sku - The pricing tier (defines a CDN provider, feature list and rate) of the CDN profile.
-	Sku                *Sku `json:"sku,omitempty"`
+	// Skt - The pricing tier (defines a CDN provider, feature list and rate) of the CDN profile.
+	Skt                *Sku `json:"skt,omitempty"`
 	*ProfileProperties `json:"properties,omitempty"`
 	// Location - Resource location.
 	Location *string `json:"location,omitempty"`
@@ -1950,8 +1950,8 @@ type Profile struct {
 // MarshalJSON is the custom marshaler for Profile.
 func (p Profile) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
-	if p.Sku != nil {
-		objectMap["sku"] = p.Sku
+	if p.Skt != nil {
+		objectMap["skt"] = p.Skt
 	}
 	if p.ProfileProperties != nil {
 		objectMap["properties"] = p.ProfileProperties
@@ -1974,14 +1974,14 @@ func (p *Profile) UnmarshalJSON(body []byte) error {
 	}
 	for k, v := range m {
 		switch k {
-		case "sku":
+		case "skt":
 			if v != nil {
-				var sku Sku
-				err = json.Unmarshal(*v, &sku)
+				var skt Sku
+				err = json.Unmarshal(*v, &skt)
 				if err != nil {
 					return err
 				}
-				p.Sku = &sku
+				p.Skt = &skt
 			}
 		case "properties":
 			if v != nil {
