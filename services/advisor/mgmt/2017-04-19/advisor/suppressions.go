@@ -47,9 +47,9 @@ func NewSuppressionsClientWithBaseURI(baseURI string, subscriptionID string) Sup
 // resourceURI - the fully qualified Azure Resource Manager identifier of the resource to which the
 // recommendation applies.
 // recommendationID - the recommendation ID.
-// name - the name of the suppression.
+// nameTest - the name of the suppression.
 // suppressionContract - the snoozed or dismissed attribute; for example, the snooze duration.
-func (client SuppressionsClient) Create(ctx context.Context, resourceURI string, recommendationID string, name string, suppressionContract SuppressionContract) (result SuppressionContract, err error) {
+func (client SuppressionsClient) Create(ctx context.Context, resourceURI string, recommendationID string, nameTest string, suppressionContract SuppressionContract) (result SuppressionContract, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/SuppressionsClient.Create")
 		defer func() {
@@ -60,7 +60,7 @@ func (client SuppressionsClient) Create(ctx context.Context, resourceURI string,
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	req, err := client.CreatePreparer(ctx, resourceURI, recommendationID, name, suppressionContract)
+	req, err := client.CreatePreparer(ctx, resourceURI, recommendationID, nameTest, suppressionContract)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "advisor.SuppressionsClient", "Create", nil, "Failure preparing request")
 		return
@@ -82,9 +82,9 @@ func (client SuppressionsClient) Create(ctx context.Context, resourceURI string,
 }
 
 // CreatePreparer prepares the Create request.
-func (client SuppressionsClient) CreatePreparer(ctx context.Context, resourceURI string, recommendationID string, name string, suppressionContract SuppressionContract) (*http.Request, error) {
+func (client SuppressionsClient) CreatePreparer(ctx context.Context, resourceURI string, recommendationID string, nameTest string, suppressionContract SuppressionContract) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
-		"name":             autorest.Encode("path", name),
+		"nameTest":         autorest.Encode("path", nameTest),
 		"recommendationId": autorest.Encode("path", recommendationID),
 		"resourceUri":      autorest.Encode("path", resourceURI),
 	}
@@ -115,7 +115,6 @@ func (client SuppressionsClient) CreateSender(req *http.Request) (*http.Response
 func (client SuppressionsClient) CreateResponder(resp *http.Response) (result SuppressionContract, err error) {
 	err = autorest.Respond(
 		resp,
-		client.ByInspecting(),
 		azure.WithErrorUnlessStatusCode(http.StatusOK),
 		autorest.ByUnmarshallingJSON(&result),
 		autorest.ByClosing())
@@ -194,7 +193,6 @@ func (client SuppressionsClient) DeleteSender(req *http.Request) (*http.Response
 func (client SuppressionsClient) DeleteResponder(resp *http.Response) (result autorest.Response, err error) {
 	err = autorest.Respond(
 		resp,
-		client.ByInspecting(),
 		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusNoContent),
 		autorest.ByClosing())
 	result.Response = resp
@@ -271,7 +269,6 @@ func (client SuppressionsClient) GetSender(req *http.Request) (*http.Response, e
 func (client SuppressionsClient) GetResponder(resp *http.Response) (result SuppressionContract, err error) {
 	err = autorest.Respond(
 		resp,
-		client.ByInspecting(),
 		azure.WithErrorUnlessStatusCode(http.StatusOK),
 		autorest.ByUnmarshallingJSON(&result),
 		autorest.ByClosing())
@@ -313,6 +310,9 @@ func (client SuppressionsClient) List(ctx context.Context, top *int32, skipToken
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "advisor.SuppressionsClient", "List", resp, "Failure responding to request")
 	}
+	if result.sclr.hasNextLink() && result.sclr.IsEmpty() {
+		err = result.NextWithContext(ctx)
+	}
 
 	return
 }
@@ -353,7 +353,6 @@ func (client SuppressionsClient) ListSender(req *http.Request) (*http.Response, 
 func (client SuppressionsClient) ListResponder(resp *http.Response) (result SuppressionContractListResult, err error) {
 	err = autorest.Respond(
 		resp,
-		client.ByInspecting(),
 		azure.WithErrorUnlessStatusCode(http.StatusOK),
 		autorest.ByUnmarshallingJSON(&result),
 		autorest.ByClosing())
