@@ -44,3 +44,12 @@ type DashboardsClientAPI interface {
 }
 
 var _ DashboardsClientAPI = (*portal.DashboardsClient)(nil)
+
+// TenantConfigurationClientAPI contains the set of methods on the TenantConfigurationClient type.
+type TenantConfigurationClientAPI interface {
+	Create(ctx context.Context, tenantConfiguration portal.Configuration) (result portal.Configuration, err error)
+	Delete(ctx context.Context) (result autorest.Response, err error)
+	Get(ctx context.Context) (result portal.Configuration, err error)
+}
+
+var _ TenantConfigurationClientAPI = (*portal.TenantConfigurationClient)(nil)

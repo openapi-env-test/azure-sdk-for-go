@@ -29,6 +29,85 @@ import (
 // The package's fully qualified name.
 const fqdn = "github.com/Azure/azure-sdk-for-go/services/preview/portal/mgmt/2019-01-01-preview/portal"
 
+// Configuration tenant configuration.
+type Configuration struct {
+	autorest.Response `json:"-"`
+	// ID - READ-ONLY; The tenant configuration id.
+	ID *string `json:"id,omitempty"`
+	// Name - READ-ONLY; The tenant configuration name - default.
+	Name *string `json:"name,omitempty"`
+	// Type - READ-ONLY; The resource type.
+	Type *string `json:"type,omitempty"`
+	// ConfigurationProperties - Tenant configuration properties.
+	*ConfigurationProperties `json:"properties,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for Configuration.
+func (c Configuration) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if c.ConfigurationProperties != nil {
+		objectMap["properties"] = c.ConfigurationProperties
+	}
+	return json.Marshal(objectMap)
+}
+
+// UnmarshalJSON is the custom unmarshaler for Configuration struct.
+func (c *Configuration) UnmarshalJSON(body []byte) error {
+	var m map[string]*json.RawMessage
+	err := json.Unmarshal(body, &m)
+	if err != nil {
+		return err
+	}
+	for k, v := range m {
+		switch k {
+		case "id":
+			if v != nil {
+				var ID string
+				err = json.Unmarshal(*v, &ID)
+				if err != nil {
+					return err
+				}
+				c.ID = &ID
+			}
+		case "name":
+			if v != nil {
+				var name string
+				err = json.Unmarshal(*v, &name)
+				if err != nil {
+					return err
+				}
+				c.Name = &name
+			}
+		case "type":
+			if v != nil {
+				var typeVar string
+				err = json.Unmarshal(*v, &typeVar)
+				if err != nil {
+					return err
+				}
+				c.Type = &typeVar
+			}
+		case "properties":
+			if v != nil {
+				var configurationProperties ConfigurationProperties
+				err = json.Unmarshal(*v, &configurationProperties)
+				if err != nil {
+					return err
+				}
+				c.ConfigurationProperties = &configurationProperties
+			}
+		}
+	}
+
+	return nil
+}
+
+// ConfigurationProperties tenant configuration Properties.
+type ConfigurationProperties struct {
+	// EnforcePrivateMarkdownStorage - Flag to enforce URI storage for Markdown tiles in Private dashboards.
+	EnforcePrivateMarkdownStorage *bool `json:"enforcePrivateMarkdownStorage,omitempty"`
+}
+
 // Dashboard the shared dashboard resource definition.
 type Dashboard struct {
 	autorest.Response `json:"-"`
@@ -232,10 +311,15 @@ func (dlr DashboardListResult) IsEmpty() bool {
 	return dlr.Value == nil || len(*dlr.Value) == 0
 }
 
+// hasNextLink returns true if the NextLink is not empty.
+func (dlr DashboardListResult) hasNextLink() bool {
+	return dlr.NextLink != nil && len(*dlr.NextLink) != 0
+}
+
 // dashboardListResultPreparer prepares a request to retrieve the next set of results.
 // It returns nil if no more results exist.
 func (dlr DashboardListResult) dashboardListResultPreparer(ctx context.Context) (*http.Request, error) {
-	if dlr.NextLink == nil || len(to.String(dlr.NextLink)) < 1 {
+	if !dlr.hasNextLink() {
 		return nil, nil
 	}
 	return autorest.Prepare((&http.Request{}).WithContext(ctx),
@@ -263,11 +347,16 @@ func (page *DashboardListResultPage) NextWithContext(ctx context.Context) (err e
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	next, err := page.fn(ctx, page.dlr)
-	if err != nil {
-		return err
+	for {
+		next, err := page.fn(ctx, page.dlr)
+		if err != nil {
+			return err
+		}
+		page.dlr = next
+		if !next.hasNextLink() || !next.IsEmpty() {
+			break
+		}
 	}
-	page.dlr = next
 	return nil
 }
 
@@ -324,13 +413,13 @@ func (dp DashboardParts) MarshalJSON() ([]byte, error) {
 // DashboardPartsPosition the dashboard's part position.
 type DashboardPartsPosition struct {
 	// X - The dashboard's part x coordinate.
-	X *float64 `json:"x,omitempty"`
+	X *int32 `json:"x,omitempty"`
 	// Y - The dashboard's part y coordinate.
-	Y *float64 `json:"y,omitempty"`
+	Y *int32 `json:"y,omitempty"`
 	// RowSpan - The dashboard's part row span.
-	RowSpan *float64 `json:"rowSpan,omitempty"`
+	RowSpan *int32 `json:"rowSpan,omitempty"`
 	// ColSpan - The dashboard's part column span.
-	ColSpan *float64 `json:"colSpan,omitempty"`
+	ColSpan *int32 `json:"colSpan,omitempty"`
 	// Metadata - The dashboard part's metadata.
 	Metadata map[string]interface{} `json:"metadata"`
 }
@@ -545,10 +634,15 @@ func (rpol ResourceProviderOperationList) IsEmpty() bool {
 	return rpol.Value == nil || len(*rpol.Value) == 0
 }
 
+// hasNextLink returns true if the NextLink is not empty.
+func (rpol ResourceProviderOperationList) hasNextLink() bool {
+	return rpol.NextLink != nil && len(*rpol.NextLink) != 0
+}
+
 // resourceProviderOperationListPreparer prepares a request to retrieve the next set of results.
 // It returns nil if no more results exist.
 func (rpol ResourceProviderOperationList) resourceProviderOperationListPreparer(ctx context.Context) (*http.Request, error) {
-	if rpol.NextLink == nil || len(to.String(rpol.NextLink)) < 1 {
+	if !rpol.hasNextLink() {
 		return nil, nil
 	}
 	return autorest.Prepare((&http.Request{}).WithContext(ctx),
@@ -576,11 +670,16 @@ func (page *ResourceProviderOperationListPage) NextWithContext(ctx context.Conte
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	next, err := page.fn(ctx, page.rpol)
-	if err != nil {
-		return err
+	for {
+		next, err := page.fn(ctx, page.rpol)
+		if err != nil {
+			return err
+		}
+		page.rpol = next
+		if !next.hasNextLink() || !next.IsEmpty() {
+			break
+		}
 	}
-	page.rpol = next
 	return nil
 }
 
