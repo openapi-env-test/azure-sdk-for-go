@@ -16,19 +16,19 @@ func Command() *cobra.Command {
 		Long:  ``, // TODO
 		Args:  cobra.ExactArgs(2),
 		RunE: func(cmd *cobra.Command, args []string) error {
-			return generate(args[0], args[1])
+			return execute(args[0], args[1])
 		},
 	}
 
 	return rootCmd
 }
 
-func generate(inputPath, outputPath string) error {
+func execute(inputPath, outputPath string) error {
 	input, err := readInputFrom(inputPath)
 	if err != nil {
 		return fmt.Errorf("cannot read generate input: %+v", err)
 	}
-	output, err := generateOutput(input)
+	output, err := generate(input)
 	if err != nil {
 		return fmt.Errorf("cannot generate: %+v", err)
 	}
@@ -66,7 +66,8 @@ func writeOutputTo(outputPath string, output *model.GenerateOutput) error {
 	return nil
 }
 
-func generateOutput(input *model.GenerateInput) (*model.GenerateOutput, error) {
+func generate(input *model.GenerateInput) (*model.GenerateOutput, error) {
+	// TODO -- add actual logic
 	return &model.GenerateOutput{
 		Packages: []model.PackageResult{
 			{
