@@ -3,10 +3,13 @@ package cmd
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/Azure/azure-sdk-for-go/tools/apidiff/ioext"
+	"github.com/Azure/azure-sdk-for-go/tools/generator/autorest"
 	"github.com/Azure/azure-sdk-for-go/tools/generator/model"
 	"github.com/spf13/cobra"
 	"io/ioutil"
 	"os"
+	"path/filepath"
 )
 
 func Command() *cobra.Command {
@@ -66,21 +69,53 @@ func writeOutputTo(outputPath string, output *model.GenerateOutput) error {
 	return nil
 }
 
+const sdkRoot = "azure-sdk-for-go"
+
+// TODO -- support dry run
 func generate(input *model.GenerateInput) (*model.GenerateOutput, error) {
-	// TODO -- add actual logic
-	return &model.GenerateOutput{
-		Packages: []model.PackageResult{
-			{
-				PackageName: "",
-				Path:        nil,
-				ReadmeMd:    nil,
-				Changelog: model.Changelog{
-					Content:           "",
-					HasBreakingChange: false,
-				},
-				Artifacts:           nil,
-				InstallInstructions: model.InstallInstructionScriptOutput{},
+	if input.DryRun {
+		return nil, fmt.Errorf("dry run not supported yet")
+	}
+	// backup the current sdk to temp dir
+	tempDir := filepath.Join(os.TempDir(), sdkRoot)
+	if err := ioext.CopyDir(".", tempDir); err != nil {
+		return nil, err
+	}
+	defer os.RemoveAll(tempDir)
+	// iterate over all the readme
+	var results []model.PackageResult
+	for _, readme := range input.RelatedReadmeMdFiles {
+		task := autorest.Task{
+			AbsReadmeMd: filepath.Join(input.SpecFolder, readme),
+		}
+		options := autorest.Options{
+			AutorestArguments: []string{
+				// TODO -- store these settings elsewhere rather than hard code here
+				"--use=@microsoft.azure/autorest.go@~2.1.157",
+				"--go",
+				"--verbose",
+				"--go-sdk-folder=.", // TODO -- if dry run, maybe we could use a temp directory to put the generated files and then delete
+				"--multiapi",
+				"--use-onever",
+				"--preview-chk",
+				"--version=V2",
 			},
-		},
+			AfterScripts:      []string{
+				// TODO -- store these settings elsewhere rather than hard code here
+				//"dep ensure", // TODO -- enable this
+				"go generate ./profiles/generate.go",
+				"gofmt -w ./profiles/",
+				"gofmt -w ./services/",
+			},
+		}
+		packageResult, err := task.Execute(options)
+		if err != nil {
+			return nil, err
+		}
+		results = append(results, *packageResult)
+	}
+
+	return &model.GenerateOutput{
+		Packages: results,
 	}, nil
 }
