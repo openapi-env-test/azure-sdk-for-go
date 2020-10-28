@@ -1,13 +1,11 @@
 package cmd
 
 import (
-	"encoding/json"
 	"fmt"
 	"github.com/Azure/azure-sdk-for-go/tools/apidiff/ioext"
 	"github.com/Azure/azure-sdk-for-go/tools/generator/autorest"
 	"github.com/Azure/azure-sdk-for-go/tools/generator/model"
 	"github.com/spf13/cobra"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 )
@@ -42,28 +40,20 @@ func execute(inputPath, outputPath string) error {
 }
 
 func readInputFrom(inputPath string) (*model.GenerateInput, error) {
-	b, err := ioutil.ReadFile(inputPath)
+	inputFile, err := os.Open(inputPath)
 	if err != nil {
 		return nil, err
 	}
-	var input model.GenerateInput
-	if err := json.Unmarshal(b, &input); err != nil {
-		return nil, err
-	}
-	return &input, nil
+	return model.NewGenerateInputFrom(inputFile)
 }
 
 func writeOutputTo(outputPath string, output *model.GenerateOutput) error {
-	b, err := json.Marshal(*output)
-	if err != nil {
-		return err
-	}
 	file, err := os.Create(outputPath)
 	if err != nil {
 		return err
 	}
 	defer file.Close()
-	if _, err := file.Write(b); err != nil {
+	if _, err := output.WriteTo(file); err != nil {
 		return err
 	}
 	return nil
@@ -108,11 +98,15 @@ func generate(input *model.GenerateInput) (*model.GenerateOutput, error) {
 				"gofmt -w ./services/",
 			},
 		}
-		packageResult, err := task.Execute(options)
-		if err != nil {
+		if err := task.Execute(options); err != nil {
 			return nil, err
 		}
-		results = append(results, *packageResult)
+		// TODO
+		results = append(results, model.PackageResult{
+			PackageName:         "",
+			Path:                nil,
+			ReadmeMd:            []string{readme},
+		})
 	}
 
 	return &model.GenerateOutput{
