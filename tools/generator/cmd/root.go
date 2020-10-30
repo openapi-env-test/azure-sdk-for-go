@@ -59,6 +59,14 @@ func writeOutputTo(outputPath string, output *model.GenerateOutput) error {
 	return nil
 }
 
+func getTempDir() string {
+	tempDirRoot := os.Getenv("TMPDIR")
+	if tempDirRoot == "" {
+		tempDirRoot = os.TempDir()
+	}
+	return filepath.Join(tempDirRoot, sdkRoot)
+}
+
 const sdkRoot = "azure-sdk-for-go"
 
 // TODO -- support dry run
@@ -67,7 +75,7 @@ func generate(input *model.GenerateInput) (*model.GenerateOutput, error) {
 		return nil, fmt.Errorf("dry run not supported yet")
 	}
 	// backup the current sdk to temp dir
-	tempDir := filepath.Join(os.TempDir(), sdkRoot)
+	tempDir := getTempDir()
 	if err := ioext.CopyDir(".", tempDir); err != nil {
 		return nil, err
 	}
@@ -101,15 +109,32 @@ func generate(input *model.GenerateInput) (*model.GenerateOutput, error) {
 		if err := task.Execute(options); err != nil {
 			return nil, err
 		}
-		// TODO
-		results = append(results, model.PackageResult{
-			PackageName:         "",
-			Path:                nil,
-			ReadmeMd:            []string{readme},
-		})
+		// get changed file list
+		changedFiles, err := getChangedFiles()
+		if err != nil {
+			return nil, err
+		}
+		// get packages using the changed file list
+		packages, err := autorest.GetChangedPackages(changedFiles)
+		if err != nil {
+			return nil, err
+		}
+		// key is package path, value is files that have changed
+		for p := range packages {
+			pp := p
+			results = append(results, model.PackageResult{
+				PackageName: pp, // TODO -- this is the package identifier
+				Path: []string{pp}, // TODO -- this is the package path relative to the root of SDK
+				ReadmeMd: []string{readme},
+			})
+		}
 	}
 
 	return &model.GenerateOutput{
 		Packages: results,
 	}, nil
+}
+
+func getChangedFiles() ([]string, error) {
+	return []string{}, nil
 }
