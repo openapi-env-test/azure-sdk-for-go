@@ -2,33 +2,38 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/Azure/azure-sdk-for-go/tools/apidiff/ioext"
+	"log"
+	"os"
+	"os/exec"
+	"path/filepath"
+	"runtime"
+	"strings"
+
 	"github.com/Azure/azure-sdk-for-go/tools/generator/autorest"
 	"github.com/Azure/azure-sdk-for-go/tools/generator/model"
 	"github.com/spf13/cobra"
-	"os"
-	"path/filepath"
 )
 
 func Command() *cobra.Command {
 	rootCmd := &cobra.Command{
 		Use:   "generator <generate input filepath> <generate output filepath>",
-		Short: "", // TODO
-		Long:  ``, // TODO
 		Args:  cobra.ExactArgs(2),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return execute(args[0], args[1])
 		},
+		SilenceUsage: true, // this command is used for a pipeline, the usage should never show
 	}
 
 	return rootCmd
 }
 
 func execute(inputPath, outputPath string) error {
+	log.Printf("Reading generate input file from '%s'...", inputPath)
 	input, err := readInputFrom(inputPath)
 	if err != nil {
 		return fmt.Errorf("cannot read generate input: %+v", err)
 	}
+	log.Printf("Generating...")
 	output, err := generate(input)
 	if err != nil {
 		return fmt.Errorf("cannot generate: %+v", err)
@@ -74,15 +79,16 @@ func generate(input *model.GenerateInput) (*model.GenerateOutput, error) {
 	if input.DryRun {
 		return nil, fmt.Errorf("dry run not supported yet")
 	}
-	// backup the current sdk to temp dir
-	tempDir := getTempDir()
-	if err := ioext.CopyDir(".", tempDir); err != nil {
-		return nil, err
-	}
-	defer os.RemoveAll(tempDir)
+	//// backup the current sdk to temp dir
+	//tempDir := getTempDir()
+	//if err := ioext.CopyDir(".", tempDir); err != nil {
+	//	return nil, err
+	//}
+	//defer os.RemoveAll(tempDir)
 	// iterate over all the readme
 	var results []model.PackageResult
 	for _, readme := range input.RelatedReadmeMdFiles {
+		log.Printf("Processing readme '%s'...", readme)
 		task := autorest.Task{
 			AbsReadmeMd: filepath.Join(input.SpecFolder, readme),
 		}
@@ -98,7 +104,7 @@ func generate(input *model.GenerateInput) (*model.GenerateOutput, error) {
 				"--preview-chk",
 				"--version=V2",
 			},
-			AfterScripts:      []string{
+			AfterScripts: []string{
 				// TODO -- store these settings elsewhere rather than hard code here
 				//"dep ensure", // TODO -- enable this
 				"go generate ./profiles/generate.go",
@@ -114,18 +120,19 @@ func generate(input *model.GenerateInput) (*model.GenerateOutput, error) {
 		if err != nil {
 			return nil, err
 		}
+		log.Printf("Files changed in the SDK: %+v", changedFiles)
 		// get packages using the changed file list
 		packages, err := autorest.GetChangedPackages(changedFiles)
 		if err != nil {
 			return nil, err
 		}
+		log.Printf("Packages changed: %+v", packages)
 		// key is package path, value is files that have changed
 		for p := range packages {
-			pp := p
 			results = append(results, model.PackageResult{
-				PackageName: pp, // TODO -- this is the package identifier
-				Path: []string{pp}, // TODO -- this is the package path relative to the root of SDK
-				ReadmeMd: []string{readme},
+				PackageName: getPackageIdentifier(p),
+				Path:        []string{p},
+				ReadmeMd:    []string{readme},
 			})
 		}
 	}
@@ -136,5 +143,66 @@ func generate(input *model.GenerateInput) (*model.GenerateOutput, error) {
 }
 
 func getChangedFiles() ([]string, error) {
-	return []string{}, nil
+	var files []string
+	// get the file changed
+	changed, err := getDiffFiles()
+	if err != nil {
+		return nil, err
+	}
+	files = append(files, changed...)
+	// get the untracked files
+	untracked, err := getUntrackedFiles()
+	if err != nil {
+		return nil, err
+	}
+	files = append(files, untracked...)
+	return files, nil
+}
+
+func getDiffFiles() ([]string, error) {
+	c := exec.Command("git", "diff", "--name-only")
+	output, err := c.Output()
+	if err != nil {
+		return nil, err
+	}
+	var files []string
+	for _, f := range strings.Split(string(output), "\n") {
+		f := escapeLines(f)
+		if f != "" {
+			files = append(files, f)
+		}
+	}
+	return files, nil
+}
+
+func escapeLines(line string) string {
+	if runtime.GOOS != "windows" {
+		return line
+	}
+	line = strings.TrimSpace(line)
+	if strings.HasPrefix(line, "warning: LF will be replaced by CRLF in") ||
+		strings.HasPrefix(line, "The file will have its original line endings in your working directory") {
+		return ""
+	}
+	return line
+}
+
+func getUntrackedFiles() ([]string, error) {
+	c := exec.Command("git", "ls-files", "--other", "--exclude-standard")
+	output, err := c.Output()
+	if err != nil {
+		return nil, err
+	}
+	var files []string
+	for _, f := range strings.Split(string(output), "\n") {
+		f := escapeLines(f)
+		if f != "" {
+			files = append(files, f)
+		}
+	}
+	return files, nil
+}
+
+func getPackageIdentifier(pkg string) string {
+	return pkg
 }

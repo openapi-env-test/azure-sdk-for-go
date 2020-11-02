@@ -1,14 +1,15 @@
 package autorest
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
 	"strings"
 )
 
-type ChangedPackages map[string][]string
+type ChangedPackagesMap map[string][]string
 
-func (c *ChangedPackages) addFileToPackage(pkg, file string) {
+func (c *ChangedPackagesMap) addFileToPackage(pkg, file string) {
 	pkg = strings.ReplaceAll(pkg, "\\", "/")
 	if _, ok := (*c)[pkg]; !ok {
 		(*c)[pkg] = []string{}
@@ -16,15 +17,31 @@ func (c *ChangedPackages) addFileToPackage(pkg, file string) {
 	(*c)[pkg] = append((*c)[pkg], file)
 }
 
+func (c *ChangedPackagesMap) String() string {
+	var r []string
+	for k, v := range *c {
+		r = append(r, fmt.Sprintf("%s: %+v", k, v))
+	}
+	return strings.Join(r, "\n")
+}
+
+func (c *ChangedPackagesMap) GetChangedPackages() []string {
+	var r []string
+	for k := range *c {
+		r = append(r, k)
+	}
+	return r
+}
+
 // GetChangedPackages get the go SDK packages map from the given changed file list.
 // the map returned has the package full path as key, and the changed files in the package as the value.
 // This function identify the package by checking if a directory has both a `version.go` file and a `client.go` file.
-func GetChangedPackages(changedFiles []string) (ChangedPackages, error) {
+func GetChangedPackages(changedFiles []string) (ChangedPackagesMap, error) {
 	changedFiles, err := ExpandChangedDirectories(changedFiles)
 	if err != nil {
 		return nil, err
 	}
-	r := ChangedPackages{}
+	r := ChangedPackagesMap{}
 	for _, file := range changedFiles {
 		fi, err := os.Stat(file)
 		if err != nil {

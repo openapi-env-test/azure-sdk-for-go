@@ -2,11 +2,13 @@ package autorest
 
 import (
 	"fmt"
+	"log"
+	"os"
 	"os/exec"
 	"strings"
 )
 
-// Task ...
+// Task describes a generation task
 type Task struct {
 	// AbsReadmeMd absolute path of the readme.md file to generate
 	AbsReadmeMd string
@@ -36,12 +38,15 @@ func (t *Task) Execute(options Options) error {
 func (t *Task) executeAutorest(options []string) error {
 	arguments := append(options, t.AbsReadmeMd)
 	c := exec.Command("autorest", arguments...)
-	output, err := c.CombinedOutput()
-	if err != nil {
+	log.Printf("Executing autorest with parameters: %+v", arguments)
+	c.Stdout = os.Stdout
+	c.Stderr = os.Stderr
+	c.Start()
+	if err := c.Wait(); err != nil {
 		return &TaskError{
 			AbsReadmeMd: t.AbsReadmeMd,
 			Script:      "autorest",
-			Message:     string(output),
+			Message:     err.Error(),
 		}
 	}
 	return nil
@@ -49,6 +54,7 @@ func (t *Task) executeAutorest(options []string) error {
 
 func (t *Task) executeAfterScript(afterScripts []string) error {
 	for _, script := range afterScripts {
+		log.Printf("Executing after scripts %s...", script)
 		arguments := strings.Split(script, " ")
 		c := exec.Command(arguments[0], arguments[1:]...)
 		output, err := c.CombinedOutput()

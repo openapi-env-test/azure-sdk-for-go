@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 )
 
+// GenerateInput ...
 type GenerateInput struct {
 	DryRun                  bool                          `json:"dryRun,omitempty,omitempty"`
 	SpecFolder              string                        `json:"specFolder,omitempty"`
@@ -18,6 +19,7 @@ type GenerateInput struct {
 	InstallInstructionInput InstallInstructionScriptInput `json:"installInstructionInput,omitempty"`
 }
 
+// NewGenerateInputFrom ...
 func NewGenerateInputFrom(reader io.Reader) (*GenerateInput, error) {
 	b, err := ioutil.ReadAll(reader)
 	if err != nil {
@@ -30,6 +32,7 @@ func NewGenerateInputFrom(reader io.Reader) (*GenerateInput, error) {
 	return &result, nil
 }
 
+// InstallInstructionScriptInput ...
 type InstallInstructionScriptInput struct {
 	PackageName             string   `json:"packageName,omitempty"`
 	Artifacts               []string `json:"artifacts,omitempty"`
@@ -39,10 +42,12 @@ type InstallInstructionScriptInput struct {
 	Trigger                 string   `json:"trigger,omitempty"`
 }
 
+// GenerateOutput ...
 type GenerateOutput struct {
 	Packages []PackageResult `json:"packages,omitempty"`
 }
 
+// WriteTo ...
 func (o GenerateOutput) WriteTo(writer io.Writer) (int64, error) {
 	b, err := json.Marshal(o)
 	if err != nil {
@@ -52,10 +57,7 @@ func (o GenerateOutput) WriteTo(writer io.Writer) (int64, error) {
 	return int64(i), err
 }
 
-func GetPackage() string {
-	return ""
-}
-
+// PackageResult ...
 type PackageResult struct {
 	PackageName         string                         `json:"packageName,omitempty"`
 	Path                []string                       `json:"path,omitempty"`
@@ -65,11 +67,13 @@ type PackageResult struct {
 	InstallInstructions InstallInstructionScriptOutput `json:"installInstructions,omitempty"`
 }
 
+// Changelog ...
 type Changelog struct {
 	Content           string `json:"content,omitempty"`
 	HasBreakingChange bool   `json:"hasBreakingChange,omitempty"`
 }
 
+// InstallInstructionScriptOutput ...
 type InstallInstructionScriptOutput struct {
 	Full string `json:"full,omitempty"`
 	Lite string `json:"lite,omitempty"`
