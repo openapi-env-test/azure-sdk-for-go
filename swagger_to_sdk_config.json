@@ -4,5 +4,13 @@
     "generateScript": {
       "path": "go run ./tools/main.go"
     }
+  },
+  "advancedOptions": {
+    "clondDir": "go/src/github.com/Azure/azure-sdk-for-go"
+  },
+  "initOptions": {
+    "initScript": {
+      "path": "sh ./initScript.sh"
+    }
   }
 }
