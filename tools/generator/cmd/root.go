@@ -102,8 +102,8 @@ func generate(input *model.GenerateInput) (*model.GenerateOutput, error) {
 				"--multiapi",
 				"--use-onever",
 				"--preview-chk",
+				"--multiapi",
 				"--version=V2",
-				"--multiapi"
 			},
 			AfterScripts: []string{
 				// TODO -- store these settings elsewhere rather than hard code here
