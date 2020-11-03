@@ -103,7 +103,7 @@ func generate(input *model.GenerateInput) (*model.GenerateOutput, error) {
 				"--use-onever",
 				"--preview-chk",
 				"--version=V2",
-				"--batch"
+				"--multiapi"
 			},
 			AfterScripts: []string{
 				// TODO -- store these settings elsewhere rather than hard code here
