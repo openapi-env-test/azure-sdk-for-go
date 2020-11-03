@@ -6,7 +6,7 @@
     }
   },
   "advancedOptions": {
-    "clondDir": "go/src/github.com/Azure/azure-sdk-for-go"
+    "cloneDir": "go/src/github.com/Azure/azure-sdk-for-go"
   },
   "initOptions": {
     "initScript": {
