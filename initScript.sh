@@ -6,6 +6,7 @@ then
   mkdir $GOPATH/bin
 fi
 curl -sSL https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+PATH=$PATH:$GOPATH/bin
 dep ensure
 cat > $2 << EOF
 {
