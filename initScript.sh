@@ -1,13 +1,16 @@
 set -x
 set -e
 export GOPATH="$(realpath ../../../..)"
-mkdir $GOPATH/bin
+if [ ! -d "$GOPATH/bin" ]
+then
+  mkdir $GOPATH/bin
+fi
 curl -sSL https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
-cat << EOF
+cat > $2 << EOF
 {
   "envs": {
     "PATH": "$PATH:$GOPATH/bin",
     "GOPATH": "$GOPATH"
   }
 }
-EOF > $2
+EOF
