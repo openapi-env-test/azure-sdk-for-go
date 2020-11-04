@@ -23,6 +23,10 @@ func Command() *cobra.Command {
 	rootCmd := &cobra.Command{
 		Use:  "generator <generate input filepath> <generate output filepath>",
 		Args: cobra.ExactArgs(2),
+		PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
+			log.SetFlags(0) // remove the time stamp prefix
+			return nil
+		},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			optionPath, err := cmd.Flags().GetString("options")
 			if err != nil {
