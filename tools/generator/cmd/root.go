@@ -142,13 +142,15 @@ func generate(input *model.GenerateInput, optionPath string) (*model.GenerateOut
 			if err != nil {
 				return nil, err
 			}
+			content := c.ToMarkdown()
+			breaking := c.HasBreakingChanges()
 			results = append(results, model.PackageResult{
 				PackageName: getPackageIdentifier(p),
 				Path:        []string{p},
 				ReadmeMd:    []string{readme},
 				Changelog: &model.Changelog{
-					Content:           c.String(),
-					HasBreakingChange: false,
+					Content:           &content,
+					HasBreakingChange: &breaking,
 				},
 			})
 		}

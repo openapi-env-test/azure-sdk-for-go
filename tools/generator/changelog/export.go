@@ -1,10 +1,12 @@
 package changelog
 
 import (
-	"github.com/Azure/azure-sdk-for-go/tools/apidiff/exports"
+	"fmt"
 	"log"
 	"os"
-	"os/exec"
+
+	"github.com/Azure/azure-sdk-for-go/tools/apidiff/exports"
+	"github.com/Azure/azure-sdk-for-go/tools/apidiff/report"
 )
 
 func NewChangelogForPackage(pkgDir string) (c *Changelog, err error) {
@@ -28,7 +30,7 @@ func NewChangelogForPackage(pkgDir string) (c *Changelog, err error) {
 		return nil, err
 	}
 	log.Printf("Exports of original package '%s': %+v", pkgDir, lhs)
-	return &Changelog{}, nil
+	return getChangelogForPackage(pkgDir, lhs, rhs)
 }
 
 func stashEverything() error {
@@ -51,32 +53,30 @@ func resetEverything() error {
 	return nil
 }
 
-func gitAddAll() error {
-	log.Printf("Executing `git add *`")
-	c := exec.Command("git", "add", "*")
-	return c.Run()
-}
-
-func gitStash() error {
-	log.Printf("Executing `git stash`")
-	c := exec.Command("git", "stash")
-	return c.Run()
-}
-
-func gitStashPop() error {
-	log.Printf("Executing `git stash pop`")
-	c := exec.Command("git", "stash", "pop")
-	return c.Run()
-}
-
-func gitResetHead() error {
-	log.Printf("Executing `git reset HEAD`")
-	c := exec.Command("git", "reset", "HEAD")
-	return c.Run()
-}
-
-func getChangelogForPackage(lhs, rhs *exports.Content) {
-
+func getChangelogForPackage(pkgDir string, lhs, rhs *exports.Content) (*Changelog, error) {
+	if lhs == nil && rhs == nil {
+		return nil, fmt.Errorf("this package does not exist even after the generation, this should never happen")
+	}
+	if lhs == nil {
+		// the package does not exist before the generation: this is a new package
+		return &Changelog{
+			PackageName: pkgDir,
+			NewPackage:  true,
+		}, nil
+	}
+	if rhs == nil {
+		// the package no longer exists after the generation: this package was removed
+		return &Changelog{
+			PackageName:    pkgDir,
+			RemovedPackage: true,
+		}, nil
+	}
+	// lhs and rhs are both non-nil
+	p := report.Generate(*lhs, *rhs, false, false)
+	return &Changelog{
+		PackageName: pkgDir,
+		Modified:    &p,
+	}, nil
 }
 
 func getExportForPackage(pkgDir string) (*exports.Content, error) {
