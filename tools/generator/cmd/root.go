@@ -14,30 +14,50 @@ import (
 	"github.com/spf13/cobra"
 )
 
+const (
+	sdkRoot = "azure-sdk-for-go"
+	defaultOptionPath = "generate_options.json"
+)
+
 func Command() *cobra.Command {
 	rootCmd := &cobra.Command{
 		Use:   "generator <generate input filepath> <generate output filepath>",
 		Args:  cobra.ExactArgs(2),
 		RunE: func(cmd *cobra.Command, args []string) error {
-			return execute(args[0], args[1])
+			optionPath, err := cmd.Flags().GetString("options")
+			if err != nil {
+				return err
+			}
+			return execute(args[0], args[1], Flags {
+				OptionPath: optionPath,
+			})
 		},
 		SilenceUsage: true, // this command is used for a pipeline, the usage should never show
 	}
 
+	flags := rootCmd.Flags()
+	flags.String("options", defaultOptionPath, "Specify a file with the autorest options")
+
 	return rootCmd
 }
 
-func execute(inputPath, outputPath string) error {
+type Flags struct {
+	OptionPath string
+}
+
+func execute(inputPath, outputPath string, flags Flags) error {
 	log.Printf("Reading generate input file from '%s'...", inputPath)
 	input, err := readInputFrom(inputPath)
 	if err != nil {
 		return fmt.Errorf("cannot read generate input: %+v", err)
 	}
-	log.Printf("Generating...")
-	output, err := generate(input)
+	log.Printf("Generating using the following GenerateInput...\n%s", input.String())
+	output, err := generate(input, flags.OptionPath)
 	if err != nil {
 		return fmt.Errorf("cannot generate: %+v", err)
 	}
+	log.Printf("Output generated: \n%s", output.String())
+	log.Printf("Writing output to file '%s'...", outputPath)
 	if err := writeOutputTo(outputPath, output); err != nil {
 		return fmt.Errorf("cannot write generate output: %+v", err)
 	}
@@ -72,10 +92,8 @@ func getTempDir() string {
 	return filepath.Join(tempDirRoot, sdkRoot)
 }
 
-const sdkRoot = "azure-sdk-for-go"
-
 // TODO -- support dry run
-func generate(input *model.GenerateInput) (*model.GenerateOutput, error) {
+func generate(input *model.GenerateInput, optionPath string) (*model.GenerateOutput, error) {
 	if input.DryRun {
 		return nil, fmt.Errorf("dry run not supported yet")
 	}
@@ -85,6 +103,16 @@ func generate(input *model.GenerateInput) (*model.GenerateOutput, error) {
 	//	return nil, err
 	//}
 	//defer os.RemoveAll(tempDir)
+	log.Printf("Reading options from file '%s'...", optionPath)
+	optionFile, err := os.Open(optionPath)
+	if err != nil {
+		return nil, err
+	}
+	options, err := autorest.NewOptionsFrom(optionFile)
+	if err != nil {
+		return nil, err
+	}
+	log.Printf("Autorest options: \n%s", options.String())
 	// iterate over all the readme
 	var results []model.PackageResult
 	for _, readme := range input.RelatedReadmeMdFiles {
@@ -92,28 +120,7 @@ func generate(input *model.GenerateInput) (*model.GenerateOutput, error) {
 		task := autorest.Task{
 			AbsReadmeMd: filepath.Join(input.SpecFolder, readme),
 		}
-		options := autorest.Options{
-			AutorestArguments: []string{
-				// TODO -- store these settings elsewhere rather than hard code here
-				"--use=@microsoft.azure/autorest.go@~2.1.157",
-				"--go",
-				"--verbose",
-				"--go-sdk-folder=.", // TODO -- if dry run, maybe we could use a temp directory to put the generated files and then delete
-				"--multiapi",
-				"--use-onever",
-				"--preview-chk",
-				"--multiapi",
-				"--version=V2",
-			},
-			AfterScripts: []string{
-				// TODO -- store these settings elsewhere rather than hard code here
-				//"dep ensure", // TODO -- enable this
-				"go generate ./profiles/generate.go",
-				"gofmt -w ./profiles/",
-				"gofmt -w ./services/",
-			},
-		}
-		if err := task.Execute(options); err != nil {
+		if err := task.Execute(*options); err != nil {
 			return nil, err
 		}
 		// get changed file list

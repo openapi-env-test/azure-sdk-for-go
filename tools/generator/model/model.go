@@ -32,6 +32,12 @@ func NewGenerateInputFrom(reader io.Reader) (*GenerateInput, error) {
 	return &result, nil
 }
 
+// String ...
+func (i GenerateInput) String() string {
+	b, _ := json.MarshalIndent(i, "", "  ")
+	return string(b)
+}
+
 // InstallInstructionScriptInput ...
 type InstallInstructionScriptInput struct {
 	PackageName             string   `json:"packageName,omitempty"`
@@ -45,6 +51,12 @@ type InstallInstructionScriptInput struct {
 // GenerateOutput ...
 type GenerateOutput struct {
 	Packages []PackageResult `json:"packages,omitempty"`
+}
+
+// String ...
+func (o GenerateOutput) String() string {
+	b, _ := json.MarshalIndent(o, "", "  ")
+	return string(b)
 }
 
 // WriteTo ...
@@ -62,9 +74,9 @@ type PackageResult struct {
 	PackageName         string                         `json:"packageName,omitempty"`
 	Path                []string                       `json:"path,omitempty"`
 	ReadmeMd            []string                       `json:"readmeMd,omitempty"`
-	Changelog           Changelog                      `json:"changelog,omitempty"`
+	Changelog           *Changelog                      `json:"changelog,omitempty"`
 	Artifacts           []string                       `json:"artifacts,omitempty"`
-	InstallInstructions InstallInstructionScriptOutput `json:"installInstructions,omitempty"`
+	InstallInstructions *InstallInstructionScriptOutput `json:"installInstructions,omitempty"`
 }
 
 // Changelog ...

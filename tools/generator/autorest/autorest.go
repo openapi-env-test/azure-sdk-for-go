@@ -1,7 +1,10 @@
 package autorest
 
 import (
+	"encoding/json"
 	"fmt"
+	"io"
+	"io/ioutil"
 	"log"
 	"os"
 	"os/exec"
@@ -12,13 +15,6 @@ import (
 type Task struct {
 	// AbsReadmeMd absolute path of the readme.md file to generate
 	AbsReadmeMd string
-}
-
-type Options struct {
-	// AutorestArguments are the optional flags for the autorest tool
-	AutorestArguments []string
-	// AfterScripts are the scripts that need to be run after the SDK is generated
-	AfterScripts []string
 }
 
 // Execute executes the autorest task, and then invoke the after scripts
@@ -68,6 +64,33 @@ func (t *Task) executeAfterScript(afterScripts []string) error {
 	}
 
 	return nil
+}
+
+// Options describes the options used in an autorest task
+type Options struct {
+	// AutorestArguments are the optional flags for the autorest tool
+	AutorestArguments []string
+	// AfterScripts are the scripts that need to be run after the SDK is generated
+	AfterScripts []string
+}
+
+// NewOptionsFrom returns a new options from a io.Reader
+func NewOptionsFrom(reader io.Reader) (*Options, error) {
+	b, err := ioutil.ReadAll(reader)
+	if err != nil {
+		return nil, err
+	}
+	var result Options
+	if err := json.Unmarshal(b, &result); err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+// String ...
+func (o Options) String() string {
+	b, _ := json.MarshalIndent(o, "", "  ")
+	return string(b)
 }
 
 // TaskError the error returned during an autorest task
