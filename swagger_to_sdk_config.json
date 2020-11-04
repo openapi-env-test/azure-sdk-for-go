@@ -12,5 +12,8 @@
     "initScript": {
       "path": "sh ./initScript.sh"
     }
+  },
+  "packageOptions": {
+    "breakingChangeLabel": "CI-BreakingChange-Go"
   }
 }
