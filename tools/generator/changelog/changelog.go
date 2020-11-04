@@ -14,7 +14,7 @@ func (c Changelog) HasBreakingChanges() bool {
 }
 
 func (c Changelog) String() string {
-	return "Dummy changelog"
+	return c.ToMarkdown()
 }
 
 func (c Changelog) ToMarkdown() string {

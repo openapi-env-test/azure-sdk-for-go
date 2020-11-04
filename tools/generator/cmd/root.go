@@ -137,7 +137,8 @@ func generate(input *model.GenerateInput, optionPath string) (*model.GenerateOut
 		}
 		log.Printf("Packages changed: %+v", packages)
 		// iterate over the changed packages
-		for p := range packages {
+		for p, files := range packages {
+			log.Printf("Getting package result for package '%s', changed files are: [%s]", p, strings.Join(files, ", "))
 			c, err := changelog.NewChangelogForPackage(p)
 			if err != nil {
 				return nil, err
