@@ -184,7 +184,10 @@ func getDiffFiles() ([]string, error) {
 	}
 	var files []string
 	for _, f := range strings.Split(string(output), "\n") {
-		files = append(files, strings.TrimSpace(f))
+		f = strings.TrimSpace(f)
+		if f != "" {
+			files = append(files, f)
+		}
 	}
 	return files, nil
 }
@@ -197,7 +200,10 @@ func getUntrackedFiles() ([]string, error) {
 	}
 	var files []string
 	for _, f := range strings.Split(string(output), "\n") {
-		files = append(files, strings.TrimSpace(f))
+		f = strings.TrimSpace(f)
+		if f != "" {
+			files = append(files, f)
+		}
 	}
 	return files, nil
 }
