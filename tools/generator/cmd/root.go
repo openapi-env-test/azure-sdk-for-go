@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"github.com/Azure/azure-sdk-for-go/tools/generator/changelog"
 	"log"
 	"os"
 	"os/exec"
@@ -129,17 +130,26 @@ func generate(input *model.GenerateInput, optionPath string) (*model.GenerateOut
 		}
 		log.Printf("Files changed in the SDK: %+v", changedFiles)
 		// get packages using the changed file list
+		// returns a map, key is package path, value is files that have changed
 		packages, err := autorest.GetChangedPackages(changedFiles)
 		if err != nil {
 			return nil, err
 		}
 		log.Printf("Packages changed: %+v", packages)
-		// key is package path, value is files that have changed
+		// iterate over the changed packages
 		for p := range packages {
+			c, err := changelog.NewChangelogForPackage(p)
+			if err != nil {
+				return nil, err
+			}
 			results = append(results, model.PackageResult{
 				PackageName: getPackageIdentifier(p),
 				Path:        []string{p},
 				ReadmeMd:    []string{readme},
+				Changelog: &model.Changelog{
+					Content:           c.String(),
+					HasBreakingChange: false,
+				},
 			})
 		}
 	}

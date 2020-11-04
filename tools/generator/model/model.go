@@ -71,11 +71,11 @@ func (o GenerateOutput) WriteTo(writer io.Writer) (int64, error) {
 
 // PackageResult ...
 type PackageResult struct {
-	PackageName         string                         `json:"packageName,omitempty"`
-	Path                []string                       `json:"path,omitempty"`
-	ReadmeMd            []string                       `json:"readmeMd,omitempty"`
+	PackageName         string                          `json:"packageName,omitempty"`
+	Path                []string                        `json:"path,omitempty"`
+	ReadmeMd            []string                        `json:"readmeMd,omitempty"`
 	Changelog           *Changelog                      `json:"changelog,omitempty"`
-	Artifacts           []string                       `json:"artifacts,omitempty"`
+	Artifacts           []string                        `json:"artifacts,omitempty"`
 	InstallInstructions *InstallInstructionScriptOutput `json:"installInstructions,omitempty"`
 }
 

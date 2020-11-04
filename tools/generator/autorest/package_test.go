@@ -7,9 +7,9 @@ import (
 
 func TestGetChangedPackages(t *testing.T) {
 	testData := []struct {
-		description string
+		description  string
 		changedFiles []string
-		expected map[string][]string
+		expected     map[string][]string
 	}{
 		{
 			description: "one file changed in one package",
@@ -134,10 +134,10 @@ func TestGetChangedPackages(t *testing.T) {
 }
 
 func TestExpandChangedDirectories(t *testing.T) {
-	testData := []struct{
+	testData := []struct {
 		description string
-		input []string
-		expected []string
+		input       []string
+		expected    []string
 	}{
 		{
 			description: "only files",
@@ -227,23 +227,23 @@ func mapDeepEqual(m1, m2 map[string][]string) bool {
 
 func TestIsValidPackage(t *testing.T) {
 	testData := []struct {
-		input string
+		input    string
 		expected bool
 	}{
 		{
-			input: "../../../services/compute/mgmt/2020-06-01/compute",
+			input:    "../../../services/compute/mgmt/2020-06-01/compute",
 			expected: true,
 		},
 		{
-			input: "../../../services/compute/mgmt/2020-06-01",
+			input:    "../../../services/compute/mgmt/2020-06-01",
 			expected: false,
 		},
 		{
-			input: "../../../storage",
+			input:    "../../../storage",
 			expected: false,
 		},
 		{
-			input: "../../../profiles",
+			input:    "../../../profiles",
 			expected: false,
 		},
 	}

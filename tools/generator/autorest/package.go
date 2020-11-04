@@ -95,7 +95,7 @@ func getAllFiles(root string) ([]string, error) {
 }
 
 const (
-	clientGo = "client.go"
+	clientGo  = "client.go"
 	versionGo = "version.go"
 )
 
