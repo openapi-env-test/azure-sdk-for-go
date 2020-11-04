@@ -6,7 +6,6 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
-	"runtime"
 	"strings"
 
 	"github.com/Azure/azure-sdk-for-go/tools/generator/autorest"
@@ -15,20 +14,20 @@ import (
 )
 
 const (
-	sdkRoot = "azure-sdk-for-go"
+	sdkRoot           = "azure-sdk-for-go"
 	defaultOptionPath = "generate_options.json"
 )
 
 func Command() *cobra.Command {
 	rootCmd := &cobra.Command{
-		Use:   "generator <generate input filepath> <generate output filepath>",
-		Args:  cobra.ExactArgs(2),
+		Use:  "generator <generate input filepath> <generate output filepath>",
+		Args: cobra.ExactArgs(2),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			optionPath, err := cmd.Flags().GetString("options")
 			if err != nil {
 				return err
 			}
-			return execute(args[0], args[1], Flags {
+			return execute(args[0], args[1], Flags{
 				OptionPath: optionPath,
 			})
 		},
@@ -175,24 +174,9 @@ func getDiffFiles() ([]string, error) {
 	}
 	var files []string
 	for _, f := range strings.Split(string(output), "\n") {
-		f := escapeLines(f)
-		if f != "" {
-			files = append(files, f)
-		}
+		files = append(files, strings.TrimSpace(f))
 	}
 	return files, nil
-}
-
-func escapeLines(line string) string {
-	if runtime.GOOS != "windows" {
-		return line
-	}
-	line = strings.TrimSpace(line)
-	if strings.HasPrefix(line, "warning: LF will be replaced by CRLF in") ||
-		strings.HasPrefix(line, "The file will have its original line endings in your working directory") {
-		return ""
-	}
-	return line
 }
 
 func getUntrackedFiles() ([]string, error) {
@@ -203,10 +187,7 @@ func getUntrackedFiles() ([]string, error) {
 	}
 	var files []string
 	for _, f := range strings.Split(string(output), "\n") {
-		f := escapeLines(f)
-		if f != "" {
-			files = append(files, f)
-		}
+		files = append(files, strings.TrimSpace(f))
 	}
 	return files, nil
 }
