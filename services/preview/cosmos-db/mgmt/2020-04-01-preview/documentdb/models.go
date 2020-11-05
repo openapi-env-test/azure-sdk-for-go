@@ -29,7 +29,7 @@ import (
 )
 
 // The package's fully qualified name.
-const fqdn = "github.com/Azure/azure-sdk-for-go/services/cosmos-db/mgmt/2020-04-01/documentdb"
+const fqdn = "github.com/Azure/azure-sdk-for-go/services/preview/cosmos-db/mgmt/2020-04-01-preview/documentdb"
 
 // APIProperties ...
 type APIProperties struct {
@@ -37,8 +37,8 @@ type APIProperties struct {
 	ServerVersion ServerVersion `json:"serverVersion,omitempty"`
 }
 
-// ARMProxyResource the resource model definition for a ARM proxy resource. It will have everything other than
-// required location and tags
+// ARMProxyResource the resource model definition for a ARM proxy resource. It will have everything other
+// than required location and tags
 type ARMProxyResource struct {
 	// ID - READ-ONLY; The unique resource identifier of the database account.
 	ID *string `json:"id,omitempty"`
@@ -73,6 +73,12 @@ func (arp ARMResourceProperties) MarshalJSON() ([]byte, error) {
 	return json.Marshal(objectMap)
 }
 
+// AutoUpgradePolicyResource cosmos DB resource auto-upgrade policy
+type AutoUpgradePolicyResource struct {
+	// ThroughputPolicy - Represents throughput policy which service must adhere to for auto-upgrade
+	ThroughputPolicy *ThroughputPolicyResource `json:"throughputPolicy,omitempty"`
+}
+
 // AutoscaleSettings ...
 type AutoscaleSettings struct {
 	// MaxThroughput - Represents maximum throughput, the resource can scale up to.
@@ -101,21 +107,15 @@ func (asr AutoscaleSettingsResource) MarshalJSON() ([]byte, error) {
 	return json.Marshal(objectMap)
 }
 
-// AutoUpgradePolicyResource cosmos DB resource auto-upgrade policy
-type AutoUpgradePolicyResource struct {
-	// ThroughputPolicy - Represents throughput policy which service must adhere to for auto-upgrade
-	ThroughputPolicy *ThroughputPolicyResource `json:"throughputPolicy,omitempty"`
-}
-
-// AzureEntityResource the resource model definition for a Azure Resource Manager resource with an etag.
+// AzureEntityResource the resource model definition for an Azure Resource Manager resource with an etag.
 type AzureEntityResource struct {
 	// Etag - READ-ONLY; Resource Etag.
 	Etag *string `json:"etag,omitempty"`
-	// ID - READ-ONLY; Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+	// ID - READ-ONLY; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string `json:"id,omitempty"`
 	// Name - READ-ONLY; The name of the resource
 	Name *string `json:"name,omitempty"`
-	// Type - READ-ONLY; The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts.
+	// Type - READ-ONLY; The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
 	Type *string `json:"type,omitempty"`
 }
 
@@ -224,7 +224,8 @@ func (ckcup *CassandraKeyspaceCreateUpdateParameters) UnmarshalJSON(body []byte)
 	return nil
 }
 
-// CassandraKeyspaceCreateUpdateProperties properties to create and update Azure Cosmos DB Cassandra keyspace.
+// CassandraKeyspaceCreateUpdateProperties properties to create and update Azure Cosmos DB Cassandra
+// keyspace.
 type CassandraKeyspaceCreateUpdateProperties struct {
 	// Resource - The standard JSON format of a Cassandra keyspace
 	Resource *CassandraKeyspaceResource `json:"resource,omitempty"`
@@ -416,8 +417,8 @@ func (future *CassandraResourcesCreateUpdateCassandraKeyspaceFuture) Result(clie
 	return
 }
 
-// CassandraResourcesCreateUpdateCassandraTableFuture an abstraction for monitoring and retrieving the results
-// of a long-running operation.
+// CassandraResourcesCreateUpdateCassandraTableFuture an abstraction for monitoring and retrieving the
+// results of a long-running operation.
 type CassandraResourcesCreateUpdateCassandraTableFuture struct {
 	azure.Future
 }
@@ -445,8 +446,8 @@ func (future *CassandraResourcesCreateUpdateCassandraTableFuture) Result(client 
 	return
 }
 
-// CassandraResourcesDeleteCassandraKeyspaceFuture an abstraction for monitoring and retrieving the results of
-// a long-running operation.
+// CassandraResourcesDeleteCassandraKeyspaceFuture an abstraction for monitoring and retrieving the results
+// of a long-running operation.
 type CassandraResourcesDeleteCassandraKeyspaceFuture struct {
 	azure.Future
 }
@@ -468,8 +469,8 @@ func (future *CassandraResourcesDeleteCassandraKeyspaceFuture) Result(client Cas
 	return
 }
 
-// CassandraResourcesDeleteCassandraTableFuture an abstraction for monitoring and retrieving the results of a
-// long-running operation.
+// CassandraResourcesDeleteCassandraTableFuture an abstraction for monitoring and retrieving the results of
+// a long-running operation.
 type CassandraResourcesDeleteCassandraTableFuture struct {
 	azure.Future
 }
@@ -491,8 +492,8 @@ func (future *CassandraResourcesDeleteCassandraTableFuture) Result(client Cassan
 	return
 }
 
-// CassandraResourcesMigrateCassandraKeyspaceToAutoscaleFuture an abstraction for monitoring and retrieving the
-// results of a long-running operation.
+// CassandraResourcesMigrateCassandraKeyspaceToAutoscaleFuture an abstraction for monitoring and retrieving
+// the results of a long-running operation.
 type CassandraResourcesMigrateCassandraKeyspaceToAutoscaleFuture struct {
 	azure.Future
 }
@@ -549,8 +550,8 @@ func (future *CassandraResourcesMigrateCassandraKeyspaceToManualThroughputFuture
 	return
 }
 
-// CassandraResourcesMigrateCassandraTableToAutoscaleFuture an abstraction for monitoring and retrieving the
-// results of a long-running operation.
+// CassandraResourcesMigrateCassandraTableToAutoscaleFuture an abstraction for monitoring and retrieving
+// the results of a long-running operation.
 type CassandraResourcesMigrateCassandraTableToAutoscaleFuture struct {
 	azure.Future
 }
@@ -578,8 +579,8 @@ func (future *CassandraResourcesMigrateCassandraTableToAutoscaleFuture) Result(c
 	return
 }
 
-// CassandraResourcesMigrateCassandraTableToManualThroughputFuture an abstraction for monitoring and retrieving
-// the results of a long-running operation.
+// CassandraResourcesMigrateCassandraTableToManualThroughputFuture an abstraction for monitoring and
+// retrieving the results of a long-running operation.
 type CassandraResourcesMigrateCassandraTableToManualThroughputFuture struct {
 	azure.Future
 }
@@ -607,8 +608,8 @@ func (future *CassandraResourcesMigrateCassandraTableToManualThroughputFuture) R
 	return
 }
 
-// CassandraResourcesUpdateCassandraKeyspaceThroughputFuture an abstraction for monitoring and retrieving the
-// results of a long-running operation.
+// CassandraResourcesUpdateCassandraKeyspaceThroughputFuture an abstraction for monitoring and retrieving
+// the results of a long-running operation.
 type CassandraResourcesUpdateCassandraKeyspaceThroughputFuture struct {
 	azure.Future
 }
@@ -996,8 +997,8 @@ type ConsistencyPolicy struct {
 	MaxIntervalInSeconds *int32 `json:"maxIntervalInSeconds,omitempty"`
 }
 
-// ContainerPartitionKey the configuration of the partition key to be used for partitioning data into multiple
-// partitions
+// ContainerPartitionKey the configuration of the partition key to be used for partitioning data into
+// multiple partitions
 type ContainerPartitionKey struct {
 	// Paths - List of paths using which data within the container can be partitioned
 	Paths *[]string `json:"paths,omitempty"`
@@ -1021,8 +1022,8 @@ type CorsPolicy struct {
 	MaxAgeInSeconds *int64 `json:"maxAgeInSeconds,omitempty"`
 }
 
-// CreateUpdateOptions createUpdateOptions are a list of key-value pairs that describe the resource. Supported
-// keys are "If-Match", "If-None-Match", "Session-Token" and "Throughput"
+// CreateUpdateOptions createUpdateOptions are a list of key-value pairs that describe the resource.
+// Supported keys are "If-Match", "If-None-Match", "Session-Token" and "Throughput"
 type CreateUpdateOptions struct {
 	// Throughput - Request Units per second. For example, "throughput": 10000.
 	Throughput *int32 `json:"throughput,omitempty"`
@@ -1446,6 +1447,109 @@ type DatabaseAccountRegenerateKeyParameters struct {
 	KeyKind KeyKind `json:"keyKind,omitempty"`
 }
 
+// DatabaseAccountUpdateParameters parameters for patching Azure Cosmos DB database account properties.
+type DatabaseAccountUpdateParameters struct {
+	Tags map[string]*string `json:"tags"`
+	// Location - The location of the resource group to which the resource belongs.
+	Location                         *string `json:"location,omitempty"`
+	*DatabaseAccountUpdateProperties `json:"properties,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for DatabaseAccountUpdateParameters.
+func (daup DatabaseAccountUpdateParameters) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if daup.Tags != nil {
+		objectMap["tags"] = daup.Tags
+	}
+	if daup.Location != nil {
+		objectMap["location"] = daup.Location
+	}
+	if daup.DatabaseAccountUpdateProperties != nil {
+		objectMap["properties"] = daup.DatabaseAccountUpdateProperties
+	}
+	return json.Marshal(objectMap)
+}
+
+// UnmarshalJSON is the custom unmarshaler for DatabaseAccountUpdateParameters struct.
+func (daup *DatabaseAccountUpdateParameters) UnmarshalJSON(body []byte) error {
+	var m map[string]*json.RawMessage
+	err := json.Unmarshal(body, &m)
+	if err != nil {
+		return err
+	}
+	for k, v := range m {
+		switch k {
+		case "tags":
+			if v != nil {
+				var tags map[string]*string
+				err = json.Unmarshal(*v, &tags)
+				if err != nil {
+					return err
+				}
+				daup.Tags = tags
+			}
+		case "location":
+			if v != nil {
+				var location string
+				err = json.Unmarshal(*v, &location)
+				if err != nil {
+					return err
+				}
+				daup.Location = &location
+			}
+		case "properties":
+			if v != nil {
+				var databaseAccountUpdateProperties DatabaseAccountUpdateProperties
+				err = json.Unmarshal(*v, &databaseAccountUpdateProperties)
+				if err != nil {
+					return err
+				}
+				daup.DatabaseAccountUpdateProperties = &databaseAccountUpdateProperties
+			}
+		}
+	}
+
+	return nil
+}
+
+// DatabaseAccountUpdateProperties properties to update Azure Cosmos DB database accounts.
+type DatabaseAccountUpdateProperties struct {
+	// ConsistencyPolicy - The consistency policy for the Cosmos DB account.
+	ConsistencyPolicy *ConsistencyPolicy `json:"consistencyPolicy,omitempty"`
+	// Locations - An array that contains the georeplication locations enabled for the Cosmos DB account.
+	Locations *[]Location `json:"locations,omitempty"`
+	// IPRules - List of IpRules.
+	IPRules *[]IPAddressOrRange `json:"ipRules,omitempty"`
+	// IsVirtualNetworkFilterEnabled - Flag to indicate whether to enable/disable Virtual Network ACL rules.
+	IsVirtualNetworkFilterEnabled *bool `json:"isVirtualNetworkFilterEnabled,omitempty"`
+	// EnableAutomaticFailover - Enables automatic failover of the write region in the rare event that the region is unavailable due to an outage. Automatic failover will result in a new write region for the account and is chosen based on the failover priorities configured for the account.
+	EnableAutomaticFailover *bool `json:"enableAutomaticFailover,omitempty"`
+	// Capabilities - List of Cosmos DB capabilities for the account
+	Capabilities *[]Capability `json:"capabilities,omitempty"`
+	// VirtualNetworkRules - List of Virtual Network ACL rules configured for the Cosmos DB account.
+	VirtualNetworkRules *[]VirtualNetworkRule `json:"virtualNetworkRules,omitempty"`
+	// EnableMultipleWriteLocations - Enables the account to write in multiple locations
+	EnableMultipleWriteLocations *bool `json:"enableMultipleWriteLocations,omitempty"`
+	// EnableCassandraConnector - Enables the cassandra connector on the Cosmos DB C* account
+	EnableCassandraConnector *bool `json:"enableCassandraConnector,omitempty"`
+	// ConnectorOffer - The cassandra connector offer type for the Cosmos DB database C* account. Possible values include: 'Small'
+	ConnectorOffer ConnectorOffer `json:"connectorOffer,omitempty"`
+	// DisableKeyBasedMetadataWriteAccess - Disable write operations on metadata resources (databases, containers, throughput) via account keys
+	DisableKeyBasedMetadataWriteAccess *bool `json:"disableKeyBasedMetadataWriteAccess,omitempty"`
+	// KeyVaultKeyURI - The URI of the key vault
+	KeyVaultKeyURI *string `json:"keyVaultKeyUri,omitempty"`
+	// PublicNetworkAccess - Whether requests from Public Network are allowed. Possible values include: 'Enabled', 'Disabled'
+	PublicNetworkAccess PublicNetworkAccess `json:"publicNetworkAccess,omitempty"`
+	// EnableFreeTier - Flag to indicate whether Free Tier is enabled.
+	EnableFreeTier *bool `json:"enableFreeTier,omitempty"`
+	// APIProperties - API specific properties. Currently, supported only for MongoDB API.
+	APIProperties *APIProperties `json:"apiProperties,omitempty"`
+	// EnableAnalyticalStorage - Flag to indicate whether to enable storage analytics.
+	EnableAnalyticalStorage *bool `json:"enableAnalyticalStorage,omitempty"`
+	// Cors - The CORS policy for the Cosmos DB database account.
+	Cors *[]CorsPolicy `json:"cors,omitempty"`
+}
+
 // DatabaseAccountsCreateOrUpdateFuture an abstraction for monitoring and retrieving the results of a
 // long-running operation.
 type DatabaseAccountsCreateOrUpdateFuture struct {
@@ -1498,8 +1602,8 @@ func (future *DatabaseAccountsDeleteFuture) Result(client DatabaseAccountsClient
 	return
 }
 
-// DatabaseAccountsFailoverPriorityChangeFuture an abstraction for monitoring and retrieving the results of a
-// long-running operation.
+// DatabaseAccountsFailoverPriorityChangeFuture an abstraction for monitoring and retrieving the results of
+// a long-running operation.
 type DatabaseAccountsFailoverPriorityChangeFuture struct {
 	azure.Future
 }
@@ -1625,109 +1729,6 @@ func (future *DatabaseAccountsUpdateFuture) Result(client DatabaseAccountsClient
 		}
 	}
 	return
-}
-
-// DatabaseAccountUpdateParameters parameters for patching Azure Cosmos DB database account properties.
-type DatabaseAccountUpdateParameters struct {
-	Tags map[string]*string `json:"tags"`
-	// Location - The location of the resource group to which the resource belongs.
-	Location                         *string `json:"location,omitempty"`
-	*DatabaseAccountUpdateProperties `json:"properties,omitempty"`
-}
-
-// MarshalJSON is the custom marshaler for DatabaseAccountUpdateParameters.
-func (daup DatabaseAccountUpdateParameters) MarshalJSON() ([]byte, error) {
-	objectMap := make(map[string]interface{})
-	if daup.Tags != nil {
-		objectMap["tags"] = daup.Tags
-	}
-	if daup.Location != nil {
-		objectMap["location"] = daup.Location
-	}
-	if daup.DatabaseAccountUpdateProperties != nil {
-		objectMap["properties"] = daup.DatabaseAccountUpdateProperties
-	}
-	return json.Marshal(objectMap)
-}
-
-// UnmarshalJSON is the custom unmarshaler for DatabaseAccountUpdateParameters struct.
-func (daup *DatabaseAccountUpdateParameters) UnmarshalJSON(body []byte) error {
-	var m map[string]*json.RawMessage
-	err := json.Unmarshal(body, &m)
-	if err != nil {
-		return err
-	}
-	for k, v := range m {
-		switch k {
-		case "tags":
-			if v != nil {
-				var tags map[string]*string
-				err = json.Unmarshal(*v, &tags)
-				if err != nil {
-					return err
-				}
-				daup.Tags = tags
-			}
-		case "location":
-			if v != nil {
-				var location string
-				err = json.Unmarshal(*v, &location)
-				if err != nil {
-					return err
-				}
-				daup.Location = &location
-			}
-		case "properties":
-			if v != nil {
-				var databaseAccountUpdateProperties DatabaseAccountUpdateProperties
-				err = json.Unmarshal(*v, &databaseAccountUpdateProperties)
-				if err != nil {
-					return err
-				}
-				daup.DatabaseAccountUpdateProperties = &databaseAccountUpdateProperties
-			}
-		}
-	}
-
-	return nil
-}
-
-// DatabaseAccountUpdateProperties properties to update Azure Cosmos DB database accounts.
-type DatabaseAccountUpdateProperties struct {
-	// ConsistencyPolicy - The consistency policy for the Cosmos DB account.
-	ConsistencyPolicy *ConsistencyPolicy `json:"consistencyPolicy,omitempty"`
-	// Locations - An array that contains the georeplication locations enabled for the Cosmos DB account.
-	Locations *[]Location `json:"locations,omitempty"`
-	// IPRules - List of IpRules.
-	IPRules *[]IPAddressOrRange `json:"ipRules,omitempty"`
-	// IsVirtualNetworkFilterEnabled - Flag to indicate whether to enable/disable Virtual Network ACL rules.
-	IsVirtualNetworkFilterEnabled *bool `json:"isVirtualNetworkFilterEnabled,omitempty"`
-	// EnableAutomaticFailover - Enables automatic failover of the write region in the rare event that the region is unavailable due to an outage. Automatic failover will result in a new write region for the account and is chosen based on the failover priorities configured for the account.
-	EnableAutomaticFailover *bool `json:"enableAutomaticFailover,omitempty"`
-	// Capabilities - List of Cosmos DB capabilities for the account
-	Capabilities *[]Capability `json:"capabilities,omitempty"`
-	// VirtualNetworkRules - List of Virtual Network ACL rules configured for the Cosmos DB account.
-	VirtualNetworkRules *[]VirtualNetworkRule `json:"virtualNetworkRules,omitempty"`
-	// EnableMultipleWriteLocations - Enables the account to write in multiple locations
-	EnableMultipleWriteLocations *bool `json:"enableMultipleWriteLocations,omitempty"`
-	// EnableCassandraConnector - Enables the cassandra connector on the Cosmos DB C* account
-	EnableCassandraConnector *bool `json:"enableCassandraConnector,omitempty"`
-	// ConnectorOffer - The cassandra connector offer type for the Cosmos DB database C* account. Possible values include: 'Small'
-	ConnectorOffer ConnectorOffer `json:"connectorOffer,omitempty"`
-	// DisableKeyBasedMetadataWriteAccess - Disable write operations on metadata resources (databases, containers, throughput) via account keys
-	DisableKeyBasedMetadataWriteAccess *bool `json:"disableKeyBasedMetadataWriteAccess,omitempty"`
-	// KeyVaultKeyURI - The URI of the key vault
-	KeyVaultKeyURI *string `json:"keyVaultKeyUri,omitempty"`
-	// PublicNetworkAccess - Whether requests from Public Network are allowed. Possible values include: 'Enabled', 'Disabled'
-	PublicNetworkAccess PublicNetworkAccess `json:"publicNetworkAccess,omitempty"`
-	// EnableFreeTier - Flag to indicate whether Free Tier is enabled.
-	EnableFreeTier *bool `json:"enableFreeTier,omitempty"`
-	// APIProperties - API specific properties. Currently, supported only for MongoDB API.
-	APIProperties *APIProperties `json:"apiProperties,omitempty"`
-	// EnableAnalyticalStorage - Flag to indicate whether to enable storage analytics.
-	EnableAnalyticalStorage *bool `json:"enableAnalyticalStorage,omitempty"`
-	// Cors - The CORS policy for the Cosmos DB database account.
-	Cors *[]CorsPolicy `json:"cors,omitempty"`
 }
 
 // ErrorResponse error Response.
@@ -2329,8 +2330,8 @@ type GremlinGraphResource struct {
 	ConflictResolutionPolicy *ConflictResolutionPolicy `json:"conflictResolutionPolicy,omitempty"`
 }
 
-// GremlinResourcesCreateUpdateGremlinDatabaseFuture an abstraction for monitoring and retrieving the results
-// of a long-running operation.
+// GremlinResourcesCreateUpdateGremlinDatabaseFuture an abstraction for monitoring and retrieving the
+// results of a long-running operation.
 type GremlinResourcesCreateUpdateGremlinDatabaseFuture struct {
 	azure.Future
 }
@@ -2358,8 +2359,8 @@ func (future *GremlinResourcesCreateUpdateGremlinDatabaseFuture) Result(client G
 	return
 }
 
-// GremlinResourcesCreateUpdateGremlinGraphFuture an abstraction for monitoring and retrieving the results of a
-// long-running operation.
+// GremlinResourcesCreateUpdateGremlinGraphFuture an abstraction for monitoring and retrieving the results
+// of a long-running operation.
 type GremlinResourcesCreateUpdateGremlinGraphFuture struct {
 	azure.Future
 }
@@ -2387,8 +2388,8 @@ func (future *GremlinResourcesCreateUpdateGremlinGraphFuture) Result(client Grem
 	return
 }
 
-// GremlinResourcesDeleteGremlinDatabaseFuture an abstraction for monitoring and retrieving the results of a
-// long-running operation.
+// GremlinResourcesDeleteGremlinDatabaseFuture an abstraction for monitoring and retrieving the results of
+// a long-running operation.
 type GremlinResourcesDeleteGremlinDatabaseFuture struct {
 	azure.Future
 }
@@ -2462,8 +2463,8 @@ func (future *GremlinResourcesMigrateGremlinDatabaseToAutoscaleFuture) Result(cl
 	return
 }
 
-// GremlinResourcesMigrateGremlinDatabaseToManualThroughputFuture an abstraction for monitoring and retrieving
-// the results of a long-running operation.
+// GremlinResourcesMigrateGremlinDatabaseToManualThroughputFuture an abstraction for monitoring and
+// retrieving the results of a long-running operation.
 type GremlinResourcesMigrateGremlinDatabaseToManualThroughputFuture struct {
 	azure.Future
 }
@@ -2520,8 +2521,8 @@ func (future *GremlinResourcesMigrateGremlinGraphToAutoscaleFuture) Result(clien
 	return
 }
 
-// GremlinResourcesMigrateGremlinGraphToManualThroughputFuture an abstraction for monitoring and retrieving the
-// results of a long-running operation.
+// GremlinResourcesMigrateGremlinGraphToManualThroughputFuture an abstraction for monitoring and retrieving
+// the results of a long-running operation.
 type GremlinResourcesMigrateGremlinGraphToManualThroughputFuture struct {
 	azure.Future
 }
@@ -2578,8 +2579,8 @@ func (future *GremlinResourcesUpdateGremlinDatabaseThroughputFuture) Result(clie
 	return
 }
 
-// GremlinResourcesUpdateGremlinGraphThroughputFuture an abstraction for monitoring and retrieving the results
-// of a long-running operation.
+// GremlinResourcesUpdateGremlinGraphThroughputFuture an abstraction for monitoring and retrieving the
+// results of a long-running operation.
 type GremlinResourcesUpdateGremlinGraphThroughputFuture struct {
 	azure.Future
 }
@@ -2605,6 +2606,12 @@ func (future *GremlinResourcesUpdateGremlinGraphThroughputFuture) Result(client 
 		}
 	}
 	return
+}
+
+// IPAddressOrRange ipAddressOrRange object
+type IPAddressOrRange struct {
+	// IPAddressOrRange - A single IPv4 address or a single IPv4 address range in CIDR format. Provided IPs must be well-formatted and cannot be contained in one of the following ranges: 10.0.0.0/8, 100.64.0.0/10, 172.16.0.0/12, 192.168.0.0/16, since these are not enforceable by the IP address filter. Example of valid inputs: “23.40.210.245” or “23.40.210.0/8”.
+	IPAddressOrRange *string `json:"ipAddressOrRange,omitempty"`
 }
 
 // IncludedPath the paths that are included in indexing
@@ -2639,12 +2646,6 @@ type IndexingPolicy struct {
 	CompositeIndexes *[][]CompositePath `json:"compositeIndexes,omitempty"`
 	// SpatialIndexes - List of spatial specifics
 	SpatialIndexes *[]SpatialSpec `json:"spatialIndexes,omitempty"`
-}
-
-// IPAddressOrRange ipAddressOrRange object
-type IPAddressOrRange struct {
-	// IPAddressOrRange - A single IPv4 address or a single IPv4 address range in CIDR format. Provided IPs must be well-formatted and cannot be contained in one of the following ranges: 10.0.0.0/8, 100.64.0.0/10, 172.16.0.0/12, 192.168.0.0/16, since these are not enforceable by the IP address filter. Example of valid inputs: “23.40.210.245” or “23.40.210.0/8”.
-	IPAddressOrRange *string `json:"ipAddressOrRange,omitempty"`
 }
 
 // Location a region in which the Azure Cosmos DB database account is deployed.
@@ -2873,7 +2874,8 @@ func (mdccup *MongoDBCollectionCreateUpdateParameters) UnmarshalJSON(body []byte
 	return nil
 }
 
-// MongoDBCollectionCreateUpdateProperties properties to create and update Azure Cosmos DB MongoDB collection.
+// MongoDBCollectionCreateUpdateProperties properties to create and update Azure Cosmos DB MongoDB
+// collection.
 type MongoDBCollectionCreateUpdateProperties struct {
 	// Resource - The standard JSON format of a MongoDB collection
 	Resource *MongoDBCollectionResource `json:"resource,omitempty"`
@@ -3325,8 +3327,8 @@ type MongoDBDatabaseResource struct {
 	ID *string `json:"id,omitempty"`
 }
 
-// MongoDBResourcesCreateUpdateMongoDBCollectionFuture an abstraction for monitoring and retrieving the results
-// of a long-running operation.
+// MongoDBResourcesCreateUpdateMongoDBCollectionFuture an abstraction for monitoring and retrieving the
+// results of a long-running operation.
 type MongoDBResourcesCreateUpdateMongoDBCollectionFuture struct {
 	azure.Future
 }
@@ -3354,8 +3356,8 @@ func (future *MongoDBResourcesCreateUpdateMongoDBCollectionFuture) Result(client
 	return
 }
 
-// MongoDBResourcesCreateUpdateMongoDBDatabaseFuture an abstraction for monitoring and retrieving the results
-// of a long-running operation.
+// MongoDBResourcesCreateUpdateMongoDBDatabaseFuture an abstraction for monitoring and retrieving the
+// results of a long-running operation.
 type MongoDBResourcesCreateUpdateMongoDBDatabaseFuture struct {
 	azure.Future
 }
@@ -3383,8 +3385,8 @@ func (future *MongoDBResourcesCreateUpdateMongoDBDatabaseFuture) Result(client M
 	return
 }
 
-// MongoDBResourcesDeleteMongoDBCollectionFuture an abstraction for monitoring and retrieving the results of a
-// long-running operation.
+// MongoDBResourcesDeleteMongoDBCollectionFuture an abstraction for monitoring and retrieving the results
+// of a long-running operation.
 type MongoDBResourcesDeleteMongoDBCollectionFuture struct {
 	azure.Future
 }
@@ -3406,8 +3408,8 @@ func (future *MongoDBResourcesDeleteMongoDBCollectionFuture) Result(client Mongo
 	return
 }
 
-// MongoDBResourcesDeleteMongoDBDatabaseFuture an abstraction for monitoring and retrieving the results of a
-// long-running operation.
+// MongoDBResourcesDeleteMongoDBDatabaseFuture an abstraction for monitoring and retrieving the results of
+// a long-running operation.
 type MongoDBResourcesDeleteMongoDBDatabaseFuture struct {
 	azure.Future
 }
@@ -3429,8 +3431,8 @@ func (future *MongoDBResourcesDeleteMongoDBDatabaseFuture) Result(client MongoDB
 	return
 }
 
-// MongoDBResourcesMigrateMongoDBCollectionToAutoscaleFuture an abstraction for monitoring and retrieving the
-// results of a long-running operation.
+// MongoDBResourcesMigrateMongoDBCollectionToAutoscaleFuture an abstraction for monitoring and retrieving
+// the results of a long-running operation.
 type MongoDBResourcesMigrateMongoDBCollectionToAutoscaleFuture struct {
 	azure.Future
 }
@@ -3516,8 +3518,8 @@ func (future *MongoDBResourcesMigrateMongoDBDatabaseToAutoscaleFuture) Result(cl
 	return
 }
 
-// MongoDBResourcesMigrateMongoDBDatabaseToManualThroughputFuture an abstraction for monitoring and retrieving
-// the results of a long-running operation.
+// MongoDBResourcesMigrateMongoDBDatabaseToManualThroughputFuture an abstraction for monitoring and
+// retrieving the results of a long-running operation.
 type MongoDBResourcesMigrateMongoDBDatabaseToManualThroughputFuture struct {
 	azure.Future
 }
@@ -3761,8 +3763,8 @@ func (future *NotebookWorkspacesCreateOrUpdateFuture) Result(client NotebookWork
 	return
 }
 
-// NotebookWorkspacesDeleteFuture an abstraction for monitoring and retrieving the results of a long-running
-// operation.
+// NotebookWorkspacesDeleteFuture an abstraction for monitoring and retrieving the results of a
+// long-running operation.
 type NotebookWorkspacesDeleteFuture struct {
 	azure.Future
 }
@@ -3784,8 +3786,8 @@ func (future *NotebookWorkspacesDeleteFuture) Result(client NotebookWorkspacesCl
 	return
 }
 
-// NotebookWorkspacesRegenerateAuthTokenFuture an abstraction for monitoring and retrieving the results of a
-// long-running operation.
+// NotebookWorkspacesRegenerateAuthTokenFuture an abstraction for monitoring and retrieving the results of
+// a long-running operation.
 type NotebookWorkspacesRegenerateAuthTokenFuture struct {
 	azure.Future
 }
@@ -4003,8 +4005,11 @@ func (page OperationListResultPage) Values() []Operation {
 }
 
 // Creates a new instance of the OperationListResultPage type.
-func NewOperationListResultPage(getNextPage func(context.Context, OperationListResult) (OperationListResult, error)) OperationListResultPage {
-	return OperationListResultPage{fn: getNextPage}
+func NewOperationListResultPage(cur OperationListResult, getNextPage func(context.Context, OperationListResult) (OperationListResult, error)) OperationListResultPage {
+	return OperationListResultPage{
+		fn:  getNextPage,
+		olr: cur,
+	}
 }
 
 // OptionsResource cosmos DB options resource object
@@ -4152,11 +4157,11 @@ type PrivateEndpointConnection struct {
 	autorest.Response `json:"-"`
 	// PrivateEndpointConnectionProperties - Resource properties.
 	*PrivateEndpointConnectionProperties `json:"properties,omitempty"`
-	// ID - READ-ONLY; Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+	// ID - READ-ONLY; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string `json:"id,omitempty"`
 	// Name - READ-ONLY; The name of the resource
 	Name *string `json:"name,omitempty"`
-	// Type - READ-ONLY; The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts.
+	// Type - READ-ONLY; The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
 	Type *string `json:"type,omitempty"`
 }
 
@@ -4239,8 +4244,8 @@ type PrivateEndpointConnectionProperties struct {
 	ProvisioningState *string `json:"provisioningState,omitempty"`
 }
 
-// PrivateEndpointConnectionsCreateOrUpdateFuture an abstraction for monitoring and retrieving the results of a
-// long-running operation.
+// PrivateEndpointConnectionsCreateOrUpdateFuture an abstraction for monitoring and retrieving the results
+// of a long-running operation.
 type PrivateEndpointConnectionsCreateOrUpdateFuture struct {
 	azure.Future
 }
@@ -4409,14 +4414,14 @@ func (plscsp PrivateLinkServiceConnectionStateProperty) MarshalJSON() ([]byte, e
 	return json.Marshal(objectMap)
 }
 
-// ProxyResource the resource model definition for a ARM proxy resource. It will have everything other than
-// required location and tags
+// ProxyResource the resource model definition for a Azure Resource Manager proxy resource. It will not
+// have tags and a location
 type ProxyResource struct {
-	// ID - READ-ONLY; Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+	// ID - READ-ONLY; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string `json:"id,omitempty"`
 	// Name - READ-ONLY; The name of the resource
 	Name *string `json:"name,omitempty"`
-	// Type - READ-ONLY; The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts.
+	// Type - READ-ONLY; The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
 	Type *string `json:"type,omitempty"`
 }
 
@@ -4426,22 +4431,14 @@ type RegionForOnlineOffline struct {
 	Region *string `json:"region,omitempty"`
 }
 
-// Resource ...
+// Resource common fields that are returned in the response for all Azure Resource Manager resources
 type Resource struct {
-	// ID - READ-ONLY; Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+	// ID - READ-ONLY; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string `json:"id,omitempty"`
 	// Name - READ-ONLY; The name of the resource
 	Name *string `json:"name,omitempty"`
-	// Type - READ-ONLY; The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts.
+	// Type - READ-ONLY; The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
 	Type *string `json:"type,omitempty"`
-}
-
-// SpatialSpec ...
-type SpatialSpec struct {
-	// Path - The path for which the indexing behavior applies to. Index paths typically start with root and end with wildcard (/path/*)
-	Path *string `json:"path,omitempty"`
-	// Types - List of path's spatial type
-	Types *[]SpatialType `json:"types,omitempty"`
 }
 
 // SQLContainerCreateUpdateParameters parameters to create and update Cosmos DB container.
@@ -5064,8 +5061,8 @@ func (future *SQLResourcesCreateUpdateSQLDatabaseFuture) Result(client SQLResour
 	return
 }
 
-// SQLResourcesCreateUpdateSQLStoredProcedureFuture an abstraction for monitoring and retrieving the results of
-// a long-running operation.
+// SQLResourcesCreateUpdateSQLStoredProcedureFuture an abstraction for monitoring and retrieving the
+// results of a long-running operation.
 type SQLResourcesCreateUpdateSQLStoredProcedureFuture struct {
 	azure.Future
 }
@@ -5243,8 +5240,8 @@ func (future *SQLResourcesDeleteSQLTriggerFuture) Result(client SQLResourcesClie
 	return
 }
 
-// SQLResourcesDeleteSQLUserDefinedFunctionFuture an abstraction for monitoring and retrieving the results of a
-// long-running operation.
+// SQLResourcesDeleteSQLUserDefinedFunctionFuture an abstraction for monitoring and retrieving the results
+// of a long-running operation.
 type SQLResourcesDeleteSQLUserDefinedFunctionFuture struct {
 	azure.Future
 }
@@ -5266,8 +5263,8 @@ func (future *SQLResourcesDeleteSQLUserDefinedFunctionFuture) Result(client SQLR
 	return
 }
 
-// SQLResourcesMigrateSQLContainerToAutoscaleFuture an abstraction for monitoring and retrieving the results of
-// a long-running operation.
+// SQLResourcesMigrateSQLContainerToAutoscaleFuture an abstraction for monitoring and retrieving the
+// results of a long-running operation.
 type SQLResourcesMigrateSQLContainerToAutoscaleFuture struct {
 	azure.Future
 }
@@ -5324,8 +5321,8 @@ func (future *SQLResourcesMigrateSQLContainerToManualThroughputFuture) Result(cl
 	return
 }
 
-// SQLResourcesMigrateSQLDatabaseToAutoscaleFuture an abstraction for monitoring and retrieving the results of
-// a long-running operation.
+// SQLResourcesMigrateSQLDatabaseToAutoscaleFuture an abstraction for monitoring and retrieving the results
+// of a long-running operation.
 type SQLResourcesMigrateSQLDatabaseToAutoscaleFuture struct {
 	azure.Future
 }
@@ -5382,8 +5379,8 @@ func (future *SQLResourcesMigrateSQLDatabaseToManualThroughputFuture) Result(cli
 	return
 }
 
-// SQLResourcesUpdateSQLContainerThroughputFuture an abstraction for monitoring and retrieving the results of a
-// long-running operation.
+// SQLResourcesUpdateSQLContainerThroughputFuture an abstraction for monitoring and retrieving the results
+// of a long-running operation.
 type SQLResourcesUpdateSQLContainerThroughputFuture struct {
 	azure.Future
 }
@@ -5411,8 +5408,8 @@ func (future *SQLResourcesUpdateSQLContainerThroughputFuture) Result(client SQLR
 	return
 }
 
-// SQLResourcesUpdateSQLDatabaseThroughputFuture an abstraction for monitoring and retrieving the results of a
-// long-running operation.
+// SQLResourcesUpdateSQLDatabaseThroughputFuture an abstraction for monitoring and retrieving the results
+// of a long-running operation.
 type SQLResourcesUpdateSQLDatabaseThroughputFuture struct {
 	azure.Future
 }
@@ -5539,7 +5536,8 @@ func (sspcup *SQLStoredProcedureCreateUpdateParameters) UnmarshalJSON(body []byt
 	return nil
 }
 
-// SQLStoredProcedureCreateUpdateProperties properties to create and update Azure Cosmos DB storedProcedure.
+// SQLStoredProcedureCreateUpdateProperties properties to create and update Azure Cosmos DB
+// storedProcedure.
 type SQLStoredProcedureCreateUpdateProperties struct {
 	// Resource - The standard JSON format of a storedProcedure
 	Resource *SQLStoredProcedureResource `json:"resource,omitempty"`
@@ -5961,7 +5959,8 @@ type SQLTriggerResource struct {
 	TriggerOperation TriggerOperation `json:"triggerOperation,omitempty"`
 }
 
-// SQLUserDefinedFunctionCreateUpdateParameters parameters to create and update Cosmos DB userDefinedFunction.
+// SQLUserDefinedFunctionCreateUpdateParameters parameters to create and update Cosmos DB
+// userDefinedFunction.
 type SQLUserDefinedFunctionCreateUpdateParameters struct {
 	// SQLUserDefinedFunctionCreateUpdateProperties - Properties to create and update Azure Cosmos DB userDefinedFunction.
 	*SQLUserDefinedFunctionCreateUpdateProperties `json:"properties,omitempty"`
@@ -6214,6 +6213,14 @@ type SQLUserDefinedFunctionResource struct {
 	ID *string `json:"id,omitempty"`
 	// Body - Body of the User Defined Function
 	Body *string `json:"body,omitempty"`
+}
+
+// SpatialSpec ...
+type SpatialSpec struct {
+	// Path - The path for which the indexing behavior applies to. Index paths typically start with root and end with wildcard (/path/*)
+	Path *string `json:"path,omitempty"`
+	// Types - List of path's spatial type
+	Types *[]SpatialType `json:"types,omitempty"`
 }
 
 // TableCreateUpdateParameters parameters to create and update Cosmos DB Table.
@@ -6500,8 +6507,8 @@ func (future *TableResourcesCreateUpdateTableFuture) Result(client TableResource
 	return
 }
 
-// TableResourcesDeleteTableFuture an abstraction for monitoring and retrieving the results of a long-running
-// operation.
+// TableResourcesDeleteTableFuture an abstraction for monitoring and retrieving the results of a
+// long-running operation.
 type TableResourcesDeleteTableFuture struct {
 	azure.Future
 }
@@ -6523,8 +6530,8 @@ func (future *TableResourcesDeleteTableFuture) Result(client TableResourcesClien
 	return
 }
 
-// TableResourcesMigrateTableToAutoscaleFuture an abstraction for monitoring and retrieving the results of a
-// long-running operation.
+// TableResourcesMigrateTableToAutoscaleFuture an abstraction for monitoring and retrieving the results of
+// a long-running operation.
 type TableResourcesMigrateTableToAutoscaleFuture struct {
 	azure.Future
 }
@@ -6552,8 +6559,8 @@ func (future *TableResourcesMigrateTableToAutoscaleFuture) Result(client TableRe
 	return
 }
 
-// TableResourcesMigrateTableToManualThroughputFuture an abstraction for monitoring and retrieving the results
-// of a long-running operation.
+// TableResourcesMigrateTableToManualThroughputFuture an abstraction for monitoring and retrieving the
+// results of a long-running operation.
 type TableResourcesMigrateTableToManualThroughputFuture struct {
 	azure.Future
 }
@@ -6883,17 +6890,18 @@ type ThroughputSettingsUpdateProperties struct {
 	Resource *ThroughputSettingsResource `json:"resource,omitempty"`
 }
 
-// TrackedResource the resource model definition for a ARM tracked top level resource
+// TrackedResource the resource model definition for an Azure Resource Manager tracked top level resource
+// which has 'tags' and a 'location'
 type TrackedResource struct {
 	// Tags - Resource tags.
 	Tags map[string]*string `json:"tags"`
 	// Location - The geo-location where the resource lives
 	Location *string `json:"location,omitempty"`
-	// ID - READ-ONLY; Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+	// ID - READ-ONLY; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string `json:"id,omitempty"`
 	// Name - READ-ONLY; The name of the resource
 	Name *string `json:"name,omitempty"`
-	// Type - READ-ONLY; The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts.
+	// Type - READ-ONLY; The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
 	Type *string `json:"type,omitempty"`
 }
 
@@ -6909,15 +6917,15 @@ func (tr TrackedResource) MarshalJSON() ([]byte, error) {
 	return json.Marshal(objectMap)
 }
 
-// UniqueKey the unique key on that enforces uniqueness constraint on documents in the collection in the Azure
-// Cosmos DB service.
+// UniqueKey the unique key on that enforces uniqueness constraint on documents in the collection in the
+// Azure Cosmos DB service.
 type UniqueKey struct {
 	// Paths - List of paths must be unique for each document in the Azure Cosmos DB service
 	Paths *[]string `json:"paths,omitempty"`
 }
 
-// UniqueKeyPolicy the unique key policy configuration for specifying uniqueness constraints on documents in
-// the collection in the Azure Cosmos DB service.
+// UniqueKeyPolicy the unique key policy configuration for specifying uniqueness constraints on documents
+// in the collection in the Azure Cosmos DB service.
 type UniqueKeyPolicy struct {
 	// UniqueKeys - List of unique keys on that enforces uniqueness constraint on documents in the collection in the Azure Cosmos DB service.
 	UniqueKeys *[]UniqueKey `json:"uniqueKeys,omitempty"`
