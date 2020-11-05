@@ -4,8 +4,8 @@
     "generateScript": {
       "path": "go run ./tools/generator/main.go",
       "stderr": {
-        "scriptError": "^[ERROR]",
-        "scriptWarning": "^[WARNING]"
+        "scriptError": "^\\[ERROR\\]",
+        "scriptWarning": "^\\[WARNING\\]"
       }
     }
   },
@@ -14,7 +14,10 @@
   },
   "initOptions": {
     "initScript": {
-      "path": "sh ./initScript.sh"
+      "path": "sh ./initScript.sh",
+      "stderr": {
+        "scriptWarning": false
+      }
     }
   },
   "packageOptions": {
