@@ -42,7 +42,7 @@ func NewUsageAggregatesClientWithBaseURI(baseURI string, subscriptionID string) 
 	return UsageAggregatesClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
 
-// List query aggregated Azure subscription consumption data for a date range.
+// Test test Query aggregated Azure subscription consumption data for a date range.
 // Parameters:
 // reportedStartTime - the start of the time range to retrieve data for.
 // reportedEndTime - the end of the time range to retrieve data for.
@@ -56,9 +56,9 @@ func NewUsageAggregatesClientWithBaseURI(baseURI string, subscriptionID string) 
 // continuationToken - used when a continuation token string is provided in the response body of the previous
 // call, enabling paging through a large result set. If not present, the data is retrieved from the beginning
 // of the day/hour (based on the granularity) passed in.
-func (client UsageAggregatesClient) List(ctx context.Context, reportedStartTime date.Time, reportedEndTime date.Time, showDetails *bool, aggregationGranularity AggregationGranularity, continuationToken string) (result UsageAggregationListResultPage, err error) {
+func (client UsageAggregatesClient) Test(ctx context.Context, reportedStartTime date.Time, reportedEndTime date.Time, showDetails *bool, aggregationGranularity AggregationGranularity, continuationToken string) (result UsageAggregationListResultPage, err error) {
 	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/UsageAggregatesClient.List")
+		ctx = tracing.StartSpan(ctx, fqdn+"/UsageAggregatesClient.Test")
 		defer func() {
 			sc := -1
 			if result.ualr.Response.Response != nil {
@@ -67,23 +67,23 @@ func (client UsageAggregatesClient) List(ctx context.Context, reportedStartTime 
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	result.fn = client.listNextResults
-	req, err := client.ListPreparer(ctx, reportedStartTime, reportedEndTime, showDetails, aggregationGranularity, continuationToken)
+	result.fn = client.testNextResults
+	req, err := client.TestPreparer(ctx, reportedStartTime, reportedEndTime, showDetails, aggregationGranularity, continuationToken)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "commerce.UsageAggregatesClient", "List", nil, "Failure preparing request")
+		err = autorest.NewErrorWithError(err, "commerce.UsageAggregatesClient", "Test", nil, "Failure preparing request")
 		return
 	}
 
-	resp, err := client.ListSender(req)
+	resp, err := client.TestSender(req)
 	if err != nil {
 		result.ualr.Response = autorest.Response{Response: resp}
-		err = autorest.NewErrorWithError(err, "commerce.UsageAggregatesClient", "List", resp, "Failure sending request")
+		err = autorest.NewErrorWithError(err, "commerce.UsageAggregatesClient", "Test", resp, "Failure sending request")
 		return
 	}
 
-	result.ualr, err = client.ListResponder(resp)
+	result.ualr, err = client.TestResponder(resp)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "commerce.UsageAggregatesClient", "List", resp, "Failure responding to request")
+		err = autorest.NewErrorWithError(err, "commerce.UsageAggregatesClient", "Test", resp, "Failure responding to request")
 	}
 	if result.ualr.hasNextLink() && result.ualr.IsEmpty() {
 		err = result.NextWithContext(ctx)
@@ -92,8 +92,8 @@ func (client UsageAggregatesClient) List(ctx context.Context, reportedStartTime 
 	return
 }
 
-// ListPreparer prepares the List request.
-func (client UsageAggregatesClient) ListPreparer(ctx context.Context, reportedStartTime date.Time, reportedEndTime date.Time, showDetails *bool, aggregationGranularity AggregationGranularity, continuationToken string) (*http.Request, error) {
+// TestPreparer prepares the Test request.
+func (client UsageAggregatesClient) TestPreparer(ctx context.Context, reportedStartTime date.Time, reportedEndTime date.Time, showDetails *bool, aggregationGranularity AggregationGranularity, continuationToken string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"subscriptionId": autorest.Encode("path", client.SubscriptionID),
 	}
@@ -124,15 +124,15 @@ func (client UsageAggregatesClient) ListPreparer(ctx context.Context, reportedSt
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
 }
 
-// ListSender sends the List request. The method will close the
+// TestSender sends the Test request. The method will close the
 // http.Response Body if it receives an error.
-func (client UsageAggregatesClient) ListSender(req *http.Request) (*http.Response, error) {
+func (client UsageAggregatesClient) TestSender(req *http.Request) (*http.Response, error) {
 	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
-// ListResponder handles the response to the List request. The method always
+// TestResponder handles the response to the Test request. The method always
 // closes the http.Response Body.
-func (client UsageAggregatesClient) ListResponder(resp *http.Response) (result UsageAggregationListResult, err error) {
+func (client UsageAggregatesClient) TestResponder(resp *http.Response) (result UsageAggregationListResult, err error) {
 	err = autorest.Respond(
 		resp,
 		azure.WithErrorUnlessStatusCode(http.StatusOK),
@@ -142,31 +142,31 @@ func (client UsageAggregatesClient) ListResponder(resp *http.Response) (result U
 	return
 }
 
-// listNextResults retrieves the next set of results, if any.
-func (client UsageAggregatesClient) listNextResults(ctx context.Context, lastResults UsageAggregationListResult) (result UsageAggregationListResult, err error) {
+// testNextResults retrieves the next set of results, if any.
+func (client UsageAggregatesClient) testNextResults(ctx context.Context, lastResults UsageAggregationListResult) (result UsageAggregationListResult, err error) {
 	req, err := lastResults.usageAggregationListResultPreparer(ctx)
 	if err != nil {
-		return result, autorest.NewErrorWithError(err, "commerce.UsageAggregatesClient", "listNextResults", nil, "Failure preparing next results request")
+		return result, autorest.NewErrorWithError(err, "commerce.UsageAggregatesClient", "testNextResults", nil, "Failure preparing next results request")
 	}
 	if req == nil {
 		return
 	}
-	resp, err := client.ListSender(req)
+	resp, err := client.TestSender(req)
 	if err != nil {
 		result.Response = autorest.Response{Response: resp}
-		return result, autorest.NewErrorWithError(err, "commerce.UsageAggregatesClient", "listNextResults", resp, "Failure sending next results request")
+		return result, autorest.NewErrorWithError(err, "commerce.UsageAggregatesClient", "testNextResults", resp, "Failure sending next results request")
 	}
-	result, err = client.ListResponder(resp)
+	result, err = client.TestResponder(resp)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "commerce.UsageAggregatesClient", "listNextResults", resp, "Failure responding to next results request")
+		err = autorest.NewErrorWithError(err, "commerce.UsageAggregatesClient", "testNextResults", resp, "Failure responding to next results request")
 	}
 	return
 }
 
-// ListComplete enumerates all values, automatically crossing page boundaries as required.
-func (client UsageAggregatesClient) ListComplete(ctx context.Context, reportedStartTime date.Time, reportedEndTime date.Time, showDetails *bool, aggregationGranularity AggregationGranularity, continuationToken string) (result UsageAggregationListResultIterator, err error) {
+// TestComplete enumerates all values, automatically crossing page boundaries as required.
+func (client UsageAggregatesClient) TestComplete(ctx context.Context, reportedStartTime date.Time, reportedEndTime date.Time, showDetails *bool, aggregationGranularity AggregationGranularity, continuationToken string) (result UsageAggregationListResultIterator, err error) {
 	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/UsageAggregatesClient.List")
+		ctx = tracing.StartSpan(ctx, fqdn+"/UsageAggregatesClient.Test")
 		defer func() {
 			sc := -1
 			if result.Response().Response.Response != nil {
@@ -175,6 +175,6 @@ func (client UsageAggregatesClient) ListComplete(ctx context.Context, reportedSt
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	result.page, err = client.List(ctx, reportedStartTime, reportedEndTime, showDetails, aggregationGranularity, continuationToken)
+	result.page, err = client.Test(ctx, reportedStartTime, reportedEndTime, showDetails, aggregationGranularity, continuationToken)
 	return
 }
