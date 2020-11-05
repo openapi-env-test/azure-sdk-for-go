@@ -60,6 +60,29 @@ func PossibleConnectorOfferValues() []ConnectorOffer {
 	return []ConnectorOffer{Small}
 }
 
+// DataType enumerates the values for data type.
+type DataType string
+
+const (
+	// LineString ...
+	LineString DataType = "LineString"
+	// MultiPolygon ...
+	MultiPolygon DataType = "MultiPolygon"
+	// Number ...
+	Number DataType = "Number"
+	// Point ...
+	Point DataType = "Point"
+	// Polygon ...
+	Polygon DataType = "Polygon"
+	// String ...
+	String DataType = "String"
+)
+
+// PossibleDataTypeValues returns an array of possible values for the DataType const type.
+func PossibleDataTypeValues() []DataType {
+	return []DataType{LineString, MultiPolygon, Number, Point, Polygon, String}
+}
+
 // DatabaseAccountKind enumerates the values for database account kind.
 type DatabaseAccountKind string
 
@@ -90,29 +113,6 @@ func PossibleDatabaseAccountOfferTypeValues() []DatabaseAccountOfferType {
 	return []DatabaseAccountOfferType{Standard}
 }
 
-// DataType enumerates the values for data type.
-type DataType string
-
-const (
-	// LineString ...
-	LineString DataType = "LineString"
-	// MultiPolygon ...
-	MultiPolygon DataType = "MultiPolygon"
-	// Number ...
-	Number DataType = "Number"
-	// Point ...
-	Point DataType = "Point"
-	// Polygon ...
-	Polygon DataType = "Polygon"
-	// String ...
-	String DataType = "String"
-)
-
-// PossibleDataTypeValues returns an array of possible values for the DataType const type.
-func PossibleDataTypeValues() []DataType {
-	return []DataType{LineString, MultiPolygon, Number, Point, Polygon, String}
-}
-
 // DefaultConsistencyLevel enumerates the values for default consistency level.
 type DefaultConsistencyLevel string
 
@@ -134,23 +134,6 @@ func PossibleDefaultConsistencyLevelValues() []DefaultConsistencyLevel {
 	return []DefaultConsistencyLevel{BoundedStaleness, ConsistentPrefix, Eventual, Session, Strong}
 }
 
-// IndexingMode enumerates the values for indexing mode.
-type IndexingMode string
-
-const (
-	// Consistent ...
-	Consistent IndexingMode = "Consistent"
-	// Lazy ...
-	Lazy IndexingMode = "Lazy"
-	// None ...
-	None IndexingMode = "None"
-)
-
-// PossibleIndexingModeValues returns an array of possible values for the IndexingMode const type.
-func PossibleIndexingModeValues() []IndexingMode {
-	return []IndexingMode{Consistent, Lazy, None}
-}
-
 // IndexKind enumerates the values for index kind.
 type IndexKind string
 
@@ -166,6 +149,23 @@ const (
 // PossibleIndexKindValues returns an array of possible values for the IndexKind const type.
 func PossibleIndexKindValues() []IndexKind {
 	return []IndexKind{Hash, Range, Spatial}
+}
+
+// IndexingMode enumerates the values for indexing mode.
+type IndexingMode string
+
+const (
+	// Consistent ...
+	Consistent IndexingMode = "Consistent"
+	// Lazy ...
+	Lazy IndexingMode = "Lazy"
+	// None ...
+	None IndexingMode = "None"
+)
+
+// PossibleIndexingModeValues returns an array of possible values for the IndexingMode const type.
+func PossibleIndexingModeValues() []IndexingMode {
+	return []IndexingMode{Consistent, Lazy, None}
 }
 
 // KeyKind enumerates the values for key kind.
