@@ -299,13 +299,13 @@ func (client ProfilesClient) GenerateSsoURIResponder(resp *http.Response) (resul
 	return
 }
 
-// Get gets a CDN profile with the specified profile name under the specified subscription and resource group.
+// GetX gets a CDN profile with the specified profile name under the specified subscription and resource group.
 // Parameters:
 // resourceGroupName - name of the Resource group within the Azure subscription.
 // profileName - name of the CDN profile which is unique within the resource group.
-func (client ProfilesClient) Get(ctx context.Context, resourceGroupName string, profileName string) (result Profile, err error) {
+func (client ProfilesClient) GetX(ctx context.Context, resourceGroupName string, profileName string) (result Profile, err error) {
 	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/ProfilesClient.Get")
+		ctx = tracing.StartSpan(ctx, fqdn+"/ProfilesClient.GetX")
 		defer func() {
 			sc := -1
 			if result.Response.Response != nil {
@@ -319,32 +319,32 @@ func (client ProfilesClient) Get(ctx context.Context, resourceGroupName string, 
 			Constraints: []validation.Constraint{{Target: "resourceGroupName", Name: validation.MaxLength, Rule: 90, Chain: nil},
 				{Target: "resourceGroupName", Name: validation.MinLength, Rule: 1, Chain: nil},
 				{Target: "resourceGroupName", Name: validation.Pattern, Rule: `^[-\w\._\(\)]+$`, Chain: nil}}}}); err != nil {
-		return result, validation.NewError("cdn.ProfilesClient", "Get", err.Error())
+		return result, validation.NewError("cdn.ProfilesClient", "GetX", err.Error())
 	}
 
-	req, err := client.GetPreparer(ctx, resourceGroupName, profileName)
+	req, err := client.GetXPreparer(ctx, resourceGroupName, profileName)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "cdn.ProfilesClient", "Get", nil, "Failure preparing request")
+		err = autorest.NewErrorWithError(err, "cdn.ProfilesClient", "GetX", nil, "Failure preparing request")
 		return
 	}
 
-	resp, err := client.GetSender(req)
+	resp, err := client.GetXSender(req)
 	if err != nil {
 		result.Response = autorest.Response{Response: resp}
-		err = autorest.NewErrorWithError(err, "cdn.ProfilesClient", "Get", resp, "Failure sending request")
+		err = autorest.NewErrorWithError(err, "cdn.ProfilesClient", "GetX", resp, "Failure sending request")
 		return
 	}
 
-	result, err = client.GetResponder(resp)
+	result, err = client.GetXResponder(resp)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "cdn.ProfilesClient", "Get", resp, "Failure responding to request")
+		err = autorest.NewErrorWithError(err, "cdn.ProfilesClient", "GetX", resp, "Failure responding to request")
 	}
 
 	return
 }
 
-// GetPreparer prepares the Get request.
-func (client ProfilesClient) GetPreparer(ctx context.Context, resourceGroupName string, profileName string) (*http.Request, error) {
+// GetXPreparer prepares the GetX request.
+func (client ProfilesClient) GetXPreparer(ctx context.Context, resourceGroupName string, profileName string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"profileName":       autorest.Encode("path", profileName),
 		"resourceGroupName": autorest.Encode("path", resourceGroupName),
@@ -364,15 +364,15 @@ func (client ProfilesClient) GetPreparer(ctx context.Context, resourceGroupName 
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
 }
 
-// GetSender sends the Get request. The method will close the
+// GetXSender sends the GetX request. The method will close the
 // http.Response Body if it receives an error.
-func (client ProfilesClient) GetSender(req *http.Request) (*http.Response, error) {
+func (client ProfilesClient) GetXSender(req *http.Request) (*http.Response, error) {
 	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
-// GetResponder handles the response to the Get request. The method always
+// GetXResponder handles the response to the GetX request. The method always
 // closes the http.Response Body.
-func (client ProfilesClient) GetResponder(resp *http.Response) (result Profile, err error) {
+func (client ProfilesClient) GetXResponder(resp *http.Response) (result Profile, err error) {
 	err = autorest.Respond(
 		resp,
 		azure.WithErrorUnlessStatusCode(http.StatusOK),

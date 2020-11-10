@@ -37,7 +37,7 @@ type ProfilesClientAPI interface {
 	Create(ctx context.Context, resourceGroupName string, profileName string, profile cdn.Profile) (result cdn.ProfilesCreateFuture, err error)
 	Delete(ctx context.Context, resourceGroupName string, profileName string) (result cdn.ProfilesDeleteFuture, err error)
 	GenerateSsoURI(ctx context.Context, resourceGroupName string, profileName string) (result cdn.SsoURI, err error)
-	Get(ctx context.Context, resourceGroupName string, profileName string) (result cdn.Profile, err error)
+	GetX(ctx context.Context, resourceGroupName string, profileName string) (result cdn.Profile, err error)
 	List(ctx context.Context) (result cdn.ProfileListResultPage, err error)
 	ListComplete(ctx context.Context) (result cdn.ProfileListResultIterator, err error)
 	ListByResourceGroup(ctx context.Context, resourceGroupName string) (result cdn.ProfileListResultPage, err error)
