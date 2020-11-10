@@ -7,6 +7,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"sort"
 	"strings"
 
 	"github.com/Azure/azure-sdk-for-go/tools/generator/autorest"
@@ -19,6 +20,7 @@ const (
 	defaultOptionPath = "generate_options.json"
 )
 
+// Command ...
 func Command() *cobra.Command {
 	rootCmd := &cobra.Command{
 		Use:  "generator <generate input filepath> <generate output filepath>",
@@ -88,35 +90,24 @@ func writeOutputTo(outputPath string, output *model.GenerateOutput) error {
 	return nil
 }
 
-func getTempDir() string {
-	tempDirRoot := os.Getenv("TMPDIR")
-	if tempDirRoot == "" {
-		tempDirRoot = os.TempDir()
-	}
-	return filepath.Join(tempDirRoot, sdkRoot)
-}
-
 // TODO -- support dry run
 func generate(input *model.GenerateInput, optionPath string) (*model.GenerateOutput, error) {
 	if input.DryRun {
 		return nil, fmt.Errorf("dry run not supported yet")
 	}
-	//// backup the current sdk to temp dir
-	//tempDir := getTempDir()
-	//if err := ioext.CopyDir(".", tempDir); err != nil {
-	//	return nil, err
-	//}
-	//defer os.RemoveAll(tempDir)
 	log.Printf("Reading options from file '%s'...", optionPath)
+
 	optionFile, err := os.Open(optionPath)
 	if err != nil {
 		return nil, err
 	}
+
 	options, err := autorest.NewOptionsFrom(optionFile)
 	if err != nil {
 		return nil, err
 	}
 	log.Printf("Autorest options: \n%s", options.String())
+
 	// iterate over all the readme
 	var results []model.PackageResult
 	for _, readme := range input.RelatedReadmeMdFiles {
@@ -160,6 +151,13 @@ func generate(input *model.GenerateInput, optionPath string) (*model.GenerateOut
 			})
 		}
 	}
+
+	// sort results
+	sort.SliceStable(results, func(i, j int) bool {
+		apiI := getPackageAPIVersionSegment(results[i].PackageName)
+		apiJ := getPackageAPIVersionSegment(results[j].PackageName)
+		return apiI > apiJ
+	})
 
 	return &model.GenerateOutput{
 		Packages: results,
@@ -216,5 +214,10 @@ func getUntrackedFiles() ([]string, error) {
 }
 
 func getPackageIdentifier(pkg string) string {
-	return pkg
+	return strings.TrimPrefix(pkg, "services/")
+}
+
+func getPackageAPIVersionSegment(pkg string) string {
+	segments := strings.Split(pkg, "/")
+	return segments[len(segments) - 2]
 }
