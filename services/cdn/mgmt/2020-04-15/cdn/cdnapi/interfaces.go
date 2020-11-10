@@ -34,10 +34,10 @@ var _ BaseClientAPI = (*cdn.BaseClient)(nil)
 
 // ProfilesClientAPI contains the set of methods on the ProfilesClient type.
 type ProfilesClientAPI interface {
-	Create(ctx context.Context, resourceGroupName string, profileName string, profile cdn.Profile) (result cdn.ProfilesCreateFuture, err error)
+	Create(ctx context.Context, resourceGroupName string, profile cdn.Profile) (result cdn.ProfilesCreateFuture, err error)
 	Delete(ctx context.Context, resourceGroupName string, profileName string) (result cdn.ProfilesDeleteFuture, err error)
 	GenerateSsoURI(ctx context.Context, resourceGroupName string, profileName string) (result cdn.SsoURI, err error)
-	Get(ctx context.Context, resourceGroupName string, profileName string) (result cdn.Profile, err error)
+	GetXXX(ctx context.Context, resourceGroupName string, profileName string) (result cdn.Profile, err error)
 	List(ctx context.Context) (result cdn.ProfileListResultPage, err error)
 	ListComplete(ctx context.Context) (result cdn.ProfileListResultIterator, err error)
 	ListByResourceGroup(ctx context.Context, resourceGroupName string) (result cdn.ProfileListResultPage, err error)
