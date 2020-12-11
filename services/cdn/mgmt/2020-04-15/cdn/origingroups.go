@@ -259,6 +259,7 @@ func (client OriginGroupsClient) Get(ctx context.Context, resourceGroupName stri
 	result, err = client.GetResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "cdn.OriginGroupsClient", "Get", resp, "Failure responding to request")
+		return
 	}
 
 	return
@@ -346,9 +347,11 @@ func (client OriginGroupsClient) ListByEndpoint(ctx context.Context, resourceGro
 	result.oglr, err = client.ListByEndpointResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "cdn.OriginGroupsClient", "ListByEndpoint", resp, "Failure responding to request")
+		return
 	}
 	if result.oglr.hasNextLink() && result.oglr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
