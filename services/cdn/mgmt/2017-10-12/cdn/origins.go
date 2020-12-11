@@ -83,6 +83,7 @@ func (client OriginsClient) Get(ctx context.Context, resourceGroupName string, p
 	result, err = client.GetResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "cdn.OriginsClient", "Get", resp, "Failure responding to request")
+		return
 	}
 
 	return
@@ -170,9 +171,11 @@ func (client OriginsClient) ListByEndpoint(ctx context.Context, resourceGroupNam
 	result.olr, err = client.ListByEndpointResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "cdn.OriginsClient", "ListByEndpoint", resp, "Failure responding to request")
+		return
 	}
 	if result.olr.hasNextLink() && result.olr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
