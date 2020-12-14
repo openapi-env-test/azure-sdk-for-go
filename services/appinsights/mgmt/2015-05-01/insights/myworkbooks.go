@@ -26,30 +26,30 @@ import (
 	"net/http"
 )
 
-// WorkbooksClient is the composite Swagger for Application Insights Management Client
-type WorkbooksClient struct {
+// MyWorkbooksClient is the composite Swagger for Application Insights Management Client
+type MyWorkbooksClient struct {
 	BaseClient
 }
 
-// NewWorkbooksClient creates an instance of the WorkbooksClient client.
-func NewWorkbooksClient(subscriptionID string) WorkbooksClient {
-	return NewWorkbooksClientWithBaseURI(DefaultBaseURI, subscriptionID)
+// NewMyWorkbooksClient creates an instance of the MyWorkbooksClient client.
+func NewMyWorkbooksClient(subscriptionID string) MyWorkbooksClient {
+	return NewMyWorkbooksClientWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
-// NewWorkbooksClientWithBaseURI creates an instance of the WorkbooksClient client using a custom endpoint.  Use this
-// when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure stack).
-func NewWorkbooksClientWithBaseURI(baseURI string, subscriptionID string) WorkbooksClient {
-	return WorkbooksClient{NewWithBaseURI(baseURI, subscriptionID)}
+// NewMyWorkbooksClientWithBaseURI creates an instance of the MyWorkbooksClient client using a custom endpoint.  Use
+// this when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure stack).
+func NewMyWorkbooksClientWithBaseURI(baseURI string, subscriptionID string) MyWorkbooksClient {
+	return MyWorkbooksClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
 
-// CreateOrUpdate create a new workbook.
+// CreateOrUpdate create a new private workbook.
 // Parameters:
 // resourceGroupName - the name of the resource group. The name is case insensitive.
 // resourceName - the name of the Application Insights component resource.
-// workbookProperties - properties that need to be specified to create a new workbook.
-func (client WorkbooksClient) CreateOrUpdate(ctx context.Context, resourceGroupName string, resourceName string, workbookProperties Workbook) (result Workbook, err error) {
+// workbookProperties - properties that need to be specified to create a new private workbook.
+func (client MyWorkbooksClient) CreateOrUpdate(ctx context.Context, resourceGroupName string, resourceName string, workbookProperties MyWorkbook) (result MyWorkbook, err error) {
 	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/WorkbooksClient.CreateOrUpdate")
+		ctx = tracing.StartSpan(ctx, fqdn+"/MyWorkbooksClient.CreateOrUpdate")
 		defer func() {
 			sc := -1
 			if result.Response.Response != nil {
@@ -66,32 +66,30 @@ func (client WorkbooksClient) CreateOrUpdate(ctx context.Context, resourceGroupN
 				{Target: "resourceGroupName", Name: validation.MinLength, Rule: 1, Chain: nil},
 				{Target: "resourceGroupName", Name: validation.Pattern, Rule: `^[-\w\._\(\)]+$`, Chain: nil}}},
 		{TargetValue: workbookProperties,
-			Constraints: []validation.Constraint{{Target: "workbookProperties.WorkbookProperties", Name: validation.Null, Rule: false,
-				Chain: []validation.Constraint{{Target: "workbookProperties.WorkbookProperties.Name", Name: validation.Null, Rule: true, Chain: nil},
-					{Target: "workbookProperties.WorkbookProperties.SerializedData", Name: validation.Null, Rule: true, Chain: nil},
-					{Target: "workbookProperties.WorkbookProperties.WorkbookID", Name: validation.Null, Rule: true, Chain: nil},
-					{Target: "workbookProperties.WorkbookProperties.Category", Name: validation.Null, Rule: true, Chain: nil},
-					{Target: "workbookProperties.WorkbookProperties.UserID", Name: validation.Null, Rule: true, Chain: nil},
+			Constraints: []validation.Constraint{{Target: "workbookProperties.MyWorkbookProperties", Name: validation.Null, Rule: false,
+				Chain: []validation.Constraint{{Target: "workbookProperties.MyWorkbookProperties.DisplayName", Name: validation.Null, Rule: true, Chain: nil},
+					{Target: "workbookProperties.MyWorkbookProperties.SerializedData", Name: validation.Null, Rule: true, Chain: nil},
+					{Target: "workbookProperties.MyWorkbookProperties.Category", Name: validation.Null, Rule: true, Chain: nil},
 				}}}}}); err != nil {
-		return result, validation.NewError("insights.WorkbooksClient", "CreateOrUpdate", err.Error())
+		return result, validation.NewError("insights.MyWorkbooksClient", "CreateOrUpdate", err.Error())
 	}
 
 	req, err := client.CreateOrUpdatePreparer(ctx, resourceGroupName, resourceName, workbookProperties)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "insights.WorkbooksClient", "CreateOrUpdate", nil, "Failure preparing request")
+		err = autorest.NewErrorWithError(err, "insights.MyWorkbooksClient", "CreateOrUpdate", nil, "Failure preparing request")
 		return
 	}
 
 	resp, err := client.CreateOrUpdateSender(req)
 	if err != nil {
 		result.Response = autorest.Response{Response: resp}
-		err = autorest.NewErrorWithError(err, "insights.WorkbooksClient", "CreateOrUpdate", resp, "Failure sending request")
+		err = autorest.NewErrorWithError(err, "insights.MyWorkbooksClient", "CreateOrUpdate", resp, "Failure sending request")
 		return
 	}
 
 	result, err = client.CreateOrUpdateResponder(resp)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "insights.WorkbooksClient", "CreateOrUpdate", resp, "Failure responding to request")
+		err = autorest.NewErrorWithError(err, "insights.MyWorkbooksClient", "CreateOrUpdate", resp, "Failure responding to request")
 		return
 	}
 
@@ -99,7 +97,7 @@ func (client WorkbooksClient) CreateOrUpdate(ctx context.Context, resourceGroupN
 }
 
 // CreateOrUpdatePreparer prepares the CreateOrUpdate request.
-func (client WorkbooksClient) CreateOrUpdatePreparer(ctx context.Context, resourceGroupName string, resourceName string, workbookProperties Workbook) (*http.Request, error) {
+func (client MyWorkbooksClient) CreateOrUpdatePreparer(ctx context.Context, resourceGroupName string, resourceName string, workbookProperties MyWorkbook) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"resourceGroupName": autorest.Encode("path", resourceGroupName),
 		"resourceName":      autorest.Encode("path", resourceName),
@@ -115,7 +113,7 @@ func (client WorkbooksClient) CreateOrUpdatePreparer(ctx context.Context, resour
 		autorest.AsContentType("application/json; charset=utf-8"),
 		autorest.AsPut(),
 		autorest.WithBaseURL(client.BaseURI),
-		autorest.WithPathParameters("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/workbooks/{resourceName}", pathParameters),
+		autorest.WithPathParameters("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/myWorkbooks/{resourceName}", pathParameters),
 		autorest.WithJSON(workbookProperties),
 		autorest.WithQueryParameters(queryParameters))
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
@@ -123,13 +121,13 @@ func (client WorkbooksClient) CreateOrUpdatePreparer(ctx context.Context, resour
 
 // CreateOrUpdateSender sends the CreateOrUpdate request. The method will close the
 // http.Response Body if it receives an error.
-func (client WorkbooksClient) CreateOrUpdateSender(req *http.Request) (*http.Response, error) {
+func (client MyWorkbooksClient) CreateOrUpdateSender(req *http.Request) (*http.Response, error) {
 	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // CreateOrUpdateResponder handles the response to the CreateOrUpdate request. The method always
 // closes the http.Response Body.
-func (client WorkbooksClient) CreateOrUpdateResponder(resp *http.Response) (result Workbook, err error) {
+func (client MyWorkbooksClient) CreateOrUpdateResponder(resp *http.Response) (result MyWorkbook, err error) {
 	err = autorest.Respond(
 		resp,
 		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusCreated),
@@ -139,13 +137,13 @@ func (client WorkbooksClient) CreateOrUpdateResponder(resp *http.Response) (resu
 	return
 }
 
-// Delete delete a workbook.
+// Delete delete a private workbook.
 // Parameters:
 // resourceGroupName - the name of the resource group. The name is case insensitive.
 // resourceName - the name of the Application Insights component resource.
-func (client WorkbooksClient) Delete(ctx context.Context, resourceGroupName string, resourceName string) (result autorest.Response, err error) {
+func (client MyWorkbooksClient) Delete(ctx context.Context, resourceGroupName string, resourceName string) (result autorest.Response, err error) {
 	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/WorkbooksClient.Delete")
+		ctx = tracing.StartSpan(ctx, fqdn+"/MyWorkbooksClient.Delete")
 		defer func() {
 			sc := -1
 			if result.Response != nil {
@@ -161,25 +159,25 @@ func (client WorkbooksClient) Delete(ctx context.Context, resourceGroupName stri
 			Constraints: []validation.Constraint{{Target: "resourceGroupName", Name: validation.MaxLength, Rule: 90, Chain: nil},
 				{Target: "resourceGroupName", Name: validation.MinLength, Rule: 1, Chain: nil},
 				{Target: "resourceGroupName", Name: validation.Pattern, Rule: `^[-\w\._\(\)]+$`, Chain: nil}}}}); err != nil {
-		return result, validation.NewError("insights.WorkbooksClient", "Delete", err.Error())
+		return result, validation.NewError("insights.MyWorkbooksClient", "Delete", err.Error())
 	}
 
 	req, err := client.DeletePreparer(ctx, resourceGroupName, resourceName)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "insights.WorkbooksClient", "Delete", nil, "Failure preparing request")
+		err = autorest.NewErrorWithError(err, "insights.MyWorkbooksClient", "Delete", nil, "Failure preparing request")
 		return
 	}
 
 	resp, err := client.DeleteSender(req)
 	if err != nil {
 		result.Response = resp
-		err = autorest.NewErrorWithError(err, "insights.WorkbooksClient", "Delete", resp, "Failure sending request")
+		err = autorest.NewErrorWithError(err, "insights.MyWorkbooksClient", "Delete", resp, "Failure sending request")
 		return
 	}
 
 	result, err = client.DeleteResponder(resp)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "insights.WorkbooksClient", "Delete", resp, "Failure responding to request")
+		err = autorest.NewErrorWithError(err, "insights.MyWorkbooksClient", "Delete", resp, "Failure responding to request")
 		return
 	}
 
@@ -187,7 +185,7 @@ func (client WorkbooksClient) Delete(ctx context.Context, resourceGroupName stri
 }
 
 // DeletePreparer prepares the Delete request.
-func (client WorkbooksClient) DeletePreparer(ctx context.Context, resourceGroupName string, resourceName string) (*http.Request, error) {
+func (client MyWorkbooksClient) DeletePreparer(ctx context.Context, resourceGroupName string, resourceName string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"resourceGroupName": autorest.Encode("path", resourceGroupName),
 		"resourceName":      autorest.Encode("path", resourceName),
@@ -202,20 +200,20 @@ func (client WorkbooksClient) DeletePreparer(ctx context.Context, resourceGroupN
 	preparer := autorest.CreatePreparer(
 		autorest.AsDelete(),
 		autorest.WithBaseURL(client.BaseURI),
-		autorest.WithPathParameters("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/workbooks/{resourceName}", pathParameters),
+		autorest.WithPathParameters("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/myWorkbooks/{resourceName}", pathParameters),
 		autorest.WithQueryParameters(queryParameters))
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
 }
 
 // DeleteSender sends the Delete request. The method will close the
 // http.Response Body if it receives an error.
-func (client WorkbooksClient) DeleteSender(req *http.Request) (*http.Response, error) {
+func (client MyWorkbooksClient) DeleteSender(req *http.Request) (*http.Response, error) {
 	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // DeleteResponder handles the response to the Delete request. The method always
 // closes the http.Response Body.
-func (client WorkbooksClient) DeleteResponder(resp *http.Response) (result autorest.Response, err error) {
+func (client MyWorkbooksClient) DeleteResponder(resp *http.Response) (result autorest.Response, err error) {
 	err = autorest.Respond(
 		resp,
 		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusCreated, http.StatusNoContent),
@@ -224,13 +222,13 @@ func (client WorkbooksClient) DeleteResponder(resp *http.Response) (result autor
 	return
 }
 
-// Get get a single workbook by its resourceName.
+// Get get a single private workbook by its resourceName.
 // Parameters:
 // resourceGroupName - the name of the resource group. The name is case insensitive.
 // resourceName - the name of the Application Insights component resource.
-func (client WorkbooksClient) Get(ctx context.Context, resourceGroupName string, resourceName string) (result Workbook, err error) {
+func (client MyWorkbooksClient) Get(ctx context.Context, resourceGroupName string, resourceName string) (result MyWorkbook, err error) {
 	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/WorkbooksClient.Get")
+		ctx = tracing.StartSpan(ctx, fqdn+"/MyWorkbooksClient.Get")
 		defer func() {
 			sc := -1
 			if result.Response.Response != nil {
@@ -246,25 +244,25 @@ func (client WorkbooksClient) Get(ctx context.Context, resourceGroupName string,
 			Constraints: []validation.Constraint{{Target: "resourceGroupName", Name: validation.MaxLength, Rule: 90, Chain: nil},
 				{Target: "resourceGroupName", Name: validation.MinLength, Rule: 1, Chain: nil},
 				{Target: "resourceGroupName", Name: validation.Pattern, Rule: `^[-\w\._\(\)]+$`, Chain: nil}}}}); err != nil {
-		return result, validation.NewError("insights.WorkbooksClient", "Get", err.Error())
+		return result, validation.NewError("insights.MyWorkbooksClient", "Get", err.Error())
 	}
 
 	req, err := client.GetPreparer(ctx, resourceGroupName, resourceName)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "insights.WorkbooksClient", "Get", nil, "Failure preparing request")
+		err = autorest.NewErrorWithError(err, "insights.MyWorkbooksClient", "Get", nil, "Failure preparing request")
 		return
 	}
 
 	resp, err := client.GetSender(req)
 	if err != nil {
 		result.Response = autorest.Response{Response: resp}
-		err = autorest.NewErrorWithError(err, "insights.WorkbooksClient", "Get", resp, "Failure sending request")
+		err = autorest.NewErrorWithError(err, "insights.MyWorkbooksClient", "Get", resp, "Failure sending request")
 		return
 	}
 
 	result, err = client.GetResponder(resp)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "insights.WorkbooksClient", "Get", resp, "Failure responding to request")
+		err = autorest.NewErrorWithError(err, "insights.MyWorkbooksClient", "Get", resp, "Failure responding to request")
 		return
 	}
 
@@ -272,7 +270,7 @@ func (client WorkbooksClient) Get(ctx context.Context, resourceGroupName string,
 }
 
 // GetPreparer prepares the Get request.
-func (client WorkbooksClient) GetPreparer(ctx context.Context, resourceGroupName string, resourceName string) (*http.Request, error) {
+func (client MyWorkbooksClient) GetPreparer(ctx context.Context, resourceGroupName string, resourceName string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"resourceGroupName": autorest.Encode("path", resourceGroupName),
 		"resourceName":      autorest.Encode("path", resourceName),
@@ -287,20 +285,20 @@ func (client WorkbooksClient) GetPreparer(ctx context.Context, resourceGroupName
 	preparer := autorest.CreatePreparer(
 		autorest.AsGet(),
 		autorest.WithBaseURL(client.BaseURI),
-		autorest.WithPathParameters("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/workbooks/{resourceName}", pathParameters),
+		autorest.WithPathParameters("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/myWorkbooks/{resourceName}", pathParameters),
 		autorest.WithQueryParameters(queryParameters))
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
 }
 
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
-func (client WorkbooksClient) GetSender(req *http.Request) (*http.Response, error) {
+func (client MyWorkbooksClient) GetSender(req *http.Request) (*http.Response, error) {
 	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // GetResponder handles the response to the Get request. The method always
 // closes the http.Response Body.
-func (client WorkbooksClient) GetResponder(resp *http.Response) (result Workbook, err error) {
+func (client MyWorkbooksClient) GetResponder(resp *http.Response) (result MyWorkbook, err error) {
 	err = autorest.Respond(
 		resp,
 		azure.WithErrorUnlessStatusCode(http.StatusOK),
@@ -310,16 +308,16 @@ func (client WorkbooksClient) GetResponder(resp *http.Response) (result Workbook
 	return
 }
 
-// ListByResourceGroup get all Workbooks defined within a specified resource group and category.
+// ListByResourceGroup get all private workbooks defined within a specified resource group and category.
 // Parameters:
 // resourceGroupName - the name of the resource group. The name is case insensitive.
 // category - category of workbook to return.
 // tags - tags presents on each workbook returned.
 // canFetchContent - flag indicating whether or not to return the full content for each applicable workbook. If
 // false, only return summary content for workbooks.
-func (client WorkbooksClient) ListByResourceGroup(ctx context.Context, resourceGroupName string, category CategoryType, tags []string, canFetchContent *bool) (result WorkbooksListResult, err error) {
+func (client MyWorkbooksClient) ListByResourceGroup(ctx context.Context, resourceGroupName string, category CategoryType, tags []string, canFetchContent *bool) (result MyWorkbooksListResult, err error) {
 	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/WorkbooksClient.ListByResourceGroup")
+		ctx = tracing.StartSpan(ctx, fqdn+"/MyWorkbooksClient.ListByResourceGroup")
 		defer func() {
 			sc := -1
 			if result.Response.Response != nil {
@@ -335,25 +333,25 @@ func (client WorkbooksClient) ListByResourceGroup(ctx context.Context, resourceG
 			Constraints: []validation.Constraint{{Target: "resourceGroupName", Name: validation.MaxLength, Rule: 90, Chain: nil},
 				{Target: "resourceGroupName", Name: validation.MinLength, Rule: 1, Chain: nil},
 				{Target: "resourceGroupName", Name: validation.Pattern, Rule: `^[-\w\._\(\)]+$`, Chain: nil}}}}); err != nil {
-		return result, validation.NewError("insights.WorkbooksClient", "ListByResourceGroup", err.Error())
+		return result, validation.NewError("insights.MyWorkbooksClient", "ListByResourceGroup", err.Error())
 	}
 
 	req, err := client.ListByResourceGroupPreparer(ctx, resourceGroupName, category, tags, canFetchContent)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "insights.WorkbooksClient", "ListByResourceGroup", nil, "Failure preparing request")
+		err = autorest.NewErrorWithError(err, "insights.MyWorkbooksClient", "ListByResourceGroup", nil, "Failure preparing request")
 		return
 	}
 
 	resp, err := client.ListByResourceGroupSender(req)
 	if err != nil {
 		result.Response = autorest.Response{Response: resp}
-		err = autorest.NewErrorWithError(err, "insights.WorkbooksClient", "ListByResourceGroup", resp, "Failure sending request")
+		err = autorest.NewErrorWithError(err, "insights.MyWorkbooksClient", "ListByResourceGroup", resp, "Failure sending request")
 		return
 	}
 
 	result, err = client.ListByResourceGroupResponder(resp)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "insights.WorkbooksClient", "ListByResourceGroup", resp, "Failure responding to request")
+		err = autorest.NewErrorWithError(err, "insights.MyWorkbooksClient", "ListByResourceGroup", resp, "Failure responding to request")
 		return
 	}
 
@@ -361,7 +359,7 @@ func (client WorkbooksClient) ListByResourceGroup(ctx context.Context, resourceG
 }
 
 // ListByResourceGroupPreparer prepares the ListByResourceGroup request.
-func (client WorkbooksClient) ListByResourceGroupPreparer(ctx context.Context, resourceGroupName string, category CategoryType, tags []string, canFetchContent *bool) (*http.Request, error) {
+func (client MyWorkbooksClient) ListByResourceGroupPreparer(ctx context.Context, resourceGroupName string, category CategoryType, tags []string, canFetchContent *bool) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"resourceGroupName": autorest.Encode("path", resourceGroupName),
 		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
@@ -382,20 +380,20 @@ func (client WorkbooksClient) ListByResourceGroupPreparer(ctx context.Context, r
 	preparer := autorest.CreatePreparer(
 		autorest.AsGet(),
 		autorest.WithBaseURL(client.BaseURI),
-		autorest.WithPathParameters("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/workbooks", pathParameters),
+		autorest.WithPathParameters("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/myWorkbooks", pathParameters),
 		autorest.WithQueryParameters(queryParameters))
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
 }
 
 // ListByResourceGroupSender sends the ListByResourceGroup request. The method will close the
 // http.Response Body if it receives an error.
-func (client WorkbooksClient) ListByResourceGroupSender(req *http.Request) (*http.Response, error) {
+func (client MyWorkbooksClient) ListByResourceGroupSender(req *http.Request) (*http.Response, error) {
 	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // ListByResourceGroupResponder handles the response to the ListByResourceGroup request. The method always
 // closes the http.Response Body.
-func (client WorkbooksClient) ListByResourceGroupResponder(resp *http.Response) (result WorkbooksListResult, err error) {
+func (client MyWorkbooksClient) ListByResourceGroupResponder(resp *http.Response) (result MyWorkbooksListResult, err error) {
 	err = autorest.Respond(
 		resp,
 		azure.WithErrorUnlessStatusCode(http.StatusOK),
@@ -405,14 +403,103 @@ func (client WorkbooksClient) ListByResourceGroupResponder(resp *http.Response) 
 	return
 }
 
-// Update updates a workbook that has already been added.
+// ListBySubscription get all private workbooks defined within a specified subscription and category.
+// Parameters:
+// category - category of workbook to return.
+// tags - tags presents on each workbook returned.
+// canFetchContent - flag indicating whether or not to return the full content for each applicable workbook. If
+// false, only return summary content for workbooks.
+func (client MyWorkbooksClient) ListBySubscription(ctx context.Context, category CategoryType, tags []string, canFetchContent *bool) (result MyWorkbooksListResult, err error) {
+	if tracing.IsEnabled() {
+		ctx = tracing.StartSpan(ctx, fqdn+"/MyWorkbooksClient.ListBySubscription")
+		defer func() {
+			sc := -1
+			if result.Response.Response != nil {
+				sc = result.Response.Response.StatusCode
+			}
+			tracing.EndSpan(ctx, sc, err)
+		}()
+	}
+	if err := validation.Validate([]validation.Validation{
+		{TargetValue: client.SubscriptionID,
+			Constraints: []validation.Constraint{{Target: "client.SubscriptionID", Name: validation.MinLength, Rule: 1, Chain: nil}}}}); err != nil {
+		return result, validation.NewError("insights.MyWorkbooksClient", "ListBySubscription", err.Error())
+	}
+
+	req, err := client.ListBySubscriptionPreparer(ctx, category, tags, canFetchContent)
+	if err != nil {
+		err = autorest.NewErrorWithError(err, "insights.MyWorkbooksClient", "ListBySubscription", nil, "Failure preparing request")
+		return
+	}
+
+	resp, err := client.ListBySubscriptionSender(req)
+	if err != nil {
+		result.Response = autorest.Response{Response: resp}
+		err = autorest.NewErrorWithError(err, "insights.MyWorkbooksClient", "ListBySubscription", resp, "Failure sending request")
+		return
+	}
+
+	result, err = client.ListBySubscriptionResponder(resp)
+	if err != nil {
+		err = autorest.NewErrorWithError(err, "insights.MyWorkbooksClient", "ListBySubscription", resp, "Failure responding to request")
+		return
+	}
+
+	return
+}
+
+// ListBySubscriptionPreparer prepares the ListBySubscription request.
+func (client MyWorkbooksClient) ListBySubscriptionPreparer(ctx context.Context, category CategoryType, tags []string, canFetchContent *bool) (*http.Request, error) {
+	pathParameters := map[string]interface{}{
+		"subscriptionId": autorest.Encode("path", client.SubscriptionID),
+	}
+
+	const APIVersion = "2015-05-01"
+	queryParameters := map[string]interface{}{
+		"api-version": APIVersion,
+		"category":    autorest.Encode("query", category),
+	}
+	if tags != nil && len(tags) > 0 {
+		queryParameters["tags"] = autorest.Encode("query", tags, ",")
+	}
+	if canFetchContent != nil {
+		queryParameters["canFetchContent"] = autorest.Encode("query", *canFetchContent)
+	}
+
+	preparer := autorest.CreatePreparer(
+		autorest.AsGet(),
+		autorest.WithBaseURL(client.BaseURI),
+		autorest.WithPathParameters("/subscriptions/{subscriptionId}/providers/Microsoft.Insights/myWorkbooks", pathParameters),
+		autorest.WithQueryParameters(queryParameters))
+	return preparer.Prepare((&http.Request{}).WithContext(ctx))
+}
+
+// ListBySubscriptionSender sends the ListBySubscription request. The method will close the
+// http.Response Body if it receives an error.
+func (client MyWorkbooksClient) ListBySubscriptionSender(req *http.Request) (*http.Response, error) {
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+}
+
+// ListBySubscriptionResponder handles the response to the ListBySubscription request. The method always
+// closes the http.Response Body.
+func (client MyWorkbooksClient) ListBySubscriptionResponder(resp *http.Response) (result MyWorkbooksListResult, err error) {
+	err = autorest.Respond(
+		resp,
+		azure.WithErrorUnlessStatusCode(http.StatusOK),
+		autorest.ByUnmarshallingJSON(&result),
+		autorest.ByClosing())
+	result.Response = autorest.Response{Response: resp}
+	return
+}
+
+// Update updates a private workbook that has already been added.
 // Parameters:
 // resourceGroupName - the name of the resource group. The name is case insensitive.
 // resourceName - the name of the Application Insights component resource.
-// workbookProperties - properties that need to be specified to create a new workbook.
-func (client WorkbooksClient) Update(ctx context.Context, resourceGroupName string, resourceName string, workbookProperties Workbook) (result Workbook, err error) {
+// workbookProperties - properties that need to be specified to create a new private workbook.
+func (client MyWorkbooksClient) Update(ctx context.Context, resourceGroupName string, resourceName string, workbookProperties MyWorkbook) (result MyWorkbook, err error) {
 	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/WorkbooksClient.Update")
+		ctx = tracing.StartSpan(ctx, fqdn+"/MyWorkbooksClient.Update")
 		defer func() {
 			sc := -1
 			if result.Response.Response != nil {
@@ -428,25 +515,25 @@ func (client WorkbooksClient) Update(ctx context.Context, resourceGroupName stri
 			Constraints: []validation.Constraint{{Target: "resourceGroupName", Name: validation.MaxLength, Rule: 90, Chain: nil},
 				{Target: "resourceGroupName", Name: validation.MinLength, Rule: 1, Chain: nil},
 				{Target: "resourceGroupName", Name: validation.Pattern, Rule: `^[-\w\._\(\)]+$`, Chain: nil}}}}); err != nil {
-		return result, validation.NewError("insights.WorkbooksClient", "Update", err.Error())
+		return result, validation.NewError("insights.MyWorkbooksClient", "Update", err.Error())
 	}
 
 	req, err := client.UpdatePreparer(ctx, resourceGroupName, resourceName, workbookProperties)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "insights.WorkbooksClient", "Update", nil, "Failure preparing request")
+		err = autorest.NewErrorWithError(err, "insights.MyWorkbooksClient", "Update", nil, "Failure preparing request")
 		return
 	}
 
 	resp, err := client.UpdateSender(req)
 	if err != nil {
 		result.Response = autorest.Response{Response: resp}
-		err = autorest.NewErrorWithError(err, "insights.WorkbooksClient", "Update", resp, "Failure sending request")
+		err = autorest.NewErrorWithError(err, "insights.MyWorkbooksClient", "Update", resp, "Failure sending request")
 		return
 	}
 
 	result, err = client.UpdateResponder(resp)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "insights.WorkbooksClient", "Update", resp, "Failure responding to request")
+		err = autorest.NewErrorWithError(err, "insights.MyWorkbooksClient", "Update", resp, "Failure responding to request")
 		return
 	}
 
@@ -454,7 +541,7 @@ func (client WorkbooksClient) Update(ctx context.Context, resourceGroupName stri
 }
 
 // UpdatePreparer prepares the Update request.
-func (client WorkbooksClient) UpdatePreparer(ctx context.Context, resourceGroupName string, resourceName string, workbookProperties Workbook) (*http.Request, error) {
+func (client MyWorkbooksClient) UpdatePreparer(ctx context.Context, resourceGroupName string, resourceName string, workbookProperties MyWorkbook) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"resourceGroupName": autorest.Encode("path", resourceGroupName),
 		"resourceName":      autorest.Encode("path", resourceName),
@@ -470,7 +557,7 @@ func (client WorkbooksClient) UpdatePreparer(ctx context.Context, resourceGroupN
 		autorest.AsContentType("application/json; charset=utf-8"),
 		autorest.AsPatch(),
 		autorest.WithBaseURL(client.BaseURI),
-		autorest.WithPathParameters("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/workbooks/{resourceName}", pathParameters),
+		autorest.WithPathParameters("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/myWorkbooks/{resourceName}", pathParameters),
 		autorest.WithJSON(workbookProperties),
 		autorest.WithQueryParameters(queryParameters))
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
@@ -478,13 +565,13 @@ func (client WorkbooksClient) UpdatePreparer(ctx context.Context, resourceGroupN
 
 // UpdateSender sends the Update request. The method will close the
 // http.Response Body if it receives an error.
-func (client WorkbooksClient) UpdateSender(req *http.Request) (*http.Response, error) {
+func (client MyWorkbooksClient) UpdateSender(req *http.Request) (*http.Response, error) {
 	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // UpdateResponder handles the response to the Update request. The method always
 // closes the http.Response Body.
-func (client WorkbooksClient) UpdateResponder(resp *http.Response) (result Workbook, err error) {
+func (client MyWorkbooksClient) UpdateResponder(resp *http.Response) (result MyWorkbook, err error) {
 	err = autorest.Respond(
 		resp,
 		azure.WithErrorUnlessStatusCode(http.StatusOK),
