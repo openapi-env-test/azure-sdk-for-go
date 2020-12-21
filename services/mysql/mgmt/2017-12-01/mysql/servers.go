@@ -73,7 +73,6 @@ func (client ServersClient) Create(ctx context.Context, resourceGroupName string
 					{Target: "parameters.Sku.Capacity", Name: validation.Null, Rule: false,
 						Chain: []validation.Constraint{{Target: "parameters.Sku.Capacity", Name: validation.InclusiveMinimum, Rule: int64(0), Chain: nil}}},
 				}},
-				{Target: "parameters.Properties", Name: validation.Null, Rule: true, Chain: nil},
 				{Target: "parameters.Location", Name: validation.Null, Rule: true, Chain: nil}}}}); err != nil {
 		return result, validation.NewError("mysql.ServersClient", "Create", err.Error())
 	}
