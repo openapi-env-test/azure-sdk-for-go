@@ -73,7 +73,6 @@ func (client ServersClient) Create(ctx context.Context, resourceGroupName string
 					{Target: "parameters.Sku.Capacity", Name: validation.Null, Rule: false,
 						Chain: []validation.Constraint{{Target: "parameters.Sku.Capacity", Name: validation.InclusiveMinimum, Rule: int64(0), Chain: nil}}},
 				}},
-				{Target: "parameters.Properties", Name: validation.Null, Rule: true, Chain: nil},
 				{Target: "parameters.Location", Name: validation.Null, Rule: true, Chain: nil}}}}); err != nil {
 		return result, validation.NewError("mysql.ServersClient", "Create", err.Error())
 	}
@@ -639,13 +638,13 @@ func (client ServersClient) StartResponder(resp *http.Response) (result autorest
 	return
 }
 
-// Stop stops a running server.
+// Test test Stops a running server.
 // Parameters:
 // resourceGroupName - the name of the resource group. The name is case insensitive.
 // serverName - the name of the server.
-func (client ServersClient) Stop(ctx context.Context, resourceGroupName string, serverName string) (result ServersStopFuture, err error) {
+func (client ServersClient) Test(ctx context.Context, resourceGroupName string, serverName string) (result ServersTestFuture, err error) {
 	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/ServersClient.Stop")
+		ctx = tracing.StartSpan(ctx, fqdn+"/ServersClient.Test")
 		defer func() {
 			sc := -1
 			if result.Response() != nil {
@@ -661,26 +660,26 @@ func (client ServersClient) Stop(ctx context.Context, resourceGroupName string, 
 			Constraints: []validation.Constraint{{Target: "resourceGroupName", Name: validation.MaxLength, Rule: 90, Chain: nil},
 				{Target: "resourceGroupName", Name: validation.MinLength, Rule: 1, Chain: nil},
 				{Target: "resourceGroupName", Name: validation.Pattern, Rule: `^[-\w\._\(\)]+$`, Chain: nil}}}}); err != nil {
-		return result, validation.NewError("mysql.ServersClient", "Stop", err.Error())
+		return result, validation.NewError("mysql.ServersClient", "Test", err.Error())
 	}
 
-	req, err := client.StopPreparer(ctx, resourceGroupName, serverName)
+	req, err := client.TestPreparer(ctx, resourceGroupName, serverName)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "mysql.ServersClient", "Stop", nil, "Failure preparing request")
+		err = autorest.NewErrorWithError(err, "mysql.ServersClient", "Test", nil, "Failure preparing request")
 		return
 	}
 
-	result, err = client.StopSender(req)
+	result, err = client.TestSender(req)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "mysql.ServersClient", "Stop", result.Response(), "Failure sending request")
+		err = autorest.NewErrorWithError(err, "mysql.ServersClient", "Test", result.Response(), "Failure sending request")
 		return
 	}
 
 	return
 }
 
-// StopPreparer prepares the Stop request.
-func (client ServersClient) StopPreparer(ctx context.Context, resourceGroupName string, serverName string) (*http.Request, error) {
+// TestPreparer prepares the Test request.
+func (client ServersClient) TestPreparer(ctx context.Context, resourceGroupName string, serverName string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"resourceGroupName": autorest.Encode("path", resourceGroupName),
 		"serverName":        autorest.Encode("path", serverName),
@@ -700,9 +699,9 @@ func (client ServersClient) StopPreparer(ctx context.Context, resourceGroupName 
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
 }
 
-// StopSender sends the Stop request. The method will close the
+// TestSender sends the Test request. The method will close the
 // http.Response Body if it receives an error.
-func (client ServersClient) StopSender(req *http.Request) (future ServersStopFuture, err error) {
+func (client ServersClient) TestSender(req *http.Request) (future ServersTestFuture, err error) {
 	var resp *http.Response
 	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
 	if err != nil {
@@ -712,9 +711,9 @@ func (client ServersClient) StopSender(req *http.Request) (future ServersStopFut
 	return
 }
 
-// StopResponder handles the response to the Stop request. The method always
+// TestResponder handles the response to the Test request. The method always
 // closes the http.Response Body.
-func (client ServersClient) StopResponder(resp *http.Response) (result autorest.Response, err error) {
+func (client ServersClient) TestResponder(resp *http.Response) (result autorest.Response, err error) {
 	err = autorest.Respond(
 		resp,
 		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusAccepted),
