@@ -33,14 +33,20 @@ type BaseClientAPI interface {
 
 var _ BaseClientAPI = (*cdn.BaseClient)(nil)
 
+// ProfilesTestClientAPI contains the set of methods on the ProfilesTestClient type.
+type ProfilesTestClientAPI interface {
+	List(ctx context.Context) (result cdn.ProfileListResultPage, err error)
+	ListComplete(ctx context.Context) (result cdn.ProfileListResultIterator, err error)
+}
+
+var _ ProfilesTestClientAPI = (*cdn.ProfilesTestClient)(nil)
+
 // ProfilesClientAPI contains the set of methods on the ProfilesClient type.
 type ProfilesClientAPI interface {
 	Create(ctx context.Context, resourceGroupName string, profileName string, profile cdn.Profile) (result cdn.ProfilesCreateFuture, err error)
 	Delete(ctx context.Context, resourceGroupName string, profileName string) (result cdn.ProfilesDeleteFuture, err error)
 	GenerateSsoURI(ctx context.Context, resourceGroupName string, profileName string) (result cdn.SsoURI, err error)
 	Get(ctx context.Context, resourceGroupName string, profileName string) (result cdn.Profile, err error)
-	List(ctx context.Context) (result cdn.ProfileListResultPage, err error)
-	ListComplete(ctx context.Context) (result cdn.ProfileListResultIterator, err error)
 	ListByResourceGroup(ctx context.Context, resourceGroupName string) (result cdn.ProfileListResultPage, err error)
 	ListByResourceGroupComplete(ctx context.Context, resourceGroupName string) (result cdn.ProfileListResultIterator, err error)
 	ListResourceUsage(ctx context.Context, resourceGroupName string, profileName string) (result cdn.ResourceUsageListResultPage, err error)
