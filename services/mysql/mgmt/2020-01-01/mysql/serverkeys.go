@@ -358,6 +358,7 @@ func (client ServerKeysClient) List(ctx context.Context, resourceGroupName strin
 	}
 	if result.sklr.hasNextLink() && result.sklr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -419,7 +420,6 @@ func (client ServerKeysClient) listNextResults(ctx context.Context, lastResults 
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "mysql.ServerKeysClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }

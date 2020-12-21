@@ -869,6 +869,18 @@ type PerformanceTierListResult struct {
 type PerformanceTierProperties struct {
 	// ID - ID of the performance tier.
 	ID *string `json:"id,omitempty"`
+	// MaxBackupRetentionDays - Maximum Backup retention in days for the performance tier edition
+	MaxBackupRetentionDays *int32 `json:"maxBackupRetentionDays,omitempty"`
+	// MinBackupRetentionDays - Minimum Backup retention in days for the performance tier edition
+	MinBackupRetentionDays *int32 `json:"minBackupRetentionDays,omitempty"`
+	// MaxStorageMB - Max storage allowed for a server.
+	MaxStorageMB *int32 `json:"maxStorageMB,omitempty"`
+	// MinLargeStorageMB - Max storage allowed for a server.
+	MinLargeStorageMB *int32 `json:"minLargeStorageMB,omitempty"`
+	// MaxLargeStorageMB - Max storage allowed for a server.
+	MaxLargeStorageMB *int32 `json:"maxLargeStorageMB,omitempty"`
+	// MinStorageMB - Max storage allowed for a server.
+	MinStorageMB *int32 `json:"minStorageMB,omitempty"`
 	// ServiceLevelObjectives - Service level objectives associated with the performance tier
 	ServiceLevelObjectives *[]PerformanceTierServiceLevelObjectives `json:"serviceLevelObjectives,omitempty"`
 }
@@ -1447,6 +1459,15 @@ type ProxyResource struct {
 	Name *string `json:"name,omitempty"`
 	// Type - READ-ONLY; The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
 	Type *string `json:"type,omitempty"`
+}
+
+// QueryPerformanceInsightResetDataResult result of Query Performance Insight data reset.
+type QueryPerformanceInsightResetDataResult struct {
+	autorest.Response `json:"-"`
+	// Status - Indicates result of the operation. Possible values include: 'QueryPerformanceInsightResetDataResultStateSucceeded', 'QueryPerformanceInsightResetDataResultStateFailed'
+	Status QueryPerformanceInsightResetDataResultState `json:"status,omitempty"`
+	// Message - operation message.
+	Message *string `json:"message,omitempty"`
 }
 
 // QueryStatistic represents a Query Statistic.
@@ -2078,6 +2099,95 @@ type RecommendedActionSessionsOperationStatus struct {
 	StartTime *date.Time `json:"startTime,omitempty"`
 	// Status - Operation status.
 	Status *string `json:"status,omitempty"`
+}
+
+// RecoverableServerProperties the recoverable server's properties.
+type RecoverableServerProperties struct {
+	// LastAvailableBackupDateTime - READ-ONLY; The last available backup date time.
+	LastAvailableBackupDateTime *string `json:"lastAvailableBackupDateTime,omitempty"`
+	// ServiceLevelObjective - READ-ONLY; The service level objective
+	ServiceLevelObjective *string `json:"serviceLevelObjective,omitempty"`
+	// Edition - READ-ONLY; Edition of the performance tier.
+	Edition *string `json:"edition,omitempty"`
+	// VCore - READ-ONLY; vCore associated with the service level objective
+	VCore *int32 `json:"vCore,omitempty"`
+	// HardwareGeneration - READ-ONLY; Hardware generation associated with the service level objective
+	HardwareGeneration *string `json:"hardwareGeneration,omitempty"`
+	// Version - READ-ONLY; The MySQL version
+	Version *string `json:"version,omitempty"`
+}
+
+// RecoverableServerResource a recoverable server resource.
+type RecoverableServerResource struct {
+	autorest.Response `json:"-"`
+	// RecoverableServerProperties - Resource properties.
+	*RecoverableServerProperties `json:"properties,omitempty"`
+	// ID - READ-ONLY; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+	ID *string `json:"id,omitempty"`
+	// Name - READ-ONLY; The name of the resource
+	Name *string `json:"name,omitempty"`
+	// Type - READ-ONLY; The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
+	Type *string `json:"type,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for RecoverableServerResource.
+func (rsr RecoverableServerResource) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if rsr.RecoverableServerProperties != nil {
+		objectMap["properties"] = rsr.RecoverableServerProperties
+	}
+	return json.Marshal(objectMap)
+}
+
+// UnmarshalJSON is the custom unmarshaler for RecoverableServerResource struct.
+func (rsr *RecoverableServerResource) UnmarshalJSON(body []byte) error {
+	var m map[string]*json.RawMessage
+	err := json.Unmarshal(body, &m)
+	if err != nil {
+		return err
+	}
+	for k, v := range m {
+		switch k {
+		case "properties":
+			if v != nil {
+				var recoverableServerProperties RecoverableServerProperties
+				err = json.Unmarshal(*v, &recoverableServerProperties)
+				if err != nil {
+					return err
+				}
+				rsr.RecoverableServerProperties = &recoverableServerProperties
+			}
+		case "id":
+			if v != nil {
+				var ID string
+				err = json.Unmarshal(*v, &ID)
+				if err != nil {
+					return err
+				}
+				rsr.ID = &ID
+			}
+		case "name":
+			if v != nil {
+				var name string
+				err = json.Unmarshal(*v, &name)
+				if err != nil {
+					return err
+				}
+				rsr.Name = &name
+			}
+		case "type":
+			if v != nil {
+				var typeVar string
+				err = json.Unmarshal(*v, &typeVar)
+				if err != nil {
+					return err
+				}
+				rsr.Type = &typeVar
+			}
+		}
+	}
+
+	return nil
 }
 
 // Resource common fields that are returned in the response for all Azure Resource Manager resources
@@ -2814,6 +2924,35 @@ type ServerListResult struct {
 	autorest.Response `json:"-"`
 	// Value - The list of servers
 	Value *[]Server `json:"value,omitempty"`
+}
+
+// ServerParametersListUpdateConfigurationsFuture an abstraction for monitoring and retrieving the results
+// of a long-running operation.
+type ServerParametersListUpdateConfigurationsFuture struct {
+	azure.Future
+}
+
+// Result returns the result of the asynchronous operation.
+// If the operation has not completed it will return an error.
+func (future *ServerParametersListUpdateConfigurationsFuture) Result(client ServerParametersClient) (clr ConfigurationListResult, err error) {
+	var done bool
+	done, err = future.DoneWithContext(context.Background(), client)
+	if err != nil {
+		err = autorest.NewErrorWithError(err, "mysql.ServerParametersListUpdateConfigurationsFuture", "Result", future.Response(), "Polling failure")
+		return
+	}
+	if !done {
+		err = azure.NewAsyncOpIncompleteError("mysql.ServerParametersListUpdateConfigurationsFuture")
+		return
+	}
+	sender := autorest.DecorateSender(client, autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
+	if clr.Response.Response, err = future.GetResult(sender); err == nil && clr.Response.Response.StatusCode != http.StatusNoContent {
+		clr, err = client.ListUpdateConfigurationsResponder(clr.Response.Response)
+		if err != nil {
+			err = autorest.NewErrorWithError(err, "mysql.ServerParametersListUpdateConfigurationsFuture", "Result", clr.Response.Response, "Failure responding to request")
+		}
+	}
+	return
 }
 
 // ServerPrivateEndpointConnection a private endpoint connection under a server
@@ -3615,22 +3754,22 @@ func (future *ServersStartFuture) Result(client ServersClient) (ar autorest.Resp
 	return
 }
 
-// ServersStopFuture an abstraction for monitoring and retrieving the results of a long-running operation.
-type ServersStopFuture struct {
+// ServersTestFuture an abstraction for monitoring and retrieving the results of a long-running operation.
+type ServersTestFuture struct {
 	azure.Future
 }
 
 // Result returns the result of the asynchronous operation.
 // If the operation has not completed it will return an error.
-func (future *ServersStopFuture) Result(client ServersClient) (ar autorest.Response, err error) {
+func (future *ServersTestFuture) Result(client ServersClient) (ar autorest.Response, err error) {
 	var done bool
 	done, err = future.DoneWithContext(context.Background(), client)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "mysql.ServersStopFuture", "Result", future.Response(), "Polling failure")
+		err = autorest.NewErrorWithError(err, "mysql.ServersTestFuture", "Result", future.Response(), "Polling failure")
 		return
 	}
 	if !done {
-		err = azure.NewAsyncOpIncompleteError("mysql.ServersStopFuture")
+		err = azure.NewAsyncOpIncompleteError("mysql.ServersTestFuture")
 		return
 	}
 	ar.Response = future.Response()

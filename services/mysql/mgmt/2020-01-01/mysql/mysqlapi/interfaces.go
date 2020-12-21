@@ -25,6 +25,7 @@ import (
 // BaseClientAPI contains the set of methods on the BaseClient type.
 type BaseClientAPI interface {
 	CreateRecommendedActionSession(ctx context.Context, resourceGroupName string, serverName string, advisorName string, databaseName string) (result mysql.CreateRecommendedActionSessionFuture, err error)
+	ResetQueryPerformanceInsightData(ctx context.Context, resourceGroupName string, serverName string) (result mysql.QueryPerformanceInsightResetDataResult, err error)
 }
 
 var _ BaseClientAPI = (*mysql.BaseClient)(nil)
@@ -38,7 +39,7 @@ type ServersClientAPI interface {
 	ListByResourceGroup(ctx context.Context, resourceGroupName string) (result mysql.ServerListResult, err error)
 	Restart(ctx context.Context, resourceGroupName string, serverName string) (result mysql.ServersRestartFuture, err error)
 	Start(ctx context.Context, resourceGroupName string, serverName string) (result mysql.ServersStartFuture, err error)
-	Stop(ctx context.Context, resourceGroupName string, serverName string) (result mysql.ServersStopFuture, err error)
+	Test(ctx context.Context, resourceGroupName string, serverName string) (result mysql.ServersTestFuture, err error)
 	Update(ctx context.Context, resourceGroupName string, serverName string, parameters mysql.ServerUpdateParameters) (result mysql.ServersUpdateFuture, err error)
 	Upgrade(ctx context.Context, resourceGroupName string, serverName string, parameters mysql.ServerUpgradeParameters) (result mysql.ServersUpgradeFuture, err error)
 }
@@ -92,6 +93,13 @@ type ConfigurationsClientAPI interface {
 
 var _ ConfigurationsClientAPI = (*mysql.ConfigurationsClient)(nil)
 
+// ServerParametersClientAPI contains the set of methods on the ServerParametersClient type.
+type ServerParametersClientAPI interface {
+	ListUpdateConfigurations(ctx context.Context, resourceGroupName string, serverName string, value mysql.ConfigurationListResult) (result mysql.ServerParametersListUpdateConfigurationsFuture, err error)
+}
+
+var _ ServerParametersClientAPI = (*mysql.ServerParametersClient)(nil)
+
 // LogFilesClientAPI contains the set of methods on the LogFilesClient type.
 type LogFilesClientAPI interface {
 	ListByServer(ctx context.Context, resourceGroupName string, serverName string) (result mysql.LogFileListResult, err error)
@@ -108,6 +116,20 @@ type ServerAdministratorsClientAPI interface {
 }
 
 var _ ServerAdministratorsClientAPI = (*mysql.ServerAdministratorsClient)(nil)
+
+// RecoverableServersClientAPI contains the set of methods on the RecoverableServersClient type.
+type RecoverableServersClientAPI interface {
+	Get(ctx context.Context, resourceGroupName string, serverName string) (result mysql.RecoverableServerResource, err error)
+}
+
+var _ RecoverableServersClientAPI = (*mysql.RecoverableServersClient)(nil)
+
+// ServerBasedPerformanceTierClientAPI contains the set of methods on the ServerBasedPerformanceTierClient type.
+type ServerBasedPerformanceTierClientAPI interface {
+	List(ctx context.Context, resourceGroupName string, serverName string) (result mysql.PerformanceTierListResult, err error)
+}
+
+var _ ServerBasedPerformanceTierClientAPI = (*mysql.ServerBasedPerformanceTierClient)(nil)
 
 // LocationBasedPerformanceTierClientAPI contains the set of methods on the LocationBasedPerformanceTierClient type.
 type LocationBasedPerformanceTierClientAPI interface {
