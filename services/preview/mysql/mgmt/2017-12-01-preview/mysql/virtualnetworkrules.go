@@ -326,6 +326,7 @@ func (client VirtualNetworkRulesClient) ListByServer(ctx context.Context, resour
 	}
 	if result.vnrlr.hasNextLink() && result.vnrlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -387,7 +388,6 @@ func (client VirtualNetworkRulesClient) listByServerNextResults(ctx context.Cont
 	result, err = client.ListByServerResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "mysql.VirtualNetworkRulesClient", "listByServerNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
