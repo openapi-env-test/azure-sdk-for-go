@@ -531,6 +531,7 @@ func (client CustomDomainsClient) ListByEndpoint(ctx context.Context, resourceGr
 	}
 	if result.cdlr.hasNextLink() && result.cdlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -593,7 +594,6 @@ func (client CustomDomainsClient) listByEndpointNextResults(ctx context.Context,
 	result, err = client.ListByEndpointResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "cdn.CustomDomainsClient", "listByEndpointNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
