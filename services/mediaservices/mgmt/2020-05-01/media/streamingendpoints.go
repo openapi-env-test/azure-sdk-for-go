@@ -344,6 +344,7 @@ func (client StreamingEndpointsClient) List(ctx context.Context, resourceGroupNa
 	}
 	if result.selr.hasNextLink() && result.selr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -405,7 +406,6 @@ func (client StreamingEndpointsClient) listNextResults(ctx context.Context, last
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "media.StreamingEndpointsClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
