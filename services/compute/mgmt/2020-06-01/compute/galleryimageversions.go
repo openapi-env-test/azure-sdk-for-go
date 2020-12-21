@@ -334,6 +334,7 @@ func (client GalleryImageVersionsClient) ListByGalleryImage(ctx context.Context,
 	}
 	if result.givl.hasNextLink() && result.givl.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -396,7 +397,6 @@ func (client GalleryImageVersionsClient) listByGalleryImageNextResults(ctx conte
 	result, err = client.ListByGalleryImageResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "compute.GalleryImageVersionsClient", "listByGalleryImageNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }

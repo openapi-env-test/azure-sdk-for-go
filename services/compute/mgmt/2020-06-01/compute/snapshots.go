@@ -407,6 +407,7 @@ func (client SnapshotsClient) List(ctx context.Context) (result SnapshotListPage
 	}
 	if result.sl.hasNextLink() && result.sl.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -466,7 +467,6 @@ func (client SnapshotsClient) listNextResults(ctx context.Context, lastResults S
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "compute.SnapshotsClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -522,6 +522,7 @@ func (client SnapshotsClient) ListByResourceGroup(ctx context.Context, resourceG
 	}
 	if result.sl.hasNextLink() && result.sl.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -582,7 +583,6 @@ func (client SnapshotsClient) listByResourceGroupNextResults(ctx context.Context
 	result, err = client.ListByResourceGroupResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "compute.SnapshotsClient", "listByResourceGroupNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
