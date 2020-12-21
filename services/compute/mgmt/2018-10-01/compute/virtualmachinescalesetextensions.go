@@ -316,6 +316,7 @@ func (client VirtualMachineScaleSetExtensionsClient) List(ctx context.Context, r
 	}
 	if result.vmsselr.hasNextLink() && result.vmsselr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -377,7 +378,6 @@ func (client VirtualMachineScaleSetExtensionsClient) listNextResults(ctx context
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "compute.VirtualMachineScaleSetExtensionsClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
