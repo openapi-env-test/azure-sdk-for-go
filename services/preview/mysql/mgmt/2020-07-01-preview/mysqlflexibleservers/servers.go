@@ -348,6 +348,7 @@ func (client ServersClient) List(ctx context.Context) (result ServerListResultPa
 	}
 	if result.slr.hasNextLink() && result.slr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -407,7 +408,6 @@ func (client ServersClient) listNextResults(ctx context.Context, lastResults Ser
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "mysqlflexibleservers.ServersClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -473,6 +473,7 @@ func (client ServersClient) ListByResourceGroup(ctx context.Context, resourceGro
 	}
 	if result.slr.hasNextLink() && result.slr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -533,7 +534,6 @@ func (client ServersClient) listByResourceGroupNextResults(ctx context.Context, 
 	result, err = client.ListByResourceGroupResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "mysqlflexibleservers.ServersClient", "listByResourceGroupNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }

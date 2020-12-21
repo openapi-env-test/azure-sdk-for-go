@@ -178,6 +178,7 @@ func (client ConfigurationsClient) ListByServer(ctx context.Context, resourceGro
 	}
 	if result.clr.hasNextLink() && result.clr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -239,7 +240,6 @@ func (client ConfigurationsClient) listByServerNextResults(ctx context.Context, 
 	result, err = client.ListByServerResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "mysqlflexibleservers.ConfigurationsClient", "listByServerNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }

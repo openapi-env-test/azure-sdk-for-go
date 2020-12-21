@@ -361,6 +361,7 @@ func (client FirewallRulesClient) ListByServer(ctx context.Context, resourceGrou
 	}
 	if result.frlr.hasNextLink() && result.frlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -422,7 +423,6 @@ func (client FirewallRulesClient) listByServerNextResults(ctx context.Context, l
 	result, err = client.ListByServerResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "mysqlflexibleservers.FirewallRulesClient", "listByServerNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
