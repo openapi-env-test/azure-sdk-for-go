@@ -351,6 +351,7 @@ func (client OriginsClient) ListByEndpoint(ctx context.Context, resourceGroupNam
 	}
 	if result.olr.hasNextLink() && result.olr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -413,7 +414,6 @@ func (client OriginsClient) listByEndpointNextResults(ctx context.Context, lastR
 	result, err = client.ListByEndpointResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "cdn.OriginsClient", "listByEndpointNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
