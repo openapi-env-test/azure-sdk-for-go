@@ -354,6 +354,7 @@ func (client DatabasesClient) ListByServer(ctx context.Context, resourceGroupNam
 	}
 	if result.dlr.hasNextLink() && result.dlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -415,7 +416,6 @@ func (client DatabasesClient) listByServerNextResults(ctx context.Context, lastR
 	result, err = client.ListByServerResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "mysqlflexibleservers.DatabasesClient", "listByServerNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
