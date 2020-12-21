@@ -174,14 +174,20 @@ type StreamingLocatorsClientAPI interface {
 
 var _ StreamingLocatorsClientAPI = (*media.StreamingLocatorsClient)(nil)
 
+// LiveEventsTestClientAPI contains the set of methods on the LiveEventsTestClient type.
+type LiveEventsTestClientAPI interface {
+	List(ctx context.Context, resourceGroupName string, accountName string) (result media.LiveEventListResultPage, err error)
+	ListComplete(ctx context.Context, resourceGroupName string, accountName string) (result media.LiveEventListResultIterator, err error)
+}
+
+var _ LiveEventsTestClientAPI = (*media.LiveEventsTestClient)(nil)
+
 // LiveEventsClientAPI contains the set of methods on the LiveEventsClient type.
 type LiveEventsClientAPI interface {
 	Allocate(ctx context.Context, resourceGroupName string, accountName string, liveEventName string) (result media.LiveEventsAllocateFuture, err error)
 	Create(ctx context.Context, resourceGroupName string, accountName string, liveEventName string, parameters media.LiveEvent, autoStart *bool) (result media.LiveEventsCreateFuture, err error)
 	Delete(ctx context.Context, resourceGroupName string, accountName string, liveEventName string) (result media.LiveEventsDeleteFuture, err error)
 	Get(ctx context.Context, resourceGroupName string, accountName string, liveEventName string) (result media.LiveEvent, err error)
-	List(ctx context.Context, resourceGroupName string, accountName string) (result media.LiveEventListResultPage, err error)
-	ListComplete(ctx context.Context, resourceGroupName string, accountName string) (result media.LiveEventListResultIterator, err error)
 	Reset(ctx context.Context, resourceGroupName string, accountName string, liveEventName string) (result media.LiveEventsResetFuture, err error)
 	Start(ctx context.Context, resourceGroupName string, accountName string, liveEventName string) (result media.LiveEventsStartFuture, err error)
 	Stop(ctx context.Context, resourceGroupName string, accountName string, liveEventName string, parameters media.LiveEventActionInput) (result media.LiveEventsStopFuture, err error)
