@@ -329,6 +329,7 @@ func (client DedicatedHostsClient) ListByHostGroup(ctx context.Context, resource
 	}
 	if result.dhlr.hasNextLink() && result.dhlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -390,7 +391,6 @@ func (client DedicatedHostsClient) listByHostGroupNextResults(ctx context.Contex
 	result, err = client.ListByHostGroupResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "compute.DedicatedHostsClient", "listByHostGroupNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
