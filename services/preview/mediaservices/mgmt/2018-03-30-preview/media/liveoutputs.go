@@ -368,6 +368,7 @@ func (client LiveOutputsClient) List(ctx context.Context, resourceGroupName stri
 	}
 	if result.lolr.hasNextLink() && result.lolr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -430,7 +431,6 @@ func (client LiveOutputsClient) listNextResults(ctx context.Context, lastResults
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "media.LiveOutputsClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
