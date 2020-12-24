@@ -30,80 +30,6 @@ import (
 // The package's fully qualified name.
 const fqdn = "github.com/Azure/azure-sdk-for-go/services/preview/alertsmanagement/mgmt/2019-06-01-preview/alertsmanagement"
 
-// ActionGroup action rule with action group configuration
-type ActionGroup struct {
-	// ActionGroupID - Action group to trigger if action rule matches
-	ActionGroupID *string `json:"actionGroupId,omitempty"`
-	// Scope - scope on which action rule will apply
-	Scope *Scope `json:"scope,omitempty"`
-	// Conditions - conditions on which alerts will be filtered
-	Conditions *Conditions `json:"conditions,omitempty"`
-	// Description - Description of action rule
-	Description *string `json:"description,omitempty"`
-	// CreatedAt - READ-ONLY; Creation time of action rule. Date-Time in ISO-8601 format.
-	CreatedAt *date.Time `json:"createdAt,omitempty"`
-	// LastModifiedAt - READ-ONLY; Last updated time of action rule. Date-Time in ISO-8601 format.
-	LastModifiedAt *date.Time `json:"lastModifiedAt,omitempty"`
-	// CreatedBy - READ-ONLY; Created by user name.
-	CreatedBy *string `json:"createdBy,omitempty"`
-	// LastModifiedBy - READ-ONLY; Last modified by user name.
-	LastModifiedBy *string `json:"lastModifiedBy,omitempty"`
-	// Status - Indicates if the given action rule is enabled or disabled. Possible values include: 'Enabled', 'Disabled'
-	Status ActionRuleStatus `json:"status,omitempty"`
-	// Type - Possible values include: 'TypeActionRuleProperties', 'TypeSuppression', 'TypeActionGroup', 'TypeDiagnostics'
-	Type Type `json:"type,omitempty"`
-}
-
-// MarshalJSON is the custom marshaler for ActionGroup.
-func (ag ActionGroup) MarshalJSON() ([]byte, error) {
-	ag.Type = TypeActionGroup
-	objectMap := make(map[string]interface{})
-	if ag.ActionGroupID != nil {
-		objectMap["actionGroupId"] = ag.ActionGroupID
-	}
-	if ag.Scope != nil {
-		objectMap["scope"] = ag.Scope
-	}
-	if ag.Conditions != nil {
-		objectMap["conditions"] = ag.Conditions
-	}
-	if ag.Description != nil {
-		objectMap["description"] = ag.Description
-	}
-	if ag.Status != "" {
-		objectMap["status"] = ag.Status
-	}
-	if ag.Type != "" {
-		objectMap["type"] = ag.Type
-	}
-	return json.Marshal(objectMap)
-}
-
-// AsSuppression is the BasicActionRuleProperties implementation for ActionGroup.
-func (ag ActionGroup) AsSuppression() (*Suppression, bool) {
-	return nil, false
-}
-
-// AsActionGroup is the BasicActionRuleProperties implementation for ActionGroup.
-func (ag ActionGroup) AsActionGroup() (*ActionGroup, bool) {
-	return &ag, true
-}
-
-// AsDiagnostics is the BasicActionRuleProperties implementation for ActionGroup.
-func (ag ActionGroup) AsDiagnostics() (*Diagnostics, bool) {
-	return nil, false
-}
-
-// AsActionRuleProperties is the BasicActionRuleProperties implementation for ActionGroup.
-func (ag ActionGroup) AsActionRuleProperties() (*ActionRuleProperties, bool) {
-	return nil, false
-}
-
-// AsBasicActionRuleProperties is the BasicActionRuleProperties implementation for ActionGroup.
-func (ag ActionGroup) AsBasicActionRuleProperties() (BasicActionRuleProperties, bool) {
-	return &ag, true
-}
-
 // ActionGroupsInformation the Action Groups information, used by the alert rule.
 type ActionGroupsInformation struct {
 	// CustomEmailSubject - An optional custom email subject to use in email notifications.
@@ -112,385 +38,6 @@ type ActionGroupsInformation struct {
 	CustomWebhookPayload *string `json:"customWebhookPayload,omitempty"`
 	// GroupIds - The Action Group resource IDs.
 	GroupIds *[]string `json:"groupIds,omitempty"`
-}
-
-// ActionRule action rule object containing target scope, conditions and suppression logic
-type ActionRule struct {
-	autorest.Response `json:"-"`
-	// Properties - action rule properties
-	Properties BasicActionRuleProperties `json:"properties,omitempty"`
-	// Location - Resource location
-	Location *string `json:"location,omitempty"`
-	// Tags - Resource tags
-	Tags map[string]*string `json:"tags"`
-	// ID - READ-ONLY; Azure resource Id
-	ID *string `json:"id,omitempty"`
-	// Type - READ-ONLY; Azure resource type
-	Type *string `json:"type,omitempty"`
-	// Name - READ-ONLY; Azure resource name
-	Name *string `json:"name,omitempty"`
-}
-
-// MarshalJSON is the custom marshaler for ActionRule.
-func (ar ActionRule) MarshalJSON() ([]byte, error) {
-	objectMap := make(map[string]interface{})
-	objectMap["properties"] = ar.Properties
-	if ar.Location != nil {
-		objectMap["location"] = ar.Location
-	}
-	if ar.Tags != nil {
-		objectMap["tags"] = ar.Tags
-	}
-	return json.Marshal(objectMap)
-}
-
-// UnmarshalJSON is the custom unmarshaler for ActionRule struct.
-func (ar *ActionRule) UnmarshalJSON(body []byte) error {
-	var m map[string]*json.RawMessage
-	err := json.Unmarshal(body, &m)
-	if err != nil {
-		return err
-	}
-	for k, v := range m {
-		switch k {
-		case "properties":
-			if v != nil {
-				properties, err := unmarshalBasicActionRuleProperties(*v)
-				if err != nil {
-					return err
-				}
-				ar.Properties = properties
-			}
-		case "location":
-			if v != nil {
-				var location string
-				err = json.Unmarshal(*v, &location)
-				if err != nil {
-					return err
-				}
-				ar.Location = &location
-			}
-		case "tags":
-			if v != nil {
-				var tags map[string]*string
-				err = json.Unmarshal(*v, &tags)
-				if err != nil {
-					return err
-				}
-				ar.Tags = tags
-			}
-		case "id":
-			if v != nil {
-				var ID string
-				err = json.Unmarshal(*v, &ID)
-				if err != nil {
-					return err
-				}
-				ar.ID = &ID
-			}
-		case "type":
-			if v != nil {
-				var typeVar string
-				err = json.Unmarshal(*v, &typeVar)
-				if err != nil {
-					return err
-				}
-				ar.Type = &typeVar
-			}
-		case "name":
-			if v != nil {
-				var name string
-				err = json.Unmarshal(*v, &name)
-				if err != nil {
-					return err
-				}
-				ar.Name = &name
-			}
-		}
-	}
-
-	return nil
-}
-
-// BasicActionRuleProperties action rule properties defining scope, conditions, suppression logic for action rule
-type BasicActionRuleProperties interface {
-	AsSuppression() (*Suppression, bool)
-	AsActionGroup() (*ActionGroup, bool)
-	AsDiagnostics() (*Diagnostics, bool)
-	AsActionRuleProperties() (*ActionRuleProperties, bool)
-}
-
-// ActionRuleProperties action rule properties defining scope, conditions, suppression logic for action rule
-type ActionRuleProperties struct {
-	// Scope - scope on which action rule will apply
-	Scope *Scope `json:"scope,omitempty"`
-	// Conditions - conditions on which alerts will be filtered
-	Conditions *Conditions `json:"conditions,omitempty"`
-	// Description - Description of action rule
-	Description *string `json:"description,omitempty"`
-	// CreatedAt - READ-ONLY; Creation time of action rule. Date-Time in ISO-8601 format.
-	CreatedAt *date.Time `json:"createdAt,omitempty"`
-	// LastModifiedAt - READ-ONLY; Last updated time of action rule. Date-Time in ISO-8601 format.
-	LastModifiedAt *date.Time `json:"lastModifiedAt,omitempty"`
-	// CreatedBy - READ-ONLY; Created by user name.
-	CreatedBy *string `json:"createdBy,omitempty"`
-	// LastModifiedBy - READ-ONLY; Last modified by user name.
-	LastModifiedBy *string `json:"lastModifiedBy,omitempty"`
-	// Status - Indicates if the given action rule is enabled or disabled. Possible values include: 'Enabled', 'Disabled'
-	Status ActionRuleStatus `json:"status,omitempty"`
-	// Type - Possible values include: 'TypeActionRuleProperties', 'TypeSuppression', 'TypeActionGroup', 'TypeDiagnostics'
-	Type Type `json:"type,omitempty"`
-}
-
-func unmarshalBasicActionRuleProperties(body []byte) (BasicActionRuleProperties, error) {
-	var m map[string]interface{}
-	err := json.Unmarshal(body, &m)
-	if err != nil {
-		return nil, err
-	}
-
-	switch m["type"] {
-	case string(TypeSuppression):
-		var s Suppression
-		err := json.Unmarshal(body, &s)
-		return s, err
-	case string(TypeActionGroup):
-		var ag ActionGroup
-		err := json.Unmarshal(body, &ag)
-		return ag, err
-	case string(TypeDiagnostics):
-		var d Diagnostics
-		err := json.Unmarshal(body, &d)
-		return d, err
-	default:
-		var arp ActionRuleProperties
-		err := json.Unmarshal(body, &arp)
-		return arp, err
-	}
-}
-func unmarshalBasicActionRulePropertiesArray(body []byte) ([]BasicActionRuleProperties, error) {
-	var rawMessages []*json.RawMessage
-	err := json.Unmarshal(body, &rawMessages)
-	if err != nil {
-		return nil, err
-	}
-
-	arpArray := make([]BasicActionRuleProperties, len(rawMessages))
-
-	for index, rawMessage := range rawMessages {
-		arp, err := unmarshalBasicActionRuleProperties(*rawMessage)
-		if err != nil {
-			return nil, err
-		}
-		arpArray[index] = arp
-	}
-	return arpArray, nil
-}
-
-// MarshalJSON is the custom marshaler for ActionRuleProperties.
-func (arp ActionRuleProperties) MarshalJSON() ([]byte, error) {
-	arp.Type = TypeActionRuleProperties
-	objectMap := make(map[string]interface{})
-	if arp.Scope != nil {
-		objectMap["scope"] = arp.Scope
-	}
-	if arp.Conditions != nil {
-		objectMap["conditions"] = arp.Conditions
-	}
-	if arp.Description != nil {
-		objectMap["description"] = arp.Description
-	}
-	if arp.Status != "" {
-		objectMap["status"] = arp.Status
-	}
-	if arp.Type != "" {
-		objectMap["type"] = arp.Type
-	}
-	return json.Marshal(objectMap)
-}
-
-// AsSuppression is the BasicActionRuleProperties implementation for ActionRuleProperties.
-func (arp ActionRuleProperties) AsSuppression() (*Suppression, bool) {
-	return nil, false
-}
-
-// AsActionGroup is the BasicActionRuleProperties implementation for ActionRuleProperties.
-func (arp ActionRuleProperties) AsActionGroup() (*ActionGroup, bool) {
-	return nil, false
-}
-
-// AsDiagnostics is the BasicActionRuleProperties implementation for ActionRuleProperties.
-func (arp ActionRuleProperties) AsDiagnostics() (*Diagnostics, bool) {
-	return nil, false
-}
-
-// AsActionRuleProperties is the BasicActionRuleProperties implementation for ActionRuleProperties.
-func (arp ActionRuleProperties) AsActionRuleProperties() (*ActionRuleProperties, bool) {
-	return &arp, true
-}
-
-// AsBasicActionRuleProperties is the BasicActionRuleProperties implementation for ActionRuleProperties.
-func (arp ActionRuleProperties) AsBasicActionRuleProperties() (BasicActionRuleProperties, bool) {
-	return &arp, true
-}
-
-// ActionRulesList list of action rules
-type ActionRulesList struct {
-	autorest.Response `json:"-"`
-	// NextLink - URL to fetch the next set of action rules
-	NextLink *string `json:"nextLink,omitempty"`
-	// Value - List of action rules
-	Value *[]ActionRule `json:"value,omitempty"`
-}
-
-// ActionRulesListIterator provides access to a complete listing of ActionRule values.
-type ActionRulesListIterator struct {
-	i    int
-	page ActionRulesListPage
-}
-
-// NextWithContext advances to the next value.  If there was an error making
-// the request the iterator does not advance and the error is returned.
-func (iter *ActionRulesListIterator) NextWithContext(ctx context.Context) (err error) {
-	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/ActionRulesListIterator.NextWithContext")
-		defer func() {
-			sc := -1
-			if iter.Response().Response.Response != nil {
-				sc = iter.Response().Response.Response.StatusCode
-			}
-			tracing.EndSpan(ctx, sc, err)
-		}()
-	}
-	iter.i++
-	if iter.i < len(iter.page.Values()) {
-		return nil
-	}
-	err = iter.page.NextWithContext(ctx)
-	if err != nil {
-		iter.i--
-		return err
-	}
-	iter.i = 0
-	return nil
-}
-
-// Next advances to the next value.  If there was an error making
-// the request the iterator does not advance and the error is returned.
-// Deprecated: Use NextWithContext() instead.
-func (iter *ActionRulesListIterator) Next() error {
-	return iter.NextWithContext(context.Background())
-}
-
-// NotDone returns true if the enumeration should be started or is not yet complete.
-func (iter ActionRulesListIterator) NotDone() bool {
-	return iter.page.NotDone() && iter.i < len(iter.page.Values())
-}
-
-// Response returns the raw server response from the last page request.
-func (iter ActionRulesListIterator) Response() ActionRulesList {
-	return iter.page.Response()
-}
-
-// Value returns the current value or a zero-initialized value if the
-// iterator has advanced beyond the end of the collection.
-func (iter ActionRulesListIterator) Value() ActionRule {
-	if !iter.page.NotDone() {
-		return ActionRule{}
-	}
-	return iter.page.Values()[iter.i]
-}
-
-// Creates a new instance of the ActionRulesListIterator type.
-func NewActionRulesListIterator(page ActionRulesListPage) ActionRulesListIterator {
-	return ActionRulesListIterator{page: page}
-}
-
-// IsEmpty returns true if the ListResult contains no values.
-func (arl ActionRulesList) IsEmpty() bool {
-	return arl.Value == nil || len(*arl.Value) == 0
-}
-
-// hasNextLink returns true if the NextLink is not empty.
-func (arl ActionRulesList) hasNextLink() bool {
-	return arl.NextLink != nil && len(*arl.NextLink) != 0
-}
-
-// actionRulesListPreparer prepares a request to retrieve the next set of results.
-// It returns nil if no more results exist.
-func (arl ActionRulesList) actionRulesListPreparer(ctx context.Context) (*http.Request, error) {
-	if !arl.hasNextLink() {
-		return nil, nil
-	}
-	return autorest.Prepare((&http.Request{}).WithContext(ctx),
-		autorest.AsJSON(),
-		autorest.AsGet(),
-		autorest.WithBaseURL(to.String(arl.NextLink)))
-}
-
-// ActionRulesListPage contains a page of ActionRule values.
-type ActionRulesListPage struct {
-	fn  func(context.Context, ActionRulesList) (ActionRulesList, error)
-	arl ActionRulesList
-}
-
-// NextWithContext advances to the next page of values.  If there was an error making
-// the request the page does not advance and the error is returned.
-func (page *ActionRulesListPage) NextWithContext(ctx context.Context) (err error) {
-	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/ActionRulesListPage.NextWithContext")
-		defer func() {
-			sc := -1
-			if page.Response().Response.Response != nil {
-				sc = page.Response().Response.Response.StatusCode
-			}
-			tracing.EndSpan(ctx, sc, err)
-		}()
-	}
-	for {
-		next, err := page.fn(ctx, page.arl)
-		if err != nil {
-			return err
-		}
-		page.arl = next
-		if !next.hasNextLink() || !next.IsEmpty() {
-			break
-		}
-	}
-	return nil
-}
-
-// Next advances to the next page of values.  If there was an error making
-// the request the page does not advance and the error is returned.
-// Deprecated: Use NextWithContext() instead.
-func (page *ActionRulesListPage) Next() error {
-	return page.NextWithContext(context.Background())
-}
-
-// NotDone returns true if the page enumeration should be started or is not yet complete.
-func (page ActionRulesListPage) NotDone() bool {
-	return !page.arl.IsEmpty()
-}
-
-// Response returns the raw server response from the last page request.
-func (page ActionRulesListPage) Response() ActionRulesList {
-	return page.arl
-}
-
-// Values returns the slice of values for the current page or nil if there are no values.
-func (page ActionRulesListPage) Values() []ActionRule {
-	if page.arl.IsEmpty() {
-		return nil
-	}
-	return *page.arl.Value
-}
-
-// Creates a new instance of the ActionRulesListPage type.
-func NewActionRulesListPage(cur ActionRulesList, getNextPage func(context.Context, ActionRulesList) (ActionRulesList, error)) ActionRulesListPage {
-	return ActionRulesListPage{
-		fn:  getNextPage,
-		arl: cur,
-	}
 }
 
 // Alert an alert created in alert management service.
@@ -591,7 +138,7 @@ type AlertRule struct {
 	// Location - The resource location.
 	Location *string `json:"location,omitempty"`
 	// Tags - The resource tags.
-	Tags interface{} `json:"tags,omitempty"`
+	Tags map[string]*string `json:"tags"`
 }
 
 // MarshalJSON is the custom marshaler for AlertRule.
@@ -665,7 +212,7 @@ func (ar *AlertRule) UnmarshalJSON(body []byte) error {
 			}
 		case "tags":
 			if v != nil {
-				var tags interface{}
+				var tags map[string]*string
 				err = json.Unmarshal(*v, &tags)
 				if err != nil {
 					return err
@@ -687,7 +234,7 @@ type AlertRulePatchObject struct {
 	// Name - READ-ONLY; The resource name.
 	Name *string `json:"name,omitempty"`
 	// Tags - The resource tags.
-	Tags interface{} `json:"tags,omitempty"`
+	Tags map[string]*string `json:"tags"`
 	// AlertRulePatchProperties - The properties of the alert rule.
 	*AlertRulePatchProperties `json:"properties,omitempty"`
 }
@@ -742,7 +289,7 @@ func (arpo *AlertRulePatchObject) UnmarshalJSON(body []byte) error {
 			}
 		case "tags":
 			if v != nil {
-				var tags interface{}
+				var tags map[string]*string
 				err = json.Unmarshal(*v, &tags)
 				if err != nil {
 					return err
@@ -768,7 +315,7 @@ func (arpo *AlertRulePatchObject) UnmarshalJSON(body []byte) error {
 type AlertRulePatchProperties struct {
 	// Description - The alert rule description.
 	Description *string `json:"description,omitempty"`
-	// State - The alert rule state. Possible values include: 'AlertRuleStateEnabled', 'AlertRuleStateDisabled'
+	// State - The alert rule state. Possible values include: 'Enabled', 'Disabled'
 	State AlertRuleState `json:"state,omitempty"`
 	// Severity - The alert rule severity. Possible values include: 'Sev0', 'Sev1', 'Sev2', 'Sev3', 'Sev4'
 	Severity Severity `json:"severity,omitempty"`
@@ -784,7 +331,7 @@ type AlertRulePatchProperties struct {
 type AlertRuleProperties struct {
 	// Description - The alert rule description.
 	Description *string `json:"description,omitempty"`
-	// State - The alert rule state. Possible values include: 'AlertRuleStateEnabled', 'AlertRuleStateDisabled'
+	// State - The alert rule state. Possible values include: 'Enabled', 'Disabled'
 	State AlertRuleState `json:"state,omitempty"`
 	// Severity - The alert rule severity. Possible values include: 'Sev0', 'Sev1', 'Sev2', 'Sev3', 'Sev4'
 	Severity Severity `json:"severity,omitempty"`
@@ -1277,7 +824,7 @@ type AzureResource struct {
 	// Location - The resource location.
 	Location *string `json:"location,omitempty"`
 	// Tags - The resource tags.
-	Tags interface{} `json:"tags,omitempty"`
+	Tags map[string]*string `json:"tags"`
 }
 
 // MarshalJSON is the custom marshaler for AzureResource.
@@ -1290,39 +837,6 @@ func (ar AzureResource) MarshalJSON() ([]byte, error) {
 		objectMap["tags"] = ar.Tags
 	}
 	return json.Marshal(objectMap)
-}
-
-// Bool ...
-type Bool struct {
-	autorest.Response `json:"-"`
-	Value             *bool `json:"value,omitempty"`
-}
-
-// Condition condition to trigger an action rule
-type Condition struct {
-	// Operator - operator for a given condition. Possible values include: 'Equals', 'NotEquals', 'Contains', 'DoesNotContain'
-	Operator Operator `json:"operator,omitempty"`
-	// Values - list of values to match for a given condition.
-	Values *[]string `json:"values,omitempty"`
-}
-
-// Conditions conditions in alert instance to be matched for a given action rule. Default value is all.
-// Multiple values could be provided with comma separation.
-type Conditions struct {
-	// Severity - filter alerts by severity
-	Severity *Condition `json:"severity,omitempty"`
-	// MonitorService - filter alerts by monitor service
-	MonitorService *Condition `json:"monitorService,omitempty"`
-	// MonitorCondition - filter alerts by monitor condition
-	MonitorCondition *Condition `json:"monitorCondition,omitempty"`
-	// TargetResourceType - filter alerts by target resource type
-	TargetResourceType *Condition `json:"targetResourceType,omitempty"`
-	// AlertRuleID - filter alerts by alert rule id
-	AlertRuleID *Condition `json:"alertRuleId,omitempty"`
-	// Description - filter alerts by alert rule description
-	Description *Condition `json:"description,omitempty"`
-	// AlertContext - filter alerts by alert context (payload)
-	AlertContext *Condition `json:"alertContext,omitempty"`
 }
 
 // Detector the detector information. By default this is not populated, unless it's specified in
@@ -1364,75 +878,6 @@ func (d Detector) MarshalJSON() ([]byte, error) {
 		objectMap["imagePaths"] = d.ImagePaths
 	}
 	return json.Marshal(objectMap)
-}
-
-// Diagnostics action rule with diagnostics configuration
-type Diagnostics struct {
-	// Scope - scope on which action rule will apply
-	Scope *Scope `json:"scope,omitempty"`
-	// Conditions - conditions on which alerts will be filtered
-	Conditions *Conditions `json:"conditions,omitempty"`
-	// Description - Description of action rule
-	Description *string `json:"description,omitempty"`
-	// CreatedAt - READ-ONLY; Creation time of action rule. Date-Time in ISO-8601 format.
-	CreatedAt *date.Time `json:"createdAt,omitempty"`
-	// LastModifiedAt - READ-ONLY; Last updated time of action rule. Date-Time in ISO-8601 format.
-	LastModifiedAt *date.Time `json:"lastModifiedAt,omitempty"`
-	// CreatedBy - READ-ONLY; Created by user name.
-	CreatedBy *string `json:"createdBy,omitempty"`
-	// LastModifiedBy - READ-ONLY; Last modified by user name.
-	LastModifiedBy *string `json:"lastModifiedBy,omitempty"`
-	// Status - Indicates if the given action rule is enabled or disabled. Possible values include: 'Enabled', 'Disabled'
-	Status ActionRuleStatus `json:"status,omitempty"`
-	// Type - Possible values include: 'TypeActionRuleProperties', 'TypeSuppression', 'TypeActionGroup', 'TypeDiagnostics'
-	Type Type `json:"type,omitempty"`
-}
-
-// MarshalJSON is the custom marshaler for Diagnostics.
-func (d Diagnostics) MarshalJSON() ([]byte, error) {
-	d.Type = TypeDiagnostics
-	objectMap := make(map[string]interface{})
-	if d.Scope != nil {
-		objectMap["scope"] = d.Scope
-	}
-	if d.Conditions != nil {
-		objectMap["conditions"] = d.Conditions
-	}
-	if d.Description != nil {
-		objectMap["description"] = d.Description
-	}
-	if d.Status != "" {
-		objectMap["status"] = d.Status
-	}
-	if d.Type != "" {
-		objectMap["type"] = d.Type
-	}
-	return json.Marshal(objectMap)
-}
-
-// AsSuppression is the BasicActionRuleProperties implementation for Diagnostics.
-func (d Diagnostics) AsSuppression() (*Suppression, bool) {
-	return nil, false
-}
-
-// AsActionGroup is the BasicActionRuleProperties implementation for Diagnostics.
-func (d Diagnostics) AsActionGroup() (*ActionGroup, bool) {
-	return nil, false
-}
-
-// AsDiagnostics is the BasicActionRuleProperties implementation for Diagnostics.
-func (d Diagnostics) AsDiagnostics() (*Diagnostics, bool) {
-	return &d, true
-}
-
-// AsActionRuleProperties is the BasicActionRuleProperties implementation for Diagnostics.
-func (d Diagnostics) AsActionRuleProperties() (*ActionRuleProperties, bool) {
-	return nil, false
-}
-
-// AsBasicActionRuleProperties is the BasicActionRuleProperties implementation for Diagnostics.
-func (d Diagnostics) AsBasicActionRuleProperties() (BasicActionRuleProperties, bool) {
-	return &d, true
 }
 
 // ErrorResponse an error response from the service.
@@ -1504,32 +949,6 @@ func (e Essentials) MarshalJSON() ([]byte, error) {
 	}
 	if e.TargetResourceType != nil {
 		objectMap["targetResourceType"] = e.TargetResourceType
-	}
-	return json.Marshal(objectMap)
-}
-
-// ManagedResource an azure managed resource object
-type ManagedResource struct {
-	// Location - Resource location
-	Location *string `json:"location,omitempty"`
-	// Tags - Resource tags
-	Tags map[string]*string `json:"tags"`
-	// ID - READ-ONLY; Azure resource Id
-	ID *string `json:"id,omitempty"`
-	// Type - READ-ONLY; Azure resource type
-	Type *string `json:"type,omitempty"`
-	// Name - READ-ONLY; Azure resource name
-	Name *string `json:"name,omitempty"`
-}
-
-// MarshalJSON is the custom marshaler for ManagedResource.
-func (mr ManagedResource) MarshalJSON() ([]byte, error) {
-	objectMap := make(map[string]interface{})
-	if mr.Location != nil {
-		objectMap["location"] = mr.Location
-	}
-	if mr.Tags != nil {
-		objectMap["tags"] = mr.Tags
 	}
 	return json.Marshal(objectMap)
 }
@@ -1757,65 +1176,6 @@ func NewOperationsListPage(cur OperationsList, getNextPage func(context.Context,
 	}
 }
 
-// PatchObject data contract for patch
-type PatchObject struct {
-	// PatchProperties - properties supported by patch operation
-	*PatchProperties `json:"properties,omitempty"`
-	// Tags - tags to be updated
-	Tags interface{} `json:"tags,omitempty"`
-}
-
-// MarshalJSON is the custom marshaler for PatchObject.
-func (po PatchObject) MarshalJSON() ([]byte, error) {
-	objectMap := make(map[string]interface{})
-	if po.PatchProperties != nil {
-		objectMap["properties"] = po.PatchProperties
-	}
-	if po.Tags != nil {
-		objectMap["tags"] = po.Tags
-	}
-	return json.Marshal(objectMap)
-}
-
-// UnmarshalJSON is the custom unmarshaler for PatchObject struct.
-func (po *PatchObject) UnmarshalJSON(body []byte) error {
-	var m map[string]*json.RawMessage
-	err := json.Unmarshal(body, &m)
-	if err != nil {
-		return err
-	}
-	for k, v := range m {
-		switch k {
-		case "properties":
-			if v != nil {
-				var patchProperties PatchProperties
-				err = json.Unmarshal(*v, &patchProperties)
-				if err != nil {
-					return err
-				}
-				po.PatchProperties = &patchProperties
-			}
-		case "tags":
-			if v != nil {
-				var tags interface{}
-				err = json.Unmarshal(*v, &tags)
-				if err != nil {
-					return err
-				}
-				po.Tags = tags
-			}
-		}
-	}
-
-	return nil
-}
-
-// PatchProperties action rule properties supported by patch
-type PatchProperties struct {
-	// Status - Indicates if the given action rule is enabled or disabled. Possible values include: 'Enabled', 'Disabled'
-	Status ActionRuleStatus `json:"status,omitempty"`
-}
-
 // Resource an azure resource object
 type Resource struct {
 	// ID - READ-ONLY; Azure resource Id
@@ -1824,15 +1184,6 @@ type Resource struct {
 	Type *string `json:"type,omitempty"`
 	// Name - READ-ONLY; Azure resource name
 	Name *string `json:"name,omitempty"`
-}
-
-// Scope target scope for a given action rule. By default scope will be the subscription. User can also
-// provide list of resource groups or list of resources from the scope subscription as well.
-type Scope struct {
-	// ScopeType - type of target scope. Possible values include: 'ScopeTypeResourceGroup', 'ScopeTypeResource', 'ScopeTypeSubscription'
-	ScopeType ScopeType `json:"scopeType,omitempty"`
-	// Values - list of ARM IDs of the given scope type which will be the target of the given action rule.
-	Values *[]string `json:"values,omitempty"`
 }
 
 // SmartDetectorErrorResponse describe the format of an Error response.
@@ -2206,102 +1557,6 @@ func NewSmartGroupsListPage(cur SmartGroupsList, getNextPage func(context.Contex
 		fn:  getNextPage,
 		sgl: cur,
 	}
-}
-
-// Suppression action rule with suppression configuration
-type Suppression struct {
-	// SuppressionConfig - suppression configuration for the action rule
-	SuppressionConfig *SuppressionConfig `json:"suppressionConfig,omitempty"`
-	// Scope - scope on which action rule will apply
-	Scope *Scope `json:"scope,omitempty"`
-	// Conditions - conditions on which alerts will be filtered
-	Conditions *Conditions `json:"conditions,omitempty"`
-	// Description - Description of action rule
-	Description *string `json:"description,omitempty"`
-	// CreatedAt - READ-ONLY; Creation time of action rule. Date-Time in ISO-8601 format.
-	CreatedAt *date.Time `json:"createdAt,omitempty"`
-	// LastModifiedAt - READ-ONLY; Last updated time of action rule. Date-Time in ISO-8601 format.
-	LastModifiedAt *date.Time `json:"lastModifiedAt,omitempty"`
-	// CreatedBy - READ-ONLY; Created by user name.
-	CreatedBy *string `json:"createdBy,omitempty"`
-	// LastModifiedBy - READ-ONLY; Last modified by user name.
-	LastModifiedBy *string `json:"lastModifiedBy,omitempty"`
-	// Status - Indicates if the given action rule is enabled or disabled. Possible values include: 'Enabled', 'Disabled'
-	Status ActionRuleStatus `json:"status,omitempty"`
-	// Type - Possible values include: 'TypeActionRuleProperties', 'TypeSuppression', 'TypeActionGroup', 'TypeDiagnostics'
-	Type Type `json:"type,omitempty"`
-}
-
-// MarshalJSON is the custom marshaler for Suppression.
-func (s Suppression) MarshalJSON() ([]byte, error) {
-	s.Type = TypeSuppression
-	objectMap := make(map[string]interface{})
-	if s.SuppressionConfig != nil {
-		objectMap["suppressionConfig"] = s.SuppressionConfig
-	}
-	if s.Scope != nil {
-		objectMap["scope"] = s.Scope
-	}
-	if s.Conditions != nil {
-		objectMap["conditions"] = s.Conditions
-	}
-	if s.Description != nil {
-		objectMap["description"] = s.Description
-	}
-	if s.Status != "" {
-		objectMap["status"] = s.Status
-	}
-	if s.Type != "" {
-		objectMap["type"] = s.Type
-	}
-	return json.Marshal(objectMap)
-}
-
-// AsSuppression is the BasicActionRuleProperties implementation for Suppression.
-func (s Suppression) AsSuppression() (*Suppression, bool) {
-	return &s, true
-}
-
-// AsActionGroup is the BasicActionRuleProperties implementation for Suppression.
-func (s Suppression) AsActionGroup() (*ActionGroup, bool) {
-	return nil, false
-}
-
-// AsDiagnostics is the BasicActionRuleProperties implementation for Suppression.
-func (s Suppression) AsDiagnostics() (*Diagnostics, bool) {
-	return nil, false
-}
-
-// AsActionRuleProperties is the BasicActionRuleProperties implementation for Suppression.
-func (s Suppression) AsActionRuleProperties() (*ActionRuleProperties, bool) {
-	return nil, false
-}
-
-// AsBasicActionRuleProperties is the BasicActionRuleProperties implementation for Suppression.
-func (s Suppression) AsBasicActionRuleProperties() (BasicActionRuleProperties, bool) {
-	return &s, true
-}
-
-// SuppressionConfig suppression logic for a given action rule
-type SuppressionConfig struct {
-	// RecurrenceType - Specifies when the suppression should be applied. Possible values include: 'Always', 'Once', 'Daily', 'Weekly', 'Monthly'
-	RecurrenceType SuppressionType `json:"recurrenceType,omitempty"`
-	// Schedule - suppression schedule configuration
-	Schedule *SuppressionSchedule `json:"schedule,omitempty"`
-}
-
-// SuppressionSchedule schedule for a given suppression configuration.
-type SuppressionSchedule struct {
-	// StartDate - Start date for suppression
-	StartDate *string `json:"startDate,omitempty"`
-	// EndDate - End date for suppression
-	EndDate *string `json:"endDate,omitempty"`
-	// StartTime - Start time for suppression
-	StartTime *string `json:"startTime,omitempty"`
-	// EndTime - End date for suppression
-	EndTime *string `json:"endTime,omitempty"`
-	// RecurrenceValues - Specifies the values for recurrence pattern
-	RecurrenceValues *[]int32 `json:"recurrenceValues,omitempty"`
 }
 
 // ThrottlingInformation optional throttling information for the alert rule.
