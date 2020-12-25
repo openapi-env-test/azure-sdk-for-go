@@ -308,6 +308,7 @@ func (client IPGroupsClient) List(ctx context.Context) (result IPGroupListResult
 	}
 	if result.iglr.hasNextLink() && result.iglr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -367,7 +368,6 @@ func (client IPGroupsClient) listNextResults(ctx context.Context, lastResults IP
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.IPGroupsClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -423,6 +423,7 @@ func (client IPGroupsClient) ListByResourceGroup(ctx context.Context, resourceGr
 	}
 	if result.iglr.hasNextLink() && result.iglr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -483,7 +484,6 @@ func (client IPGroupsClient) listByResourceGroupNextResults(ctx context.Context,
 	result, err = client.ListByResourceGroupResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.IPGroupsClient", "listByResourceGroupNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }

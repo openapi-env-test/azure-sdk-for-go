@@ -339,6 +339,7 @@ func (client WebApplicationFirewallPoliciesClient) List(ctx context.Context, res
 	}
 	if result.wafplr.hasNextLink() && result.wafplr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -399,7 +400,6 @@ func (client WebApplicationFirewallPoliciesClient) listNextResults(ctx context.C
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.WebApplicationFirewallPoliciesClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -453,6 +453,7 @@ func (client WebApplicationFirewallPoliciesClient) ListAll(ctx context.Context) 
 	}
 	if result.wafplr.hasNextLink() && result.wafplr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -512,7 +513,6 @@ func (client WebApplicationFirewallPoliciesClient) listAllNextResults(ctx contex
 	result, err = client.ListAllResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.WebApplicationFirewallPoliciesClient", "listAllNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
