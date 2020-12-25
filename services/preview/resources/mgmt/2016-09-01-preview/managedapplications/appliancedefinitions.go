@@ -586,6 +586,7 @@ func (client ApplianceDefinitionsClient) ListByResourceGroup(ctx context.Context
 	}
 	if result.adlr.hasNextLink() && result.adlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -646,7 +647,6 @@ func (client ApplianceDefinitionsClient) listByResourceGroupNextResults(ctx cont
 	result, err = client.ListByResourceGroupResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "managedapplications.ApplianceDefinitionsClient", "listByResourceGroupNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
