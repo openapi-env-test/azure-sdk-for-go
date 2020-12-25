@@ -494,6 +494,7 @@ func (client GroupsClient) List(ctx context.Context, filter string, top *int32) 
 	}
 	if result.glr.hasNextLink() && result.glr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -559,7 +560,6 @@ func (client GroupsClient) listNextResults(ctx context.Context, lastResults Grou
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "resources.GroupsClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -627,6 +627,7 @@ func (client GroupsClient) ListResources(ctx context.Context, resourceGroupName 
 	}
 	if result.lr.hasNextLink() && result.lr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -696,7 +697,6 @@ func (client GroupsClient) listResourcesNextResults(ctx context.Context, lastRes
 	result, err = client.ListResourcesResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "resources.GroupsClient", "listResourcesNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
