@@ -397,6 +397,7 @@ func (client VirtualNetworkGatewayConnectionsClient) List(ctx context.Context, r
 	}
 	if result.vngclr.hasNextLink() && result.vngclr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -457,7 +458,6 @@ func (client VirtualNetworkGatewayConnectionsClient) listNextResults(ctx context
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.VirtualNetworkGatewayConnectionsClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
