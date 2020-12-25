@@ -349,6 +349,7 @@ func (client InterfaceTapConfigurationsClient) List(ctx context.Context, resourc
 	}
 	if result.itclr.hasNextLink() && result.itclr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -410,7 +411,6 @@ func (client InterfaceTapConfigurationsClient) listNextResults(ctx context.Conte
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.InterfaceTapConfigurationsClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
