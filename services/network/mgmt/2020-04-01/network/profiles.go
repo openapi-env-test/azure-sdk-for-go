@@ -310,6 +310,7 @@ func (client ProfilesClient) List(ctx context.Context, resourceGroupName string)
 	}
 	if result.plr.hasNextLink() && result.plr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -370,7 +371,6 @@ func (client ProfilesClient) listNextResults(ctx context.Context, lastResults Pr
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.ProfilesClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -424,6 +424,7 @@ func (client ProfilesClient) ListAll(ctx context.Context) (result ProfileListRes
 	}
 	if result.plr.hasNextLink() && result.plr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -483,7 +484,6 @@ func (client ProfilesClient) listAllNextResults(ctx context.Context, lastResults
 	result, err = client.ListAllResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.ProfilesClient", "listAllNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
