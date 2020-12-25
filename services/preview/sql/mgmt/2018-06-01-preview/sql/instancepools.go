@@ -319,6 +319,7 @@ func (client InstancePoolsClient) List(ctx context.Context) (result InstancePool
 	}
 	if result.iplr.hasNextLink() && result.iplr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -378,7 +379,6 @@ func (client InstancePoolsClient) listNextResults(ctx context.Context, lastResul
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "sql.InstancePoolsClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -435,6 +435,7 @@ func (client InstancePoolsClient) ListByResourceGroup(ctx context.Context, resou
 	}
 	if result.iplr.hasNextLink() && result.iplr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -495,7 +496,6 @@ func (client InstancePoolsClient) listByResourceGroupNextResults(ctx context.Con
 	result, err = client.ListByResourceGroupResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "sql.InstancePoolsClient", "listByResourceGroupNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }

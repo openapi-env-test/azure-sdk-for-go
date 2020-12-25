@@ -405,6 +405,7 @@ func (client ManagedDatabasesClient) ListByInstance(ctx context.Context, resourc
 	}
 	if result.mdlr.hasNextLink() && result.mdlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -466,7 +467,6 @@ func (client ManagedDatabasesClient) listByInstanceNextResults(ctx context.Conte
 	result, err = client.ListByInstanceResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "sql.ManagedDatabasesClient", "listByInstanceNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
