@@ -245,6 +245,7 @@ func (client ManagedBackupShortTermRetentionPoliciesClient) ListByDatabase(ctx c
 	}
 	if result.mbstrplr.hasNextLink() && result.mbstrplr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -307,7 +308,6 @@ func (client ManagedBackupShortTermRetentionPoliciesClient) listByDatabaseNextRe
 	result, err = client.ListByDatabaseResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "sql.ManagedBackupShortTermRetentionPoliciesClient", "listByDatabaseNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
