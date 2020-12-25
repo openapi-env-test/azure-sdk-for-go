@@ -324,6 +324,7 @@ func (client VirtualNetworkPeeringsClient) List(ctx context.Context, resourceGro
 	}
 	if result.vnplr.hasNextLink() && result.vnplr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -385,7 +386,6 @@ func (client VirtualNetworkPeeringsClient) listNextResults(ctx context.Context, 
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.VirtualNetworkPeeringsClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }

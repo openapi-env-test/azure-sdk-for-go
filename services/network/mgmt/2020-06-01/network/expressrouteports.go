@@ -390,6 +390,7 @@ func (client ExpressRoutePortsClient) List(ctx context.Context) (result ExpressR
 	}
 	if result.erplr.hasNextLink() && result.erplr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -449,7 +450,6 @@ func (client ExpressRoutePortsClient) listNextResults(ctx context.Context, lastR
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.ExpressRoutePortsClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -505,6 +505,7 @@ func (client ExpressRoutePortsClient) ListByResourceGroup(ctx context.Context, r
 	}
 	if result.erplr.hasNextLink() && result.erplr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -565,7 +566,6 @@ func (client ExpressRoutePortsClient) listByResourceGroupNextResults(ctx context
 	result, err = client.ListByResourceGroupResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.ExpressRoutePortsClient", "listByResourceGroupNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }

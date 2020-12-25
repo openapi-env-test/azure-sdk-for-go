@@ -316,6 +316,7 @@ func (client SubnetsClient) List(ctx context.Context, resourceGroupName string, 
 	}
 	if result.slr.hasNextLink() && result.slr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -377,7 +378,6 @@ func (client SubnetsClient) listNextResults(ctx context.Context, lastResults Sub
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.SubnetsClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
