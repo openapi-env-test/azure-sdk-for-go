@@ -461,6 +461,7 @@ func (client ExpressRouteCircuitsClient) List(ctx context.Context, resourceGroup
 	}
 	if result.erclr.hasNextLink() && result.erclr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -521,7 +522,6 @@ func (client ExpressRouteCircuitsClient) listNextResults(ctx context.Context, la
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.ExpressRouteCircuitsClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -575,6 +575,7 @@ func (client ExpressRouteCircuitsClient) ListAll(ctx context.Context) (result Ex
 	}
 	if result.erclr.hasNextLink() && result.erclr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -634,7 +635,6 @@ func (client ExpressRouteCircuitsClient) listAllNextResults(ctx context.Context,
 	result, err = client.ListAllResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.ExpressRouteCircuitsClient", "listAllNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
