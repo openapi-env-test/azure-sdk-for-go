@@ -310,6 +310,7 @@ func (client CustomIPPrefixesClient) List(ctx context.Context, resourceGroupName
 	}
 	if result.ciplr.hasNextLink() && result.ciplr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -370,7 +371,6 @@ func (client CustomIPPrefixesClient) listNextResults(ctx context.Context, lastRe
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.CustomIPPrefixesClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -424,6 +424,7 @@ func (client CustomIPPrefixesClient) ListAll(ctx context.Context) (result Custom
 	}
 	if result.ciplr.hasNextLink() && result.ciplr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -483,7 +484,6 @@ func (client CustomIPPrefixesClient) listAllNextResults(ctx context.Context, las
 	result, err = client.ListAllResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.CustomIPPrefixesClient", "listAllNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
