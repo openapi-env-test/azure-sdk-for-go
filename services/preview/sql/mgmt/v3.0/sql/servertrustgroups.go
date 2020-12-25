@@ -328,6 +328,7 @@ func (client ServerTrustGroupsClient) ListByInstance(ctx context.Context, resour
 	}
 	if result.stglr.hasNextLink() && result.stglr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -389,7 +390,6 @@ func (client ServerTrustGroupsClient) listByInstanceNextResults(ctx context.Cont
 	result, err = client.ListByInstanceResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "sql.ServerTrustGroupsClient", "listByInstanceNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -447,6 +447,7 @@ func (client ServerTrustGroupsClient) ListByLocation(ctx context.Context, resour
 	}
 	if result.stglr.hasNextLink() && result.stglr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -508,7 +509,6 @@ func (client ServerTrustGroupsClient) listByLocationNextResults(ctx context.Cont
 	result, err = client.ListByLocationResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "sql.ServerTrustGroupsClient", "listByLocationNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }

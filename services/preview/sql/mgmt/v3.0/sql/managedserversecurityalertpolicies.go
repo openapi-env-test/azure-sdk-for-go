@@ -240,6 +240,7 @@ func (client ManagedServerSecurityAlertPoliciesClient) ListByInstance(ctx contex
 	}
 	if result.mssaplr.hasNextLink() && result.mssaplr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -301,7 +302,6 @@ func (client ManagedServerSecurityAlertPoliciesClient) listByInstanceNextResults
 	result, err = client.ListByInstanceResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "sql.ManagedServerSecurityAlertPoliciesClient", "listByInstanceNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }

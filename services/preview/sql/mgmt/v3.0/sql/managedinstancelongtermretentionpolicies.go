@@ -245,6 +245,7 @@ func (client ManagedInstanceLongTermRetentionPoliciesClient) ListByDatabase(ctx 
 	}
 	if result.miltrplr.hasNextLink() && result.miltrplr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -307,7 +308,6 @@ func (client ManagedInstanceLongTermRetentionPoliciesClient) listByDatabaseNextR
 	result, err = client.ListByDatabaseResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "sql.ManagedInstanceLongTermRetentionPoliciesClient", "listByDatabaseNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
