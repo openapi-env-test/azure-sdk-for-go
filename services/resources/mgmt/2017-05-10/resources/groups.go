@@ -495,6 +495,7 @@ func (client GroupsClient) List(ctx context.Context, filter string, top *int32) 
 	}
 	if result.glr.hasNextLink() && result.glr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -560,7 +561,6 @@ func (client GroupsClient) listNextResults(ctx context.Context, lastResults Grou
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "resources.GroupsClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
