@@ -325,6 +325,7 @@ func (client ExpressRouteCircuitPeeringsClient) List(ctx context.Context, resour
 	}
 	if result.ercplr.hasNextLink() && result.ercplr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -386,7 +387,6 @@ func (client ExpressRouteCircuitPeeringsClient) listNextResults(ctx context.Cont
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.ExpressRouteCircuitPeeringsClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }

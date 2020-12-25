@@ -309,6 +309,7 @@ func (client PublicIPPrefixesClient) List(ctx context.Context, resourceGroupName
 	}
 	if result.piplr.hasNextLink() && result.piplr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -369,7 +370,6 @@ func (client PublicIPPrefixesClient) listNextResults(ctx context.Context, lastRe
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.PublicIPPrefixesClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -423,6 +423,7 @@ func (client PublicIPPrefixesClient) ListAll(ctx context.Context) (result Public
 	}
 	if result.piplr.hasNextLink() && result.piplr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -482,7 +483,6 @@ func (client PublicIPPrefixesClient) listAllNextResults(ctx context.Context, las
 	result, err = client.ListAllResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.PublicIPPrefixesClient", "listAllNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
