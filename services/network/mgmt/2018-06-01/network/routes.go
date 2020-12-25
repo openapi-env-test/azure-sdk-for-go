@@ -311,6 +311,7 @@ func (client RoutesClient) List(ctx context.Context, resourceGroupName string, r
 	}
 	if result.rlr.hasNextLink() && result.rlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -372,7 +373,6 @@ func (client RoutesClient) listNextResults(ctx context.Context, lastResults Rout
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.RoutesClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
