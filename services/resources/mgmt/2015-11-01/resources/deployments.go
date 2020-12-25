@@ -584,6 +584,7 @@ func (client DeploymentsClient) List(ctx context.Context, resourceGroupName stri
 	}
 	if result.dlr.hasNextLink() && result.dlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -650,7 +651,6 @@ func (client DeploymentsClient) listNextResults(ctx context.Context, lastResults
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "resources.DeploymentsClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
