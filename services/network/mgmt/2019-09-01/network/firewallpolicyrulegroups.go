@@ -326,6 +326,7 @@ func (client FirewallPolicyRuleGroupsClient) List(ctx context.Context, resourceG
 	}
 	if result.fprglr.hasNextLink() && result.fprglr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -387,7 +388,6 @@ func (client FirewallPolicyRuleGroupsClient) listNextResults(ctx context.Context
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.FirewallPolicyRuleGroupsClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
