@@ -319,6 +319,7 @@ func (client VirtualRoutersClient) List(ctx context.Context) (result VirtualRout
 	}
 	if result.vrlr.hasNextLink() && result.vrlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -378,7 +379,6 @@ func (client VirtualRoutersClient) listNextResults(ctx context.Context, lastResu
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.VirtualRoutersClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -434,6 +434,7 @@ func (client VirtualRoutersClient) ListByResourceGroup(ctx context.Context, reso
 	}
 	if result.vrlr.hasNextLink() && result.vrlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -494,7 +495,6 @@ func (client VirtualRoutersClient) listByResourceGroupNextResults(ctx context.Co
 	result, err = client.ListByResourceGroupResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.VirtualRoutersClient", "listByResourceGroupNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
