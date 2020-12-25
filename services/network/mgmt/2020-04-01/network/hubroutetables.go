@@ -313,6 +313,7 @@ func (client HubRouteTablesClient) List(ctx context.Context, resourceGroupName s
 	}
 	if result.lhrtr.hasNextLink() && result.lhrtr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -374,7 +375,6 @@ func (client HubRouteTablesClient) listNextResults(ctx context.Context, lastResu
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.HubRouteTablesClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }

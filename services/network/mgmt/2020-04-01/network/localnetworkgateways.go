@@ -334,6 +334,7 @@ func (client LocalNetworkGatewaysClient) List(ctx context.Context, resourceGroup
 	}
 	if result.lnglr.hasNextLink() && result.lnglr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -394,7 +395,6 @@ func (client LocalNetworkGatewaysClient) listNextResults(ctx context.Context, la
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.LocalNetworkGatewaysClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
