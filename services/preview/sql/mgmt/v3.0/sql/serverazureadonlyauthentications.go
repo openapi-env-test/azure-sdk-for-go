@@ -325,6 +325,7 @@ func (client ServerAzureADOnlyAuthenticationsClient) ListByServer(ctx context.Co
 	}
 	if result.aaoalr.hasNextLink() && result.aaoalr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -386,7 +387,6 @@ func (client ServerAzureADOnlyAuthenticationsClient) listByServerNextResults(ctx
 	result, err = client.ListByServerResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "sql.ServerAzureADOnlyAuthenticationsClient", "listByServerNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
