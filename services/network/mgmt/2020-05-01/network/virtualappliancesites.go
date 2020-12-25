@@ -314,6 +314,7 @@ func (client VirtualApplianceSitesClient) List(ctx context.Context, resourceGrou
 	}
 	if result.vaslr.hasNextLink() && result.vaslr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -375,7 +376,6 @@ func (client VirtualApplianceSitesClient) listNextResults(ctx context.Context, l
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.VirtualApplianceSitesClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }

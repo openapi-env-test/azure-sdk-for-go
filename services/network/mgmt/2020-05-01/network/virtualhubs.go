@@ -396,6 +396,7 @@ func (client VirtualHubsClient) List(ctx context.Context) (result ListVirtualHub
 	}
 	if result.lvhr.hasNextLink() && result.lvhr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -455,7 +456,6 @@ func (client VirtualHubsClient) listNextResults(ctx context.Context, lastResults
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.VirtualHubsClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -511,6 +511,7 @@ func (client VirtualHubsClient) ListByResourceGroup(ctx context.Context, resourc
 	}
 	if result.lvhr.hasNextLink() && result.lvhr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -571,7 +572,6 @@ func (client VirtualHubsClient) listByResourceGroupNextResults(ctx context.Conte
 	result, err = client.ListByResourceGroupResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.VirtualHubsClient", "listByResourceGroupNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }

@@ -331,6 +331,7 @@ func (client VirtualHubIPConfigurationClient) List(ctx context.Context, resource
 	}
 	if result.lvhicr.hasNextLink() && result.lvhicr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -392,7 +393,6 @@ func (client VirtualHubIPConfigurationClient) listNextResults(ctx context.Contex
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.VirtualHubIPConfigurationClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
