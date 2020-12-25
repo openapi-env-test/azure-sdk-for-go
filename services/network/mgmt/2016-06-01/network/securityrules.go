@@ -322,6 +322,7 @@ func (client SecurityRulesClient) List(ctx context.Context, resourceGroupName st
 	}
 	if result.srlr.hasNextLink() && result.srlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -383,7 +384,6 @@ func (client SecurityRulesClient) listNextResults(ctx context.Context, lastResul
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.SecurityRulesClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
