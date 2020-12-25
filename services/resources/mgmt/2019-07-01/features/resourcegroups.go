@@ -500,6 +500,7 @@ func (client ResourceGroupsClient) List(ctx context.Context, filter string, top 
 	}
 	if result.rglr.hasNextLink() && result.rglr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -565,7 +566,6 @@ func (client ResourceGroupsClient) listNextResults(ctx context.Context, lastResu
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "features.ResourceGroupsClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }

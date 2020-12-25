@@ -2745,6 +2745,7 @@ func (client DeploymentsClient) ListAtManagementGroupScope(ctx context.Context, 
 	}
 	if result.dlr.hasNextLink() && result.dlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -2810,7 +2811,6 @@ func (client DeploymentsClient) listAtManagementGroupScopeNextResults(ctx contex
 	result, err = client.ListAtManagementGroupScopeResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "features.DeploymentsClient", "listAtManagementGroupScopeNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -2869,6 +2869,7 @@ func (client DeploymentsClient) ListAtScope(ctx context.Context, scope string, f
 	}
 	if result.dlr.hasNextLink() && result.dlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -2934,7 +2935,6 @@ func (client DeploymentsClient) listAtScopeNextResults(ctx context.Context, last
 	result, err = client.ListAtScopeResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "features.DeploymentsClient", "listAtScopeNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -2992,6 +2992,7 @@ func (client DeploymentsClient) ListAtSubscriptionScope(ctx context.Context, fil
 	}
 	if result.dlr.hasNextLink() && result.dlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -3057,7 +3058,6 @@ func (client DeploymentsClient) listAtSubscriptionScopeNextResults(ctx context.C
 	result, err = client.ListAtSubscriptionScopeResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "features.DeploymentsClient", "listAtSubscriptionScopeNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -3115,6 +3115,7 @@ func (client DeploymentsClient) ListAtTenantScope(ctx context.Context, filter st
 	}
 	if result.dlr.hasNextLink() && result.dlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -3176,7 +3177,6 @@ func (client DeploymentsClient) listAtTenantScopeNextResults(ctx context.Context
 	result, err = client.ListAtTenantScopeResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "features.DeploymentsClient", "listAtTenantScopeNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -3244,6 +3244,7 @@ func (client DeploymentsClient) ListByResourceGroup(ctx context.Context, resourc
 	}
 	if result.dlr.hasNextLink() && result.dlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -3310,7 +3311,6 @@ func (client DeploymentsClient) listByResourceGroupNextResults(ctx context.Conte
 	result, err = client.ListByResourceGroupResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "features.DeploymentsClient", "listByResourceGroupNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
