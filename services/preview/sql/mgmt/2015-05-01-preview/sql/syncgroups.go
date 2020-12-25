@@ -404,6 +404,7 @@ func (client SyncGroupsClient) ListByDatabase(ctx context.Context, resourceGroup
 	}
 	if result.sglr.hasNextLink() && result.sglr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -466,7 +467,6 @@ func (client SyncGroupsClient) listByDatabaseNextResults(ctx context.Context, la
 	result, err = client.ListByDatabaseResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "sql.SyncGroupsClient", "listByDatabaseNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -526,6 +526,7 @@ func (client SyncGroupsClient) ListHubSchemas(ctx context.Context, resourceGroup
 	}
 	if result.sfsplr.hasNextLink() && result.sfsplr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -589,7 +590,6 @@ func (client SyncGroupsClient) listHubSchemasNextResults(ctx context.Context, la
 	result, err = client.ListHubSchemasResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "sql.SyncGroupsClient", "listHubSchemasNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -653,6 +653,7 @@ func (client SyncGroupsClient) ListLogs(ctx context.Context, resourceGroupName s
 	}
 	if result.sgllr.hasNextLink() && result.sgllr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -722,7 +723,6 @@ func (client SyncGroupsClient) listLogsNextResults(ctx context.Context, lastResu
 	result, err = client.ListLogsResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "sql.SyncGroupsClient", "listLogsNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -778,6 +778,7 @@ func (client SyncGroupsClient) ListSyncDatabaseIds(ctx context.Context, location
 	}
 	if result.sdilr.hasNextLink() && result.sdilr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -838,7 +839,6 @@ func (client SyncGroupsClient) listSyncDatabaseIdsNextResults(ctx context.Contex
 	result, err = client.ListSyncDatabaseIdsResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "sql.SyncGroupsClient", "listSyncDatabaseIdsNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
