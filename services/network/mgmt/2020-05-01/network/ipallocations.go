@@ -307,6 +307,7 @@ func (client IPAllocationsClient) List(ctx context.Context) (result IPAllocation
 	}
 	if result.ialr.hasNextLink() && result.ialr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -366,7 +367,6 @@ func (client IPAllocationsClient) listNextResults(ctx context.Context, lastResul
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.IPAllocationsClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -422,6 +422,7 @@ func (client IPAllocationsClient) ListByResourceGroup(ctx context.Context, resou
 	}
 	if result.ialr.hasNextLink() && result.ialr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -482,7 +483,6 @@ func (client IPAllocationsClient) listByResourceGroupNextResults(ctx context.Con
 	result, err = client.ListByResourceGroupResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.IPAllocationsClient", "listByResourceGroupNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
