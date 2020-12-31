@@ -304,6 +304,7 @@ func (client LoadBalancersClient) List(ctx context.Context, resourceGroupName st
 	}
 	if result.lblr.hasNextLink() && result.lblr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -364,7 +365,6 @@ func (client LoadBalancersClient) listNextResults(ctx context.Context, lastResul
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.LoadBalancersClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -418,6 +418,7 @@ func (client LoadBalancersClient) ListAll(ctx context.Context) (result LoadBalan
 	}
 	if result.lblr.hasNextLink() && result.lblr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -477,7 +478,6 @@ func (client LoadBalancersClient) listAllNextResults(ctx context.Context, lastRe
 	result, err = client.ListAllResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.LoadBalancersClient", "listAllNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
