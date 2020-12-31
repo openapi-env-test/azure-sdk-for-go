@@ -350,6 +350,7 @@ func (client EndpointsClient) ListByProfile(ctx context.Context, resourceGroupNa
 	}
 	if result.elr.hasNextLink() && result.elr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -411,7 +412,6 @@ func (client EndpointsClient) listByProfileNextResults(ctx context.Context, last
 	result, err = client.ListByProfileResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "cdn.EndpointsClient", "listByProfileNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -477,6 +477,7 @@ func (client EndpointsClient) ListResourceUsage(ctx context.Context, resourceGro
 	}
 	if result.rulr.hasNextLink() && result.rulr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -539,7 +540,6 @@ func (client EndpointsClient) listResourceUsageNextResults(ctx context.Context, 
 	result, err = client.ListResourceUsageResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "cdn.EndpointsClient", "listResourceUsageNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
