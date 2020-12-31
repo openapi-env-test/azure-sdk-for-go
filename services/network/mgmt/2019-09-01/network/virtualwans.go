@@ -303,6 +303,7 @@ func (client VirtualWansClient) List(ctx context.Context) (result ListVirtualWAN
 	}
 	if result.lvwnr.hasNextLink() && result.lvwnr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -362,7 +363,6 @@ func (client VirtualWansClient) listNextResults(ctx context.Context, lastResults
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.VirtualWansClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -418,6 +418,7 @@ func (client VirtualWansClient) ListByResourceGroup(ctx context.Context, resourc
 	}
 	if result.lvwnr.hasNextLink() && result.lvwnr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -478,7 +479,6 @@ func (client VirtualWansClient) listByResourceGroupNextResults(ctx context.Conte
 	result, err = client.ListByResourceGroupResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.VirtualWansClient", "listByResourceGroupNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
