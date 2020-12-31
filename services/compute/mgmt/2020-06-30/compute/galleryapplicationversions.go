@@ -344,6 +344,7 @@ func (client GalleryApplicationVersionsClient) ListByGalleryApplication(ctx cont
 	}
 	if result.gavl.hasNextLink() && result.gavl.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -406,7 +407,6 @@ func (client GalleryApplicationVersionsClient) listByGalleryApplicationNextResul
 	result, err = client.ListByGalleryApplicationResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "compute.GalleryApplicationVersionsClient", "listByGalleryApplicationNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
