@@ -322,6 +322,7 @@ func (client DiskEncryptionSetsClient) List(ctx context.Context) (result DiskEnc
 	}
 	if result.desl.hasNextLink() && result.desl.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -381,7 +382,6 @@ func (client DiskEncryptionSetsClient) listNextResults(ctx context.Context, last
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "compute.DiskEncryptionSetsClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -440,6 +440,7 @@ func (client DiskEncryptionSetsClient) ListAssociatedResources(ctx context.Conte
 	}
 	if result.rul.hasNextLink() && result.rul.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -501,7 +502,6 @@ func (client DiskEncryptionSetsClient) listAssociatedResourcesNextResults(ctx co
 	result, err = client.ListAssociatedResourcesResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "compute.DiskEncryptionSetsClient", "listAssociatedResourcesNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -557,6 +557,7 @@ func (client DiskEncryptionSetsClient) ListByResourceGroup(ctx context.Context, 
 	}
 	if result.desl.hasNextLink() && result.desl.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -617,7 +618,6 @@ func (client DiskEncryptionSetsClient) listByResourceGroupNextResults(ctx contex
 	result, err = client.ListByResourceGroupResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "compute.DiskEncryptionSetsClient", "listByResourceGroupNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }

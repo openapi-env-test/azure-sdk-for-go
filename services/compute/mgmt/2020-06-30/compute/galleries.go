@@ -303,6 +303,7 @@ func (client GalleriesClient) List(ctx context.Context) (result GalleryListPage,
 	}
 	if result.gl.hasNextLink() && result.gl.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -362,7 +363,6 @@ func (client GalleriesClient) listNextResults(ctx context.Context, lastResults G
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "compute.GalleriesClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -418,6 +418,7 @@ func (client GalleriesClient) ListByResourceGroup(ctx context.Context, resourceG
 	}
 	if result.gl.hasNextLink() && result.gl.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -478,7 +479,6 @@ func (client GalleriesClient) listByResourceGroupNextResults(ctx context.Context
 	result, err = client.ListByResourceGroupResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "compute.GalleriesClient", "listByResourceGroupNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
