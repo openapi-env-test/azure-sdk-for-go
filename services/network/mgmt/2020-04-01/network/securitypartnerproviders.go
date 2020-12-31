@@ -304,6 +304,7 @@ func (client SecurityPartnerProvidersClient) List(ctx context.Context) (result S
 	}
 	if result.spplr.hasNextLink() && result.spplr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -363,7 +364,6 @@ func (client SecurityPartnerProvidersClient) listNextResults(ctx context.Context
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.SecurityPartnerProvidersClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -419,6 +419,7 @@ func (client SecurityPartnerProvidersClient) ListByResourceGroup(ctx context.Con
 	}
 	if result.spplr.hasNextLink() && result.spplr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -479,7 +480,6 @@ func (client SecurityPartnerProvidersClient) listByResourceGroupNextResults(ctx 
 	result, err = client.ListByResourceGroupResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.SecurityPartnerProvidersClient", "listByResourceGroupNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
