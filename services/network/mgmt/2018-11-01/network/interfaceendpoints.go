@@ -309,6 +309,7 @@ func (client InterfaceEndpointsClient) List(ctx context.Context, resourceGroupNa
 	}
 	if result.ielr.hasNextLink() && result.ielr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -369,7 +370,6 @@ func (client InterfaceEndpointsClient) listNextResults(ctx context.Context, last
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.InterfaceEndpointsClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -423,6 +423,7 @@ func (client InterfaceEndpointsClient) ListBySubscription(ctx context.Context) (
 	}
 	if result.ielr.hasNextLink() && result.ielr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -482,7 +483,6 @@ func (client InterfaceEndpointsClient) listBySubscriptionNextResults(ctx context
 	result, err = client.ListBySubscriptionResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.InterfaceEndpointsClient", "listBySubscriptionNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
