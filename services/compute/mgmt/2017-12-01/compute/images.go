@@ -308,6 +308,7 @@ func (client ImagesClient) List(ctx context.Context) (result ImageListResultPage
 	}
 	if result.ilr.hasNextLink() && result.ilr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -367,7 +368,6 @@ func (client ImagesClient) listNextResults(ctx context.Context, lastResults Imag
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "compute.ImagesClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -423,6 +423,7 @@ func (client ImagesClient) ListByResourceGroup(ctx context.Context, resourceGrou
 	}
 	if result.ilr.hasNextLink() && result.ilr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -483,7 +484,6 @@ func (client ImagesClient) listByResourceGroupNextResults(ctx context.Context, l
 	result, err = client.ListByResourceGroupResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "compute.ImagesClient", "listByResourceGroupNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
