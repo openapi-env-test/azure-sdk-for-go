@@ -310,6 +310,7 @@ func (client OrganizationClient) ListByResourceGroup(ctx context.Context, resour
 	}
 	if result.orlr.hasNextLink() && result.orlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -370,7 +371,6 @@ func (client OrganizationClient) listByResourceGroupNextResults(ctx context.Cont
 	result, err = client.ListByResourceGroupResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "confluent.OrganizationClient", "listByResourceGroupNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -424,6 +424,7 @@ func (client OrganizationClient) ListBySubscription(ctx context.Context) (result
 	}
 	if result.orlr.hasNextLink() && result.orlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -483,7 +484,6 @@ func (client OrganizationClient) listBySubscriptionNextResults(ctx context.Conte
 	result, err = client.ListBySubscriptionResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "confluent.OrganizationClient", "listBySubscriptionNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
