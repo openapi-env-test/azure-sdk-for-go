@@ -304,6 +304,7 @@ func (client VirtualNetworksClient) List(ctx context.Context, resourceGroupName 
 	}
 	if result.vnlr.hasNextLink() && result.vnlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -364,7 +365,6 @@ func (client VirtualNetworksClient) listNextResults(ctx context.Context, lastRes
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.VirtualNetworksClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -418,6 +418,7 @@ func (client VirtualNetworksClient) ListAll(ctx context.Context) (result Virtual
 	}
 	if result.vnlr.hasNextLink() && result.vnlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -477,7 +478,6 @@ func (client VirtualNetworksClient) listAllNextResults(ctx context.Context, last
 	result, err = client.ListAllResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.VirtualNetworksClient", "listAllNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
