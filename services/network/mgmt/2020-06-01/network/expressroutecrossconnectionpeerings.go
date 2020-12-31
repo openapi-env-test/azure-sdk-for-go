@@ -327,6 +327,7 @@ func (client ExpressRouteCrossConnectionPeeringsClient) List(ctx context.Context
 	}
 	if result.erccpl.hasNextLink() && result.erccpl.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -388,7 +389,6 @@ func (client ExpressRouteCrossConnectionPeeringsClient) listNextResults(ctx cont
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.ExpressRouteCrossConnectionPeeringsClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }

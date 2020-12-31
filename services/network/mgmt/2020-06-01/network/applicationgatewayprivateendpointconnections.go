@@ -233,6 +233,7 @@ func (client ApplicationGatewayPrivateEndpointConnectionsClient) List(ctx contex
 	}
 	if result.agpeclr.hasNextLink() && result.agpeclr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -294,7 +295,6 @@ func (client ApplicationGatewayPrivateEndpointConnectionsClient) listNextResults
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.ApplicationGatewayPrivateEndpointConnectionsClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }

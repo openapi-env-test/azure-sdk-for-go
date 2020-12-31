@@ -306,6 +306,7 @@ func (client DscpConfigurationClient) List(ctx context.Context, resourceGroupNam
 	}
 	if result.dclr.hasNextLink() && result.dclr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -366,7 +367,6 @@ func (client DscpConfigurationClient) listNextResults(ctx context.Context, lastR
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.DscpConfigurationClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -420,6 +420,7 @@ func (client DscpConfigurationClient) ListAll(ctx context.Context) (result DscpC
 	}
 	if result.dclr.hasNextLink() && result.dclr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -479,7 +480,6 @@ func (client DscpConfigurationClient) listAllNextResults(ctx context.Context, la
 	result, err = client.ListAllResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.DscpConfigurationClient", "listAllNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
