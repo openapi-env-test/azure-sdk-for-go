@@ -306,6 +306,7 @@ func (client ApplicationSecurityGroupsClient) List(ctx context.Context, resource
 	}
 	if result.asglr.hasNextLink() && result.asglr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -366,7 +367,6 @@ func (client ApplicationSecurityGroupsClient) listNextResults(ctx context.Contex
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.ApplicationSecurityGroupsClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -420,6 +420,7 @@ func (client ApplicationSecurityGroupsClient) ListAll(ctx context.Context) (resu
 	}
 	if result.asglr.hasNextLink() && result.asglr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -479,7 +480,6 @@ func (client ApplicationSecurityGroupsClient) listAllNextResults(ctx context.Con
 	result, err = client.ListAllResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.ApplicationSecurityGroupsClient", "listAllNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
