@@ -326,6 +326,7 @@ func (client GalleryImagesClient) ListByGallery(ctx context.Context, resourceGro
 	}
 	if result.gil.hasNextLink() && result.gil.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -387,7 +388,6 @@ func (client GalleryImagesClient) listByGalleryNextResults(ctx context.Context, 
 	result, err = client.ListByGalleryResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "compute.GalleryImagesClient", "listByGalleryNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
