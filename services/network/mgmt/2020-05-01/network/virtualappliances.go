@@ -320,6 +320,7 @@ func (client VirtualAppliancesClient) List(ctx context.Context) (result VirtualA
 	}
 	if result.valr.hasNextLink() && result.valr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -379,7 +380,6 @@ func (client VirtualAppliancesClient) listNextResults(ctx context.Context, lastR
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.VirtualAppliancesClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -435,6 +435,7 @@ func (client VirtualAppliancesClient) ListByResourceGroup(ctx context.Context, r
 	}
 	if result.valr.hasNextLink() && result.valr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -495,7 +496,6 @@ func (client VirtualAppliancesClient) listByResourceGroupNextResults(ctx context
 	result, err = client.ListByResourceGroupResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.VirtualAppliancesClient", "listByResourceGroupNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
