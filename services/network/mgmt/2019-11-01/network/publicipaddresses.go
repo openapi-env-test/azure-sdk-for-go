@@ -410,6 +410,7 @@ func (client PublicIPAddressesClient) List(ctx context.Context, resourceGroupNam
 	}
 	if result.pialr.hasNextLink() && result.pialr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -470,7 +471,6 @@ func (client PublicIPAddressesClient) listNextResults(ctx context.Context, lastR
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.PublicIPAddressesClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -524,6 +524,7 @@ func (client PublicIPAddressesClient) ListAll(ctx context.Context) (result Publi
 	}
 	if result.pialr.hasNextLink() && result.pialr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -583,7 +584,6 @@ func (client PublicIPAddressesClient) listAllNextResults(ctx context.Context, la
 	result, err = client.ListAllResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.PublicIPAddressesClient", "listAllNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -641,6 +641,7 @@ func (client PublicIPAddressesClient) ListVirtualMachineScaleSetPublicIPAddresse
 	}
 	if result.pialr.hasNextLink() && result.pialr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -702,7 +703,6 @@ func (client PublicIPAddressesClient) listVirtualMachineScaleSetPublicIPAddresse
 	result, err = client.ListVirtualMachineScaleSetPublicIPAddressesResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.PublicIPAddressesClient", "listVirtualMachineScaleSetPublicIPAddressesNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -763,6 +763,7 @@ func (client PublicIPAddressesClient) ListVirtualMachineScaleSetVMPublicIPAddres
 	}
 	if result.pialr.hasNextLink() && result.pialr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -827,7 +828,6 @@ func (client PublicIPAddressesClient) listVirtualMachineScaleSetVMPublicIPAddres
 	result, err = client.ListVirtualMachineScaleSetVMPublicIPAddressesResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.PublicIPAddressesClient", "listVirtualMachineScaleSetVMPublicIPAddressesNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
