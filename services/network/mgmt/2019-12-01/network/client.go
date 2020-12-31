@@ -246,6 +246,7 @@ func (client BaseClient) DisconnectActiveSessions(ctx context.Context, resourceG
 	}
 	if result.bsdr.hasNextLink() && result.bsdr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -309,7 +310,6 @@ func (client BaseClient) disconnectActiveSessionsNextResults(ctx context.Context
 	result, err = client.DisconnectActiveSessionsResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.BaseClient", "disconnectActiveSessionsNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -562,6 +562,7 @@ func (client BaseClient) GetBastionShareableLink(ctx context.Context, resourceGr
 	}
 	if result.bsllr.hasNextLink() && result.bsllr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -625,7 +626,6 @@ func (client BaseClient) getBastionShareableLinkNextResults(ctx context.Context,
 	result, err = client.GetBastionShareableLinkResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.BaseClient", "getBastionShareableLinkNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }

@@ -309,6 +309,7 @@ func (client NatGatewaysClient) List(ctx context.Context, resourceGroupName stri
 	}
 	if result.nglr.hasNextLink() && result.nglr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -369,7 +370,6 @@ func (client NatGatewaysClient) listNextResults(ctx context.Context, lastResults
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.NatGatewaysClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -423,6 +423,7 @@ func (client NatGatewaysClient) ListAll(ctx context.Context) (result NatGatewayL
 	}
 	if result.nglr.hasNextLink() && result.nglr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -482,7 +483,6 @@ func (client NatGatewaysClient) listAllNextResults(ctx context.Context, lastResu
 	result, err = client.ListAllResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.NatGatewaysClient", "listAllNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
