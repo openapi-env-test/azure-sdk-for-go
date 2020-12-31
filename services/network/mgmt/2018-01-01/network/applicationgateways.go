@@ -475,6 +475,7 @@ func (client ApplicationGatewaysClient) List(ctx context.Context, resourceGroupN
 	}
 	if result.aglr.hasNextLink() && result.aglr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -535,7 +536,6 @@ func (client ApplicationGatewaysClient) listNextResults(ctx context.Context, las
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.ApplicationGatewaysClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -589,6 +589,7 @@ func (client ApplicationGatewaysClient) ListAll(ctx context.Context) (result App
 	}
 	if result.aglr.hasNextLink() && result.aglr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -648,7 +649,6 @@ func (client ApplicationGatewaysClient) listAllNextResults(ctx context.Context, 
 	result, err = client.ListAllResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.ApplicationGatewaysClient", "listAllNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -773,6 +773,7 @@ func (client ApplicationGatewaysClient) ListAvailableSslPredefinedPolicies(ctx c
 	}
 	if result.agaspp.hasNextLink() && result.agaspp.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -832,7 +833,6 @@ func (client ApplicationGatewaysClient) listAvailableSslPredefinedPoliciesNextRe
 	result, err = client.ListAvailableSslPredefinedPoliciesResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.ApplicationGatewaysClient", "listAvailableSslPredefinedPoliciesNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
