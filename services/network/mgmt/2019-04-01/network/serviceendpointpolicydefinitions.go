@@ -313,6 +313,7 @@ func (client ServiceEndpointPolicyDefinitionsClient) ListByResourceGroup(ctx con
 	}
 	if result.sepdlr.hasNextLink() && result.sepdlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -374,7 +375,6 @@ func (client ServiceEndpointPolicyDefinitionsClient) listByResourceGroupNextResu
 	result, err = client.ListByResourceGroupResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.ServiceEndpointPolicyDefinitionsClient", "listByResourceGroupNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
