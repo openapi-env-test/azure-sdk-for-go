@@ -314,6 +314,7 @@ func (client ExpressRouteCircuitAuthorizationsClient) List(ctx context.Context, 
 	}
 	if result.alr.hasNextLink() && result.alr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -375,7 +376,6 @@ func (client ExpressRouteCircuitAuthorizationsClient) listNextResults(ctx contex
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.ExpressRouteCircuitAuthorizationsClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
