@@ -303,6 +303,7 @@ func (client BastionHostsClient) List(ctx context.Context) (result BastionHostLi
 	}
 	if result.bhlr.hasNextLink() && result.bhlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -362,7 +363,6 @@ func (client BastionHostsClient) listNextResults(ctx context.Context, lastResult
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.BastionHostsClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -418,6 +418,7 @@ func (client BastionHostsClient) ListByResourceGroup(ctx context.Context, resour
 	}
 	if result.bhlr.hasNextLink() && result.bhlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -478,7 +479,6 @@ func (client BastionHostsClient) listByResourceGroupNextResults(ctx context.Cont
 	result, err = client.ListByResourceGroupResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.BastionHostsClient", "listByResourceGroupNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
