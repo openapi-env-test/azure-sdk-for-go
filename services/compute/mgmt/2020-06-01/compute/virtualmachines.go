@@ -459,7 +459,7 @@ func (client VirtualMachinesClient) DeallocateResponder(resp *http.Response) (re
 // Parameters:
 // resourceGroupName - the name of the resource group.
 // VMName - the name of the virtual machine.
-// forceDeletion - optional parameter to force delete virtual machines.
+// forceDeletion - optional parameter to force delete virtual machines.(Feature in Preview)
 func (client VirtualMachinesClient) Delete(ctx context.Context, resourceGroupName string, VMName string, forceDeletion *bool) (result VirtualMachinesDeleteFuture, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/VirtualMachinesClient.Delete")
@@ -804,6 +804,7 @@ func (client VirtualMachinesClient) List(ctx context.Context, resourceGroupName 
 	}
 	if result.vmlr.hasNextLink() && result.vmlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -864,7 +865,6 @@ func (client VirtualMachinesClient) listNextResults(ctx context.Context, lastRes
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "compute.VirtualMachinesClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -921,6 +921,7 @@ func (client VirtualMachinesClient) ListAll(ctx context.Context, statusOnly stri
 	}
 	if result.vmlr.hasNextLink() && result.vmlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -983,7 +984,6 @@ func (client VirtualMachinesClient) listAllNextResults(ctx context.Context, last
 	result, err = client.ListAllResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "compute.VirtualMachinesClient", "listAllNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -1121,6 +1121,7 @@ func (client VirtualMachinesClient) ListByLocation(ctx context.Context, location
 	}
 	if result.vmlr.hasNextLink() && result.vmlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -1181,7 +1182,6 @@ func (client VirtualMachinesClient) listByLocationNextResults(ctx context.Contex
 	result, err = client.ListByLocationResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "compute.VirtualMachinesClient", "listByLocationNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
