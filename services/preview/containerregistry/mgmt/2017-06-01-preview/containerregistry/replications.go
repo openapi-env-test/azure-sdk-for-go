@@ -356,6 +356,7 @@ func (client ReplicationsClient) List(ctx context.Context, resourceGroupName str
 	}
 	if result.rlr.hasNextLink() && result.rlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -417,7 +418,6 @@ func (client ReplicationsClient) listNextResults(ctx context.Context, lastResult
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "containerregistry.ReplicationsClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
