@@ -559,6 +559,7 @@ func (client ManagedClustersClient) List(ctx context.Context) (result ManagedClu
 	}
 	if result.mclr.hasNextLink() && result.mclr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -618,7 +619,6 @@ func (client ManagedClustersClient) listNextResults(ctx context.Context, lastRes
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "containerservice.ManagedClustersClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -675,6 +675,7 @@ func (client ManagedClustersClient) ListByResourceGroup(ctx context.Context, res
 	}
 	if result.mclr.hasNextLink() && result.mclr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -735,7 +736,6 @@ func (client ManagedClustersClient) listByResourceGroupNextResults(ctx context.C
 	result, err = client.ListByResourceGroupResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "containerservice.ManagedClustersClient", "listByResourceGroupNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
