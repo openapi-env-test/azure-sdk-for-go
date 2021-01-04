@@ -41,7 +41,7 @@ func NewOperationsClientWithBaseURI(baseURI string, subscriptionID string) Opera
 	return OperationsClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
 
-// List gets a list of compute operations.
+// List minghc_Test_Gets a list of compute operations.
 func (client OperationsClient) List(ctx context.Context) (result OperationListResult, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/OperationsClient.List")
