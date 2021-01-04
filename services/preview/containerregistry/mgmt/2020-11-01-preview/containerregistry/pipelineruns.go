@@ -106,7 +106,7 @@ func (client PipelineRunsClient) CreatePreparer(ctx context.Context, resourceGro
 		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2020-11-01-preview"
+	const APIVersion = "2019-12-01-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -199,7 +199,7 @@ func (client PipelineRunsClient) DeletePreparer(ctx context.Context, resourceGro
 		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2020-11-01-preview"
+	const APIVersion = "2019-12-01-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -296,7 +296,7 @@ func (client PipelineRunsClient) GetPreparer(ctx context.Context, resourceGroupN
 		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2020-11-01-preview"
+	const APIVersion = "2019-12-01-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -373,6 +373,7 @@ func (client PipelineRunsClient) List(ctx context.Context, resourceGroupName str
 	}
 	if result.prlr.hasNextLink() && result.prlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -386,7 +387,7 @@ func (client PipelineRunsClient) ListPreparer(ctx context.Context, resourceGroup
 		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2020-11-01-preview"
+	const APIVersion = "2019-12-01-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -434,7 +435,6 @@ func (client PipelineRunsClient) listNextResults(ctx context.Context, lastResult
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "containerregistry.PipelineRunsClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }

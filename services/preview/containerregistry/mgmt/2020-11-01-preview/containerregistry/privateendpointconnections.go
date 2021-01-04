@@ -95,7 +95,7 @@ func (client PrivateEndpointConnectionsClient) CreateOrUpdatePreparer(ctx contex
 		"subscriptionId":                autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2020-11-01-preview"
+	const APIVersion = "2019-12-01-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -184,7 +184,7 @@ func (client PrivateEndpointConnectionsClient) DeletePreparer(ctx context.Contex
 		"subscriptionId":                autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2020-11-01-preview"
+	const APIVersion = "2019-12-01-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -277,7 +277,7 @@ func (client PrivateEndpointConnectionsClient) GetPreparer(ctx context.Context, 
 		"subscriptionId":                autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2020-11-01-preview"
+	const APIVersion = "2019-12-01-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -354,6 +354,7 @@ func (client PrivateEndpointConnectionsClient) List(ctx context.Context, resourc
 	}
 	if result.peclr.hasNextLink() && result.peclr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -367,7 +368,7 @@ func (client PrivateEndpointConnectionsClient) ListPreparer(ctx context.Context,
 		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2020-11-01-preview"
+	const APIVersion = "2019-12-01-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -415,7 +416,6 @@ func (client PrivateEndpointConnectionsClient) listNextResults(ctx context.Conte
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "containerregistry.PrivateEndpointConnectionsClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }

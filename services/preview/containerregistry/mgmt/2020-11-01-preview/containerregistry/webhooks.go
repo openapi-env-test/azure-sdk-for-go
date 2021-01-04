@@ -103,7 +103,7 @@ func (client WebhooksClient) CreatePreparer(ctx context.Context, resourceGroupNa
 		"webhookName":       autorest.Encode("path", webhookName),
 	}
 
-	const APIVersion = "2020-11-01-preview"
+	const APIVersion = "2019-12-01-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -196,7 +196,7 @@ func (client WebhooksClient) DeletePreparer(ctx context.Context, resourceGroupNa
 		"webhookName":       autorest.Encode("path", webhookName),
 	}
 
-	const APIVersion = "2020-11-01-preview"
+	const APIVersion = "2019-12-01-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -293,7 +293,7 @@ func (client WebhooksClient) GetPreparer(ctx context.Context, resourceGroupName 
 		"webhookName":       autorest.Encode("path", webhookName),
 	}
 
-	const APIVersion = "2020-11-01-preview"
+	const APIVersion = "2019-12-01-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -385,7 +385,7 @@ func (client WebhooksClient) GetCallbackConfigPreparer(ctx context.Context, reso
 		"webhookName":       autorest.Encode("path", webhookName),
 	}
 
-	const APIVersion = "2020-11-01-preview"
+	const APIVersion = "2019-12-01-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -462,6 +462,7 @@ func (client WebhooksClient) List(ctx context.Context, resourceGroupName string,
 	}
 	if result.wlr.hasNextLink() && result.wlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -475,7 +476,7 @@ func (client WebhooksClient) ListPreparer(ctx context.Context, resourceGroupName
 		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2020-11-01-preview"
+	const APIVersion = "2019-12-01-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -523,7 +524,6 @@ func (client WebhooksClient) listNextResults(ctx context.Context, lastResults We
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "containerregistry.WebhooksClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -595,6 +595,7 @@ func (client WebhooksClient) ListEvents(ctx context.Context, resourceGroupName s
 	}
 	if result.elr.hasNextLink() && result.elr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -609,7 +610,7 @@ func (client WebhooksClient) ListEventsPreparer(ctx context.Context, resourceGro
 		"webhookName":       autorest.Encode("path", webhookName),
 	}
 
-	const APIVersion = "2020-11-01-preview"
+	const APIVersion = "2019-12-01-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -657,7 +658,6 @@ func (client WebhooksClient) listEventsNextResults(ctx context.Context, lastResu
 	result, err = client.ListEventsResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "containerregistry.WebhooksClient", "listEventsNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -739,7 +739,7 @@ func (client WebhooksClient) PingPreparer(ctx context.Context, resourceGroupName
 		"webhookName":       autorest.Encode("path", webhookName),
 	}
 
-	const APIVersion = "2020-11-01-preview"
+	const APIVersion = "2019-12-01-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -825,7 +825,7 @@ func (client WebhooksClient) UpdatePreparer(ctx context.Context, resourceGroupNa
 		"webhookName":       autorest.Encode("path", webhookName),
 	}
 
-	const APIVersion = "2020-11-01-preview"
+	const APIVersion = "2019-12-01-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
