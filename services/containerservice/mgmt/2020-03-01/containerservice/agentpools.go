@@ -528,6 +528,7 @@ func (client AgentPoolsClient) List(ctx context.Context, resourceGroupName strin
 	}
 	if result.aplr.hasNextLink() && result.aplr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -589,7 +590,6 @@ func (client AgentPoolsClient) listNextResults(ctx context.Context, lastResults 
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "containerservice.AgentPoolsClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
