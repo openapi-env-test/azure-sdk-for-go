@@ -240,6 +240,7 @@ func (client ExtendedServerBlobAuditingPoliciesClient) ListByServer(ctx context.
 	}
 	if result.esbaplr.hasNextLink() && result.esbaplr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -301,7 +302,6 @@ func (client ExtendedServerBlobAuditingPoliciesClient) listByServerNextResults(c
 	result, err = client.ListByServerResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "sql.ExtendedServerBlobAuditingPoliciesClient", "listByServerNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
