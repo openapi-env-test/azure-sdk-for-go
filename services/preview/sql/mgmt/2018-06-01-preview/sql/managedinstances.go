@@ -316,6 +316,7 @@ func (client ManagedInstancesClient) List(ctx context.Context) (result ManagedIn
 	}
 	if result.milr.hasNextLink() && result.milr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -375,7 +376,6 @@ func (client ManagedInstancesClient) listNextResults(ctx context.Context, lastRe
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "sql.ManagedInstancesClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -433,6 +433,7 @@ func (client ManagedInstancesClient) ListByInstancePool(ctx context.Context, res
 	}
 	if result.milr.hasNextLink() && result.milr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -494,7 +495,6 @@ func (client ManagedInstancesClient) listByInstancePoolNextResults(ctx context.C
 	result, err = client.ListByInstancePoolResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "sql.ManagedInstancesClient", "listByInstancePoolNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -551,6 +551,7 @@ func (client ManagedInstancesClient) ListByResourceGroup(ctx context.Context, re
 	}
 	if result.milr.hasNextLink() && result.milr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -611,7 +612,6 @@ func (client ManagedInstancesClient) listByResourceGroupNextResults(ctx context.
 	result, err = client.ListByResourceGroupResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "sql.ManagedInstancesClient", "listByResourceGroupNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
