@@ -467,6 +467,7 @@ func (client TasksClient) List(ctx context.Context, resourceGroupName string, re
 	}
 	if result.tlr.hasNextLink() && result.tlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -528,7 +529,6 @@ func (client TasksClient) listNextResults(ctx context.Context, lastResults TaskL
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "containerregistry.TasksClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
