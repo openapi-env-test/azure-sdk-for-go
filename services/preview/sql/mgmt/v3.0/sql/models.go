@@ -2236,35 +2236,6 @@ type DatabaseSecurityAlertPolicyProperties struct {
 	UseServerDefault SecurityAlertPolicyUseServerDefault `json:"useServerDefault,omitempty"`
 }
 
-// DatabasesExportFuture an abstraction for monitoring and retrieving the results of a long-running
-// operation.
-type DatabasesExportFuture struct {
-	azure.Future
-}
-
-// Result returns the result of the asynchronous operation.
-// If the operation has not completed it will return an error.
-func (future *DatabasesExportFuture) Result(client DatabasesClient) (ieor ImportExportOperationResult, err error) {
-	var done bool
-	done, err = future.DoneWithContext(context.Background(), client)
-	if err != nil {
-		err = autorest.NewErrorWithError(err, "sql.DatabasesExportFuture", "Result", future.Response(), "Polling failure")
-		return
-	}
-	if !done {
-		err = azure.NewAsyncOpIncompleteError("sql.DatabasesExportFuture")
-		return
-	}
-	sender := autorest.DecorateSender(client, autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
-	if ieor.Response.Response, err = future.GetResult(sender); err == nil && ieor.Response.Response.StatusCode != http.StatusNoContent {
-		ieor, err = client.ExportResponder(ieor.Response.Response)
-		if err != nil {
-			err = autorest.NewErrorWithError(err, "sql.DatabasesExportFuture", "Result", ieor.Response.Response, "Failure responding to request")
-		}
-	}
-	return
-}
-
 // DatabasesFailoverFuture an abstraction for monitoring and retrieving the results of a long-running
 // operation.
 type DatabasesFailoverFuture struct {
@@ -4719,24 +4690,6 @@ func (future *EncryptionProtectorsRevalidateFuture) Result(client EncryptionProt
 	return
 }
 
-// ExportDatabaseDefinition contains the information necessary to perform export database operation.
-type ExportDatabaseDefinition struct {
-	// StorageKeyType - Storage key type. Possible values include: 'SharedAccessKey', 'StorageAccessKey'
-	StorageKeyType StorageKeyType `json:"storageKeyType,omitempty"`
-	// StorageKey - Storage key.
-	StorageKey *string `json:"storageKey,omitempty"`
-	// StorageURI - Storage Uri.
-	StorageURI *string `json:"storageUri,omitempty"`
-	// AdministratorLogin - Administrator login name.
-	AdministratorLogin *string `json:"administratorLogin,omitempty"`
-	// AdministratorLoginPassword - Administrator login password.
-	AdministratorLoginPassword *string `json:"administratorLoginPassword,omitempty"`
-	// AuthenticationType - Authentication type.
-	AuthenticationType *string `json:"authenticationType,omitempty"`
-	// NetworkIsolation - Optional resource information to enable network isolation for request.
-	NetworkIsolation *NetworkIsolationSettings `json:"networkIsolation,omitempty"`
-}
-
 // ExtendedDatabaseBlobAuditingPolicy an extended database blob auditing policy.
 type ExtendedDatabaseBlobAuditingPolicy struct {
 	autorest.Response `json:"-"`
@@ -6160,179 +6113,6 @@ func (gbpp GeoBackupPolicyProperties) MarshalJSON() ([]byte, error) {
 		objectMap["state"] = gbpp.State
 	}
 	return json.Marshal(objectMap)
-}
-
-// ImportExistingDatabaseDefinition contains the information necessary to perform import operation for
-// existing database.
-type ImportExistingDatabaseDefinition struct {
-	// StorageKeyType - Storage key type. Possible values include: 'SharedAccessKey', 'StorageAccessKey'
-	StorageKeyType StorageKeyType `json:"storageKeyType,omitempty"`
-	// StorageKey - Storage key.
-	StorageKey *string `json:"storageKey,omitempty"`
-	// StorageURI - Storage Uri.
-	StorageURI *string `json:"storageUri,omitempty"`
-	// AdministratorLogin - Administrator login name.
-	AdministratorLogin *string `json:"administratorLogin,omitempty"`
-	// AdministratorLoginPassword - Administrator login password.
-	AdministratorLoginPassword *string `json:"administratorLoginPassword,omitempty"`
-	// AuthenticationType - Authentication type.
-	AuthenticationType *string `json:"authenticationType,omitempty"`
-	// NetworkIsolation - Optional resource information to enable network isolation for request.
-	NetworkIsolation *NetworkIsolationSettings `json:"networkIsolation,omitempty"`
-}
-
-// ImportExportImportFuture an abstraction for monitoring and retrieving the results of a long-running
-// operation.
-type ImportExportImportFuture struct {
-	azure.Future
-}
-
-// Result returns the result of the asynchronous operation.
-// If the operation has not completed it will return an error.
-func (future *ImportExportImportFuture) Result(client ImportExportClient) (ieor ImportExportOperationResult, err error) {
-	var done bool
-	done, err = future.DoneWithContext(context.Background(), client)
-	if err != nil {
-		err = autorest.NewErrorWithError(err, "sql.ImportExportImportFuture", "Result", future.Response(), "Polling failure")
-		return
-	}
-	if !done {
-		err = azure.NewAsyncOpIncompleteError("sql.ImportExportImportFuture")
-		return
-	}
-	sender := autorest.DecorateSender(client, autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
-	if ieor.Response.Response, err = future.GetResult(sender); err == nil && ieor.Response.Response.StatusCode != http.StatusNoContent {
-		ieor, err = client.ImportResponder(ieor.Response.Response)
-		if err != nil {
-			err = autorest.NewErrorWithError(err, "sql.ImportExportImportFuture", "Result", ieor.Response.Response, "Failure responding to request")
-		}
-	}
-	return
-}
-
-// ImportExportOperationResult an ImportExport operation result resource.
-type ImportExportOperationResult struct {
-	autorest.Response `json:"-"`
-	// ImportExportOperationResultProperties - Resource properties.
-	*ImportExportOperationResultProperties `json:"properties,omitempty"`
-	// ID - READ-ONLY; Resource ID.
-	ID *string `json:"id,omitempty"`
-	// Name - READ-ONLY; Resource name.
-	Name *string `json:"name,omitempty"`
-	// Type - READ-ONLY; Resource type.
-	Type *string `json:"type,omitempty"`
-}
-
-// MarshalJSON is the custom marshaler for ImportExportOperationResult.
-func (ieor ImportExportOperationResult) MarshalJSON() ([]byte, error) {
-	objectMap := make(map[string]interface{})
-	if ieor.ImportExportOperationResultProperties != nil {
-		objectMap["properties"] = ieor.ImportExportOperationResultProperties
-	}
-	return json.Marshal(objectMap)
-}
-
-// UnmarshalJSON is the custom unmarshaler for ImportExportOperationResult struct.
-func (ieor *ImportExportOperationResult) UnmarshalJSON(body []byte) error {
-	var m map[string]*json.RawMessage
-	err := json.Unmarshal(body, &m)
-	if err != nil {
-		return err
-	}
-	for k, v := range m {
-		switch k {
-		case "properties":
-			if v != nil {
-				var importExportOperationResultProperties ImportExportOperationResultProperties
-				err = json.Unmarshal(*v, &importExportOperationResultProperties)
-				if err != nil {
-					return err
-				}
-				ieor.ImportExportOperationResultProperties = &importExportOperationResultProperties
-			}
-		case "id":
-			if v != nil {
-				var ID string
-				err = json.Unmarshal(*v, &ID)
-				if err != nil {
-					return err
-				}
-				ieor.ID = &ID
-			}
-		case "name":
-			if v != nil {
-				var name string
-				err = json.Unmarshal(*v, &name)
-				if err != nil {
-					return err
-				}
-				ieor.Name = &name
-			}
-		case "type":
-			if v != nil {
-				var typeVar string
-				err = json.Unmarshal(*v, &typeVar)
-				if err != nil {
-					return err
-				}
-				ieor.Type = &typeVar
-			}
-		}
-	}
-
-	return nil
-}
-
-// ImportExportOperationResultProperties contains the operation result properties for import/export
-// operation.
-type ImportExportOperationResultProperties struct {
-	// RequestID - READ-ONLY; Request Id.
-	RequestID *uuid.UUID `json:"requestId,omitempty"`
-	// RequestType - READ-ONLY; Request type.
-	RequestType *string `json:"requestType,omitempty"`
-	// QueuedTime - READ-ONLY; Queued time.
-	QueuedTime *string `json:"queuedTime,omitempty"`
-	// LastModifiedTime - READ-ONLY; Last modified time.
-	LastModifiedTime *string `json:"lastModifiedTime,omitempty"`
-	// BlobURI - READ-ONLY; Blob Uri.
-	BlobURI *string `json:"blobUri,omitempty"`
-	// ServerName - READ-ONLY; Server name.
-	ServerName *string `json:"serverName,omitempty"`
-	// DatabaseName - READ-ONLY; Database name.
-	DatabaseName *string `json:"databaseName,omitempty"`
-	// Status - READ-ONLY; Operation status.
-	Status *string `json:"status,omitempty"`
-	// ErrorMessage - READ-ONLY; Error message.
-	ErrorMessage *string `json:"errorMessage,omitempty"`
-	// PrivateEndpointConnections - READ-ONLY; Gets the status of private endpoints associated with this request.
-	PrivateEndpointConnections *[]PrivateEndpointConnectionRequestStatus `json:"privateEndpointConnections,omitempty"`
-}
-
-// ImportNewDatabaseDefinition contains the information necessary to perform import operation for new
-// database.
-type ImportNewDatabaseDefinition struct {
-	// DatabaseName - Name of the import database.
-	DatabaseName *string `json:"databaseName,omitempty"`
-	// Edition - Edition of the import database.
-	Edition *string `json:"edition,omitempty"`
-	// ServiceObjectiveName - Service level objective name of the import database.
-	ServiceObjectiveName *string `json:"serviceObjectiveName,omitempty"`
-	// MaxSizeBytes - Max size in bytes for the import database.
-	MaxSizeBytes *string `json:"maxSizeBytes,omitempty"`
-	// StorageKeyType - Storage key type. Possible values include: 'SharedAccessKey', 'StorageAccessKey'
-	StorageKeyType StorageKeyType `json:"storageKeyType,omitempty"`
-	// StorageKey - Storage key.
-	StorageKey *string `json:"storageKey,omitempty"`
-	// StorageURI - Storage Uri.
-	StorageURI *string `json:"storageUri,omitempty"`
-	// AdministratorLogin - Administrator login name.
-	AdministratorLogin *string `json:"administratorLogin,omitempty"`
-	// AdministratorLoginPassword - Administrator login password.
-	AdministratorLoginPassword *string `json:"administratorLoginPassword,omitempty"`
-	// AuthenticationType - Authentication type.
-	AuthenticationType *string `json:"authenticationType,omitempty"`
-	// NetworkIsolation - Optional resource information to enable network isolation for request.
-	NetworkIsolation *NetworkIsolationSettings `json:"networkIsolation,omitempty"`
 }
 
 // InstanceFailoverGroup an instance failover group.
@@ -10328,103 +10108,6 @@ func (mdp ManagedDatabaseProperties) MarshalJSON() ([]byte, error) {
 	return json.Marshal(objectMap)
 }
 
-// ManagedDatabaseRestoreDetailsProperties the managed database's restore details properties.
-type ManagedDatabaseRestoreDetailsProperties struct {
-	// Status - READ-ONLY; Restore status.
-	Status *string `json:"status,omitempty"`
-	// CurrentRestoringFileName - READ-ONLY; Current restoring file name.
-	CurrentRestoringFileName *string `json:"currentRestoringFileName,omitempty"`
-	// LastRestoredFileName - READ-ONLY; Last restored file name.
-	LastRestoredFileName *string `json:"lastRestoredFileName,omitempty"`
-	// LastRestoredFileTime - READ-ONLY; Last restored file time.
-	LastRestoredFileTime *date.Time `json:"lastRestoredFileTime,omitempty"`
-	// PercentCompleted - READ-ONLY; Percent completed.
-	PercentCompleted *float64 `json:"percentCompleted,omitempty"`
-	// UnrestorableFiles - READ-ONLY; List of unrestorable files.
-	UnrestorableFiles *[]string `json:"unrestorableFiles,omitempty"`
-	// NumberOfFilesDetected - READ-ONLY; Number of files detected.
-	NumberOfFilesDetected *int64 `json:"numberOfFilesDetected,omitempty"`
-	// LastUploadedFileName - READ-ONLY; Last uploaded file name.
-	LastUploadedFileName *string `json:"lastUploadedFileName,omitempty"`
-	// LastUploadedFileTime - READ-ONLY; Last uploaded file time.
-	LastUploadedFileTime *date.Time `json:"lastUploadedFileTime,omitempty"`
-	// BlockReason - READ-ONLY; The reason why restore is in Blocked state.
-	BlockReason *string `json:"blockReason,omitempty"`
-}
-
-// ManagedDatabaseRestoreDetailsResult a managed database restore details.
-type ManagedDatabaseRestoreDetailsResult struct {
-	autorest.Response `json:"-"`
-	// ManagedDatabaseRestoreDetailsProperties - Resource properties.
-	*ManagedDatabaseRestoreDetailsProperties `json:"properties,omitempty"`
-	// ID - READ-ONLY; Resource ID.
-	ID *string `json:"id,omitempty"`
-	// Name - READ-ONLY; Resource name.
-	Name *string `json:"name,omitempty"`
-	// Type - READ-ONLY; Resource type.
-	Type *string `json:"type,omitempty"`
-}
-
-// MarshalJSON is the custom marshaler for ManagedDatabaseRestoreDetailsResult.
-func (mdrdr ManagedDatabaseRestoreDetailsResult) MarshalJSON() ([]byte, error) {
-	objectMap := make(map[string]interface{})
-	if mdrdr.ManagedDatabaseRestoreDetailsProperties != nil {
-		objectMap["properties"] = mdrdr.ManagedDatabaseRestoreDetailsProperties
-	}
-	return json.Marshal(objectMap)
-}
-
-// UnmarshalJSON is the custom unmarshaler for ManagedDatabaseRestoreDetailsResult struct.
-func (mdrdr *ManagedDatabaseRestoreDetailsResult) UnmarshalJSON(body []byte) error {
-	var m map[string]*json.RawMessage
-	err := json.Unmarshal(body, &m)
-	if err != nil {
-		return err
-	}
-	for k, v := range m {
-		switch k {
-		case "properties":
-			if v != nil {
-				var managedDatabaseRestoreDetailsProperties ManagedDatabaseRestoreDetailsProperties
-				err = json.Unmarshal(*v, &managedDatabaseRestoreDetailsProperties)
-				if err != nil {
-					return err
-				}
-				mdrdr.ManagedDatabaseRestoreDetailsProperties = &managedDatabaseRestoreDetailsProperties
-			}
-		case "id":
-			if v != nil {
-				var ID string
-				err = json.Unmarshal(*v, &ID)
-				if err != nil {
-					return err
-				}
-				mdrdr.ID = &ID
-			}
-		case "name":
-			if v != nil {
-				var name string
-				err = json.Unmarshal(*v, &name)
-				if err != nil {
-					return err
-				}
-				mdrdr.Name = &name
-			}
-		case "type":
-			if v != nil {
-				var typeVar string
-				err = json.Unmarshal(*v, &typeVar)
-				if err != nil {
-					return err
-				}
-				mdrdr.Type = &typeVar
-			}
-		}
-	}
-
-	return nil
-}
-
 // ManagedDatabasesCompleteRestoreFuture an abstraction for monitoring and retrieving the results of a
 // long-running operation.
 type ManagedDatabasesCompleteRestoreFuture struct {
@@ -13210,6 +12893,42 @@ type ManagedInstancePairInfo struct {
 	PartnerManagedInstanceID *string `json:"partnerManagedInstanceId,omitempty"`
 }
 
+// ManagedInstancePecProperty a private endpoint connection under a managed instance
+type ManagedInstancePecProperty struct {
+	// ID - READ-ONLY; Resource ID.
+	ID *string `json:"id,omitempty"`
+	// Properties - READ-ONLY; Private endpoint connection properties
+	Properties *ManagedInstancePrivateEndpointConnectionProperties `json:"properties,omitempty"`
+}
+
+// ManagedInstancePrivateEndpointConnectionProperties properties of a private endpoint connection.
+type ManagedInstancePrivateEndpointConnectionProperties struct {
+	// PrivateEndpoint - Private endpoint which the connection belongs to.
+	PrivateEndpoint *ManagedInstancePrivateEndpointProperty `json:"privateEndpoint,omitempty"`
+	// PrivateLinkServiceConnectionState - Connection State of the Private Endpoint Connection.
+	PrivateLinkServiceConnectionState *ManagedInstancePrivateLinkServiceConnectionStateProperty `json:"privateLinkServiceConnectionState,omitempty"`
+	// ProvisioningState - READ-ONLY; State of the Private Endpoint Connection.
+	ProvisioningState *string `json:"provisioningState,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for ManagedInstancePrivateEndpointConnectionProperties.
+func (mipecp ManagedInstancePrivateEndpointConnectionProperties) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if mipecp.PrivateEndpoint != nil {
+		objectMap["privateEndpoint"] = mipecp.PrivateEndpoint
+	}
+	if mipecp.PrivateLinkServiceConnectionState != nil {
+		objectMap["privateLinkServiceConnectionState"] = mipecp.PrivateLinkServiceConnectionState
+	}
+	return json.Marshal(objectMap)
+}
+
+// ManagedInstancePrivateEndpointProperty ...
+type ManagedInstancePrivateEndpointProperty struct {
+	// ID - Resource id of the private endpoint.
+	ID *string `json:"id,omitempty"`
+}
+
 // ManagedInstancePrivateLinkServiceConnectionStateProperty ...
 type ManagedInstancePrivateLinkServiceConnectionStateProperty struct {
 	// Status - The private link service connection status.
@@ -13283,10 +13002,14 @@ type ManagedInstanceProperties struct {
 	InstancePoolID *string `json:"instancePoolId,omitempty"`
 	// MaintenanceConfigurationID - Specifies maintenance configuration id to apply to this managed instance.
 	MaintenanceConfigurationID *string `json:"maintenanceConfigurationId,omitempty"`
+	// PrivateEndpointConnections - READ-ONLY; List of private endpoint connections on a managed instance.
+	PrivateEndpointConnections *[]ManagedInstancePecProperty `json:"privateEndpointConnections,omitempty"`
 	// MinimalTLSVersion - Minimal TLS version. Allowed values: 'None', '1.0', '1.1', '1.2'
 	MinimalTLSVersion *string `json:"minimalTlsVersion,omitempty"`
 	// StorageAccountType - The storage account type used to store backups for this instance. The options are LRS (LocallyRedundantStorage), ZRS (ZoneRedundantStorage) and GRS (GeoRedundantStorage). Possible values include: 'GRS', 'LRS', 'ZRS'
 	StorageAccountType StorageAccountType `json:"storageAccountType,omitempty"`
+	// ZoneRedundant - Whether or not the multi-az is enabled.
+	ZoneRedundant *bool `json:"zoneRedundant,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for ManagedInstanceProperties.
@@ -13345,6 +13068,9 @@ func (mip ManagedInstanceProperties) MarshalJSON() ([]byte, error) {
 	}
 	if mip.StorageAccountType != "" {
 		objectMap["storageAccountType"] = mip.StorageAccountType
+	}
+	if mip.ZoneRedundant != nil {
+		objectMap["zoneRedundant"] = mip.ZoneRedundant
 	}
 	return json.Marshal(objectMap)
 }
@@ -13480,6 +13206,8 @@ func (future *ManagedInstanceTdeCertificatesCreateFuture) Result(client ManagedI
 type ManagedInstanceUpdate struct {
 	// Sku - Managed instance sku
 	Sku *Sku `json:"sku,omitempty"`
+	// Identity - Managed instance identity
+	Identity *ResourceIdentity `json:"identity,omitempty"`
 	// ManagedInstanceProperties - Resource properties.
 	*ManagedInstanceProperties `json:"properties,omitempty"`
 	// Tags - Resource tags.
@@ -13491,6 +13219,9 @@ func (miu ManagedInstanceUpdate) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
 	if miu.Sku != nil {
 		objectMap["sku"] = miu.Sku
+	}
+	if miu.Identity != nil {
+		objectMap["identity"] = miu.Identity
 	}
 	if miu.ManagedInstanceProperties != nil {
 		objectMap["properties"] = miu.ManagedInstanceProperties
@@ -13518,6 +13249,15 @@ func (miu *ManagedInstanceUpdate) UnmarshalJSON(body []byte) error {
 					return err
 				}
 				miu.Sku = &sku
+			}
+		case "identity":
+			if v != nil {
+				var identity ResourceIdentity
+				err = json.Unmarshal(*v, &identity)
+				if err != nil {
+					return err
+				}
+				miu.Identity = &identity
 			}
 		case "properties":
 			if v != nil {
@@ -14225,7 +13965,7 @@ type MetricAvailability struct {
 type MetricDefinition struct {
 	// Name - READ-ONLY; The name information for the metric.
 	Name *MetricName `json:"name,omitempty"`
-	// PrimaryAggregationType - READ-ONLY; The primary aggregation type defining how metric values are displayed. Possible values include: 'None', 'Average', 'Count', 'Minimum', 'Maximum', 'Total'
+	// PrimaryAggregationType - READ-ONLY; The primary aggregation type defining how metric values are displayed. Possible values include: 'PrimaryAggregationTypeNone', 'PrimaryAggregationTypeAverage', 'PrimaryAggregationTypeCount', 'PrimaryAggregationTypeMinimum', 'PrimaryAggregationTypeMaximum', 'PrimaryAggregationTypeTotal'
 	PrimaryAggregationType PrimaryAggregationType `json:"primaryAggregationType,omitempty"`
 	// ResourceURI - READ-ONLY; The resource uri of the database.
 	ResourceURI *string `json:"resourceUri,omitempty"`
@@ -14298,14 +14038,6 @@ type Name struct {
 	Value *string `json:"value,omitempty"`
 	// LocalizedValue - Usage name localized value.
 	LocalizedValue *string `json:"localizedValue,omitempty"`
-}
-
-// NetworkIsolationSettings contains the ARM resources for which to create private endpoint connection.
-type NetworkIsolationSettings struct {
-	// StorageAccountResourceID - The resource id for the storage account used to store BACPAC file. If set, private endpoint connection will be created for the storage account. Must match storage account used for StorageUri parameter.
-	StorageAccountResourceID *string `json:"storageAccountResourceId,omitempty"`
-	// SQLServerResourceID - The resource id for the SQL server which is the target of this request. If set, private endpoint connection will be created for the SQL server. Must match server which is target of the operation.
-	SQLServerResourceID *string `json:"sqlServerResourceId,omitempty"`
 }
 
 // Operation SQL REST API operation definition.
@@ -14808,16 +14540,6 @@ func (pecp PrivateEndpointConnectionProperties) MarshalJSON() ([]byte, error) {
 	return json.Marshal(objectMap)
 }
 
-// PrivateEndpointConnectionRequestStatus contains the private endpoint connection requests status.
-type PrivateEndpointConnectionRequestStatus struct {
-	// PrivateLinkServiceID - READ-ONLY; Resource id for which the private endpoint is created.
-	PrivateLinkServiceID *string `json:"privateLinkServiceId,omitempty"`
-	// PrivateEndpointConnectionName - READ-ONLY; The connection name for the private endpoint.
-	PrivateEndpointConnectionName *string `json:"privateEndpointConnectionName,omitempty"`
-	// Status - READ-ONLY; Status of this private endpoint connection.
-	Status *string `json:"status,omitempty"`
-}
-
 // PrivateEndpointConnectionsCreateOrUpdateFuture an abstraction for monitoring and retrieving the results
 // of a long-running operation.
 type PrivateEndpointConnectionsCreateOrUpdateFuture struct {
@@ -15087,6 +14809,72 @@ type ProxyResource struct {
 	Name *string `json:"name,omitempty"`
 	// Type - READ-ONLY; Resource type.
 	Type *string `json:"type,omitempty"`
+}
+
+// QueryMetricInterval properties of a query metrics interval.
+type QueryMetricInterval struct {
+	// IntervalStartTime - READ-ONLY; The start time for the metric interval (ISO-8601 format).
+	IntervalStartTime *string `json:"intervalStartTime,omitempty"`
+	// IntervalType - READ-ONLY; Interval type (length). Possible values include: 'PT1H', 'P1D'
+	IntervalType QueryTimeGrainType `json:"intervalType,omitempty"`
+	// ExecutionCount - READ-ONLY; Execution count of a query in this interval.
+	ExecutionCount *int64 `json:"executionCount,omitempty"`
+	// Metrics - List of metric objects for this interval
+	Metrics *[]QueryMetricProperties `json:"metrics,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for QueryMetricInterval.
+func (qmi QueryMetricInterval) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if qmi.Metrics != nil {
+		objectMap["metrics"] = qmi.Metrics
+	}
+	return json.Marshal(objectMap)
+}
+
+// QueryMetricProperties properties of a topquery metric in one interval.
+type QueryMetricProperties struct {
+	// Name - READ-ONLY; The name information for the metric.
+	Name *string `json:"name,omitempty"`
+	// DisplayName - READ-ONLY; The UI appropriate name for the metric.
+	DisplayName *string `json:"displayName,omitempty"`
+	// Unit - READ-ONLY; The unit of the metric. Possible values include: 'Percentage', 'KB', 'Microseconds', 'Count'
+	Unit QueryMetricUnitType `json:"unit,omitempty"`
+	// Value - READ-ONLY; The value of the metric.
+	Value *float64 `json:"value,omitempty"`
+	// Min - READ-ONLY; Metric value when min() aggregate function is used over the interval.
+	Min *float64 `json:"min,omitempty"`
+	// Max - READ-ONLY; Metric value when max() aggregate function is used over the interval.
+	Max *float64 `json:"max,omitempty"`
+	// Avg - READ-ONLY; Metric value when avg() aggregate function is used over the interval.
+	Avg *float64 `json:"avg,omitempty"`
+	// Sum - READ-ONLY; Metric value when sum() aggregate function is used over the interval.
+	Sum *float64 `json:"sum,omitempty"`
+	// Stdev - READ-ONLY; Metric value when stdev aggregate function is used over the interval.
+	Stdev *float64 `json:"stdev,omitempty"`
+}
+
+// QueryStatisticsProperties properties of a query execution statistics.
+type QueryStatisticsProperties struct {
+	// DatabaseName - READ-ONLY; Database name of the database in which this query was executed.
+	DatabaseName *string `json:"databaseName,omitempty"`
+	// QueryID - READ-ONLY; Unique query id (unique within one database).
+	QueryID *string `json:"queryId,omitempty"`
+	// StartTime - READ-ONLY; The start time for the metric (ISO-8601 format).
+	StartTime *string `json:"startTime,omitempty"`
+	// EndTime - READ-ONLY; The end time for the metric (ISO-8601 format).
+	EndTime *string `json:"endTime,omitempty"`
+	// Intervals - List of intervals with appropriate metric data
+	Intervals *[]QueryMetricInterval `json:"intervals,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for QueryStatisticsProperties.
+func (qsp QueryStatisticsProperties) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if qsp.Intervals != nil {
+		objectMap["intervals"] = qsp.Intervals
+	}
+	return json.Marshal(objectMap)
 }
 
 // ReadScaleCapability the read scale capability.
@@ -15876,7 +15664,7 @@ type Resource struct {
 type ResourceIdentity struct {
 	// PrincipalID - READ-ONLY; The Azure Active Directory principal id.
 	PrincipalID *uuid.UUID `json:"principalId,omitempty"`
-	// Type - The identity type. Set this to 'SystemAssigned' in order to automatically create and assign an Azure Active Directory principal for the resource. Possible values include: 'SystemAssigned'
+	// Type - The identity type. Set this to 'SystemAssigned' in order to automatically create and assign an Azure Active Directory principal for the resource. Possible values include: 'None', 'SystemAssigned', 'UserAssigned'
 	Type IdentityType `json:"type,omitempty"`
 	// TenantID - READ-ONLY; The Azure Active Directory tenant id.
 	TenantID *uuid.UUID `json:"tenantId,omitempty"`
@@ -18812,35 +18600,6 @@ func (ssap *ServerSecurityAlertPolicy) UnmarshalJSON(body []byte) error {
 	}
 
 	return nil
-}
-
-// ServersImportDatabaseFuture an abstraction for monitoring and retrieving the results of a long-running
-// operation.
-type ServersImportDatabaseFuture struct {
-	azure.Future
-}
-
-// Result returns the result of the asynchronous operation.
-// If the operation has not completed it will return an error.
-func (future *ServersImportDatabaseFuture) Result(client ServersClient) (ieor ImportExportOperationResult, err error) {
-	var done bool
-	done, err = future.DoneWithContext(context.Background(), client)
-	if err != nil {
-		err = autorest.NewErrorWithError(err, "sql.ServersImportDatabaseFuture", "Result", future.Response(), "Polling failure")
-		return
-	}
-	if !done {
-		err = azure.NewAsyncOpIncompleteError("sql.ServersImportDatabaseFuture")
-		return
-	}
-	sender := autorest.DecorateSender(client, autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
-	if ieor.Response.Response, err = future.GetResult(sender); err == nil && ieor.Response.Response.StatusCode != http.StatusNoContent {
-		ieor, err = client.ImportDatabaseResponder(ieor.Response.Response)
-		if err != nil {
-			err = autorest.NewErrorWithError(err, "sql.ServersImportDatabaseFuture", "Result", ieor.Response.Response, "Failure responding to request")
-		}
-	}
-	return
 }
 
 // ServersUpdateFuture an abstraction for monitoring and retrieving the results of a long-running
@@ -22070,6 +21829,192 @@ func (future *TdeCertificatesCreateFuture) Result(client TdeCertificatesClient) 
 	}
 	ar.Response = future.Response()
 	return
+}
+
+// TopQueries ...
+type TopQueries struct {
+	// NumberOfQueries - READ-ONLY; Requested number of top queries.
+	NumberOfQueries *int32 `json:"numberOfQueries,omitempty"`
+	// AggregationFunction - READ-ONLY; Aggregation function used to calculate query metrics.
+	AggregationFunction *string `json:"aggregationFunction,omitempty"`
+	// ObservationMetric - READ-ONLY; Metric used to rank queries.
+	ObservationMetric *string `json:"observationMetric,omitempty"`
+	// IntervalType - READ-ONLY; Interval type (length). Possible values include: 'PT1H', 'P1D'
+	IntervalType QueryTimeGrainType `json:"intervalType,omitempty"`
+	// StartTime - READ-ONLY; The start time for the metric (ISO-8601 format).
+	StartTime *string `json:"startTime,omitempty"`
+	// EndTime - READ-ONLY; The end time for the metric (ISO-8601 format).
+	EndTime *string `json:"endTime,omitempty"`
+	// Queries - List of top resource consuming queries with appropriate metric data
+	Queries *[]QueryStatisticsProperties `json:"queries,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for TopQueries.
+func (tq TopQueries) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if tq.Queries != nil {
+		objectMap["queries"] = tq.Queries
+	}
+	return json.Marshal(objectMap)
+}
+
+// TopQueriesListResult a list of top resource consuming queries on managed instance
+type TopQueriesListResult struct {
+	autorest.Response `json:"-"`
+	// Value - READ-ONLY; Array of results.
+	Value *[]TopQueries `json:"value,omitempty"`
+	// NextLink - READ-ONLY; Link to retrieve next page of results.
+	NextLink *string `json:"nextLink,omitempty"`
+}
+
+// TopQueriesListResultIterator provides access to a complete listing of TopQueries values.
+type TopQueriesListResultIterator struct {
+	i    int
+	page TopQueriesListResultPage
+}
+
+// NextWithContext advances to the next value.  If there was an error making
+// the request the iterator does not advance and the error is returned.
+func (iter *TopQueriesListResultIterator) NextWithContext(ctx context.Context) (err error) {
+	if tracing.IsEnabled() {
+		ctx = tracing.StartSpan(ctx, fqdn+"/TopQueriesListResultIterator.NextWithContext")
+		defer func() {
+			sc := -1
+			if iter.Response().Response.Response != nil {
+				sc = iter.Response().Response.Response.StatusCode
+			}
+			tracing.EndSpan(ctx, sc, err)
+		}()
+	}
+	iter.i++
+	if iter.i < len(iter.page.Values()) {
+		return nil
+	}
+	err = iter.page.NextWithContext(ctx)
+	if err != nil {
+		iter.i--
+		return err
+	}
+	iter.i = 0
+	return nil
+}
+
+// Next advances to the next value.  If there was an error making
+// the request the iterator does not advance and the error is returned.
+// Deprecated: Use NextWithContext() instead.
+func (iter *TopQueriesListResultIterator) Next() error {
+	return iter.NextWithContext(context.Background())
+}
+
+// NotDone returns true if the enumeration should be started or is not yet complete.
+func (iter TopQueriesListResultIterator) NotDone() bool {
+	return iter.page.NotDone() && iter.i < len(iter.page.Values())
+}
+
+// Response returns the raw server response from the last page request.
+func (iter TopQueriesListResultIterator) Response() TopQueriesListResult {
+	return iter.page.Response()
+}
+
+// Value returns the current value or a zero-initialized value if the
+// iterator has advanced beyond the end of the collection.
+func (iter TopQueriesListResultIterator) Value() TopQueries {
+	if !iter.page.NotDone() {
+		return TopQueries{}
+	}
+	return iter.page.Values()[iter.i]
+}
+
+// Creates a new instance of the TopQueriesListResultIterator type.
+func NewTopQueriesListResultIterator(page TopQueriesListResultPage) TopQueriesListResultIterator {
+	return TopQueriesListResultIterator{page: page}
+}
+
+// IsEmpty returns true if the ListResult contains no values.
+func (tqlr TopQueriesListResult) IsEmpty() bool {
+	return tqlr.Value == nil || len(*tqlr.Value) == 0
+}
+
+// hasNextLink returns true if the NextLink is not empty.
+func (tqlr TopQueriesListResult) hasNextLink() bool {
+	return tqlr.NextLink != nil && len(*tqlr.NextLink) != 0
+}
+
+// topQueriesListResultPreparer prepares a request to retrieve the next set of results.
+// It returns nil if no more results exist.
+func (tqlr TopQueriesListResult) topQueriesListResultPreparer(ctx context.Context) (*http.Request, error) {
+	if !tqlr.hasNextLink() {
+		return nil, nil
+	}
+	return autorest.Prepare((&http.Request{}).WithContext(ctx),
+		autorest.AsJSON(),
+		autorest.AsGet(),
+		autorest.WithBaseURL(to.String(tqlr.NextLink)))
+}
+
+// TopQueriesListResultPage contains a page of TopQueries values.
+type TopQueriesListResultPage struct {
+	fn   func(context.Context, TopQueriesListResult) (TopQueriesListResult, error)
+	tqlr TopQueriesListResult
+}
+
+// NextWithContext advances to the next page of values.  If there was an error making
+// the request the page does not advance and the error is returned.
+func (page *TopQueriesListResultPage) NextWithContext(ctx context.Context) (err error) {
+	if tracing.IsEnabled() {
+		ctx = tracing.StartSpan(ctx, fqdn+"/TopQueriesListResultPage.NextWithContext")
+		defer func() {
+			sc := -1
+			if page.Response().Response.Response != nil {
+				sc = page.Response().Response.Response.StatusCode
+			}
+			tracing.EndSpan(ctx, sc, err)
+		}()
+	}
+	for {
+		next, err := page.fn(ctx, page.tqlr)
+		if err != nil {
+			return err
+		}
+		page.tqlr = next
+		if !next.hasNextLink() || !next.IsEmpty() {
+			break
+		}
+	}
+	return nil
+}
+
+// Next advances to the next page of values.  If there was an error making
+// the request the page does not advance and the error is returned.
+// Deprecated: Use NextWithContext() instead.
+func (page *TopQueriesListResultPage) Next() error {
+	return page.NextWithContext(context.Background())
+}
+
+// NotDone returns true if the page enumeration should be started or is not yet complete.
+func (page TopQueriesListResultPage) NotDone() bool {
+	return !page.tqlr.IsEmpty()
+}
+
+// Response returns the raw server response from the last page request.
+func (page TopQueriesListResultPage) Response() TopQueriesListResult {
+	return page.tqlr
+}
+
+// Values returns the slice of values for the current page or nil if there are no values.
+func (page TopQueriesListResultPage) Values() []TopQueries {
+	if page.tqlr.IsEmpty() {
+		return nil
+	}
+	return *page.tqlr.Value
+}
+
+// Creates a new instance of the TopQueriesListResultPage type.
+func NewTopQueriesListResultPage(cur TopQueriesListResult, getNextPage func(context.Context, TopQueriesListResult) (TopQueriesListResult, error)) TopQueriesListResultPage {
+	return TopQueriesListResultPage{
+		fn:   getNextPage,
+		tqlr: cur,
+	}
 }
 
 // TrackedResource ARM tracked top level resource.

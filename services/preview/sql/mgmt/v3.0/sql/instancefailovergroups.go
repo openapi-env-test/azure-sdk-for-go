@@ -486,6 +486,7 @@ func (client InstanceFailoverGroupsClient) ListByLocation(ctx context.Context, r
 	}
 	if result.ifglr.hasNextLink() && result.ifglr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -547,7 +548,6 @@ func (client InstanceFailoverGroupsClient) listByLocationNextResults(ctx context
 	result, err = client.ListByLocationResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "sql.InstanceFailoverGroupsClient", "listByLocationNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
