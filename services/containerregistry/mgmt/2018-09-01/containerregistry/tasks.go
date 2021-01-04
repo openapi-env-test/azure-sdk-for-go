@@ -77,7 +77,6 @@ func (client TasksClient) Create(ctx context.Context, resourceGroupName string, 
 						Chain: []validation.Constraint{{Target: "taskCreateParameters.TaskProperties.Timeout", Name: validation.InclusiveMaximum, Rule: int64(28800), Chain: nil},
 							{Target: "taskCreateParameters.TaskProperties.Timeout", Name: validation.InclusiveMinimum, Rule: int64(300), Chain: nil},
 						}},
-					{Target: "taskCreateParameters.TaskProperties.Step", Name: validation.Null, Rule: true, Chain: nil},
 					{Target: "taskCreateParameters.TaskProperties.Trigger", Name: validation.Null, Rule: false,
 						Chain: []validation.Constraint{{Target: "taskCreateParameters.TaskProperties.Trigger.BaseImageTrigger", Name: validation.Null, Rule: false,
 							Chain: []validation.Constraint{{Target: "taskCreateParameters.TaskProperties.Trigger.BaseImageTrigger.Name", Name: validation.Null, Rule: true, Chain: nil}}},
@@ -469,6 +468,7 @@ func (client TasksClient) List(ctx context.Context, resourceGroupName string, re
 	}
 	if result.tlr.hasNextLink() && result.tlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -530,7 +530,6 @@ func (client TasksClient) listNextResults(ctx context.Context, lastResults TaskL
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "containerregistry.TasksClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
