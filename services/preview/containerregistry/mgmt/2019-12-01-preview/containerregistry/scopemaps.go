@@ -367,6 +367,7 @@ func (client ScopeMapsClient) List(ctx context.Context, resourceGroupName string
 	}
 	if result.smlr.hasNextLink() && result.smlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -428,7 +429,6 @@ func (client ScopeMapsClient) listNextResults(ctx context.Context, lastResults S
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "containerregistry.ScopeMapsClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }

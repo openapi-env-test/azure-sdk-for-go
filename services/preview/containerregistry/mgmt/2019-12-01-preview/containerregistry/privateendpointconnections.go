@@ -354,6 +354,7 @@ func (client PrivateEndpointConnectionsClient) List(ctx context.Context, resourc
 	}
 	if result.peclr.hasNextLink() && result.peclr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -415,7 +416,6 @@ func (client PrivateEndpointConnectionsClient) listNextResults(ctx context.Conte
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "containerregistry.PrivateEndpointConnectionsClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }

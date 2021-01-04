@@ -369,6 +369,7 @@ func (client ExportPipelinesClient) List(ctx context.Context, resourceGroupName 
 	}
 	if result.eplr.hasNextLink() && result.eplr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -430,7 +431,6 @@ func (client ExportPipelinesClient) listNextResults(ctx context.Context, lastRes
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "containerregistry.ExportPipelinesClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }

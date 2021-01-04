@@ -373,6 +373,7 @@ func (client PipelineRunsClient) List(ctx context.Context, resourceGroupName str
 	}
 	if result.prlr.hasNextLink() && result.prlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -434,7 +435,6 @@ func (client PipelineRunsClient) listNextResults(ctx context.Context, lastResult
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "containerregistry.PipelineRunsClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
