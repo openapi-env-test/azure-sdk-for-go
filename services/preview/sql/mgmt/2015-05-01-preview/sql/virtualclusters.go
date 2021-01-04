@@ -228,6 +228,7 @@ func (client VirtualClustersClient) List(ctx context.Context) (result VirtualClu
 	}
 	if result.vclr.hasNextLink() && result.vclr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -287,7 +288,6 @@ func (client VirtualClustersClient) listNextResults(ctx context.Context, lastRes
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "sql.VirtualClustersClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -344,6 +344,7 @@ func (client VirtualClustersClient) ListByResourceGroup(ctx context.Context, res
 	}
 	if result.vclr.hasNextLink() && result.vclr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -404,7 +405,6 @@ func (client VirtualClustersClient) listByResourceGroupNextResults(ctx context.C
 	result, err = client.ListByResourceGroupResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "sql.VirtualClustersClient", "listByResourceGroupNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
