@@ -417,6 +417,7 @@ func (client JobExecutionsClient) ListByAgent(ctx context.Context, resourceGroup
 	}
 	if result.jelr.hasNextLink() && result.jelr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -500,7 +501,6 @@ func (client JobExecutionsClient) listByAgentNextResults(ctx context.Context, la
 	result, err = client.ListByAgentResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "sql.JobExecutionsClient", "listByAgentNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -567,6 +567,7 @@ func (client JobExecutionsClient) ListByJob(ctx context.Context, resourceGroupNa
 	}
 	if result.jelr.hasNextLink() && result.jelr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -651,7 +652,6 @@ func (client JobExecutionsClient) listByJobNextResults(ctx context.Context, last
 	result, err = client.ListByJobResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "sql.JobExecutionsClient", "listByJobNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }

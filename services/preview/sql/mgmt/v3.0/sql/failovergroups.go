@@ -485,6 +485,7 @@ func (client FailoverGroupsClient) ListByServer(ctx context.Context, resourceGro
 	}
 	if result.fglr.hasNextLink() && result.fglr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -546,7 +547,6 @@ func (client FailoverGroupsClient) listByServerNextResults(ctx context.Context, 
 	result, err = client.ListByServerResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "sql.FailoverGroupsClient", "listByServerNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
