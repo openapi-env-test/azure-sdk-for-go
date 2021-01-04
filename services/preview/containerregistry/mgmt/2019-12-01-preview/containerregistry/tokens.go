@@ -364,6 +364,7 @@ func (client TokensClient) List(ctx context.Context, resourceGroupName string, r
 	}
 	if result.tlr.hasNextLink() && result.tlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -425,7 +426,6 @@ func (client TokensClient) listNextResults(ctx context.Context, lastResults Toke
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "containerregistry.TokensClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }

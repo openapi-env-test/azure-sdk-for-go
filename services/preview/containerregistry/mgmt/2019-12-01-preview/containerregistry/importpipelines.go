@@ -369,6 +369,7 @@ func (client ImportPipelinesClient) List(ctx context.Context, resourceGroupName 
 	}
 	if result.iplr.hasNextLink() && result.iplr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -430,7 +431,6 @@ func (client ImportPipelinesClient) listNextResults(ctx context.Context, lastRes
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "containerregistry.ImportPipelinesClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }

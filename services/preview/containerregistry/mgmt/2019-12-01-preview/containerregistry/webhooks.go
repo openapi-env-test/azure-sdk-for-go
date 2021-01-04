@@ -462,6 +462,7 @@ func (client WebhooksClient) List(ctx context.Context, resourceGroupName string,
 	}
 	if result.wlr.hasNextLink() && result.wlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -523,7 +524,6 @@ func (client WebhooksClient) listNextResults(ctx context.Context, lastResults We
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "containerregistry.WebhooksClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -595,6 +595,7 @@ func (client WebhooksClient) ListEvents(ctx context.Context, resourceGroupName s
 	}
 	if result.elr.hasNextLink() && result.elr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -657,7 +658,6 @@ func (client WebhooksClient) listEventsNextResults(ctx context.Context, lastResu
 	result, err = client.ListEventsResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "containerregistry.WebhooksClient", "listEventsNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }

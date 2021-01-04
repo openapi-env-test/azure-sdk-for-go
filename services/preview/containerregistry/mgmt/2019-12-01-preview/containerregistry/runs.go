@@ -353,6 +353,7 @@ func (client RunsClient) List(ctx context.Context, resourceGroupName string, reg
 	}
 	if result.rlr.hasNextLink() && result.rlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -420,7 +421,6 @@ func (client RunsClient) listNextResults(ctx context.Context, lastResults RunLis
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "containerregistry.RunsClient", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
