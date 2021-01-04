@@ -239,6 +239,7 @@ func (client ServerSecurityAlertPoliciesClient) ListByServer(ctx context.Context
 	}
 	if result.lssaplr.hasNextLink() && result.lssaplr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -300,7 +301,6 @@ func (client ServerSecurityAlertPoliciesClient) listByServerNextResults(ctx cont
 	result, err = client.ListByServerResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "sql.ServerSecurityAlertPoliciesClient", "listByServerNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }

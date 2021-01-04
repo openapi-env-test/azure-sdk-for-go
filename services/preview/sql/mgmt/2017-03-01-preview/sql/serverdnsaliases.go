@@ -394,6 +394,7 @@ func (client ServerDNSAliasesClient) ListByServer(ctx context.Context, resourceG
 	}
 	if result.sdalr.hasNextLink() && result.sdalr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -455,7 +456,6 @@ func (client ServerDNSAliasesClient) listByServerNextResults(ctx context.Context
 	result, err = client.ListByServerResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "sql.ServerDNSAliasesClient", "listByServerNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
