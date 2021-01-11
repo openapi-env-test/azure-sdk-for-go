@@ -335,6 +335,7 @@ func (client WorkloadGroupsClient) ListByDatabase(ctx context.Context, resourceG
 	}
 	if result.wglr.hasNextLink() && result.wglr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -397,7 +398,6 @@ func (client WorkloadGroupsClient) listByDatabaseNextResults(ctx context.Context
 	result, err = client.ListByDatabaseResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "sql.WorkloadGroupsClient", "listByDatabaseNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }

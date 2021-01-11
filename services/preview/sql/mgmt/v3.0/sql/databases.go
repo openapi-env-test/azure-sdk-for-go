@@ -215,96 +215,6 @@ func (client DatabasesClient) DeleteResponder(resp *http.Response) (result autor
 	return
 }
 
-// Export exports a database.
-// Parameters:
-// resourceGroupName - the name of the resource group that contains the resource. You can obtain this value
-// from the Azure Resource Manager API or the portal.
-// serverName - the name of the server.
-// databaseName - the name of the database.
-// parameters - the database export request parameters.
-func (client DatabasesClient) Export(ctx context.Context, resourceGroupName string, serverName string, databaseName string, parameters ExportDatabaseDefinition) (result DatabasesExportFuture, err error) {
-	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/DatabasesClient.Export")
-		defer func() {
-			sc := -1
-			if result.Response() != nil {
-				sc = result.Response().StatusCode
-			}
-			tracing.EndSpan(ctx, sc, err)
-		}()
-	}
-	if err := validation.Validate([]validation.Validation{
-		{TargetValue: parameters,
-			Constraints: []validation.Constraint{{Target: "parameters.StorageKey", Name: validation.Null, Rule: true, Chain: nil},
-				{Target: "parameters.StorageURI", Name: validation.Null, Rule: true, Chain: nil},
-				{Target: "parameters.AdministratorLogin", Name: validation.Null, Rule: true, Chain: nil},
-				{Target: "parameters.AdministratorLoginPassword", Name: validation.Null, Rule: true, Chain: nil}}}}); err != nil {
-		return result, validation.NewError("sql.DatabasesClient", "Export", err.Error())
-	}
-
-	req, err := client.ExportPreparer(ctx, resourceGroupName, serverName, databaseName, parameters)
-	if err != nil {
-		err = autorest.NewErrorWithError(err, "sql.DatabasesClient", "Export", nil, "Failure preparing request")
-		return
-	}
-
-	result, err = client.ExportSender(req)
-	if err != nil {
-		err = autorest.NewErrorWithError(err, "sql.DatabasesClient", "Export", result.Response(), "Failure sending request")
-		return
-	}
-
-	return
-}
-
-// ExportPreparer prepares the Export request.
-func (client DatabasesClient) ExportPreparer(ctx context.Context, resourceGroupName string, serverName string, databaseName string, parameters ExportDatabaseDefinition) (*http.Request, error) {
-	pathParameters := map[string]interface{}{
-		"databaseName":      autorest.Encode("path", databaseName),
-		"resourceGroupName": autorest.Encode("path", resourceGroupName),
-		"serverName":        autorest.Encode("path", serverName),
-		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
-	}
-
-	const APIVersion = "2020-02-02-preview"
-	queryParameters := map[string]interface{}{
-		"api-version": APIVersion,
-	}
-
-	preparer := autorest.CreatePreparer(
-		autorest.AsContentType("application/json; charset=utf-8"),
-		autorest.AsPost(),
-		autorest.WithBaseURL(client.BaseURI),
-		autorest.WithPathParameters("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/export", pathParameters),
-		autorest.WithJSON(parameters),
-		autorest.WithQueryParameters(queryParameters))
-	return preparer.Prepare((&http.Request{}).WithContext(ctx))
-}
-
-// ExportSender sends the Export request. The method will close the
-// http.Response Body if it receives an error.
-func (client DatabasesClient) ExportSender(req *http.Request) (future DatabasesExportFuture, err error) {
-	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
-	if err != nil {
-		return
-	}
-	future.Future, err = azure.NewFutureFromResponse(resp)
-	return
-}
-
-// ExportResponder handles the response to the Export request. The method always
-// closes the http.Response Body.
-func (client DatabasesClient) ExportResponder(resp *http.Response) (result ImportExportOperationResult, err error) {
-	err = autorest.Respond(
-		resp,
-		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusAccepted),
-		autorest.ByUnmarshallingJSON(&result),
-		autorest.ByClosing())
-	result.Response = autorest.Response{Response: resp}
-	return
-}
-
 // Failover failovers a database.
 // Parameters:
 // resourceGroupName - the name of the resource group that contains the resource. You can obtain this value
@@ -503,6 +413,7 @@ func (client DatabasesClient) ListByElasticPool(ctx context.Context, resourceGro
 	}
 	if result.dlr.hasNextLink() && result.dlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -565,7 +476,6 @@ func (client DatabasesClient) listByElasticPoolNextResults(ctx context.Context, 
 	result, err = client.ListByElasticPoolResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "sql.DatabasesClient", "listByElasticPoolNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -623,6 +533,7 @@ func (client DatabasesClient) ListByServer(ctx context.Context, resourceGroupNam
 	}
 	if result.dlr.hasNextLink() && result.dlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -684,7 +595,6 @@ func (client DatabasesClient) listByServerNextResults(ctx context.Context, lastR
 	result, err = client.ListByServerResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "sql.DatabasesClient", "listByServerNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -742,6 +652,7 @@ func (client DatabasesClient) ListInaccessibleByServer(ctx context.Context, reso
 	}
 	if result.dlr.hasNextLink() && result.dlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -803,7 +714,6 @@ func (client DatabasesClient) listInaccessibleByServerNextResults(ctx context.Co
 	result, err = client.ListInaccessibleByServerResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "sql.DatabasesClient", "listInaccessibleByServerNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }

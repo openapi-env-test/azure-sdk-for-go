@@ -404,6 +404,7 @@ func (client ElasticPoolsClient) ListByServer(ctx context.Context, resourceGroup
 	}
 	if result.eplr.hasNextLink() && result.eplr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -468,7 +469,6 @@ func (client ElasticPoolsClient) listByServerNextResults(ctx context.Context, la
 	result, err = client.ListByServerResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "sql.ElasticPoolsClient", "listByServerNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
