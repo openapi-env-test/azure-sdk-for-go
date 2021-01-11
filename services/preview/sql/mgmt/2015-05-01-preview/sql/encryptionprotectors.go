@@ -241,6 +241,7 @@ func (client EncryptionProtectorsClient) ListByServer(ctx context.Context, resou
 	}
 	if result.eplr.hasNextLink() && result.eplr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -302,7 +303,6 @@ func (client EncryptionProtectorsClient) listByServerNextResults(ctx context.Con
 	result, err = client.ListByServerResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "sql.EncryptionProtectorsClient", "listByServerNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
