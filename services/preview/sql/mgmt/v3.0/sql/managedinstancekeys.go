@@ -320,6 +320,7 @@ func (client ManagedInstanceKeysClient) ListByInstance(ctx context.Context, reso
 	}
 	if result.miklr.hasNextLink() && result.miklr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -384,7 +385,6 @@ func (client ManagedInstanceKeysClient) listByInstanceNextResults(ctx context.Co
 	result, err = client.ListByInstanceResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "sql.ManagedInstanceKeysClient", "listByInstanceNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }

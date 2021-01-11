@@ -321,6 +321,7 @@ func (client ServerKeysClient) ListByServer(ctx context.Context, resourceGroupNa
 	}
 	if result.sklr.hasNextLink() && result.sklr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -382,7 +383,6 @@ func (client ServerKeysClient) listByServerNextResults(ctx context.Context, last
 	result, err = client.ListByServerResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "sql.ServerKeysClient", "listByServerNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }

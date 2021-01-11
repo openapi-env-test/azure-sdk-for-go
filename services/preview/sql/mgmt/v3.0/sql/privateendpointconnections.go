@@ -325,6 +325,7 @@ func (client PrivateEndpointConnectionsClient) ListByServer(ctx context.Context,
 	}
 	if result.peclr.hasNextLink() && result.peclr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -386,7 +387,6 @@ func (client PrivateEndpointConnectionsClient) listByServerNextResults(ctx conte
 	result, err = client.ListByServerResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "sql.PrivateEndpointConnectionsClient", "listByServerNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }

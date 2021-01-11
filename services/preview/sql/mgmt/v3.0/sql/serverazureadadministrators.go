@@ -326,6 +326,7 @@ func (client ServerAzureADAdministratorsClient) ListByServer(ctx context.Context
 	}
 	if result.alr.hasNextLink() && result.alr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -387,7 +388,6 @@ func (client ServerAzureADAdministratorsClient) listByServerNextResults(ctx cont
 	result, err = client.ListByServerResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "sql.ServerAzureADAdministratorsClient", "listByServerNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }

@@ -326,6 +326,7 @@ func (client ManagedInstanceAdministratorsClient) ListByInstance(ctx context.Con
 	}
 	if result.mialr.hasNextLink() && result.mialr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -387,7 +388,6 @@ func (client ManagedInstanceAdministratorsClient) listByInstanceNextResults(ctx 
 	result, err = client.ListByInstanceResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "sql.ManagedInstanceAdministratorsClient", "listByInstanceNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }

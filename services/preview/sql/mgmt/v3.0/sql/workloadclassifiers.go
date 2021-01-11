@@ -340,6 +340,7 @@ func (client WorkloadClassifiersClient) ListByWorkloadGroup(ctx context.Context,
 	}
 	if result.wclr.hasNextLink() && result.wclr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -403,7 +404,6 @@ func (client WorkloadClassifiersClient) listByWorkloadGroupNextResults(ctx conte
 	result, err = client.ListByWorkloadGroupResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "sql.WorkloadClassifiersClient", "listByWorkloadGroupNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
