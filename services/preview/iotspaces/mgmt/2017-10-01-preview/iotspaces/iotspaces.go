@@ -421,6 +421,7 @@ func (client Client) List(ctx context.Context) (result DescriptionListResultPage
 	}
 	if result.dlr.hasNextLink() && result.dlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -480,7 +481,6 @@ func (client Client) listNextResults(ctx context.Context, lastResults Descriptio
 	result, err = client.ListResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "iotspaces.Client", "listNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
@@ -543,6 +543,7 @@ func (client Client) ListByResourceGroup(ctx context.Context, resourceGroupName 
 	}
 	if result.dlr.hasNextLink() && result.dlr.IsEmpty() {
 		err = result.NextWithContext(ctx)
+		return
 	}
 
 	return
@@ -603,7 +604,6 @@ func (client Client) listByResourceGroupNextResults(ctx context.Context, lastRes
 	result, err = client.ListByResourceGroupResponder(resp)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "iotspaces.Client", "listByResourceGroupNextResults", resp, "Failure responding to next results request")
-		return
 	}
 	return
 }
