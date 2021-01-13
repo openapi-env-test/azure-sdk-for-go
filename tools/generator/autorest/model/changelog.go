@@ -1,4 +1,4 @@
-package changelog
+package model
 
 import (
 	"fmt"
@@ -9,9 +9,7 @@ import (
 	"github.com/Azure/azure-sdk-for-go/tools/apidiff/report"
 )
 
-// Changelog describes a changelog of the package during this generation
 type Changelog struct {
-	PackageName    string
 	NewPackage     bool
 	RemovedPackage bool
 	Modified       *report.Package
@@ -28,6 +26,16 @@ func (c Changelog) String() string {
 
 // ToMarkdown returns the markdown string of this changelog
 func (c Changelog) ToMarkdown() string {
+	if c.NewPackage {
+		return ""
+	}
+	if c.RemovedPackage {
+		return "This package was removed" // this should never be executed
+	}
+	return c.Modified.ToMarkdown()
+}
+
+func (c Changelog) ToCompactMarkdown() string {
 	if c.NewPackage {
 		return "This is a new package"
 	}
