@@ -9,10 +9,10 @@ import (
 	"github.com/Azure/azure-sdk-for-go/tools/apidiff/exports"
 	"github.com/Azure/azure-sdk-for-go/tools/apidiff/report"
 	"github.com/Azure/azure-sdk-for-go/tools/generator/autorest/model"
+	"github.com/Azure/azure-sdk-for-go/tools/generator/changelog"
 	"github.com/Azure/azure-sdk-for-go/tools/generator/utils"
 )
 
-// ChangelogContext describes all necessary data that would be needed in the processing of changelogs
 type ChangelogContext interface {
 	SDKRoot() string
 	SDKCloneRoot() string
@@ -21,28 +21,24 @@ type ChangelogContext interface {
 	CodeGenVersion() string
 }
 
-// ChangelogProcessor processes the metadata and output changelog with the desired format
-type ChangelogProcessor struct {
+type changelogProcessor struct {
 	ctx              ChangelogContext
 	metadataLocation string
 	readme           string
 }
 
-// NewChangelogProcessorFromContext returns a new ChangelogProcessor
-func NewChangelogProcessorFromContext(ctx ChangelogContext) *ChangelogProcessor {
-	return &ChangelogProcessor{
+func NewChangelogProcessorFromContext(ctx ChangelogContext) *changelogProcessor {
+	return &changelogProcessor{
 		ctx: ctx,
 	}
 }
 
-// WithLocation adds the information of the metadata-output-folder
-func (p *ChangelogProcessor) WithLocation(metadataLocation string) *ChangelogProcessor {
+func (p *changelogProcessor) WithLocation(metadataLocation string) *changelogProcessor {
 	p.metadataLocation = metadataLocation
 	return p
 }
 
-// WithReadme adds the information of the path of readme.md file. This path could be relative or absolute.
-func (p *ChangelogProcessor) WithReadme(readme string) *ChangelogProcessor {
+func (p *changelogProcessor) WithReadme(readme string) *changelogProcessor {
 	// make sure the readme here is a relative path to the root of spec
 	readme = utils.NormalizePath(readme)
 	root := utils.NormalizePath(p.ctx.SpecRoot())
@@ -53,20 +49,17 @@ func (p *ChangelogProcessor) WithReadme(readme string) *ChangelogProcessor {
 	return p
 }
 
-// ChangelogResult describes the result of the generated changelog for one package
 type ChangelogResult struct {
 	PackageName        string
 	PackagePath        string
-	GenerationMetadata GenerationMetadata
+	GenerationMetadata changelog.GenerationMetadata
 	Changelog          model.Changelog
 }
 
-// ChangelogProcessError describes the errors during the processing
 type ChangelogProcessError struct {
 	Errors []error
 }
 
-// Error ...
 func (e *ChangelogProcessError) Error() string {
 	return fmt.Sprintf("total %d error(s) during processing changelog: %+v", len(e.Errors), e.Errors)
 }
@@ -90,7 +83,7 @@ func (b *changelogErrorBuilder) build() error {
 
 // Process generates the changelogs using the input metadata map.
 // Please ensure the input metadata map does not contain any package that is not under the sdk root, otherwise this might give weird results.
-func (p *ChangelogProcessor) Process(metadataMap map[string]model.Metadata) ([]ChangelogResult, error) {
+func (p *changelogProcessor) Process(metadataMap map[string]model.Metadata) ([]ChangelogResult, error) {
 	builder := changelogErrorBuilder{}
 	var results []ChangelogResult
 	for tag, metadata := range metadataMap {
@@ -111,7 +104,7 @@ func (p *ChangelogProcessor) Process(metadataMap map[string]model.Metadata) ([]C
 }
 
 // GenerateChangelog generates a changelog for one package
-func (p *ChangelogProcessor) GenerateChangelog(packagePath, tag string) (*ChangelogResult, error) {
+func (p *changelogProcessor) GenerateChangelog(packagePath, tag string) (*ChangelogResult, error) {
 	// use the relative path to the sdk root as package name
 	packageName, err := filepath.Rel(p.ctx.SDKRoot(), packagePath)
 	if err != nil {
@@ -134,7 +127,7 @@ func (p *ChangelogProcessor) GenerateChangelog(packagePath, tag string) (*Change
 	return &ChangelogResult{
 		PackageName: packageName,
 		PackagePath: packagePath,
-		GenerationMetadata: GenerationMetadata{
+		GenerationMetadata: changelog.GenerationMetadata{
 			CommitHash:     p.ctx.SpecCommitHash(),
 			Readme:         p.readme,
 			Tag:            tag,

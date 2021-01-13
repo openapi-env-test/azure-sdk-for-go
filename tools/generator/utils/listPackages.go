@@ -23,14 +23,14 @@ func ListTrack1SDKPackages(root string) ([]string, error) {
 			}
 			base := filepath.Base(path)
 			hasSubDir := false
-			hasAPISubDirs := false
+			hasApiSubDirs := false
 			hasVersionFile := false
 			for _, f := range fi {
 				hasSubDir = hasSubDir || isSubDir(base, f)
-				hasAPISubDirs = hasAPISubDirs || isAPIDir(base, f)
+				hasApiSubDirs = hasApiSubDirs || isApiDir(base, f)
 				hasVersionFile = hasVersionFile || isVersionFile(f)
 			}
-			if !hasSubDir && hasAPISubDirs && hasVersionFile {
+			if !hasSubDir && hasApiSubDirs && hasVersionFile {
 				results = append(results, path)
 				// skip all subdirectories
 				return filepath.SkipDir
@@ -45,7 +45,7 @@ func isSubDir(base string, fi os.FileInfo) bool {
 	return fi.IsDir() && fi.Name() != base+apiDirSuffix
 }
 
-func isAPIDir(base string, fi os.FileInfo) bool {
+func isApiDir(base string, fi os.FileInfo) bool {
 	return fi.IsDir() && fi.Name() == base+apiDirSuffix
 }
 

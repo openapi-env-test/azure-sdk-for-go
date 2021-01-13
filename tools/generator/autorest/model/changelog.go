@@ -9,11 +9,8 @@ import (
 	"github.com/Azure/azure-sdk-for-go/tools/apidiff/report"
 )
 
-// Changelog describes the changelog generated for a package.
 type Changelog struct {
-	// NewPackage is true if this package does not exist in the old version
-	NewPackage bool
-	// RemovedPackage is true if this package does not exist in the new version
+	NewPackage     bool
 	RemovedPackage bool
 	// Modified contains the details of a modified package. This is nil when either NewPackage or RemovedPackage is true
 	Modified *report.Package
@@ -40,7 +37,6 @@ func (c Changelog) ToMarkdown() string {
 	return c.Modified.ToMarkdown()
 }
 
-// ToCompactMarkdown returns the markdown string of this changelog but more compact
 func (c Changelog) ToCompactMarkdown() string {
 	if c.NewPackage {
 		return "This is a new package"
