@@ -1201,7 +1201,7 @@ type CloudErrorBody struct {
 
 // ClusterResourceProperties service properties payload
 type ClusterResourceProperties struct {
-	// ProvisioningState - READ-ONLY; Provisioning state of the Service. Possible values include: 'ProvisioningStateCreating', 'ProvisioningStateUpdating', 'ProvisioningStateDeleting', 'ProvisioningStateDeleted', 'ProvisioningStateSucceeded', 'ProvisioningStateFailed', 'ProvisioningStateMoving', 'ProvisioningStateMoved', 'ProvisioningStateMoveFailed'
+	// ProvisioningState - READ-ONLY; Provisioning state of the Service. Possible values include: 'ProvisioningStateCreating', 'ProvisioningStateUpdating', 'ProvisioningStateDeleting', 'ProvisioningStateDeleted', 'ProvisioningStateSucceeded', 'ProvisioningStateFailed', 'ProvisioningStateMoving', 'ProvisioningStateMoved', 'ProvisioningStateMoveFailed', 'ProvisioningStateTesting'
 	ProvisioningState ProvisioningState `json:"provisioningState,omitempty"`
 	// NetworkProfile - Network profile of the Service
 	NetworkProfile *NetworkProfile `json:"networkProfile,omitempty"`
@@ -1209,6 +1209,8 @@ type ClusterResourceProperties struct {
 	Version *int32 `json:"version,omitempty"`
 	// ServiceID - READ-ONLY; ServiceInstanceEntity GUID which uniquely identifies a created resource
 	ServiceID *string `json:"serviceId,omitempty"`
+	// Foo - READ-ONLY; bar
+	Foo *string `json:"foo,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for ClusterResourceProperties.
@@ -2540,6 +2542,8 @@ type NetworkProfile struct {
 	AppNetworkResourceGroup *string `json:"appNetworkResourceGroup,omitempty"`
 	// OutboundIPs - READ-ONLY; Desired outbound IP resources for Azure Spring Cloud instance.
 	OutboundIPs *NetworkProfileOutboundIPs `json:"outboundIPs,omitempty"`
+	// RequiredTraffics - READ-ONLY; Required inbound or outbound traffics for Azure Spring Cloud instance.
+	RequiredTraffics *[]RequiredTraffic `json:"requiredTraffics,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for NetworkProfile.
@@ -2638,6 +2642,20 @@ type ProxyResource struct {
 type RegenerateTestKeyRequestPayload struct {
 	// KeyType - Type of the test key. Possible values include: 'Primary', 'Secondary'
 	KeyType TestKeyType `json:"keyType,omitempty"`
+}
+
+// RequiredTraffic required inbound or outbound traffic for Azure Spring Cloud instance.
+type RequiredTraffic struct {
+	// Protocol - READ-ONLY; The protocol of required traffic
+	Protocol *string `json:"protocol,omitempty"`
+	// Port - READ-ONLY; The port of required traffic
+	Port *int32 `json:"port,omitempty"`
+	// Ips - READ-ONLY; The ip list of required traffic
+	Ips *[]string `json:"ips,omitempty"`
+	// Fqdns - READ-ONLY; The FQDN list of required traffic
+	Fqdns *[]string `json:"fqdns,omitempty"`
+	// Direction - READ-ONLY; The direction of required traffic. Possible values include: 'Inbound', 'Outbound'
+	Direction TrafficDirection `json:"direction,omitempty"`
 }
 
 // Resource the core properties of ARM resources.

@@ -148,13 +148,15 @@ const (
 	ProvisioningStateMoving ProvisioningState = "Moving"
 	// ProvisioningStateSucceeded ...
 	ProvisioningStateSucceeded ProvisioningState = "Succeeded"
+	// ProvisioningStateTesting ...
+	ProvisioningStateTesting ProvisioningState = "Testing"
 	// ProvisioningStateUpdating ...
 	ProvisioningStateUpdating ProvisioningState = "Updating"
 )
 
 // PossibleProvisioningStateValues returns an array of possible values for the ProvisioningState const type.
 func PossibleProvisioningStateValues() []ProvisioningState {
-	return []ProvisioningState{ProvisioningStateCreating, ProvisioningStateDeleted, ProvisioningStateDeleting, ProvisioningStateFailed, ProvisioningStateMoved, ProvisioningStateMoveFailed, ProvisioningStateMoving, ProvisioningStateSucceeded, ProvisioningStateUpdating}
+	return []ProvisioningState{ProvisioningStateCreating, ProvisioningStateDeleted, ProvisioningStateDeleting, ProvisioningStateFailed, ProvisioningStateMoved, ProvisioningStateMoveFailed, ProvisioningStateMoving, ProvisioningStateSucceeded, ProvisioningStateTesting, ProvisioningStateUpdating}
 }
 
 // ResourceSkuRestrictionsReasonCode enumerates the values for resource sku restrictions reason code.
@@ -266,6 +268,21 @@ const (
 // PossibleTestKeyTypeValues returns an array of possible values for the TestKeyType const type.
 func PossibleTestKeyTypeValues() []TestKeyType {
 	return []TestKeyType{Primary, Secondary}
+}
+
+// TrafficDirection enumerates the values for traffic direction.
+type TrafficDirection string
+
+const (
+	// Inbound ...
+	Inbound TrafficDirection = "Inbound"
+	// Outbound ...
+	Outbound TrafficDirection = "Outbound"
+)
+
+// PossibleTrafficDirectionValues returns an array of possible values for the TrafficDirection const type.
+func PossibleTrafficDirectionValues() []TrafficDirection {
+	return []TrafficDirection{Inbound, Outbound}
 }
 
 // UserSourceType enumerates the values for user source type.
