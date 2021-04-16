@@ -1,10 +1,40 @@
-Generated from https://github.com/Azure/azure-rest-api-specs/tree/3c764635e7d442b3e74caf593029fcd440b3ef82//specification/keyvault/resource-manager/readme.md tag: `package-2019-09`
+# Unreleased Content
 
-Code generator @microsoft.azure/autorest.go@2.1.178
+## Breaking Changes
 
+### Struct Changes
+
+#### Removed Struct Fields
+
+1. PrivateLinkServiceConnectionState.ActionRequired
+
+## Additive Changes
+
+### New Constants
+
+1. VaultProvisioningState.VaultProvisioningStateRegisteringDNS
+1. VaultProvisioningState.VaultProvisioningStateSucceeded
 
 ### New Funcs
 
-1. *PrivateEndpointConnectionsDeleteFuture.UnmarshalJSON([]byte) error
-1. *VaultsCreateOrUpdateFuture.UnmarshalJSON([]byte) error
-1. *VaultsPurgeDeletedFuture.UnmarshalJSON([]byte) error
+1. PossibleVaultProvisioningStateValues() []VaultProvisioningState
+
+### Struct Changes
+
+#### New Structs
+
+1. DimensionProperties
+1. MetricSpecification
+
+#### New Struct Fields
+
+1. DeletedVaultProperties.PurgeProtectionEnabled
+1. Operation.IsDataAction
+1. PrivateEndpointConnection.Etag
+1. PrivateEndpointConnectionItem.Etag
+1. PrivateEndpointConnectionItem.ID
+1. PrivateLinkServiceConnectionState.ActionsRequired
+1. ServiceSpecification.MetricSpecifications
+1. VaultProperties.HsmPoolResourceID
+1. VaultProperties.ProvisioningState
+1. VirtualNetworkRule.IgnoreMissingVnetServiceEndpoint
