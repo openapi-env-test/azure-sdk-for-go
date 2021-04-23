@@ -191,14 +191,14 @@ func (future *AFDCustomDomainsUpdateFuture) result(client AFDCustomDomainsClient
 type AFDDomain struct {
 	autorest.Response    `json:"-"`
 	*AFDDomainProperties `json:"properties,omitempty"`
-	// SystemData - READ-ONLY
-	SystemData *SystemData `json:"systemData,omitempty"`
 	// ID - READ-ONLY; Resource ID.
 	ID *string `json:"id,omitempty"`
 	// Name - READ-ONLY; Resource name.
 	Name *string `json:"name,omitempty"`
 	// Type - READ-ONLY; Resource type.
 	Type *string `json:"type,omitempty"`
+	// SystemData - READ-ONLY
+	SystemData *SystemData `json:"systemData,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for AFDDomain.
@@ -228,15 +228,6 @@ func (ad *AFDDomain) UnmarshalJSON(body []byte) error {
 				}
 				ad.AFDDomainProperties = &aFDDomainProperties
 			}
-		case "systemData":
-			if v != nil {
-				var systemData SystemData
-				err = json.Unmarshal(*v, &systemData)
-				if err != nil {
-					return err
-				}
-				ad.SystemData = &systemData
-			}
 		case "id":
 			if v != nil {
 				var ID string
@@ -263,6 +254,15 @@ func (ad *AFDDomain) UnmarshalJSON(body []byte) error {
 					return err
 				}
 				ad.Type = &typeVar
+			}
+		case "systemData":
+			if v != nil {
+				var systemData SystemData
+				err = json.Unmarshal(*v, &systemData)
+				if err != nil {
+					return err
+				}
+				ad.SystemData = &systemData
 			}
 		}
 	}
@@ -539,14 +539,14 @@ type AFDEndpoint struct {
 	Location *string `json:"location,omitempty"`
 	// Tags - Resource tags.
 	Tags map[string]*string `json:"tags"`
-	// SystemData - READ-ONLY
-	SystemData *SystemData `json:"systemData,omitempty"`
 	// ID - READ-ONLY; Resource ID.
 	ID *string `json:"id,omitempty"`
 	// Name - READ-ONLY; Resource name.
 	Name *string `json:"name,omitempty"`
 	// Type - READ-ONLY; Resource type.
 	Type *string `json:"type,omitempty"`
+	// SystemData - READ-ONLY
+	SystemData *SystemData `json:"systemData,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for AFDEndpoint.
@@ -600,15 +600,6 @@ func (ae *AFDEndpoint) UnmarshalJSON(body []byte) error {
 				}
 				ae.Tags = tags
 			}
-		case "systemData":
-			if v != nil {
-				var systemData SystemData
-				err = json.Unmarshal(*v, &systemData)
-				if err != nil {
-					return err
-				}
-				ae.SystemData = &systemData
-			}
 		case "id":
 			if v != nil {
 				var ID string
@@ -635,6 +626,15 @@ func (ae *AFDEndpoint) UnmarshalJSON(body []byte) error {
 					return err
 				}
 				ae.Type = &typeVar
+			}
+		case "systemData":
+			if v != nil {
+				var systemData SystemData
+				err = json.Unmarshal(*v, &systemData)
+				if err != nil {
+					return err
+				}
+				ae.SystemData = &systemData
 			}
 		}
 	}
@@ -1070,14 +1070,14 @@ type AfdErrorResponse struct {
 type AFDOrigin struct {
 	autorest.Response    `json:"-"`
 	*AFDOriginProperties `json:"properties,omitempty"`
-	// SystemData - READ-ONLY
-	SystemData *SystemData `json:"systemData,omitempty"`
 	// ID - READ-ONLY; Resource ID.
 	ID *string `json:"id,omitempty"`
 	// Name - READ-ONLY; Resource name.
 	Name *string `json:"name,omitempty"`
 	// Type - READ-ONLY; Resource type.
 	Type *string `json:"type,omitempty"`
+	// SystemData - READ-ONLY
+	SystemData *SystemData `json:"systemData,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for AFDOrigin.
@@ -1107,15 +1107,6 @@ func (ao *AFDOrigin) UnmarshalJSON(body []byte) error {
 				}
 				ao.AFDOriginProperties = &aFDOriginProperties
 			}
-		case "systemData":
-			if v != nil {
-				var systemData SystemData
-				err = json.Unmarshal(*v, &systemData)
-				if err != nil {
-					return err
-				}
-				ao.SystemData = &systemData
-			}
 		case "id":
 			if v != nil {
 				var ID string
@@ -1143,6 +1134,15 @@ func (ao *AFDOrigin) UnmarshalJSON(body []byte) error {
 				}
 				ao.Type = &typeVar
 			}
+		case "systemData":
+			if v != nil {
+				var systemData SystemData
+				err = json.Unmarshal(*v, &systemData)
+				if err != nil {
+					return err
+				}
+				ao.SystemData = &systemData
+			}
 		}
 	}
 
@@ -1154,14 +1154,14 @@ func (ao *AFDOrigin) UnmarshalJSON(body []byte) error {
 type AFDOriginGroup struct {
 	autorest.Response         `json:"-"`
 	*AFDOriginGroupProperties `json:"properties,omitempty"`
-	// SystemData - READ-ONLY
-	SystemData *SystemData `json:"systemData,omitempty"`
 	// ID - READ-ONLY; Resource ID.
 	ID *string `json:"id,omitempty"`
 	// Name - READ-ONLY; Resource name.
 	Name *string `json:"name,omitempty"`
 	// Type - READ-ONLY; Resource type.
 	Type *string `json:"type,omitempty"`
+	// SystemData - READ-ONLY
+	SystemData *SystemData `json:"systemData,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for AFDOriginGroup.
@@ -1191,15 +1191,6 @@ func (aog *AFDOriginGroup) UnmarshalJSON(body []byte) error {
 				}
 				aog.AFDOriginGroupProperties = &aFDOriginGroupProperties
 			}
-		case "systemData":
-			if v != nil {
-				var systemData SystemData
-				err = json.Unmarshal(*v, &systemData)
-				if err != nil {
-					return err
-				}
-				aog.SystemData = &systemData
-			}
 		case "id":
 			if v != nil {
 				var ID string
@@ -1226,6 +1217,15 @@ func (aog *AFDOriginGroup) UnmarshalJSON(body []byte) error {
 					return err
 				}
 				aog.Type = &typeVar
+			}
+		case "systemData":
+			if v != nil {
+				var systemData SystemData
+				err = json.Unmarshal(*v, &systemData)
+				if err != nil {
+					return err
+				}
+				aog.SystemData = &systemData
 			}
 		}
 	}
@@ -2155,14 +2155,14 @@ type CookiesMatchConditionParameters struct {
 type CustomDomain struct {
 	autorest.Response       `json:"-"`
 	*CustomDomainProperties `json:"properties,omitempty"`
-	// SystemData - READ-ONLY
-	SystemData *SystemData `json:"systemData,omitempty"`
 	// ID - READ-ONLY; Resource ID.
 	ID *string `json:"id,omitempty"`
 	// Name - READ-ONLY; Resource name.
 	Name *string `json:"name,omitempty"`
 	// Type - READ-ONLY; Resource type.
 	Type *string `json:"type,omitempty"`
+	// SystemData - READ-ONLY
+	SystemData *SystemData `json:"systemData,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for CustomDomain.
@@ -2192,15 +2192,6 @@ func (cd *CustomDomain) UnmarshalJSON(body []byte) error {
 				}
 				cd.CustomDomainProperties = &customDomainProperties
 			}
-		case "systemData":
-			if v != nil {
-				var systemData SystemData
-				err = json.Unmarshal(*v, &systemData)
-				if err != nil {
-					return err
-				}
-				cd.SystemData = &systemData
-			}
 		case "id":
 			if v != nil {
 				var ID string
@@ -2227,6 +2218,15 @@ func (cd *CustomDomain) UnmarshalJSON(body []byte) error {
 					return err
 				}
 				cd.Type = &typeVar
+			}
+		case "systemData":
+			if v != nil {
+				var systemData SystemData
+				err = json.Unmarshal(*v, &systemData)
+				if err != nil {
+					return err
+				}
+				cd.SystemData = &systemData
 			}
 		}
 	}
@@ -5023,14 +5023,14 @@ type DomainValidationProperties struct {
 // EdgeNode edgenode is a global Point of Presence (POP) location used to deliver CDN content to end users.
 type EdgeNode struct {
 	*EdgeNodeProperties `json:"properties,omitempty"`
-	// SystemData - READ-ONLY
-	SystemData *SystemData `json:"systemData,omitempty"`
 	// ID - READ-ONLY; Resource ID.
 	ID *string `json:"id,omitempty"`
 	// Name - READ-ONLY; Resource name.
 	Name *string `json:"name,omitempty"`
 	// Type - READ-ONLY; Resource type.
 	Type *string `json:"type,omitempty"`
+	// SystemData - READ-ONLY
+	SystemData *SystemData `json:"systemData,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for EdgeNode.
@@ -5060,15 +5060,6 @@ func (en *EdgeNode) UnmarshalJSON(body []byte) error {
 				}
 				en.EdgeNodeProperties = &edgeNodeProperties
 			}
-		case "systemData":
-			if v != nil {
-				var systemData SystemData
-				err = json.Unmarshal(*v, &systemData)
-				if err != nil {
-					return err
-				}
-				en.SystemData = &systemData
-			}
 		case "id":
 			if v != nil {
 				var ID string
@@ -5095,6 +5086,15 @@ func (en *EdgeNode) UnmarshalJSON(body []byte) error {
 					return err
 				}
 				en.Type = &typeVar
+			}
+		case "systemData":
+			if v != nil {
+				var systemData SystemData
+				err = json.Unmarshal(*v, &systemData)
+				if err != nil {
+					return err
+				}
+				en.SystemData = &systemData
 			}
 		}
 	}
@@ -5287,14 +5287,14 @@ type Endpoint struct {
 	Location *string `json:"location,omitempty"`
 	// Tags - Resource tags.
 	Tags map[string]*string `json:"tags"`
-	// SystemData - READ-ONLY
-	SystemData *SystemData `json:"systemData,omitempty"`
 	// ID - READ-ONLY; Resource ID.
 	ID *string `json:"id,omitempty"`
 	// Name - READ-ONLY; Resource name.
 	Name *string `json:"name,omitempty"`
 	// Type - READ-ONLY; Resource type.
 	Type *string `json:"type,omitempty"`
+	// SystemData - READ-ONLY
+	SystemData *SystemData `json:"systemData,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for Endpoint.
@@ -5348,15 +5348,6 @@ func (e *Endpoint) UnmarshalJSON(body []byte) error {
 				}
 				e.Tags = tags
 			}
-		case "systemData":
-			if v != nil {
-				var systemData SystemData
-				err = json.Unmarshal(*v, &systemData)
-				if err != nil {
-					return err
-				}
-				e.SystemData = &systemData
-			}
 		case "id":
 			if v != nil {
 				var ID string
@@ -5383,6 +5374,15 @@ func (e *Endpoint) UnmarshalJSON(body []byte) error {
 					return err
 				}
 				e.Type = &typeVar
+			}
+		case "systemData":
+			if v != nil {
+				var systemData SystemData
+				err = json.Unmarshal(*v, &systemData)
+				if err != nil {
+					return err
+				}
+				e.SystemData = &systemData
 			}
 		}
 	}
@@ -6342,6 +6342,8 @@ type ManagedRuleSetDefinition struct {
 	Name *string `json:"name,omitempty"`
 	// Type - READ-ONLY; Resource type.
 	Type *string `json:"type,omitempty"`
+	// SystemData - READ-ONLY
+	SystemData *SystemData `json:"systemData,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for ManagedRuleSetDefinition.
@@ -6409,6 +6411,15 @@ func (mrsd *ManagedRuleSetDefinition) UnmarshalJSON(body []byte) error {
 					return err
 				}
 				mrsd.Type = &typeVar
+			}
+		case "systemData":
+			if v != nil {
+				var systemData SystemData
+				err = json.Unmarshal(*v, &systemData)
+				if err != nil {
+					return err
+				}
+				mrsd.SystemData = &systemData
 			}
 		}
 	}
@@ -6852,14 +6863,14 @@ func NewOperationsListResultPage(cur OperationsListResult, getNextPage func(cont
 type Origin struct {
 	autorest.Response `json:"-"`
 	*OriginProperties `json:"properties,omitempty"`
-	// SystemData - READ-ONLY
-	SystemData *SystemData `json:"systemData,omitempty"`
 	// ID - READ-ONLY; Resource ID.
 	ID *string `json:"id,omitempty"`
 	// Name - READ-ONLY; Resource name.
 	Name *string `json:"name,omitempty"`
 	// Type - READ-ONLY; Resource type.
 	Type *string `json:"type,omitempty"`
+	// SystemData - READ-ONLY
+	SystemData *SystemData `json:"systemData,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for Origin.
@@ -6889,15 +6900,6 @@ func (o *Origin) UnmarshalJSON(body []byte) error {
 				}
 				o.OriginProperties = &originProperties
 			}
-		case "systemData":
-			if v != nil {
-				var systemData SystemData
-				err = json.Unmarshal(*v, &systemData)
-				if err != nil {
-					return err
-				}
-				o.SystemData = &systemData
-			}
 		case "id":
 			if v != nil {
 				var ID string
@@ -6925,6 +6927,15 @@ func (o *Origin) UnmarshalJSON(body []byte) error {
 				}
 				o.Type = &typeVar
 			}
+		case "systemData":
+			if v != nil {
+				var systemData SystemData
+				err = json.Unmarshal(*v, &systemData)
+				if err != nil {
+					return err
+				}
+				o.SystemData = &systemData
+			}
 		}
 	}
 
@@ -6936,14 +6947,14 @@ func (o *Origin) UnmarshalJSON(body []byte) error {
 type OriginGroup struct {
 	autorest.Response      `json:"-"`
 	*OriginGroupProperties `json:"properties,omitempty"`
-	// SystemData - READ-ONLY
-	SystemData *SystemData `json:"systemData,omitempty"`
 	// ID - READ-ONLY; Resource ID.
 	ID *string `json:"id,omitempty"`
 	// Name - READ-ONLY; Resource name.
 	Name *string `json:"name,omitempty"`
 	// Type - READ-ONLY; Resource type.
 	Type *string `json:"type,omitempty"`
+	// SystemData - READ-ONLY
+	SystemData *SystemData `json:"systemData,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for OriginGroup.
@@ -6973,15 +6984,6 @@ func (og *OriginGroup) UnmarshalJSON(body []byte) error {
 				}
 				og.OriginGroupProperties = &originGroupProperties
 			}
-		case "systemData":
-			if v != nil {
-				var systemData SystemData
-				err = json.Unmarshal(*v, &systemData)
-				if err != nil {
-					return err
-				}
-				og.SystemData = &systemData
-			}
 		case "id":
 			if v != nil {
 				var ID string
@@ -7008,6 +7010,15 @@ func (og *OriginGroup) UnmarshalJSON(body []byte) error {
 					return err
 				}
 				og.Type = &typeVar
+			}
+		case "systemData":
+			if v != nil {
+				var systemData SystemData
+				err = json.Unmarshal(*v, &systemData)
+				if err != nil {
+					return err
+				}
+				og.SystemData = &systemData
 			}
 		}
 	}
@@ -8022,14 +8033,14 @@ type Profile struct {
 	Location *string `json:"location,omitempty"`
 	// Tags - Resource tags.
 	Tags map[string]*string `json:"tags"`
-	// SystemData - READ-ONLY
-	SystemData *SystemData `json:"systemData,omitempty"`
 	// ID - READ-ONLY; Resource ID.
 	ID *string `json:"id,omitempty"`
 	// Name - READ-ONLY; Resource name.
 	Name *string `json:"name,omitempty"`
 	// Type - READ-ONLY; Resource type.
 	Type *string `json:"type,omitempty"`
+	// SystemData - READ-ONLY
+	SystemData *SystemData `json:"systemData,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for Profile.
@@ -8095,15 +8106,6 @@ func (p *Profile) UnmarshalJSON(body []byte) error {
 				}
 				p.Tags = tags
 			}
-		case "systemData":
-			if v != nil {
-				var systemData SystemData
-				err = json.Unmarshal(*v, &systemData)
-				if err != nil {
-					return err
-				}
-				p.SystemData = &systemData
-			}
 		case "id":
 			if v != nil {
 				var ID string
@@ -8130,6 +8132,15 @@ func (p *Profile) UnmarshalJSON(body []byte) error {
 					return err
 				}
 				p.Type = &typeVar
+			}
+		case "systemData":
+			if v != nil {
+				var systemData SystemData
+				err = json.Unmarshal(*v, &systemData)
+				if err != nil {
+					return err
+				}
+				p.SystemData = &systemData
 			}
 		}
 	}
@@ -8457,14 +8468,14 @@ func (pup ProfileUpdateParameters) MarshalJSON() ([]byte, error) {
 // ProxyResource the resource model definition for a ARM proxy resource. It will have everything other than
 // required location and tags
 type ProxyResource struct {
-	// SystemData - READ-ONLY
-	SystemData *SystemData `json:"systemData,omitempty"`
 	// ID - READ-ONLY; Resource ID.
 	ID *string `json:"id,omitempty"`
 	// Name - READ-ONLY; Resource name.
 	Name *string `json:"name,omitempty"`
 	// Type - READ-ONLY; Resource type.
 	Type *string `json:"type,omitempty"`
+	// SystemData - READ-ONLY
+	SystemData *SystemData `json:"systemData,omitempty"`
 }
 
 // PurgeParameters parameters required for content purge.
@@ -8621,6 +8632,8 @@ type Resource struct {
 	Name *string `json:"name,omitempty"`
 	// Type - READ-ONLY; Resource type.
 	Type *string `json:"type,omitempty"`
+	// SystemData - READ-ONLY
+	SystemData *SystemData `json:"systemData,omitempty"`
 }
 
 // ResourceReference reference to another resource.
@@ -8855,14 +8868,14 @@ type ResponseBasedOriginErrorDetectionParameters struct {
 type Route struct {
 	autorest.Response `json:"-"`
 	*RouteProperties  `json:"properties,omitempty"`
-	// SystemData - READ-ONLY
-	SystemData *SystemData `json:"systemData,omitempty"`
 	// ID - READ-ONLY; Resource ID.
 	ID *string `json:"id,omitempty"`
 	// Name - READ-ONLY; Resource name.
 	Name *string `json:"name,omitempty"`
 	// Type - READ-ONLY; Resource type.
 	Type *string `json:"type,omitempty"`
+	// SystemData - READ-ONLY
+	SystemData *SystemData `json:"systemData,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for Route.
@@ -8892,15 +8905,6 @@ func (r *Route) UnmarshalJSON(body []byte) error {
 				}
 				r.RouteProperties = &routeProperties
 			}
-		case "systemData":
-			if v != nil {
-				var systemData SystemData
-				err = json.Unmarshal(*v, &systemData)
-				if err != nil {
-					return err
-				}
-				r.SystemData = &systemData
-			}
 		case "id":
 			if v != nil {
 				var ID string
@@ -8927,6 +8931,15 @@ func (r *Route) UnmarshalJSON(body []byte) error {
 					return err
 				}
 				r.Type = &typeVar
+			}
+		case "systemData":
+			if v != nil {
+				var systemData SystemData
+				err = json.Unmarshal(*v, &systemData)
+				if err != nil {
+					return err
+				}
+				r.SystemData = &systemData
 			}
 		}
 	}
@@ -9367,14 +9380,14 @@ type RouteUpdatePropertiesParameters struct {
 type Rule struct {
 	autorest.Response `json:"-"`
 	*RuleProperties   `json:"properties,omitempty"`
-	// SystemData - READ-ONLY
-	SystemData *SystemData `json:"systemData,omitempty"`
 	// ID - READ-ONLY; Resource ID.
 	ID *string `json:"id,omitempty"`
 	// Name - READ-ONLY; Resource name.
 	Name *string `json:"name,omitempty"`
 	// Type - READ-ONLY; Resource type.
 	Type *string `json:"type,omitempty"`
+	// SystemData - READ-ONLY
+	SystemData *SystemData `json:"systemData,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for Rule.
@@ -9404,15 +9417,6 @@ func (r *Rule) UnmarshalJSON(body []byte) error {
 				}
 				r.RuleProperties = &ruleProperties
 			}
-		case "systemData":
-			if v != nil {
-				var systemData SystemData
-				err = json.Unmarshal(*v, &systemData)
-				if err != nil {
-					return err
-				}
-				r.SystemData = &systemData
-			}
 		case "id":
 			if v != nil {
 				var ID string
@@ -9439,6 +9443,15 @@ func (r *Rule) UnmarshalJSON(body []byte) error {
 					return err
 				}
 				r.Type = &typeVar
+			}
+		case "systemData":
+			if v != nil {
+				var systemData SystemData
+				err = json.Unmarshal(*v, &systemData)
+				if err != nil {
+					return err
+				}
+				r.SystemData = &systemData
 			}
 		}
 	}
@@ -9798,14 +9811,14 @@ func (future *RulesDeleteFuture) result(client RulesClient) (ar autorest.Respons
 type RuleSet struct {
 	autorest.Response  `json:"-"`
 	*RuleSetProperties `json:"properties,omitempty"`
-	// SystemData - READ-ONLY
-	SystemData *SystemData `json:"systemData,omitempty"`
 	// ID - READ-ONLY; Resource ID.
 	ID *string `json:"id,omitempty"`
 	// Name - READ-ONLY; Resource name.
 	Name *string `json:"name,omitempty"`
 	// Type - READ-ONLY; Resource type.
 	Type *string `json:"type,omitempty"`
+	// SystemData - READ-ONLY
+	SystemData *SystemData `json:"systemData,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for RuleSet.
@@ -9835,15 +9848,6 @@ func (rs *RuleSet) UnmarshalJSON(body []byte) error {
 				}
 				rs.RuleSetProperties = &ruleSetProperties
 			}
-		case "systemData":
-			if v != nil {
-				var systemData SystemData
-				err = json.Unmarshal(*v, &systemData)
-				if err != nil {
-					return err
-				}
-				rs.SystemData = &systemData
-			}
 		case "id":
 			if v != nil {
 				var ID string
@@ -9870,6 +9874,15 @@ func (rs *RuleSet) UnmarshalJSON(body []byte) error {
 					return err
 				}
 				rs.Type = &typeVar
+			}
+		case "systemData":
+			if v != nil {
+				var systemData SystemData
+				err = json.Unmarshal(*v, &systemData)
+				if err != nil {
+					return err
+				}
+				rs.SystemData = &systemData
 			}
 		}
 	}
@@ -10279,14 +10292,14 @@ func (rupp *RuleUpdatePropertiesParameters) UnmarshalJSON(body []byte) error {
 type Secret struct {
 	autorest.Response `json:"-"`
 	*SecretProperties `json:"properties,omitempty"`
-	// SystemData - READ-ONLY
-	SystemData *SystemData `json:"systemData,omitempty"`
 	// ID - READ-ONLY; Resource ID.
 	ID *string `json:"id,omitempty"`
 	// Name - READ-ONLY; Resource name.
 	Name *string `json:"name,omitempty"`
 	// Type - READ-ONLY; Resource type.
 	Type *string `json:"type,omitempty"`
+	// SystemData - READ-ONLY
+	SystemData *SystemData `json:"systemData,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for Secret.
@@ -10316,15 +10329,6 @@ func (s *Secret) UnmarshalJSON(body []byte) error {
 				}
 				s.SecretProperties = &secretProperties
 			}
-		case "systemData":
-			if v != nil {
-				var systemData SystemData
-				err = json.Unmarshal(*v, &systemData)
-				if err != nil {
-					return err
-				}
-				s.SystemData = &systemData
-			}
 		case "id":
 			if v != nil {
 				var ID string
@@ -10351,6 +10355,15 @@ func (s *Secret) UnmarshalJSON(body []byte) error {
 					return err
 				}
 				s.Type = &typeVar
+			}
+		case "systemData":
+			if v != nil {
+				var systemData SystemData
+				err = json.Unmarshal(*v, &systemData)
+				if err != nil {
+					return err
+				}
+				s.SystemData = &systemData
 			}
 		}
 	}
@@ -10929,14 +10942,14 @@ func (future *SecurityPoliciesPatchFuture) result(client SecurityPoliciesClient)
 type SecurityPolicy struct {
 	autorest.Response         `json:"-"`
 	*SecurityPolicyProperties `json:"properties,omitempty"`
-	// SystemData - READ-ONLY
-	SystemData *SystemData `json:"systemData,omitempty"`
 	// ID - READ-ONLY; Resource ID.
 	ID *string `json:"id,omitempty"`
 	// Name - READ-ONLY; Resource name.
 	Name *string `json:"name,omitempty"`
 	// Type - READ-ONLY; Resource type.
 	Type *string `json:"type,omitempty"`
+	// SystemData - READ-ONLY
+	SystemData *SystemData `json:"systemData,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for SecurityPolicy.
@@ -10966,15 +10979,6 @@ func (sp *SecurityPolicy) UnmarshalJSON(body []byte) error {
 				}
 				sp.SecurityPolicyProperties = &securityPolicyProperties
 			}
-		case "systemData":
-			if v != nil {
-				var systemData SystemData
-				err = json.Unmarshal(*v, &systemData)
-				if err != nil {
-					return err
-				}
-				sp.SystemData = &systemData
-			}
 		case "id":
 			if v != nil {
 				var ID string
@@ -11001,6 +11005,15 @@ func (sp *SecurityPolicy) UnmarshalJSON(body []byte) error {
 					return err
 				}
 				sp.Type = &typeVar
+			}
+		case "systemData":
+			if v != nil {
+				var systemData SystemData
+				err = json.Unmarshal(*v, &systemData)
+				if err != nil {
+					return err
+				}
+				sp.SystemData = &systemData
 			}
 		}
 	}
@@ -11415,14 +11428,14 @@ type TrackedResource struct {
 	Location *string `json:"location,omitempty"`
 	// Tags - Resource tags.
 	Tags map[string]*string `json:"tags"`
-	// SystemData - READ-ONLY
-	SystemData *SystemData `json:"systemData,omitempty"`
 	// ID - READ-ONLY; Resource ID.
 	ID *string `json:"id,omitempty"`
 	// Name - READ-ONLY; Resource name.
 	Name *string `json:"name,omitempty"`
 	// Type - READ-ONLY; Resource type.
 	Type *string `json:"type,omitempty"`
+	// SystemData - READ-ONLY
+	SystemData *SystemData `json:"systemData,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for TrackedResource.
@@ -12173,14 +12186,14 @@ type WebApplicationFirewallPolicy struct {
 	Location *string `json:"location,omitempty"`
 	// Tags - Resource tags.
 	Tags map[string]*string `json:"tags"`
-	// SystemData - READ-ONLY
-	SystemData *SystemData `json:"systemData,omitempty"`
 	// ID - READ-ONLY; Resource ID.
 	ID *string `json:"id,omitempty"`
 	// Name - READ-ONLY; Resource name.
 	Name *string `json:"name,omitempty"`
 	// Type - READ-ONLY; Resource type.
 	Type *string `json:"type,omitempty"`
+	// SystemData - READ-ONLY
+	SystemData *SystemData `json:"systemData,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for WebApplicationFirewallPolicy.
@@ -12258,15 +12271,6 @@ func (wafp *WebApplicationFirewallPolicy) UnmarshalJSON(body []byte) error {
 				}
 				wafp.Tags = tags
 			}
-		case "systemData":
-			if v != nil {
-				var systemData SystemData
-				err = json.Unmarshal(*v, &systemData)
-				if err != nil {
-					return err
-				}
-				wafp.SystemData = &systemData
-			}
 		case "id":
 			if v != nil {
 				var ID string
@@ -12293,6 +12297,15 @@ func (wafp *WebApplicationFirewallPolicy) UnmarshalJSON(body []byte) error {
 					return err
 				}
 				wafp.Type = &typeVar
+			}
+		case "systemData":
+			if v != nil {
+				var systemData SystemData
+				err = json.Unmarshal(*v, &systemData)
+				if err != nil {
+					return err
+				}
+				wafp.SystemData = &systemData
 			}
 		}
 	}

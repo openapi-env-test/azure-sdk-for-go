@@ -379,7 +379,7 @@ func (client ProfilesClient) GetResponder(resp *http.Response) (result Profile, 
 	return
 }
 
-// List lists all of the CDN profiles within an Azure subscription.
+// List lists all of the CDN profiles within an Azure subscription. Update 2.
 func (client ProfilesClient) List(ctx context.Context) (result ProfileListResultPage, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/ProfilesClient.List")
