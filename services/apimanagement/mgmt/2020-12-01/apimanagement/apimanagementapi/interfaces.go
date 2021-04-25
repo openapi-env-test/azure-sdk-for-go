@@ -494,8 +494,8 @@ var _ NamedValueClientAPI = (*apimanagement.NamedValueClient)(nil)
 
 // NetworkStatusClientAPI contains the set of methods on the NetworkStatusClient type.
 type NetworkStatusClientAPI interface {
-	ListByLocation(ctx context.Context, resourceGroupName string, serviceName string, locationName string) (result apimanagement.NetworkStatusContract, err error)
-	ListByService(ctx context.Context, resourceGroupName string, serviceName string) (result apimanagement.ListNetworkStatusContractByLocation, err error)
+	ListByLocationABC(ctx context.Context, resourceGroupName string, serviceName string, locationName string) (result apimanagement.NetworkStatusContract, err error)
+	ListByService(ctx context.Context, resourceGroupName string, serviceName string) (result autorest.Response, err error)
 }
 
 var _ NetworkStatusClientAPI = (*apimanagement.NetworkStatusClient)(nil)
