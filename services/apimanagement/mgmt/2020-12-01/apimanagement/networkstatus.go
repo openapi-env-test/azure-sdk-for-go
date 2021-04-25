@@ -31,16 +31,16 @@ func NewNetworkStatusClientWithBaseURI(baseURI string, subscriptionID string) Ne
 	return NetworkStatusClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
 
-// ListByLocation gets the Connectivity Status to the external resources on which the Api Management service depends
+// ListByLocationABC gets the Connectivity Status to the external resources on which the Api Management service depends
 // from inside the Cloud Service. This also returns the DNS Servers as visible to the CloudService.
 // Parameters:
 // resourceGroupName - the name of the resource group.
 // serviceName - the name of the API Management service.
 // locationName - location in which the API Management service is deployed. This is one of the Azure Regions
 // like West US, East US, South Central US.
-func (client NetworkStatusClient) ListByLocation(ctx context.Context, resourceGroupName string, serviceName string, locationName string) (result NetworkStatusContract, err error) {
+func (client NetworkStatusClient) ListByLocationABC(ctx context.Context, resourceGroupName string, serviceName string, locationName string) (result NetworkStatusContract, err error) {
 	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/NetworkStatusClient.ListByLocation")
+		ctx = tracing.StartSpan(ctx, fqdn+"/NetworkStatusClient.ListByLocationABC")
 		defer func() {
 			sc := -1
 			if result.Response.Response != nil {
@@ -56,33 +56,33 @@ func (client NetworkStatusClient) ListByLocation(ctx context.Context, resourceGr
 				{Target: "serviceName", Name: validation.Pattern, Rule: `^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$`, Chain: nil}}},
 		{TargetValue: locationName,
 			Constraints: []validation.Constraint{{Target: "locationName", Name: validation.MinLength, Rule: 1, Chain: nil}}}}); err != nil {
-		return result, validation.NewError("apimanagement.NetworkStatusClient", "ListByLocation", err.Error())
+		return result, validation.NewError("apimanagement.NetworkStatusClient", "ListByLocationABC", err.Error())
 	}
 
-	req, err := client.ListByLocationPreparer(ctx, resourceGroupName, serviceName, locationName)
+	req, err := client.ListByLocationABCPreparer(ctx, resourceGroupName, serviceName, locationName)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "apimanagement.NetworkStatusClient", "ListByLocation", nil, "Failure preparing request")
+		err = autorest.NewErrorWithError(err, "apimanagement.NetworkStatusClient", "ListByLocationABC", nil, "Failure preparing request")
 		return
 	}
 
-	resp, err := client.ListByLocationSender(req)
+	resp, err := client.ListByLocationABCSender(req)
 	if err != nil {
 		result.Response = autorest.Response{Response: resp}
-		err = autorest.NewErrorWithError(err, "apimanagement.NetworkStatusClient", "ListByLocation", resp, "Failure sending request")
+		err = autorest.NewErrorWithError(err, "apimanagement.NetworkStatusClient", "ListByLocationABC", resp, "Failure sending request")
 		return
 	}
 
-	result, err = client.ListByLocationResponder(resp)
+	result, err = client.ListByLocationABCResponder(resp)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "apimanagement.NetworkStatusClient", "ListByLocation", resp, "Failure responding to request")
+		err = autorest.NewErrorWithError(err, "apimanagement.NetworkStatusClient", "ListByLocationABC", resp, "Failure responding to request")
 		return
 	}
 
 	return
 }
 
-// ListByLocationPreparer prepares the ListByLocation request.
-func (client NetworkStatusClient) ListByLocationPreparer(ctx context.Context, resourceGroupName string, serviceName string, locationName string) (*http.Request, error) {
+// ListByLocationABCPreparer prepares the ListByLocationABC request.
+func (client NetworkStatusClient) ListByLocationABCPreparer(ctx context.Context, resourceGroupName string, serviceName string, locationName string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"locationName":      autorest.Encode("path", locationName),
 		"resourceGroupName": autorest.Encode("path", resourceGroupName),
@@ -103,15 +103,15 @@ func (client NetworkStatusClient) ListByLocationPreparer(ctx context.Context, re
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
 }
 
-// ListByLocationSender sends the ListByLocation request. The method will close the
+// ListByLocationABCSender sends the ListByLocationABC request. The method will close the
 // http.Response Body if it receives an error.
-func (client NetworkStatusClient) ListByLocationSender(req *http.Request) (*http.Response, error) {
+func (client NetworkStatusClient) ListByLocationABCSender(req *http.Request) (*http.Response, error) {
 	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
-// ListByLocationResponder handles the response to the ListByLocation request. The method always
+// ListByLocationABCResponder handles the response to the ListByLocationABC request. The method always
 // closes the http.Response Body.
-func (client NetworkStatusClient) ListByLocationResponder(resp *http.Response) (result NetworkStatusContract, err error) {
+func (client NetworkStatusClient) ListByLocationABCResponder(resp *http.Response) (result NetworkStatusContract, err error) {
 	err = autorest.Respond(
 		resp,
 		azure.WithErrorUnlessStatusCode(http.StatusOK),
@@ -126,13 +126,13 @@ func (client NetworkStatusClient) ListByLocationResponder(resp *http.Response) (
 // Parameters:
 // resourceGroupName - the name of the resource group.
 // serviceName - the name of the API Management service.
-func (client NetworkStatusClient) ListByService(ctx context.Context, resourceGroupName string, serviceName string) (result ListNetworkStatusContractByLocation, err error) {
+func (client NetworkStatusClient) ListByService(ctx context.Context, resourceGroupName string, serviceName string) (result autorest.Response, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/NetworkStatusClient.ListByService")
 		defer func() {
 			sc := -1
-			if result.Response.Response != nil {
-				sc = result.Response.Response.StatusCode
+			if result.Response != nil {
+				sc = result.Response.StatusCode
 			}
 			tracing.EndSpan(ctx, sc, err)
 		}()
@@ -153,7 +153,7 @@ func (client NetworkStatusClient) ListByService(ctx context.Context, resourceGro
 
 	resp, err := client.ListByServiceSender(req)
 	if err != nil {
-		result.Response = autorest.Response{Response: resp}
+		result.Response = resp
 		err = autorest.NewErrorWithError(err, "apimanagement.NetworkStatusClient", "ListByService", resp, "Failure sending request")
 		return
 	}
@@ -196,12 +196,11 @@ func (client NetworkStatusClient) ListByServiceSender(req *http.Request) (*http.
 
 // ListByServiceResponder handles the response to the ListByService request. The method always
 // closes the http.Response Body.
-func (client NetworkStatusClient) ListByServiceResponder(resp *http.Response) (result ListNetworkStatusContractByLocation, err error) {
+func (client NetworkStatusClient) ListByServiceResponder(resp *http.Response) (result autorest.Response, err error) {
 	err = autorest.Respond(
 		resp,
 		azure.WithErrorUnlessStatusCode(http.StatusOK),
-		autorest.ByUnmarshallingJSON(&result.Value),
 		autorest.ByClosing())
-	result.Response = autorest.Response{Response: resp}
+	result.Response = resp
 	return
 }
