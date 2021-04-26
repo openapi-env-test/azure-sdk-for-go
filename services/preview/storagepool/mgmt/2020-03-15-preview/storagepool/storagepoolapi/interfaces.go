@@ -20,25 +20,26 @@ var _ OperationsClientAPI = (*storagepool.OperationsClient)(nil)
 
 // DiskPoolsClientAPI contains the set of methods on the DiskPoolsClient type.
 type DiskPoolsClientAPI interface {
-	CreateOrUpdate(ctx context.Context, resourceGroupName string, diskPoolName string, diskPoolPayload storagepool.DiskPool) (result storagepool.DiskPoolsCreateOrUpdateFuture, err error)
+	CreateOrUpdate(ctx context.Context, resourceGroupName string, diskPoolName string, diskPoolCreatePayload storagepool.DiskPoolCreate) (result storagepool.DiskPoolsCreateOrUpdateFuture, err error)
 	Delete(ctx context.Context, resourceGroupName string, diskPoolName string) (result storagepool.DiskPoolsDeleteFuture, err error)
 	Get(ctx context.Context, resourceGroupName string, diskPoolName string) (result storagepool.DiskPool, err error)
 	ListByResourceGroup(ctx context.Context, resourceGroupName string) (result storagepool.DiskPoolListResultPage, err error)
 	ListByResourceGroupComplete(ctx context.Context, resourceGroupName string) (result storagepool.DiskPoolListResultIterator, err error)
 	ListBySubscription(ctx context.Context) (result storagepool.DiskPoolListResultPage, err error)
 	ListBySubscriptionComplete(ctx context.Context) (result storagepool.DiskPoolListResultIterator, err error)
-	Update(ctx context.Context, resourceGroupName string, diskPoolName string, diskPoolPayload storagepool.DiskPool) (result storagepool.DiskPool, err error)
+	Update(ctx context.Context, resourceGroupName string, diskPoolName string, diskPoolUpdatePayload storagepool.DiskPoolUpdate) (result storagepool.DiskPoolsUpdateFuture, err error)
 }
 
 var _ DiskPoolsClientAPI = (*storagepool.DiskPoolsClient)(nil)
 
 // IscsiTargetsClientAPI contains the set of methods on the IscsiTargetsClient type.
 type IscsiTargetsClientAPI interface {
-	CreateOrUpdate(ctx context.Context, resourceGroupName string, diskPoolName string, iscsiTargetName string, iscsiTargetPayload storagepool.IscsiTarget) (result storagepool.IscsiTargetsCreateOrUpdateFuture, err error)
+	CreateOrUpdate(ctx context.Context, resourceGroupName string, diskPoolName string, iscsiTargetName string, iscsiTargetCreatePayload storagepool.IscsiTargetCreate) (result storagepool.IscsiTargetsCreateOrUpdateFuture, err error)
 	Delete(ctx context.Context, resourceGroupName string, diskPoolName string, iscsiTargetName string) (result storagepool.IscsiTargetsDeleteFuture, err error)
 	Get(ctx context.Context, resourceGroupName string, diskPoolName string, iscsiTargetName string) (result storagepool.IscsiTarget, err error)
 	ListByDiskPool(ctx context.Context, resourceGroupName string, diskPoolName string) (result storagepool.IscsiTargetListPage, err error)
 	ListByDiskPoolComplete(ctx context.Context, resourceGroupName string, diskPoolName string) (result storagepool.IscsiTargetListIterator, err error)
+	Update(ctx context.Context, resourceGroupName string, diskPoolName string, iscsiTargetName string, iscsiTargetUpdatePayload storagepool.IscsiTargetUpdate) (result storagepool.IscsiTargetsUpdateFuture, err error)
 }
 
 var _ IscsiTargetsClientAPI = (*storagepool.IscsiTargetsClient)(nil)
