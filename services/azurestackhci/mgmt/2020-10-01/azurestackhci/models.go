@@ -44,6 +44,8 @@ type AzureEntityResource struct {
 // Cluster cluster details.
 type Cluster struct {
 	autorest.Response `json:"-"`
+	// SystemData - READ-ONLY; System data of Cluster resource
+	*SystemData `json:"systemData,omitempty"`
 	// ClusterProperties - Cluster properties.
 	*ClusterProperties `json:"properties,omitempty"`
 	// Tags - Resource tags.
@@ -82,6 +84,15 @@ func (c *Cluster) UnmarshalJSON(body []byte) error {
 	}
 	for k, v := range m {
 		switch k {
+		case "systemData":
+			if v != nil {
+				var systemData SystemData
+				err = json.Unmarshal(*v, &systemData)
+				if err != nil {
+					return err
+				}
+				c.SystemData = &systemData
+			}
 		case "properties":
 			if v != nil {
 				var clusterProperties ClusterProperties
@@ -457,8 +468,8 @@ type OperationDisplay struct {
 	Description *string `json:"description,omitempty"`
 }
 
-// ProxyResource the resource model definition for an Azure Resource Manager proxy resource. It will have
-// everything other than required location and tags
+// ProxyResource the resource model definition for a Azure Resource Manager proxy resource. It will not
+// have tags and a location
 type ProxyResource struct {
 	// ID - READ-ONLY; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string `json:"id,omitempty"`
@@ -478,7 +489,24 @@ type Resource struct {
 	Type *string `json:"type,omitempty"`
 }
 
+// SystemData metadata pertaining to creation and last modification of the resource.
+type SystemData struct {
+	// CreatedBy - The identity that created the resource.
+	CreatedBy *string `json:"createdBy,omitempty"`
+	// CreatedByType - The type of identity that created the resource. Possible values include: 'User', 'Application', 'ManagedIdentity', 'Key'
+	CreatedByType CreatedByType `json:"createdByType,omitempty"`
+	// CreatedAt - The timestamp of resource creation (UTC).
+	CreatedAt *date.Time `json:"createdAt,omitempty"`
+	// LastModifiedBy - The identity that last modified the resource.
+	LastModifiedBy *string `json:"lastModifiedBy,omitempty"`
+	// LastModifiedByType - The type of identity that last modified the resource. Possible values include: 'User', 'Application', 'ManagedIdentity', 'Key'
+	LastModifiedByType CreatedByType `json:"lastModifiedByType,omitempty"`
+	// LastModifiedAt - The timestamp of resource last modification (UTC)
+	LastModifiedAt *date.Time `json:"lastModifiedAt,omitempty"`
+}
+
 // TrackedResource the resource model definition for an Azure Resource Manager tracked top level resource
+// which has 'tags' and a 'location'
 type TrackedResource struct {
 	// Tags - Resource tags.
 	Tags map[string]*string `json:"tags"`
