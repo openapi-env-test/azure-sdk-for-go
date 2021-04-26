@@ -19,13 +19,13 @@ import (
 // The package's fully qualified name.
 const fqdn = "github.com/Azure/azure-sdk-for-go/services/preview/storagepool/mgmt/2020-03-15-preview/storagepool"
 
-// ACL access Control List (ACL) for an iSCSI target lun
+// ACL access Control List (ACL) for an iSCSI target portal group
 type ACL struct {
-	// InitiatorIqn - iSCSI initiator iqn (iSCSI Qualified Name); example: iqn.2005-03.org.iscsi:client
+	// InitiatorIqn - iSCSI initiator IQN (iSCSI Qualified Name); example: "iqn.2005-03.org.iscsi:client".
 	InitiatorIqn *string `json:"initiatorIqn,omitempty"`
-	// MappedLuns - Array of lun names mapped to the ACL
+	// MappedLuns - List of LUN names mapped to the ACL.
 	MappedLuns *[]string `json:"mappedLuns,omitempty"`
-	// IscsiTargetCredentials - CHAP credentials for iSCSI target.
+	// IscsiTargetCredentials - Challenge Handshake Authentication Protocol (CHAP) credentials to set for the ACL. Credentials can not be updated for an ACL.
 	*IscsiTargetCredentials `json:"credentials,omitempty"`
 }
 
@@ -86,32 +86,30 @@ func (a *ACL) UnmarshalJSON(body []byte) error {
 	return nil
 }
 
-// Attributes attributes of an iSCSI target
+// Attributes attributes of a iSCSI target portal group.
 type Attributes struct {
 	// Authentication - Indicates whether or not authentication is enabled on the ACL.
 	Authentication *bool `json:"authentication,omitempty"`
-	// ProdModeWriteProtect - Indicates whether or not write protect is enabled on the luns.
+	// ProdModeWriteProtect - Indicates whether or not write protect is enabled on the LUNs.
 	ProdModeWriteProtect *bool `json:"prodModeWriteProtect,omitempty"`
 }
 
-// Disk managed disk to attach to the DiskPool. Required.
+// Disk azure Managed Disk to attach to the Disk pool.
 type Disk struct {
-	// ID - Unique Azure resource id of the managed disk. Required.
+	// ID - Unique Azure Resource ID of the Managed Disk.
 	ID *string `json:"id,omitempty"`
 }
 
-// DiskPool request payload for Create or Update Disk Pool requests.
+// DiskPool response for Disk pool request.
 type DiskPool struct {
 	autorest.Response `json:"-"`
-	// DiskPoolProperties - RP defined properties for Disk Pool operations.
+	// DiskPoolProperties - Properties of Disk pool.
 	*DiskPoolProperties `json:"properties,omitempty"`
-	// Sku - Sku description.
-	Sku *Sku `json:"sku,omitempty"`
 	// SystemData - READ-ONLY; Resource metadata required by ARM RPC
 	SystemData *SystemMetadata `json:"systemData,omitempty"`
 	// Tags - Resource tags.
 	Tags map[string]*string `json:"tags"`
-	// Location - The geo-location where the resource lives
+	// Location - The geo-location where the resource lives.
 	Location *string `json:"location,omitempty"`
 	// ID - READ-ONLY; Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string `json:"id,omitempty"`
@@ -126,9 +124,6 @@ func (dp DiskPool) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
 	if dp.DiskPoolProperties != nil {
 		objectMap["properties"] = dp.DiskPoolProperties
-	}
-	if dp.Sku != nil {
-		objectMap["sku"] = dp.Sku
 	}
 	if dp.Tags != nil {
 		objectMap["tags"] = dp.Tags
@@ -156,15 +151,6 @@ func (dp *DiskPool) UnmarshalJSON(body []byte) error {
 					return err
 				}
 				dp.DiskPoolProperties = &diskPoolProperties
-			}
-		case "sku":
-			if v != nil {
-				var sku Sku
-				err = json.Unmarshal(*v, &sku)
-				if err != nil {
-					return err
-				}
-				dp.Sku = &sku
 			}
 		case "systemData":
 			if v != nil {
@@ -226,10 +212,124 @@ func (dp *DiskPool) UnmarshalJSON(body []byte) error {
 	return nil
 }
 
+// DiskPoolCreate request payload for create or update Disk pool request.
+type DiskPoolCreate struct {
+	// DiskPoolCreateProperties - Properties for Disk pool create request.
+	*DiskPoolCreateProperties `json:"properties,omitempty"`
+	// Tags - Resource tags.
+	Tags map[string]*string `json:"tags"`
+	// Location - The geo-location where the resource lives.
+	Location *string `json:"location,omitempty"`
+	// ID - READ-ONLY; Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+	ID *string `json:"id,omitempty"`
+	// Name - READ-ONLY; The name of the resource
+	Name *string `json:"name,omitempty"`
+	// Type - READ-ONLY; The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts.
+	Type *string `json:"type,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for DiskPoolCreate.
+func (dpc DiskPoolCreate) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if dpc.DiskPoolCreateProperties != nil {
+		objectMap["properties"] = dpc.DiskPoolCreateProperties
+	}
+	if dpc.Tags != nil {
+		objectMap["tags"] = dpc.Tags
+	}
+	if dpc.Location != nil {
+		objectMap["location"] = dpc.Location
+	}
+	return json.Marshal(objectMap)
+}
+
+// UnmarshalJSON is the custom unmarshaler for DiskPoolCreate struct.
+func (dpc *DiskPoolCreate) UnmarshalJSON(body []byte) error {
+	var m map[string]*json.RawMessage
+	err := json.Unmarshal(body, &m)
+	if err != nil {
+		return err
+	}
+	for k, v := range m {
+		switch k {
+		case "properties":
+			if v != nil {
+				var diskPoolCreateProperties DiskPoolCreateProperties
+				err = json.Unmarshal(*v, &diskPoolCreateProperties)
+				if err != nil {
+					return err
+				}
+				dpc.DiskPoolCreateProperties = &diskPoolCreateProperties
+			}
+		case "tags":
+			if v != nil {
+				var tags map[string]*string
+				err = json.Unmarshal(*v, &tags)
+				if err != nil {
+					return err
+				}
+				dpc.Tags = tags
+			}
+		case "location":
+			if v != nil {
+				var location string
+				err = json.Unmarshal(*v, &location)
+				if err != nil {
+					return err
+				}
+				dpc.Location = &location
+			}
+		case "id":
+			if v != nil {
+				var ID string
+				err = json.Unmarshal(*v, &ID)
+				if err != nil {
+					return err
+				}
+				dpc.ID = &ID
+			}
+		case "name":
+			if v != nil {
+				var name string
+				err = json.Unmarshal(*v, &name)
+				if err != nil {
+					return err
+				}
+				dpc.Name = &name
+			}
+		case "type":
+			if v != nil {
+				var typeVar string
+				err = json.Unmarshal(*v, &typeVar)
+				if err != nil {
+					return err
+				}
+				dpc.Type = &typeVar
+			}
+		}
+	}
+
+	return nil
+}
+
+// DiskPoolCreateProperties properties for Disk pool create or update request.
+type DiskPoolCreateProperties struct {
+	// AvailabilityZones - Logical zone for Disk pool resource; example: ["1"].
+	AvailabilityZones *[]string `json:"availabilityZones,omitempty"`
+	// Disks - List of Azure Managed Disks to attach to a Disk pool. Can attach 8 disks at most.
+	Disks *[]Disk `json:"disks,omitempty"`
+	// SubnetID - Azure Resource ID of a Subnet for the Disk pool.
+	SubnetID *string `json:"subnetId,omitempty"`
+	// AdditionalCapabilities - List of additional capabilities for a Disk pool.
+	AdditionalCapabilities *[]string `json:"additionalCapabilities,omitempty"`
+	// Tier - Determines the SKU of VM deployed for Disk pool. Possible values include: 'Basic', 'Standard', 'Premium'
+	Tier DiskPoolTier `json:"tier,omitempty"`
+}
+
 // DiskPoolListResult list of Disk Pools
 type DiskPoolListResult struct {
 	autorest.Response `json:"-"`
-	// Value - An array of Disk Pool objects.
+	// Value - An array of Disk pool objects.
 	Value *[]DiskPool `json:"value,omitempty"`
 	// NextLink - READ-ONLY; URI to fetch the next section of the paginated response.
 	NextLink *string `json:"nextLink,omitempty"`
@@ -394,33 +494,22 @@ func NewDiskPoolListResultPage(cur DiskPoolListResult, getNextPage func(context.
 	}
 }
 
-// DiskPoolProperties properties section of the Disk Pool request payload.
+// DiskPoolProperties disk pool response properties.
 type DiskPoolProperties struct {
-	// ProvisioningState - READ-ONLY; State of the operation on the resource. Possible values include: 'ProvisioningStatesInvalid', 'ProvisioningStatesSucceeded', 'ProvisioningStatesFailed', 'ProvisioningStatesCanceled', 'ProvisioningStatesPending', 'ProvisioningStatesCreating', 'ProvisioningStatesUpdating', 'ProvisioningStatesDeleting'
+	// ProvisioningState - State of the operation on the resource. Possible values include: 'ProvisioningStatesInvalid', 'ProvisioningStatesSucceeded', 'ProvisioningStatesFailed', 'ProvisioningStatesCanceled', 'ProvisioningStatesPending', 'ProvisioningStatesCreating', 'ProvisioningStatesUpdating', 'ProvisioningStatesDeleting'
 	ProvisioningState ProvisioningStates `json:"provisioningState,omitempty"`
-	// AvailabilityZones - Logical zone for DiskPool resource.
+	// AvailabilityZones - Logical zone for Disk pool resource; example: ["1"].
 	AvailabilityZones *[]string `json:"availabilityZones,omitempty"`
-	// Status - READ-ONLY; Operational status of the Disk pool. Possible values include: 'Invalid', 'Unknown', 'Healthy', 'Unhealthy'
+	// Status - Operational status of the Disk pool. Possible values include: 'Invalid', 'Unknown', 'Healthy', 'Unhealthy', 'Updating', 'Running', 'Stopped', 'Stoppeddeallocated'
 	Status OperationalStatus `json:"status,omitempty"`
-	// Disks - List of Azure managed disks to attach to a DiskPool
+	// Disks - List of Azure Managed Disks to attach to a Disk pool. Can attach 8 disks at most.
 	Disks *[]Disk `json:"disks,omitempty"`
-	// SubnetID - Azure resource id of the subnet for the DiskPool
+	// SubnetID - Azure Resource ID of a Subnet for the Disk pool.
 	SubnetID *string `json:"subnetId,omitempty"`
-}
-
-// MarshalJSON is the custom marshaler for DiskPoolProperties.
-func (dpp DiskPoolProperties) MarshalJSON() ([]byte, error) {
-	objectMap := make(map[string]interface{})
-	if dpp.AvailabilityZones != nil {
-		objectMap["availabilityZones"] = dpp.AvailabilityZones
-	}
-	if dpp.Disks != nil {
-		objectMap["disks"] = dpp.Disks
-	}
-	if dpp.SubnetID != nil {
-		objectMap["subnetId"] = dpp.SubnetID
-	}
-	return json.Marshal(objectMap)
+	// AdditionalCapabilities - List of additional capabilities for Disk pool.
+	AdditionalCapabilities *[]string `json:"additionalCapabilities,omitempty"`
+	// Tier - Determines the SKU of VM deployed for Disk pool. Possible values include: 'Basic', 'Standard', 'Premium'
+	Tier DiskPoolTier `json:"tier,omitempty"`
 }
 
 // DiskPoolsCreateOrUpdateFuture an abstraction for monitoring and retrieving the results of a long-running
@@ -503,9 +592,111 @@ func (future *DiskPoolsDeleteFuture) result(client DiskPoolsClient) (ar autorest
 	return
 }
 
+// DiskPoolsUpdateFuture an abstraction for monitoring and retrieving the results of a long-running
+// operation.
+type DiskPoolsUpdateFuture struct {
+	azure.FutureAPI
+	// Result returns the result of the asynchronous operation.
+	// If the operation has not completed it will return an error.
+	Result func(DiskPoolsClient) (DiskPool, error)
+}
+
+// UnmarshalJSON is the custom unmarshaller for CreateFuture.
+func (future *DiskPoolsUpdateFuture) UnmarshalJSON(body []byte) error {
+	var azFuture azure.Future
+	if err := json.Unmarshal(body, &azFuture); err != nil {
+		return err
+	}
+	future.FutureAPI = &azFuture
+	future.Result = future.result
+	return nil
+}
+
+// result is the default implementation for DiskPoolsUpdateFuture.Result.
+func (future *DiskPoolsUpdateFuture) result(client DiskPoolsClient) (dp DiskPool, err error) {
+	var done bool
+	done, err = future.DoneWithContext(context.Background(), client)
+	if err != nil {
+		err = autorest.NewErrorWithError(err, "storagepool.DiskPoolsUpdateFuture", "Result", future.Response(), "Polling failure")
+		return
+	}
+	if !done {
+		dp.Response.Response = future.Response()
+		err = azure.NewAsyncOpIncompleteError("storagepool.DiskPoolsUpdateFuture")
+		return
+	}
+	sender := autorest.DecorateSender(client, autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
+	if dp.Response.Response, err = future.GetResult(sender); err == nil && dp.Response.Response.StatusCode != http.StatusNoContent {
+		dp, err = client.UpdateResponder(dp.Response.Response)
+		if err != nil {
+			err = autorest.NewErrorWithError(err, "storagepool.DiskPoolsUpdateFuture", "Result", dp.Response.Response, "Failure responding to request")
+		}
+	}
+	return
+}
+
+// DiskPoolUpdate request payload for Update Disk pool request.
+type DiskPoolUpdate struct {
+	// DiskPoolUpdateProperties - Properties for Disk pool update request.
+	*DiskPoolUpdateProperties `json:"properties,omitempty"`
+	// Tags - Resource tags.
+	Tags map[string]*string `json:"tags"`
+}
+
+// MarshalJSON is the custom marshaler for DiskPoolUpdate.
+func (dpu DiskPoolUpdate) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if dpu.DiskPoolUpdateProperties != nil {
+		objectMap["properties"] = dpu.DiskPoolUpdateProperties
+	}
+	if dpu.Tags != nil {
+		objectMap["tags"] = dpu.Tags
+	}
+	return json.Marshal(objectMap)
+}
+
+// UnmarshalJSON is the custom unmarshaler for DiskPoolUpdate struct.
+func (dpu *DiskPoolUpdate) UnmarshalJSON(body []byte) error {
+	var m map[string]*json.RawMessage
+	err := json.Unmarshal(body, &m)
+	if err != nil {
+		return err
+	}
+	for k, v := range m {
+		switch k {
+		case "properties":
+			if v != nil {
+				var diskPoolUpdateProperties DiskPoolUpdateProperties
+				err = json.Unmarshal(*v, &diskPoolUpdateProperties)
+				if err != nil {
+					return err
+				}
+				dpu.DiskPoolUpdateProperties = &diskPoolUpdateProperties
+			}
+		case "tags":
+			if v != nil {
+				var tags map[string]*string
+				err = json.Unmarshal(*v, &tags)
+				if err != nil {
+					return err
+				}
+				dpu.Tags = tags
+			}
+		}
+	}
+
+	return nil
+}
+
+// DiskPoolUpdateProperties properties for Disk pool update request.
+type DiskPoolUpdateProperties struct {
+	// Disks - List of Azure Managed Disks to attach to a Disk pool. Can attach 8 disks at most.
+	Disks *[]Disk `json:"disks,omitempty"`
+}
+
 // Error the resource management error response.
 type Error struct {
-	// Error - RP error response
+	// Error - RP error response.
 	Error *ErrorResponse `json:"error,omitempty"`
 }
 
@@ -531,18 +722,18 @@ type ErrorResponse struct {
 	AdditionalInfo *[]ErrorAdditionalInfo `json:"additionalInfo,omitempty"`
 }
 
-// IscsiLun lun to expose the ManagedDisk.
+// IscsiLun LUN to expose the Azure Managed Disk.
 type IscsiLun struct {
-	// Name - Lun name.
+	// Name - User defined name for iSCSI LUN; example: "lun0"
 	Name *string `json:"name,omitempty"`
-	// ManagedDiskAzureResourceID - Unique Azure resource id of the managed disk. Required.
+	// ManagedDiskAzureResourceID - Azure Resource ID of the Managed Disk.
 	ManagedDiskAzureResourceID *string `json:"managedDiskAzureResourceId,omitempty"`
 }
 
-// IscsiTarget payload for iSCSI Target Create or Update requests.
+// IscsiTarget response for iSCSI target requests.
 type IscsiTarget struct {
 	autorest.Response `json:"-"`
-	// IscsiTargetProperties - RP defined properties for iSCSI Target operations.
+	// IscsiTargetProperties - Properties for iSCSI target operations.
 	*IscsiTargetProperties `json:"properties,omitempty"`
 	// ID - READ-ONLY; Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string `json:"id,omitempty"`
@@ -612,18 +803,99 @@ func (it *IscsiTarget) UnmarshalJSON(body []byte) error {
 	return nil
 }
 
-// IscsiTargetCredentials CHAP credentials for an iSCSI target
+// IscsiTargetCreate payload for iSCSI target create or update requests.
+type IscsiTargetCreate struct {
+	// IscsiTargetCreateProperties - Properties for iSCSI target create request.
+	*IscsiTargetCreateProperties `json:"properties,omitempty"`
+	// ID - READ-ONLY; Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+	ID *string `json:"id,omitempty"`
+	// Name - READ-ONLY; The name of the resource
+	Name *string `json:"name,omitempty"`
+	// Type - READ-ONLY; The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts.
+	Type *string `json:"type,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for IscsiTargetCreate.
+func (itc IscsiTargetCreate) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if itc.IscsiTargetCreateProperties != nil {
+		objectMap["properties"] = itc.IscsiTargetCreateProperties
+	}
+	return json.Marshal(objectMap)
+}
+
+// UnmarshalJSON is the custom unmarshaler for IscsiTargetCreate struct.
+func (itc *IscsiTargetCreate) UnmarshalJSON(body []byte) error {
+	var m map[string]*json.RawMessage
+	err := json.Unmarshal(body, &m)
+	if err != nil {
+		return err
+	}
+	for k, v := range m {
+		switch k {
+		case "properties":
+			if v != nil {
+				var iscsiTargetCreateProperties IscsiTargetCreateProperties
+				err = json.Unmarshal(*v, &iscsiTargetCreateProperties)
+				if err != nil {
+					return err
+				}
+				itc.IscsiTargetCreateProperties = &iscsiTargetCreateProperties
+			}
+		case "id":
+			if v != nil {
+				var ID string
+				err = json.Unmarshal(*v, &ID)
+				if err != nil {
+					return err
+				}
+				itc.ID = &ID
+			}
+		case "name":
+			if v != nil {
+				var name string
+				err = json.Unmarshal(*v, &name)
+				if err != nil {
+					return err
+				}
+				itc.Name = &name
+			}
+		case "type":
+			if v != nil {
+				var typeVar string
+				err = json.Unmarshal(*v, &typeVar)
+				if err != nil {
+					return err
+				}
+				itc.Type = &typeVar
+			}
+		}
+	}
+
+	return nil
+}
+
+// IscsiTargetCreateProperties properties for iSCSI target create or update request.
+type IscsiTargetCreateProperties struct {
+	// Tpgs - List of iSCSI target portal groups. Can have 1 portal group at most.
+	Tpgs *[]TargetPortalGroupCreate `json:"tpgs,omitempty"`
+	// TargetIqn - iSCSI target IQN (iSCSI Qualified Name); example: "iqn.2005-03.org.iscsi:server".
+	TargetIqn *string `json:"targetIqn,omitempty"`
+}
+
+// IscsiTargetCredentials challenge Handshake Authentication Protocol (CHAP) credentials for an iSCSI
+// target ACL.
 type IscsiTargetCredentials struct {
-	// Username - Username for Challenge Handshake Authentication Protocol (CHAP) authentication
+	// Username - Username for Challenge Handshake Authentication Protocol (CHAP) authentication.
 	Username *string `json:"username,omitempty"`
-	// Password - Password for Challenge Handshake Authentication Protocol (CHAP) authentication
+	// Password - Password for Challenge Handshake Authentication Protocol (CHAP) authentication.
 	Password *string `json:"password,omitempty"`
 }
 
 // IscsiTargetList list of iSCSI Targets.
 type IscsiTargetList struct {
 	autorest.Response `json:"-"`
-	// Value - An array of iSCSI targets within a Disk Pool.
+	// Value - An array of iSCSI targets in a Disk pool.
 	Value *[]IscsiTarget `json:"value,omitempty"`
 	// NextLink - READ-ONLY; URI to fetch the next section of the paginated response.
 	NextLink *string `json:"nextLink,omitempty"`
@@ -788,28 +1060,16 @@ func NewIscsiTargetListPage(cur IscsiTargetList, getNextPage func(context.Contex
 	}
 }
 
-// IscsiTargetProperties properties of iSCSI Target request payload.
+// IscsiTargetProperties response properties for iSCSI target operations.
 type IscsiTargetProperties struct {
-	// ProvisioningState - READ-ONLY; State of the operation on the resource. Possible values include: 'ProvisioningStatesInvalid', 'ProvisioningStatesSucceeded', 'ProvisioningStatesFailed', 'ProvisioningStatesCanceled', 'ProvisioningStatesPending', 'ProvisioningStatesCreating', 'ProvisioningStatesUpdating', 'ProvisioningStatesDeleting'
+	// ProvisioningState - State of the operation on the resource. Possible values include: 'ProvisioningStatesInvalid', 'ProvisioningStatesSucceeded', 'ProvisioningStatesFailed', 'ProvisioningStatesCanceled', 'ProvisioningStatesPending', 'ProvisioningStatesCreating', 'ProvisioningStatesUpdating', 'ProvisioningStatesDeleting'
 	ProvisioningState ProvisioningStates `json:"provisioningState,omitempty"`
-	// Status - READ-ONLY; Operational status of the Disk pool. Possible values include: 'Invalid', 'Unknown', 'Healthy', 'Unhealthy'
+	// Status - Operational status of the iSCSI target. Possible values include: 'Invalid', 'Unknown', 'Healthy', 'Unhealthy', 'Updating', 'Running', 'Stopped', 'Stoppeddeallocated'
 	Status OperationalStatus `json:"status,omitempty"`
-	// Tpgs - list of iSCSI target portal groups
+	// Tpgs - List of iSCSI target portal groups. Can have 1 portal group at most.
 	Tpgs *[]TargetPortalGroup `json:"tpgs,omitempty"`
-	// TargetIqn - iSCSI target iqn (iSCSI Qualified Name); example: iqn.2005-03.org.iscsi:server
+	// TargetIqn - iSCSI target IQN (iSCSI Qualified Name); example: "iqn.2005-03.org.iscsi:server".
 	TargetIqn *string `json:"targetIqn,omitempty"`
-}
-
-// MarshalJSON is the custom marshaler for IscsiTargetProperties.
-func (itp IscsiTargetProperties) MarshalJSON() ([]byte, error) {
-	objectMap := make(map[string]interface{})
-	if itp.Tpgs != nil {
-		objectMap["tpgs"] = itp.Tpgs
-	}
-	if itp.TargetIqn != nil {
-		objectMap["targetIqn"] = itp.TargetIqn
-	}
-	return json.Marshal(objectMap)
 }
 
 // IscsiTargetsCreateOrUpdateFuture an abstraction for monitoring and retrieving the results of a
@@ -892,6 +1152,94 @@ func (future *IscsiTargetsDeleteFuture) result(client IscsiTargetsClient) (ar au
 	return
 }
 
+// IscsiTargetsUpdateFuture an abstraction for monitoring and retrieving the results of a long-running
+// operation.
+type IscsiTargetsUpdateFuture struct {
+	azure.FutureAPI
+	// Result returns the result of the asynchronous operation.
+	// If the operation has not completed it will return an error.
+	Result func(IscsiTargetsClient) (IscsiTarget, error)
+}
+
+// UnmarshalJSON is the custom unmarshaller for CreateFuture.
+func (future *IscsiTargetsUpdateFuture) UnmarshalJSON(body []byte) error {
+	var azFuture azure.Future
+	if err := json.Unmarshal(body, &azFuture); err != nil {
+		return err
+	}
+	future.FutureAPI = &azFuture
+	future.Result = future.result
+	return nil
+}
+
+// result is the default implementation for IscsiTargetsUpdateFuture.Result.
+func (future *IscsiTargetsUpdateFuture) result(client IscsiTargetsClient) (it IscsiTarget, err error) {
+	var done bool
+	done, err = future.DoneWithContext(context.Background(), client)
+	if err != nil {
+		err = autorest.NewErrorWithError(err, "storagepool.IscsiTargetsUpdateFuture", "Result", future.Response(), "Polling failure")
+		return
+	}
+	if !done {
+		it.Response.Response = future.Response()
+		err = azure.NewAsyncOpIncompleteError("storagepool.IscsiTargetsUpdateFuture")
+		return
+	}
+	sender := autorest.DecorateSender(client, autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
+	if it.Response.Response, err = future.GetResult(sender); err == nil && it.Response.Response.StatusCode != http.StatusNoContent {
+		it, err = client.UpdateResponder(it.Response.Response)
+		if err != nil {
+			err = autorest.NewErrorWithError(err, "storagepool.IscsiTargetsUpdateFuture", "Result", it.Response.Response, "Failure responding to request")
+		}
+	}
+	return
+}
+
+// IscsiTargetUpdate payload for iSCSI target update request.
+type IscsiTargetUpdate struct {
+	// IscsiTargetUpdateProperties - Properties for iSCSI target update request.
+	*IscsiTargetUpdateProperties `json:"properties,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for IscsiTargetUpdate.
+func (itu IscsiTargetUpdate) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if itu.IscsiTargetUpdateProperties != nil {
+		objectMap["properties"] = itu.IscsiTargetUpdateProperties
+	}
+	return json.Marshal(objectMap)
+}
+
+// UnmarshalJSON is the custom unmarshaler for IscsiTargetUpdate struct.
+func (itu *IscsiTargetUpdate) UnmarshalJSON(body []byte) error {
+	var m map[string]*json.RawMessage
+	err := json.Unmarshal(body, &m)
+	if err != nil {
+		return err
+	}
+	for k, v := range m {
+		switch k {
+		case "properties":
+			if v != nil {
+				var iscsiTargetUpdateProperties IscsiTargetUpdateProperties
+				err = json.Unmarshal(*v, &iscsiTargetUpdateProperties)
+				if err != nil {
+					return err
+				}
+				itu.IscsiTargetUpdateProperties = &iscsiTargetUpdateProperties
+			}
+		}
+	}
+
+	return nil
+}
+
+// IscsiTargetUpdateProperties properties for iSCSI target update request.
+type IscsiTargetUpdateProperties struct {
+	// Tpgs - List of iSCSI target portal groups. Can have 1 portal group at most.
+	Tpgs *[]TargetPortalGroupUpdate `json:"tpgs,omitempty"`
+}
+
 // OperationDisplay metadata about an operation.
 type OperationDisplay struct {
 	// Provider - Localized friendly form of the resource provider name.
@@ -948,72 +1296,61 @@ type RPOperation struct {
 	Origin *string `json:"origin,omitempty"`
 }
 
-// Sku the resource model definition representing SKU
-type Sku struct {
-	// Name - The name of the SKU. Ex - P3. It is typically a letter+number code
-	Name *string `json:"name,omitempty"`
-	// Tier - This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT. Possible values include: 'Free', 'Basic', 'Standard', 'Premium'
-	Tier SkuTier `json:"tier,omitempty"`
-	// Size - The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code.
-	Size *string `json:"size,omitempty"`
-	// Family - If the service has different generations of hardware, for the same SKU, then that can be captured here.
-	Family *string `json:"family,omitempty"`
-	// Capacity - If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted.
-	Capacity *int32 `json:"capacity,omitempty"`
-}
-
-// SystemMetadata resource metadata required by ARM RPC
+// SystemMetadata resource metadata required by ARM RPC.
 type SystemMetadata struct {
 	// CreatedBy - A string identifier for the identity that created the resource.
 	CreatedBy *string `json:"createdBy,omitempty"`
-	// CreatedByType - The type of identity that created the resource: user, application, managedIdentity
+	// CreatedByType - The type of identity that created the resource: user, application, managedIdentity.
 	CreatedByType *string `json:"createdByType,omitempty"`
-	// CreatedAt - The timestamp of resource creation (UTC)
+	// CreatedAt - The timestamp of resource creation (UTC).
 	CreatedAt *string `json:"createdAt,omitempty"`
-	// LastModifiedBy - A string identifier for the identity that last modified the resource
+	// LastModifiedBy - A string identifier for the identity that last modified the resource.
 	LastModifiedBy *string `json:"lastModifiedBy,omitempty"`
-	// LastModifiedByType - The type of identity that last modified the resource: user, application, managedIdentity
+	// LastModifiedByType - The type of identity that last modified the resource: user, application, managedIdentity.
 	LastModifiedByType *string `json:"lastModifiedByType,omitempty"`
-	// LastModifiedAt - The timestamp of resource last modification (UTC)
+	// LastModifiedAt - The timestamp of resource last modification (UTC).
 	LastModifiedAt *string `json:"lastModifiedAt,omitempty"`
 }
 
-// TargetPortalGroup iSCSI target portal group
+// TargetPortalGroup response properties for iSCSI target portal group.
 type TargetPortalGroup struct {
-	// Luns - Lun list to be exposed through the iSCSI target. Required
+	// Luns - List of LUNs to be exposed through iSCSI target portal group.
 	Luns *[]IscsiLun `json:"luns,omitempty"`
-	// Acls - Access Control List (ACL) for an iSCSI target lun
+	// Acls - Access Control List (ACL) for an iSCSI target portal group.
 	Acls *[]ACL `json:"acls,omitempty"`
-	// Attributes - Attributes of an iSCSI target
+	// Attributes - Attributes of an iSCSI target portal group.
 	Attributes *Attributes `json:"attributes,omitempty"`
-	// Endpoints - READ-ONLY; list of public ip addresses to connect to the iSCSI target
+	// Endpoints - List of private IPv4 addresses to connect to the iSCSI target.
 	Endpoints *[]string `json:"endpoints,omitempty"`
-	// Tag - READ-ONLY; The tag associated with the iSCSI target portal group
+	// Tag - The tag associated with the iSCSI target portal group.
 	Tag *int32 `json:"tag,omitempty"`
-	// Port - READ-ONLY; The port at which the iSCSI target is available
+	// Port - The port used by iSCSI target portal group.
 	Port *int32 `json:"port,omitempty"`
 }
 
-// MarshalJSON is the custom marshaler for TargetPortalGroup.
-func (tpg TargetPortalGroup) MarshalJSON() ([]byte, error) {
-	objectMap := make(map[string]interface{})
-	if tpg.Luns != nil {
-		objectMap["luns"] = tpg.Luns
-	}
-	if tpg.Acls != nil {
-		objectMap["acls"] = tpg.Acls
-	}
-	if tpg.Attributes != nil {
-		objectMap["attributes"] = tpg.Attributes
-	}
-	return json.Marshal(objectMap)
+// TargetPortalGroupCreate target portal group properties for create or update iSCSI target request.
+type TargetPortalGroupCreate struct {
+	// Luns - List of LUNs to be exposed through the iSCSI target portal group.
+	Luns *[]IscsiLun `json:"luns,omitempty"`
+	// Acls - Access Control List (ACL) for an iSCSI target portal group.
+	Acls *[]ACL `json:"acls,omitempty"`
+	// Attributes - Attributes of an iSCSI target portal group.
+	Attributes *Attributes `json:"attributes,omitempty"`
 }
 
-// TrackedResource the resource model definition for a ARM tracked top level resource
+// TargetPortalGroupUpdate target portal group properties for update iSCSI target request.
+type TargetPortalGroupUpdate struct {
+	// Luns - List of LUNs to be exposed through the iSCSI target portal group.
+	Luns *[]IscsiLun `json:"luns,omitempty"`
+	// Acls - Access Control List (ACL) for an iSCSI target portal group.
+	Acls *[]ACL `json:"acls,omitempty"`
+}
+
+// TrackedResource the resource model definition for a ARM tracked top level resource.
 type TrackedResource struct {
 	// Tags - Resource tags.
 	Tags map[string]*string `json:"tags"`
-	// Location - The geo-location where the resource lives
+	// Location - The geo-location where the resource lives.
 	Location *string `json:"location,omitempty"`
 	// ID - READ-ONLY; Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string `json:"id,omitempty"`
