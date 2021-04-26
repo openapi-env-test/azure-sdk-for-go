@@ -31,7 +31,7 @@ func NewCloudServiceRoleInstancesClientWithBaseURI(baseURI string, subscriptionI
 	return CloudServiceRoleInstancesClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
 
-// Delete deletes a role instance from a cloud service.
+// Delete deletes a role instance from a cloud service xx.
 // Parameters:
 // roleInstanceName - name of the role instance.
 func (client CloudServiceRoleInstancesClient) Delete(ctx context.Context, roleInstanceName string, resourceGroupName string, cloudServiceName string) (result CloudServiceRoleInstancesDeleteFuture, err error) {

@@ -408,7 +408,7 @@ var _ DiskRestorePointClientAPI = (*compute.DiskRestorePointClient)(nil)
 type GalleriesClientAPI interface {
 	CreateOrUpdate(ctx context.Context, resourceGroupName string, galleryName string, gallery compute.Gallery) (result compute.GalleriesCreateOrUpdateFuture, err error)
 	Delete(ctx context.Context, resourceGroupName string, galleryName string) (result compute.GalleriesDeleteFuture, err error)
-	Get(ctx context.Context, resourceGroupName string, galleryName string) (result compute.Gallery, err error)
+	Get(ctx context.Context, resourceGroupName string, galleryName string, selectParameter compute.SelectPermissions) (result compute.Gallery, err error)
 	List(ctx context.Context) (result compute.GalleryListPage, err error)
 	ListComplete(ctx context.Context) (result compute.GalleryListIterator, err error)
 	ListByResourceGroup(ctx context.Context, resourceGroupName string) (result compute.GalleryListPage, err error)
@@ -465,6 +465,40 @@ type GalleryApplicationVersionsClientAPI interface {
 }
 
 var _ GalleryApplicationVersionsClientAPI = (*compute.GalleryApplicationVersionsClient)(nil)
+
+// GallerySharingProfileClientAPI contains the set of methods on the GallerySharingProfileClient type.
+type GallerySharingProfileClientAPI interface {
+	Update(ctx context.Context, resourceGroupName string, galleryName string, sharingUpdate compute.SharingUpdate) (result compute.GallerySharingProfileUpdateFuture, err error)
+}
+
+var _ GallerySharingProfileClientAPI = (*compute.GallerySharingProfileClient)(nil)
+
+// SharedGalleriesClientAPI contains the set of methods on the SharedGalleriesClient type.
+type SharedGalleriesClientAPI interface {
+	Get(ctx context.Context, location string, galleryUniqueName string) (result compute.SharedGallery, err error)
+	List(ctx context.Context, location string, sharedTo compute.SharedToValues) (result compute.SharedGalleryListPage, err error)
+	ListComplete(ctx context.Context, location string, sharedTo compute.SharedToValues) (result compute.SharedGalleryListIterator, err error)
+}
+
+var _ SharedGalleriesClientAPI = (*compute.SharedGalleriesClient)(nil)
+
+// SharedGalleryImagesClientAPI contains the set of methods on the SharedGalleryImagesClient type.
+type SharedGalleryImagesClientAPI interface {
+	Get(ctx context.Context, location string, galleryUniqueName string, galleryImageName string) (result compute.SharedGalleryImage, err error)
+	List(ctx context.Context, location string, galleryUniqueName string, sharedTo compute.SharedToValues) (result compute.SharedGalleryImageListPage, err error)
+	ListComplete(ctx context.Context, location string, galleryUniqueName string, sharedTo compute.SharedToValues) (result compute.SharedGalleryImageListIterator, err error)
+}
+
+var _ SharedGalleryImagesClientAPI = (*compute.SharedGalleryImagesClient)(nil)
+
+// SharedGalleryImageVersionsClientAPI contains the set of methods on the SharedGalleryImageVersionsClient type.
+type SharedGalleryImageVersionsClientAPI interface {
+	Get(ctx context.Context, location string, galleryUniqueName string, galleryImageName string, galleryImageVersionName string) (result compute.SharedGalleryImageVersion, err error)
+	List(ctx context.Context, location string, galleryUniqueName string, galleryImageName string, sharedTo compute.SharedToValues) (result compute.SharedGalleryImageVersionListPage, err error)
+	ListComplete(ctx context.Context, location string, galleryUniqueName string, galleryImageName string, sharedTo compute.SharedToValues) (result compute.SharedGalleryImageVersionListIterator, err error)
+}
+
+var _ SharedGalleryImageVersionsClientAPI = (*compute.SharedGalleryImageVersionsClient)(nil)
 
 // CloudServiceRoleInstancesClientAPI contains the set of methods on the CloudServiceRoleInstancesClient type.
 type CloudServiceRoleInstancesClientAPI interface {

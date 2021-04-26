@@ -5892,7 +5892,7 @@ func NewGalleryApplicationVersionListPage(cur GalleryApplicationVersionList, get
 	}
 }
 
-// GalleryApplicationVersionProperties describes the properties of a gallery Image Version.
+// GalleryApplicationVersionProperties describes the properties of a gallery image version.
 type GalleryApplicationVersionProperties struct {
 	PublishingProfile *GalleryApplicationVersionPublishingProfile `json:"publishingProfile,omitempty"`
 	// ProvisioningState - READ-ONLY; The provisioning state, which only appears in the response. Possible values include: 'ProvisioningState1Creating', 'ProvisioningState1Updating', 'ProvisioningState1Failed', 'ProvisioningState1Succeeded', 'ProvisioningState1Deleting', 'ProvisioningState1Migrating'
@@ -5922,9 +5922,9 @@ type GalleryApplicationVersionPublishingProfile struct {
 	ReplicaCount *int32 `json:"replicaCount,omitempty"`
 	// ExcludeFromLatest - If set to true, Virtual Machines deployed from the latest version of the Image Definition won't use this Image Version.
 	ExcludeFromLatest *bool `json:"excludeFromLatest,omitempty"`
-	// PublishedDate - READ-ONLY; The timestamp for when the gallery Image Version is published.
+	// PublishedDate - READ-ONLY; The timestamp for when the gallery image version is published.
 	PublishedDate *date.Time `json:"publishedDate,omitempty"`
-	// EndOfLifeDate - The end of life date of the gallery Image Version. This property can be used for decommissioning purposes. This property is updatable.
+	// EndOfLifeDate - The end of life date of the gallery image version. This property can be used for decommissioning purposes. This property is updatable.
 	EndOfLifeDate *date.Time `json:"endOfLifeDate,omitempty"`
 	// StorageAccountType - Specifies the storage account type to be used to store the image. This property is not updatable. Possible values include: 'StorageAccountTypeStandardLRS', 'StorageAccountTypeStandardZRS', 'StorageAccountTypePremiumLRS'
 	StorageAccountType StorageAccountType `json:"storageAccountType,omitempty"`
@@ -6177,9 +6177,9 @@ type GalleryArtifactPublishingProfileBase struct {
 	ReplicaCount *int32 `json:"replicaCount,omitempty"`
 	// ExcludeFromLatest - If set to true, Virtual Machines deployed from the latest version of the Image Definition won't use this Image Version.
 	ExcludeFromLatest *bool `json:"excludeFromLatest,omitempty"`
-	// PublishedDate - READ-ONLY; The timestamp for when the gallery Image Version is published.
+	// PublishedDate - READ-ONLY; The timestamp for when the gallery image version is published.
 	PublishedDate *date.Time `json:"publishedDate,omitempty"`
-	// EndOfLifeDate - The end of life date of the gallery Image Version. This property can be used for decommissioning purposes. This property is updatable.
+	// EndOfLifeDate - The end of life date of the gallery image version. This property can be used for decommissioning purposes. This property is updatable.
 	EndOfLifeDate *date.Time `json:"endOfLifeDate,omitempty"`
 	// StorageAccountType - Specifies the storage account type to be used to store the image. This property is not updatable. Possible values include: 'StorageAccountTypeStandardLRS', 'StorageAccountTypeStandardZRS', 'StorageAccountTypePremiumLRS'
 	StorageAccountType StorageAccountType `json:"storageAccountType,omitempty"`
@@ -6213,8 +6213,10 @@ type GalleryArtifactSource struct {
 
 // GalleryArtifactVersionSource the gallery artifact version source.
 type GalleryArtifactVersionSource struct {
-	// ID - The id of the gallery artifact version source. Can specify a disk uri, snapshot uri, or user image.
+	// ID - The id of the gallery artifact version source. Can specify a disk uri, snapshot uri, user image or storage account resource.
 	ID *string `json:"id,omitempty"`
+	// URI - The uri of the gallery artifact version source. Currently used to specify vhd/blob source.
+	URI *string `json:"uri,omitempty"`
 }
 
 // GalleryDataDiskImage this is the data disk image.
@@ -6270,7 +6272,7 @@ type GalleryIdentifier struct {
 	UniqueName *string `json:"uniqueName,omitempty"`
 }
 
-// GalleryImage specifies information about the gallery Image Definition that you want to create or update.
+// GalleryImage specifies information about the gallery image definition that you want to create or update.
 type GalleryImage struct {
 	autorest.Response       `json:"-"`
 	*GalleryImageProperties `json:"properties,omitempty"`
@@ -6370,13 +6372,21 @@ func (gi *GalleryImage) UnmarshalJSON(body []byte) error {
 	return nil
 }
 
-// GalleryImageIdentifier this is the gallery Image Definition identifier.
+// GalleryImageFeature a feature for gallery image.
+type GalleryImageFeature struct {
+	// Name - The name of the gallery image feature.
+	Name *string `json:"name,omitempty"`
+	// Value - The value of the gallery image feature.
+	Value *string `json:"value,omitempty"`
+}
+
+// GalleryImageIdentifier this is the gallery image definition identifier.
 type GalleryImageIdentifier struct {
-	// Publisher - The name of the gallery Image Definition publisher.
+	// Publisher - The name of the gallery image definition publisher.
 	Publisher *string `json:"publisher,omitempty"`
-	// Offer - The name of the gallery Image Definition offer.
+	// Offer - The name of the gallery image definition offer.
 	Offer *string `json:"offer,omitempty"`
-	// Sku - The name of the gallery Image Definition SKU.
+	// Sku - The name of the gallery image definition SKU.
 	Sku *string `json:"sku,omitempty"`
 }
 
@@ -6385,7 +6395,7 @@ type GalleryImageList struct {
 	autorest.Response `json:"-"`
 	// Value - A list of Shared Image Gallery images.
 	Value *[]GalleryImage `json:"value,omitempty"`
-	// NextLink - The uri to fetch the next page of Image Definitions in the Shared Image Gallery. Call ListNext() with this to fetch the next page of gallery Image Definitions.
+	// NextLink - The uri to fetch the next page of Image Definitions in the Shared Image Gallery. Call ListNext() with this to fetch the next page of gallery image definitions.
 	NextLink *string `json:"nextLink,omitempty"`
 }
 
@@ -6539,11 +6549,11 @@ func NewGalleryImageListPage(cur GalleryImageList, getNextPage func(context.Cont
 	}
 }
 
-// GalleryImageProperties describes the properties of a gallery Image Definition.
+// GalleryImageProperties describes the properties of a gallery image definition.
 type GalleryImageProperties struct {
-	// Description - The description of this gallery Image Definition resource. This property is updatable.
+	// Description - The description of this gallery image definition resource. This property is updatable.
 	Description *string `json:"description,omitempty"`
-	// Eula - The Eula agreement for the gallery Image Definition.
+	// Eula - The Eula agreement for the gallery image definition.
 	Eula *string `json:"eula,omitempty"`
 	// PrivacyStatementURI - The privacy statement uri.
 	PrivacyStatementURI *string `json:"privacyStatementUri,omitempty"`
@@ -6555,7 +6565,7 @@ type GalleryImageProperties struct {
 	OsState OperatingSystemStateTypes `json:"osState,omitempty"`
 	// HyperVGeneration - The hypervisor generation of the Virtual Machine. Applicable to OS disks only. Possible values include: 'V1', 'V2'
 	HyperVGeneration HyperVGeneration `json:"hyperVGeneration,omitempty"`
-	// EndOfLifeDate - The end of life date of the gallery Image Definition. This property can be used for decommissioning purposes. This property is updatable.
+	// EndOfLifeDate - The end of life date of the gallery image definition. This property can be used for decommissioning purposes. This property is updatable.
 	EndOfLifeDate *date.Time                       `json:"endOfLifeDate,omitempty"`
 	Identifier    *GalleryImageIdentifier          `json:"identifier,omitempty"`
 	Recommended   *RecommendedMachineConfiguration `json:"recommended,omitempty"`
@@ -6563,6 +6573,8 @@ type GalleryImageProperties struct {
 	PurchasePlan  *ImagePurchasePlan               `json:"purchasePlan,omitempty"`
 	// ProvisioningState - READ-ONLY; The provisioning state, which only appears in the response. Possible values include: 'ProvisioningState2Creating', 'ProvisioningState2Updating', 'ProvisioningState2Failed', 'ProvisioningState2Succeeded', 'ProvisioningState2Deleting', 'ProvisioningState2Migrating'
 	ProvisioningState ProvisioningState2 `json:"provisioningState,omitempty"`
+	// Features - A list of gallery image features.
+	Features *[]GalleryImageFeature `json:"features,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for GalleryImageProperties.
@@ -6603,6 +6615,9 @@ func (gip GalleryImageProperties) MarshalJSON() ([]byte, error) {
 	}
 	if gip.PurchasePlan != nil {
 		objectMap["purchasePlan"] = gip.PurchasePlan
+	}
+	if gip.Features != nil {
+		objectMap["features"] = gip.Features
 	}
 	return json.Marshal(objectMap)
 }
@@ -6730,7 +6745,7 @@ func (future *GalleryImagesUpdateFuture) result(client GalleryImagesClient) (gi 
 	return
 }
 
-// GalleryImageUpdate specifies information about the gallery Image Definition that you want to update.
+// GalleryImageUpdate specifies information about the gallery image definition that you want to update.
 type GalleryImageUpdate struct {
 	*GalleryImageProperties `json:"properties,omitempty"`
 	// ID - READ-ONLY; Resource Id
@@ -6815,7 +6830,7 @@ func (giu *GalleryImageUpdate) UnmarshalJSON(body []byte) error {
 	return nil
 }
 
-// GalleryImageVersion specifies information about the gallery Image Version that you want to create or
+// GalleryImageVersion specifies information about the gallery image version that you want to create or
 // update.
 type GalleryImageVersion struct {
 	autorest.Response              `json:"-"`
@@ -6919,9 +6934,9 @@ func (giv *GalleryImageVersion) UnmarshalJSON(body []byte) error {
 // GalleryImageVersionList the List Gallery Image version operation response.
 type GalleryImageVersionList struct {
 	autorest.Response `json:"-"`
-	// Value - A list of gallery Image Versions.
+	// Value - A list of gallery image versions.
 	Value *[]GalleryImageVersion `json:"value,omitempty"`
-	// NextLink - The uri to fetch the next page of gallery Image Versions. Call ListNext() with this to fetch the next page of gallery Image Versions.
+	// NextLink - The uri to fetch the next page of gallery image versions. Call ListNext() with this to fetch the next page of gallery image versions.
 	NextLink *string `json:"nextLink,omitempty"`
 }
 
@@ -7075,7 +7090,7 @@ func NewGalleryImageVersionListPage(cur GalleryImageVersionList, getNextPage fun
 	}
 }
 
-// GalleryImageVersionProperties describes the properties of a gallery Image Version.
+// GalleryImageVersionProperties describes the properties of a gallery image version.
 type GalleryImageVersionProperties struct {
 	PublishingProfile *GalleryImageVersionPublishingProfile `json:"publishingProfile,omitempty"`
 	// ProvisioningState - READ-ONLY; The provisioning state, which only appears in the response. Possible values include: 'ProvisioningState3Creating', 'ProvisioningState3Updating', 'ProvisioningState3Failed', 'ProvisioningState3Succeeded', 'ProvisioningState3Deleting', 'ProvisioningState3Migrating'
@@ -7097,7 +7112,7 @@ func (givp GalleryImageVersionProperties) MarshalJSON() ([]byte, error) {
 	return json.Marshal(objectMap)
 }
 
-// GalleryImageVersionPublishingProfile the publishing profile of a gallery Image Version.
+// GalleryImageVersionPublishingProfile the publishing profile of a gallery image Version.
 type GalleryImageVersionPublishingProfile struct {
 	// TargetRegions - The target regions where the Image Version is going to be replicated to. This property is updatable.
 	TargetRegions *[]TargetRegion `json:"targetRegions,omitempty"`
@@ -7105,9 +7120,9 @@ type GalleryImageVersionPublishingProfile struct {
 	ReplicaCount *int32 `json:"replicaCount,omitempty"`
 	// ExcludeFromLatest - If set to true, Virtual Machines deployed from the latest version of the Image Definition won't use this Image Version.
 	ExcludeFromLatest *bool `json:"excludeFromLatest,omitempty"`
-	// PublishedDate - READ-ONLY; The timestamp for when the gallery Image Version is published.
+	// PublishedDate - READ-ONLY; The timestamp for when the gallery image version is published.
 	PublishedDate *date.Time `json:"publishedDate,omitempty"`
-	// EndOfLifeDate - The end of life date of the gallery Image Version. This property can be used for decommissioning purposes. This property is updatable.
+	// EndOfLifeDate - The end of life date of the gallery image version. This property can be used for decommissioning purposes. This property is updatable.
 	EndOfLifeDate *date.Time `json:"endOfLifeDate,omitempty"`
 	// StorageAccountType - Specifies the storage account type to be used to store the image. This property is not updatable. Possible values include: 'StorageAccountTypeStandardLRS', 'StorageAccountTypeStandardZRS', 'StorageAccountTypePremiumLRS'
 	StorageAccountType StorageAccountType `json:"storageAccountType,omitempty"`
@@ -7265,7 +7280,7 @@ func (future *GalleryImageVersionsUpdateFuture) result(client GalleryImageVersio
 	return
 }
 
-// GalleryImageVersionUpdate specifies information about the gallery Image Version that you want to update.
+// GalleryImageVersionUpdate specifies information about the gallery image version that you want to update.
 type GalleryImageVersionUpdate struct {
 	*GalleryImageVersionProperties `json:"properties,omitempty"`
 	// ID - READ-ONLY; Resource Id
@@ -7537,6 +7552,7 @@ type GalleryProperties struct {
 	Identifier  *GalleryIdentifier `json:"identifier,omitempty"`
 	// ProvisioningState - READ-ONLY; The provisioning state, which only appears in the response. Possible values include: 'ProvisioningStateCreating', 'ProvisioningStateUpdating', 'ProvisioningStateFailed', 'ProvisioningStateSucceeded', 'ProvisioningStateDeleting', 'ProvisioningStateMigrating'
 	ProvisioningState ProvisioningState `json:"provisioningState,omitempty"`
+	SharingProfile    *SharingProfile   `json:"sharingProfile,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for GalleryProperties.
@@ -7548,7 +7564,53 @@ func (gp GalleryProperties) MarshalJSON() ([]byte, error) {
 	if gp.Identifier != nil {
 		objectMap["identifier"] = gp.Identifier
 	}
+	if gp.SharingProfile != nil {
+		objectMap["sharingProfile"] = gp.SharingProfile
+	}
 	return json.Marshal(objectMap)
+}
+
+// GallerySharingProfileUpdateFuture an abstraction for monitoring and retrieving the results of a
+// long-running operation.
+type GallerySharingProfileUpdateFuture struct {
+	azure.FutureAPI
+	// Result returns the result of the asynchronous operation.
+	// If the operation has not completed it will return an error.
+	Result func(GallerySharingProfileClient) (SharingUpdate, error)
+}
+
+// UnmarshalJSON is the custom unmarshaller for CreateFuture.
+func (future *GallerySharingProfileUpdateFuture) UnmarshalJSON(body []byte) error {
+	var azFuture azure.Future
+	if err := json.Unmarshal(body, &azFuture); err != nil {
+		return err
+	}
+	future.FutureAPI = &azFuture
+	future.Result = future.result
+	return nil
+}
+
+// result is the default implementation for GallerySharingProfileUpdateFuture.Result.
+func (future *GallerySharingProfileUpdateFuture) result(client GallerySharingProfileClient) (su SharingUpdate, err error) {
+	var done bool
+	done, err = future.DoneWithContext(context.Background(), client)
+	if err != nil {
+		err = autorest.NewErrorWithError(err, "compute.GallerySharingProfileUpdateFuture", "Result", future.Response(), "Polling failure")
+		return
+	}
+	if !done {
+		su.Response.Response = future.Response()
+		err = azure.NewAsyncOpIncompleteError("compute.GallerySharingProfileUpdateFuture")
+		return
+	}
+	sender := autorest.DecorateSender(client, autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
+	if su.Response.Response, err = future.GetResult(sender); err == nil && su.Response.Response.StatusCode != http.StatusNoContent {
+		su, err = client.UpdateResponder(su.Response.Response)
+		if err != nil {
+			err = autorest.NewErrorWithError(err, "compute.GallerySharingProfileUpdateFuture", "Result", su.Response.Response, "Failure responding to request")
+		}
+	}
+	return
 }
 
 // GalleryUpdate specifies information about the Shared Image Gallery that you want to update.
@@ -8020,7 +8082,7 @@ func (IP ImageProperties) MarshalJSON() ([]byte, error) {
 	return json.Marshal(objectMap)
 }
 
-// ImagePurchasePlan describes the gallery Image Definition purchase plan. This is used by marketplace
+// ImagePurchasePlan describes the gallery image definition purchase plan. This is used by marketplace
 // images.
 type ImagePurchasePlan struct {
 	// Name - The plan ID.
@@ -9395,6 +9457,74 @@ type PatchSettings struct {
 	EnableHotpatching *bool `json:"enableHotpatching,omitempty"`
 }
 
+// PirResource the Resource model definition.
+type PirResource struct {
+	// Name - READ-ONLY; Resource name
+	Name *string `json:"name,omitempty"`
+	// Location - READ-ONLY; Resource location
+	Location *string `json:"location,omitempty"`
+}
+
+// PirSharedGalleryResource base information about the shared gallery resource in pir.
+type PirSharedGalleryResource struct {
+	*SharedGalleryIdentifier `json:"identifier,omitempty"`
+	// Name - READ-ONLY; Resource name
+	Name *string `json:"name,omitempty"`
+	// Location - READ-ONLY; Resource location
+	Location *string `json:"location,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for PirSharedGalleryResource.
+func (psgr PirSharedGalleryResource) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if psgr.SharedGalleryIdentifier != nil {
+		objectMap["identifier"] = psgr.SharedGalleryIdentifier
+	}
+	return json.Marshal(objectMap)
+}
+
+// UnmarshalJSON is the custom unmarshaler for PirSharedGalleryResource struct.
+func (psgr *PirSharedGalleryResource) UnmarshalJSON(body []byte) error {
+	var m map[string]*json.RawMessage
+	err := json.Unmarshal(body, &m)
+	if err != nil {
+		return err
+	}
+	for k, v := range m {
+		switch k {
+		case "identifier":
+			if v != nil {
+				var sharedGalleryIdentifier SharedGalleryIdentifier
+				err = json.Unmarshal(*v, &sharedGalleryIdentifier)
+				if err != nil {
+					return err
+				}
+				psgr.SharedGalleryIdentifier = &sharedGalleryIdentifier
+			}
+		case "name":
+			if v != nil {
+				var name string
+				err = json.Unmarshal(*v, &name)
+				if err != nil {
+					return err
+				}
+				psgr.Name = &name
+			}
+		case "location":
+			if v != nil {
+				var location string
+				err = json.Unmarshal(*v, &location)
+				if err != nil {
+					return err
+				}
+				psgr.Location = &location
+			}
+		}
+	}
+
+	return nil
+}
+
 // Plan specifies information about the marketplace image used to create the virtual machine. This element
 // is only used for marketplace images. Before you can use a marketplace image from an API, you must enable
 // the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use
@@ -10135,7 +10265,7 @@ type RecoveryWalkResponse struct {
 
 // RegionalReplicationStatus this is the regional replication status.
 type RegionalReplicationStatus struct {
-	// Region - READ-ONLY; The region to which the gallery Image Version is being replicated to.
+	// Region - READ-ONLY; The region to which the gallery image version is being replicated to.
 	Region *string `json:"region,omitempty"`
 	// State - READ-ONLY; This is the regional replication state. Possible values include: 'ReplicationStateUnknown', 'ReplicationStateReplicating', 'ReplicationStateCompleted', 'ReplicationStateFailed'
 	State ReplicationState `json:"state,omitempty"`
@@ -10145,7 +10275,7 @@ type RegionalReplicationStatus struct {
 	Progress *int32 `json:"progress,omitempty"`
 }
 
-// ReplicationStatus this is the replication status of the gallery Image Version.
+// ReplicationStatus this is the replication status of the gallery image version.
 type ReplicationStatus struct {
 	// AggregatedState - READ-ONLY; This is the aggregated replication status based on all the regional replication status flags. Possible values include: 'Unknown', 'InProgress', 'Completed', 'Failed'
 	AggregatedState AggregatedReplicationState `json:"aggregatedState,omitempty"`
@@ -11289,10 +11419,765 @@ type SecurityProfile struct {
 	SecurityType SecurityTypes `json:"securityType,omitempty"`
 }
 
+// SharedGallery specifies information about the Shared Gallery that you want to create or update.
+type SharedGallery struct {
+	autorest.Response        `json:"-"`
+	*SharedGalleryIdentifier `json:"identifier,omitempty"`
+	// Name - READ-ONLY; Resource name
+	Name *string `json:"name,omitempty"`
+	// Location - READ-ONLY; Resource location
+	Location *string `json:"location,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for SharedGallery.
+func (sg SharedGallery) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if sg.SharedGalleryIdentifier != nil {
+		objectMap["identifier"] = sg.SharedGalleryIdentifier
+	}
+	return json.Marshal(objectMap)
+}
+
+// UnmarshalJSON is the custom unmarshaler for SharedGallery struct.
+func (sg *SharedGallery) UnmarshalJSON(body []byte) error {
+	var m map[string]*json.RawMessage
+	err := json.Unmarshal(body, &m)
+	if err != nil {
+		return err
+	}
+	for k, v := range m {
+		switch k {
+		case "identifier":
+			if v != nil {
+				var sharedGalleryIdentifier SharedGalleryIdentifier
+				err = json.Unmarshal(*v, &sharedGalleryIdentifier)
+				if err != nil {
+					return err
+				}
+				sg.SharedGalleryIdentifier = &sharedGalleryIdentifier
+			}
+		case "name":
+			if v != nil {
+				var name string
+				err = json.Unmarshal(*v, &name)
+				if err != nil {
+					return err
+				}
+				sg.Name = &name
+			}
+		case "location":
+			if v != nil {
+				var location string
+				err = json.Unmarshal(*v, &location)
+				if err != nil {
+					return err
+				}
+				sg.Location = &location
+			}
+		}
+	}
+
+	return nil
+}
+
+// SharedGalleryIdentifier the identifier information of shared gallery.
+type SharedGalleryIdentifier struct {
+	// UniqueID - The unique id of this shared gallery.
+	UniqueID *string `json:"uniqueId,omitempty"`
+}
+
+// SharedGalleryImage specifies information about the gallery image definition that you want to create or
+// update.
+type SharedGalleryImage struct {
+	autorest.Response             `json:"-"`
+	*SharedGalleryImageProperties `json:"properties,omitempty"`
+	*SharedGalleryIdentifier      `json:"identifier,omitempty"`
+	// Name - READ-ONLY; Resource name
+	Name *string `json:"name,omitempty"`
+	// Location - READ-ONLY; Resource location
+	Location *string `json:"location,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for SharedGalleryImage.
+func (sgi SharedGalleryImage) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if sgi.SharedGalleryImageProperties != nil {
+		objectMap["properties"] = sgi.SharedGalleryImageProperties
+	}
+	if sgi.SharedGalleryIdentifier != nil {
+		objectMap["identifier"] = sgi.SharedGalleryIdentifier
+	}
+	return json.Marshal(objectMap)
+}
+
+// UnmarshalJSON is the custom unmarshaler for SharedGalleryImage struct.
+func (sgi *SharedGalleryImage) UnmarshalJSON(body []byte) error {
+	var m map[string]*json.RawMessage
+	err := json.Unmarshal(body, &m)
+	if err != nil {
+		return err
+	}
+	for k, v := range m {
+		switch k {
+		case "properties":
+			if v != nil {
+				var sharedGalleryImageProperties SharedGalleryImageProperties
+				err = json.Unmarshal(*v, &sharedGalleryImageProperties)
+				if err != nil {
+					return err
+				}
+				sgi.SharedGalleryImageProperties = &sharedGalleryImageProperties
+			}
+		case "identifier":
+			if v != nil {
+				var sharedGalleryIdentifier SharedGalleryIdentifier
+				err = json.Unmarshal(*v, &sharedGalleryIdentifier)
+				if err != nil {
+					return err
+				}
+				sgi.SharedGalleryIdentifier = &sharedGalleryIdentifier
+			}
+		case "name":
+			if v != nil {
+				var name string
+				err = json.Unmarshal(*v, &name)
+				if err != nil {
+					return err
+				}
+				sgi.Name = &name
+			}
+		case "location":
+			if v != nil {
+				var location string
+				err = json.Unmarshal(*v, &location)
+				if err != nil {
+					return err
+				}
+				sgi.Location = &location
+			}
+		}
+	}
+
+	return nil
+}
+
+// SharedGalleryImageList the List Shared Gallery Images operation response.
+type SharedGalleryImageList struct {
+	autorest.Response `json:"-"`
+	// Value - A list of shared gallery images.
+	Value *[]SharedGalleryImage `json:"value,omitempty"`
+	// NextLink - The uri to fetch the next page of shared gallery images. Call ListNext() with this to fetch the next page of shared gallery images.
+	NextLink *string `json:"nextLink,omitempty"`
+}
+
+// SharedGalleryImageListIterator provides access to a complete listing of SharedGalleryImage values.
+type SharedGalleryImageListIterator struct {
+	i    int
+	page SharedGalleryImageListPage
+}
+
+// NextWithContext advances to the next value.  If there was an error making
+// the request the iterator does not advance and the error is returned.
+func (iter *SharedGalleryImageListIterator) NextWithContext(ctx context.Context) (err error) {
+	if tracing.IsEnabled() {
+		ctx = tracing.StartSpan(ctx, fqdn+"/SharedGalleryImageListIterator.NextWithContext")
+		defer func() {
+			sc := -1
+			if iter.Response().Response.Response != nil {
+				sc = iter.Response().Response.Response.StatusCode
+			}
+			tracing.EndSpan(ctx, sc, err)
+		}()
+	}
+	iter.i++
+	if iter.i < len(iter.page.Values()) {
+		return nil
+	}
+	err = iter.page.NextWithContext(ctx)
+	if err != nil {
+		iter.i--
+		return err
+	}
+	iter.i = 0
+	return nil
+}
+
+// Next advances to the next value.  If there was an error making
+// the request the iterator does not advance and the error is returned.
+// Deprecated: Use NextWithContext() instead.
+func (iter *SharedGalleryImageListIterator) Next() error {
+	return iter.NextWithContext(context.Background())
+}
+
+// NotDone returns true if the enumeration should be started or is not yet complete.
+func (iter SharedGalleryImageListIterator) NotDone() bool {
+	return iter.page.NotDone() && iter.i < len(iter.page.Values())
+}
+
+// Response returns the raw server response from the last page request.
+func (iter SharedGalleryImageListIterator) Response() SharedGalleryImageList {
+	return iter.page.Response()
+}
+
+// Value returns the current value or a zero-initialized value if the
+// iterator has advanced beyond the end of the collection.
+func (iter SharedGalleryImageListIterator) Value() SharedGalleryImage {
+	if !iter.page.NotDone() {
+		return SharedGalleryImage{}
+	}
+	return iter.page.Values()[iter.i]
+}
+
+// Creates a new instance of the SharedGalleryImageListIterator type.
+func NewSharedGalleryImageListIterator(page SharedGalleryImageListPage) SharedGalleryImageListIterator {
+	return SharedGalleryImageListIterator{page: page}
+}
+
+// IsEmpty returns true if the ListResult contains no values.
+func (sgil SharedGalleryImageList) IsEmpty() bool {
+	return sgil.Value == nil || len(*sgil.Value) == 0
+}
+
+// hasNextLink returns true if the NextLink is not empty.
+func (sgil SharedGalleryImageList) hasNextLink() bool {
+	return sgil.NextLink != nil && len(*sgil.NextLink) != 0
+}
+
+// sharedGalleryImageListPreparer prepares a request to retrieve the next set of results.
+// It returns nil if no more results exist.
+func (sgil SharedGalleryImageList) sharedGalleryImageListPreparer(ctx context.Context) (*http.Request, error) {
+	if !sgil.hasNextLink() {
+		return nil, nil
+	}
+	return autorest.Prepare((&http.Request{}).WithContext(ctx),
+		autorest.AsJSON(),
+		autorest.AsGet(),
+		autorest.WithBaseURL(to.String(sgil.NextLink)))
+}
+
+// SharedGalleryImageListPage contains a page of SharedGalleryImage values.
+type SharedGalleryImageListPage struct {
+	fn   func(context.Context, SharedGalleryImageList) (SharedGalleryImageList, error)
+	sgil SharedGalleryImageList
+}
+
+// NextWithContext advances to the next page of values.  If there was an error making
+// the request the page does not advance and the error is returned.
+func (page *SharedGalleryImageListPage) NextWithContext(ctx context.Context) (err error) {
+	if tracing.IsEnabled() {
+		ctx = tracing.StartSpan(ctx, fqdn+"/SharedGalleryImageListPage.NextWithContext")
+		defer func() {
+			sc := -1
+			if page.Response().Response.Response != nil {
+				sc = page.Response().Response.Response.StatusCode
+			}
+			tracing.EndSpan(ctx, sc, err)
+		}()
+	}
+	for {
+		next, err := page.fn(ctx, page.sgil)
+		if err != nil {
+			return err
+		}
+		page.sgil = next
+		if !next.hasNextLink() || !next.IsEmpty() {
+			break
+		}
+	}
+	return nil
+}
+
+// Next advances to the next page of values.  If there was an error making
+// the request the page does not advance and the error is returned.
+// Deprecated: Use NextWithContext() instead.
+func (page *SharedGalleryImageListPage) Next() error {
+	return page.NextWithContext(context.Background())
+}
+
+// NotDone returns true if the page enumeration should be started or is not yet complete.
+func (page SharedGalleryImageListPage) NotDone() bool {
+	return !page.sgil.IsEmpty()
+}
+
+// Response returns the raw server response from the last page request.
+func (page SharedGalleryImageListPage) Response() SharedGalleryImageList {
+	return page.sgil
+}
+
+// Values returns the slice of values for the current page or nil if there are no values.
+func (page SharedGalleryImageListPage) Values() []SharedGalleryImage {
+	if page.sgil.IsEmpty() {
+		return nil
+	}
+	return *page.sgil.Value
+}
+
+// Creates a new instance of the SharedGalleryImageListPage type.
+func NewSharedGalleryImageListPage(cur SharedGalleryImageList, getNextPage func(context.Context, SharedGalleryImageList) (SharedGalleryImageList, error)) SharedGalleryImageListPage {
+	return SharedGalleryImageListPage{
+		fn:   getNextPage,
+		sgil: cur,
+	}
+}
+
+// SharedGalleryImageProperties describes the properties of a gallery image definition.
+type SharedGalleryImageProperties struct {
+	// OsType - This property allows you to specify the type of the OS that is included in the disk when creating a VM from a managed image. <br><br> Possible values are: <br><br> **Windows** <br><br> **Linux**. Possible values include: 'Windows', 'Linux'
+	OsType OperatingSystemTypes `json:"osType,omitempty"`
+	// OsState - This property allows the user to specify whether the virtual machines created under this image are 'Generalized' or 'Specialized'. Possible values include: 'Generalized', 'Specialized'
+	OsState OperatingSystemStateTypes `json:"osState,omitempty"`
+	// EndOfLifeDate - The end of life date of the gallery image definition. This property can be used for decommissioning purposes. This property is updatable.
+	EndOfLifeDate *date.Time                       `json:"endOfLifeDate,omitempty"`
+	Identifier    *GalleryImageIdentifier          `json:"identifier,omitempty"`
+	Recommended   *RecommendedMachineConfiguration `json:"recommended,omitempty"`
+	Disallowed    *Disallowed                      `json:"disallowed,omitempty"`
+	// HyperVGeneration - The hypervisor generation of the Virtual Machine. Applicable to OS disks only. Possible values include: 'V1', 'V2'
+	HyperVGeneration HyperVGeneration `json:"hyperVGeneration,omitempty"`
+	// Features - A list of gallery image features.
+	Features     *[]GalleryImageFeature `json:"features,omitempty"`
+	PurchasePlan *ImagePurchasePlan     `json:"purchasePlan,omitempty"`
+}
+
+// SharedGalleryImageVersion specifies information about the gallery image version that you want to create
+// or update.
+type SharedGalleryImageVersion struct {
+	autorest.Response                    `json:"-"`
+	*SharedGalleryImageVersionProperties `json:"properties,omitempty"`
+	*SharedGalleryIdentifier             `json:"identifier,omitempty"`
+	// Name - READ-ONLY; Resource name
+	Name *string `json:"name,omitempty"`
+	// Location - READ-ONLY; Resource location
+	Location *string `json:"location,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for SharedGalleryImageVersion.
+func (sgiv SharedGalleryImageVersion) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if sgiv.SharedGalleryImageVersionProperties != nil {
+		objectMap["properties"] = sgiv.SharedGalleryImageVersionProperties
+	}
+	if sgiv.SharedGalleryIdentifier != nil {
+		objectMap["identifier"] = sgiv.SharedGalleryIdentifier
+	}
+	return json.Marshal(objectMap)
+}
+
+// UnmarshalJSON is the custom unmarshaler for SharedGalleryImageVersion struct.
+func (sgiv *SharedGalleryImageVersion) UnmarshalJSON(body []byte) error {
+	var m map[string]*json.RawMessage
+	err := json.Unmarshal(body, &m)
+	if err != nil {
+		return err
+	}
+	for k, v := range m {
+		switch k {
+		case "properties":
+			if v != nil {
+				var sharedGalleryImageVersionProperties SharedGalleryImageVersionProperties
+				err = json.Unmarshal(*v, &sharedGalleryImageVersionProperties)
+				if err != nil {
+					return err
+				}
+				sgiv.SharedGalleryImageVersionProperties = &sharedGalleryImageVersionProperties
+			}
+		case "identifier":
+			if v != nil {
+				var sharedGalleryIdentifier SharedGalleryIdentifier
+				err = json.Unmarshal(*v, &sharedGalleryIdentifier)
+				if err != nil {
+					return err
+				}
+				sgiv.SharedGalleryIdentifier = &sharedGalleryIdentifier
+			}
+		case "name":
+			if v != nil {
+				var name string
+				err = json.Unmarshal(*v, &name)
+				if err != nil {
+					return err
+				}
+				sgiv.Name = &name
+			}
+		case "location":
+			if v != nil {
+				var location string
+				err = json.Unmarshal(*v, &location)
+				if err != nil {
+					return err
+				}
+				sgiv.Location = &location
+			}
+		}
+	}
+
+	return nil
+}
+
+// SharedGalleryImageVersionList the List Shared Gallery Image versions operation response.
+type SharedGalleryImageVersionList struct {
+	autorest.Response `json:"-"`
+	// Value - A list of shared gallery images versions.
+	Value *[]SharedGalleryImageVersion `json:"value,omitempty"`
+	// NextLink - The uri to fetch the next page of shared gallery image versions. Call ListNext() with this to fetch the next page of shared gallery image versions.
+	NextLink *string `json:"nextLink,omitempty"`
+}
+
+// SharedGalleryImageVersionListIterator provides access to a complete listing of SharedGalleryImageVersion
+// values.
+type SharedGalleryImageVersionListIterator struct {
+	i    int
+	page SharedGalleryImageVersionListPage
+}
+
+// NextWithContext advances to the next value.  If there was an error making
+// the request the iterator does not advance and the error is returned.
+func (iter *SharedGalleryImageVersionListIterator) NextWithContext(ctx context.Context) (err error) {
+	if tracing.IsEnabled() {
+		ctx = tracing.StartSpan(ctx, fqdn+"/SharedGalleryImageVersionListIterator.NextWithContext")
+		defer func() {
+			sc := -1
+			if iter.Response().Response.Response != nil {
+				sc = iter.Response().Response.Response.StatusCode
+			}
+			tracing.EndSpan(ctx, sc, err)
+		}()
+	}
+	iter.i++
+	if iter.i < len(iter.page.Values()) {
+		return nil
+	}
+	err = iter.page.NextWithContext(ctx)
+	if err != nil {
+		iter.i--
+		return err
+	}
+	iter.i = 0
+	return nil
+}
+
+// Next advances to the next value.  If there was an error making
+// the request the iterator does not advance and the error is returned.
+// Deprecated: Use NextWithContext() instead.
+func (iter *SharedGalleryImageVersionListIterator) Next() error {
+	return iter.NextWithContext(context.Background())
+}
+
+// NotDone returns true if the enumeration should be started or is not yet complete.
+func (iter SharedGalleryImageVersionListIterator) NotDone() bool {
+	return iter.page.NotDone() && iter.i < len(iter.page.Values())
+}
+
+// Response returns the raw server response from the last page request.
+func (iter SharedGalleryImageVersionListIterator) Response() SharedGalleryImageVersionList {
+	return iter.page.Response()
+}
+
+// Value returns the current value or a zero-initialized value if the
+// iterator has advanced beyond the end of the collection.
+func (iter SharedGalleryImageVersionListIterator) Value() SharedGalleryImageVersion {
+	if !iter.page.NotDone() {
+		return SharedGalleryImageVersion{}
+	}
+	return iter.page.Values()[iter.i]
+}
+
+// Creates a new instance of the SharedGalleryImageVersionListIterator type.
+func NewSharedGalleryImageVersionListIterator(page SharedGalleryImageVersionListPage) SharedGalleryImageVersionListIterator {
+	return SharedGalleryImageVersionListIterator{page: page}
+}
+
+// IsEmpty returns true if the ListResult contains no values.
+func (sgivl SharedGalleryImageVersionList) IsEmpty() bool {
+	return sgivl.Value == nil || len(*sgivl.Value) == 0
+}
+
+// hasNextLink returns true if the NextLink is not empty.
+func (sgivl SharedGalleryImageVersionList) hasNextLink() bool {
+	return sgivl.NextLink != nil && len(*sgivl.NextLink) != 0
+}
+
+// sharedGalleryImageVersionListPreparer prepares a request to retrieve the next set of results.
+// It returns nil if no more results exist.
+func (sgivl SharedGalleryImageVersionList) sharedGalleryImageVersionListPreparer(ctx context.Context) (*http.Request, error) {
+	if !sgivl.hasNextLink() {
+		return nil, nil
+	}
+	return autorest.Prepare((&http.Request{}).WithContext(ctx),
+		autorest.AsJSON(),
+		autorest.AsGet(),
+		autorest.WithBaseURL(to.String(sgivl.NextLink)))
+}
+
+// SharedGalleryImageVersionListPage contains a page of SharedGalleryImageVersion values.
+type SharedGalleryImageVersionListPage struct {
+	fn    func(context.Context, SharedGalleryImageVersionList) (SharedGalleryImageVersionList, error)
+	sgivl SharedGalleryImageVersionList
+}
+
+// NextWithContext advances to the next page of values.  If there was an error making
+// the request the page does not advance and the error is returned.
+func (page *SharedGalleryImageVersionListPage) NextWithContext(ctx context.Context) (err error) {
+	if tracing.IsEnabled() {
+		ctx = tracing.StartSpan(ctx, fqdn+"/SharedGalleryImageVersionListPage.NextWithContext")
+		defer func() {
+			sc := -1
+			if page.Response().Response.Response != nil {
+				sc = page.Response().Response.Response.StatusCode
+			}
+			tracing.EndSpan(ctx, sc, err)
+		}()
+	}
+	for {
+		next, err := page.fn(ctx, page.sgivl)
+		if err != nil {
+			return err
+		}
+		page.sgivl = next
+		if !next.hasNextLink() || !next.IsEmpty() {
+			break
+		}
+	}
+	return nil
+}
+
+// Next advances to the next page of values.  If there was an error making
+// the request the page does not advance and the error is returned.
+// Deprecated: Use NextWithContext() instead.
+func (page *SharedGalleryImageVersionListPage) Next() error {
+	return page.NextWithContext(context.Background())
+}
+
+// NotDone returns true if the page enumeration should be started or is not yet complete.
+func (page SharedGalleryImageVersionListPage) NotDone() bool {
+	return !page.sgivl.IsEmpty()
+}
+
+// Response returns the raw server response from the last page request.
+func (page SharedGalleryImageVersionListPage) Response() SharedGalleryImageVersionList {
+	return page.sgivl
+}
+
+// Values returns the slice of values for the current page or nil if there are no values.
+func (page SharedGalleryImageVersionListPage) Values() []SharedGalleryImageVersion {
+	if page.sgivl.IsEmpty() {
+		return nil
+	}
+	return *page.sgivl.Value
+}
+
+// Creates a new instance of the SharedGalleryImageVersionListPage type.
+func NewSharedGalleryImageVersionListPage(cur SharedGalleryImageVersionList, getNextPage func(context.Context, SharedGalleryImageVersionList) (SharedGalleryImageVersionList, error)) SharedGalleryImageVersionListPage {
+	return SharedGalleryImageVersionListPage{
+		fn:    getNextPage,
+		sgivl: cur,
+	}
+}
+
+// SharedGalleryImageVersionProperties describes the properties of a gallery image version.
+type SharedGalleryImageVersionProperties struct {
+	// PublishedDate - The published date of the gallery image version Definition. This property can be used for decommissioning purposes. This property is updatable.
+	PublishedDate *date.Time `json:"publishedDate,omitempty"`
+	// EndOfLifeDate - The end of life date of the gallery image version Definition. This property can be used for decommissioning purposes. This property is updatable.
+	EndOfLifeDate *date.Time `json:"endOfLifeDate,omitempty"`
+}
+
+// SharedGalleryList the List Shared Galleries operation response.
+type SharedGalleryList struct {
+	autorest.Response `json:"-"`
+	// Value - A list of shared galleries.
+	Value *[]SharedGallery `json:"value,omitempty"`
+	// NextLink - The uri to fetch the next page of shared galleries. Call ListNext() with this to fetch the next page of shared galleries.
+	NextLink *string `json:"nextLink,omitempty"`
+}
+
+// SharedGalleryListIterator provides access to a complete listing of SharedGallery values.
+type SharedGalleryListIterator struct {
+	i    int
+	page SharedGalleryListPage
+}
+
+// NextWithContext advances to the next value.  If there was an error making
+// the request the iterator does not advance and the error is returned.
+func (iter *SharedGalleryListIterator) NextWithContext(ctx context.Context) (err error) {
+	if tracing.IsEnabled() {
+		ctx = tracing.StartSpan(ctx, fqdn+"/SharedGalleryListIterator.NextWithContext")
+		defer func() {
+			sc := -1
+			if iter.Response().Response.Response != nil {
+				sc = iter.Response().Response.Response.StatusCode
+			}
+			tracing.EndSpan(ctx, sc, err)
+		}()
+	}
+	iter.i++
+	if iter.i < len(iter.page.Values()) {
+		return nil
+	}
+	err = iter.page.NextWithContext(ctx)
+	if err != nil {
+		iter.i--
+		return err
+	}
+	iter.i = 0
+	return nil
+}
+
+// Next advances to the next value.  If there was an error making
+// the request the iterator does not advance and the error is returned.
+// Deprecated: Use NextWithContext() instead.
+func (iter *SharedGalleryListIterator) Next() error {
+	return iter.NextWithContext(context.Background())
+}
+
+// NotDone returns true if the enumeration should be started or is not yet complete.
+func (iter SharedGalleryListIterator) NotDone() bool {
+	return iter.page.NotDone() && iter.i < len(iter.page.Values())
+}
+
+// Response returns the raw server response from the last page request.
+func (iter SharedGalleryListIterator) Response() SharedGalleryList {
+	return iter.page.Response()
+}
+
+// Value returns the current value or a zero-initialized value if the
+// iterator has advanced beyond the end of the collection.
+func (iter SharedGalleryListIterator) Value() SharedGallery {
+	if !iter.page.NotDone() {
+		return SharedGallery{}
+	}
+	return iter.page.Values()[iter.i]
+}
+
+// Creates a new instance of the SharedGalleryListIterator type.
+func NewSharedGalleryListIterator(page SharedGalleryListPage) SharedGalleryListIterator {
+	return SharedGalleryListIterator{page: page}
+}
+
+// IsEmpty returns true if the ListResult contains no values.
+func (sgl SharedGalleryList) IsEmpty() bool {
+	return sgl.Value == nil || len(*sgl.Value) == 0
+}
+
+// hasNextLink returns true if the NextLink is not empty.
+func (sgl SharedGalleryList) hasNextLink() bool {
+	return sgl.NextLink != nil && len(*sgl.NextLink) != 0
+}
+
+// sharedGalleryListPreparer prepares a request to retrieve the next set of results.
+// It returns nil if no more results exist.
+func (sgl SharedGalleryList) sharedGalleryListPreparer(ctx context.Context) (*http.Request, error) {
+	if !sgl.hasNextLink() {
+		return nil, nil
+	}
+	return autorest.Prepare((&http.Request{}).WithContext(ctx),
+		autorest.AsJSON(),
+		autorest.AsGet(),
+		autorest.WithBaseURL(to.String(sgl.NextLink)))
+}
+
+// SharedGalleryListPage contains a page of SharedGallery values.
+type SharedGalleryListPage struct {
+	fn  func(context.Context, SharedGalleryList) (SharedGalleryList, error)
+	sgl SharedGalleryList
+}
+
+// NextWithContext advances to the next page of values.  If there was an error making
+// the request the page does not advance and the error is returned.
+func (page *SharedGalleryListPage) NextWithContext(ctx context.Context) (err error) {
+	if tracing.IsEnabled() {
+		ctx = tracing.StartSpan(ctx, fqdn+"/SharedGalleryListPage.NextWithContext")
+		defer func() {
+			sc := -1
+			if page.Response().Response.Response != nil {
+				sc = page.Response().Response.Response.StatusCode
+			}
+			tracing.EndSpan(ctx, sc, err)
+		}()
+	}
+	for {
+		next, err := page.fn(ctx, page.sgl)
+		if err != nil {
+			return err
+		}
+		page.sgl = next
+		if !next.hasNextLink() || !next.IsEmpty() {
+			break
+		}
+	}
+	return nil
+}
+
+// Next advances to the next page of values.  If there was an error making
+// the request the page does not advance and the error is returned.
+// Deprecated: Use NextWithContext() instead.
+func (page *SharedGalleryListPage) Next() error {
+	return page.NextWithContext(context.Background())
+}
+
+// NotDone returns true if the page enumeration should be started or is not yet complete.
+func (page SharedGalleryListPage) NotDone() bool {
+	return !page.sgl.IsEmpty()
+}
+
+// Response returns the raw server response from the last page request.
+func (page SharedGalleryListPage) Response() SharedGalleryList {
+	return page.sgl
+}
+
+// Values returns the slice of values for the current page or nil if there are no values.
+func (page SharedGalleryListPage) Values() []SharedGallery {
+	if page.sgl.IsEmpty() {
+		return nil
+	}
+	return *page.sgl.Value
+}
+
+// Creates a new instance of the SharedGalleryListPage type.
+func NewSharedGalleryListPage(cur SharedGalleryList, getNextPage func(context.Context, SharedGalleryList) (SharedGalleryList, error)) SharedGalleryListPage {
+	return SharedGalleryListPage{
+		fn:  getNextPage,
+		sgl: cur,
+	}
+}
+
 // ShareInfoElement ...
 type ShareInfoElement struct {
 	// VMURI - READ-ONLY; A relative URI containing the ID of the VM that has the disk attached.
 	VMURI *string `json:"vmUri,omitempty"`
+}
+
+// SharingProfile profile for gallery sharing to subscription or tenant
+type SharingProfile struct {
+	// Permissions - This property allows you to specify the permission of sharing gallery. <br><br> Possible values are: <br><br> **Private** <br><br> **Groups**. Possible values include: 'Private', 'Groups'
+	Permissions GallerySharingPermissionTypes `json:"permissions,omitempty"`
+	// Groups - READ-ONLY; A list of sharing profile groups.
+	Groups *[]SharingProfileGroup `json:"groups,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for SharingProfile.
+func (sp SharingProfile) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if sp.Permissions != "" {
+		objectMap["permissions"] = sp.Permissions
+	}
+	return json.Marshal(objectMap)
+}
+
+// SharingProfileGroup group of the gallery sharing profile
+type SharingProfileGroup struct {
+	// Type - This property allows you to specify the type of sharing group. <br><br> Possible values are: <br><br> **Subscriptions** <br><br> **AADTenants**. Possible values include: 'Subscriptions', 'AADTenants'
+	Type SharingProfileGroupTypes `json:"type,omitempty"`
+	// Ids - A list of subscription/tenant ids the gallery is aimed to be shared to.
+	Ids *[]string `json:"ids,omitempty"`
+}
+
+// SharingUpdate specifies information about the gallery sharing profile update.
+type SharingUpdate struct {
+	autorest.Response `json:"-"`
+	// OperationType - This property allows you to specify the operation type of gallery sharing update. <br><br> Possible values are: <br><br> **Add** <br><br> **Remove** <br><br> **Reset**. Possible values include: 'Add', 'Remove', 'Reset'
+	OperationType SharingUpdateOperationTypes `json:"operationType,omitempty"`
+	// Groups - A list of sharing profile groups.
+	Groups *[]SharingProfileGroup `json:"groups,omitempty"`
 }
 
 // Sku describes a virtual machine scale set sku. NOTE: If the new VM SKU is not supported on the hardware

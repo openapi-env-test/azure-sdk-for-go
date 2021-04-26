@@ -365,6 +365,21 @@ func PossibleExtendedLocationTypesValues() []ExtendedLocationTypes {
 	return []ExtendedLocationTypes{EdgeZone}
 }
 
+// GallerySharingPermissionTypes enumerates the values for gallery sharing permission types.
+type GallerySharingPermissionTypes string
+
+const (
+	// Groups ...
+	Groups GallerySharingPermissionTypes = "Groups"
+	// Private ...
+	Private GallerySharingPermissionTypes = "Private"
+)
+
+// PossibleGallerySharingPermissionTypesValues returns an array of possible values for the GallerySharingPermissionTypes const type.
+func PossibleGallerySharingPermissionTypesValues() []GallerySharingPermissionTypes {
+	return []GallerySharingPermissionTypes{Groups, Private}
+}
+
 // HostCaching enumerates the values for host caching.
 type HostCaching string
 
@@ -991,6 +1006,19 @@ func PossibleSecurityTypesValues() []SecurityTypes {
 	return []SecurityTypes{SecurityTypesTrustedLaunch}
 }
 
+// SelectPermissions enumerates the values for select permissions.
+type SelectPermissions string
+
+const (
+	// Permissions ...
+	Permissions SelectPermissions = "Permissions"
+)
+
+// PossibleSelectPermissionsValues returns an array of possible values for the SelectPermissions const type.
+func PossibleSelectPermissionsValues() []SelectPermissions {
+	return []SelectPermissions{Permissions}
+}
+
 // SettingNames enumerates the values for setting names.
 type SettingNames string
 
@@ -1004,6 +1032,51 @@ const (
 // PossibleSettingNamesValues returns an array of possible values for the SettingNames const type.
 func PossibleSettingNamesValues() []SettingNames {
 	return []SettingNames{AutoLogon, FirstLogonCommands}
+}
+
+// SharedToValues enumerates the values for shared to values.
+type SharedToValues string
+
+const (
+	// Tenant ...
+	Tenant SharedToValues = "tenant"
+)
+
+// PossibleSharedToValuesValues returns an array of possible values for the SharedToValues const type.
+func PossibleSharedToValuesValues() []SharedToValues {
+	return []SharedToValues{Tenant}
+}
+
+// SharingProfileGroupTypes enumerates the values for sharing profile group types.
+type SharingProfileGroupTypes string
+
+const (
+	// AADTenants ...
+	AADTenants SharingProfileGroupTypes = "AADTenants"
+	// Subscriptions ...
+	Subscriptions SharingProfileGroupTypes = "Subscriptions"
+)
+
+// PossibleSharingProfileGroupTypesValues returns an array of possible values for the SharingProfileGroupTypes const type.
+func PossibleSharingProfileGroupTypesValues() []SharingProfileGroupTypes {
+	return []SharingProfileGroupTypes{AADTenants, Subscriptions}
+}
+
+// SharingUpdateOperationTypes enumerates the values for sharing update operation types.
+type SharingUpdateOperationTypes string
+
+const (
+	// Add ...
+	Add SharingUpdateOperationTypes = "Add"
+	// Remove ...
+	Remove SharingUpdateOperationTypes = "Remove"
+	// Reset ...
+	Reset SharingUpdateOperationTypes = "Reset"
+)
+
+// PossibleSharingUpdateOperationTypesValues returns an array of possible values for the SharingUpdateOperationTypes const type.
+func PossibleSharingUpdateOperationTypesValues() []SharingUpdateOperationTypes {
+	return []SharingUpdateOperationTypes{Add, Remove, Reset}
 }
 
 // SnapshotStorageAccountTypes enumerates the values for snapshot storage account types.
