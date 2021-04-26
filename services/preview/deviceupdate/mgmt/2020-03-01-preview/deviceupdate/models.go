@@ -11,6 +11,7 @@ import (
 	"encoding/json"
 	"github.com/Azure/go-autorest/autorest"
 	"github.com/Azure/go-autorest/autorest/azure"
+	"github.com/Azure/go-autorest/autorest/date"
 	"github.com/Azure/go-autorest/autorest/to"
 	"github.com/Azure/go-autorest/tracing"
 	"net/http"
@@ -22,8 +23,12 @@ const fqdn = "github.com/Azure/azure-sdk-for-go/services/preview/deviceupdate/mg
 // Account device Update account details.
 type Account struct {
 	autorest.Response `json:"-"`
+	// SystemData - READ-ONLY
+	SystemData *SystemData `json:"systemData,omitempty"`
 	// AccountProperties - Device Update account properties.
 	*AccountProperties `json:"properties,omitempty"`
+	// Identity - The type of identity used for the resource.
+	Identity *Identity `json:"identity,omitempty"`
 	// Tags - Resource tags.
 	Tags map[string]*string `json:"tags"`
 	// Location - The geo-location where the resource lives
@@ -41,6 +46,9 @@ func (a Account) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
 	if a.AccountProperties != nil {
 		objectMap["properties"] = a.AccountProperties
+	}
+	if a.Identity != nil {
+		objectMap["identity"] = a.Identity
 	}
 	if a.Tags != nil {
 		objectMap["tags"] = a.Tags
@@ -60,6 +68,15 @@ func (a *Account) UnmarshalJSON(body []byte) error {
 	}
 	for k, v := range m {
 		switch k {
+		case "systemData":
+			if v != nil {
+				var systemData SystemData
+				err = json.Unmarshal(*v, &systemData)
+				if err != nil {
+					return err
+				}
+				a.SystemData = &systemData
+			}
 		case "properties":
 			if v != nil {
 				var accountProperties AccountProperties
@@ -68,6 +85,15 @@ func (a *Account) UnmarshalJSON(body []byte) error {
 					return err
 				}
 				a.AccountProperties = &accountProperties
+			}
+		case "identity":
+			if v != nil {
+				var identity Identity
+				err = json.Unmarshal(*v, &identity)
+				if err != nil {
+					return err
+				}
+				a.Identity = &identity
 			}
 		case "tags":
 			if v != nil {
@@ -412,6 +438,8 @@ func (future *AccountsUpdateFuture) result(client AccountsClient) (a Account, er
 
 // AccountUpdate request payload used to update and existing Accounts.
 type AccountUpdate struct {
+	// Identity - The type of identity used for the resource.
+	Identity *Identity `json:"identity,omitempty"`
 	// Location - The geo-location where the resource lives
 	Location *string `json:"location,omitempty"`
 	// Tags - List of key value pairs that describe the resource. This will overwrite the existing tags.
@@ -421,6 +449,9 @@ type AccountUpdate struct {
 // MarshalJSON is the custom marshaler for AccountUpdate.
 func (au AccountUpdate) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
+	if au.Identity != nil {
+		objectMap["identity"] = au.Identity
+	}
 	if au.Location != nil {
 		objectMap["location"] = au.Location
 	}
@@ -442,6 +473,25 @@ type AzureEntityResource struct {
 	Type *string `json:"type,omitempty"`
 }
 
+// CheckNameAvailabilityRequest the check availability request body.
+type CheckNameAvailabilityRequest struct {
+	// Name - The name of the resource for which availability needs to be checked.
+	Name *string `json:"name,omitempty"`
+	// Type - The resource type.
+	Type *string `json:"type,omitempty"`
+}
+
+// CheckNameAvailabilityResponse the check availability result.
+type CheckNameAvailabilityResponse struct {
+	autorest.Response `json:"-"`
+	// NameAvailable - Indicates if the resource name is available.
+	NameAvailable *bool `json:"nameAvailable,omitempty"`
+	// Reason - The reason why the given name is not available. Possible values include: 'Invalid', 'AlreadyExists'
+	Reason CheckNameAvailabilityReason `json:"reason,omitempty"`
+	// Message - Detailed reason why the given name is available.
+	Message *string `json:"message,omitempty"`
+}
+
 // ErrorAdditionalInfo the resource management error additional info.
 type ErrorAdditionalInfo struct {
 	// Type - READ-ONLY; The additional info type.
@@ -450,15 +500,8 @@ type ErrorAdditionalInfo struct {
 	Info interface{} `json:"info,omitempty"`
 }
 
-// ErrorDefinition error response indicates that the service is not able to process the incoming request.
-type ErrorDefinition struct {
-	// Error - READ-ONLY; Error details.
-	Error *ErrorResponse `json:"error,omitempty"`
-}
-
-// ErrorResponse common error response for all Azure Resource Manager APIs to return error details for
-// failed operations. (This also follows the OData error response format.)
-type ErrorResponse struct {
+// ErrorDetail the error detail.
+type ErrorDetail struct {
 	// Code - READ-ONLY; The error code.
 	Code *string `json:"code,omitempty"`
 	// Message - READ-ONLY; The error message.
@@ -466,14 +509,42 @@ type ErrorResponse struct {
 	// Target - READ-ONLY; The error target.
 	Target *string `json:"target,omitempty"`
 	// Details - READ-ONLY; The error details.
-	Details *[]ErrorResponse `json:"details,omitempty"`
+	Details *[]ErrorDetail `json:"details,omitempty"`
 	// AdditionalInfo - READ-ONLY; The error additional info.
 	AdditionalInfo *[]ErrorAdditionalInfo `json:"additionalInfo,omitempty"`
+}
+
+// ErrorResponse common error response for all Azure Resource Manager APIs to return error details for
+// failed operations. (This also follows the OData error response format.).
+type ErrorResponse struct {
+	// Error - The error object.
+	Error *ErrorDetail `json:"error,omitempty"`
+}
+
+// Identity identity for the resource.
+type Identity struct {
+	// PrincipalID - READ-ONLY; The principal ID of resource identity.
+	PrincipalID *string `json:"principalId,omitempty"`
+	// TenantID - READ-ONLY; The tenant ID of resource.
+	TenantID *string `json:"tenantId,omitempty"`
+	// Type - The identity type. Possible values include: 'SystemAssigned', 'None'
+	Type ResourceIdentityType `json:"type,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for Identity.
+func (i Identity) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if i.Type != "" {
+		objectMap["type"] = i.Type
+	}
+	return json.Marshal(objectMap)
 }
 
 // Instance device Update instance details.
 type Instance struct {
 	autorest.Response `json:"-"`
+	// SystemData - READ-ONLY
+	SystemData *SystemData `json:"systemData,omitempty"`
 	// InstanceProperties - Device Update instance properties.
 	*InstanceProperties `json:"properties,omitempty"`
 	// Tags - Resource tags.
@@ -512,6 +583,15 @@ func (i *Instance) UnmarshalJSON(body []byte) error {
 	}
 	for k, v := range m {
 		switch k {
+		case "systemData":
+			if v != nil {
+				var systemData SystemData
+				err = json.Unmarshal(*v, &systemData)
+				if err != nil {
+					return err
+				}
+				i.SystemData = &systemData
+			}
 		case "properties":
 			if v != nil {
 				var instanceProperties InstanceProperties
@@ -848,7 +928,7 @@ type Operation struct {
 	IsDataAction *bool `json:"isDataAction,omitempty"`
 	// Display - Localized display information for this particular operation.
 	Display *OperationDisplay `json:"display,omitempty"`
-	// Origin - READ-ONLY; The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is "user,system". Possible values include: 'User', 'System', 'Usersystem'
+	// Origin - READ-ONLY; The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is "user,system". Possible values include: 'OriginUser', 'OriginSystem', 'OriginUsersystem'
 	Origin Origin `json:"origin,omitempty"`
 	// ActionType - READ-ONLY; Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs. Possible values include: 'Internal'
 	ActionType ActionType `json:"actionType,omitempty"`
@@ -1054,6 +1134,22 @@ type Resource struct {
 	Name *string `json:"name,omitempty"`
 	// Type - READ-ONLY; The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
 	Type *string `json:"type,omitempty"`
+}
+
+// SystemData metadata pertaining to creation and last modification of the resource.
+type SystemData struct {
+	// CreatedBy - The identity that created the resource.
+	CreatedBy *string `json:"createdBy,omitempty"`
+	// CreatedByType - The type of identity that created the resource. Possible values include: 'User', 'Application', 'ManagedIdentity', 'Key'
+	CreatedByType CreatedByType `json:"createdByType,omitempty"`
+	// CreatedAt - The timestamp of resource creation (UTC).
+	CreatedAt *date.Time `json:"createdAt,omitempty"`
+	// LastModifiedBy - The identity that last modified the resource.
+	LastModifiedBy *string `json:"lastModifiedBy,omitempty"`
+	// LastModifiedByType - The type of identity that last modified the resource. Possible values include: 'User', 'Application', 'ManagedIdentity', 'Key'
+	LastModifiedByType CreatedByType `json:"lastModifiedByType,omitempty"`
+	// LastModifiedAt - The timestamp of resource last modification (UTC)
+	LastModifiedAt *date.Time `json:"lastModifiedAt,omitempty"`
 }
 
 // TagUpdate request payload used to update an existing resource's tags.

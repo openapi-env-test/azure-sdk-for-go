@@ -11,6 +11,13 @@ import (
 	"github.com/Azure/azure-sdk-for-go/services/preview/deviceupdate/mgmt/2020-03-01-preview/deviceupdate"
 )
 
+// BaseClientAPI contains the set of methods on the BaseClient type.
+type BaseClientAPI interface {
+	CheckNameAvailability(ctx context.Context, request deviceupdate.CheckNameAvailabilityRequest) (result deviceupdate.CheckNameAvailabilityResponse, err error)
+}
+
+var _ BaseClientAPI = (*deviceupdate.BaseClient)(nil)
+
 // AccountsClientAPI contains the set of methods on the AccountsClient type.
 type AccountsClientAPI interface {
 	Create(ctx context.Context, resourceGroupName string, accountName string, account deviceupdate.Account) (result deviceupdate.AccountsCreateFuture, err error)
