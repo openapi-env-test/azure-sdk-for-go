@@ -29,10 +29,10 @@ type AlertRuleKind string
 const (
 	// AlertRuleKindFusion ...
 	AlertRuleKindFusion AlertRuleKind = "Fusion"
-	// AlertRuleKindMLBehaviorAnalytics ...
-	AlertRuleKindMLBehaviorAnalytics AlertRuleKind = "MLBehaviorAnalytics"
 	// AlertRuleKindMicrosoftSecurityIncidentCreation ...
 	AlertRuleKindMicrosoftSecurityIncidentCreation AlertRuleKind = "MicrosoftSecurityIncidentCreation"
+	// AlertRuleKindMLBehaviorAnalytics ...
+	AlertRuleKindMLBehaviorAnalytics AlertRuleKind = "MLBehaviorAnalytics"
 	// AlertRuleKindScheduled ...
 	AlertRuleKindScheduled AlertRuleKind = "Scheduled"
 	// AlertRuleKindThreatIntelligence ...
@@ -41,7 +41,7 @@ const (
 
 // PossibleAlertRuleKindValues returns an array of possible values for the AlertRuleKind const type.
 func PossibleAlertRuleKindValues() []AlertRuleKind {
-	return []AlertRuleKind{AlertRuleKindFusion, AlertRuleKindMLBehaviorAnalytics, AlertRuleKindMicrosoftSecurityIncidentCreation, AlertRuleKindScheduled, AlertRuleKindThreatIntelligence}
+	return []AlertRuleKind{AlertRuleKindFusion, AlertRuleKindMicrosoftSecurityIncidentCreation, AlertRuleKindMLBehaviorAnalytics, AlertRuleKindScheduled, AlertRuleKindThreatIntelligence}
 }
 
 // AlertSeverity enumerates the values for alert severity.
@@ -179,10 +179,10 @@ const (
 	// AutomationRulePropertyConditionSupportedPropertyAccountAadUserID The account Azure Active Directory user
 	// id.
 	AutomationRulePropertyConditionSupportedPropertyAccountAadUserID AutomationRulePropertyConditionSupportedProperty = "AccountAadUserId"
-	// AutomationRulePropertyConditionSupportedPropertyAccountNTDomain The account NetBIOS domain name
-	AutomationRulePropertyConditionSupportedPropertyAccountNTDomain AutomationRulePropertyConditionSupportedProperty = "AccountNTDomain"
 	// AutomationRulePropertyConditionSupportedPropertyAccountName The account name
 	AutomationRulePropertyConditionSupportedPropertyAccountName AutomationRulePropertyConditionSupportedProperty = "AccountName"
+	// AutomationRulePropertyConditionSupportedPropertyAccountNTDomain The account NetBIOS domain name
+	AutomationRulePropertyConditionSupportedPropertyAccountNTDomain AutomationRulePropertyConditionSupportedProperty = "AccountNTDomain"
 	// AutomationRulePropertyConditionSupportedPropertyAccountObjectGUID The account unique identifier
 	AutomationRulePropertyConditionSupportedPropertyAccountObjectGUID AutomationRulePropertyConditionSupportedProperty = "AccountObjectGuid"
 	// AutomationRulePropertyConditionSupportedPropertyAccountPUID The account Azure Active Directory Passport
@@ -211,16 +211,14 @@ const (
 	AutomationRulePropertyConditionSupportedPropertyFileName AutomationRulePropertyConditionSupportedProperty = "FileName"
 	// AutomationRulePropertyConditionSupportedPropertyHostAzureID The host Azure resource id
 	AutomationRulePropertyConditionSupportedPropertyHostAzureID AutomationRulePropertyConditionSupportedProperty = "HostAzureID"
-	// AutomationRulePropertyConditionSupportedPropertyHostNTDomain The host NT domain
-	AutomationRulePropertyConditionSupportedPropertyHostNTDomain AutomationRulePropertyConditionSupportedProperty = "HostNTDomain"
 	// AutomationRulePropertyConditionSupportedPropertyHostName The host name without domain
 	AutomationRulePropertyConditionSupportedPropertyHostName AutomationRulePropertyConditionSupportedProperty = "HostName"
 	// AutomationRulePropertyConditionSupportedPropertyHostNetBiosName The host NetBIOS name
 	AutomationRulePropertyConditionSupportedPropertyHostNetBiosName AutomationRulePropertyConditionSupportedProperty = "HostNetBiosName"
+	// AutomationRulePropertyConditionSupportedPropertyHostNTDomain The host NT domain
+	AutomationRulePropertyConditionSupportedPropertyHostNTDomain AutomationRulePropertyConditionSupportedProperty = "HostNTDomain"
 	// AutomationRulePropertyConditionSupportedPropertyHostOSVersion The host operating system
 	AutomationRulePropertyConditionSupportedPropertyHostOSVersion AutomationRulePropertyConditionSupportedProperty = "HostOSVersion"
-	// AutomationRulePropertyConditionSupportedPropertyIPAddress The IP address
-	AutomationRulePropertyConditionSupportedPropertyIPAddress AutomationRulePropertyConditionSupportedProperty = "IPAddress"
 	// AutomationRulePropertyConditionSupportedPropertyIncidentDescription The description of the incident
 	AutomationRulePropertyConditionSupportedPropertyIncidentDescription AutomationRulePropertyConditionSupportedProperty = "IncidentDescription"
 	// AutomationRulePropertyConditionSupportedPropertyIncidentProviderName The provider name of the incident
@@ -248,6 +246,14 @@ const (
 	AutomationRulePropertyConditionSupportedPropertyIoTDeviceType AutomationRulePropertyConditionSupportedProperty = "IoTDeviceType"
 	// AutomationRulePropertyConditionSupportedPropertyIoTDeviceVendor The IoT device vendor
 	AutomationRulePropertyConditionSupportedPropertyIoTDeviceVendor AutomationRulePropertyConditionSupportedProperty = "IoTDeviceVendor"
+	// AutomationRulePropertyConditionSupportedPropertyIPAddress The IP address
+	AutomationRulePropertyConditionSupportedPropertyIPAddress AutomationRulePropertyConditionSupportedProperty = "IPAddress"
+	// AutomationRulePropertyConditionSupportedPropertyMailboxDisplayName The mailbox display name
+	AutomationRulePropertyConditionSupportedPropertyMailboxDisplayName AutomationRulePropertyConditionSupportedProperty = "MailboxDisplayName"
+	// AutomationRulePropertyConditionSupportedPropertyMailboxPrimaryAddress The mailbox primary address
+	AutomationRulePropertyConditionSupportedPropertyMailboxPrimaryAddress AutomationRulePropertyConditionSupportedProperty = "MailboxPrimaryAddress"
+	// AutomationRulePropertyConditionSupportedPropertyMailboxUPN The mailbox user principal name
+	AutomationRulePropertyConditionSupportedPropertyMailboxUPN AutomationRulePropertyConditionSupportedProperty = "MailboxUPN"
 	// AutomationRulePropertyConditionSupportedPropertyMailMessageDeliveryAction The mail message delivery
 	// action
 	AutomationRulePropertyConditionSupportedPropertyMailMessageDeliveryAction AutomationRulePropertyConditionSupportedProperty = "MailMessageDeliveryAction"
@@ -264,12 +270,6 @@ const (
 	AutomationRulePropertyConditionSupportedPropertyMailMessageSenderIP AutomationRulePropertyConditionSupportedProperty = "MailMessageSenderIP"
 	// AutomationRulePropertyConditionSupportedPropertyMailMessageSubject The mail message subject
 	AutomationRulePropertyConditionSupportedPropertyMailMessageSubject AutomationRulePropertyConditionSupportedProperty = "MailMessageSubject"
-	// AutomationRulePropertyConditionSupportedPropertyMailboxDisplayName The mailbox display name
-	AutomationRulePropertyConditionSupportedPropertyMailboxDisplayName AutomationRulePropertyConditionSupportedProperty = "MailboxDisplayName"
-	// AutomationRulePropertyConditionSupportedPropertyMailboxPrimaryAddress The mailbox primary address
-	AutomationRulePropertyConditionSupportedPropertyMailboxPrimaryAddress AutomationRulePropertyConditionSupportedProperty = "MailboxPrimaryAddress"
-	// AutomationRulePropertyConditionSupportedPropertyMailboxUPN The mailbox user principal name
-	AutomationRulePropertyConditionSupportedPropertyMailboxUPN AutomationRulePropertyConditionSupportedProperty = "MailboxUPN"
 	// AutomationRulePropertyConditionSupportedPropertyMalwareCategory The malware category
 	AutomationRulePropertyConditionSupportedPropertyMalwareCategory AutomationRulePropertyConditionSupportedProperty = "MalwareCategory"
 	// AutomationRulePropertyConditionSupportedPropertyMalwareName The malware name
@@ -289,7 +289,7 @@ const (
 
 // PossibleAutomationRulePropertyConditionSupportedPropertyValues returns an array of possible values for the AutomationRulePropertyConditionSupportedProperty const type.
 func PossibleAutomationRulePropertyConditionSupportedPropertyValues() []AutomationRulePropertyConditionSupportedProperty {
-	return []AutomationRulePropertyConditionSupportedProperty{AutomationRulePropertyConditionSupportedPropertyAccountAadTenantID, AutomationRulePropertyConditionSupportedPropertyAccountAadUserID, AutomationRulePropertyConditionSupportedPropertyAccountNTDomain, AutomationRulePropertyConditionSupportedPropertyAccountName, AutomationRulePropertyConditionSupportedPropertyAccountObjectGUID, AutomationRulePropertyConditionSupportedPropertyAccountPUID, AutomationRulePropertyConditionSupportedPropertyAccountSid, AutomationRulePropertyConditionSupportedPropertyAccountUPNSuffix, AutomationRulePropertyConditionSupportedPropertyAzureResourceResourceID, AutomationRulePropertyConditionSupportedPropertyAzureResourceSubscriptionID, AutomationRulePropertyConditionSupportedPropertyCloudApplicationAppID, AutomationRulePropertyConditionSupportedPropertyCloudApplicationAppName, AutomationRulePropertyConditionSupportedPropertyDNSDomainName, AutomationRulePropertyConditionSupportedPropertyFileDirectory, AutomationRulePropertyConditionSupportedPropertyFileHashValue, AutomationRulePropertyConditionSupportedPropertyFileName, AutomationRulePropertyConditionSupportedPropertyHostAzureID, AutomationRulePropertyConditionSupportedPropertyHostNTDomain, AutomationRulePropertyConditionSupportedPropertyHostName, AutomationRulePropertyConditionSupportedPropertyHostNetBiosName, AutomationRulePropertyConditionSupportedPropertyHostOSVersion, AutomationRulePropertyConditionSupportedPropertyIPAddress, AutomationRulePropertyConditionSupportedPropertyIncidentDescription, AutomationRulePropertyConditionSupportedPropertyIncidentProviderName, AutomationRulePropertyConditionSupportedPropertyIncidentRelatedAnalyticRuleIds, AutomationRulePropertyConditionSupportedPropertyIncidentSeverity, AutomationRulePropertyConditionSupportedPropertyIncidentStatus, AutomationRulePropertyConditionSupportedPropertyIncidentTactics, AutomationRulePropertyConditionSupportedPropertyIncidentTitle, AutomationRulePropertyConditionSupportedPropertyIoTDeviceID, AutomationRulePropertyConditionSupportedPropertyIoTDeviceModel, AutomationRulePropertyConditionSupportedPropertyIoTDeviceName, AutomationRulePropertyConditionSupportedPropertyIoTDeviceOperatingSystem, AutomationRulePropertyConditionSupportedPropertyIoTDeviceType, AutomationRulePropertyConditionSupportedPropertyIoTDeviceVendor, AutomationRulePropertyConditionSupportedPropertyMailMessageDeliveryAction, AutomationRulePropertyConditionSupportedPropertyMailMessageDeliveryLocation, AutomationRulePropertyConditionSupportedPropertyMailMessageP1Sender, AutomationRulePropertyConditionSupportedPropertyMailMessageP2Sender, AutomationRulePropertyConditionSupportedPropertyMailMessageRecipient, AutomationRulePropertyConditionSupportedPropertyMailMessageSenderIP, AutomationRulePropertyConditionSupportedPropertyMailMessageSubject, AutomationRulePropertyConditionSupportedPropertyMailboxDisplayName, AutomationRulePropertyConditionSupportedPropertyMailboxPrimaryAddress, AutomationRulePropertyConditionSupportedPropertyMailboxUPN, AutomationRulePropertyConditionSupportedPropertyMalwareCategory, AutomationRulePropertyConditionSupportedPropertyMalwareName, AutomationRulePropertyConditionSupportedPropertyProcessCommandLine, AutomationRulePropertyConditionSupportedPropertyProcessID, AutomationRulePropertyConditionSupportedPropertyRegistryKey, AutomationRulePropertyConditionSupportedPropertyRegistryValueData, AutomationRulePropertyConditionSupportedPropertyURL}
+	return []AutomationRulePropertyConditionSupportedProperty{AutomationRulePropertyConditionSupportedPropertyAccountAadTenantID, AutomationRulePropertyConditionSupportedPropertyAccountAadUserID, AutomationRulePropertyConditionSupportedPropertyAccountName, AutomationRulePropertyConditionSupportedPropertyAccountNTDomain, AutomationRulePropertyConditionSupportedPropertyAccountObjectGUID, AutomationRulePropertyConditionSupportedPropertyAccountPUID, AutomationRulePropertyConditionSupportedPropertyAccountSid, AutomationRulePropertyConditionSupportedPropertyAccountUPNSuffix, AutomationRulePropertyConditionSupportedPropertyAzureResourceResourceID, AutomationRulePropertyConditionSupportedPropertyAzureResourceSubscriptionID, AutomationRulePropertyConditionSupportedPropertyCloudApplicationAppID, AutomationRulePropertyConditionSupportedPropertyCloudApplicationAppName, AutomationRulePropertyConditionSupportedPropertyDNSDomainName, AutomationRulePropertyConditionSupportedPropertyFileDirectory, AutomationRulePropertyConditionSupportedPropertyFileHashValue, AutomationRulePropertyConditionSupportedPropertyFileName, AutomationRulePropertyConditionSupportedPropertyHostAzureID, AutomationRulePropertyConditionSupportedPropertyHostName, AutomationRulePropertyConditionSupportedPropertyHostNetBiosName, AutomationRulePropertyConditionSupportedPropertyHostNTDomain, AutomationRulePropertyConditionSupportedPropertyHostOSVersion, AutomationRulePropertyConditionSupportedPropertyIncidentDescription, AutomationRulePropertyConditionSupportedPropertyIncidentProviderName, AutomationRulePropertyConditionSupportedPropertyIncidentRelatedAnalyticRuleIds, AutomationRulePropertyConditionSupportedPropertyIncidentSeverity, AutomationRulePropertyConditionSupportedPropertyIncidentStatus, AutomationRulePropertyConditionSupportedPropertyIncidentTactics, AutomationRulePropertyConditionSupportedPropertyIncidentTitle, AutomationRulePropertyConditionSupportedPropertyIoTDeviceID, AutomationRulePropertyConditionSupportedPropertyIoTDeviceModel, AutomationRulePropertyConditionSupportedPropertyIoTDeviceName, AutomationRulePropertyConditionSupportedPropertyIoTDeviceOperatingSystem, AutomationRulePropertyConditionSupportedPropertyIoTDeviceType, AutomationRulePropertyConditionSupportedPropertyIoTDeviceVendor, AutomationRulePropertyConditionSupportedPropertyIPAddress, AutomationRulePropertyConditionSupportedPropertyMailboxDisplayName, AutomationRulePropertyConditionSupportedPropertyMailboxPrimaryAddress, AutomationRulePropertyConditionSupportedPropertyMailboxUPN, AutomationRulePropertyConditionSupportedPropertyMailMessageDeliveryAction, AutomationRulePropertyConditionSupportedPropertyMailMessageDeliveryLocation, AutomationRulePropertyConditionSupportedPropertyMailMessageP1Sender, AutomationRulePropertyConditionSupportedPropertyMailMessageP2Sender, AutomationRulePropertyConditionSupportedPropertyMailMessageRecipient, AutomationRulePropertyConditionSupportedPropertyMailMessageSenderIP, AutomationRulePropertyConditionSupportedPropertyMailMessageSubject, AutomationRulePropertyConditionSupportedPropertyMalwareCategory, AutomationRulePropertyConditionSupportedPropertyMalwareName, AutomationRulePropertyConditionSupportedPropertyProcessCommandLine, AutomationRulePropertyConditionSupportedPropertyProcessID, AutomationRulePropertyConditionSupportedPropertyRegistryKey, AutomationRulePropertyConditionSupportedPropertyRegistryValueData, AutomationRulePropertyConditionSupportedPropertyURL}
 }
 
 // CaseSeverity enumerates the values for case severity.
@@ -594,16 +594,16 @@ const (
 	EntityKindFileHash EntityKind = "FileHash"
 	// EntityKindHost Entity represents host in the system.
 	EntityKindHost EntityKind = "Host"
-	// EntityKindIP Entity represents ip in the system.
-	EntityKindIP EntityKind = "Ip"
 	// EntityKindIoTDevice Entity represents IoT device in the system.
 	EntityKindIoTDevice EntityKind = "IoTDevice"
+	// EntityKindIP Entity represents ip in the system.
+	EntityKindIP EntityKind = "Ip"
+	// EntityKindMailbox Entity represents mailbox in the system.
+	EntityKindMailbox EntityKind = "Mailbox"
 	// EntityKindMailCluster Entity represents mail cluster in the system.
 	EntityKindMailCluster EntityKind = "MailCluster"
 	// EntityKindMailMessage Entity represents mail message in the system.
 	EntityKindMailMessage EntityKind = "MailMessage"
-	// EntityKindMailbox Entity represents mailbox in the system.
-	EntityKindMailbox EntityKind = "Mailbox"
 	// EntityKindMalware Entity represents malware in the system.
 	EntityKindMalware EntityKind = "Malware"
 	// EntityKindProcess Entity represents process in the system.
@@ -624,7 +624,7 @@ const (
 
 // PossibleEntityKindValues returns an array of possible values for the EntityKind const type.
 func PossibleEntityKindValues() []EntityKind {
-	return []EntityKind{EntityKindAccount, EntityKindAzureResource, EntityKindBookmark, EntityKindCloudApplication, EntityKindDNSResolution, EntityKindFile, EntityKindFileHash, EntityKindHost, EntityKindIP, EntityKindIoTDevice, EntityKindMailCluster, EntityKindMailMessage, EntityKindMailbox, EntityKindMalware, EntityKindProcess, EntityKindRegistryKey, EntityKindRegistryValue, EntityKindSecurityAlert, EntityKindSecurityGroup, EntityKindSubmissionMail, EntityKindURL}
+	return []EntityKind{EntityKindAccount, EntityKindAzureResource, EntityKindBookmark, EntityKindCloudApplication, EntityKindDNSResolution, EntityKindFile, EntityKindFileHash, EntityKindHost, EntityKindIoTDevice, EntityKindIP, EntityKindMailbox, EntityKindMailCluster, EntityKindMailMessage, EntityKindMalware, EntityKindProcess, EntityKindRegistryKey, EntityKindRegistryValue, EntityKindSecurityAlert, EntityKindSecurityGroup, EntityKindSubmissionMail, EntityKindURL}
 }
 
 // EntityQueryKind enumerates the values for entity query kind.
@@ -679,16 +679,16 @@ const (
 	EntityTypeHost EntityType = "Host"
 	// EntityTypeHuntingBookmark Entity represents HuntingBookmark in the system.
 	EntityTypeHuntingBookmark EntityType = "HuntingBookmark"
-	// EntityTypeIP Entity represents ip in the system.
-	EntityTypeIP EntityType = "IP"
 	// EntityTypeIoTDevice Entity represents IoT device in the system.
 	EntityTypeIoTDevice EntityType = "IoTDevice"
+	// EntityTypeIP Entity represents ip in the system.
+	EntityTypeIP EntityType = "IP"
+	// EntityTypeMailbox Entity represents mailbox in the system.
+	EntityTypeMailbox EntityType = "Mailbox"
 	// EntityTypeMailCluster Entity represents mail cluster in the system.
 	EntityTypeMailCluster EntityType = "MailCluster"
 	// EntityTypeMailMessage Entity represents mail message in the system.
 	EntityTypeMailMessage EntityType = "MailMessage"
-	// EntityTypeMailbox Entity represents mailbox in the system.
-	EntityTypeMailbox EntityType = "Mailbox"
 	// EntityTypeMalware Entity represents malware in the system.
 	EntityTypeMalware EntityType = "Malware"
 	// EntityTypeProcess Entity represents process in the system.
@@ -709,7 +709,7 @@ const (
 
 // PossibleEntityTypeValues returns an array of possible values for the EntityType const type.
 func PossibleEntityTypeValues() []EntityType {
-	return []EntityType{EntityTypeAccount, EntityTypeAzureResource, EntityTypeCloudApplication, EntityTypeDNS, EntityTypeFile, EntityTypeFileHash, EntityTypeHost, EntityTypeHuntingBookmark, EntityTypeIP, EntityTypeIoTDevice, EntityTypeMailCluster, EntityTypeMailMessage, EntityTypeMailbox, EntityTypeMalware, EntityTypeProcess, EntityTypeRegistryKey, EntityTypeRegistryValue, EntityTypeSecurityAlert, EntityTypeSecurityGroup, EntityTypeSubmissionMail, EntityTypeURL}
+	return []EntityType{EntityTypeAccount, EntityTypeAzureResource, EntityTypeCloudApplication, EntityTypeDNS, EntityTypeFile, EntityTypeFileHash, EntityTypeHost, EntityTypeHuntingBookmark, EntityTypeIoTDevice, EntityTypeIP, EntityTypeMailbox, EntityTypeMailCluster, EntityTypeMailMessage, EntityTypeMalware, EntityTypeProcess, EntityTypeRegistryKey, EntityTypeRegistryValue, EntityTypeSecurityAlert, EntityTypeSecurityGroup, EntityTypeSubmissionMail, EntityTypeURL}
 }
 
 // EventGroupingAggregationKind enumerates the values for event grouping aggregation kind.
@@ -959,10 +959,10 @@ const (
 	KindAlertRule KindBasicAlertRule = "AlertRule"
 	// KindFusion ...
 	KindFusion KindBasicAlertRule = "Fusion"
-	// KindMLBehaviorAnalytics ...
-	KindMLBehaviorAnalytics KindBasicAlertRule = "MLBehaviorAnalytics"
 	// KindMicrosoftSecurityIncidentCreation ...
 	KindMicrosoftSecurityIncidentCreation KindBasicAlertRule = "MicrosoftSecurityIncidentCreation"
+	// KindMLBehaviorAnalytics ...
+	KindMLBehaviorAnalytics KindBasicAlertRule = "MLBehaviorAnalytics"
 	// KindScheduled ...
 	KindScheduled KindBasicAlertRule = "Scheduled"
 	// KindThreatIntelligence ...
@@ -971,7 +971,7 @@ const (
 
 // PossibleKindBasicAlertRuleValues returns an array of possible values for the KindBasicAlertRule const type.
 func PossibleKindBasicAlertRuleValues() []KindBasicAlertRule {
-	return []KindBasicAlertRule{KindAlertRule, KindFusion, KindMLBehaviorAnalytics, KindMicrosoftSecurityIncidentCreation, KindScheduled, KindThreatIntelligence}
+	return []KindBasicAlertRule{KindAlertRule, KindFusion, KindMicrosoftSecurityIncidentCreation, KindMLBehaviorAnalytics, KindScheduled, KindThreatIntelligence}
 }
 
 // KindBasicAlertRuleTemplate enumerates the values for kind basic alert rule template.
@@ -982,10 +982,10 @@ const (
 	KindBasicAlertRuleTemplateKindAlertRuleTemplate KindBasicAlertRuleTemplate = "AlertRuleTemplate"
 	// KindBasicAlertRuleTemplateKindFusion ...
 	KindBasicAlertRuleTemplateKindFusion KindBasicAlertRuleTemplate = "Fusion"
-	// KindBasicAlertRuleTemplateKindMLBehaviorAnalytics ...
-	KindBasicAlertRuleTemplateKindMLBehaviorAnalytics KindBasicAlertRuleTemplate = "MLBehaviorAnalytics"
 	// KindBasicAlertRuleTemplateKindMicrosoftSecurityIncidentCreation ...
 	KindBasicAlertRuleTemplateKindMicrosoftSecurityIncidentCreation KindBasicAlertRuleTemplate = "MicrosoftSecurityIncidentCreation"
+	// KindBasicAlertRuleTemplateKindMLBehaviorAnalytics ...
+	KindBasicAlertRuleTemplateKindMLBehaviorAnalytics KindBasicAlertRuleTemplate = "MLBehaviorAnalytics"
 	// KindBasicAlertRuleTemplateKindScheduled ...
 	KindBasicAlertRuleTemplateKindScheduled KindBasicAlertRuleTemplate = "Scheduled"
 	// KindBasicAlertRuleTemplateKindThreatIntelligence ...
@@ -994,7 +994,7 @@ const (
 
 // PossibleKindBasicAlertRuleTemplateValues returns an array of possible values for the KindBasicAlertRuleTemplate const type.
 func PossibleKindBasicAlertRuleTemplateValues() []KindBasicAlertRuleTemplate {
-	return []KindBasicAlertRuleTemplate{KindBasicAlertRuleTemplateKindAlertRuleTemplate, KindBasicAlertRuleTemplateKindFusion, KindBasicAlertRuleTemplateKindMLBehaviorAnalytics, KindBasicAlertRuleTemplateKindMicrosoftSecurityIncidentCreation, KindBasicAlertRuleTemplateKindScheduled, KindBasicAlertRuleTemplateKindThreatIntelligence}
+	return []KindBasicAlertRuleTemplate{KindBasicAlertRuleTemplateKindAlertRuleTemplate, KindBasicAlertRuleTemplateKindFusion, KindBasicAlertRuleTemplateKindMicrosoftSecurityIncidentCreation, KindBasicAlertRuleTemplateKindMLBehaviorAnalytics, KindBasicAlertRuleTemplateKindScheduled, KindBasicAlertRuleTemplateKindThreatIntelligence}
 }
 
 // KindBasicDataConnector enumerates the values for kind basic data connector.
@@ -1096,16 +1096,16 @@ const (
 	KindFileHash KindBasicEntity = "FileHash"
 	// KindHost ...
 	KindHost KindBasicEntity = "Host"
-	// KindIP ...
-	KindIP KindBasicEntity = "Ip"
 	// KindIoTDevice ...
 	KindIoTDevice KindBasicEntity = "IoTDevice"
+	// KindIP ...
+	KindIP KindBasicEntity = "Ip"
+	// KindMailbox ...
+	KindMailbox KindBasicEntity = "Mailbox"
 	// KindMailCluster ...
 	KindMailCluster KindBasicEntity = "MailCluster"
 	// KindMailMessage ...
 	KindMailMessage KindBasicEntity = "MailMessage"
-	// KindMailbox ...
-	KindMailbox KindBasicEntity = "Mailbox"
 	// KindMalware ...
 	KindMalware KindBasicEntity = "Malware"
 	// KindProcess ...
@@ -1126,7 +1126,7 @@ const (
 
 // PossibleKindBasicEntityValues returns an array of possible values for the KindBasicEntity const type.
 func PossibleKindBasicEntityValues() []KindBasicEntity {
-	return []KindBasicEntity{KindAccount, KindAzureResource, KindBookmark, KindCloudApplication, KindDNSResolution, KindEntity, KindFile, KindFileHash, KindHost, KindIP, KindIoTDevice, KindMailCluster, KindMailMessage, KindMailbox, KindMalware, KindProcess, KindRegistryKey, KindRegistryValue, KindSecurityAlert, KindSecurityGroup, KindSubmissionMail, KindURL}
+	return []KindBasicEntity{KindAccount, KindAzureResource, KindBookmark, KindCloudApplication, KindDNSResolution, KindEntity, KindFile, KindFileHash, KindHost, KindIoTDevice, KindIP, KindMailbox, KindMailCluster, KindMailMessage, KindMalware, KindProcess, KindRegistryKey, KindRegistryValue, KindSecurityAlert, KindSecurityGroup, KindSubmissionMail, KindURL}
 }
 
 // KindBasicEntityQuery enumerates the values for kind basic entity query.
