@@ -7,11 +7,30 @@ package serialconsole
 // Changes may cause incorrect behavior and will be lost if the code is regenerated.
 
 import (
+	"encoding/json"
 	"github.com/Azure/go-autorest/autorest"
 )
 
 // The package's fully qualified name.
 const fqdn = "github.com/Azure/azure-sdk-for-go/services/serialconsole/mgmt/2018-05-01/serialconsole"
+
+// CloudError an error response from the service.
+type CloudError struct {
+	// Error - Cloud error body.
+	Error *CloudErrorBody `json:"error,omitempty"`
+}
+
+// CloudErrorBody an error response from the Batch service.
+type CloudErrorBody struct {
+	// Code - An identifier for the error. Codes are invariant and are intended to be consumed programmatically.
+	Code *string `json:"code,omitempty"`
+	// Message - A message describing the error, intended to be suitable for display in a user interface.
+	Message *string `json:"message,omitempty"`
+	// Target - The target of the particular error. For example, the name of the property in error.
+	Target *string `json:"target,omitempty"`
+	// Details - A list of additional details about the error.
+	Details *[]CloudErrorBody `json:"details,omitempty"`
+}
 
 // DisableSerialConsoleResult returns whether or not Serial Console is disabled.
 type DisableSerialConsoleResult struct {
@@ -53,6 +72,120 @@ type OperationsValueItemDisplay struct {
 	Resource    *string `json:"resource,omitempty"`
 	Operation   *string `json:"operation,omitempty"`
 	Description *string `json:"description,omitempty"`
+}
+
+// ProxyResource the resource model definition for a ARM proxy resource. It will have everything other than
+// required location and tags
+type ProxyResource struct {
+	// ID - READ-ONLY; Resource Id
+	ID *string `json:"id,omitempty"`
+	// Name - READ-ONLY; Resource name
+	Name *string `json:"name,omitempty"`
+	// Type - READ-ONLY; Resource type
+	Type *string `json:"type,omitempty"`
+}
+
+// Resource the Resource model definition.
+type Resource struct {
+	// ID - READ-ONLY; Resource Id
+	ID *string `json:"id,omitempty"`
+	// Name - READ-ONLY; Resource name
+	Name *string `json:"name,omitempty"`
+	// Type - READ-ONLY; Resource type
+	Type *string `json:"type,omitempty"`
+}
+
+// SerialPort represents the serial port of the parent resource.
+type SerialPort struct {
+	autorest.Response `json:"-"`
+	// SerialPortProperties - The properties of the serial port.
+	*SerialPortProperties `json:"properties,omitempty"`
+	// ID - READ-ONLY; Resource Id
+	ID *string `json:"id,omitempty"`
+	// Name - READ-ONLY; Resource name
+	Name *string `json:"name,omitempty"`
+	// Type - READ-ONLY; Resource type
+	Type *string `json:"type,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for SerialPort.
+func (sp SerialPort) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if sp.SerialPortProperties != nil {
+		objectMap["properties"] = sp.SerialPortProperties
+	}
+	return json.Marshal(objectMap)
+}
+
+// UnmarshalJSON is the custom unmarshaler for SerialPort struct.
+func (sp *SerialPort) UnmarshalJSON(body []byte) error {
+	var m map[string]*json.RawMessage
+	err := json.Unmarshal(body, &m)
+	if err != nil {
+		return err
+	}
+	for k, v := range m {
+		switch k {
+		case "properties":
+			if v != nil {
+				var serialPortProperties SerialPortProperties
+				err = json.Unmarshal(*v, &serialPortProperties)
+				if err != nil {
+					return err
+				}
+				sp.SerialPortProperties = &serialPortProperties
+			}
+		case "id":
+			if v != nil {
+				var ID string
+				err = json.Unmarshal(*v, &ID)
+				if err != nil {
+					return err
+				}
+				sp.ID = &ID
+			}
+		case "name":
+			if v != nil {
+				var name string
+				err = json.Unmarshal(*v, &name)
+				if err != nil {
+					return err
+				}
+				sp.Name = &name
+			}
+		case "type":
+			if v != nil {
+				var typeVar string
+				err = json.Unmarshal(*v, &typeVar)
+				if err != nil {
+					return err
+				}
+				sp.Type = &typeVar
+			}
+		}
+	}
+
+	return nil
+}
+
+// SerialPortConnectResult returns a connection string to the serial port of the resource.
+type SerialPortConnectResult struct {
+	autorest.Response `json:"-"`
+	// ConnectionString - Connection string to the serial port of the resource.
+	ConnectionString *string `json:"connectionString,omitempty"`
+}
+
+// SerialPortListResult the list serial ports operation response.
+type SerialPortListResult struct {
+	autorest.Response `json:"-"`
+	// Value - The list of serial ports.
+	Value *[]SerialPort `json:"value,omitempty"`
+}
+
+// SerialPortProperties the properties of the serial port.
+type SerialPortProperties struct {
+	// State - Specifies whether the port is enabled for a serial console connection. Possible values include: 'Enabled', 'Disabled'
+	State SerialPortState `json:"state,omitempty"`
 }
 
 // SetObject ...
