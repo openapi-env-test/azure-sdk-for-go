@@ -1,0 +1,11 @@
+{
+  "commit": "173d9d010d78a8f5161d37c3e5d1adf8be922fcd",
+  "readme": "/_/azure-rest-api-specs/specification/confluent/resource-manager/readme.md",
+  "tag": "package-2021-03-01-preview",
+  "use": "@microsoft.azure/autorest.go@2.1.180",
+  "repository_url": "https://github.com/Azure/azure-rest-api-specs.git",
+  "autorest_command": "autorest --use=@microsoft.azure/autorest.go@2.1.180 --tag=package-2021-03-01-preview --go-sdk-folder=/_/azure-sdk-for-go --go --verbose --use-onever --version=V2 --go.license-header=MICROSOFT_MIT_NO_VERSION /_/azure-rest-api-specs/specification/confluent/resource-manager/readme.md",
+  "additional_properties": {
+    "additional_options": "--go --verbose --use-onever --version=V2 --go.license-header=MICROSOFT_MIT_NO_VERSION"
+  }
+}
