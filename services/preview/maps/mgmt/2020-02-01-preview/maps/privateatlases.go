@@ -15,7 +15,7 @@ import (
 	"net/http"
 )
 
-// PrivateAtlasesClient is the resource Provider
+// PrivateAtlasesClient is the azure Maps
 type PrivateAtlasesClient struct {
 	BaseClient
 }
@@ -31,8 +31,8 @@ func NewPrivateAtlasesClientWithBaseURI(baseURI string, subscriptionID string) P
 	return PrivateAtlasesClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
 
-// CreateOrUpdate create or update a Private Atlas resource. Private Atlas resource will enable the usage of Azure
-// resources to build a custom set of mapping data. It requires an account to exist before it can be created.
+// CreateOrUpdate [Deprecated] Create or update a Private Atlas resource. Private Atlas resource will enable the usage
+// of Azure resources to build a custom set of mapping data. It requires an account to exist before it can be created.
 // Parameters:
 // resourceGroupName - the name of the resource group. The name is case insensitive.
 // accountName - the name of the Maps Account.
@@ -125,7 +125,7 @@ func (client PrivateAtlasesClient) CreateOrUpdateResponder(resp *http.Response) 
 	return
 }
 
-// Delete delete a Private Atlas resource.
+// Delete [Deprecated] Delete a Private Atlas resource.
 // Parameters:
 // resourceGroupName - the name of the resource group. The name is case insensitive.
 // accountName - the name of the Maps Account.
@@ -212,7 +212,7 @@ func (client PrivateAtlasesClient) DeleteResponder(resp *http.Response) (result 
 	return
 }
 
-// Get get a Private Atlas resource.
+// Get [Deprecated] Get a Private Atlas resource.
 // Parameters:
 // resourceGroupName - the name of the resource group. The name is case insensitive.
 // accountName - the name of the Maps Account.
@@ -300,7 +300,7 @@ func (client PrivateAtlasesClient) GetResponder(resp *http.Response) (result Pri
 	return
 }
 
-// ListByAccount get all Private Atlas instances for an Azure Map Account
+// ListByAccount [Deprecated] Get all Private Atlas instances for an Azure Map Account
 // Parameters:
 // resourceGroupName - the name of the resource group. The name is case insensitive.
 // accountName - the name of the Maps Account.
@@ -386,8 +386,8 @@ func (client PrivateAtlasesClient) ListByAccountResponder(resp *http.Response) (
 	return
 }
 
-// Update updates the Private Atlas resource. Only a subset of the parameters may be updated after creation, such as
-// Tags.
+// Update [Deprecated] Updates the Private Atlas resource. Only a subset of the parameters may be updated after
+// creation, such as Tags.
 // Parameters:
 // resourceGroupName - the name of the resource group. The name is case insensitive.
 // accountName - the name of the Maps Account.
