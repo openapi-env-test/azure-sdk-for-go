@@ -14,19 +14,9 @@ import (
 // MarketplaceAgreementsClientAPI contains the set of methods on the MarketplaceAgreementsClient type.
 type MarketplaceAgreementsClientAPI interface {
 	Create(ctx context.Context, body *confluent.AgreementResource) (result confluent.AgreementResource, err error)
-	List(ctx context.Context) (result confluent.AgreementResourceListResponsePage, err error)
-	ListComplete(ctx context.Context) (result confluent.AgreementResourceListResponseIterator, err error)
 }
 
 var _ MarketplaceAgreementsClientAPI = (*confluent.MarketplaceAgreementsClient)(nil)
-
-// OrganizationOperationsClientAPI contains the set of methods on the OrganizationOperationsClient type.
-type OrganizationOperationsClientAPI interface {
-	List(ctx context.Context) (result confluent.OperationListResultPage, err error)
-	ListComplete(ctx context.Context) (result confluent.OperationListResultIterator, err error)
-}
-
-var _ OrganizationOperationsClientAPI = (*confluent.OrganizationOperationsClient)(nil)
 
 // OrganizationClientAPI contains the set of methods on the OrganizationClient type.
 type OrganizationClientAPI interface {
