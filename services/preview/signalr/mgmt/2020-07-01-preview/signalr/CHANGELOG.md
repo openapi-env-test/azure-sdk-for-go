@@ -1,2 +1,7 @@
-# Change History
+# Unreleased Content
 
+## Additive Changes
+
+### New Funcs
+
+1. ResourceSku.MarshalJSON() ([]byte, error)
