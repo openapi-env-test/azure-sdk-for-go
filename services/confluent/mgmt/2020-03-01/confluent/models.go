@@ -115,161 +115,10 @@ func (ar *AgreementResource) UnmarshalJSON(body []byte) error {
 
 // AgreementResourceListResponse response of a list operation.
 type AgreementResourceListResponse struct {
-	autorest.Response `json:"-"`
 	// Value - Results of a list operation.
 	Value *[]AgreementResource `json:"value,omitempty"`
 	// NextLink - Link to the next set of results, if any.
 	NextLink *string `json:"nextLink,omitempty"`
-}
-
-// AgreementResourceListResponseIterator provides access to a complete listing of AgreementResource values.
-type AgreementResourceListResponseIterator struct {
-	i    int
-	page AgreementResourceListResponsePage
-}
-
-// NextWithContext advances to the next value.  If there was an error making
-// the request the iterator does not advance and the error is returned.
-func (iter *AgreementResourceListResponseIterator) NextWithContext(ctx context.Context) (err error) {
-	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/AgreementResourceListResponseIterator.NextWithContext")
-		defer func() {
-			sc := -1
-			if iter.Response().Response.Response != nil {
-				sc = iter.Response().Response.Response.StatusCode
-			}
-			tracing.EndSpan(ctx, sc, err)
-		}()
-	}
-	iter.i++
-	if iter.i < len(iter.page.Values()) {
-		return nil
-	}
-	err = iter.page.NextWithContext(ctx)
-	if err != nil {
-		iter.i--
-		return err
-	}
-	iter.i = 0
-	return nil
-}
-
-// Next advances to the next value.  If there was an error making
-// the request the iterator does not advance and the error is returned.
-// Deprecated: Use NextWithContext() instead.
-func (iter *AgreementResourceListResponseIterator) Next() error {
-	return iter.NextWithContext(context.Background())
-}
-
-// NotDone returns true if the enumeration should be started or is not yet complete.
-func (iter AgreementResourceListResponseIterator) NotDone() bool {
-	return iter.page.NotDone() && iter.i < len(iter.page.Values())
-}
-
-// Response returns the raw server response from the last page request.
-func (iter AgreementResourceListResponseIterator) Response() AgreementResourceListResponse {
-	return iter.page.Response()
-}
-
-// Value returns the current value or a zero-initialized value if the
-// iterator has advanced beyond the end of the collection.
-func (iter AgreementResourceListResponseIterator) Value() AgreementResource {
-	if !iter.page.NotDone() {
-		return AgreementResource{}
-	}
-	return iter.page.Values()[iter.i]
-}
-
-// Creates a new instance of the AgreementResourceListResponseIterator type.
-func NewAgreementResourceListResponseIterator(page AgreementResourceListResponsePage) AgreementResourceListResponseIterator {
-	return AgreementResourceListResponseIterator{page: page}
-}
-
-// IsEmpty returns true if the ListResult contains no values.
-func (arlr AgreementResourceListResponse) IsEmpty() bool {
-	return arlr.Value == nil || len(*arlr.Value) == 0
-}
-
-// hasNextLink returns true if the NextLink is not empty.
-func (arlr AgreementResourceListResponse) hasNextLink() bool {
-	return arlr.NextLink != nil && len(*arlr.NextLink) != 0
-}
-
-// agreementResourceListResponsePreparer prepares a request to retrieve the next set of results.
-// It returns nil if no more results exist.
-func (arlr AgreementResourceListResponse) agreementResourceListResponsePreparer(ctx context.Context) (*http.Request, error) {
-	if !arlr.hasNextLink() {
-		return nil, nil
-	}
-	return autorest.Prepare((&http.Request{}).WithContext(ctx),
-		autorest.AsJSON(),
-		autorest.AsGet(),
-		autorest.WithBaseURL(to.String(arlr.NextLink)))
-}
-
-// AgreementResourceListResponsePage contains a page of AgreementResource values.
-type AgreementResourceListResponsePage struct {
-	fn   func(context.Context, AgreementResourceListResponse) (AgreementResourceListResponse, error)
-	arlr AgreementResourceListResponse
-}
-
-// NextWithContext advances to the next page of values.  If there was an error making
-// the request the page does not advance and the error is returned.
-func (page *AgreementResourceListResponsePage) NextWithContext(ctx context.Context) (err error) {
-	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/AgreementResourceListResponsePage.NextWithContext")
-		defer func() {
-			sc := -1
-			if page.Response().Response.Response != nil {
-				sc = page.Response().Response.Response.StatusCode
-			}
-			tracing.EndSpan(ctx, sc, err)
-		}()
-	}
-	for {
-		next, err := page.fn(ctx, page.arlr)
-		if err != nil {
-			return err
-		}
-		page.arlr = next
-		if !next.hasNextLink() || !next.IsEmpty() {
-			break
-		}
-	}
-	return nil
-}
-
-// Next advances to the next page of values.  If there was an error making
-// the request the page does not advance and the error is returned.
-// Deprecated: Use NextWithContext() instead.
-func (page *AgreementResourceListResponsePage) Next() error {
-	return page.NextWithContext(context.Background())
-}
-
-// NotDone returns true if the page enumeration should be started or is not yet complete.
-func (page AgreementResourceListResponsePage) NotDone() bool {
-	return !page.arlr.IsEmpty()
-}
-
-// Response returns the raw server response from the last page request.
-func (page AgreementResourceListResponsePage) Response() AgreementResourceListResponse {
-	return page.arlr
-}
-
-// Values returns the slice of values for the current page or nil if there are no values.
-func (page AgreementResourceListResponsePage) Values() []AgreementResource {
-	if page.arlr.IsEmpty() {
-		return nil
-	}
-	return *page.arlr.Value
-}
-
-// Creates a new instance of the AgreementResourceListResponsePage type.
-func NewAgreementResourceListResponsePage(cur AgreementResourceListResponse, getNextPage func(context.Context, AgreementResourceListResponse) (AgreementResourceListResponse, error)) AgreementResourceListResponsePage {
-	return AgreementResourceListResponsePage{
-		fn:   getNextPage,
-		arlr: cur,
-	}
 }
 
 // ErrorResponseBody response body of Error
@@ -296,8 +145,29 @@ type OfferDetail struct {
 	PlanName *string `json:"planName,omitempty"`
 	// TermUnit - Offer Plan Term unit
 	TermUnit *string `json:"termUnit,omitempty"`
-	// Status - SaaS Offer Status. Possible values include: 'SaaSOfferStatusStarted', 'SaaSOfferStatusPendingFulfillmentStart', 'SaaSOfferStatusInProgress', 'SaaSOfferStatusSubscribed', 'SaaSOfferStatusSuspended', 'SaaSOfferStatusReinstated', 'SaaSOfferStatusSucceeded', 'SaaSOfferStatusFailed', 'SaaSOfferStatusUnsubscribed', 'SaaSOfferStatusUpdating'
+	// Status - READ-ONLY; SaaS Offer Status. Possible values include: 'SaaSOfferStatusStarted', 'SaaSOfferStatusPendingFulfillmentStart', 'SaaSOfferStatusInProgress', 'SaaSOfferStatusSubscribed', 'SaaSOfferStatusSuspended', 'SaaSOfferStatusReinstated', 'SaaSOfferStatusSucceeded', 'SaaSOfferStatusFailed', 'SaaSOfferStatusUnsubscribed', 'SaaSOfferStatusUpdating'
 	Status SaaSOfferStatus `json:"status,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for OfferDetail.
+func (od OfferDetail) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if od.PublisherID != nil {
+		objectMap["publisherId"] = od.PublisherID
+	}
+	if od.ID != nil {
+		objectMap["id"] = od.ID
+	}
+	if od.PlanID != nil {
+		objectMap["planId"] = od.PlanID
+	}
+	if od.PlanName != nil {
+		objectMap["planName"] = od.PlanName
+	}
+	if od.TermUnit != nil {
+		objectMap["termUnit"] = od.TermUnit
+	}
+	return json.Marshal(objectMap)
 }
 
 // OperationDisplay the object that represents the operation.
@@ -314,161 +184,19 @@ type OperationDisplay struct {
 
 // OperationListResult result of GET request to list Confluent operations.
 type OperationListResult struct {
-	autorest.Response `json:"-"`
 	// Value - List of Confluent operations supported by the Microsoft.Confluent provider.
 	Value *[]OperationResult `json:"value,omitempty"`
-	// NextLink - URL to get the next set of operation list results if there are any.
+	// NextLink - READ-ONLY; URL to get the next set of operation list results if there are any.
 	NextLink *string `json:"nextLink,omitempty"`
 }
 
-// OperationListResultIterator provides access to a complete listing of OperationResult values.
-type OperationListResultIterator struct {
-	i    int
-	page OperationListResultPage
-}
-
-// NextWithContext advances to the next value.  If there was an error making
-// the request the iterator does not advance and the error is returned.
-func (iter *OperationListResultIterator) NextWithContext(ctx context.Context) (err error) {
-	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/OperationListResultIterator.NextWithContext")
-		defer func() {
-			sc := -1
-			if iter.Response().Response.Response != nil {
-				sc = iter.Response().Response.Response.StatusCode
-			}
-			tracing.EndSpan(ctx, sc, err)
-		}()
+// MarshalJSON is the custom marshaler for OperationListResult.
+func (olr OperationListResult) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if olr.Value != nil {
+		objectMap["value"] = olr.Value
 	}
-	iter.i++
-	if iter.i < len(iter.page.Values()) {
-		return nil
-	}
-	err = iter.page.NextWithContext(ctx)
-	if err != nil {
-		iter.i--
-		return err
-	}
-	iter.i = 0
-	return nil
-}
-
-// Next advances to the next value.  If there was an error making
-// the request the iterator does not advance and the error is returned.
-// Deprecated: Use NextWithContext() instead.
-func (iter *OperationListResultIterator) Next() error {
-	return iter.NextWithContext(context.Background())
-}
-
-// NotDone returns true if the enumeration should be started or is not yet complete.
-func (iter OperationListResultIterator) NotDone() bool {
-	return iter.page.NotDone() && iter.i < len(iter.page.Values())
-}
-
-// Response returns the raw server response from the last page request.
-func (iter OperationListResultIterator) Response() OperationListResult {
-	return iter.page.Response()
-}
-
-// Value returns the current value or a zero-initialized value if the
-// iterator has advanced beyond the end of the collection.
-func (iter OperationListResultIterator) Value() OperationResult {
-	if !iter.page.NotDone() {
-		return OperationResult{}
-	}
-	return iter.page.Values()[iter.i]
-}
-
-// Creates a new instance of the OperationListResultIterator type.
-func NewOperationListResultIterator(page OperationListResultPage) OperationListResultIterator {
-	return OperationListResultIterator{page: page}
-}
-
-// IsEmpty returns true if the ListResult contains no values.
-func (olr OperationListResult) IsEmpty() bool {
-	return olr.Value == nil || len(*olr.Value) == 0
-}
-
-// hasNextLink returns true if the NextLink is not empty.
-func (olr OperationListResult) hasNextLink() bool {
-	return olr.NextLink != nil && len(*olr.NextLink) != 0
-}
-
-// operationListResultPreparer prepares a request to retrieve the next set of results.
-// It returns nil if no more results exist.
-func (olr OperationListResult) operationListResultPreparer(ctx context.Context) (*http.Request, error) {
-	if !olr.hasNextLink() {
-		return nil, nil
-	}
-	return autorest.Prepare((&http.Request{}).WithContext(ctx),
-		autorest.AsJSON(),
-		autorest.AsGet(),
-		autorest.WithBaseURL(to.String(olr.NextLink)))
-}
-
-// OperationListResultPage contains a page of OperationResult values.
-type OperationListResultPage struct {
-	fn  func(context.Context, OperationListResult) (OperationListResult, error)
-	olr OperationListResult
-}
-
-// NextWithContext advances to the next page of values.  If there was an error making
-// the request the page does not advance and the error is returned.
-func (page *OperationListResultPage) NextWithContext(ctx context.Context) (err error) {
-	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/OperationListResultPage.NextWithContext")
-		defer func() {
-			sc := -1
-			if page.Response().Response.Response != nil {
-				sc = page.Response().Response.Response.StatusCode
-			}
-			tracing.EndSpan(ctx, sc, err)
-		}()
-	}
-	for {
-		next, err := page.fn(ctx, page.olr)
-		if err != nil {
-			return err
-		}
-		page.olr = next
-		if !next.hasNextLink() || !next.IsEmpty() {
-			break
-		}
-	}
-	return nil
-}
-
-// Next advances to the next page of values.  If there was an error making
-// the request the page does not advance and the error is returned.
-// Deprecated: Use NextWithContext() instead.
-func (page *OperationListResultPage) Next() error {
-	return page.NextWithContext(context.Background())
-}
-
-// NotDone returns true if the page enumeration should be started or is not yet complete.
-func (page OperationListResultPage) NotDone() bool {
-	return !page.olr.IsEmpty()
-}
-
-// Response returns the raw server response from the last page request.
-func (page OperationListResultPage) Response() OperationListResult {
-	return page.olr
-}
-
-// Values returns the slice of values for the current page or nil if there are no values.
-func (page OperationListResultPage) Values() []OperationResult {
-	if page.olr.IsEmpty() {
-		return nil
-	}
-	return *page.olr.Value
-}
-
-// Creates a new instance of the OperationListResultPage type.
-func NewOperationListResultPage(cur OperationListResult, getNextPage func(context.Context, OperationListResult) (OperationListResult, error)) OperationListResultPage {
-	return OperationListResultPage{
-		fn:  getNextPage,
-		olr: cur,
-	}
+	return json.Marshal(objectMap)
 }
 
 // OperationResult an Confluent REST API operation.
@@ -826,7 +554,7 @@ func NewOrganizationResourceListResultPage(cur OrganizationResourceListResult, g
 type OrganizationResourceProperties struct {
 	// CreatedTime - READ-ONLY; The creation time of the resource.
 	CreatedTime *date.Time `json:"createdTime,omitempty"`
-	// ProvisioningState - Provision states for confluent RP. Possible values include: 'Accepted', 'Creating', 'Updating', 'Deleting', 'Succeeded', 'Failed', 'Canceled', 'Deleted', 'NotSpecified'
+	// ProvisioningState - READ-ONLY; Provision states for confluent RP. Possible values include: 'Accepted', 'Creating', 'Updating', 'Deleting', 'Succeeded', 'Failed', 'Canceled', 'Deleted', 'NotSpecified'
 	ProvisioningState ProvisionState `json:"provisioningState,omitempty"`
 	// OrganizationID - READ-ONLY; Id of the Confluent organization.
 	OrganizationID *string `json:"organizationId,omitempty"`
@@ -841,9 +569,6 @@ type OrganizationResourceProperties struct {
 // MarshalJSON is the custom marshaler for OrganizationResourceProperties.
 func (orp OrganizationResourceProperties) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
-	if orp.ProvisioningState != "" {
-		objectMap["provisioningState"] = orp.ProvisioningState
-	}
 	if orp.OfferDetail != nil {
 		objectMap["offerDetail"] = orp.OfferDetail
 	}
@@ -857,7 +582,7 @@ func (orp OrganizationResourceProperties) MarshalJSON() ([]byte, error) {
 type OrganizationResourcePropertiesModel struct {
 	// CreatedTime - READ-ONLY; The creation time of the resource.
 	CreatedTime *date.Time `json:"createdTime,omitempty"`
-	// ProvisioningState - Provision states for confluent RP. Possible values include: 'Accepted', 'Creating', 'Updating', 'Deleting', 'Succeeded', 'Failed', 'Canceled', 'Deleted', 'NotSpecified'
+	// ProvisioningState - READ-ONLY; Provision states for confluent RP. Possible values include: 'Accepted', 'Creating', 'Updating', 'Deleting', 'Succeeded', 'Failed', 'Canceled', 'Deleted', 'NotSpecified'
 	ProvisioningState ProvisionState `json:"provisioningState,omitempty"`
 	// OrganizationID - READ-ONLY; Id of the Confluent organization.
 	OrganizationID *string `json:"organizationId,omitempty"`
@@ -872,9 +597,6 @@ type OrganizationResourcePropertiesModel struct {
 // MarshalJSON is the custom marshaler for OrganizationResourcePropertiesModel.
 func (orpm OrganizationResourcePropertiesModel) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
-	if orpm.ProvisioningState != "" {
-		objectMap["provisioningState"] = orpm.ProvisioningState
-	}
 	if orpm.OfferDetail != nil {
 		objectMap["offerDetail"] = orpm.OfferDetail
 	}
@@ -896,8 +618,29 @@ type OrganizationResourcePropertiesOfferDetail struct {
 	PlanName *string `json:"planName,omitempty"`
 	// TermUnit - Offer Plan Term unit
 	TermUnit *string `json:"termUnit,omitempty"`
-	// Status - SaaS Offer Status. Possible values include: 'SaaSOfferStatusStarted', 'SaaSOfferStatusPendingFulfillmentStart', 'SaaSOfferStatusInProgress', 'SaaSOfferStatusSubscribed', 'SaaSOfferStatusSuspended', 'SaaSOfferStatusReinstated', 'SaaSOfferStatusSucceeded', 'SaaSOfferStatusFailed', 'SaaSOfferStatusUnsubscribed', 'SaaSOfferStatusUpdating'
+	// Status - READ-ONLY; SaaS Offer Status. Possible values include: 'SaaSOfferStatusStarted', 'SaaSOfferStatusPendingFulfillmentStart', 'SaaSOfferStatusInProgress', 'SaaSOfferStatusSubscribed', 'SaaSOfferStatusSuspended', 'SaaSOfferStatusReinstated', 'SaaSOfferStatusSucceeded', 'SaaSOfferStatusFailed', 'SaaSOfferStatusUnsubscribed', 'SaaSOfferStatusUpdating'
 	Status SaaSOfferStatus `json:"status,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for OrganizationResourcePropertiesOfferDetail.
+func (orpD OrganizationResourcePropertiesOfferDetail) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if orpD.PublisherID != nil {
+		objectMap["publisherId"] = orpD.PublisherID
+	}
+	if orpD.ID != nil {
+		objectMap["id"] = orpD.ID
+	}
+	if orpD.PlanID != nil {
+		objectMap["planId"] = orpD.PlanID
+	}
+	if orpD.PlanName != nil {
+		objectMap["planName"] = orpD.PlanName
+	}
+	if orpD.TermUnit != nil {
+		objectMap["termUnit"] = orpD.TermUnit
+	}
+	return json.Marshal(objectMap)
 }
 
 // OrganizationResourcePropertiesUserDetail subscriber detail
