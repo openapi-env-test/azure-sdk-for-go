@@ -15,7 +15,7 @@ import (
 	"net/http"
 )
 
-// CreatorsClient is the resource Provider
+// CreatorsClient is the azure Maps
 type CreatorsClient struct {
 	BaseClient
 }
