@@ -1,5 +1,5 @@
 {
-  "commit": "3c764635e7d442b3e74caf593029fcd440b3ef82",
+  "commit": "bf51cb177bfeb66e3785cc1b1a78fd1c945f8bd4",
   "readme": "/_/azure-rest-api-specs/specification/storsimple8000series/resource-manager/readme.md",
   "tag": "package-2017-06",
   "use": "@microsoft.azure/autorest.go@2.1.180",
