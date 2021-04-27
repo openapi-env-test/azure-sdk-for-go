@@ -446,7 +446,6 @@ type Resource struct {
 
 // SystemAssignedIdentity describes a system assigned identity resource.
 type SystemAssignedIdentity struct {
-	autorest.Response `json:"-"`
 	// Location - The geo-location where the resource lives
 	Location *string `json:"location,omitempty"`
 	// Tags - Resource tags
@@ -583,161 +582,10 @@ func (tr TrackedResource) MarshalJSON() ([]byte, error) {
 
 // UserAssignedIdentitiesListResult values returned by the List operation.
 type UserAssignedIdentitiesListResult struct {
-	autorest.Response `json:"-"`
 	// Value - The collection of userAssignedIdentities returned by the listing operation.
 	Value *[]Identity `json:"value,omitempty"`
 	// NextLink - The url to get the next page of results, if any.
 	NextLink *string `json:"nextLink,omitempty"`
-}
-
-// UserAssignedIdentitiesListResultIterator provides access to a complete listing of Identity values.
-type UserAssignedIdentitiesListResultIterator struct {
-	i    int
-	page UserAssignedIdentitiesListResultPage
-}
-
-// NextWithContext advances to the next value.  If there was an error making
-// the request the iterator does not advance and the error is returned.
-func (iter *UserAssignedIdentitiesListResultIterator) NextWithContext(ctx context.Context) (err error) {
-	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/UserAssignedIdentitiesListResultIterator.NextWithContext")
-		defer func() {
-			sc := -1
-			if iter.Response().Response.Response != nil {
-				sc = iter.Response().Response.Response.StatusCode
-			}
-			tracing.EndSpan(ctx, sc, err)
-		}()
-	}
-	iter.i++
-	if iter.i < len(iter.page.Values()) {
-		return nil
-	}
-	err = iter.page.NextWithContext(ctx)
-	if err != nil {
-		iter.i--
-		return err
-	}
-	iter.i = 0
-	return nil
-}
-
-// Next advances to the next value.  If there was an error making
-// the request the iterator does not advance and the error is returned.
-// Deprecated: Use NextWithContext() instead.
-func (iter *UserAssignedIdentitiesListResultIterator) Next() error {
-	return iter.NextWithContext(context.Background())
-}
-
-// NotDone returns true if the enumeration should be started or is not yet complete.
-func (iter UserAssignedIdentitiesListResultIterator) NotDone() bool {
-	return iter.page.NotDone() && iter.i < len(iter.page.Values())
-}
-
-// Response returns the raw server response from the last page request.
-func (iter UserAssignedIdentitiesListResultIterator) Response() UserAssignedIdentitiesListResult {
-	return iter.page.Response()
-}
-
-// Value returns the current value or a zero-initialized value if the
-// iterator has advanced beyond the end of the collection.
-func (iter UserAssignedIdentitiesListResultIterator) Value() Identity {
-	if !iter.page.NotDone() {
-		return Identity{}
-	}
-	return iter.page.Values()[iter.i]
-}
-
-// Creates a new instance of the UserAssignedIdentitiesListResultIterator type.
-func NewUserAssignedIdentitiesListResultIterator(page UserAssignedIdentitiesListResultPage) UserAssignedIdentitiesListResultIterator {
-	return UserAssignedIdentitiesListResultIterator{page: page}
-}
-
-// IsEmpty returns true if the ListResult contains no values.
-func (uailr UserAssignedIdentitiesListResult) IsEmpty() bool {
-	return uailr.Value == nil || len(*uailr.Value) == 0
-}
-
-// hasNextLink returns true if the NextLink is not empty.
-func (uailr UserAssignedIdentitiesListResult) hasNextLink() bool {
-	return uailr.NextLink != nil && len(*uailr.NextLink) != 0
-}
-
-// userAssignedIdentitiesListResultPreparer prepares a request to retrieve the next set of results.
-// It returns nil if no more results exist.
-func (uailr UserAssignedIdentitiesListResult) userAssignedIdentitiesListResultPreparer(ctx context.Context) (*http.Request, error) {
-	if !uailr.hasNextLink() {
-		return nil, nil
-	}
-	return autorest.Prepare((&http.Request{}).WithContext(ctx),
-		autorest.AsJSON(),
-		autorest.AsGet(),
-		autorest.WithBaseURL(to.String(uailr.NextLink)))
-}
-
-// UserAssignedIdentitiesListResultPage contains a page of Identity values.
-type UserAssignedIdentitiesListResultPage struct {
-	fn    func(context.Context, UserAssignedIdentitiesListResult) (UserAssignedIdentitiesListResult, error)
-	uailr UserAssignedIdentitiesListResult
-}
-
-// NextWithContext advances to the next page of values.  If there was an error making
-// the request the page does not advance and the error is returned.
-func (page *UserAssignedIdentitiesListResultPage) NextWithContext(ctx context.Context) (err error) {
-	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/UserAssignedIdentitiesListResultPage.NextWithContext")
-		defer func() {
-			sc := -1
-			if page.Response().Response.Response != nil {
-				sc = page.Response().Response.Response.StatusCode
-			}
-			tracing.EndSpan(ctx, sc, err)
-		}()
-	}
-	for {
-		next, err := page.fn(ctx, page.uailr)
-		if err != nil {
-			return err
-		}
-		page.uailr = next
-		if !next.hasNextLink() || !next.IsEmpty() {
-			break
-		}
-	}
-	return nil
-}
-
-// Next advances to the next page of values.  If there was an error making
-// the request the page does not advance and the error is returned.
-// Deprecated: Use NextWithContext() instead.
-func (page *UserAssignedIdentitiesListResultPage) Next() error {
-	return page.NextWithContext(context.Background())
-}
-
-// NotDone returns true if the page enumeration should be started or is not yet complete.
-func (page UserAssignedIdentitiesListResultPage) NotDone() bool {
-	return !page.uailr.IsEmpty()
-}
-
-// Response returns the raw server response from the last page request.
-func (page UserAssignedIdentitiesListResultPage) Response() UserAssignedIdentitiesListResult {
-	return page.uailr
-}
-
-// Values returns the slice of values for the current page or nil if there are no values.
-func (page UserAssignedIdentitiesListResultPage) Values() []Identity {
-	if page.uailr.IsEmpty() {
-		return nil
-	}
-	return *page.uailr.Value
-}
-
-// Creates a new instance of the UserAssignedIdentitiesListResultPage type.
-func NewUserAssignedIdentitiesListResultPage(cur UserAssignedIdentitiesListResult, getNextPage func(context.Context, UserAssignedIdentitiesListResult) (UserAssignedIdentitiesListResult, error)) UserAssignedIdentitiesListResultPage {
-	return UserAssignedIdentitiesListResultPage{
-		fn:    getNextPage,
-		uailr: cur,
-	}
 }
 
 // UserAssignedIdentityProperties the properties associated with the user assigned identity.
