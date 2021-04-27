@@ -572,9 +572,9 @@ func (future *ConfigurationStoresCreateFuture) result(client ConfigurationStores
 	return
 }
 
-// ConfigurationStoresDeleteFuture an abstraction for monitoring and retrieving the results of a
+// ConfigurationStoresDeleteABCFuture an abstraction for monitoring and retrieving the results of a
 // long-running operation.
-type ConfigurationStoresDeleteFuture struct {
+type ConfigurationStoresDeleteABCFuture struct {
 	azure.FutureAPI
 	// Result returns the result of the asynchronous operation.
 	// If the operation has not completed it will return an error.
@@ -582,7 +582,7 @@ type ConfigurationStoresDeleteFuture struct {
 }
 
 // UnmarshalJSON is the custom unmarshaller for CreateFuture.
-func (future *ConfigurationStoresDeleteFuture) UnmarshalJSON(body []byte) error {
+func (future *ConfigurationStoresDeleteABCFuture) UnmarshalJSON(body []byte) error {
 	var azFuture azure.Future
 	if err := json.Unmarshal(body, &azFuture); err != nil {
 		return err
@@ -592,63 +592,20 @@ func (future *ConfigurationStoresDeleteFuture) UnmarshalJSON(body []byte) error 
 	return nil
 }
 
-// result is the default implementation for ConfigurationStoresDeleteFuture.Result.
-func (future *ConfigurationStoresDeleteFuture) result(client ConfigurationStoresClient) (ar autorest.Response, err error) {
+// result is the default implementation for ConfigurationStoresDeleteABCFuture.Result.
+func (future *ConfigurationStoresDeleteABCFuture) result(client ConfigurationStoresClient) (ar autorest.Response, err error) {
 	var done bool
 	done, err = future.DoneWithContext(context.Background(), client)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "appconfiguration.ConfigurationStoresDeleteFuture", "Result", future.Response(), "Polling failure")
+		err = autorest.NewErrorWithError(err, "appconfiguration.ConfigurationStoresDeleteABCFuture", "Result", future.Response(), "Polling failure")
 		return
 	}
 	if !done {
 		ar.Response = future.Response()
-		err = azure.NewAsyncOpIncompleteError("appconfiguration.ConfigurationStoresDeleteFuture")
+		err = azure.NewAsyncOpIncompleteError("appconfiguration.ConfigurationStoresDeleteABCFuture")
 		return
 	}
 	ar.Response = future.Response()
-	return
-}
-
-// ConfigurationStoresUpdateFuture an abstraction for monitoring and retrieving the results of a
-// long-running operation.
-type ConfigurationStoresUpdateFuture struct {
-	azure.FutureAPI
-	// Result returns the result of the asynchronous operation.
-	// If the operation has not completed it will return an error.
-	Result func(ConfigurationStoresClient) (ConfigurationStore, error)
-}
-
-// UnmarshalJSON is the custom unmarshaller for CreateFuture.
-func (future *ConfigurationStoresUpdateFuture) UnmarshalJSON(body []byte) error {
-	var azFuture azure.Future
-	if err := json.Unmarshal(body, &azFuture); err != nil {
-		return err
-	}
-	future.FutureAPI = &azFuture
-	future.Result = future.result
-	return nil
-}
-
-// result is the default implementation for ConfigurationStoresUpdateFuture.Result.
-func (future *ConfigurationStoresUpdateFuture) result(client ConfigurationStoresClient) (cs ConfigurationStore, err error) {
-	var done bool
-	done, err = future.DoneWithContext(context.Background(), client)
-	if err != nil {
-		err = autorest.NewErrorWithError(err, "appconfiguration.ConfigurationStoresUpdateFuture", "Result", future.Response(), "Polling failure")
-		return
-	}
-	if !done {
-		cs.Response.Response = future.Response()
-		err = azure.NewAsyncOpIncompleteError("appconfiguration.ConfigurationStoresUpdateFuture")
-		return
-	}
-	sender := autorest.DecorateSender(client, autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
-	if cs.Response.Response, err = future.GetResult(sender); err == nil && cs.Response.Response.StatusCode != http.StatusNoContent {
-		cs, err = client.UpdateResponder(cs.Response.Response)
-		if err != nil {
-			err = autorest.NewErrorWithError(err, "appconfiguration.ConfigurationStoresUpdateFuture", "Result", cs.Response.Response, "Failure responding to request")
-		}
-	}
 	return
 }
 
