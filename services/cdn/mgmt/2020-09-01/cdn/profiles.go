@@ -295,13 +295,14 @@ func (client ProfilesClient) GenerateSsoURIResponder(resp *http.Response) (resul
 	return
 }
 
-// Get gets a CDN profile with the specified profile name under the specified subscription and resource group.
+// GetABreakingChange gets a CDN profile with the specified profile name under the specified subscription and resource
+// group.
 // Parameters:
 // resourceGroupName - name of the Resource group within the Azure subscription.
 // profileName - name of the CDN profile which is unique within the resource group.
-func (client ProfilesClient) Get(ctx context.Context, resourceGroupName string, profileName string) (result Profile, err error) {
+func (client ProfilesClient) GetABreakingChange(ctx context.Context, resourceGroupName string, profileName string) (result Profile, err error) {
 	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/ProfilesClient.Get")
+		ctx = tracing.StartSpan(ctx, fqdn+"/ProfilesClient.GetABreakingChange")
 		defer func() {
 			sc := -1
 			if result.Response.Response != nil {
@@ -315,33 +316,33 @@ func (client ProfilesClient) Get(ctx context.Context, resourceGroupName string, 
 			Constraints: []validation.Constraint{{Target: "resourceGroupName", Name: validation.MaxLength, Rule: 90, Chain: nil},
 				{Target: "resourceGroupName", Name: validation.MinLength, Rule: 1, Chain: nil},
 				{Target: "resourceGroupName", Name: validation.Pattern, Rule: `^[-\w\._\(\)]+$`, Chain: nil}}}}); err != nil {
-		return result, validation.NewError("cdn.ProfilesClient", "Get", err.Error())
+		return result, validation.NewError("cdn.ProfilesClient", "GetABreakingChange", err.Error())
 	}
 
-	req, err := client.GetPreparer(ctx, resourceGroupName, profileName)
+	req, err := client.GetABreakingChangePreparer(ctx, resourceGroupName, profileName)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "cdn.ProfilesClient", "Get", nil, "Failure preparing request")
+		err = autorest.NewErrorWithError(err, "cdn.ProfilesClient", "GetABreakingChange", nil, "Failure preparing request")
 		return
 	}
 
-	resp, err := client.GetSender(req)
+	resp, err := client.GetABreakingChangeSender(req)
 	if err != nil {
 		result.Response = autorest.Response{Response: resp}
-		err = autorest.NewErrorWithError(err, "cdn.ProfilesClient", "Get", resp, "Failure sending request")
+		err = autorest.NewErrorWithError(err, "cdn.ProfilesClient", "GetABreakingChange", resp, "Failure sending request")
 		return
 	}
 
-	result, err = client.GetResponder(resp)
+	result, err = client.GetABreakingChangeResponder(resp)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "cdn.ProfilesClient", "Get", resp, "Failure responding to request")
+		err = autorest.NewErrorWithError(err, "cdn.ProfilesClient", "GetABreakingChange", resp, "Failure responding to request")
 		return
 	}
 
 	return
 }
 
-// GetPreparer prepares the Get request.
-func (client ProfilesClient) GetPreparer(ctx context.Context, resourceGroupName string, profileName string) (*http.Request, error) {
+// GetABreakingChangePreparer prepares the GetABreakingChange request.
+func (client ProfilesClient) GetABreakingChangePreparer(ctx context.Context, resourceGroupName string, profileName string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"profileName":       autorest.Encode("path", profileName),
 		"resourceGroupName": autorest.Encode("path", resourceGroupName),
@@ -361,15 +362,15 @@ func (client ProfilesClient) GetPreparer(ctx context.Context, resourceGroupName 
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
 }
 
-// GetSender sends the Get request. The method will close the
+// GetABreakingChangeSender sends the GetABreakingChange request. The method will close the
 // http.Response Body if it receives an error.
-func (client ProfilesClient) GetSender(req *http.Request) (*http.Response, error) {
+func (client ProfilesClient) GetABreakingChangeSender(req *http.Request) (*http.Response, error) {
 	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
-// GetResponder handles the response to the Get request. The method always
+// GetABreakingChangeResponder handles the response to the GetABreakingChange request. The method always
 // closes the http.Response Body.
-func (client ProfilesClient) GetResponder(resp *http.Response) (result Profile, err error) {
+func (client ProfilesClient) GetABreakingChangeResponder(resp *http.Response) (result Profile, err error) {
 	err = autorest.Respond(
 		resp,
 		azure.WithErrorUnlessStatusCode(http.StatusOK),
@@ -489,130 +490,6 @@ func (client ProfilesClient) ListComplete(ctx context.Context) (result ProfileLi
 		}()
 	}
 	result.page, err = client.List(ctx)
-	return
-}
-
-// ListByResourceGroup lists all of the CDN profiles within a resource group.
-// Parameters:
-// resourceGroupName - name of the Resource group within the Azure subscription.
-func (client ProfilesClient) ListByResourceGroup(ctx context.Context, resourceGroupName string) (result ProfileListResultPage, err error) {
-	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/ProfilesClient.ListByResourceGroup")
-		defer func() {
-			sc := -1
-			if result.plr.Response.Response != nil {
-				sc = result.plr.Response.Response.StatusCode
-			}
-			tracing.EndSpan(ctx, sc, err)
-		}()
-	}
-	if err := validation.Validate([]validation.Validation{
-		{TargetValue: resourceGroupName,
-			Constraints: []validation.Constraint{{Target: "resourceGroupName", Name: validation.MaxLength, Rule: 90, Chain: nil},
-				{Target: "resourceGroupName", Name: validation.MinLength, Rule: 1, Chain: nil},
-				{Target: "resourceGroupName", Name: validation.Pattern, Rule: `^[-\w\._\(\)]+$`, Chain: nil}}}}); err != nil {
-		return result, validation.NewError("cdn.ProfilesClient", "ListByResourceGroup", err.Error())
-	}
-
-	result.fn = client.listByResourceGroupNextResults
-	req, err := client.ListByResourceGroupPreparer(ctx, resourceGroupName)
-	if err != nil {
-		err = autorest.NewErrorWithError(err, "cdn.ProfilesClient", "ListByResourceGroup", nil, "Failure preparing request")
-		return
-	}
-
-	resp, err := client.ListByResourceGroupSender(req)
-	if err != nil {
-		result.plr.Response = autorest.Response{Response: resp}
-		err = autorest.NewErrorWithError(err, "cdn.ProfilesClient", "ListByResourceGroup", resp, "Failure sending request")
-		return
-	}
-
-	result.plr, err = client.ListByResourceGroupResponder(resp)
-	if err != nil {
-		err = autorest.NewErrorWithError(err, "cdn.ProfilesClient", "ListByResourceGroup", resp, "Failure responding to request")
-		return
-	}
-	if result.plr.hasNextLink() && result.plr.IsEmpty() {
-		err = result.NextWithContext(ctx)
-		return
-	}
-
-	return
-}
-
-// ListByResourceGroupPreparer prepares the ListByResourceGroup request.
-func (client ProfilesClient) ListByResourceGroupPreparer(ctx context.Context, resourceGroupName string) (*http.Request, error) {
-	pathParameters := map[string]interface{}{
-		"resourceGroupName": autorest.Encode("path", resourceGroupName),
-		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
-	}
-
-	const APIVersion = "2020-09-01"
-	queryParameters := map[string]interface{}{
-		"api-version": APIVersion,
-	}
-
-	preparer := autorest.CreatePreparer(
-		autorest.AsGet(),
-		autorest.WithBaseURL(client.BaseURI),
-		autorest.WithPathParameters("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles", pathParameters),
-		autorest.WithQueryParameters(queryParameters))
-	return preparer.Prepare((&http.Request{}).WithContext(ctx))
-}
-
-// ListByResourceGroupSender sends the ListByResourceGroup request. The method will close the
-// http.Response Body if it receives an error.
-func (client ProfilesClient) ListByResourceGroupSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
-}
-
-// ListByResourceGroupResponder handles the response to the ListByResourceGroup request. The method always
-// closes the http.Response Body.
-func (client ProfilesClient) ListByResourceGroupResponder(resp *http.Response) (result ProfileListResult, err error) {
-	err = autorest.Respond(
-		resp,
-		azure.WithErrorUnlessStatusCode(http.StatusOK),
-		autorest.ByUnmarshallingJSON(&result),
-		autorest.ByClosing())
-	result.Response = autorest.Response{Response: resp}
-	return
-}
-
-// listByResourceGroupNextResults retrieves the next set of results, if any.
-func (client ProfilesClient) listByResourceGroupNextResults(ctx context.Context, lastResults ProfileListResult) (result ProfileListResult, err error) {
-	req, err := lastResults.profileListResultPreparer(ctx)
-	if err != nil {
-		return result, autorest.NewErrorWithError(err, "cdn.ProfilesClient", "listByResourceGroupNextResults", nil, "Failure preparing next results request")
-	}
-	if req == nil {
-		return
-	}
-	resp, err := client.ListByResourceGroupSender(req)
-	if err != nil {
-		result.Response = autorest.Response{Response: resp}
-		return result, autorest.NewErrorWithError(err, "cdn.ProfilesClient", "listByResourceGroupNextResults", resp, "Failure sending next results request")
-	}
-	result, err = client.ListByResourceGroupResponder(resp)
-	if err != nil {
-		err = autorest.NewErrorWithError(err, "cdn.ProfilesClient", "listByResourceGroupNextResults", resp, "Failure responding to next results request")
-	}
-	return
-}
-
-// ListByResourceGroupComplete enumerates all values, automatically crossing page boundaries as required.
-func (client ProfilesClient) ListByResourceGroupComplete(ctx context.Context, resourceGroupName string) (result ProfileListResultIterator, err error) {
-	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/ProfilesClient.ListByResourceGroup")
-		defer func() {
-			sc := -1
-			if result.Response().Response.Response != nil {
-				sc = result.page.Response().Response.Response.StatusCode
-			}
-			tracing.EndSpan(ctx, sc, err)
-		}()
-	}
-	result.page, err = client.ListByResourceGroup(ctx, resourceGroupName)
 	return
 }
 
