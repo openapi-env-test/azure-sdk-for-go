@@ -446,7 +446,6 @@ type Resource struct {
 
 // SystemAssignedIdentity describes a system assigned identity resource.
 type SystemAssignedIdentity struct {
-	autorest.Response `json:"-"`
 	// Location - The geo-location where the resource lives
 	Location *string `json:"location,omitempty"`
 	// Tags - Resource tags
