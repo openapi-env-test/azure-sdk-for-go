@@ -1,5 +1,5 @@
 {
-  "commit": "3c764635e7d442b3e74caf593029fcd440b3ef82",
+  "commit": "5d9d0fab53eddff0992c8f3720811aa36cb547d9",
   "readme": "/_/azure-rest-api-specs/specification/storageimportexport/resource-manager/readme.md",
   "tag": "package-2016-11",
   "use": "@microsoft.azure/autorest.go@2.1.180",
