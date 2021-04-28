@@ -34,8 +34,7 @@ func NewOrchestratorInstanceServiceClientWithBaseURI(baseURI string, subscriptio
 
 // Create create a orchestrator instance
 // Parameters:
-// resourceGroupName - the name of the Azure Resource group of which a given DelegatedNetwork resource is part.
-// This name must be at least 1 character in length, and no more than 90.
+// resourceGroupName - the name of the resource group. The name is case insensitive.
 // resourceName - the name of the resource. It must be a minimum of 3 characters, and a maximum of 63.
 // parameters - orchestratorInstance type parameters
 func (client OrchestratorInstanceServiceClient) Create(ctx context.Context, resourceGroupName string, resourceName string, parameters Orchestrator) (result OrchestratorInstanceServiceCreateFuture, err error) {
@@ -58,6 +57,8 @@ func (client OrchestratorInstanceServiceClient) Create(ctx context.Context, reso
 			Constraints: []validation.Constraint{{Target: "resourceName", Name: validation.MaxLength, Rule: 63, Chain: nil},
 				{Target: "resourceName", Name: validation.MinLength, Rule: 3, Chain: nil},
 				{Target: "resourceName", Name: validation.Pattern, Rule: `^[a-z][a-z0-9]*$`, Chain: nil}}},
+		{TargetValue: client.SubscriptionID,
+			Constraints: []validation.Constraint{{Target: "client.SubscriptionID", Name: validation.MinLength, Rule: 1, Chain: nil}}},
 		{TargetValue: parameters,
 			Constraints: []validation.Constraint{{Target: "parameters.OrchestratorResourceProperties", Name: validation.Null, Rule: false,
 				Chain: []validation.Constraint{{Target: "parameters.OrchestratorResourceProperties.ControllerDetails", Name: validation.Null, Rule: true, Chain: nil}}}}}}); err != nil {
@@ -131,8 +132,7 @@ func (client OrchestratorInstanceServiceClient) CreateResponder(resp *http.Respo
 
 // Delete deletes the Orchestrator Instance
 // Parameters:
-// resourceGroupName - the name of the Azure Resource group of which a given DelegatedNetwork resource is part.
-// This name must be at least 1 character in length, and no more than 90.
+// resourceGroupName - the name of the resource group. The name is case insensitive.
 // resourceName - the name of the resource. It must be a minimum of 3 characters, and a maximum of 63.
 func (client OrchestratorInstanceServiceClient) Delete(ctx context.Context, resourceGroupName string, resourceName string) (result OrchestratorInstanceServiceDeleteFuture, err error) {
 	if tracing.IsEnabled() {
@@ -153,7 +153,9 @@ func (client OrchestratorInstanceServiceClient) Delete(ctx context.Context, reso
 		{TargetValue: resourceName,
 			Constraints: []validation.Constraint{{Target: "resourceName", Name: validation.MaxLength, Rule: 63, Chain: nil},
 				{Target: "resourceName", Name: validation.MinLength, Rule: 3, Chain: nil},
-				{Target: "resourceName", Name: validation.Pattern, Rule: `^[a-z][a-z0-9]*$`, Chain: nil}}}}); err != nil {
+				{Target: "resourceName", Name: validation.Pattern, Rule: `^[a-z][a-z0-9]*$`, Chain: nil}}},
+		{TargetValue: client.SubscriptionID,
+			Constraints: []validation.Constraint{{Target: "client.SubscriptionID", Name: validation.MinLength, Rule: 1, Chain: nil}}}}); err != nil {
 		return result, validation.NewError("delegatednetwork.OrchestratorInstanceServiceClient", "Delete", err.Error())
 	}
 
@@ -221,8 +223,7 @@ func (client OrchestratorInstanceServiceClient) DeleteResponder(resp *http.Respo
 
 // GetDetails gets details about the orchestrator instance.
 // Parameters:
-// resourceGroupName - the name of the Azure Resource group of which a given DelegatedNetwork resource is part.
-// This name must be at least 1 character in length, and no more than 90.
+// resourceGroupName - the name of the resource group. The name is case insensitive.
 // resourceName - the name of the resource. It must be a minimum of 3 characters, and a maximum of 63.
 func (client OrchestratorInstanceServiceClient) GetDetails(ctx context.Context, resourceGroupName string, resourceName string) (result Orchestrator, err error) {
 	if tracing.IsEnabled() {
@@ -243,7 +244,9 @@ func (client OrchestratorInstanceServiceClient) GetDetails(ctx context.Context, 
 		{TargetValue: resourceName,
 			Constraints: []validation.Constraint{{Target: "resourceName", Name: validation.MaxLength, Rule: 63, Chain: nil},
 				{Target: "resourceName", Name: validation.MinLength, Rule: 3, Chain: nil},
-				{Target: "resourceName", Name: validation.Pattern, Rule: `^[a-z][a-z0-9]*$`, Chain: nil}}}}); err != nil {
+				{Target: "resourceName", Name: validation.Pattern, Rule: `^[a-z][a-z0-9]*$`, Chain: nil}}},
+		{TargetValue: client.SubscriptionID,
+			Constraints: []validation.Constraint{{Target: "client.SubscriptionID", Name: validation.MinLength, Rule: 1, Chain: nil}}}}); err != nil {
 		return result, validation.NewError("delegatednetwork.OrchestratorInstanceServiceClient", "GetDetails", err.Error())
 	}
 
@@ -310,8 +313,7 @@ func (client OrchestratorInstanceServiceClient) GetDetailsResponder(resp *http.R
 
 // ListByResourceGroup get all the OrchestratorInstances resources in a resource group.
 // Parameters:
-// resourceGroupName - the name of the Azure Resource group of which a given DelegatedNetwork resource is part.
-// This name must be at least 1 character in length, and no more than 90.
+// resourceGroupName - the name of the resource group. The name is case insensitive.
 func (client OrchestratorInstanceServiceClient) ListByResourceGroup(ctx context.Context, resourceGroupName string) (result OrchestratorsPage, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/OrchestratorInstanceServiceClient.ListByResourceGroup")
@@ -327,7 +329,9 @@ func (client OrchestratorInstanceServiceClient) ListByResourceGroup(ctx context.
 		{TargetValue: resourceGroupName,
 			Constraints: []validation.Constraint{{Target: "resourceGroupName", Name: validation.MaxLength, Rule: 90, Chain: nil},
 				{Target: "resourceGroupName", Name: validation.MinLength, Rule: 1, Chain: nil},
-				{Target: "resourceGroupName", Name: validation.Pattern, Rule: `^[-\w\._\(\)]+$`, Chain: nil}}}}); err != nil {
+				{Target: "resourceGroupName", Name: validation.Pattern, Rule: `^[-\w\._\(\)]+$`, Chain: nil}}},
+		{TargetValue: client.SubscriptionID,
+			Constraints: []validation.Constraint{{Target: "client.SubscriptionID", Name: validation.MinLength, Rule: 1, Chain: nil}}}}); err != nil {
 		return result, validation.NewError("delegatednetwork.OrchestratorInstanceServiceClient", "ListByResourceGroup", err.Error())
 	}
 
@@ -445,6 +449,12 @@ func (client OrchestratorInstanceServiceClient) ListBySubscription(ctx context.C
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
+	if err := validation.Validate([]validation.Validation{
+		{TargetValue: client.SubscriptionID,
+			Constraints: []validation.Constraint{{Target: "client.SubscriptionID", Name: validation.MinLength, Rule: 1, Chain: nil}}}}); err != nil {
+		return result, validation.NewError("delegatednetwork.OrchestratorInstanceServiceClient", "ListBySubscription", err.Error())
+	}
+
 	result.fn = client.listBySubscriptionNextResults
 	req, err := client.ListBySubscriptionPreparer(ctx)
 	if err != nil {
@@ -548,8 +558,7 @@ func (client OrchestratorInstanceServiceClient) ListBySubscriptionComplete(ctx c
 
 // Patch update Orchestrator Instance
 // Parameters:
-// resourceGroupName - the name of the Azure Resource group of which a given DelegatedNetwork resource is part.
-// This name must be at least 1 character in length, and no more than 90.
+// resourceGroupName - the name of the resource group. The name is case insensitive.
 // resourceName - the name of the resource. It must be a minimum of 3 characters, and a maximum of 63.
 // parameters - orchestratorInstance update parameters
 func (client OrchestratorInstanceServiceClient) Patch(ctx context.Context, resourceGroupName string, resourceName string, parameters OrchestratorResourceUpdateParameters) (result Orchestrator, err error) {
@@ -571,7 +580,9 @@ func (client OrchestratorInstanceServiceClient) Patch(ctx context.Context, resou
 		{TargetValue: resourceName,
 			Constraints: []validation.Constraint{{Target: "resourceName", Name: validation.MaxLength, Rule: 63, Chain: nil},
 				{Target: "resourceName", Name: validation.MinLength, Rule: 3, Chain: nil},
-				{Target: "resourceName", Name: validation.Pattern, Rule: `^[a-z][a-z0-9]*$`, Chain: nil}}}}); err != nil {
+				{Target: "resourceName", Name: validation.Pattern, Rule: `^[a-z][a-z0-9]*$`, Chain: nil}}},
+		{TargetValue: client.SubscriptionID,
+			Constraints: []validation.Constraint{{Target: "client.SubscriptionID", Name: validation.MinLength, Rule: 1, Chain: nil}}}}); err != nil {
 		return result, validation.NewError("delegatednetwork.OrchestratorInstanceServiceClient", "Patch", err.Error())
 	}
 
