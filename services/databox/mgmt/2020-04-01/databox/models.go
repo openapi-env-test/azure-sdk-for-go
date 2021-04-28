@@ -1095,10 +1095,10 @@ func (dtdvrp DataTransferDetailsValidationResponseProperties) AsBasicValidationI
 
 // DcAccessSecurityCode dc access security code
 type DcAccessSecurityCode struct {
-	// ReverseDcAccessCode - Reverse Dc access security code.
-	ReverseDcAccessCode *string `json:"reverseDcAccessCode,omitempty"`
-	// ForwardDcAccessCode - Forward Dc access security code.
-	ForwardDcAccessCode *string `json:"forwardDcAccessCode,omitempty"`
+	// ReverseDCAccessCode - Reverse Dc access security code.
+	ReverseDCAccessCode *string `json:"reverseDCAccessCode,omitempty"`
+	// ForwardDCAccessCode - Forward Dc access security code.
+	ForwardDCAccessCode *string `json:"forwardDCAccessCode,omitempty"`
 }
 
 // Details ...
@@ -1200,8 +1200,8 @@ type DiskJobDetails struct {
 	ChainOfCustodySasKey *string `json:"chainOfCustodySasKey,omitempty"`
 	// KeyEncryptionKey - READ-ONLY; Details about which key encryption type is being used.
 	KeyEncryptionKey *KeyEncryptionKey `json:"keyEncryptionKey,omitempty"`
-	// ExpectedDataSizeInTerabytes - The expected size of the data, which needs to be transferred in this job, in terabytes.
-	ExpectedDataSizeInTerabytes *int32 `json:"expectedDataSizeInTerabytes,omitempty"`
+	// ExpectedDataSizeInTeraBytes - The expected size of the data, which needs to be transferred in this job, in terabytes.
+	ExpectedDataSizeInTeraBytes *int32 `json:"expectedDataSizeInTeraBytes,omitempty"`
 	// JobDetailsType - Possible values include: 'JobDetailsTypeJobDetails', 'JobDetailsTypeDataBoxDisk', 'JobDetailsTypeDataBoxHeavy', 'JobDetailsTypeDataBox'
 	JobDetailsType JobDetailsTypeEnum `json:"jobDetailsType,omitempty"`
 }
@@ -1231,8 +1231,8 @@ func (djd DiskJobDetails) MarshalJSON() ([]byte, error) {
 	if djd.Preferences != nil {
 		objectMap["preferences"] = djd.Preferences
 	}
-	if djd.ExpectedDataSizeInTerabytes != nil {
-		objectMap["expectedDataSizeInTerabytes"] = djd.ExpectedDataSizeInTerabytes
+	if djd.ExpectedDataSizeInTeraBytes != nil {
+		objectMap["expectedDataSizeInTeraBytes"] = djd.ExpectedDataSizeInTeraBytes
 	}
 	if djd.JobDetailsType != "" {
 		objectMap["jobDetailsType"] = djd.JobDetailsType
@@ -1417,14 +1417,14 @@ func (djd *DiskJobDetails) UnmarshalJSON(body []byte) error {
 				}
 				djd.KeyEncryptionKey = &keyEncryptionKey
 			}
-		case "expectedDataSizeInTerabytes":
+		case "expectedDataSizeInTeraBytes":
 			if v != nil {
-				var expectedDataSizeInTerabytes int32
-				err = json.Unmarshal(*v, &expectedDataSizeInTerabytes)
+				var expectedDataSizeInTeraBytes int32
+				err = json.Unmarshal(*v, &expectedDataSizeInTeraBytes)
 				if err != nil {
 					return err
 				}
-				djd.ExpectedDataSizeInTerabytes = &expectedDataSizeInTerabytes
+				djd.ExpectedDataSizeInTeraBytes = &expectedDataSizeInTeraBytes
 			}
 		case "jobDetailsType":
 			if v != nil {
@@ -1494,8 +1494,8 @@ func (djs DiskJobSecrets) AsBasicJobSecrets() (BasicJobSecrets, bool) {
 
 // DiskScheduleAvailabilityRequest request body to get the availability for scheduling disk orders.
 type DiskScheduleAvailabilityRequest struct {
-	// ExpectedDataSizeInTerabytes - The expected size of the data, which needs to be transferred in this job, in terabytes.
-	ExpectedDataSizeInTerabytes *int32 `json:"expectedDataSizeInTerabytes,omitempty"`
+	// ExpectedDataSizeInTeraBytes - The expected size of the data, which needs to be transferred in this job, in terabytes.
+	ExpectedDataSizeInTeraBytes *int32 `json:"expectedDataSizeInTeraBytes,omitempty"`
 	// StorageLocation - Location for data transfer. For locations check: https://management.azure.com/subscriptions/SUBSCRIPTIONID/locations?api-version=2018-01-01
 	StorageLocation *string `json:"storageLocation,omitempty"`
 	// Country - Country in which storage location should be supported.
@@ -1508,8 +1508,8 @@ type DiskScheduleAvailabilityRequest struct {
 func (dsar DiskScheduleAvailabilityRequest) MarshalJSON() ([]byte, error) {
 	dsar.SkuName = SkuNameDataBoxDisk
 	objectMap := make(map[string]interface{})
-	if dsar.ExpectedDataSizeInTerabytes != nil {
-		objectMap["expectedDataSizeInTerabytes"] = dsar.ExpectedDataSizeInTerabytes
+	if dsar.ExpectedDataSizeInTeraBytes != nil {
+		objectMap["expectedDataSizeInTeraBytes"] = dsar.ExpectedDataSizeInTeraBytes
 	}
 	if dsar.StorageLocation != nil {
 		objectMap["storageLocation"] = dsar.StorageLocation
@@ -1649,8 +1649,8 @@ type HeavyJobDetails struct {
 	ChainOfCustodySasKey *string `json:"chainOfCustodySasKey,omitempty"`
 	// KeyEncryptionKey - READ-ONLY; Details about which key encryption type is being used.
 	KeyEncryptionKey *KeyEncryptionKey `json:"keyEncryptionKey,omitempty"`
-	// ExpectedDataSizeInTerabytes - The expected size of the data, which needs to be transferred in this job, in terabytes.
-	ExpectedDataSizeInTerabytes *int32 `json:"expectedDataSizeInTerabytes,omitempty"`
+	// ExpectedDataSizeInTeraBytes - The expected size of the data, which needs to be transferred in this job, in terabytes.
+	ExpectedDataSizeInTeraBytes *int32 `json:"expectedDataSizeInTeraBytes,omitempty"`
 	// JobDetailsType - Possible values include: 'JobDetailsTypeJobDetails', 'JobDetailsTypeDataBoxDisk', 'JobDetailsTypeDataBoxHeavy', 'JobDetailsTypeDataBox'
 	JobDetailsType JobDetailsTypeEnum `json:"jobDetailsType,omitempty"`
 }
@@ -1677,8 +1677,8 @@ func (hjd HeavyJobDetails) MarshalJSON() ([]byte, error) {
 	if hjd.Preferences != nil {
 		objectMap["preferences"] = hjd.Preferences
 	}
-	if hjd.ExpectedDataSizeInTerabytes != nil {
-		objectMap["expectedDataSizeInTerabytes"] = hjd.ExpectedDataSizeInTerabytes
+	if hjd.ExpectedDataSizeInTeraBytes != nil {
+		objectMap["expectedDataSizeInTeraBytes"] = hjd.ExpectedDataSizeInTeraBytes
 	}
 	if hjd.JobDetailsType != "" {
 		objectMap["jobDetailsType"] = hjd.JobDetailsType
@@ -1845,14 +1845,14 @@ func (hjd *HeavyJobDetails) UnmarshalJSON(body []byte) error {
 				}
 				hjd.KeyEncryptionKey = &keyEncryptionKey
 			}
-		case "expectedDataSizeInTerabytes":
+		case "expectedDataSizeInTeraBytes":
 			if v != nil {
-				var expectedDataSizeInTerabytes int32
-				err = json.Unmarshal(*v, &expectedDataSizeInTerabytes)
+				var expectedDataSizeInTeraBytes int32
+				err = json.Unmarshal(*v, &expectedDataSizeInTeraBytes)
 				if err != nil {
 					return err
 				}
-				hjd.ExpectedDataSizeInTerabytes = &expectedDataSizeInTerabytes
+				hjd.ExpectedDataSizeInTeraBytes = &expectedDataSizeInTeraBytes
 			}
 		case "jobDetailsType":
 			if v != nil {
@@ -2021,8 +2021,8 @@ type JobDetails struct {
 	ChainOfCustodySasKey *string `json:"chainOfCustodySasKey,omitempty"`
 	// KeyEncryptionKey - READ-ONLY; Details about which key encryption type is being used.
 	KeyEncryptionKey *KeyEncryptionKey `json:"keyEncryptionKey,omitempty"`
-	// ExpectedDataSizeInTerabytes - The expected size of the data, which needs to be transferred in this job, in terabytes.
-	ExpectedDataSizeInTerabytes *int32 `json:"expectedDataSizeInTerabytes,omitempty"`
+	// ExpectedDataSizeInTeraBytes - The expected size of the data, which needs to be transferred in this job, in terabytes.
+	ExpectedDataSizeInTeraBytes *int32 `json:"expectedDataSizeInTeraBytes,omitempty"`
 	// JobDetailsType - Possible values include: 'JobDetailsTypeJobDetails', 'JobDetailsTypeDataBoxDisk', 'JobDetailsTypeDataBoxHeavy', 'JobDetailsTypeDataBox'
 	JobDetailsType JobDetailsTypeEnum `json:"jobDetailsType,omitempty"`
 }
@@ -2091,8 +2091,8 @@ func (jd JobDetails) MarshalJSON() ([]byte, error) {
 	if jd.Preferences != nil {
 		objectMap["preferences"] = jd.Preferences
 	}
-	if jd.ExpectedDataSizeInTerabytes != nil {
-		objectMap["expectedDataSizeInTerabytes"] = jd.ExpectedDataSizeInTerabytes
+	if jd.ExpectedDataSizeInTeraBytes != nil {
+		objectMap["expectedDataSizeInTeraBytes"] = jd.ExpectedDataSizeInTeraBytes
 	}
 	if jd.JobDetailsType != "" {
 		objectMap["jobDetailsType"] = jd.JobDetailsType
@@ -2241,14 +2241,14 @@ func (jd *JobDetails) UnmarshalJSON(body []byte) error {
 				}
 				jd.KeyEncryptionKey = &keyEncryptionKey
 			}
-		case "expectedDataSizeInTerabytes":
+		case "expectedDataSizeInTeraBytes":
 			if v != nil {
-				var expectedDataSizeInTerabytes int32
-				err = json.Unmarshal(*v, &expectedDataSizeInTerabytes)
+				var expectedDataSizeInTeraBytes int32
+				err = json.Unmarshal(*v, &expectedDataSizeInTeraBytes)
 				if err != nil {
 					return err
 				}
-				jd.ExpectedDataSizeInTerabytes = &expectedDataSizeInTerabytes
+				jd.ExpectedDataSizeInTeraBytes = &expectedDataSizeInTeraBytes
 			}
 		case "jobDetailsType":
 			if v != nil {
@@ -2295,8 +2295,8 @@ type JobDetailsType struct {
 	ChainOfCustodySasKey *string `json:"chainOfCustodySasKey,omitempty"`
 	// KeyEncryptionKey - READ-ONLY; Details about which key encryption type is being used.
 	KeyEncryptionKey *KeyEncryptionKey `json:"keyEncryptionKey,omitempty"`
-	// ExpectedDataSizeInTerabytes - The expected size of the data, which needs to be transferred in this job, in terabytes.
-	ExpectedDataSizeInTerabytes *int32 `json:"expectedDataSizeInTerabytes,omitempty"`
+	// ExpectedDataSizeInTeraBytes - The expected size of the data, which needs to be transferred in this job, in terabytes.
+	ExpectedDataSizeInTeraBytes *int32 `json:"expectedDataSizeInTeraBytes,omitempty"`
 	// JobDetailsType - Possible values include: 'JobDetailsTypeJobDetails', 'JobDetailsTypeDataBoxDisk', 'JobDetailsTypeDataBoxHeavy', 'JobDetailsTypeDataBox'
 	JobDetailsType JobDetailsTypeEnum `json:"jobDetailsType,omitempty"`
 }
@@ -2323,8 +2323,8 @@ func (jdt JobDetailsType) MarshalJSON() ([]byte, error) {
 	if jdt.Preferences != nil {
 		objectMap["preferences"] = jdt.Preferences
 	}
-	if jdt.ExpectedDataSizeInTerabytes != nil {
-		objectMap["expectedDataSizeInTerabytes"] = jdt.ExpectedDataSizeInTerabytes
+	if jdt.ExpectedDataSizeInTeraBytes != nil {
+		objectMap["expectedDataSizeInTeraBytes"] = jdt.ExpectedDataSizeInTeraBytes
 	}
 	if jdt.JobDetailsType != "" {
 		objectMap["jobDetailsType"] = jdt.JobDetailsType
@@ -2491,14 +2491,14 @@ func (jdt *JobDetailsType) UnmarshalJSON(body []byte) error {
 				}
 				jdt.KeyEncryptionKey = &keyEncryptionKey
 			}
-		case "expectedDataSizeInTerabytes":
+		case "expectedDataSizeInTeraBytes":
 			if v != nil {
-				var expectedDataSizeInTerabytes int32
-				err = json.Unmarshal(*v, &expectedDataSizeInTerabytes)
+				var expectedDataSizeInTeraBytes int32
+				err = json.Unmarshal(*v, &expectedDataSizeInTeraBytes)
 				if err != nil {
 					return err
 				}
-				jdt.ExpectedDataSizeInTerabytes = &expectedDataSizeInTerabytes
+				jdt.ExpectedDataSizeInTeraBytes = &expectedDataSizeInTeraBytes
 			}
 		case "jobDetailsType":
 			if v != nil {
