@@ -1,5 +1,5 @@
 {
-  "commit": "4c93f28f89435f6d244f4db61bbf810b5d20f09f",
+  "commit": "f20725d21d5ea8956798d74eefecedc36f1c867f",
   "readme": "/_/azure-rest-api-specs/specification/healthbot/resource-manager/readme.md",
   "tag": "package-2020-12-08",
   "use": "@microsoft.azure/autorest.go@2.1.180",
