@@ -9,6 +9,7 @@ package serialconsoleapi
 import (
 	"context"
 	"github.com/Azure/azure-sdk-for-go/services/serialconsole/mgmt/2018-05-01/serialconsole"
+	"github.com/Azure/go-autorest/autorest"
 )
 
 // BaseClientAPI contains the set of methods on the BaseClient type.
@@ -20,3 +21,15 @@ type BaseClientAPI interface {
 }
 
 var _ BaseClientAPI = (*serialconsole.BaseClient)(nil)
+
+// SerialPortsClientAPI contains the set of methods on the SerialPortsClient type.
+type SerialPortsClientAPI interface {
+	Connect(ctx context.Context, resourceGroupName string, resourceProviderNamespace string, parentResourceType string, parentResource string, serialPort string) (result serialconsole.SerialPortConnectResult, err error)
+	Create(ctx context.Context, resourceGroupName string, resourceProviderNamespace string, parentResourceType string, parentResource string, serialPort string, parameters serialconsole.SerialPort) (result serialconsole.SerialPort, err error)
+	Delete(ctx context.Context, resourceGroupName string, resourceProviderNamespace string, parentResourceType string, parentResource string, serialPort string) (result autorest.Response, err error)
+	Get(ctx context.Context, resourceGroupName string, resourceProviderNamespace string, parentResourceType string, parentResource string, serialPort string) (result serialconsole.SerialPort, err error)
+	List(ctx context.Context, resourceGroupName string, resourceProviderNamespace string, parentResourceType string, parentResource string) (result serialconsole.SerialPortListResult, err error)
+	ListBySubscriptions(ctx context.Context) (result serialconsole.SerialPortListResult, err error)
+}
+
+var _ SerialPortsClientAPI = (*serialconsole.SerialPortsClient)(nil)
