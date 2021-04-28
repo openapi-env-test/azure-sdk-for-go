@@ -11,6 +11,8 @@ import (
 	"encoding/json"
 	"github.com/Azure/go-autorest/autorest"
 	"github.com/Azure/go-autorest/autorest/azure"
+	"github.com/Azure/go-autorest/autorest/to"
+	"github.com/Azure/go-autorest/tracing"
 	"net/http"
 )
 
@@ -36,12 +38,54 @@ type CheckServerNameAvailabilityResult struct {
 	Message *string `json:"message,omitempty"`
 }
 
+// ErrorAdditionalInfo the resource management error additional info.
+type ErrorAdditionalInfo struct {
+	// Type - READ-ONLY; The additional info type.
+	Type *string `json:"type,omitempty"`
+	// Info - READ-ONLY; The additional info.
+	Info interface{} `json:"info,omitempty"`
+}
+
+// ErrorDetail the error detail.
+type ErrorDetail struct {
+	// Code - READ-ONLY; The error code.
+	Code *string `json:"code,omitempty"`
+	// Message - READ-ONLY; The error message.
+	Message *string `json:"message,omitempty"`
+	// Target - READ-ONLY; The error target.
+	Target *string `json:"target,omitempty"`
+	// Details - READ-ONLY; The error details.
+	Details *[]ErrorDetail `json:"details,omitempty"`
+	// AdditionalInfo - READ-ONLY; The error additional info.
+	AdditionalInfo *[]ErrorAdditionalInfo `json:"additionalInfo,omitempty"`
+}
+
 // ErrorResponse describes the format of Error response.
 type ErrorResponse struct {
+	// Error - The error object
+	Error *ErrorResponseError `json:"error,omitempty"`
+}
+
+// ErrorResponseError the error object
+type ErrorResponseError struct {
 	// Code - Error code
 	Code *string `json:"code,omitempty"`
 	// Message - Error message indicating why the operation failed.
 	Message *string `json:"message,omitempty"`
+	// Details - READ-ONLY; The error details.
+	Details *[]ErrorDetail `json:"details,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for ErrorResponseError.
+func (er ErrorResponseError) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if er.Code != nil {
+		objectMap["code"] = er.Code
+	}
+	if er.Message != nil {
+		objectMap["message"] = er.Message
+	}
+	return json.Marshal(objectMap)
 }
 
 // GatewayDetails the gateway details.
@@ -80,8 +124,273 @@ type GatewayListStatusError struct {
 // GatewayListStatusLive status of gateway is live
 type GatewayListStatusLive struct {
 	autorest.Response `json:"-"`
-	// Status - Live message of list gateway. Possible values include: 'Live'
-	Status Status `json:"status,omitempty"`
+	// Status - Live message of list gateway. Status: 0 - Live
+	Status *int32 `json:"status,omitempty"`
+}
+
+// LogSpecifications the log metric specification for exposing performance metrics to shoebox.
+type LogSpecifications struct {
+	// Name - READ-ONLY; The name of metric.
+	Name *string `json:"name,omitempty"`
+	// DisplayName - READ-ONLY; The displayed name of log.
+	DisplayName *string `json:"displayName,omitempty"`
+	// BlobDuration - READ-ONLY; The blob duration for the log.
+	BlobDuration *string `json:"blobDuration,omitempty"`
+}
+
+// MetricDimensions metric dimension.
+type MetricDimensions struct {
+	// Name - READ-ONLY; Dimension name.
+	Name *string `json:"name,omitempty"`
+	// DisplayName - READ-ONLY; Dimension display name.
+	DisplayName *string `json:"displayName,omitempty"`
+}
+
+// MetricSpecifications available operation metric specification for exposing performance metrics to
+// shoebox.
+type MetricSpecifications struct {
+	// Name - READ-ONLY; The name of metric.
+	Name *string `json:"name,omitempty"`
+	// DisplayName - READ-ONLY; The displayed name of metric.
+	DisplayName *string `json:"displayName,omitempty"`
+	// DisplayDescription - READ-ONLY; The displayed description of metric.
+	DisplayDescription *string `json:"displayDescription,omitempty"`
+	// Unit - READ-ONLY; The unit of the metric.
+	Unit *string `json:"unit,omitempty"`
+	// AggregationType - READ-ONLY; The aggregation type of metric.
+	AggregationType *string `json:"aggregationType,omitempty"`
+	// Dimensions - READ-ONLY; The dimensions of metric.
+	Dimensions *[]MetricDimensions `json:"dimensions,omitempty"`
+}
+
+// OperationDetail a Consumption REST API operation.
+type OperationDetail struct {
+	// Name - READ-ONLY; Operation name: {provider}/{resource}/{operation}.
+	Name *string `json:"name,omitempty"`
+	// IsDataAction - Indicates whether the operation is a data action
+	IsDataAction *bool `json:"isDataAction,omitempty"`
+	// Display - Display of the operation
+	Display *OperationDisplay `json:"display,omitempty"`
+	// Origin - READ-ONLY; The origin
+	Origin *string `json:"origin,omitempty"`
+	// Properties - Additional properties to expose performance metrics to shoebox.
+	Properties *OperationDetailProperties `json:"properties,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for OperationDetail.
+func (od OperationDetail) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if od.IsDataAction != nil {
+		objectMap["isDataAction"] = od.IsDataAction
+	}
+	if od.Display != nil {
+		objectMap["display"] = od.Display
+	}
+	if od.Properties != nil {
+		objectMap["properties"] = od.Properties
+	}
+	return json.Marshal(objectMap)
+}
+
+// OperationDetailProperties additional properties to expose performance metrics to shoebox.
+type OperationDetailProperties struct {
+	// ServiceSpecification - Performance metrics to shoebox.
+	ServiceSpecification *OperationDetailPropertiesServiceSpecification `json:"serviceSpecification,omitempty"`
+}
+
+// OperationDetailPropertiesServiceSpecification performance metrics to shoebox.
+type OperationDetailPropertiesServiceSpecification struct {
+	// MetricSpecifications - READ-ONLY; The metric specifications.
+	MetricSpecifications *[]MetricSpecifications `json:"metricSpecifications,omitempty"`
+	// LogSpecifications - READ-ONLY; The log specifications.
+	LogSpecifications *[]LogSpecifications `json:"logSpecifications,omitempty"`
+}
+
+// OperationDisplay the object that represents the operation.
+type OperationDisplay struct {
+	// Provider - READ-ONLY; Service provider: Microsoft.Consumption.
+	Provider *string `json:"provider,omitempty"`
+	// Resource - READ-ONLY; Resource on which the operation is performed: UsageDetail, etc.
+	Resource *string `json:"resource,omitempty"`
+	// Operation - READ-ONLY; Operation type: Read, write, delete, etc.
+	Operation *string `json:"operation,omitempty"`
+	// Description - Description for the operation
+	Description *string `json:"description,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for OperationDisplay.
+func (od OperationDisplay) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if od.Description != nil {
+		objectMap["description"] = od.Description
+	}
+	return json.Marshal(objectMap)
+}
+
+// OperationListResult result of listing consumption operations. It contains a list of operations and a URL
+// link to get the next set of results.
+type OperationListResult struct {
+	autorest.Response `json:"-"`
+	// Value - READ-ONLY; List of analysis services operations supported by the Microsoft.AnalysisServices resource provider.
+	Value *[]OperationDetail `json:"value,omitempty"`
+	// NextLink - READ-ONLY; URL to get the next set of operation list results if there are any.
+	NextLink *string `json:"nextLink,omitempty"`
+}
+
+// OperationListResultIterator provides access to a complete listing of OperationDetail values.
+type OperationListResultIterator struct {
+	i    int
+	page OperationListResultPage
+}
+
+// NextWithContext advances to the next value.  If there was an error making
+// the request the iterator does not advance and the error is returned.
+func (iter *OperationListResultIterator) NextWithContext(ctx context.Context) (err error) {
+	if tracing.IsEnabled() {
+		ctx = tracing.StartSpan(ctx, fqdn+"/OperationListResultIterator.NextWithContext")
+		defer func() {
+			sc := -1
+			if iter.Response().Response.Response != nil {
+				sc = iter.Response().Response.Response.StatusCode
+			}
+			tracing.EndSpan(ctx, sc, err)
+		}()
+	}
+	iter.i++
+	if iter.i < len(iter.page.Values()) {
+		return nil
+	}
+	err = iter.page.NextWithContext(ctx)
+	if err != nil {
+		iter.i--
+		return err
+	}
+	iter.i = 0
+	return nil
+}
+
+// Next advances to the next value.  If there was an error making
+// the request the iterator does not advance and the error is returned.
+// Deprecated: Use NextWithContext() instead.
+func (iter *OperationListResultIterator) Next() error {
+	return iter.NextWithContext(context.Background())
+}
+
+// NotDone returns true if the enumeration should be started or is not yet complete.
+func (iter OperationListResultIterator) NotDone() bool {
+	return iter.page.NotDone() && iter.i < len(iter.page.Values())
+}
+
+// Response returns the raw server response from the last page request.
+func (iter OperationListResultIterator) Response() OperationListResult {
+	return iter.page.Response()
+}
+
+// Value returns the current value or a zero-initialized value if the
+// iterator has advanced beyond the end of the collection.
+func (iter OperationListResultIterator) Value() OperationDetail {
+	if !iter.page.NotDone() {
+		return OperationDetail{}
+	}
+	return iter.page.Values()[iter.i]
+}
+
+// Creates a new instance of the OperationListResultIterator type.
+func NewOperationListResultIterator(page OperationListResultPage) OperationListResultIterator {
+	return OperationListResultIterator{page: page}
+}
+
+// IsEmpty returns true if the ListResult contains no values.
+func (olr OperationListResult) IsEmpty() bool {
+	return olr.Value == nil || len(*olr.Value) == 0
+}
+
+// hasNextLink returns true if the NextLink is not empty.
+func (olr OperationListResult) hasNextLink() bool {
+	return olr.NextLink != nil && len(*olr.NextLink) != 0
+}
+
+// operationListResultPreparer prepares a request to retrieve the next set of results.
+// It returns nil if no more results exist.
+func (olr OperationListResult) operationListResultPreparer(ctx context.Context) (*http.Request, error) {
+	if !olr.hasNextLink() {
+		return nil, nil
+	}
+	return autorest.Prepare((&http.Request{}).WithContext(ctx),
+		autorest.AsJSON(),
+		autorest.AsGet(),
+		autorest.WithBaseURL(to.String(olr.NextLink)))
+}
+
+// OperationListResultPage contains a page of OperationDetail values.
+type OperationListResultPage struct {
+	fn  func(context.Context, OperationListResult) (OperationListResult, error)
+	olr OperationListResult
+}
+
+// NextWithContext advances to the next page of values.  If there was an error making
+// the request the page does not advance and the error is returned.
+func (page *OperationListResultPage) NextWithContext(ctx context.Context) (err error) {
+	if tracing.IsEnabled() {
+		ctx = tracing.StartSpan(ctx, fqdn+"/OperationListResultPage.NextWithContext")
+		defer func() {
+			sc := -1
+			if page.Response().Response.Response != nil {
+				sc = page.Response().Response.Response.StatusCode
+			}
+			tracing.EndSpan(ctx, sc, err)
+		}()
+	}
+	for {
+		next, err := page.fn(ctx, page.olr)
+		if err != nil {
+			return err
+		}
+		page.olr = next
+		if !next.hasNextLink() || !next.IsEmpty() {
+			break
+		}
+	}
+	return nil
+}
+
+// Next advances to the next page of values.  If there was an error making
+// the request the page does not advance and the error is returned.
+// Deprecated: Use NextWithContext() instead.
+func (page *OperationListResultPage) Next() error {
+	return page.NextWithContext(context.Background())
+}
+
+// NotDone returns true if the page enumeration should be started or is not yet complete.
+func (page OperationListResultPage) NotDone() bool {
+	return !page.olr.IsEmpty()
+}
+
+// Response returns the raw server response from the last page request.
+func (page OperationListResultPage) Response() OperationListResult {
+	return page.olr
+}
+
+// Values returns the slice of values for the current page or nil if there are no values.
+func (page OperationListResultPage) Values() []OperationDetail {
+	if page.olr.IsEmpty() {
+		return nil
+	}
+	return *page.olr.Value
+}
+
+// Creates a new instance of the OperationListResultPage type.
+func NewOperationListResultPage(cur OperationListResult, getNextPage func(context.Context, OperationListResult) (OperationListResult, error)) OperationListResultPage {
+	return OperationListResultPage{
+		fn:  getNextPage,
+		olr: cur,
+	}
+}
+
+// OperationsErrorResponse an error response from Operations.
+type OperationsErrorResponse struct {
+	// Error - Error message from Operations.
+	Error *ErrorResponse `json:"error,omitempty"`
 }
 
 // OperationStatus the status of operation.
@@ -270,6 +579,10 @@ type ServerMutableProperties struct {
 	BackupBlobContainerURI *string `json:"backupBlobContainerUri,omitempty"`
 	// GatewayDetails - The gateway details configured for the AS server.
 	GatewayDetails *GatewayDetails `json:"gatewayDetails,omitempty"`
+	// ManagedMode - The managed mode of the server (0 = not managed, 1 = managed).
+	ManagedMode *int32 `json:"managedMode,omitempty"`
+	// ServerMonitorMode - The server monitor mode for AS server
+	ServerMonitorMode *int32 `json:"serverMonitorMode,omitempty"`
 }
 
 // ServerProperties properties of Analysis Services resource.
@@ -286,6 +599,10 @@ type ServerProperties struct {
 	BackupBlobContainerURI *string `json:"backupBlobContainerUri,omitempty"`
 	// GatewayDetails - The gateway details configured for the AS server.
 	GatewayDetails *GatewayDetails `json:"gatewayDetails,omitempty"`
+	// ManagedMode - The managed mode of the server (0 = not managed, 1 = managed).
+	ManagedMode *int32 `json:"managedMode,omitempty"`
+	// ServerMonitorMode - The server monitor mode for AS server
+	ServerMonitorMode *int32 `json:"serverMonitorMode,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for ServerProperties.
@@ -299,6 +616,12 @@ func (sp ServerProperties) MarshalJSON() ([]byte, error) {
 	}
 	if sp.GatewayDetails != nil {
 		objectMap["gatewayDetails"] = sp.GatewayDetails
+	}
+	if sp.ManagedMode != nil {
+		objectMap["managedMode"] = sp.ManagedMode
+	}
+	if sp.ServerMonitorMode != nil {
+		objectMap["serverMonitorMode"] = sp.ServerMonitorMode
 	}
 	return json.Marshal(objectMap)
 }
@@ -578,6 +901,8 @@ func (sup *ServerUpdateParameters) UnmarshalJSON(body []byte) error {
 type SkuDetailsForExistingResource struct {
 	// Sku - The SKU in SKU details for existing resources.
 	Sku *ResourceSku `json:"sku,omitempty"`
+	// ResourceType - The resource type.
+	ResourceType *string `json:"resourceType,omitempty"`
 }
 
 // SkuEnumerationForExistingResourceResult an object that represents enumerating SKUs for existing
