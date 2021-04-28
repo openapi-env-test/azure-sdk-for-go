@@ -51,7 +51,7 @@ func (client AccountsClient) Create(ctx context.Context, resourceGroupName strin
 		{TargetValue: accountName,
 			Constraints: []validation.Constraint{{Target: "accountName", Name: validation.MaxLength, Rule: 24, Chain: nil},
 				{Target: "accountName", Name: validation.MinLength, Rule: 3, Chain: nil},
-				{Target: "accountName", Name: validation.Pattern, Rule: `^[A-Za-z][A-Za-z0-9]+$`, Chain: nil}}}}); err != nil {
+				{Target: "accountName", Name: validation.Pattern, Rule: `^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$`, Chain: nil}}}}); err != nil {
 		return result, validation.NewError("deviceupdate.AccountsClient", "Create", err.Error())
 	}
 
@@ -83,6 +83,7 @@ func (client AccountsClient) CreatePreparer(ctx context.Context, resourceGroupNa
 		"api-version": APIVersion,
 	}
 
+	account.SystemData = nil
 	preparer := autorest.CreatePreparer(
 		autorest.AsContentType("application/json; charset=utf-8"),
 		autorest.AsPut(),
@@ -139,7 +140,7 @@ func (client AccountsClient) Delete(ctx context.Context, resourceGroupName strin
 		{TargetValue: accountName,
 			Constraints: []validation.Constraint{{Target: "accountName", Name: validation.MaxLength, Rule: 24, Chain: nil},
 				{Target: "accountName", Name: validation.MinLength, Rule: 3, Chain: nil},
-				{Target: "accountName", Name: validation.Pattern, Rule: `^[A-Za-z][A-Za-z0-9]+$`, Chain: nil}}}}); err != nil {
+				{Target: "accountName", Name: validation.Pattern, Rule: `^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$`, Chain: nil}}}}); err != nil {
 		return result, validation.NewError("deviceupdate.AccountsClient", "Delete", err.Error())
 	}
 
@@ -224,7 +225,7 @@ func (client AccountsClient) Get(ctx context.Context, resourceGroupName string, 
 		{TargetValue: accountName,
 			Constraints: []validation.Constraint{{Target: "accountName", Name: validation.MaxLength, Rule: 24, Chain: nil},
 				{Target: "accountName", Name: validation.MinLength, Rule: 3, Chain: nil},
-				{Target: "accountName", Name: validation.Pattern, Rule: `^[A-Za-z][A-Za-z0-9]+$`, Chain: nil}}}}); err != nil {
+				{Target: "accountName", Name: validation.Pattern, Rule: `^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$`, Chain: nil}}}}); err != nil {
 		return result, validation.NewError("deviceupdate.AccountsClient", "Get", err.Error())
 	}
 
@@ -538,7 +539,7 @@ func (client AccountsClient) Update(ctx context.Context, resourceGroupName strin
 		{TargetValue: accountName,
 			Constraints: []validation.Constraint{{Target: "accountName", Name: validation.MaxLength, Rule: 24, Chain: nil},
 				{Target: "accountName", Name: validation.MinLength, Rule: 3, Chain: nil},
-				{Target: "accountName", Name: validation.Pattern, Rule: `^[A-Za-z][A-Za-z0-9]+$`, Chain: nil}}}}); err != nil {
+				{Target: "accountName", Name: validation.Pattern, Rule: `^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$`, Chain: nil}}}}); err != nil {
 		return result, validation.NewError("deviceupdate.AccountsClient", "Update", err.Error())
 	}
 
@@ -600,7 +601,7 @@ func (client AccountsClient) UpdateSender(req *http.Request) (future AccountsUpd
 func (client AccountsClient) UpdateResponder(resp *http.Response) (result Account, err error) {
 	err = autorest.Respond(
 		resp,
-		azure.WithErrorUnlessStatusCode(http.StatusOK),
+		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusCreated),
 		autorest.ByUnmarshallingJSON(&result),
 		autorest.ByClosing())
 	result.Response = autorest.Response{Response: resp}
