@@ -124,13 +124,13 @@ func (client ConfigurationStoresClient) CreateResponder(resp *http.Response) (re
 	return
 }
 
-// Delete deletes a configuration store.
+// DeleteABC deletes a configuration store.
 // Parameters:
 // resourceGroupName - the name of the resource group to which the container registry belongs.
 // configStoreName - the name of the configuration store.
-func (client ConfigurationStoresClient) Delete(ctx context.Context, resourceGroupName string, configStoreName string) (result ConfigurationStoresDeleteFuture, err error) {
+func (client ConfigurationStoresClient) DeleteABC(ctx context.Context, resourceGroupName string, configStoreName string) (result ConfigurationStoresDeleteABCFuture, err error) {
 	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/ConfigurationStoresClient.Delete")
+		ctx = tracing.StartSpan(ctx, fqdn+"/ConfigurationStoresClient.DeleteABC")
 		defer func() {
 			sc := -1
 			if result.FutureAPI != nil && result.FutureAPI.Response() != nil {
@@ -144,26 +144,26 @@ func (client ConfigurationStoresClient) Delete(ctx context.Context, resourceGrou
 			Constraints: []validation.Constraint{{Target: "configStoreName", Name: validation.MaxLength, Rule: 50, Chain: nil},
 				{Target: "configStoreName", Name: validation.MinLength, Rule: 5, Chain: nil},
 				{Target: "configStoreName", Name: validation.Pattern, Rule: `^[a-zA-Z0-9_-]*$`, Chain: nil}}}}); err != nil {
-		return result, validation.NewError("appconfiguration.ConfigurationStoresClient", "Delete", err.Error())
+		return result, validation.NewError("appconfiguration.ConfigurationStoresClient", "DeleteABC", err.Error())
 	}
 
-	req, err := client.DeletePreparer(ctx, resourceGroupName, configStoreName)
+	req, err := client.DeleteABCPreparer(ctx, resourceGroupName, configStoreName)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "appconfiguration.ConfigurationStoresClient", "Delete", nil, "Failure preparing request")
+		err = autorest.NewErrorWithError(err, "appconfiguration.ConfigurationStoresClient", "DeleteABC", nil, "Failure preparing request")
 		return
 	}
 
-	result, err = client.DeleteSender(req)
+	result, err = client.DeleteABCSender(req)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "appconfiguration.ConfigurationStoresClient", "Delete", nil, "Failure sending request")
+		err = autorest.NewErrorWithError(err, "appconfiguration.ConfigurationStoresClient", "DeleteABC", nil, "Failure sending request")
 		return
 	}
 
 	return
 }
 
-// DeletePreparer prepares the Delete request.
-func (client ConfigurationStoresClient) DeletePreparer(ctx context.Context, resourceGroupName string, configStoreName string) (*http.Request, error) {
+// DeleteABCPreparer prepares the DeleteABC request.
+func (client ConfigurationStoresClient) DeleteABCPreparer(ctx context.Context, resourceGroupName string, configStoreName string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"configStoreName":   autorest.Encode("path", configStoreName),
 		"resourceGroupName": autorest.Encode("path", resourceGroupName),
@@ -183,9 +183,9 @@ func (client ConfigurationStoresClient) DeletePreparer(ctx context.Context, reso
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
 }
 
-// DeleteSender sends the Delete request. The method will close the
+// DeleteABCSender sends the DeleteABC request. The method will close the
 // http.Response Body if it receives an error.
-func (client ConfigurationStoresClient) DeleteSender(req *http.Request) (future ConfigurationStoresDeleteFuture, err error) {
+func (client ConfigurationStoresClient) DeleteABCSender(req *http.Request) (future ConfigurationStoresDeleteABCFuture, err error) {
 	var resp *http.Response
 	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
 	if err != nil {
@@ -198,9 +198,9 @@ func (client ConfigurationStoresClient) DeleteSender(req *http.Request) (future 
 	return
 }
 
-// DeleteResponder handles the response to the Delete request. The method always
+// DeleteABCResponder handles the response to the DeleteABC request. The method always
 // closes the http.Response Body.
-func (client ConfigurationStoresClient) DeleteResponder(resp *http.Response) (result autorest.Response, err error) {
+func (client ConfigurationStoresClient) DeleteABCResponder(resp *http.Response) (result autorest.Response, err error) {
 	err = autorest.Respond(
 		resp,
 		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusAccepted, http.StatusNoContent),
@@ -837,95 +837,6 @@ func (client ConfigurationStoresClient) RegenerateKeyResponder(resp *http.Respon
 	err = autorest.Respond(
 		resp,
 		azure.WithErrorUnlessStatusCode(http.StatusOK),
-		autorest.ByUnmarshallingJSON(&result),
-		autorest.ByClosing())
-	result.Response = autorest.Response{Response: resp}
-	return
-}
-
-// Update updates a configuration store with the specified parameters.
-// Parameters:
-// resourceGroupName - the name of the resource group to which the container registry belongs.
-// configStoreName - the name of the configuration store.
-// configStoreUpdateParameters - the parameters for updating a configuration store.
-func (client ConfigurationStoresClient) Update(ctx context.Context, resourceGroupName string, configStoreName string, configStoreUpdateParameters ConfigurationStoreUpdateParameters) (result ConfigurationStoresUpdateFuture, err error) {
-	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/ConfigurationStoresClient.Update")
-		defer func() {
-			sc := -1
-			if result.FutureAPI != nil && result.FutureAPI.Response() != nil {
-				sc = result.FutureAPI.Response().StatusCode
-			}
-			tracing.EndSpan(ctx, sc, err)
-		}()
-	}
-	if err := validation.Validate([]validation.Validation{
-		{TargetValue: configStoreName,
-			Constraints: []validation.Constraint{{Target: "configStoreName", Name: validation.MaxLength, Rule: 50, Chain: nil},
-				{Target: "configStoreName", Name: validation.MinLength, Rule: 5, Chain: nil},
-				{Target: "configStoreName", Name: validation.Pattern, Rule: `^[a-zA-Z0-9_-]*$`, Chain: nil}}}}); err != nil {
-		return result, validation.NewError("appconfiguration.ConfigurationStoresClient", "Update", err.Error())
-	}
-
-	req, err := client.UpdatePreparer(ctx, resourceGroupName, configStoreName, configStoreUpdateParameters)
-	if err != nil {
-		err = autorest.NewErrorWithError(err, "appconfiguration.ConfigurationStoresClient", "Update", nil, "Failure preparing request")
-		return
-	}
-
-	result, err = client.UpdateSender(req)
-	if err != nil {
-		err = autorest.NewErrorWithError(err, "appconfiguration.ConfigurationStoresClient", "Update", nil, "Failure sending request")
-		return
-	}
-
-	return
-}
-
-// UpdatePreparer prepares the Update request.
-func (client ConfigurationStoresClient) UpdatePreparer(ctx context.Context, resourceGroupName string, configStoreName string, configStoreUpdateParameters ConfigurationStoreUpdateParameters) (*http.Request, error) {
-	pathParameters := map[string]interface{}{
-		"configStoreName":   autorest.Encode("path", configStoreName),
-		"resourceGroupName": autorest.Encode("path", resourceGroupName),
-		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
-	}
-
-	const APIVersion = "2020-06-01"
-	queryParameters := map[string]interface{}{
-		"api-version": APIVersion,
-	}
-
-	preparer := autorest.CreatePreparer(
-		autorest.AsContentType("application/json; charset=utf-8"),
-		autorest.AsPatch(),
-		autorest.WithBaseURL(client.BaseURI),
-		autorest.WithPathParameters("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}", pathParameters),
-		autorest.WithJSON(configStoreUpdateParameters),
-		autorest.WithQueryParameters(queryParameters))
-	return preparer.Prepare((&http.Request{}).WithContext(ctx))
-}
-
-// UpdateSender sends the Update request. The method will close the
-// http.Response Body if it receives an error.
-func (client ConfigurationStoresClient) UpdateSender(req *http.Request) (future ConfigurationStoresUpdateFuture, err error) {
-	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
-	if err != nil {
-		return
-	}
-	var azf azure.Future
-	azf, err = azure.NewFutureFromResponse(resp)
-	future.FutureAPI = &azf
-	future.Result = future.result
-	return
-}
-
-// UpdateResponder handles the response to the Update request. The method always
-// closes the http.Response Body.
-func (client ConfigurationStoresClient) UpdateResponder(resp *http.Response) (result ConfigurationStore, err error) {
-	err = autorest.Respond(
-		resp,
-		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusCreated),
 		autorest.ByUnmarshallingJSON(&result),
 		autorest.ByClosing())
 	result.Response = autorest.Response{Response: resp}
