@@ -145,7 +145,17 @@ func (client ServersClient) Create(ctx context.Context, resourceGroupName string
 		{TargetValue: serverName,
 			Constraints: []validation.Constraint{{Target: "serverName", Name: validation.MaxLength, Rule: 63, Chain: nil},
 				{Target: "serverName", Name: validation.MinLength, Rule: 3, Chain: nil},
-				{Target: "serverName", Name: validation.Pattern, Rule: `^[a-z][a-z0-9]*$`, Chain: nil}}}}); err != nil {
+				{Target: "serverName", Name: validation.Pattern, Rule: `^[a-z][a-z0-9]*$`, Chain: nil}}},
+		{TargetValue: serverParameters,
+			Constraints: []validation.Constraint{{Target: "serverParameters.ServerProperties", Name: validation.Null, Rule: false,
+				Chain: []validation.Constraint{{Target: "serverParameters.ServerProperties.Sku", Name: validation.Null, Rule: false,
+					Chain: []validation.Constraint{{Target: "serverParameters.ServerProperties.Sku.Name", Name: validation.Null, Rule: true, Chain: nil},
+						{Target: "serverParameters.ServerProperties.Sku.Capacity", Name: validation.Null, Rule: false,
+							Chain: []validation.Constraint{{Target: "serverParameters.ServerProperties.Sku.Capacity", Name: validation.InclusiveMaximum, Rule: int64(8), Chain: nil},
+								{Target: "serverParameters.ServerProperties.Sku.Capacity", Name: validation.InclusiveMinimum, Rule: int64(1), Chain: nil},
+							}},
+					}},
+				}}}}}); err != nil {
 		return result, validation.NewError("analysisservices.ServersClient", "Create", err.Error())
 	}
 
@@ -207,7 +217,7 @@ func (client ServersClient) CreateSender(req *http.Request) (future ServersCreat
 func (client ServersClient) CreateResponder(resp *http.Response) (result Server, err error) {
 	err = autorest.Respond(
 		resp,
-		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusCreated),
+		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusCreated, http.StatusAccepted),
 		autorest.ByUnmarshallingJSON(&result),
 		autorest.ByClosing())
 	result.Response = autorest.Response{Response: resp}
