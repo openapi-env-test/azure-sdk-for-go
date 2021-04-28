@@ -38,12 +38,18 @@ type CheckServerNameAvailabilityResult struct {
 	Message *string `json:"message,omitempty"`
 }
 
+// ErrorAdditionalInfo the resource management error additional info.
+type ErrorAdditionalInfo struct {
+	// Type - READ-ONLY; The additional info type.
+	Type *string `json:"type,omitempty"`
+	// Info - READ-ONLY; The additional info.
+	Info interface{} `json:"info,omitempty"`
+}
+
 // ErrorResponse describes the format of Error response.
 type ErrorResponse struct {
-	// Code - Error code
-	Code *string `json:"code,omitempty"`
-	// Message - Error message indicating why the operation failed.
-	Message *string `json:"message,omitempty"`
+	// Error - The error object
+	Error *GatewayError `json:"error,omitempty"`
 }
 
 // GatewayDetails the gateway details.
@@ -65,12 +71,24 @@ func (gd GatewayDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(objectMap)
 }
 
-// GatewayError detail of gateway errors.
+// GatewayError the error detail.
 type GatewayError struct {
-	// Code - Error code of list gateway.
+	// Code - READ-ONLY; The error code.
 	Code *string `json:"code,omitempty"`
-	// Message - Error message of list gateway.
+	// Message - READ-ONLY; The error message.
 	Message *string `json:"message,omitempty"`
+	// Target - READ-ONLY; The error target.
+	Target *string `json:"target,omitempty"`
+	// SubCode - READ-ONLY; The error sub code
+	SubCode *int32 `json:"subCode,omitempty"`
+	// HTTPStatusCode - READ-ONLY; The http status code
+	HTTPStatusCode *int32 `json:"httpStatusCode,omitempty"`
+	// TimeStamp - READ-ONLY; the timestamp for the error.
+	TimeStamp *string `json:"timeStamp,omitempty"`
+	// Details - READ-ONLY; The error details.
+	Details *[]GatewayError `json:"details,omitempty"`
+	// AdditionalInfo - READ-ONLY; The error additional info.
+	AdditionalInfo *[]ErrorAdditionalInfo `json:"additionalInfo,omitempty"`
 }
 
 // GatewayListStatusError status of gateway is error.
@@ -82,8 +100,8 @@ type GatewayListStatusError struct {
 // GatewayListStatusLive status of gateway is live.
 type GatewayListStatusLive struct {
 	autorest.Response `json:"-"`
-	// Status - Live message of list gateway. Possible values include: 'Live'
-	Status Status `json:"status,omitempty"`
+	// Status - Live message of list gateway. Status: 0 - Live
+	Status *int32 `json:"status,omitempty"`
 }
 
 // IPv4FirewallRule the detail of firewall rule.
@@ -104,12 +122,51 @@ type IPv4FirewallSettings struct {
 	EnablePowerBIService *bool `json:"enablePowerBIService,omitempty"`
 }
 
+// LogSpecifications the log metric specification for exposing performance metrics to shoebox.
+type LogSpecifications struct {
+	// Name - READ-ONLY; The name of metric.
+	Name *string `json:"name,omitempty"`
+	// DisplayName - READ-ONLY; The displayed name of log.
+	DisplayName *string `json:"displayName,omitempty"`
+	// BlobDuration - READ-ONLY; The blob duration for the log.
+	BlobDuration *string `json:"blobDuration,omitempty"`
+}
+
+// MetricDimensions metric dimension.
+type MetricDimensions struct {
+	// Name - READ-ONLY; Dimension name.
+	Name *string `json:"name,omitempty"`
+	// DisplayName - READ-ONLY; Dimension display name.
+	DisplayName *string `json:"displayName,omitempty"`
+}
+
+// MetricSpecifications available operation metric specification for exposing performance metrics to
+// shoebox.
+type MetricSpecifications struct {
+	// Name - READ-ONLY; The name of metric.
+	Name *string `json:"name,omitempty"`
+	// DisplayName - READ-ONLY; The displayed name of metric.
+	DisplayName *string `json:"displayName,omitempty"`
+	// DisplayDescription - READ-ONLY; The displayed description of metric.
+	DisplayDescription *string `json:"displayDescription,omitempty"`
+	// Unit - READ-ONLY; The unit of the metric.
+	Unit *string `json:"unit,omitempty"`
+	// AggregationType - READ-ONLY; The aggregation type of metric.
+	AggregationType *string `json:"aggregationType,omitempty"`
+	// Dimensions - READ-ONLY; The dimensions of metric.
+	Dimensions *[]MetricDimensions `json:"dimensions,omitempty"`
+}
+
 // Operation a Consumption REST API operation.
 type Operation struct {
 	// Name - READ-ONLY; Operation name: {provider}/{resource}/{operation}.
 	Name *string `json:"name,omitempty"`
 	// Display - The object that represents the operation.
 	Display *OperationDisplay `json:"display,omitempty"`
+	// Origin - READ-ONLY; The origin
+	Origin *string `json:"origin,omitempty"`
+	// Properties - Additional properties to expose performance metrics to shoebox.
+	Properties *OperationProperties `json:"properties,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for Operation.
@@ -117,6 +174,9 @@ func (o Operation) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
 	if o.Display != nil {
 		objectMap["display"] = o.Display
+	}
+	if o.Properties != nil {
+		objectMap["properties"] = o.Properties
 	}
 	return json.Marshal(objectMap)
 }
@@ -129,6 +189,8 @@ type OperationDisplay struct {
 	Resource *string `json:"resource,omitempty"`
 	// Operation - READ-ONLY; Operation type: Read, write, delete, etc.
 	Operation *string `json:"operation,omitempty"`
+	// Description - READ-ONLY; Description of the operation object.
+	Description *string `json:"description,omitempty"`
 }
 
 // OperationListResult result of listing consumption operations. It contains a list of operations and a URL
@@ -291,6 +353,20 @@ func NewOperationListResultPage(cur OperationListResult, getNextPage func(contex
 	}
 }
 
+// OperationProperties additional properties to expose performance metrics to shoebox.
+type OperationProperties struct {
+	// ServiceSpecification - Performance metrics to shoebox.
+	ServiceSpecification *OperationPropertiesServiceSpecification `json:"serviceSpecification,omitempty"`
+}
+
+// OperationPropertiesServiceSpecification performance metrics to shoebox.
+type OperationPropertiesServiceSpecification struct {
+	// MetricSpecifications - READ-ONLY; The metric specifications.
+	MetricSpecifications *[]MetricSpecifications `json:"metricSpecifications,omitempty"`
+	// LogSpecifications - READ-ONLY; The log specifications.
+	LogSpecifications *[]LogSpecifications `json:"logSpecifications,omitempty"`
+}
+
 // OperationStatus the status of operation.
 type OperationStatus struct {
 	autorest.Response `json:"-"`
@@ -305,7 +381,7 @@ type OperationStatus struct {
 	// Status - The status of the operation.
 	Status *string `json:"status,omitempty"`
 	// Error - The error detail of the operation if any.
-	Error *ErrorResponse `json:"error,omitempty"`
+	Error *GatewayError `json:"error,omitempty"`
 }
 
 // Resource represents an instance of an Analysis Services resource.
@@ -483,6 +559,10 @@ type ServerMutableProperties struct {
 	IPV4FirewallSettings *IPv4FirewallSettings `json:"ipV4FirewallSettings,omitempty"`
 	// QuerypoolConnectionMode - How the read-write server's participation in the query pool is controlled.<br/>It can have the following values: <ul><li>readOnly - indicates that the read-write server is intended not to participate in query operations</li><li>all - indicates that the read-write server can participate in query operations</li></ul>Specifying readOnly when capacity is 1 results in error. Possible values include: 'All', 'ReadOnly'
 	QuerypoolConnectionMode ConnectionMode `json:"querypoolConnectionMode,omitempty"`
+	// ManagedMode - The managed mode of the server (0 = not managed, 1 = managed).
+	ManagedMode *int32 `json:"managedMode,omitempty"`
+	// ServerMonitorMode - The server monitor mode for AS server
+	ServerMonitorMode *int32 `json:"serverMonitorMode,omitempty"`
 }
 
 // ServerProperties properties of Analysis Services resource.
@@ -493,6 +573,8 @@ type ServerProperties struct {
 	ProvisioningState ProvisioningState `json:"provisioningState,omitempty"`
 	// ServerFullName - READ-ONLY; The full name of the Analysis Services resource.
 	ServerFullName *string `json:"serverFullName,omitempty"`
+	// Sku - The SKU of the Analysis Services resource.
+	Sku *ResourceSku `json:"sku,omitempty"`
 	// AsAdministrators - A collection of AS server administrators
 	AsAdministrators *ServerAdministrators `json:"asAdministrators,omitempty"`
 	// BackupBlobContainerURI - The SAS container URI to the backup container.
@@ -503,11 +585,18 @@ type ServerProperties struct {
 	IPV4FirewallSettings *IPv4FirewallSettings `json:"ipV4FirewallSettings,omitempty"`
 	// QuerypoolConnectionMode - How the read-write server's participation in the query pool is controlled.<br/>It can have the following values: <ul><li>readOnly - indicates that the read-write server is intended not to participate in query operations</li><li>all - indicates that the read-write server can participate in query operations</li></ul>Specifying readOnly when capacity is 1 results in error. Possible values include: 'All', 'ReadOnly'
 	QuerypoolConnectionMode ConnectionMode `json:"querypoolConnectionMode,omitempty"`
+	// ManagedMode - The managed mode of the server (0 = not managed, 1 = managed).
+	ManagedMode *int32 `json:"managedMode,omitempty"`
+	// ServerMonitorMode - The server monitor mode for AS server
+	ServerMonitorMode *int32 `json:"serverMonitorMode,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for ServerProperties.
 func (sp ServerProperties) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
+	if sp.Sku != nil {
+		objectMap["sku"] = sp.Sku
+	}
 	if sp.AsAdministrators != nil {
 		objectMap["asAdministrators"] = sp.AsAdministrators
 	}
@@ -522,6 +611,12 @@ func (sp ServerProperties) MarshalJSON() ([]byte, error) {
 	}
 	if sp.QuerypoolConnectionMode != "" {
 		objectMap["querypoolConnectionMode"] = sp.QuerypoolConnectionMode
+	}
+	if sp.ManagedMode != nil {
+		objectMap["managedMode"] = sp.ManagedMode
+	}
+	if sp.ServerMonitorMode != nil {
+		objectMap["serverMonitorMode"] = sp.ServerMonitorMode
 	}
 	return json.Marshal(objectMap)
 }
@@ -801,6 +896,8 @@ func (sup *ServerUpdateParameters) UnmarshalJSON(body []byte) error {
 type SkuDetailsForExistingResource struct {
 	// Sku - The SKU in SKU details for existing resources.
 	Sku *ResourceSku `json:"sku,omitempty"`
+	// ResourceType - The resource type.
+	ResourceType *string `json:"resourceType,omitempty"`
 }
 
 // SkuEnumerationForExistingResourceResult an object that represents enumerating SKUs for existing
