@@ -99,6 +99,9 @@ func (client RecordSetsClient) CreateOrUpdatePreparer(ctx context.Context, resou
 		"api-version": APIVersion,
 	}
 
+	parameters.ID = nil
+	parameters.Name = nil
+	parameters.Type = nil
 	preparer := autorest.CreatePreparer(
 		autorest.AsContentType("application/json; charset=utf-8"),
 		autorest.AsPut(),
@@ -128,7 +131,7 @@ func (client RecordSetsClient) CreateOrUpdateSender(req *http.Request) (*http.Re
 func (client RecordSetsClient) CreateOrUpdateResponder(resp *http.Response) (result RecordSet, err error) {
 	err = autorest.Respond(
 		resp,
-		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusAccepted),
+		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusCreated, http.StatusAccepted),
 		autorest.ByUnmarshallingJSON(&result),
 		autorest.ByClosing())
 	result.Response = autorest.Response{Response: resp}
@@ -224,7 +227,7 @@ func (client RecordSetsClient) DeleteSender(req *http.Request) (*http.Response, 
 func (client RecordSetsClient) DeleteResponder(resp *http.Response) (result autorest.Response, err error) {
 	err = autorest.Respond(
 		resp,
-		azure.WithErrorUnlessStatusCode(http.StatusOK),
+		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusNoContent),
 		autorest.ByClosing())
 	result.Response = resp
 	return
