@@ -1,5 +1,5 @@
 {
-  "commit": "0f0e41fa4e3679510fcf03ecd60084f1cdbd5805",
+  "commit": "ab3ab0280654521e2e8a701a4a93ef29cb35d47c",
   "readme": "/_/azure-rest-api-specs/specification/deviceupdate/resource-manager/readme.md",
   "tag": "package-2020-03-01-preview",
   "use": "@microsoft.azure/autorest.go@2.1.180",

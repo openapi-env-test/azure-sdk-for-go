@@ -52,11 +52,11 @@ func (client InstancesClient) Create(ctx context.Context, resourceGroupName stri
 		{TargetValue: accountName,
 			Constraints: []validation.Constraint{{Target: "accountName", Name: validation.MaxLength, Rule: 24, Chain: nil},
 				{Target: "accountName", Name: validation.MinLength, Rule: 3, Chain: nil},
-				{Target: "accountName", Name: validation.Pattern, Rule: `^[A-Za-z][A-Za-z0-9]+$`, Chain: nil}}},
+				{Target: "accountName", Name: validation.Pattern, Rule: `^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$`, Chain: nil}}},
 		{TargetValue: instanceName,
 			Constraints: []validation.Constraint{{Target: "instanceName", Name: validation.MaxLength, Rule: 36, Chain: nil},
 				{Target: "instanceName", Name: validation.MinLength, Rule: 3, Chain: nil},
-				{Target: "instanceName", Name: validation.Pattern, Rule: `^[A-Za-z][A-Za-z0-9]+$`, Chain: nil}}},
+				{Target: "instanceName", Name: validation.Pattern, Rule: `^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$`, Chain: nil}}},
 		{TargetValue: instance,
 			Constraints: []validation.Constraint{{Target: "instance.InstanceProperties", Name: validation.Null, Rule: true, Chain: nil}}}}); err != nil {
 		return result, validation.NewError("deviceupdate.InstancesClient", "Create", err.Error())
@@ -91,6 +91,7 @@ func (client InstancesClient) CreatePreparer(ctx context.Context, resourceGroupN
 		"api-version": APIVersion,
 	}
 
+	instance.SystemData = nil
 	preparer := autorest.CreatePreparer(
 		autorest.AsContentType("application/json; charset=utf-8"),
 		autorest.AsPut(),
@@ -148,11 +149,11 @@ func (client InstancesClient) Delete(ctx context.Context, resourceGroupName stri
 		{TargetValue: accountName,
 			Constraints: []validation.Constraint{{Target: "accountName", Name: validation.MaxLength, Rule: 24, Chain: nil},
 				{Target: "accountName", Name: validation.MinLength, Rule: 3, Chain: nil},
-				{Target: "accountName", Name: validation.Pattern, Rule: `^[A-Za-z][A-Za-z0-9]+$`, Chain: nil}}},
+				{Target: "accountName", Name: validation.Pattern, Rule: `^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$`, Chain: nil}}},
 		{TargetValue: instanceName,
 			Constraints: []validation.Constraint{{Target: "instanceName", Name: validation.MaxLength, Rule: 36, Chain: nil},
 				{Target: "instanceName", Name: validation.MinLength, Rule: 3, Chain: nil},
-				{Target: "instanceName", Name: validation.Pattern, Rule: `^[A-Za-z][A-Za-z0-9]+$`, Chain: nil}}}}); err != nil {
+				{Target: "instanceName", Name: validation.Pattern, Rule: `^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$`, Chain: nil}}}}); err != nil {
 		return result, validation.NewError("deviceupdate.InstancesClient", "Delete", err.Error())
 	}
 
@@ -239,11 +240,11 @@ func (client InstancesClient) Get(ctx context.Context, resourceGroupName string,
 		{TargetValue: accountName,
 			Constraints: []validation.Constraint{{Target: "accountName", Name: validation.MaxLength, Rule: 24, Chain: nil},
 				{Target: "accountName", Name: validation.MinLength, Rule: 3, Chain: nil},
-				{Target: "accountName", Name: validation.Pattern, Rule: `^[A-Za-z][A-Za-z0-9]+$`, Chain: nil}}},
+				{Target: "accountName", Name: validation.Pattern, Rule: `^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$`, Chain: nil}}},
 		{TargetValue: instanceName,
 			Constraints: []validation.Constraint{{Target: "instanceName", Name: validation.MaxLength, Rule: 36, Chain: nil},
 				{Target: "instanceName", Name: validation.MinLength, Rule: 3, Chain: nil},
-				{Target: "instanceName", Name: validation.Pattern, Rule: `^[A-Za-z][A-Za-z0-9]+$`, Chain: nil}}}}); err != nil {
+				{Target: "instanceName", Name: validation.Pattern, Rule: `^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$`, Chain: nil}}}}); err != nil {
 		return result, validation.NewError("deviceupdate.InstancesClient", "Get", err.Error())
 	}
 
@@ -328,7 +329,7 @@ func (client InstancesClient) ListByAccount(ctx context.Context, resourceGroupNa
 		{TargetValue: accountName,
 			Constraints: []validation.Constraint{{Target: "accountName", Name: validation.MaxLength, Rule: 24, Chain: nil},
 				{Target: "accountName", Name: validation.MinLength, Rule: 3, Chain: nil},
-				{Target: "accountName", Name: validation.Pattern, Rule: `^[A-Za-z][A-Za-z0-9]+$`, Chain: nil}}}}); err != nil {
+				{Target: "accountName", Name: validation.Pattern, Rule: `^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$`, Chain: nil}}}}); err != nil {
 		return result, validation.NewError("deviceupdate.InstancesClient", "ListByAccount", err.Error())
 	}
 
@@ -456,11 +457,11 @@ func (client InstancesClient) Update(ctx context.Context, resourceGroupName stri
 		{TargetValue: accountName,
 			Constraints: []validation.Constraint{{Target: "accountName", Name: validation.MaxLength, Rule: 24, Chain: nil},
 				{Target: "accountName", Name: validation.MinLength, Rule: 3, Chain: nil},
-				{Target: "accountName", Name: validation.Pattern, Rule: `^[A-Za-z][A-Za-z0-9]+$`, Chain: nil}}},
+				{Target: "accountName", Name: validation.Pattern, Rule: `^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$`, Chain: nil}}},
 		{TargetValue: instanceName,
 			Constraints: []validation.Constraint{{Target: "instanceName", Name: validation.MaxLength, Rule: 36, Chain: nil},
 				{Target: "instanceName", Name: validation.MinLength, Rule: 3, Chain: nil},
-				{Target: "instanceName", Name: validation.Pattern, Rule: `^[A-Za-z][A-Za-z0-9]+$`, Chain: nil}}}}); err != nil {
+				{Target: "instanceName", Name: validation.Pattern, Rule: `^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$`, Chain: nil}}}}); err != nil {
 		return result, validation.NewError("deviceupdate.InstancesClient", "Update", err.Error())
 	}
 
