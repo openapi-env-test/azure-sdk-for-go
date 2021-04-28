@@ -14,7 +14,7 @@ import (
 // ConfigurationStoresClientAPI contains the set of methods on the ConfigurationStoresClient type.
 type ConfigurationStoresClientAPI interface {
 	Create(ctx context.Context, resourceGroupName string, configStoreName string, configStoreCreationParameters appconfiguration.ConfigurationStore) (result appconfiguration.ConfigurationStoresCreateFuture, err error)
-	Delete(ctx context.Context, resourceGroupName string, configStoreName string) (result appconfiguration.ConfigurationStoresDeleteFuture, err error)
+	DeleteABC(ctx context.Context, resourceGroupName string, configStoreName string) (result appconfiguration.ConfigurationStoresDeleteABCFuture, err error)
 	Get(ctx context.Context, resourceGroupName string, configStoreName string) (result appconfiguration.ConfigurationStore, err error)
 	List(ctx context.Context, skipToken string) (result appconfiguration.ConfigurationStoreListResultPage, err error)
 	ListComplete(ctx context.Context, skipToken string) (result appconfiguration.ConfigurationStoreListResultIterator, err error)
@@ -24,7 +24,6 @@ type ConfigurationStoresClientAPI interface {
 	ListKeysComplete(ctx context.Context, resourceGroupName string, configStoreName string, skipToken string) (result appconfiguration.APIKeyListResultIterator, err error)
 	ListKeyValue(ctx context.Context, resourceGroupName string, configStoreName string, listKeyValueParameters appconfiguration.ListKeyValueParameters) (result appconfiguration.KeyValue, err error)
 	RegenerateKey(ctx context.Context, resourceGroupName string, configStoreName string, regenerateKeyParameters appconfiguration.RegenerateKeyParameters) (result appconfiguration.APIKey, err error)
-	Update(ctx context.Context, resourceGroupName string, configStoreName string, configStoreUpdateParameters appconfiguration.ConfigurationStoreUpdateParameters) (result appconfiguration.ConfigurationStoresUpdateFuture, err error)
 }
 
 var _ ConfigurationStoresClientAPI = (*appconfiguration.ConfigurationStoresClient)(nil)
