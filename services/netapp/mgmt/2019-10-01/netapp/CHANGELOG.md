@@ -1,2 +1,9 @@
-# Change History
+# Unreleased Content
 
+## Additive Changes
+
+### Struct Changes
+
+#### New Struct Fields
+
+1. VolumeProperties.UsedBytes
