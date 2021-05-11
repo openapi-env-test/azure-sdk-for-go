@@ -10,71 +10,71 @@ package securityinsight
 type AlertRuleKind string
 
 const (
-	// AlertRuleKindFusion ...
-	AlertRuleKindFusion AlertRuleKind = "Fusion"
-	// AlertRuleKindMicrosoftSecurityIncidentCreation ...
-	AlertRuleKindMicrosoftSecurityIncidentCreation AlertRuleKind = "MicrosoftSecurityIncidentCreation"
-	// AlertRuleKindScheduled ...
-	AlertRuleKindScheduled AlertRuleKind = "Scheduled"
+	// Fusion ...
+	Fusion AlertRuleKind = "Fusion"
+	// MicrosoftSecurityIncidentCreation ...
+	MicrosoftSecurityIncidentCreation AlertRuleKind = "MicrosoftSecurityIncidentCreation"
+	// Scheduled ...
+	Scheduled AlertRuleKind = "Scheduled"
 )
 
 // PossibleAlertRuleKindValues returns an array of possible values for the AlertRuleKind const type.
 func PossibleAlertRuleKindValues() []AlertRuleKind {
-	return []AlertRuleKind{AlertRuleKindFusion, AlertRuleKindMicrosoftSecurityIncidentCreation, AlertRuleKindScheduled}
+	return []AlertRuleKind{Fusion, MicrosoftSecurityIncidentCreation, Scheduled}
 }
 
 // AlertSeverity enumerates the values for alert severity.
 type AlertSeverity string
 
 const (
-	// AlertSeverityHigh High severity
-	AlertSeverityHigh AlertSeverity = "High"
-	// AlertSeverityInformational Informational severity
-	AlertSeverityInformational AlertSeverity = "Informational"
-	// AlertSeverityLow Low severity
-	AlertSeverityLow AlertSeverity = "Low"
-	// AlertSeverityMedium Medium severity
-	AlertSeverityMedium AlertSeverity = "Medium"
+	// High High severity
+	High AlertSeverity = "High"
+	// Informational Informational severity
+	Informational AlertSeverity = "Informational"
+	// Low Low severity
+	Low AlertSeverity = "Low"
+	// Medium Medium severity
+	Medium AlertSeverity = "Medium"
 )
 
 // PossibleAlertSeverityValues returns an array of possible values for the AlertSeverity const type.
 func PossibleAlertSeverityValues() []AlertSeverity {
-	return []AlertSeverity{AlertSeverityHigh, AlertSeverityInformational, AlertSeverityLow, AlertSeverityMedium}
+	return []AlertSeverity{High, Informational, Low, Medium}
 }
 
 // AttackTactic enumerates the values for attack tactic.
 type AttackTactic string
 
 const (
-	// AttackTacticCollection ...
-	AttackTacticCollection AttackTactic = "Collection"
-	// AttackTacticCommandAndControl ...
-	AttackTacticCommandAndControl AttackTactic = "CommandAndControl"
-	// AttackTacticCredentialAccess ...
-	AttackTacticCredentialAccess AttackTactic = "CredentialAccess"
-	// AttackTacticDefenseEvasion ...
-	AttackTacticDefenseEvasion AttackTactic = "DefenseEvasion"
-	// AttackTacticDiscovery ...
-	AttackTacticDiscovery AttackTactic = "Discovery"
-	// AttackTacticExecution ...
-	AttackTacticExecution AttackTactic = "Execution"
-	// AttackTacticExfiltration ...
-	AttackTacticExfiltration AttackTactic = "Exfiltration"
-	// AttackTacticImpact ...
-	AttackTacticImpact AttackTactic = "Impact"
-	// AttackTacticInitialAccess ...
-	AttackTacticInitialAccess AttackTactic = "InitialAccess"
-	// AttackTacticLateralMovement ...
-	AttackTacticLateralMovement AttackTactic = "LateralMovement"
-	// AttackTacticPersistence ...
-	AttackTacticPersistence AttackTactic = "Persistence"
-	// AttackTacticPrivilegeEscalation ...
-	AttackTacticPrivilegeEscalation AttackTactic = "PrivilegeEscalation"
+	// Collection ...
+	Collection AttackTactic = "Collection"
+	// CommandAndControl ...
+	CommandAndControl AttackTactic = "CommandAndControl"
+	// CredentialAccess ...
+	CredentialAccess AttackTactic = "CredentialAccess"
+	// DefenseEvasion ...
+	DefenseEvasion AttackTactic = "DefenseEvasion"
+	// Discovery ...
+	Discovery AttackTactic = "Discovery"
+	// Execution ...
+	Execution AttackTactic = "Execution"
+	// Exfiltration ...
+	Exfiltration AttackTactic = "Exfiltration"
+	// Impact ...
+	Impact AttackTactic = "Impact"
+	// InitialAccess ...
+	InitialAccess AttackTactic = "InitialAccess"
+	// LateralMovement ...
+	LateralMovement AttackTactic = "LateralMovement"
+	// Persistence ...
+	Persistence AttackTactic = "Persistence"
+	// PrivilegeEscalation ...
+	PrivilegeEscalation AttackTactic = "PrivilegeEscalation"
 )
 
 // PossibleAttackTacticValues returns an array of possible values for the AttackTactic const type.
 func PossibleAttackTacticValues() []AttackTactic {
-	return []AttackTactic{AttackTacticCollection, AttackTacticCommandAndControl, AttackTacticCredentialAccess, AttackTacticDefenseEvasion, AttackTacticDiscovery, AttackTacticExecution, AttackTacticExfiltration, AttackTacticImpact, AttackTacticInitialAccess, AttackTacticLateralMovement, AttackTacticPersistence, AttackTacticPrivilegeEscalation}
+	return []AttackTactic{Collection, CommandAndControl, CredentialAccess, DefenseEvasion, Discovery, Execution, Exfiltration, Impact, InitialAccess, LateralMovement, Persistence, PrivilegeEscalation}
 }
 
 // CaseSeverity enumerates the values for case severity.
@@ -129,68 +129,68 @@ func PossibleDataConnectorKindValues() []DataConnectorKind {
 type DataTypeState string
 
 const (
-	// DataTypeStateDisabled ...
-	DataTypeStateDisabled DataTypeState = "Disabled"
-	// DataTypeStateEnabled ...
-	DataTypeStateEnabled DataTypeState = "Enabled"
+	// Disabled ...
+	Disabled DataTypeState = "Disabled"
+	// Enabled ...
+	Enabled DataTypeState = "Enabled"
 )
 
 // PossibleDataTypeStateValues returns an array of possible values for the DataTypeState const type.
 func PossibleDataTypeStateValues() []DataTypeState {
-	return []DataTypeState{DataTypeStateDisabled, DataTypeStateEnabled}
+	return []DataTypeState{Disabled, Enabled}
 }
 
 // IncidentClassification enumerates the values for incident classification.
 type IncidentClassification string
 
 const (
-	// IncidentClassificationBenignPositive Incident was benign positive
-	IncidentClassificationBenignPositive IncidentClassification = "BenignPositive"
-	// IncidentClassificationFalsePositive Incident was false positive
-	IncidentClassificationFalsePositive IncidentClassification = "FalsePositive"
-	// IncidentClassificationTruePositive Incident was true positive
-	IncidentClassificationTruePositive IncidentClassification = "TruePositive"
-	// IncidentClassificationUndetermined Incident classification was undetermined
-	IncidentClassificationUndetermined IncidentClassification = "Undetermined"
+	// BenignPositive Incident was benign positive
+	BenignPositive IncidentClassification = "BenignPositive"
+	// FalsePositive Incident was false positive
+	FalsePositive IncidentClassification = "FalsePositive"
+	// TruePositive Incident was true positive
+	TruePositive IncidentClassification = "TruePositive"
+	// Undetermined Incident classification was undetermined
+	Undetermined IncidentClassification = "Undetermined"
 )
 
 // PossibleIncidentClassificationValues returns an array of possible values for the IncidentClassification const type.
 func PossibleIncidentClassificationValues() []IncidentClassification {
-	return []IncidentClassification{IncidentClassificationBenignPositive, IncidentClassificationFalsePositive, IncidentClassificationTruePositive, IncidentClassificationUndetermined}
+	return []IncidentClassification{BenignPositive, FalsePositive, TruePositive, Undetermined}
 }
 
 // IncidentClassificationReason enumerates the values for incident classification reason.
 type IncidentClassificationReason string
 
 const (
-	// IncidentClassificationReasonInaccurateData Classification reason was inaccurate data
-	IncidentClassificationReasonInaccurateData IncidentClassificationReason = "InaccurateData"
-	// IncidentClassificationReasonIncorrectAlertLogic Classification reason was incorrect alert logic
-	IncidentClassificationReasonIncorrectAlertLogic IncidentClassificationReason = "IncorrectAlertLogic"
-	// IncidentClassificationReasonSuspiciousActivity Classification reason was suspicious activity
-	IncidentClassificationReasonSuspiciousActivity IncidentClassificationReason = "SuspiciousActivity"
-	// IncidentClassificationReasonSuspiciousButExpected Classification reason was suspicious but expected
-	IncidentClassificationReasonSuspiciousButExpected IncidentClassificationReason = "SuspiciousButExpected"
+	// InaccurateData Classification reason was inaccurate data
+	InaccurateData IncidentClassificationReason = "InaccurateData"
+	// IncorrectAlertLogic Classification reason was incorrect alert logic
+	IncorrectAlertLogic IncidentClassificationReason = "IncorrectAlertLogic"
+	// SuspiciousActivity Classification reason was suspicious activity
+	SuspiciousActivity IncidentClassificationReason = "SuspiciousActivity"
+	// SuspiciousButExpected Classification reason was suspicious but expected
+	SuspiciousButExpected IncidentClassificationReason = "SuspiciousButExpected"
 )
 
 // PossibleIncidentClassificationReasonValues returns an array of possible values for the IncidentClassificationReason const type.
 func PossibleIncidentClassificationReasonValues() []IncidentClassificationReason {
-	return []IncidentClassificationReason{IncidentClassificationReasonInaccurateData, IncidentClassificationReasonIncorrectAlertLogic, IncidentClassificationReasonSuspiciousActivity, IncidentClassificationReasonSuspiciousButExpected}
+	return []IncidentClassificationReason{InaccurateData, IncorrectAlertLogic, SuspiciousActivity, SuspiciousButExpected}
 }
 
 // IncidentLabelType enumerates the values for incident label type.
 type IncidentLabelType string
 
 const (
-	// IncidentLabelTypeSystem Label automatically created by the system
-	IncidentLabelTypeSystem IncidentLabelType = "System"
-	// IncidentLabelTypeUser Label manually created by a user
-	IncidentLabelTypeUser IncidentLabelType = "User"
+	// System Label automatically created by the system
+	System IncidentLabelType = "System"
+	// User Label manually created by a user
+	User IncidentLabelType = "User"
 )
 
 // PossibleIncidentLabelTypeValues returns an array of possible values for the IncidentLabelType const type.
 func PossibleIncidentLabelTypeValues() []IncidentLabelType {
-	return []IncidentLabelType{IncidentLabelTypeSystem, IncidentLabelTypeUser}
+	return []IncidentLabelType{System, User}
 }
 
 // IncidentSeverity enumerates the values for incident severity.
@@ -233,19 +233,19 @@ func PossibleIncidentStatusValues() []IncidentStatus {
 type Kind string
 
 const (
-	// KindKindAlertRule ...
-	KindKindAlertRule Kind = "AlertRule"
-	// KindKindFusion ...
-	KindKindFusion Kind = "Fusion"
-	// KindKindMicrosoftSecurityIncidentCreation ...
-	KindKindMicrosoftSecurityIncidentCreation Kind = "MicrosoftSecurityIncidentCreation"
-	// KindKindScheduled ...
-	KindKindScheduled Kind = "Scheduled"
+	// KindAlertRule ...
+	KindAlertRule Kind = "AlertRule"
+	// KindFusion ...
+	KindFusion Kind = "Fusion"
+	// KindMicrosoftSecurityIncidentCreation ...
+	KindMicrosoftSecurityIncidentCreation Kind = "MicrosoftSecurityIncidentCreation"
+	// KindScheduled ...
+	KindScheduled Kind = "Scheduled"
 )
 
 // PossibleKindValues returns an array of possible values for the Kind const type.
 func PossibleKindValues() []Kind {
-	return []Kind{KindKindAlertRule, KindKindFusion, KindKindMicrosoftSecurityIncidentCreation, KindKindScheduled}
+	return []Kind{KindAlertRule, KindFusion, KindMicrosoftSecurityIncidentCreation, KindScheduled}
 }
 
 // KindBasicAlertRuleTemplate enumerates the values for kind basic alert rule template.
@@ -271,46 +271,46 @@ func PossibleKindBasicAlertRuleTemplateValues() []KindBasicAlertRuleTemplate {
 type KindBasicDataConnector string
 
 const (
-	// KindBasicDataConnectorKindAmazonWebServicesCloudTrail ...
-	KindBasicDataConnectorKindAmazonWebServicesCloudTrail KindBasicDataConnector = "AmazonWebServicesCloudTrail"
-	// KindBasicDataConnectorKindAzureActiveDirectory ...
-	KindBasicDataConnectorKindAzureActiveDirectory KindBasicDataConnector = "AzureActiveDirectory"
-	// KindBasicDataConnectorKindAzureAdvancedThreatProtection ...
-	KindBasicDataConnectorKindAzureAdvancedThreatProtection KindBasicDataConnector = "AzureAdvancedThreatProtection"
-	// KindBasicDataConnectorKindAzureSecurityCenter ...
-	KindBasicDataConnectorKindAzureSecurityCenter KindBasicDataConnector = "AzureSecurityCenter"
-	// KindBasicDataConnectorKindDataConnector ...
-	KindBasicDataConnectorKindDataConnector KindBasicDataConnector = "DataConnector"
-	// KindBasicDataConnectorKindMicrosoftCloudAppSecurity ...
-	KindBasicDataConnectorKindMicrosoftCloudAppSecurity KindBasicDataConnector = "MicrosoftCloudAppSecurity"
-	// KindBasicDataConnectorKindMicrosoftDefenderAdvancedThreatProtection ...
-	KindBasicDataConnectorKindMicrosoftDefenderAdvancedThreatProtection KindBasicDataConnector = "MicrosoftDefenderAdvancedThreatProtection"
-	// KindBasicDataConnectorKindOffice365 ...
-	KindBasicDataConnectorKindOffice365 KindBasicDataConnector = "Office365"
-	// KindBasicDataConnectorKindThreatIntelligence ...
-	KindBasicDataConnectorKindThreatIntelligence KindBasicDataConnector = "ThreatIntelligence"
+	// KindAmazonWebServicesCloudTrail ...
+	KindAmazonWebServicesCloudTrail KindBasicDataConnector = "AmazonWebServicesCloudTrail"
+	// KindAzureActiveDirectory ...
+	KindAzureActiveDirectory KindBasicDataConnector = "AzureActiveDirectory"
+	// KindAzureAdvancedThreatProtection ...
+	KindAzureAdvancedThreatProtection KindBasicDataConnector = "AzureAdvancedThreatProtection"
+	// KindAzureSecurityCenter ...
+	KindAzureSecurityCenter KindBasicDataConnector = "AzureSecurityCenter"
+	// KindDataConnector ...
+	KindDataConnector KindBasicDataConnector = "DataConnector"
+	// KindMicrosoftCloudAppSecurity ...
+	KindMicrosoftCloudAppSecurity KindBasicDataConnector = "MicrosoftCloudAppSecurity"
+	// KindMicrosoftDefenderAdvancedThreatProtection ...
+	KindMicrosoftDefenderAdvancedThreatProtection KindBasicDataConnector = "MicrosoftDefenderAdvancedThreatProtection"
+	// KindOffice365 ...
+	KindOffice365 KindBasicDataConnector = "Office365"
+	// KindThreatIntelligence ...
+	KindThreatIntelligence KindBasicDataConnector = "ThreatIntelligence"
 )
 
 // PossibleKindBasicDataConnectorValues returns an array of possible values for the KindBasicDataConnector const type.
 func PossibleKindBasicDataConnectorValues() []KindBasicDataConnector {
-	return []KindBasicDataConnector{KindBasicDataConnectorKindAmazonWebServicesCloudTrail, KindBasicDataConnectorKindAzureActiveDirectory, KindBasicDataConnectorKindAzureAdvancedThreatProtection, KindBasicDataConnectorKindAzureSecurityCenter, KindBasicDataConnectorKindDataConnector, KindBasicDataConnectorKindMicrosoftCloudAppSecurity, KindBasicDataConnectorKindMicrosoftDefenderAdvancedThreatProtection, KindBasicDataConnectorKindOffice365, KindBasicDataConnectorKindThreatIntelligence}
+	return []KindBasicDataConnector{KindAmazonWebServicesCloudTrail, KindAzureActiveDirectory, KindAzureAdvancedThreatProtection, KindAzureSecurityCenter, KindDataConnector, KindMicrosoftCloudAppSecurity, KindMicrosoftDefenderAdvancedThreatProtection, KindOffice365, KindThreatIntelligence}
 }
 
 // KindBasicSettings enumerates the values for kind basic settings.
 type KindBasicSettings string
 
 const (
-	// KindBasicSettingsKindSettings ...
-	KindBasicSettingsKindSettings KindBasicSettings = "Settings"
-	// KindBasicSettingsKindToggleSettings ...
-	KindBasicSettingsKindToggleSettings KindBasicSettings = "ToggleSettings"
-	// KindBasicSettingsKindUebaSettings ...
-	KindBasicSettingsKindUebaSettings KindBasicSettings = "UebaSettings"
+	// KindSettings ...
+	KindSettings KindBasicSettings = "Settings"
+	// KindToggleSettings ...
+	KindToggleSettings KindBasicSettings = "ToggleSettings"
+	// KindUebaSettings ...
+	KindUebaSettings KindBasicSettings = "UebaSettings"
 )
 
 // PossibleKindBasicSettingsValues returns an array of possible values for the KindBasicSettings const type.
 func PossibleKindBasicSettingsValues() []KindBasicSettings {
-	return []KindBasicSettings{KindBasicSettingsKindSettings, KindBasicSettingsKindToggleSettings, KindBasicSettingsKindUebaSettings}
+	return []KindBasicSettings{KindSettings, KindToggleSettings, KindUebaSettings}
 }
 
 // LicenseStatus enumerates the values for license status.
@@ -332,21 +332,21 @@ func PossibleLicenseStatusValues() []LicenseStatus {
 type MicrosoftSecurityProductName string
 
 const (
-	// MicrosoftSecurityProductNameAzureActiveDirectoryIdentityProtection ...
-	MicrosoftSecurityProductNameAzureActiveDirectoryIdentityProtection MicrosoftSecurityProductName = "Azure Active Directory Identity Protection"
-	// MicrosoftSecurityProductNameAzureAdvancedThreatProtection ...
-	MicrosoftSecurityProductNameAzureAdvancedThreatProtection MicrosoftSecurityProductName = "Azure Advanced Threat Protection"
-	// MicrosoftSecurityProductNameAzureSecurityCenter ...
-	MicrosoftSecurityProductNameAzureSecurityCenter MicrosoftSecurityProductName = "Azure Security Center"
-	// MicrosoftSecurityProductNameAzureSecurityCenterforIoT ...
-	MicrosoftSecurityProductNameAzureSecurityCenterforIoT MicrosoftSecurityProductName = "Azure Security Center for IoT"
-	// MicrosoftSecurityProductNameMicrosoftCloudAppSecurity ...
-	MicrosoftSecurityProductNameMicrosoftCloudAppSecurity MicrosoftSecurityProductName = "Microsoft Cloud App Security"
+	// AzureActiveDirectoryIdentityProtection ...
+	AzureActiveDirectoryIdentityProtection MicrosoftSecurityProductName = "Azure Active Directory Identity Protection"
+	// AzureAdvancedThreatProtection ...
+	AzureAdvancedThreatProtection MicrosoftSecurityProductName = "Azure Advanced Threat Protection"
+	// AzureSecurityCenter ...
+	AzureSecurityCenter MicrosoftSecurityProductName = "Azure Security Center"
+	// AzureSecurityCenterforIoT ...
+	AzureSecurityCenterforIoT MicrosoftSecurityProductName = "Azure Security Center for IoT"
+	// MicrosoftCloudAppSecurity ...
+	MicrosoftCloudAppSecurity MicrosoftSecurityProductName = "Microsoft Cloud App Security"
 )
 
 // PossibleMicrosoftSecurityProductNameValues returns an array of possible values for the MicrosoftSecurityProductName const type.
 func PossibleMicrosoftSecurityProductNameValues() []MicrosoftSecurityProductName {
-	return []MicrosoftSecurityProductName{MicrosoftSecurityProductNameAzureActiveDirectoryIdentityProtection, MicrosoftSecurityProductNameAzureAdvancedThreatProtection, MicrosoftSecurityProductNameAzureSecurityCenter, MicrosoftSecurityProductNameAzureSecurityCenterforIoT, MicrosoftSecurityProductNameMicrosoftCloudAppSecurity}
+	return []MicrosoftSecurityProductName{AzureActiveDirectoryIdentityProtection, AzureAdvancedThreatProtection, AzureSecurityCenter, AzureSecurityCenterforIoT, MicrosoftCloudAppSecurity}
 }
 
 // SettingKind enumerates the values for setting kind.
@@ -383,34 +383,34 @@ func PossibleStatusInMcasValues() []StatusInMcas {
 type TemplateStatus string
 
 const (
-	// TemplateStatusAvailable Alert rule template is available.
-	TemplateStatusAvailable TemplateStatus = "Available"
-	// TemplateStatusInstalled Alert rule template installed. and can not use more then once
-	TemplateStatusInstalled TemplateStatus = "Installed"
-	// TemplateStatusNotAvailable Alert rule template is not available
-	TemplateStatusNotAvailable TemplateStatus = "NotAvailable"
+	// Available Alert rule template is available.
+	Available TemplateStatus = "Available"
+	// Installed Alert rule template installed. and can not use more then once
+	Installed TemplateStatus = "Installed"
+	// NotAvailable Alert rule template is not available
+	NotAvailable TemplateStatus = "NotAvailable"
 )
 
 // PossibleTemplateStatusValues returns an array of possible values for the TemplateStatus const type.
 func PossibleTemplateStatusValues() []TemplateStatus {
-	return []TemplateStatus{TemplateStatusAvailable, TemplateStatusInstalled, TemplateStatusNotAvailable}
+	return []TemplateStatus{Available, Installed, NotAvailable}
 }
 
 // TriggerOperator enumerates the values for trigger operator.
 type TriggerOperator string
 
 const (
-	// TriggerOperatorEqual ...
-	TriggerOperatorEqual TriggerOperator = "Equal"
-	// TriggerOperatorGreaterThan ...
-	TriggerOperatorGreaterThan TriggerOperator = "GreaterThan"
-	// TriggerOperatorLessThan ...
-	TriggerOperatorLessThan TriggerOperator = "LessThan"
-	// TriggerOperatorNotEqual ...
-	TriggerOperatorNotEqual TriggerOperator = "NotEqual"
+	// Equal ...
+	Equal TriggerOperator = "Equal"
+	// GreaterThan ...
+	GreaterThan TriggerOperator = "GreaterThan"
+	// LessThan ...
+	LessThan TriggerOperator = "LessThan"
+	// NotEqual ...
+	NotEqual TriggerOperator = "NotEqual"
 )
 
 // PossibleTriggerOperatorValues returns an array of possible values for the TriggerOperator const type.
 func PossibleTriggerOperatorValues() []TriggerOperator {
-	return []TriggerOperator{TriggerOperatorEqual, TriggerOperatorGreaterThan, TriggerOperatorLessThan, TriggerOperatorNotEqual}
+	return []TriggerOperator{Equal, GreaterThan, LessThan, NotEqual}
 }
