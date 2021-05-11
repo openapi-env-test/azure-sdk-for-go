@@ -1,2 +1,129 @@
-# Change History
+# Unreleased Content
 
+## Breaking Changes
+
+### Removed Constants
+
+1. AlertRuleKind.AlertRuleKindFusion
+1. AlertRuleKind.AlertRuleKindMicrosoftSecurityIncidentCreation
+1. AlertRuleKind.AlertRuleKindScheduled
+1. AlertSeverity.AlertSeverityHigh
+1. AlertSeverity.AlertSeverityInformational
+1. AlertSeverity.AlertSeverityLow
+1. AlertSeverity.AlertSeverityMedium
+1. AttackTactic.AttackTacticCollection
+1. AttackTactic.AttackTacticCommandAndControl
+1. AttackTactic.AttackTacticCredentialAccess
+1. AttackTactic.AttackTacticDefenseEvasion
+1. AttackTactic.AttackTacticDiscovery
+1. AttackTactic.AttackTacticExecution
+1. AttackTactic.AttackTacticExfiltration
+1. AttackTactic.AttackTacticImpact
+1. AttackTactic.AttackTacticInitialAccess
+1. AttackTactic.AttackTacticLateralMovement
+1. AttackTactic.AttackTacticPersistence
+1. AttackTactic.AttackTacticPrivilegeEscalation
+1. DataTypeState.DataTypeStateDisabled
+1. DataTypeState.DataTypeStateEnabled
+1. IncidentClassification.IncidentClassificationBenignPositive
+1. IncidentClassification.IncidentClassificationFalsePositive
+1. IncidentClassification.IncidentClassificationTruePositive
+1. IncidentClassification.IncidentClassificationUndetermined
+1. IncidentClassificationReason.IncidentClassificationReasonInaccurateData
+1. IncidentClassificationReason.IncidentClassificationReasonIncorrectAlertLogic
+1. IncidentClassificationReason.IncidentClassificationReasonSuspiciousActivity
+1. IncidentClassificationReason.IncidentClassificationReasonSuspiciousButExpected
+1. IncidentLabelType.IncidentLabelTypeSystem
+1. IncidentLabelType.IncidentLabelTypeUser
+1. Kind.KindKindAlertRule
+1. Kind.KindKindFusion
+1. Kind.KindKindMicrosoftSecurityIncidentCreation
+1. Kind.KindKindScheduled
+1. KindBasicDataConnector.KindBasicDataConnectorKindAmazonWebServicesCloudTrail
+1. KindBasicDataConnector.KindBasicDataConnectorKindAzureActiveDirectory
+1. KindBasicDataConnector.KindBasicDataConnectorKindAzureAdvancedThreatProtection
+1. KindBasicDataConnector.KindBasicDataConnectorKindAzureSecurityCenter
+1. KindBasicDataConnector.KindBasicDataConnectorKindDataConnector
+1. KindBasicDataConnector.KindBasicDataConnectorKindMicrosoftCloudAppSecurity
+1. KindBasicDataConnector.KindBasicDataConnectorKindMicrosoftDefenderAdvancedThreatProtection
+1. KindBasicDataConnector.KindBasicDataConnectorKindOffice365
+1. KindBasicDataConnector.KindBasicDataConnectorKindThreatIntelligence
+1. KindBasicSettings.KindBasicSettingsKindSettings
+1. KindBasicSettings.KindBasicSettingsKindToggleSettings
+1. KindBasicSettings.KindBasicSettingsKindUebaSettings
+1. MicrosoftSecurityProductName.MicrosoftSecurityProductNameAzureActiveDirectoryIdentityProtection
+1. MicrosoftSecurityProductName.MicrosoftSecurityProductNameAzureAdvancedThreatProtection
+1. MicrosoftSecurityProductName.MicrosoftSecurityProductNameAzureSecurityCenter
+1. MicrosoftSecurityProductName.MicrosoftSecurityProductNameAzureSecurityCenterforIoT
+1. MicrosoftSecurityProductName.MicrosoftSecurityProductNameMicrosoftCloudAppSecurity
+1. TemplateStatus.TemplateStatusAvailable
+1. TemplateStatus.TemplateStatusInstalled
+1. TemplateStatus.TemplateStatusNotAvailable
+1. TriggerOperator.TriggerOperatorEqual
+1. TriggerOperator.TriggerOperatorGreaterThan
+1. TriggerOperator.TriggerOperatorLessThan
+1. TriggerOperator.TriggerOperatorNotEqual
+
+## Additive Changes
+
+### New Constants
+
+1. AlertRuleKind.Fusion
+1. AlertRuleKind.MicrosoftSecurityIncidentCreation
+1. AlertRuleKind.Scheduled
+1. AlertSeverity.High
+1. AlertSeverity.Informational
+1. AlertSeverity.Low
+1. AlertSeverity.Medium
+1. AttackTactic.Collection
+1. AttackTactic.CommandAndControl
+1. AttackTactic.CredentialAccess
+1. AttackTactic.DefenseEvasion
+1. AttackTactic.Discovery
+1. AttackTactic.Execution
+1. AttackTactic.Exfiltration
+1. AttackTactic.Impact
+1. AttackTactic.InitialAccess
+1. AttackTactic.LateralMovement
+1. AttackTactic.Persistence
+1. AttackTactic.PrivilegeEscalation
+1. DataTypeState.Disabled
+1. DataTypeState.Enabled
+1. IncidentClassification.BenignPositive
+1. IncidentClassification.FalsePositive
+1. IncidentClassification.TruePositive
+1. IncidentClassification.Undetermined
+1. IncidentClassificationReason.InaccurateData
+1. IncidentClassificationReason.IncorrectAlertLogic
+1. IncidentClassificationReason.SuspiciousActivity
+1. IncidentClassificationReason.SuspiciousButExpected
+1. IncidentLabelType.System
+1. IncidentLabelType.User
+1. Kind.KindAlertRule
+1. Kind.KindFusion
+1. Kind.KindMicrosoftSecurityIncidentCreation
+1. Kind.KindScheduled
+1. KindBasicDataConnector.KindAmazonWebServicesCloudTrail
+1. KindBasicDataConnector.KindAzureActiveDirectory
+1. KindBasicDataConnector.KindAzureAdvancedThreatProtection
+1. KindBasicDataConnector.KindAzureSecurityCenter
+1. KindBasicDataConnector.KindDataConnector
+1. KindBasicDataConnector.KindMicrosoftCloudAppSecurity
+1. KindBasicDataConnector.KindMicrosoftDefenderAdvancedThreatProtection
+1. KindBasicDataConnector.KindOffice365
+1. KindBasicDataConnector.KindThreatIntelligence
+1. KindBasicSettings.KindSettings
+1. KindBasicSettings.KindToggleSettings
+1. KindBasicSettings.KindUebaSettings
+1. MicrosoftSecurityProductName.AzureActiveDirectoryIdentityProtection
+1. MicrosoftSecurityProductName.AzureAdvancedThreatProtection
+1. MicrosoftSecurityProductName.AzureSecurityCenter
+1. MicrosoftSecurityProductName.AzureSecurityCenterforIoT
+1. MicrosoftSecurityProductName.MicrosoftCloudAppSecurity
+1. TemplateStatus.Available
+1. TemplateStatus.Installed
+1. TemplateStatus.NotAvailable
+1. TriggerOperator.Equal
+1. TriggerOperator.GreaterThan
+1. TriggerOperator.LessThan
+1. TriggerOperator.NotEqual
