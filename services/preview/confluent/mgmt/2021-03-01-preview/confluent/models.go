@@ -848,7 +848,7 @@ func NewOrganizationResourceListResultPage(cur OrganizationResourceListResult, g
 type OrganizationResourceProperties struct {
 	// CreatedTime - READ-ONLY; The creation time of the resource.
 	CreatedTime *date.Time `json:"createdTime,omitempty"`
-	// ProvisioningState - READ-ONLY; Provision states for confluent RP. Possible values include: 'ProvisionStateAccepted', 'ProvisionStateCreating', 'ProvisionStateUpdating', 'ProvisionStateDeleting', 'ProvisionStateSucceeded', 'ProvisionStateFailed', 'ProvisionStateCanceled', 'ProvisionStateDeleted', 'ProvisionStateNotSpecified'
+	// ProvisioningState - READ-ONLY; Provision states for confluent RP. Possible values include: 'Accepted', 'Creating', 'Updating', 'Deleting', 'Succeeded', 'Failed', 'Canceled', 'Deleted', 'NotSpecified'
 	ProvisioningState ProvisionState `json:"provisioningState,omitempty"`
 	// OrganizationID - READ-ONLY; Id of the Confluent organization.
 	OrganizationID *string `json:"organizationId,omitempty"`
@@ -897,13 +897,13 @@ type ResourceProviderDefaultErrorResponse struct {
 type SystemData struct {
 	// CreatedBy - The identity that created the resource.
 	CreatedBy *string `json:"createdBy,omitempty"`
-	// CreatedByType - The type of identity that created the resource. Possible values include: 'CreatedByTypeUser', 'CreatedByTypeApplication', 'CreatedByTypeManagedIdentity', 'CreatedByTypeKey'
+	// CreatedByType - The type of identity that created the resource. Possible values include: 'User', 'Application', 'ManagedIdentity', 'Key'
 	CreatedByType CreatedByType `json:"createdByType,omitempty"`
 	// CreatedAt - The timestamp of resource creation (UTC).
 	CreatedAt *date.Time `json:"createdAt,omitempty"`
 	// LastModifiedBy - The identity that last modified the resource.
 	LastModifiedBy *string `json:"lastModifiedBy,omitempty"`
-	// LastModifiedByType - The type of identity that last modified the resource. Possible values include: 'CreatedByTypeUser', 'CreatedByTypeApplication', 'CreatedByTypeManagedIdentity', 'CreatedByTypeKey'
+	// LastModifiedByType - The type of identity that last modified the resource. Possible values include: 'User', 'Application', 'ManagedIdentity', 'Key'
 	LastModifiedByType CreatedByType `json:"lastModifiedByType,omitempty"`
 	// LastModifiedAt - The timestamp of resource last modification (UTC)
 	LastModifiedAt *date.Time `json:"lastModifiedAt,omitempty"`
