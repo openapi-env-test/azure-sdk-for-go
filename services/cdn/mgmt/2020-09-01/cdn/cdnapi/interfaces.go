@@ -28,10 +28,10 @@ type ProfilesClientAPI interface {
 	Delete(ctx context.Context, resourceGroupName string, profileName string) (result cdn.ProfilesDeleteFuture, err error)
 	GenerateSsoURI(ctx context.Context, resourceGroupName string, profileName string) (result cdn.SsoURI, err error)
 	Get(ctx context.Context, resourceGroupName string, profileName string) (result cdn.Profile, err error)
-	List(ctx context.Context) (result cdn.ProfileListResultPage, err error)
-	ListComplete(ctx context.Context) (result cdn.ProfileListResultIterator, err error)
-	ListByResourceGroup(ctx context.Context, resourceGroupName string) (result cdn.ProfileListResultPage, err error)
-	ListByResourceGroupComplete(ctx context.Context, resourceGroupName string) (result cdn.ProfileListResultIterator, err error)
+	ListABCD(ctx context.Context) (result cdn.ProfileListResultPage, err error)
+	ListABCDComplete(ctx context.Context) (result cdn.ProfileListResultIterator, err error)
+	ListByResourceGroupABCD(ctx context.Context, resourceGroupName string) (result cdn.ProfileListResultPage, err error)
+	ListByResourceGroupABCDComplete(ctx context.Context, resourceGroupName string) (result cdn.ProfileListResultIterator, err error)
 	ListResourceUsage(ctx context.Context, resourceGroupName string, profileName string) (result cdn.ResourceUsageListResultPage, err error)
 	ListResourceUsageComplete(ctx context.Context, resourceGroupName string, profileName string) (result cdn.ResourceUsageListResultIterator, err error)
 	ListSupportedOptimizationTypes(ctx context.Context, resourceGroupName string, profileName string) (result cdn.SupportedOptimizationTypesListResult, err error)
@@ -198,7 +198,7 @@ var _ RoutesClientAPI = (*cdn.RoutesClient)(nil)
 
 // RuleSetsClientAPI contains the set of methods on the RuleSetsClient type.
 type RuleSetsClientAPI interface {
-	Create(ctx context.Context, resourceGroupName string, profileName string, ruleSetName string, ruleSet cdn.RuleSet) (result cdn.RuleSetsCreateFuture, err error)
+	Create(ctx context.Context, resourceGroupName string, profileName string, ruleSetName string) (result cdn.RuleSetsCreateFuture, err error)
 	Delete(ctx context.Context, resourceGroupName string, profileName string, ruleSetName string) (result cdn.RuleSetsDeleteFuture, err error)
 	Get(ctx context.Context, resourceGroupName string, profileName string, ruleSetName string) (result cdn.RuleSet, err error)
 	ListByProfile(ctx context.Context, resourceGroupName string, profileName string) (result cdn.RuleSetListResultPage, err error)
@@ -255,11 +255,11 @@ var _ ValidateClientAPI = (*cdn.ValidateClient)(nil)
 // LogAnalyticsClientAPI contains the set of methods on the LogAnalyticsClient type.
 type LogAnalyticsClientAPI interface {
 	GetLogAnalyticsLocations(ctx context.Context, resourceGroupName string, profileName string) (result cdn.ContinentsResponse, err error)
-	GetLogAnalyticsMetrics(ctx context.Context, resourceGroupName string, profileName string, metrics []string, dateTimeBegin date.Time, dateTimeEnd date.Time, granularity string, groupBy []string, continents []string, countryOrRegions []string, customDomains []string, protocols []string) (result cdn.MetricsResponse, err error)
-	GetLogAnalyticsRankings(ctx context.Context, resourceGroupName string, profileName string, rankings []string, metrics []string, maxRanking int32, dateTimeBegin date.Time, dateTimeEnd date.Time, customDomains []string) (result cdn.RankingsResponse, err error)
+	GetLogAnalyticsMetrics(ctx context.Context, resourceGroupName string, profileName string, metrics []cdn.LogMetric, dateTimeBegin date.Time, dateTimeEnd date.Time, granularity cdn.LogMetricsGranularity, customDomains []string, protocols []string, groupBy []cdn.LogMetricsGroupBy, continents []string, countryOrRegions []string) (result cdn.MetricsResponse, err error)
+	GetLogAnalyticsRankings(ctx context.Context, resourceGroupName string, profileName string, rankings []cdn.LogRanking, metrics []cdn.LogRankingMetric, maxRanking int32, dateTimeBegin date.Time, dateTimeEnd date.Time, customDomains []string) (result cdn.RankingsResponse, err error)
 	GetLogAnalyticsResources(ctx context.Context, resourceGroupName string, profileName string) (result cdn.ResourcesResponse, err error)
-	GetWafLogAnalyticsMetrics(ctx context.Context, resourceGroupName string, profileName string, metrics []string, dateTimeBegin date.Time, dateTimeEnd date.Time, granularity string, actions []string, groupBy []string, ruleTypes []string) (result cdn.WafMetricsResponse, err error)
-	GetWafLogAnalyticsRankings(ctx context.Context, resourceGroupName string, profileName string, metrics []string, dateTimeBegin date.Time, dateTimeEnd date.Time, maxRanking int32, rankings []string, actions []string, ruleTypes []string) (result cdn.WafRankingsResponse, err error)
+	GetWafLogAnalyticsMetrics(ctx context.Context, resourceGroupName string, profileName string, metrics []cdn.WafMetric, dateTimeBegin date.Time, dateTimeEnd date.Time, granularity cdn.WafGranularity, actions []cdn.WafAction, groupBy []cdn.WafRankingGroupBy, ruleTypes []cdn.WafRuleType) (result cdn.WafMetricsResponse, err error)
+	GetWafLogAnalyticsRankings(ctx context.Context, resourceGroupName string, profileName string, metrics []cdn.WafMetric, dateTimeBegin date.Time, dateTimeEnd date.Time, maxRanking int32, rankings []cdn.WafRankingType, actions []cdn.WafAction, ruleTypes []cdn.WafRuleType) (result cdn.WafRankingsResponse, err error)
 }
 
 var _ LogAnalyticsClientAPI = (*cdn.LogAnalyticsClient)(nil)
