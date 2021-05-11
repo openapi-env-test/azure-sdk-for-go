@@ -379,10 +379,10 @@ func (client ProfilesClient) GetResponder(resp *http.Response) (result Profile, 
 	return
 }
 
-// List lists all of the CDN profiles within an Azure subscription.
-func (client ProfilesClient) List(ctx context.Context) (result ProfileListResultPage, err error) {
+// ListABCD lists all of the CDN profiles within an Azure subscription.
+func (client ProfilesClient) ListABCD(ctx context.Context) (result ProfileListResultPage, err error) {
 	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/ProfilesClient.List")
+		ctx = tracing.StartSpan(ctx, fqdn+"/ProfilesClient.ListABCD")
 		defer func() {
 			sc := -1
 			if result.plr.Response.Response != nil {
@@ -391,23 +391,23 @@ func (client ProfilesClient) List(ctx context.Context) (result ProfileListResult
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	result.fn = client.listNextResults
-	req, err := client.ListPreparer(ctx)
+	result.fn = client.listABCDNextResults
+	req, err := client.ListABCDPreparer(ctx)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "cdn.ProfilesClient", "List", nil, "Failure preparing request")
+		err = autorest.NewErrorWithError(err, "cdn.ProfilesClient", "ListABCD", nil, "Failure preparing request")
 		return
 	}
 
-	resp, err := client.ListSender(req)
+	resp, err := client.ListABCDSender(req)
 	if err != nil {
 		result.plr.Response = autorest.Response{Response: resp}
-		err = autorest.NewErrorWithError(err, "cdn.ProfilesClient", "List", resp, "Failure sending request")
+		err = autorest.NewErrorWithError(err, "cdn.ProfilesClient", "ListABCD", resp, "Failure sending request")
 		return
 	}
 
-	result.plr, err = client.ListResponder(resp)
+	result.plr, err = client.ListABCDResponder(resp)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "cdn.ProfilesClient", "List", resp, "Failure responding to request")
+		err = autorest.NewErrorWithError(err, "cdn.ProfilesClient", "ListABCD", resp, "Failure responding to request")
 		return
 	}
 	if result.plr.hasNextLink() && result.plr.IsEmpty() {
@@ -418,8 +418,8 @@ func (client ProfilesClient) List(ctx context.Context) (result ProfileListResult
 	return
 }
 
-// ListPreparer prepares the List request.
-func (client ProfilesClient) ListPreparer(ctx context.Context) (*http.Request, error) {
+// ListABCDPreparer prepares the ListABCD request.
+func (client ProfilesClient) ListABCDPreparer(ctx context.Context) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"subscriptionId": autorest.Encode("path", client.SubscriptionID),
 	}
@@ -437,15 +437,15 @@ func (client ProfilesClient) ListPreparer(ctx context.Context) (*http.Request, e
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
 }
 
-// ListSender sends the List request. The method will close the
+// ListABCDSender sends the ListABCD request. The method will close the
 // http.Response Body if it receives an error.
-func (client ProfilesClient) ListSender(req *http.Request) (*http.Response, error) {
+func (client ProfilesClient) ListABCDSender(req *http.Request) (*http.Response, error) {
 	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
-// ListResponder handles the response to the List request. The method always
+// ListABCDResponder handles the response to the ListABCD request. The method always
 // closes the http.Response Body.
-func (client ProfilesClient) ListResponder(resp *http.Response) (result ProfileListResult, err error) {
+func (client ProfilesClient) ListABCDResponder(resp *http.Response) (result ProfileListResult, err error) {
 	err = autorest.Respond(
 		resp,
 		azure.WithErrorUnlessStatusCode(http.StatusOK),
@@ -455,31 +455,31 @@ func (client ProfilesClient) ListResponder(resp *http.Response) (result ProfileL
 	return
 }
 
-// listNextResults retrieves the next set of results, if any.
-func (client ProfilesClient) listNextResults(ctx context.Context, lastResults ProfileListResult) (result ProfileListResult, err error) {
+// listABCDNextResults retrieves the next set of results, if any.
+func (client ProfilesClient) listABCDNextResults(ctx context.Context, lastResults ProfileListResult) (result ProfileListResult, err error) {
 	req, err := lastResults.profileListResultPreparer(ctx)
 	if err != nil {
-		return result, autorest.NewErrorWithError(err, "cdn.ProfilesClient", "listNextResults", nil, "Failure preparing next results request")
+		return result, autorest.NewErrorWithError(err, "cdn.ProfilesClient", "listABCDNextResults", nil, "Failure preparing next results request")
 	}
 	if req == nil {
 		return
 	}
-	resp, err := client.ListSender(req)
+	resp, err := client.ListABCDSender(req)
 	if err != nil {
 		result.Response = autorest.Response{Response: resp}
-		return result, autorest.NewErrorWithError(err, "cdn.ProfilesClient", "listNextResults", resp, "Failure sending next results request")
+		return result, autorest.NewErrorWithError(err, "cdn.ProfilesClient", "listABCDNextResults", resp, "Failure sending next results request")
 	}
-	result, err = client.ListResponder(resp)
+	result, err = client.ListABCDResponder(resp)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "cdn.ProfilesClient", "listNextResults", resp, "Failure responding to next results request")
+		err = autorest.NewErrorWithError(err, "cdn.ProfilesClient", "listABCDNextResults", resp, "Failure responding to next results request")
 	}
 	return
 }
 
-// ListComplete enumerates all values, automatically crossing page boundaries as required.
-func (client ProfilesClient) ListComplete(ctx context.Context) (result ProfileListResultIterator, err error) {
+// ListABCDComplete enumerates all values, automatically crossing page boundaries as required.
+func (client ProfilesClient) ListABCDComplete(ctx context.Context) (result ProfileListResultIterator, err error) {
 	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/ProfilesClient.List")
+		ctx = tracing.StartSpan(ctx, fqdn+"/ProfilesClient.ListABCD")
 		defer func() {
 			sc := -1
 			if result.Response().Response.Response != nil {
@@ -488,16 +488,16 @@ func (client ProfilesClient) ListComplete(ctx context.Context) (result ProfileLi
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	result.page, err = client.List(ctx)
+	result.page, err = client.ListABCD(ctx)
 	return
 }
 
-// ListByResourceGroup lists all of the CDN profiles within a resource group.
+// ListByResourceGroupABCD lists all of the CDN profiles within a resource group.
 // Parameters:
 // resourceGroupName - name of the Resource group within the Azure subscription.
-func (client ProfilesClient) ListByResourceGroup(ctx context.Context, resourceGroupName string) (result ProfileListResultPage, err error) {
+func (client ProfilesClient) ListByResourceGroupABCD(ctx context.Context, resourceGroupName string) (result ProfileListResultPage, err error) {
 	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/ProfilesClient.ListByResourceGroup")
+		ctx = tracing.StartSpan(ctx, fqdn+"/ProfilesClient.ListByResourceGroupABCD")
 		defer func() {
 			sc := -1
 			if result.plr.Response.Response != nil {
@@ -511,26 +511,26 @@ func (client ProfilesClient) ListByResourceGroup(ctx context.Context, resourceGr
 			Constraints: []validation.Constraint{{Target: "resourceGroupName", Name: validation.MaxLength, Rule: 90, Chain: nil},
 				{Target: "resourceGroupName", Name: validation.MinLength, Rule: 1, Chain: nil},
 				{Target: "resourceGroupName", Name: validation.Pattern, Rule: `^[-\w\._\(\)]+$`, Chain: nil}}}}); err != nil {
-		return result, validation.NewError("cdn.ProfilesClient", "ListByResourceGroup", err.Error())
+		return result, validation.NewError("cdn.ProfilesClient", "ListByResourceGroupABCD", err.Error())
 	}
 
-	result.fn = client.listByResourceGroupNextResults
-	req, err := client.ListByResourceGroupPreparer(ctx, resourceGroupName)
+	result.fn = client.listByResourceGroupABCDNextResults
+	req, err := client.ListByResourceGroupABCDPreparer(ctx, resourceGroupName)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "cdn.ProfilesClient", "ListByResourceGroup", nil, "Failure preparing request")
+		err = autorest.NewErrorWithError(err, "cdn.ProfilesClient", "ListByResourceGroupABCD", nil, "Failure preparing request")
 		return
 	}
 
-	resp, err := client.ListByResourceGroupSender(req)
+	resp, err := client.ListByResourceGroupABCDSender(req)
 	if err != nil {
 		result.plr.Response = autorest.Response{Response: resp}
-		err = autorest.NewErrorWithError(err, "cdn.ProfilesClient", "ListByResourceGroup", resp, "Failure sending request")
+		err = autorest.NewErrorWithError(err, "cdn.ProfilesClient", "ListByResourceGroupABCD", resp, "Failure sending request")
 		return
 	}
 
-	result.plr, err = client.ListByResourceGroupResponder(resp)
+	result.plr, err = client.ListByResourceGroupABCDResponder(resp)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "cdn.ProfilesClient", "ListByResourceGroup", resp, "Failure responding to request")
+		err = autorest.NewErrorWithError(err, "cdn.ProfilesClient", "ListByResourceGroupABCD", resp, "Failure responding to request")
 		return
 	}
 	if result.plr.hasNextLink() && result.plr.IsEmpty() {
@@ -541,8 +541,8 @@ func (client ProfilesClient) ListByResourceGroup(ctx context.Context, resourceGr
 	return
 }
 
-// ListByResourceGroupPreparer prepares the ListByResourceGroup request.
-func (client ProfilesClient) ListByResourceGroupPreparer(ctx context.Context, resourceGroupName string) (*http.Request, error) {
+// ListByResourceGroupABCDPreparer prepares the ListByResourceGroupABCD request.
+func (client ProfilesClient) ListByResourceGroupABCDPreparer(ctx context.Context, resourceGroupName string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"resourceGroupName": autorest.Encode("path", resourceGroupName),
 		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
@@ -561,15 +561,15 @@ func (client ProfilesClient) ListByResourceGroupPreparer(ctx context.Context, re
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
 }
 
-// ListByResourceGroupSender sends the ListByResourceGroup request. The method will close the
+// ListByResourceGroupABCDSender sends the ListByResourceGroupABCD request. The method will close the
 // http.Response Body if it receives an error.
-func (client ProfilesClient) ListByResourceGroupSender(req *http.Request) (*http.Response, error) {
+func (client ProfilesClient) ListByResourceGroupABCDSender(req *http.Request) (*http.Response, error) {
 	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
-// ListByResourceGroupResponder handles the response to the ListByResourceGroup request. The method always
+// ListByResourceGroupABCDResponder handles the response to the ListByResourceGroupABCD request. The method always
 // closes the http.Response Body.
-func (client ProfilesClient) ListByResourceGroupResponder(resp *http.Response) (result ProfileListResult, err error) {
+func (client ProfilesClient) ListByResourceGroupABCDResponder(resp *http.Response) (result ProfileListResult, err error) {
 	err = autorest.Respond(
 		resp,
 		azure.WithErrorUnlessStatusCode(http.StatusOK),
@@ -579,31 +579,31 @@ func (client ProfilesClient) ListByResourceGroupResponder(resp *http.Response) (
 	return
 }
 
-// listByResourceGroupNextResults retrieves the next set of results, if any.
-func (client ProfilesClient) listByResourceGroupNextResults(ctx context.Context, lastResults ProfileListResult) (result ProfileListResult, err error) {
+// listByResourceGroupABCDNextResults retrieves the next set of results, if any.
+func (client ProfilesClient) listByResourceGroupABCDNextResults(ctx context.Context, lastResults ProfileListResult) (result ProfileListResult, err error) {
 	req, err := lastResults.profileListResultPreparer(ctx)
 	if err != nil {
-		return result, autorest.NewErrorWithError(err, "cdn.ProfilesClient", "listByResourceGroupNextResults", nil, "Failure preparing next results request")
+		return result, autorest.NewErrorWithError(err, "cdn.ProfilesClient", "listByResourceGroupABCDNextResults", nil, "Failure preparing next results request")
 	}
 	if req == nil {
 		return
 	}
-	resp, err := client.ListByResourceGroupSender(req)
+	resp, err := client.ListByResourceGroupABCDSender(req)
 	if err != nil {
 		result.Response = autorest.Response{Response: resp}
-		return result, autorest.NewErrorWithError(err, "cdn.ProfilesClient", "listByResourceGroupNextResults", resp, "Failure sending next results request")
+		return result, autorest.NewErrorWithError(err, "cdn.ProfilesClient", "listByResourceGroupABCDNextResults", resp, "Failure sending next results request")
 	}
-	result, err = client.ListByResourceGroupResponder(resp)
+	result, err = client.ListByResourceGroupABCDResponder(resp)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "cdn.ProfilesClient", "listByResourceGroupNextResults", resp, "Failure responding to next results request")
+		err = autorest.NewErrorWithError(err, "cdn.ProfilesClient", "listByResourceGroupABCDNextResults", resp, "Failure responding to next results request")
 	}
 	return
 }
 
-// ListByResourceGroupComplete enumerates all values, automatically crossing page boundaries as required.
-func (client ProfilesClient) ListByResourceGroupComplete(ctx context.Context, resourceGroupName string) (result ProfileListResultIterator, err error) {
+// ListByResourceGroupABCDComplete enumerates all values, automatically crossing page boundaries as required.
+func (client ProfilesClient) ListByResourceGroupABCDComplete(ctx context.Context, resourceGroupName string) (result ProfileListResultIterator, err error) {
 	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/ProfilesClient.ListByResourceGroup")
+		ctx = tracing.StartSpan(ctx, fqdn+"/ProfilesClient.ListByResourceGroupABCD")
 		defer func() {
 			sc := -1
 			if result.Response().Response.Response != nil {
@@ -612,7 +612,7 @@ func (client ProfilesClient) ListByResourceGroupComplete(ctx context.Context, re
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	result.page, err = client.ListByResourceGroup(ctx, resourceGroupName)
+	result.page, err = client.ListByResourceGroupABCD(ctx, resourceGroupName)
 	return
 }
 
