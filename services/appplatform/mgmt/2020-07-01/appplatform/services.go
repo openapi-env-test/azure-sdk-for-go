@@ -428,7 +428,7 @@ func (client ServicesClient) EnableTestEndpointResponder(resp *http.Response) (r
 	return
 }
 
-// Get get a Service and its properties.
+// Get get a Service and its properties. Test. Test2 x.
 // Parameters:
 // resourceGroupName - the name of the resource group that contains the resource. You can obtain this value
 // from the Azure Resource Manager API or the portal.
