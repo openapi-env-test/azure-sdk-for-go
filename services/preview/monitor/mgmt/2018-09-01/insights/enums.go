@@ -29,6 +29,27 @@ func PossibleAggregationTypeValues() []AggregationType {
 	return []AggregationType{Average, Count, Maximum, Minimum, None, Total}
 }
 
+// AggregationTypeEnum enumerates the values for aggregation type enum.
+type AggregationTypeEnum string
+
+const (
+	// AggregationTypeEnumAverage ...
+	AggregationTypeEnumAverage AggregationTypeEnum = "Average"
+	// AggregationTypeEnumCount ...
+	AggregationTypeEnumCount AggregationTypeEnum = "Count"
+	// AggregationTypeEnumMaximum ...
+	AggregationTypeEnumMaximum AggregationTypeEnum = "Maximum"
+	// AggregationTypeEnumMinimum ...
+	AggregationTypeEnumMinimum AggregationTypeEnum = "Minimum"
+	// AggregationTypeEnumTotal ...
+	AggregationTypeEnumTotal AggregationTypeEnum = "Total"
+)
+
+// PossibleAggregationTypeEnumValues returns an array of possible values for the AggregationTypeEnum const type.
+func PossibleAggregationTypeEnumValues() []AggregationTypeEnum {
+	return []AggregationTypeEnum{AggregationTypeEnumAverage, AggregationTypeEnumCount, AggregationTypeEnumMaximum, AggregationTypeEnumMinimum, AggregationTypeEnumTotal}
+}
+
 // AlertSeverity enumerates the values for alert severity.
 type AlertSeverity string
 
@@ -48,6 +69,23 @@ const (
 // PossibleAlertSeverityValues returns an array of possible values for the AlertSeverity const type.
 func PossibleAlertSeverityValues() []AlertSeverity {
 	return []AlertSeverity{Four, One, Three, Two, Zero}
+}
+
+// BaselineSensitivity enumerates the values for baseline sensitivity.
+type BaselineSensitivity string
+
+const (
+	// High ...
+	High BaselineSensitivity = "High"
+	// Low ...
+	Low BaselineSensitivity = "Low"
+	// Medium ...
+	Medium BaselineSensitivity = "Medium"
+)
+
+// PossibleBaselineSensitivityValues returns an array of possible values for the BaselineSensitivity const type.
+func PossibleBaselineSensitivityValues() []BaselineSensitivity {
+	return []BaselineSensitivity{High, Low, Medium}
 }
 
 // CategoryType enumerates the values for category type.
@@ -96,13 +134,17 @@ const (
 	ConditionalOperatorEqual ConditionalOperator = "Equal"
 	// ConditionalOperatorGreaterThan ...
 	ConditionalOperatorGreaterThan ConditionalOperator = "GreaterThan"
+	// ConditionalOperatorGreaterThanOrEqual ...
+	ConditionalOperatorGreaterThanOrEqual ConditionalOperator = "GreaterThanOrEqual"
 	// ConditionalOperatorLessThan ...
 	ConditionalOperatorLessThan ConditionalOperator = "LessThan"
+	// ConditionalOperatorLessThanOrEqual ...
+	ConditionalOperatorLessThanOrEqual ConditionalOperator = "LessThanOrEqual"
 )
 
 // PossibleConditionalOperatorValues returns an array of possible values for the ConditionalOperator const type.
 func PossibleConditionalOperatorValues() []ConditionalOperator {
-	return []ConditionalOperator{ConditionalOperatorEqual, ConditionalOperatorGreaterThan, ConditionalOperatorLessThan}
+	return []ConditionalOperator{ConditionalOperatorEqual, ConditionalOperatorGreaterThan, ConditionalOperatorGreaterThanOrEqual, ConditionalOperatorLessThan, ConditionalOperatorLessThanOrEqual}
 }
 
 // ConditionOperator enumerates the values for condition operator.
@@ -162,17 +204,17 @@ func PossibleDynamicThresholdOperatorValues() []DynamicThresholdOperator {
 type DynamicThresholdSensitivity string
 
 const (
-	// High ...
-	High DynamicThresholdSensitivity = "High"
-	// Low ...
-	Low DynamicThresholdSensitivity = "Low"
-	// Medium ...
-	Medium DynamicThresholdSensitivity = "Medium"
+	// DynamicThresholdSensitivityHigh ...
+	DynamicThresholdSensitivityHigh DynamicThresholdSensitivity = "High"
+	// DynamicThresholdSensitivityLow ...
+	DynamicThresholdSensitivityLow DynamicThresholdSensitivity = "Low"
+	// DynamicThresholdSensitivityMedium ...
+	DynamicThresholdSensitivityMedium DynamicThresholdSensitivity = "Medium"
 )
 
 // PossibleDynamicThresholdSensitivityValues returns an array of possible values for the DynamicThresholdSensitivity const type.
 func PossibleDynamicThresholdSensitivityValues() []DynamicThresholdSensitivity {
-	return []DynamicThresholdSensitivity{High, Low, Medium}
+	return []DynamicThresholdSensitivity{DynamicThresholdSensitivityHigh, DynamicThresholdSensitivityLow, DynamicThresholdSensitivityMedium}
 }
 
 // Enabled enumerates the values for enabled.
