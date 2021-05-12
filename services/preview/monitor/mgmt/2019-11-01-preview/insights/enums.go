@@ -29,6 +29,27 @@ func PossibleAggregationTypeValues() []AggregationType {
 	return []AggregationType{Average, Count, Maximum, Minimum, None, Total}
 }
 
+// AggregationTypeEnum enumerates the values for aggregation type enum.
+type AggregationTypeEnum string
+
+const (
+	// AggregationTypeEnumAverage ...
+	AggregationTypeEnumAverage AggregationTypeEnum = "Average"
+	// AggregationTypeEnumCount ...
+	AggregationTypeEnumCount AggregationTypeEnum = "Count"
+	// AggregationTypeEnumMaximum ...
+	AggregationTypeEnumMaximum AggregationTypeEnum = "Maximum"
+	// AggregationTypeEnumMinimum ...
+	AggregationTypeEnumMinimum AggregationTypeEnum = "Minimum"
+	// AggregationTypeEnumTotal ...
+	AggregationTypeEnumTotal AggregationTypeEnum = "Total"
+)
+
+// PossibleAggregationTypeEnumValues returns an array of possible values for the AggregationTypeEnum const type.
+func PossibleAggregationTypeEnumValues() []AggregationTypeEnum {
+	return []AggregationTypeEnum{AggregationTypeEnumAverage, AggregationTypeEnumCount, AggregationTypeEnumMaximum, AggregationTypeEnumMinimum, AggregationTypeEnumTotal}
+}
+
 // AlertSeverity enumerates the values for alert severity.
 type AlertSeverity string
 
@@ -113,13 +134,17 @@ const (
 	ConditionalOperatorEqual ConditionalOperator = "Equal"
 	// ConditionalOperatorGreaterThan ...
 	ConditionalOperatorGreaterThan ConditionalOperator = "GreaterThan"
+	// ConditionalOperatorGreaterThanOrEqual ...
+	ConditionalOperatorGreaterThanOrEqual ConditionalOperator = "GreaterThanOrEqual"
 	// ConditionalOperatorLessThan ...
 	ConditionalOperatorLessThan ConditionalOperator = "LessThan"
+	// ConditionalOperatorLessThanOrEqual ...
+	ConditionalOperatorLessThanOrEqual ConditionalOperator = "LessThanOrEqual"
 )
 
 // PossibleConditionalOperatorValues returns an array of possible values for the ConditionalOperator const type.
 func PossibleConditionalOperatorValues() []ConditionalOperator {
-	return []ConditionalOperator{ConditionalOperatorEqual, ConditionalOperatorGreaterThan, ConditionalOperatorLessThan}
+	return []ConditionalOperator{ConditionalOperatorEqual, ConditionalOperatorGreaterThan, ConditionalOperatorGreaterThanOrEqual, ConditionalOperatorLessThan, ConditionalOperatorLessThanOrEqual}
 }
 
 // ConditionOperator enumerates the values for condition operator.
@@ -275,6 +300,23 @@ const (
 // PossibleMetricTriggerTypeValues returns an array of possible values for the MetricTriggerType const type.
 func PossibleMetricTriggerTypeValues() []MetricTriggerType {
 	return []MetricTriggerType{MetricTriggerTypeConsecutive, MetricTriggerTypeTotal}
+}
+
+// NamespaceClassification enumerates the values for namespace classification.
+type NamespaceClassification string
+
+const (
+	// Custom ...
+	Custom NamespaceClassification = "Custom"
+	// Platform ...
+	Platform NamespaceClassification = "Platform"
+	// Qos ...
+	Qos NamespaceClassification = "Qos"
+)
+
+// PossibleNamespaceClassificationValues returns an array of possible values for the NamespaceClassification const type.
+func PossibleNamespaceClassificationValues() []NamespaceClassification {
+	return []NamespaceClassification{Custom, Platform, Qos}
 }
 
 // OdataType enumerates the values for odata type.
@@ -544,23 +586,6 @@ const (
 // PossibleScaleTypeValues returns an array of possible values for the ScaleType const type.
 func PossibleScaleTypeValues() []ScaleType {
 	return []ScaleType{ChangeCount, ExactCount, PercentChangeCount}
-}
-
-// Sensitivity enumerates the values for sensitivity.
-type Sensitivity string
-
-const (
-	// SensitivityHigh ...
-	SensitivityHigh Sensitivity = "High"
-	// SensitivityLow ...
-	SensitivityLow Sensitivity = "Low"
-	// SensitivityMedium ...
-	SensitivityMedium Sensitivity = "Medium"
-)
-
-// PossibleSensitivityValues returns an array of possible values for the Sensitivity const type.
-func PossibleSensitivityValues() []Sensitivity {
-	return []Sensitivity{SensitivityHigh, SensitivityLow, SensitivityMedium}
 }
 
 // TimeAggregationOperator enumerates the values for time aggregation operator.
