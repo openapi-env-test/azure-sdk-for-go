@@ -62,8 +62,8 @@ type AccountResourceRequest struct {
 	AccountName *string `json:"accountName,omitempty"`
 	// Location - The Azure instance location.
 	Location *string `json:"location,omitempty"`
-	// OperationType - The type of the operation.
-	OperationType interface{} `json:"operationType,omitempty"`
+	// OperationType - The type of the operation. Possible values include: 'Unknown', 'Create', 'Update', 'Link'
+	OperationType AccountResourceRequestOperationType `json:"operationType,omitempty"`
 	// Properties - The custom properties of the resource.
 	Properties map[string]*string `json:"properties"`
 	// Tags - The custom tags of the resource.
@@ -79,7 +79,7 @@ func (arr AccountResourceRequest) MarshalJSON() ([]byte, error) {
 	if arr.Location != nil {
 		objectMap["location"] = arr.Location
 	}
-	if arr.OperationType != nil {
+	if arr.OperationType != "" {
 		objectMap["operationType"] = arr.OperationType
 	}
 	if arr.Properties != nil {
