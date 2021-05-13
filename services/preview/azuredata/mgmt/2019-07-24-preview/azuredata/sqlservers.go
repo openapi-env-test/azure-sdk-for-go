@@ -21,14 +21,14 @@ type SQLServersClient struct {
 }
 
 // NewSQLServersClient creates an instance of the SQLServersClient client.
-func NewSQLServersClient(subscriptionID string, subscriptionID1 string) SQLServersClient {
-	return NewSQLServersClientWithBaseURI(DefaultBaseURI, subscriptionID, subscriptionID1)
+func NewSQLServersClient(subscriptionID string) SQLServersClient {
+	return NewSQLServersClientWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
 // NewSQLServersClientWithBaseURI creates an instance of the SQLServersClient client using a custom endpoint.  Use this
 // when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure stack).
-func NewSQLServersClientWithBaseURI(baseURI string, subscriptionID string, subscriptionID1 string) SQLServersClient {
-	return SQLServersClient{NewWithBaseURI(baseURI, subscriptionID, subscriptionID1)}
+func NewSQLServersClientWithBaseURI(baseURI string, subscriptionID string) SQLServersClient {
+	return SQLServersClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
 
 // CreateOrUpdate creates or updates a SQL Server.
