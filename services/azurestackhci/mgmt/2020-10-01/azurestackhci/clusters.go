@@ -97,6 +97,7 @@ func (client ClustersClient) CreatePreparer(ctx context.Context, resourceGroupNa
 		"api-version": APIVersion,
 	}
 
+	cluster.SystemData = nil
 	preparer := autorest.CreatePreparer(
 		autorest.AsContentType("application/json; charset=utf-8"),
 		autorest.AsPut(),
