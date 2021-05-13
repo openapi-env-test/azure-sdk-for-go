@@ -21,15 +21,15 @@ type SQLServerRegistrationsClient struct {
 }
 
 // NewSQLServerRegistrationsClient creates an instance of the SQLServerRegistrationsClient client.
-func NewSQLServerRegistrationsClient(subscriptionID string, subscriptionID1 string) SQLServerRegistrationsClient {
-	return NewSQLServerRegistrationsClientWithBaseURI(DefaultBaseURI, subscriptionID, subscriptionID1)
+func NewSQLServerRegistrationsClient(subscriptionID string) SQLServerRegistrationsClient {
+	return NewSQLServerRegistrationsClientWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
 // NewSQLServerRegistrationsClientWithBaseURI creates an instance of the SQLServerRegistrationsClient client using a
 // custom endpoint.  Use this when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds,
 // Azure stack).
-func NewSQLServerRegistrationsClientWithBaseURI(baseURI string, subscriptionID string, subscriptionID1 string) SQLServerRegistrationsClient {
-	return SQLServerRegistrationsClient{NewWithBaseURI(baseURI, subscriptionID, subscriptionID1)}
+func NewSQLServerRegistrationsClientWithBaseURI(baseURI string, subscriptionID string) SQLServerRegistrationsClient {
+	return SQLServerRegistrationsClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
 
 // CreateOrUpdate creates or updates a SQL Server registration.
