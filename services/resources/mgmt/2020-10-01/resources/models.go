@@ -86,9 +86,9 @@ func (ap AliasPath) MarshalJSON() ([]byte, error) {
 
 // AliasPathMetadata ...
 type AliasPathMetadata struct {
-	// Type - READ-ONLY; The type of the token that the alias path is referring to. Possible values include: 'AliasPathTokenTypeNotSpecified', 'AliasPathTokenTypeAny', 'AliasPathTokenTypeString', 'AliasPathTokenTypeObject', 'AliasPathTokenTypeArray', 'AliasPathTokenTypeInteger', 'AliasPathTokenTypeNumber', 'AliasPathTokenTypeBoolean'
+	// Type - READ-ONLY; The type of the token that the alias path is referring to. Possible values include: 'NotSpecified', 'Any', 'String', 'Object', 'Array', 'Integer', 'Number', 'Boolean'
 	Type AliasPathTokenType `json:"type,omitempty"`
-	// Attributes - READ-ONLY; The attributes of the token that the alias path is referring to. Possible values include: 'AliasPathAttributesNone', 'AliasPathAttributesModifiable'
+	// Attributes - READ-ONLY; The attributes of the token that the alias path is referring to. Possible values include: 'None', 'Modifiable'
 	Attributes AliasPathAttributes `json:"attributes,omitempty"`
 }
 
@@ -762,7 +762,7 @@ type DeploymentProperties struct {
 	Parameters interface{} `json:"parameters,omitempty"`
 	// ParametersLink - The URI of parameters file. You use this element to link to an existing parameters file. Use either the parametersLink property or the parameters property, but not both.
 	ParametersLink *ParametersLink `json:"parametersLink,omitempty"`
-	// Mode - The mode that is used to deploy resources. This value can be either Incremental or Complete. In Incremental mode, resources are deployed without deleting existing resources that are not included in the template. In Complete mode, resources are deployed and existing resources in the resource group that are not included in the template are deleted. Be careful when using Complete mode as you may unintentionally delete resources. Possible values include: 'DeploymentModeIncremental', 'DeploymentModeComplete'
+	// Mode - The mode that is used to deploy resources. This value can be either Incremental or Complete. In Incremental mode, resources are deployed without deleting existing resources that are not included in the template. In Complete mode, resources are deployed and existing resources in the resource group that are not included in the template are deleted. Be careful when using Complete mode as you may unintentionally delete resources. Possible values include: 'Incremental', 'Complete'
 	Mode DeploymentMode `json:"mode,omitempty"`
 	// DebugSetting - The debug setting of the deployment.
 	DebugSetting *DebugSetting `json:"debugSetting,omitempty"`
@@ -794,7 +794,7 @@ type DeploymentPropertiesExtended struct {
 	Parameters interface{} `json:"parameters,omitempty"`
 	// ParametersLink - READ-ONLY; The URI referencing the parameters.
 	ParametersLink *ParametersLink `json:"parametersLink,omitempty"`
-	// Mode - READ-ONLY; The deployment mode. Possible values are Incremental and Complete. Possible values include: 'DeploymentModeIncremental', 'DeploymentModeComplete'
+	// Mode - READ-ONLY; The deployment mode. Possible values are Incremental and Complete. Possible values include: 'Incremental', 'Complete'
 	Mode DeploymentMode `json:"mode,omitempty"`
 	// DebugSetting - READ-ONLY; The debug setting of the deployment.
 	DebugSetting *DebugSetting `json:"debugSetting,omitempty"`
@@ -1635,7 +1635,7 @@ type DeploymentWhatIfProperties struct {
 	Parameters interface{} `json:"parameters,omitempty"`
 	// ParametersLink - The URI of parameters file. You use this element to link to an existing parameters file. Use either the parametersLink property or the parameters property, but not both.
 	ParametersLink *ParametersLink `json:"parametersLink,omitempty"`
-	// Mode - The mode that is used to deploy resources. This value can be either Incremental or Complete. In Incremental mode, resources are deployed without deleting existing resources that are not included in the template. In Complete mode, resources are deployed and existing resources in the resource group that are not included in the template are deleted. Be careful when using Complete mode as you may unintentionally delete resources. Possible values include: 'DeploymentModeIncremental', 'DeploymentModeComplete'
+	// Mode - The mode that is used to deploy resources. This value can be either Incremental or Complete. In Incremental mode, resources are deployed without deleting existing resources that are not included in the template. In Complete mode, resources are deployed and existing resources in the resource group that are not included in the template are deleted. Be careful when using Complete mode as you may unintentionally delete resources. Possible values include: 'Incremental', 'Complete'
 	Mode DeploymentMode `json:"mode,omitempty"`
 	// DebugSetting - The debug setting of the deployment.
 	DebugSetting *DebugSetting `json:"debugSetting,omitempty"`
@@ -1647,7 +1647,7 @@ type DeploymentWhatIfProperties struct {
 
 // DeploymentWhatIfSettings deployment What-If operation settings.
 type DeploymentWhatIfSettings struct {
-	// ResultFormat - The format of the What-If results. Possible values include: 'WhatIfResultFormatResourceIDOnly', 'WhatIfResultFormatFullResourcePayloads'
+	// ResultFormat - The format of the What-If results. Possible values include: 'ResourceIDOnly', 'FullResourcePayloads'
 	ResultFormat WhatIfResultFormat `json:"resultFormat,omitempty"`
 }
 
@@ -2408,7 +2408,7 @@ func (future *MoveResourcesFuture) result(client Client) (ar autorest.Response, 
 
 // OnErrorDeployment deployment on error behavior.
 type OnErrorDeployment struct {
-	// Type - The deployment on error behavior type. Possible values are LastSuccessful and SpecificDeployment. Possible values include: 'OnErrorDeploymentTypeLastSuccessful', 'OnErrorDeploymentTypeSpecificDeployment'
+	// Type - The deployment on error behavior type. Possible values are LastSuccessful and SpecificDeployment. Possible values include: 'LastSuccessful', 'SpecificDeployment'
 	Type OnErrorDeploymentType `json:"type,omitempty"`
 	// DeploymentName - The deployment to be used on error case.
 	DeploymentName *string `json:"deploymentName,omitempty"`
@@ -2418,7 +2418,7 @@ type OnErrorDeployment struct {
 type OnErrorDeploymentExtended struct {
 	// ProvisioningState - READ-ONLY; The state of the provisioning for the on error deployment.
 	ProvisioningState *string `json:"provisioningState,omitempty"`
-	// Type - The deployment on error behavior type. Possible values are LastSuccessful and SpecificDeployment. Possible values include: 'OnErrorDeploymentTypeLastSuccessful', 'OnErrorDeploymentTypeSpecificDeployment'
+	// Type - The deployment on error behavior type. Possible values are LastSuccessful and SpecificDeployment. Possible values include: 'LastSuccessful', 'SpecificDeployment'
 	Type OnErrorDeploymentType `json:"type,omitempty"`
 	// DeploymentName - The deployment to be used on error case.
 	DeploymentName *string `json:"deploymentName,omitempty"`
@@ -3450,7 +3450,7 @@ func (future *ValidateMoveResourcesFuture) result(client Client) (ar autorest.Re
 type WhatIfChange struct {
 	// ResourceID - Resource ID
 	ResourceID *string `json:"resourceId,omitempty"`
-	// ChangeType - Type of change that will be made to the resource when the deployment is executed. Possible values include: 'ChangeTypeCreate', 'ChangeTypeDelete', 'ChangeTypeIgnore', 'ChangeTypeDeploy', 'ChangeTypeNoChange', 'ChangeTypeModify'
+	// ChangeType - Type of change that will be made to the resource when the deployment is executed. Possible values include: 'Create', 'Delete', 'Ignore', 'Deploy', 'NoChange', 'Modify'
 	ChangeType ChangeType `json:"changeType,omitempty"`
 	// Before - The snapshot of the resource before the deployment is executed.
 	Before interface{} `json:"before,omitempty"`
