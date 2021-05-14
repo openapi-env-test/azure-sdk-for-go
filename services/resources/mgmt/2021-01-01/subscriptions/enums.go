@@ -10,115 +10,115 @@ package subscriptions
 type LocationType string
 
 const (
-	// LocationTypeEdgeZone ...
-	LocationTypeEdgeZone LocationType = "EdgeZone"
-	// LocationTypeRegion ...
-	LocationTypeRegion LocationType = "Region"
+	// EdgeZone ...
+	EdgeZone LocationType = "EdgeZone"
+	// Region ...
+	Region LocationType = "Region"
 )
 
 // PossibleLocationTypeValues returns an array of possible values for the LocationType const type.
 func PossibleLocationTypeValues() []LocationType {
-	return []LocationType{LocationTypeEdgeZone, LocationTypeRegion}
+	return []LocationType{EdgeZone, Region}
 }
 
 // RegionCategory enumerates the values for region category.
 type RegionCategory string
 
 const (
-	// RegionCategoryExtended ...
-	RegionCategoryExtended RegionCategory = "Extended"
-	// RegionCategoryOther ...
-	RegionCategoryOther RegionCategory = "Other"
-	// RegionCategoryRecommended ...
-	RegionCategoryRecommended RegionCategory = "Recommended"
+	// Extended ...
+	Extended RegionCategory = "Extended"
+	// Other ...
+	Other RegionCategory = "Other"
+	// Recommended ...
+	Recommended RegionCategory = "Recommended"
 )
 
 // PossibleRegionCategoryValues returns an array of possible values for the RegionCategory const type.
 func PossibleRegionCategoryValues() []RegionCategory {
-	return []RegionCategory{RegionCategoryExtended, RegionCategoryOther, RegionCategoryRecommended}
+	return []RegionCategory{Extended, Other, Recommended}
 }
 
 // RegionType enumerates the values for region type.
 type RegionType string
 
 const (
-	// RegionTypeLogical ...
-	RegionTypeLogical RegionType = "Logical"
-	// RegionTypePhysical ...
-	RegionTypePhysical RegionType = "Physical"
+	// Logical ...
+	Logical RegionType = "Logical"
+	// Physical ...
+	Physical RegionType = "Physical"
 )
 
 // PossibleRegionTypeValues returns an array of possible values for the RegionType const type.
 func PossibleRegionTypeValues() []RegionType {
-	return []RegionType{RegionTypeLogical, RegionTypePhysical}
+	return []RegionType{Logical, Physical}
 }
 
 // ResourceNameStatus enumerates the values for resource name status.
 type ResourceNameStatus string
 
 const (
-	// ResourceNameStatusAllowed ...
-	ResourceNameStatusAllowed ResourceNameStatus = "Allowed"
-	// ResourceNameStatusReserved ...
-	ResourceNameStatusReserved ResourceNameStatus = "Reserved"
+	// Allowed ...
+	Allowed ResourceNameStatus = "Allowed"
+	// Reserved ...
+	Reserved ResourceNameStatus = "Reserved"
 )
 
 // PossibleResourceNameStatusValues returns an array of possible values for the ResourceNameStatus const type.
 func PossibleResourceNameStatusValues() []ResourceNameStatus {
-	return []ResourceNameStatus{ResourceNameStatusAllowed, ResourceNameStatusReserved}
+	return []ResourceNameStatus{Allowed, Reserved}
 }
 
 // SpendingLimit enumerates the values for spending limit.
 type SpendingLimit string
 
 const (
-	// SpendingLimitCurrentPeriodOff ...
-	SpendingLimitCurrentPeriodOff SpendingLimit = "CurrentPeriodOff"
-	// SpendingLimitOff ...
-	SpendingLimitOff SpendingLimit = "Off"
-	// SpendingLimitOn ...
-	SpendingLimitOn SpendingLimit = "On"
+	// CurrentPeriodOff ...
+	CurrentPeriodOff SpendingLimit = "CurrentPeriodOff"
+	// Off ...
+	Off SpendingLimit = "Off"
+	// On ...
+	On SpendingLimit = "On"
 )
 
 // PossibleSpendingLimitValues returns an array of possible values for the SpendingLimit const type.
 func PossibleSpendingLimitValues() []SpendingLimit {
-	return []SpendingLimit{SpendingLimitCurrentPeriodOff, SpendingLimitOff, SpendingLimitOn}
+	return []SpendingLimit{CurrentPeriodOff, Off, On}
 }
 
 // State enumerates the values for state.
 type State string
 
 const (
-	// StateDeleted ...
-	StateDeleted State = "Deleted"
-	// StateDisabled ...
-	StateDisabled State = "Disabled"
-	// StateEnabled ...
-	StateEnabled State = "Enabled"
-	// StatePastDue ...
-	StatePastDue State = "PastDue"
-	// StateWarned ...
-	StateWarned State = "Warned"
+	// Deleted ...
+	Deleted State = "Deleted"
+	// Disabled ...
+	Disabled State = "Disabled"
+	// Enabled ...
+	Enabled State = "Enabled"
+	// PastDue ...
+	PastDue State = "PastDue"
+	// Warned ...
+	Warned State = "Warned"
 )
 
 // PossibleStateValues returns an array of possible values for the State const type.
 func PossibleStateValues() []State {
-	return []State{StateDeleted, StateDisabled, StateEnabled, StatePastDue, StateWarned}
+	return []State{Deleted, Disabled, Enabled, PastDue, Warned}
 }
 
 // TenantCategory enumerates the values for tenant category.
 type TenantCategory string
 
 const (
-	// TenantCategoryHome ...
-	TenantCategoryHome TenantCategory = "Home"
-	// TenantCategoryManagedBy ...
-	TenantCategoryManagedBy TenantCategory = "ManagedBy"
-	// TenantCategoryProjectedBy ...
-	TenantCategoryProjectedBy TenantCategory = "ProjectedBy"
+	// Home ...
+	Home TenantCategory = "Home"
+	// ManagedBy ...
+	ManagedBy TenantCategory = "ManagedBy"
+	// ProjectedBy ...
+	ProjectedBy TenantCategory = "ProjectedBy"
 )
 
 // PossibleTenantCategoryValues returns an array of possible values for the TenantCategory const type.
 func PossibleTenantCategoryValues() []TenantCategory {
-	return []TenantCategory{TenantCategoryHome, TenantCategoryManagedBy, TenantCategoryProjectedBy}
+	return []TenantCategory{Home, ManagedBy, ProjectedBy}
 }
