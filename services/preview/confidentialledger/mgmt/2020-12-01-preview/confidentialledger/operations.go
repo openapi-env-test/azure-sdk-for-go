@@ -31,7 +31,7 @@ func NewOperationsClientWithBaseURI(baseURI string, subscriptionID string) Opera
 	return OperationsClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
 
-// List retrieves a list of available API operations
+// List retrieves a list of available API
 func (client OperationsClient) List(ctx context.Context) (result ResourceProviderOperationListPage, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/OperationsClient.List")
