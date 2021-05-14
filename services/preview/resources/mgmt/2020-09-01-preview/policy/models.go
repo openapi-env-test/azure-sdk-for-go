@@ -85,9 +85,9 @@ func (ap AliasPath) MarshalJSON() ([]byte, error) {
 
 // AliasPathMetadata ...
 type AliasPathMetadata struct {
-	// Type - READ-ONLY; The type of the token that the alias path is referring to. Possible values include: 'AliasPathTokenTypeNotSpecified', 'AliasPathTokenTypeAny', 'AliasPathTokenTypeString', 'AliasPathTokenTypeObject', 'AliasPathTokenTypeArray', 'AliasPathTokenTypeInteger', 'AliasPathTokenTypeNumber', 'AliasPathTokenTypeBoolean'
+	// Type - READ-ONLY; The type of the token that the alias path is referring to. Possible values include: 'NotSpecified', 'Any', 'String', 'Object', 'Array', 'Integer', 'Number', 'Boolean'
 	Type AliasPathTokenType `json:"type,omitempty"`
-	// Attributes - READ-ONLY; The attributes of the token that the alias path is referring to. Possible values include: 'AliasPathAttributesNone', 'AliasPathAttributesModifiable'
+	// Attributes - READ-ONLY; The attributes of the token that the alias path is referring to. Possible values include: 'None', 'Modifiable'
 	Attributes AliasPathAttributes `json:"attributes,omitempty"`
 }
 
@@ -377,7 +377,7 @@ type AssignmentProperties struct {
 	Description *string `json:"description,omitempty"`
 	// Metadata - The policy assignment metadata. Metadata is an open ended object and is typically a collection of key value pairs.
 	Metadata interface{} `json:"metadata,omitempty"`
-	// EnforcementMode - The policy assignment enforcement mode. Possible values are Default and DoNotEnforce. Possible values include: 'EnforcementModeDefault', 'EnforcementModeDoNotEnforce'
+	// EnforcementMode - The policy assignment enforcement mode. Possible values are Default and DoNotEnforce. Possible values include: 'Default', 'DoNotEnforce'
 	EnforcementMode EnforcementMode `json:"enforcementMode,omitempty"`
 	// NonComplianceMessages - The messages that describe why a resource is non-compliant with the policy.
 	NonComplianceMessages *[]NonComplianceMessage `json:"nonComplianceMessages,omitempty"`
@@ -1403,7 +1403,7 @@ type ExemptionProperties struct {
 	PolicyAssignmentID *string `json:"policyAssignmentId,omitempty"`
 	// PolicyDefinitionReferenceIds - The policy definition reference ID list when the associated policy assignment is an assignment of a policy set definition.
 	PolicyDefinitionReferenceIds *[]string `json:"policyDefinitionReferenceIds,omitempty"`
-	// ExemptionCategory - The policy exemption category. Possible values are Waiver and Mitigated. Possible values include: 'ExemptionCategoryWaiver', 'ExemptionCategoryMitigated'
+	// ExemptionCategory - The policy exemption category. Possible values are Waiver and Mitigated. Possible values include: 'Waiver', 'Mitigated'
 	ExemptionCategory ExemptionCategory `json:"exemptionCategory,omitempty"`
 	// ExpiresOn - The expiration date and time (in UTC ISO 8601 format yyyy-MM-ddTHH:mm:ssZ) of the policy exemption.
 	ExpiresOn *date.Time `json:"expiresOn,omitempty"`
@@ -1848,13 +1848,13 @@ func (sdp SetDefinitionProperties) MarshalJSON() ([]byte, error) {
 type SystemData struct {
 	// CreatedBy - The identity that created the resource.
 	CreatedBy *string `json:"createdBy,omitempty"`
-	// CreatedByType - The type of identity that created the resource. Possible values include: 'CreatedByTypeUser', 'CreatedByTypeApplication', 'CreatedByTypeManagedIdentity', 'CreatedByTypeKey'
+	// CreatedByType - The type of identity that created the resource. Possible values include: 'User', 'Application', 'ManagedIdentity', 'Key'
 	CreatedByType CreatedByType `json:"createdByType,omitempty"`
 	// CreatedAt - The timestamp of resource creation (UTC).
 	CreatedAt *date.Time `json:"createdAt,omitempty"`
 	// LastModifiedBy - The identity that last modified the resource.
 	LastModifiedBy *string `json:"lastModifiedBy,omitempty"`
-	// LastModifiedByType - The type of identity that last modified the resource. Possible values include: 'CreatedByTypeUser', 'CreatedByTypeApplication', 'CreatedByTypeManagedIdentity', 'CreatedByTypeKey'
+	// LastModifiedByType - The type of identity that last modified the resource. Possible values include: 'User', 'Application', 'ManagedIdentity', 'Key'
 	LastModifiedByType CreatedByType `json:"lastModifiedByType,omitempty"`
 	// LastModifiedAt - The timestamp of resource last modification (UTC)
 	LastModifiedAt *date.Time `json:"lastModifiedAt,omitempty"`

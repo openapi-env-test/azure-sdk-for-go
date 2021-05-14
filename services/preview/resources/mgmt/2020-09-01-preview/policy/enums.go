@@ -10,43 +10,42 @@ package policy
 type AliasPathAttributes string
 
 const (
-	// AliasPathAttributesModifiable The token that the alias path is referring to is modifiable by policies
-	// with 'modify' effect.
-	AliasPathAttributesModifiable AliasPathAttributes = "Modifiable"
-	// AliasPathAttributesNone The token that the alias path is referring to has no attributes.
-	AliasPathAttributesNone AliasPathAttributes = "None"
+	// Modifiable The token that the alias path is referring to is modifiable by policies with 'modify' effect.
+	Modifiable AliasPathAttributes = "Modifiable"
+	// None The token that the alias path is referring to has no attributes.
+	None AliasPathAttributes = "None"
 )
 
 // PossibleAliasPathAttributesValues returns an array of possible values for the AliasPathAttributes const type.
 func PossibleAliasPathAttributesValues() []AliasPathAttributes {
-	return []AliasPathAttributes{AliasPathAttributesModifiable, AliasPathAttributesNone}
+	return []AliasPathAttributes{Modifiable, None}
 }
 
 // AliasPathTokenType enumerates the values for alias path token type.
 type AliasPathTokenType string
 
 const (
-	// AliasPathTokenTypeAny The token type can be anything.
-	AliasPathTokenTypeAny AliasPathTokenType = "Any"
-	// AliasPathTokenTypeArray The token type is array.
-	AliasPathTokenTypeArray AliasPathTokenType = "Array"
-	// AliasPathTokenTypeBoolean The token type is boolean.
-	AliasPathTokenTypeBoolean AliasPathTokenType = "Boolean"
-	// AliasPathTokenTypeInteger The token type is integer.
-	AliasPathTokenTypeInteger AliasPathTokenType = "Integer"
-	// AliasPathTokenTypeNotSpecified The token type is not specified.
-	AliasPathTokenTypeNotSpecified AliasPathTokenType = "NotSpecified"
-	// AliasPathTokenTypeNumber The token type is number.
-	AliasPathTokenTypeNumber AliasPathTokenType = "Number"
-	// AliasPathTokenTypeObject The token type is object.
-	AliasPathTokenTypeObject AliasPathTokenType = "Object"
-	// AliasPathTokenTypeString The token type is string.
-	AliasPathTokenTypeString AliasPathTokenType = "String"
+	// Any The token type can be anything.
+	Any AliasPathTokenType = "Any"
+	// Array The token type is array.
+	Array AliasPathTokenType = "Array"
+	// Boolean The token type is boolean.
+	Boolean AliasPathTokenType = "Boolean"
+	// Integer The token type is integer.
+	Integer AliasPathTokenType = "Integer"
+	// NotSpecified The token type is not specified.
+	NotSpecified AliasPathTokenType = "NotSpecified"
+	// Number The token type is number.
+	Number AliasPathTokenType = "Number"
+	// Object The token type is object.
+	Object AliasPathTokenType = "Object"
+	// String The token type is string.
+	String AliasPathTokenType = "String"
 )
 
 // PossibleAliasPathTokenTypeValues returns an array of possible values for the AliasPathTokenType const type.
 func PossibleAliasPathTokenTypeValues() []AliasPathTokenType {
-	return []AliasPathTokenType{AliasPathTokenTypeAny, AliasPathTokenTypeArray, AliasPathTokenTypeBoolean, AliasPathTokenTypeInteger, AliasPathTokenTypeNotSpecified, AliasPathTokenTypeNumber, AliasPathTokenTypeObject, AliasPathTokenTypeString}
+	return []AliasPathTokenType{Any, Array, Boolean, Integer, NotSpecified, Number, Object, String}
 }
 
 // AliasPatternType enumerates the values for alias pattern type.
@@ -85,51 +84,50 @@ func PossibleAliasTypeValues() []AliasType {
 type CreatedByType string
 
 const (
-	// CreatedByTypeApplication ...
-	CreatedByTypeApplication CreatedByType = "Application"
-	// CreatedByTypeKey ...
-	CreatedByTypeKey CreatedByType = "Key"
-	// CreatedByTypeManagedIdentity ...
-	CreatedByTypeManagedIdentity CreatedByType = "ManagedIdentity"
-	// CreatedByTypeUser ...
-	CreatedByTypeUser CreatedByType = "User"
+	// Application ...
+	Application CreatedByType = "Application"
+	// Key ...
+	Key CreatedByType = "Key"
+	// ManagedIdentity ...
+	ManagedIdentity CreatedByType = "ManagedIdentity"
+	// User ...
+	User CreatedByType = "User"
 )
 
 // PossibleCreatedByTypeValues returns an array of possible values for the CreatedByType const type.
 func PossibleCreatedByTypeValues() []CreatedByType {
-	return []CreatedByType{CreatedByTypeApplication, CreatedByTypeKey, CreatedByTypeManagedIdentity, CreatedByTypeUser}
+	return []CreatedByType{Application, Key, ManagedIdentity, User}
 }
 
 // EnforcementMode enumerates the values for enforcement mode.
 type EnforcementMode string
 
 const (
-	// EnforcementModeDefault The policy effect is enforced during resource creation or update.
-	EnforcementModeDefault EnforcementMode = "Default"
-	// EnforcementModeDoNotEnforce The policy effect is not enforced during resource creation or update.
-	EnforcementModeDoNotEnforce EnforcementMode = "DoNotEnforce"
+	// Default The policy effect is enforced during resource creation or update.
+	Default EnforcementMode = "Default"
+	// DoNotEnforce The policy effect is not enforced during resource creation or update.
+	DoNotEnforce EnforcementMode = "DoNotEnforce"
 )
 
 // PossibleEnforcementModeValues returns an array of possible values for the EnforcementMode const type.
 func PossibleEnforcementModeValues() []EnforcementMode {
-	return []EnforcementMode{EnforcementModeDefault, EnforcementModeDoNotEnforce}
+	return []EnforcementMode{Default, DoNotEnforce}
 }
 
 // ExemptionCategory enumerates the values for exemption category.
 type ExemptionCategory string
 
 const (
-	// ExemptionCategoryMitigated This category of exemptions usually means the mitigation actions have been
-	// applied to the scope.
-	ExemptionCategoryMitigated ExemptionCategory = "Mitigated"
-	// ExemptionCategoryWaiver This category of exemptions usually means the scope is not applicable for the
-	// policy.
-	ExemptionCategoryWaiver ExemptionCategory = "Waiver"
+	// Mitigated This category of exemptions usually means the mitigation actions have been applied to the
+	// scope.
+	Mitigated ExemptionCategory = "Mitigated"
+	// Waiver This category of exemptions usually means the scope is not applicable for the policy.
+	Waiver ExemptionCategory = "Waiver"
 )
 
 // PossibleExemptionCategoryValues returns an array of possible values for the ExemptionCategory const type.
 func PossibleExemptionCategoryValues() []ExemptionCategory {
-	return []ExemptionCategory{ExemptionCategoryMitigated, ExemptionCategoryWaiver}
+	return []ExemptionCategory{Mitigated, Waiver}
 }
 
 // ParameterType enumerates the values for parameter type.
