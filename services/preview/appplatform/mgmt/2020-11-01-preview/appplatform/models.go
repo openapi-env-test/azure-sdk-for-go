@@ -232,14 +232,14 @@ type AppResourceProperties struct {
 	Fqdn *string `json:"fqdn,omitempty"`
 	// HTTPSOnly - Indicate if only https is allowed.
 	HTTPSOnly *bool `json:"httpsOnly,omitempty"`
-	// EnableEndToEndTLS - Indicate if end to end TLS is enabled.
-	EnableEndToEndTLS *bool `json:"enableEndToEndTLS,omitempty"`
 	// CreatedTime - READ-ONLY; Date time when the resource is created
 	CreatedTime *date.Time `json:"createdTime,omitempty"`
 	// TemporaryDisk - Temporary disk settings
 	TemporaryDisk *TemporaryDisk `json:"temporaryDisk,omitempty"`
 	// PersistentDisk - Persistent disk settings
 	PersistentDisk *PersistentDisk `json:"persistentDisk,omitempty"`
+	// EnableEndToEndTLS - Indicate if end to end TLS is enabled.
+	EnableEndToEndTLS *bool `json:"enableEndToEndTLS,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for AppResourceProperties.
@@ -257,14 +257,14 @@ func (arp AppResourceProperties) MarshalJSON() ([]byte, error) {
 	if arp.HTTPSOnly != nil {
 		objectMap["httpsOnly"] = arp.HTTPSOnly
 	}
-	if arp.EnableEndToEndTLS != nil {
-		objectMap["enableEndToEndTLS"] = arp.EnableEndToEndTLS
-	}
 	if arp.TemporaryDisk != nil {
 		objectMap["temporaryDisk"] = arp.TemporaryDisk
 	}
 	if arp.PersistentDisk != nil {
 		objectMap["persistentDisk"] = arp.PersistentDisk
+	}
+	if arp.EnableEndToEndTLS != nil {
+		objectMap["enableEndToEndTLS"] = arp.EnableEndToEndTLS
 	}
 	return json.Marshal(objectMap)
 }
