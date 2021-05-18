@@ -1,35 +1,8 @@
-# Change History
+# Unreleased Content
 
 ## Breaking Changes
 
 ### Removed Constants
-
-1. AliasPathAttributes.Modifiable
-1. AliasPathAttributes.None
-1. AliasPathTokenType.Any
-1. AliasPathTokenType.Array
-1. AliasPathTokenType.Boolean
-1. AliasPathTokenType.Integer
-1. AliasPathTokenType.NotSpecified
-1. AliasPathTokenType.Number
-1. AliasPathTokenType.Object
-1. AliasPathTokenType.String
-1. ChangeType.Create
-1. ChangeType.Delete
-1. ChangeType.Deploy
-1. ChangeType.Ignore
-1. ChangeType.Modify
-1. ChangeType.NoChange
-1. DeploymentMode.Complete
-1. DeploymentMode.Incremental
-1. OnErrorDeploymentType.LastSuccessful
-1. OnErrorDeploymentType.SpecificDeployment
-1. WhatIfResultFormat.FullResourcePayloads
-1. WhatIfResultFormat.ResourceIDOnly
-
-## Additive Changes
-
-### New Constants
 
 1. AliasPathAttributes.AliasPathAttributesModifiable
 1. AliasPathAttributes.AliasPathAttributesNone
@@ -54,12 +27,29 @@
 1. WhatIfResultFormat.WhatIfResultFormatFullResourcePayloads
 1. WhatIfResultFormat.WhatIfResultFormatResourceIDOnly
 
-### Struct Changes
+## Additive Changes
 
-#### New Structs
+### New Constants
 
-1. ZoneMapping
-
-#### New Struct Fields
-
-1. ProviderResourceType.ZoneMappings
+1. AliasPathAttributes.Modifiable
+1. AliasPathAttributes.None
+1. AliasPathTokenType.Any
+1. AliasPathTokenType.Array
+1. AliasPathTokenType.Boolean
+1. AliasPathTokenType.Integer
+1. AliasPathTokenType.NotSpecified
+1. AliasPathTokenType.Number
+1. AliasPathTokenType.Object
+1. AliasPathTokenType.String
+1. ChangeType.Create
+1. ChangeType.Delete
+1. ChangeType.Deploy
+1. ChangeType.Ignore
+1. ChangeType.Modify
+1. ChangeType.NoChange
+1. DeploymentMode.Complete
+1. DeploymentMode.Incremental
+1. OnErrorDeploymentType.LastSuccessful
+1. OnErrorDeploymentType.SpecificDeployment
+1. WhatIfResultFormat.FullResourcePayloads
+1. WhatIfResultFormat.ResourceIDOnly
