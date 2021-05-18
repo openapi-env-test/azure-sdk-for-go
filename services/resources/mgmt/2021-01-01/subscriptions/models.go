@@ -26,7 +26,7 @@ type CheckResourceNameResult struct {
 	Name *string `json:"name,omitempty"`
 	// Type - Type of Resource
 	Type *string `json:"type,omitempty"`
-	// Status - Is the resource name Allowed or Reserved. Possible values include: 'ResourceNameStatusAllowed', 'ResourceNameStatusReserved'
+	// Status - Is the resource name Allowed or Reserved. Possible values include: 'Allowed', 'Reserved'
 	Status ResourceNameStatus `json:"status,omitempty"`
 }
 
@@ -225,7 +225,7 @@ type Location struct {
 	SubscriptionID *string `json:"subscriptionId,omitempty"`
 	// Name - READ-ONLY; The location name.
 	Name *string `json:"name,omitempty"`
-	// Type - READ-ONLY; The location type. Possible values include: 'LocationTypeRegion', 'LocationTypeEdgeZone'
+	// Type - READ-ONLY; The location type. Possible values include: 'Region', 'EdgeZone'
 	Type LocationType `json:"type,omitempty"`
 	// DisplayName - READ-ONLY; The display name of the location.
 	DisplayName *string `json:"displayName,omitempty"`
@@ -253,9 +253,9 @@ type LocationListResult struct {
 
 // LocationMetadata location metadata information
 type LocationMetadata struct {
-	// RegionType - READ-ONLY; The type of the region. Possible values include: 'RegionTypePhysical', 'RegionTypeLogical'
+	// RegionType - READ-ONLY; The type of the region. Possible values include: 'Physical', 'Logical'
 	RegionType RegionType `json:"regionType,omitempty"`
-	// RegionCategory - READ-ONLY; The category of the region. Possible values include: 'RegionCategoryRecommended', 'RegionCategoryExtended', 'RegionCategoryOther'
+	// RegionCategory - READ-ONLY; The category of the region. Possible values include: 'Recommended', 'Extended', 'Other'
 	RegionCategory RegionCategory `json:"regionCategory,omitempty"`
 	// GeographyGroup - READ-ONLY; The geography group of the location.
 	GeographyGroup *string `json:"geographyGroup,omitempty"`
@@ -482,7 +482,7 @@ type Policies struct {
 	LocationPlacementID *string `json:"locationPlacementId,omitempty"`
 	// QuotaID - READ-ONLY; The subscription quota ID.
 	QuotaID *string `json:"quotaId,omitempty"`
-	// SpendingLimit - READ-ONLY; The subscription spending limit. Possible values include: 'SpendingLimitOn', 'SpendingLimitOff', 'SpendingLimitCurrentPeriodOff'
+	// SpendingLimit - READ-ONLY; The subscription spending limit. Possible values include: 'On', 'Off', 'CurrentPeriodOff'
 	SpendingLimit SpendingLimit `json:"spendingLimit,omitempty"`
 }
 
@@ -505,7 +505,7 @@ type Subscription struct {
 	DisplayName *string `json:"displayName,omitempty"`
 	// TenantID - READ-ONLY; The subscription tenant ID.
 	TenantID *string `json:"tenantId,omitempty"`
-	// State - READ-ONLY; The subscription state. Possible values are Enabled, Warned, PastDue, Disabled, and Deleted. Possible values include: 'StateEnabled', 'StateWarned', 'StatePastDue', 'StateDisabled', 'StateDeleted'
+	// State - READ-ONLY; The subscription state. Possible values are Enabled, Warned, PastDue, Disabled, and Deleted. Possible values include: 'Enabled', 'Warned', 'PastDue', 'Disabled', 'Deleted'
 	State State `json:"state,omitempty"`
 	// SubscriptionPolicies - The subscription policies.
 	SubscriptionPolicies *Policies `json:"subscriptionPolicies,omitempty"`
@@ -541,7 +541,7 @@ type TenantIDDescription struct {
 	ID *string `json:"id,omitempty"`
 	// TenantID - READ-ONLY; The tenant ID. For example, 00000000-0000-0000-0000-000000000000.
 	TenantID *string `json:"tenantId,omitempty"`
-	// TenantCategory - READ-ONLY; Category of the tenant. Possible values include: 'TenantCategoryHome', 'TenantCategoryProjectedBy', 'TenantCategoryManagedBy'
+	// TenantCategory - READ-ONLY; Category of the tenant. Possible values include: 'Home', 'ProjectedBy', 'ManagedBy'
 	TenantCategory TenantCategory `json:"tenantCategory,omitempty"`
 	// Country - READ-ONLY; Country/region name of the address for the tenant.
 	Country *string `json:"country,omitempty"`
