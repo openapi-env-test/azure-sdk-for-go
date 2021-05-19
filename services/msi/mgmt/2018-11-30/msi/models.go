@@ -748,4 +748,15 @@ type UserAssignedIdentityProperties struct {
 	PrincipalID *uuid.UUID `json:"principalId,omitempty"`
 	// ClientID - READ-ONLY; The id of the app associated with the identity. This is a random generated UUID by MSI.
 	ClientID *uuid.UUID `json:"clientId,omitempty"`
+	// TestNewProperty - for test only
+	TestNewProperty *string `json:"testNewProperty,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for UserAssignedIdentityProperties.
+func (uaip UserAssignedIdentityProperties) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if uaip.TestNewProperty != nil {
+		objectMap["testNewProperty"] = uaip.TestNewProperty
+	}
+	return json.Marshal(objectMap)
 }
