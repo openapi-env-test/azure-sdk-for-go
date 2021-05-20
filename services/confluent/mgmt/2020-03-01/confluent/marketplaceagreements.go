@@ -31,81 +31,6 @@ func NewMarketplaceAgreementsClientWithBaseURI(baseURI string, subscriptionID st
 	return MarketplaceAgreementsClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
 
-// Create sends the create request.
-// Parameters:
-// body - confluent Agreement resource
-func (client MarketplaceAgreementsClient) Create(ctx context.Context, body *AgreementResource) (result AgreementResource, err error) {
-	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/MarketplaceAgreementsClient.Create")
-		defer func() {
-			sc := -1
-			if result.Response.Response != nil {
-				sc = result.Response.Response.StatusCode
-			}
-			tracing.EndSpan(ctx, sc, err)
-		}()
-	}
-	req, err := client.CreatePreparer(ctx, body)
-	if err != nil {
-		err = autorest.NewErrorWithError(err, "confluent.MarketplaceAgreementsClient", "Create", nil, "Failure preparing request")
-		return
-	}
-
-	resp, err := client.CreateSender(req)
-	if err != nil {
-		result.Response = autorest.Response{Response: resp}
-		err = autorest.NewErrorWithError(err, "confluent.MarketplaceAgreementsClient", "Create", resp, "Failure sending request")
-		return
-	}
-
-	result, err = client.CreateResponder(resp)
-	if err != nil {
-		err = autorest.NewErrorWithError(err, "confluent.MarketplaceAgreementsClient", "Create", resp, "Failure responding to request")
-		return
-	}
-
-	return
-}
-
-// CreatePreparer prepares the Create request.
-func (client MarketplaceAgreementsClient) CreatePreparer(ctx context.Context, body *AgreementResource) (*http.Request, error) {
-	pathParameters := map[string]interface{}{
-		"subscriptionId": autorest.Encode("path", client.SubscriptionID),
-	}
-
-	body.ID = nil
-	body.Name = nil
-	body.Type = nil
-	preparer := autorest.CreatePreparer(
-		autorest.AsContentType("application/json; charset=utf-8"),
-		autorest.AsPut(),
-		autorest.WithBaseURL(client.BaseURI),
-		autorest.WithPathParameters("/subscriptions/{subscriptionId}/providers/Microsoft.Confluent/agreements/default", pathParameters))
-	if body != nil {
-		preparer = autorest.DecoratePreparer(preparer,
-			autorest.WithJSON(body))
-	}
-	return preparer.Prepare((&http.Request{}).WithContext(ctx))
-}
-
-// CreateSender sends the Create request. The method will close the
-// http.Response Body if it receives an error.
-func (client MarketplaceAgreementsClient) CreateSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
-}
-
-// CreateResponder handles the response to the Create request. The method always
-// closes the http.Response Body.
-func (client MarketplaceAgreementsClient) CreateResponder(resp *http.Response) (result AgreementResource, err error) {
-	err = autorest.Respond(
-		resp,
-		azure.WithErrorUnlessStatusCode(http.StatusOK),
-		autorest.ByUnmarshallingJSON(&result),
-		autorest.ByClosing())
-	result.Response = autorest.Response{Response: resp}
-	return
-}
-
 // List sends the list request.
 func (client MarketplaceAgreementsClient) List(ctx context.Context) (result AgreementResourceListResponsePage, err error) {
 	if tracing.IsEnabled() {
@@ -151,10 +76,16 @@ func (client MarketplaceAgreementsClient) ListPreparer(ctx context.Context) (*ht
 		"subscriptionId": autorest.Encode("path", client.SubscriptionID),
 	}
 
+	const APIVersion = "2020-03-01"
+	queryParameters := map[string]interface{}{
+		"api-version": APIVersion,
+	}
+
 	preparer := autorest.CreatePreparer(
 		autorest.AsGet(),
 		autorest.WithBaseURL(client.BaseURI),
-		autorest.WithPathParameters("/subscriptions/{subscriptionId}/providers/Microsoft.Confluent/agreements", pathParameters))
+		autorest.WithPathParameters("/subscriptions/{subscriptionId}/providers/Microsoft.Confluent/agreements", pathParameters),
+		autorest.WithQueryParameters(queryParameters))
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
 }
 
