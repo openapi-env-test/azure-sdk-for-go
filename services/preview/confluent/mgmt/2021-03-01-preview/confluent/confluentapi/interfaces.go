@@ -30,7 +30,6 @@ var _ OrganizationOperationsClientAPI = (*confluent.OrganizationOperationsClient
 
 // OrganizationClientAPI contains the set of methods on the OrganizationClient type.
 type OrganizationClientAPI interface {
-	Create(ctx context.Context, resourceGroupName string, organizationName string, body *confluent.OrganizationResource) (result confluent.OrganizationCreateFuture, err error)
 	Delete(ctx context.Context, resourceGroupName string, organizationName string) (result confluent.OrganizationDeleteFuture, err error)
 	Get(ctx context.Context, resourceGroupName string, organizationName string) (result confluent.OrganizationResource, err error)
 	ListByResourceGroup(ctx context.Context, resourceGroupName string) (result confluent.OrganizationResourceListResultPage, err error)

@@ -10,7 +10,6 @@ import (
 	"context"
 	"github.com/Azure/go-autorest/autorest"
 	"github.com/Azure/go-autorest/autorest/azure"
-	"github.com/Azure/go-autorest/autorest/validation"
 	"github.com/Azure/go-autorest/tracing"
 	"net/http"
 )
@@ -29,123 +28,6 @@ func NewOrganizationClient(subscriptionID string) OrganizationClient {
 // this when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure stack).
 func NewOrganizationClientWithBaseURI(baseURI string, subscriptionID string) OrganizationClient {
 	return OrganizationClient{NewWithBaseURI(baseURI, subscriptionID)}
-}
-
-// Create sends the create request.
-// Parameters:
-// resourceGroupName - resource group name
-// organizationName - organization resource name
-// body - organization resource model
-func (client OrganizationClient) Create(ctx context.Context, resourceGroupName string, organizationName string, body *OrganizationResource) (result OrganizationCreateFuture, err error) {
-	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/OrganizationClient.Create")
-		defer func() {
-			sc := -1
-			if result.FutureAPI != nil && result.FutureAPI.Response() != nil {
-				sc = result.FutureAPI.Response().StatusCode
-			}
-			tracing.EndSpan(ctx, sc, err)
-		}()
-	}
-	if err := validation.Validate([]validation.Validation{
-		{TargetValue: body,
-			Constraints: []validation.Constraint{{Target: "body", Name: validation.Null, Rule: false,
-				Chain: []validation.Constraint{{Target: "body.OrganizationResourceProperties", Name: validation.Null, Rule: true,
-					Chain: []validation.Constraint{{Target: "body.OrganizationResourceProperties.OfferDetail", Name: validation.Null, Rule: true,
-						Chain: []validation.Constraint{{Target: "body.OrganizationResourceProperties.OfferDetail.PublisherID", Name: validation.Null, Rule: true,
-							Chain: []validation.Constraint{{Target: "body.OrganizationResourceProperties.OfferDetail.PublisherID", Name: validation.MaxLength, Rule: 50, Chain: nil}}},
-							{Target: "body.OrganizationResourceProperties.OfferDetail.ID", Name: validation.Null, Rule: true,
-								Chain: []validation.Constraint{{Target: "body.OrganizationResourceProperties.OfferDetail.ID", Name: validation.MaxLength, Rule: 50, Chain: nil}}},
-							{Target: "body.OrganizationResourceProperties.OfferDetail.PlanID", Name: validation.Null, Rule: true,
-								Chain: []validation.Constraint{{Target: "body.OrganizationResourceProperties.OfferDetail.PlanID", Name: validation.MaxLength, Rule: 50, Chain: nil}}},
-							{Target: "body.OrganizationResourceProperties.OfferDetail.PlanName", Name: validation.Null, Rule: true,
-								Chain: []validation.Constraint{{Target: "body.OrganizationResourceProperties.OfferDetail.PlanName", Name: validation.MaxLength, Rule: 50, Chain: nil}}},
-							{Target: "body.OrganizationResourceProperties.OfferDetail.TermUnit", Name: validation.Null, Rule: true,
-								Chain: []validation.Constraint{{Target: "body.OrganizationResourceProperties.OfferDetail.TermUnit", Name: validation.MaxLength, Rule: 25, Chain: nil}}},
-						}},
-						{Target: "body.OrganizationResourceProperties.UserDetail", Name: validation.Null, Rule: true,
-							Chain: []validation.Constraint{{Target: "body.OrganizationResourceProperties.UserDetail.FirstName", Name: validation.Null, Rule: false,
-								Chain: []validation.Constraint{{Target: "body.OrganizationResourceProperties.UserDetail.FirstName", Name: validation.MaxLength, Rule: 50, Chain: nil}}},
-								{Target: "body.OrganizationResourceProperties.UserDetail.LastName", Name: validation.Null, Rule: false,
-									Chain: []validation.Constraint{{Target: "body.OrganizationResourceProperties.UserDetail.LastName", Name: validation.MaxLength, Rule: 50, Chain: nil}}},
-								{Target: "body.OrganizationResourceProperties.UserDetail.EmailAddress", Name: validation.Null, Rule: true,
-									Chain: []validation.Constraint{{Target: "body.OrganizationResourceProperties.UserDetail.EmailAddress", Name: validation.Pattern, Rule: `^\S+@\S+\.\S+$`, Chain: nil}}},
-							}},
-					}},
-				}}}}}); err != nil {
-		return result, validation.NewError("confluent.OrganizationClient", "Create", err.Error())
-	}
-
-	req, err := client.CreatePreparer(ctx, resourceGroupName, organizationName, body)
-	if err != nil {
-		err = autorest.NewErrorWithError(err, "confluent.OrganizationClient", "Create", nil, "Failure preparing request")
-		return
-	}
-
-	result, err = client.CreateSender(req)
-	if err != nil {
-		err = autorest.NewErrorWithError(err, "confluent.OrganizationClient", "Create", nil, "Failure sending request")
-		return
-	}
-
-	return
-}
-
-// CreatePreparer prepares the Create request.
-func (client OrganizationClient) CreatePreparer(ctx context.Context, resourceGroupName string, organizationName string, body *OrganizationResource) (*http.Request, error) {
-	pathParameters := map[string]interface{}{
-		"organizationName":  autorest.Encode("path", organizationName),
-		"resourceGroupName": autorest.Encode("path", resourceGroupName),
-		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
-	}
-
-	const APIVersion = "2021-03-01-preview"
-	queryParameters := map[string]interface{}{
-		"api-version": APIVersion,
-	}
-
-	body.ID = nil
-	body.Name = nil
-	body.Type = nil
-	body.SystemData = nil
-	preparer := autorest.CreatePreparer(
-		autorest.AsContentType("application/json; charset=utf-8"),
-		autorest.AsPut(),
-		autorest.WithBaseURL(client.BaseURI),
-		autorest.WithPathParameters("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}", pathParameters),
-		autorest.WithQueryParameters(queryParameters))
-	if body != nil {
-		preparer = autorest.DecoratePreparer(preparer,
-			autorest.WithJSON(body))
-	}
-	return preparer.Prepare((&http.Request{}).WithContext(ctx))
-}
-
-// CreateSender sends the Create request. The method will close the
-// http.Response Body if it receives an error.
-func (client OrganizationClient) CreateSender(req *http.Request) (future OrganizationCreateFuture, err error) {
-	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
-	if err != nil {
-		return
-	}
-	var azf azure.Future
-	azf, err = azure.NewFutureFromResponse(resp)
-	future.FutureAPI = &azf
-	future.Result = future.result
-	return
-}
-
-// CreateResponder handles the response to the Create request. The method always
-// closes the http.Response Body.
-func (client OrganizationClient) CreateResponder(resp *http.Response) (result OrganizationResource, err error) {
-	err = autorest.Respond(
-		resp,
-		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusCreated),
-		autorest.ByUnmarshallingJSON(&result),
-		autorest.ByClosing())
-	result.Response = autorest.Response{Response: resp}
-	return
 }
 
 // Delete sends the delete request.
