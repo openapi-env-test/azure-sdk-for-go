@@ -1,5 +1,5 @@
 {
-  "commit": "225e4a77704766b9b6529c40c2677b22b58da9b9",
+  "commit": "0f6ac764b912ec0e93ccb3ea40fd42c5cdcd652c",
   "readme": "/_/azure-rest-api-specs/specification/confluent/resource-manager/readme.md",
   "tag": "package-2021-03-01-preview",
   "use": "@microsoft.azure/autorest.go@2.1.183",
