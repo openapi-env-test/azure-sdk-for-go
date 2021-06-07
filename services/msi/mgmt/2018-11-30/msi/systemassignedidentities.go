@@ -31,7 +31,7 @@ func NewSystemAssignedIdentitiesClientWithBaseURI(baseURI string, subscriptionID
 	return SystemAssignedIdentitiesClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
 
-// GetByScope gets the systemAssignedIdentity available under the specified RP scope.
+// GetByScope gets the systemAssignedIdentity available under the specified RP scope. Update 1
 // Parameters:
 // scope - the resource provider scope of the resource. Parent resource being extended by Managed Identities.
 func (client SystemAssignedIdentitiesClient) GetByScope(ctx context.Context, scope string) (result SystemAssignedIdentity, err error) {
