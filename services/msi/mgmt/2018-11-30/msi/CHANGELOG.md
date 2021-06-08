@@ -1,11 +1,11 @@
-# Change History
+# Unreleased Content
 
-## Additive Changes
+## Breaking Changes
 
-### New Funcs
+### Removed Funcs
 
-1. AzureEntityResource.MarshalJSON() ([]byte, error)
-1. ProxyResource.MarshalJSON() ([]byte, error)
-1. Resource.MarshalJSON() ([]byte, error)
-1. SystemAssignedIdentityProperties.MarshalJSON() ([]byte, error)
-1. UserAssignedIdentityProperties.MarshalJSON() ([]byte, error)
+1. UserAssignedIdentitiesClient.ListByResourceGroup(context.Context, string) (UserAssignedIdentitiesListResultPage, error)
+1. UserAssignedIdentitiesClient.ListByResourceGroupComplete(context.Context, string) (UserAssignedIdentitiesListResultIterator, error)
+1. UserAssignedIdentitiesClient.ListByResourceGroupPreparer(context.Context, string) (*http.Request, error)
+1. UserAssignedIdentitiesClient.ListByResourceGroupResponder(*http.Response) (UserAssignedIdentitiesListResult, error)
+1. UserAssignedIdentitiesClient.ListByResourceGroupSender(*http.Request) (*http.Response, error)
