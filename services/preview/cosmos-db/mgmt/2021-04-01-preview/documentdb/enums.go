@@ -10,23 +10,23 @@ package documentdb
 type APIType string
 
 const (
-	// APITypeCassandra ...
-	APITypeCassandra APIType = "Cassandra"
-	// APITypeGremlin ...
-	APITypeGremlin APIType = "Gremlin"
-	// APITypeGremlinV2 ...
-	APITypeGremlinV2 APIType = "GremlinV2"
-	// APITypeMongoDB ...
-	APITypeMongoDB APIType = "MongoDB"
-	// APITypeSQL ...
-	APITypeSQL APIType = "Sql"
-	// APITypeTable ...
-	APITypeTable APIType = "Table"
+	// Cassandra ...
+	Cassandra APIType = "Cassandra"
+	// Gremlin ...
+	Gremlin APIType = "Gremlin"
+	// GremlinV2 ...
+	GremlinV2 APIType = "GremlinV2"
+	// MongoDB ...
+	MongoDB APIType = "MongoDB"
+	// SQL ...
+	SQL APIType = "Sql"
+	// Table ...
+	Table APIType = "Table"
 )
 
 // PossibleAPITypeValues returns an array of possible values for the APIType const type.
 func PossibleAPITypeValues() []APIType {
-	return []APIType{APITypeCassandra, APITypeGremlin, APITypeGremlinV2, APITypeMongoDB, APITypeSQL, APITypeTable}
+	return []APIType{Cassandra, Gremlin, GremlinV2, MongoDB, SQL, Table}
 }
 
 // AuthenticationMethod enumerates the values for authentication method.
@@ -48,109 +48,109 @@ func PossibleAuthenticationMethodValues() []AuthenticationMethod {
 type BackupPolicyType string
 
 const (
-	// BackupPolicyTypeContinuous ...
-	BackupPolicyTypeContinuous BackupPolicyType = "Continuous"
-	// BackupPolicyTypePeriodic ...
-	BackupPolicyTypePeriodic BackupPolicyType = "Periodic"
+	// Continuous ...
+	Continuous BackupPolicyType = "Continuous"
+	// Periodic ...
+	Periodic BackupPolicyType = "Periodic"
 )
 
 // PossibleBackupPolicyTypeValues returns an array of possible values for the BackupPolicyType const type.
 func PossibleBackupPolicyTypeValues() []BackupPolicyType {
-	return []BackupPolicyType{BackupPolicyTypeContinuous, BackupPolicyTypePeriodic}
+	return []BackupPolicyType{Continuous, Periodic}
 }
 
 // BackupStorageRedundancy enumerates the values for backup storage redundancy.
 type BackupStorageRedundancy string
 
 const (
-	// BackupStorageRedundancyGeo ...
-	BackupStorageRedundancyGeo BackupStorageRedundancy = "Geo"
-	// BackupStorageRedundancyLocal ...
-	BackupStorageRedundancyLocal BackupStorageRedundancy = "Local"
-	// BackupStorageRedundancyZone ...
-	BackupStorageRedundancyZone BackupStorageRedundancy = "Zone"
+	// Geo ...
+	Geo BackupStorageRedundancy = "Geo"
+	// Local ...
+	Local BackupStorageRedundancy = "Local"
+	// Zone ...
+	Zone BackupStorageRedundancy = "Zone"
 )
 
 // PossibleBackupStorageRedundancyValues returns an array of possible values for the BackupStorageRedundancy const type.
 func PossibleBackupStorageRedundancyValues() []BackupStorageRedundancy {
-	return []BackupStorageRedundancy{BackupStorageRedundancyGeo, BackupStorageRedundancyLocal, BackupStorageRedundancyZone}
+	return []BackupStorageRedundancy{Geo, Local, Zone}
 }
 
 // CompositePathSortOrder enumerates the values for composite path sort order.
 type CompositePathSortOrder string
 
 const (
-	// CompositePathSortOrderAscending ...
-	CompositePathSortOrderAscending CompositePathSortOrder = "ascending"
-	// CompositePathSortOrderDescending ...
-	CompositePathSortOrderDescending CompositePathSortOrder = "descending"
+	// Ascending ...
+	Ascending CompositePathSortOrder = "ascending"
+	// Descending ...
+	Descending CompositePathSortOrder = "descending"
 )
 
 // PossibleCompositePathSortOrderValues returns an array of possible values for the CompositePathSortOrder const type.
 func PossibleCompositePathSortOrderValues() []CompositePathSortOrder {
-	return []CompositePathSortOrder{CompositePathSortOrderAscending, CompositePathSortOrderDescending}
+	return []CompositePathSortOrder{Ascending, Descending}
 }
 
 // ConflictResolutionMode enumerates the values for conflict resolution mode.
 type ConflictResolutionMode string
 
 const (
-	// ConflictResolutionModeCustom ...
-	ConflictResolutionModeCustom ConflictResolutionMode = "Custom"
-	// ConflictResolutionModeLastWriterWins ...
-	ConflictResolutionModeLastWriterWins ConflictResolutionMode = "LastWriterWins"
+	// Custom ...
+	Custom ConflictResolutionMode = "Custom"
+	// LastWriterWins ...
+	LastWriterWins ConflictResolutionMode = "LastWriterWins"
 )
 
 // PossibleConflictResolutionModeValues returns an array of possible values for the ConflictResolutionMode const type.
 func PossibleConflictResolutionModeValues() []ConflictResolutionMode {
-	return []ConflictResolutionMode{ConflictResolutionModeCustom, ConflictResolutionModeLastWriterWins}
+	return []ConflictResolutionMode{Custom, LastWriterWins}
 }
 
 // ConnectorOffer enumerates the values for connector offer.
 type ConnectorOffer string
 
 const (
-	// ConnectorOfferSmall ...
-	ConnectorOfferSmall ConnectorOffer = "Small"
+	// Small ...
+	Small ConnectorOffer = "Small"
 )
 
 // PossibleConnectorOfferValues returns an array of possible values for the ConnectorOffer const type.
 func PossibleConnectorOfferValues() []ConnectorOffer {
-	return []ConnectorOffer{ConnectorOfferSmall}
+	return []ConnectorOffer{Small}
 }
 
 // CreatedByType enumerates the values for created by type.
 type CreatedByType string
 
 const (
-	// CreatedByTypeApplication ...
-	CreatedByTypeApplication CreatedByType = "Application"
-	// CreatedByTypeKey ...
-	CreatedByTypeKey CreatedByType = "Key"
-	// CreatedByTypeManagedIdentity ...
-	CreatedByTypeManagedIdentity CreatedByType = "ManagedIdentity"
-	// CreatedByTypeUser ...
-	CreatedByTypeUser CreatedByType = "User"
+	// Application ...
+	Application CreatedByType = "Application"
+	// Key ...
+	Key CreatedByType = "Key"
+	// ManagedIdentity ...
+	ManagedIdentity CreatedByType = "ManagedIdentity"
+	// User ...
+	User CreatedByType = "User"
 )
 
 // PossibleCreatedByTypeValues returns an array of possible values for the CreatedByType const type.
 func PossibleCreatedByTypeValues() []CreatedByType {
-	return []CreatedByType{CreatedByTypeApplication, CreatedByTypeKey, CreatedByTypeManagedIdentity, CreatedByTypeUser}
+	return []CreatedByType{Application, Key, ManagedIdentity, User}
 }
 
 // CreateMode enumerates the values for create mode.
 type CreateMode string
 
 const (
-	// CreateModeDefault ...
-	CreateModeDefault CreateMode = "Default"
-	// CreateModeRestore ...
-	CreateModeRestore CreateMode = "Restore"
+	// Default ...
+	Default CreateMode = "Default"
+	// Restore ...
+	Restore CreateMode = "Restore"
 )
 
 // PossibleCreateModeValues returns an array of possible values for the CreateMode const type.
 func PossibleCreateModeValues() []CreateMode {
-	return []CreateMode{CreateModeDefault, CreateModeRestore}
+	return []CreateMode{Default, Restore}
 }
 
 // CreateModeBasicDatabaseAccountCreateUpdateProperties enumerates the values for create mode basic database
@@ -158,17 +158,17 @@ func PossibleCreateModeValues() []CreateMode {
 type CreateModeBasicDatabaseAccountCreateUpdateProperties string
 
 const (
-	// CreateModeBasicDatabaseAccountCreateUpdatePropertiesCreateModeDatabaseAccountCreateUpdateProperties ...
-	CreateModeBasicDatabaseAccountCreateUpdatePropertiesCreateModeDatabaseAccountCreateUpdateProperties CreateModeBasicDatabaseAccountCreateUpdateProperties = "DatabaseAccountCreateUpdateProperties"
-	// CreateModeBasicDatabaseAccountCreateUpdatePropertiesCreateModeDefault ...
-	CreateModeBasicDatabaseAccountCreateUpdatePropertiesCreateModeDefault CreateModeBasicDatabaseAccountCreateUpdateProperties = "Default"
-	// CreateModeBasicDatabaseAccountCreateUpdatePropertiesCreateModeRestore ...
-	CreateModeBasicDatabaseAccountCreateUpdatePropertiesCreateModeRestore CreateModeBasicDatabaseAccountCreateUpdateProperties = "Restore"
+	// CreateModeDatabaseAccountCreateUpdateProperties ...
+	CreateModeDatabaseAccountCreateUpdateProperties CreateModeBasicDatabaseAccountCreateUpdateProperties = "DatabaseAccountCreateUpdateProperties"
+	// CreateModeDefault ...
+	CreateModeDefault CreateModeBasicDatabaseAccountCreateUpdateProperties = "Default"
+	// CreateModeRestore ...
+	CreateModeRestore CreateModeBasicDatabaseAccountCreateUpdateProperties = "Restore"
 )
 
 // PossibleCreateModeBasicDatabaseAccountCreateUpdatePropertiesValues returns an array of possible values for the CreateModeBasicDatabaseAccountCreateUpdateProperties const type.
 func PossibleCreateModeBasicDatabaseAccountCreateUpdatePropertiesValues() []CreateModeBasicDatabaseAccountCreateUpdateProperties {
-	return []CreateModeBasicDatabaseAccountCreateUpdateProperties{CreateModeBasicDatabaseAccountCreateUpdatePropertiesCreateModeDatabaseAccountCreateUpdateProperties, CreateModeBasicDatabaseAccountCreateUpdatePropertiesCreateModeDefault, CreateModeBasicDatabaseAccountCreateUpdatePropertiesCreateModeRestore}
+	return []CreateModeBasicDatabaseAccountCreateUpdateProperties{CreateModeDatabaseAccountCreateUpdateProperties, CreateModeDefault, CreateModeRestore}
 }
 
 // DatabaseAccountKind enumerates the values for database account kind.
@@ -192,133 +192,133 @@ func PossibleDatabaseAccountKindValues() []DatabaseAccountKind {
 type DatabaseAccountOfferType string
 
 const (
-	// DatabaseAccountOfferTypeStandard ...
-	DatabaseAccountOfferTypeStandard DatabaseAccountOfferType = "Standard"
+	// Standard ...
+	Standard DatabaseAccountOfferType = "Standard"
 )
 
 // PossibleDatabaseAccountOfferTypeValues returns an array of possible values for the DatabaseAccountOfferType const type.
 func PossibleDatabaseAccountOfferTypeValues() []DatabaseAccountOfferType {
-	return []DatabaseAccountOfferType{DatabaseAccountOfferTypeStandard}
+	return []DatabaseAccountOfferType{Standard}
 }
 
 // DataType enumerates the values for data type.
 type DataType string
 
 const (
-	// DataTypeLineString ...
-	DataTypeLineString DataType = "LineString"
-	// DataTypeMultiPolygon ...
-	DataTypeMultiPolygon DataType = "MultiPolygon"
-	// DataTypeNumber ...
-	DataTypeNumber DataType = "Number"
-	// DataTypePoint ...
-	DataTypePoint DataType = "Point"
-	// DataTypePolygon ...
-	DataTypePolygon DataType = "Polygon"
-	// DataTypeString ...
-	DataTypeString DataType = "String"
+	// LineString ...
+	LineString DataType = "LineString"
+	// MultiPolygon ...
+	MultiPolygon DataType = "MultiPolygon"
+	// Number ...
+	Number DataType = "Number"
+	// Point ...
+	Point DataType = "Point"
+	// Polygon ...
+	Polygon DataType = "Polygon"
+	// String ...
+	String DataType = "String"
 )
 
 // PossibleDataTypeValues returns an array of possible values for the DataType const type.
 func PossibleDataTypeValues() []DataType {
-	return []DataType{DataTypeLineString, DataTypeMultiPolygon, DataTypeNumber, DataTypePoint, DataTypePolygon, DataTypeString}
+	return []DataType{LineString, MultiPolygon, Number, Point, Polygon, String}
 }
 
 // DefaultConsistencyLevel enumerates the values for default consistency level.
 type DefaultConsistencyLevel string
 
 const (
-	// DefaultConsistencyLevelBoundedStaleness ...
-	DefaultConsistencyLevelBoundedStaleness DefaultConsistencyLevel = "BoundedStaleness"
-	// DefaultConsistencyLevelConsistentPrefix ...
-	DefaultConsistencyLevelConsistentPrefix DefaultConsistencyLevel = "ConsistentPrefix"
-	// DefaultConsistencyLevelEventual ...
-	DefaultConsistencyLevelEventual DefaultConsistencyLevel = "Eventual"
-	// DefaultConsistencyLevelSession ...
-	DefaultConsistencyLevelSession DefaultConsistencyLevel = "Session"
-	// DefaultConsistencyLevelStrong ...
-	DefaultConsistencyLevelStrong DefaultConsistencyLevel = "Strong"
+	// BoundedStaleness ...
+	BoundedStaleness DefaultConsistencyLevel = "BoundedStaleness"
+	// ConsistentPrefix ...
+	ConsistentPrefix DefaultConsistencyLevel = "ConsistentPrefix"
+	// Eventual ...
+	Eventual DefaultConsistencyLevel = "Eventual"
+	// Session ...
+	Session DefaultConsistencyLevel = "Session"
+	// Strong ...
+	Strong DefaultConsistencyLevel = "Strong"
 )
 
 // PossibleDefaultConsistencyLevelValues returns an array of possible values for the DefaultConsistencyLevel const type.
 func PossibleDefaultConsistencyLevelValues() []DefaultConsistencyLevel {
-	return []DefaultConsistencyLevel{DefaultConsistencyLevelBoundedStaleness, DefaultConsistencyLevelConsistentPrefix, DefaultConsistencyLevelEventual, DefaultConsistencyLevelSession, DefaultConsistencyLevelStrong}
+	return []DefaultConsistencyLevel{BoundedStaleness, ConsistentPrefix, Eventual, Session, Strong}
 }
 
 // IndexingMode enumerates the values for indexing mode.
 type IndexingMode string
 
 const (
-	// IndexingModeConsistent ...
-	IndexingModeConsistent IndexingMode = "consistent"
-	// IndexingModeLazy ...
-	IndexingModeLazy IndexingMode = "lazy"
-	// IndexingModeNone ...
-	IndexingModeNone IndexingMode = "none"
+	// Consistent ...
+	Consistent IndexingMode = "consistent"
+	// Lazy ...
+	Lazy IndexingMode = "lazy"
+	// None ...
+	None IndexingMode = "none"
 )
 
 // PossibleIndexingModeValues returns an array of possible values for the IndexingMode const type.
 func PossibleIndexingModeValues() []IndexingMode {
-	return []IndexingMode{IndexingModeConsistent, IndexingModeLazy, IndexingModeNone}
+	return []IndexingMode{Consistent, Lazy, None}
 }
 
 // IndexKind enumerates the values for index kind.
 type IndexKind string
 
 const (
-	// IndexKindHash ...
-	IndexKindHash IndexKind = "Hash"
-	// IndexKindRange ...
-	IndexKindRange IndexKind = "Range"
-	// IndexKindSpatial ...
-	IndexKindSpatial IndexKind = "Spatial"
+	// Hash ...
+	Hash IndexKind = "Hash"
+	// Range ...
+	Range IndexKind = "Range"
+	// Spatial ...
+	Spatial IndexKind = "Spatial"
 )
 
 // PossibleIndexKindValues returns an array of possible values for the IndexKind const type.
 func PossibleIndexKindValues() []IndexKind {
-	return []IndexKind{IndexKindHash, IndexKindRange, IndexKindSpatial}
+	return []IndexKind{Hash, Range, Spatial}
 }
 
 // KeyKind enumerates the values for key kind.
 type KeyKind string
 
 const (
-	// KeyKindPrimary ...
-	KeyKindPrimary KeyKind = "primary"
-	// KeyKindPrimaryReadonly ...
-	KeyKindPrimaryReadonly KeyKind = "primaryReadonly"
-	// KeyKindSecondary ...
-	KeyKindSecondary KeyKind = "secondary"
-	// KeyKindSecondaryReadonly ...
-	KeyKindSecondaryReadonly KeyKind = "secondaryReadonly"
+	// Primary ...
+	Primary KeyKind = "primary"
+	// PrimaryReadonly ...
+	PrimaryReadonly KeyKind = "primaryReadonly"
+	// Secondary ...
+	Secondary KeyKind = "secondary"
+	// SecondaryReadonly ...
+	SecondaryReadonly KeyKind = "secondaryReadonly"
 )
 
 // PossibleKeyKindValues returns an array of possible values for the KeyKind const type.
 func PossibleKeyKindValues() []KeyKind {
-	return []KeyKind{KeyKindPrimary, KeyKindPrimaryReadonly, KeyKindSecondary, KeyKindSecondaryReadonly}
+	return []KeyKind{Primary, PrimaryReadonly, Secondary, SecondaryReadonly}
 }
 
 // ManagedCassandraProvisioningState enumerates the values for managed cassandra provisioning state.
 type ManagedCassandraProvisioningState string
 
 const (
-	// ManagedCassandraProvisioningStateCanceled ...
-	ManagedCassandraProvisioningStateCanceled ManagedCassandraProvisioningState = "Canceled"
-	// ManagedCassandraProvisioningStateCreating ...
-	ManagedCassandraProvisioningStateCreating ManagedCassandraProvisioningState = "Creating"
-	// ManagedCassandraProvisioningStateDeleting ...
-	ManagedCassandraProvisioningStateDeleting ManagedCassandraProvisioningState = "Deleting"
-	// ManagedCassandraProvisioningStateFailed ...
-	ManagedCassandraProvisioningStateFailed ManagedCassandraProvisioningState = "Failed"
-	// ManagedCassandraProvisioningStateSucceeded ...
-	ManagedCassandraProvisioningStateSucceeded ManagedCassandraProvisioningState = "Succeeded"
-	// ManagedCassandraProvisioningStateUpdating ...
-	ManagedCassandraProvisioningStateUpdating ManagedCassandraProvisioningState = "Updating"
+	// Canceled ...
+	Canceled ManagedCassandraProvisioningState = "Canceled"
+	// Creating ...
+	Creating ManagedCassandraProvisioningState = "Creating"
+	// Deleting ...
+	Deleting ManagedCassandraProvisioningState = "Deleting"
+	// Failed ...
+	Failed ManagedCassandraProvisioningState = "Failed"
+	// Succeeded ...
+	Succeeded ManagedCassandraProvisioningState = "Succeeded"
+	// Updating ...
+	Updating ManagedCassandraProvisioningState = "Updating"
 )
 
 // PossibleManagedCassandraProvisioningStateValues returns an array of possible values for the ManagedCassandraProvisioningState const type.
 func PossibleManagedCassandraProvisioningStateValues() []ManagedCassandraProvisioningState {
-	return []ManagedCassandraProvisioningState{ManagedCassandraProvisioningStateCanceled, ManagedCassandraProvisioningStateCreating, ManagedCassandraProvisioningStateDeleting, ManagedCassandraProvisioningStateFailed, ManagedCassandraProvisioningStateSucceeded, ManagedCassandraProvisioningStateUpdating}
+	return []ManagedCassandraProvisioningState{Canceled, Creating, Deleting, Failed, Succeeded, Updating}
 }
 
 // NetworkACLBypass enumerates the values for network acl bypass.
@@ -340,55 +340,55 @@ func PossibleNetworkACLBypassValues() []NetworkACLBypass {
 type NodeState string
 
 const (
-	// NodeStateJoining ...
-	NodeStateJoining NodeState = "Joining"
-	// NodeStateLeaving ...
-	NodeStateLeaving NodeState = "Leaving"
-	// NodeStateMoving ...
-	NodeStateMoving NodeState = "Moving"
-	// NodeStateNormal ...
-	NodeStateNormal NodeState = "Normal"
-	// NodeStateStopped ...
-	NodeStateStopped NodeState = "Stopped"
+	// Joining ...
+	Joining NodeState = "Joining"
+	// Leaving ...
+	Leaving NodeState = "Leaving"
+	// Moving ...
+	Moving NodeState = "Moving"
+	// Normal ...
+	Normal NodeState = "Normal"
+	// Stopped ...
+	Stopped NodeState = "Stopped"
 )
 
 // PossibleNodeStateValues returns an array of possible values for the NodeState const type.
 func PossibleNodeStateValues() []NodeState {
-	return []NodeState{NodeStateJoining, NodeStateLeaving, NodeStateMoving, NodeStateNormal, NodeStateStopped}
+	return []NodeState{Joining, Leaving, Moving, Normal, Stopped}
 }
 
 // NodeStatus enumerates the values for node status.
 type NodeStatus string
 
 const (
-	// NodeStatusDown ...
-	NodeStatusDown NodeStatus = "Down"
-	// NodeStatusUp ...
-	NodeStatusUp NodeStatus = "Up"
+	// Down ...
+	Down NodeStatus = "Down"
+	// Up ...
+	Up NodeStatus = "Up"
 )
 
 // PossibleNodeStatusValues returns an array of possible values for the NodeStatus const type.
 func PossibleNodeStatusValues() []NodeStatus {
-	return []NodeStatus{NodeStatusDown, NodeStatusUp}
+	return []NodeStatus{Down, Up}
 }
 
 // OperationType enumerates the values for operation type.
 type OperationType string
 
 const (
-	// OperationTypeCreate ...
-	OperationTypeCreate OperationType = "Create"
-	// OperationTypeDelete ...
-	OperationTypeDelete OperationType = "Delete"
-	// OperationTypeReplace ...
-	OperationTypeReplace OperationType = "Replace"
-	// OperationTypeSystemOperation ...
-	OperationTypeSystemOperation OperationType = "SystemOperation"
+	// Create ...
+	Create OperationType = "Create"
+	// Delete ...
+	Delete OperationType = "Delete"
+	// Replace ...
+	Replace OperationType = "Replace"
+	// SystemOperation ...
+	SystemOperation OperationType = "SystemOperation"
 )
 
 // PossibleOperationTypeValues returns an array of possible values for the OperationType const type.
 func PossibleOperationTypeValues() []OperationType {
-	return []OperationType{OperationTypeCreate, OperationTypeDelete, OperationTypeReplace, OperationTypeSystemOperation}
+	return []OperationType{Create, Delete, Replace, SystemOperation}
 }
 
 // PartitionKind enumerates the values for partition kind.
@@ -435,15 +435,15 @@ func PossiblePrimaryAggregationTypeValues() []PrimaryAggregationType {
 type PublicNetworkAccess string
 
 const (
-	// PublicNetworkAccessDisabled ...
-	PublicNetworkAccessDisabled PublicNetworkAccess = "Disabled"
-	// PublicNetworkAccessEnabled ...
-	PublicNetworkAccessEnabled PublicNetworkAccess = "Enabled"
+	// Disabled ...
+	Disabled PublicNetworkAccess = "Disabled"
+	// Enabled ...
+	Enabled PublicNetworkAccess = "Enabled"
 )
 
 // PossiblePublicNetworkAccessValues returns an array of possible values for the PublicNetworkAccess const type.
 func PossiblePublicNetworkAccessValues() []PublicNetworkAccess {
-	return []PublicNetworkAccess{PublicNetworkAccessDisabled, PublicNetworkAccessEnabled}
+	return []PublicNetworkAccess{Disabled, Enabled}
 }
 
 // ResourceIdentityType enumerates the values for resource identity type.
@@ -469,62 +469,62 @@ func PossibleResourceIdentityTypeValues() []ResourceIdentityType {
 type RestoreMode string
 
 const (
-	// RestoreModePointInTime ...
-	RestoreModePointInTime RestoreMode = "PointInTime"
+	// PointInTime ...
+	PointInTime RestoreMode = "PointInTime"
 )
 
 // PossibleRestoreModeValues returns an array of possible values for the RestoreMode const type.
 func PossibleRestoreModeValues() []RestoreMode {
-	return []RestoreMode{RestoreModePointInTime}
+	return []RestoreMode{PointInTime}
 }
 
 // RoleDefinitionType enumerates the values for role definition type.
 type RoleDefinitionType string
 
 const (
-	// RoleDefinitionTypeBuiltInRole ...
-	RoleDefinitionTypeBuiltInRole RoleDefinitionType = "BuiltInRole"
-	// RoleDefinitionTypeCustomRole ...
-	RoleDefinitionTypeCustomRole RoleDefinitionType = "CustomRole"
+	// BuiltInRole ...
+	BuiltInRole RoleDefinitionType = "BuiltInRole"
+	// CustomRole ...
+	CustomRole RoleDefinitionType = "CustomRole"
 )
 
 // PossibleRoleDefinitionTypeValues returns an array of possible values for the RoleDefinitionType const type.
 func PossibleRoleDefinitionTypeValues() []RoleDefinitionType {
-	return []RoleDefinitionType{RoleDefinitionTypeBuiltInRole, RoleDefinitionTypeCustomRole}
+	return []RoleDefinitionType{BuiltInRole, CustomRole}
 }
 
 // ServerVersion enumerates the values for server version.
 type ServerVersion string
 
 const (
-	// ServerVersionFourFullStopZero ...
-	ServerVersionFourFullStopZero ServerVersion = "4.0"
-	// ServerVersionThreeFullStopSix ...
-	ServerVersionThreeFullStopSix ServerVersion = "3.6"
-	// ServerVersionThreeFullStopTwo ...
-	ServerVersionThreeFullStopTwo ServerVersion = "3.2"
+	// FourFullStopZero ...
+	FourFullStopZero ServerVersion = "4.0"
+	// ThreeFullStopSix ...
+	ThreeFullStopSix ServerVersion = "3.6"
+	// ThreeFullStopTwo ...
+	ThreeFullStopTwo ServerVersion = "3.2"
 )
 
 // PossibleServerVersionValues returns an array of possible values for the ServerVersion const type.
 func PossibleServerVersionValues() []ServerVersion {
-	return []ServerVersion{ServerVersionFourFullStopZero, ServerVersionThreeFullStopSix, ServerVersionThreeFullStopTwo}
+	return []ServerVersion{FourFullStopZero, ThreeFullStopSix, ThreeFullStopTwo}
 }
 
 // ServiceSize enumerates the values for service size.
 type ServiceSize string
 
 const (
-	// ServiceSizeCosmosD16s ...
-	ServiceSizeCosmosD16s ServiceSize = "Cosmos.D16s"
-	// ServiceSizeCosmosD4s ...
-	ServiceSizeCosmosD4s ServiceSize = "Cosmos.D4s"
-	// ServiceSizeCosmosD8s ...
-	ServiceSizeCosmosD8s ServiceSize = "Cosmos.D8s"
+	// CosmosD16s ...
+	CosmosD16s ServiceSize = "Cosmos.D16s"
+	// CosmosD4s ...
+	CosmosD4s ServiceSize = "Cosmos.D4s"
+	// CosmosD8s ...
+	CosmosD8s ServiceSize = "Cosmos.D8s"
 )
 
 // PossibleServiceSizeValues returns an array of possible values for the ServiceSize const type.
 func PossibleServiceSizeValues() []ServiceSize {
-	return []ServiceSize{ServiceSizeCosmosD16s, ServiceSizeCosmosD4s, ServiceSizeCosmosD8s}
+	return []ServiceSize{CosmosD16s, CosmosD4s, CosmosD8s}
 }
 
 // ServiceStatus enumerates the values for service status.
@@ -554,15 +554,15 @@ func PossibleServiceStatusValues() []ServiceStatus {
 type ServiceType string
 
 const (
-	// ServiceTypeDataTransfer ...
-	ServiceTypeDataTransfer ServiceType = "DataTransfer"
-	// ServiceTypeSQLDedicatedGateway ...
-	ServiceTypeSQLDedicatedGateway ServiceType = "SqlDedicatedGateway"
+	// DataTransfer ...
+	DataTransfer ServiceType = "DataTransfer"
+	// SQLDedicatedGateway ...
+	SQLDedicatedGateway ServiceType = "SqlDedicatedGateway"
 )
 
 // PossibleServiceTypeValues returns an array of possible values for the ServiceType const type.
 func PossibleServiceTypeValues() []ServiceType {
-	return []ServiceType{ServiceTypeDataTransfer, ServiceTypeSQLDedicatedGateway}
+	return []ServiceType{DataTransfer, SQLDedicatedGateway}
 }
 
 // ServiceTypeBasicServiceResourceProperties enumerates the values for service type basic service resource
@@ -570,17 +570,17 @@ func PossibleServiceTypeValues() []ServiceType {
 type ServiceTypeBasicServiceResourceProperties string
 
 const (
-	// ServiceTypeBasicServiceResourcePropertiesServiceTypeDataTransferServiceResourceProperties ...
-	ServiceTypeBasicServiceResourcePropertiesServiceTypeDataTransferServiceResourceProperties ServiceTypeBasicServiceResourceProperties = "DataTransferServiceResourceProperties"
-	// ServiceTypeBasicServiceResourcePropertiesServiceTypeServiceResourceProperties ...
-	ServiceTypeBasicServiceResourcePropertiesServiceTypeServiceResourceProperties ServiceTypeBasicServiceResourceProperties = "ServiceResourceProperties"
-	// ServiceTypeBasicServiceResourcePropertiesServiceTypeSQLDedicatedGatewayServiceResourceProperties ...
-	ServiceTypeBasicServiceResourcePropertiesServiceTypeSQLDedicatedGatewayServiceResourceProperties ServiceTypeBasicServiceResourceProperties = "SqlDedicatedGatewayServiceResourceProperties"
+	// ServiceTypeDataTransferServiceResourceProperties ...
+	ServiceTypeDataTransferServiceResourceProperties ServiceTypeBasicServiceResourceProperties = "DataTransferServiceResourceProperties"
+	// ServiceTypeServiceResourceProperties ...
+	ServiceTypeServiceResourceProperties ServiceTypeBasicServiceResourceProperties = "ServiceResourceProperties"
+	// ServiceTypeSQLDedicatedGatewayServiceResourceProperties ...
+	ServiceTypeSQLDedicatedGatewayServiceResourceProperties ServiceTypeBasicServiceResourceProperties = "SqlDedicatedGatewayServiceResourceProperties"
 )
 
 // PossibleServiceTypeBasicServiceResourcePropertiesValues returns an array of possible values for the ServiceTypeBasicServiceResourceProperties const type.
 func PossibleServiceTypeBasicServiceResourcePropertiesValues() []ServiceTypeBasicServiceResourceProperties {
-	return []ServiceTypeBasicServiceResourceProperties{ServiceTypeBasicServiceResourcePropertiesServiceTypeDataTransferServiceResourceProperties, ServiceTypeBasicServiceResourcePropertiesServiceTypeServiceResourceProperties, ServiceTypeBasicServiceResourcePropertiesServiceTypeSQLDedicatedGatewayServiceResourceProperties}
+	return []ServiceTypeBasicServiceResourceProperties{ServiceTypeDataTransferServiceResourceProperties, ServiceTypeServiceResourceProperties, ServiceTypeSQLDedicatedGatewayServiceResourceProperties}
 }
 
 // SpatialType enumerates the values for spatial type.
@@ -627,15 +627,15 @@ func PossibleTriggerOperationValues() []TriggerOperation {
 type TriggerType string
 
 const (
-	// TriggerTypePost ...
-	TriggerTypePost TriggerType = "Post"
-	// TriggerTypePre ...
-	TriggerTypePre TriggerType = "Pre"
+	// Post ...
+	Post TriggerType = "Post"
+	// Pre ...
+	Pre TriggerType = "Pre"
 )
 
 // PossibleTriggerTypeValues returns an array of possible values for the TriggerType const type.
 func PossibleTriggerTypeValues() []TriggerType {
-	return []TriggerType{TriggerTypePost, TriggerTypePre}
+	return []TriggerType{Post, Pre}
 }
 
 // Type enumerates the values for type.
@@ -659,23 +659,23 @@ func PossibleTypeValues() []Type {
 type UnitType string
 
 const (
-	// UnitTypeBytes ...
-	UnitTypeBytes UnitType = "Bytes"
-	// UnitTypeBytesPerSecond ...
-	UnitTypeBytesPerSecond UnitType = "BytesPerSecond"
-	// UnitTypeCount ...
-	UnitTypeCount UnitType = "Count"
-	// UnitTypeCountPerSecond ...
-	UnitTypeCountPerSecond UnitType = "CountPerSecond"
-	// UnitTypeMilliseconds ...
-	UnitTypeMilliseconds UnitType = "Milliseconds"
-	// UnitTypePercent ...
-	UnitTypePercent UnitType = "Percent"
-	// UnitTypeSeconds ...
-	UnitTypeSeconds UnitType = "Seconds"
+	// Bytes ...
+	Bytes UnitType = "Bytes"
+	// BytesPerSecond ...
+	BytesPerSecond UnitType = "BytesPerSecond"
+	// Count ...
+	Count UnitType = "Count"
+	// CountPerSecond ...
+	CountPerSecond UnitType = "CountPerSecond"
+	// Milliseconds ...
+	Milliseconds UnitType = "Milliseconds"
+	// Percent ...
+	Percent UnitType = "Percent"
+	// Seconds ...
+	Seconds UnitType = "Seconds"
 )
 
 // PossibleUnitTypeValues returns an array of possible values for the UnitType const type.
 func PossibleUnitTypeValues() []UnitType {
-	return []UnitType{UnitTypeBytes, UnitTypeBytesPerSecond, UnitTypeCount, UnitTypeCountPerSecond, UnitTypeMilliseconds, UnitTypePercent, UnitTypeSeconds}
+	return []UnitType{Bytes, BytesPerSecond, Count, CountPerSecond, Milliseconds, Percent, Seconds}
 }
