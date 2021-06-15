@@ -6433,7 +6433,7 @@ func (rip *ReferenceInputProperties) UnmarshalJSON(body []byte) error {
 	return nil
 }
 
-// Resource ...
+// Resource the base resource definition
 type Resource struct {
 	// ID - READ-ONLY; Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string `json:"id,omitempty"`
