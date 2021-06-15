@@ -1,8 +1,9 @@
-# Change History
+# Unreleased
 
 ## Additive Changes
 
-### New Funcs
+### Struct Changes
 
-1. ErrorDetails.MarshalJSON() ([]byte, error)
-1. OperationDisplay.MarshalJSON() ([]byte, error)
+#### New Struct Fields
+
+1. OperationDisplay.Resourcetest

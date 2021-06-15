@@ -358,6 +358,8 @@ type OperationDisplay struct {
 	Provider *string `json:"provider,omitempty"`
 	// Resource - READ-ONLY; Resource Type: IoTSpaces
 	Resource *string `json:"resource,omitempty"`
+	// Resourcetest - READ-ONLY; Resource Type: IoTSpaces
+	Resourcetest *string `json:"resourcetest,omitempty"`
 	// Operation - READ-ONLY; Name of the operation
 	Operation *string `json:"operation,omitempty"`
 	// Description - READ-ONLY; Friendly description for the operation,
