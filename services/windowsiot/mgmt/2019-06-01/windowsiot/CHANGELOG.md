@@ -1,9 +1,47 @@
-# Change History
+# Unreleased
+
+## Breaking Changes
+
+### Struct Changes
+
+#### Removed Struct Fields
+
+1. ErrorDetails.Code
+1. ErrorDetails.Details
+1. ErrorDetails.Message
+1. ErrorDetails.Target
+
+### Signature Changes
+
+#### Funcs
+
+1. ServicesClient.CreateOrUpdate
+	- Params
+		- From: context.Context, string, string, DeviceServiceProperties, string
+		- To: context.Context, string, string, DeviceService, string
+1. ServicesClient.CreateOrUpdatePreparer
+	- Params
+		- From: context.Context, string, string, DeviceServiceProperties, string
+		- To: context.Context, string, string, DeviceService, string
+1. ServicesClient.Update
+	- Params
+		- From: context.Context, string, string, DeviceServiceProperties, string
+		- To: context.Context, string, string, DeviceService, string
+1. ServicesClient.UpdatePreparer
+	- Params
+		- From: context.Context, string, string, DeviceServiceProperties, string
+		- To: context.Context, string, string, DeviceService, string
 
 ## Additive Changes
 
-### New Funcs
+### Struct Changes
 
-1. OperationListResult.MarshalJSON() ([]byte, error)
-1. ProxyResource.MarshalJSON() ([]byte, error)
-1. Resource.MarshalJSON() ([]byte, error)
+#### New Structs
+
+1. ErrorDetailsError
+
+#### New Struct Fields
+
+1. ErrorDetails.Error
+1. OperationEntity.IsDataAction
+1. OperationEntity.Origin
