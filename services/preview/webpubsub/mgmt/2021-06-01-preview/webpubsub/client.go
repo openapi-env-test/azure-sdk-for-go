@@ -1,8 +1,7 @@
-// Package videoanalyzer implements the Azure ARM Videoanalyzer service API version 2021-05-01-preview.
+// Package webpubsub implements the Azure ARM Webpubsub service API version 2021-06-01-preview.
 //
-// Azure Video Analyzer provides a platform for you to build intelligent video applications that span the edge and the
-// cloud
-package videoanalyzer
+// REST API for Azure WebPubSub Service
+package webpubsub
 
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
@@ -15,11 +14,11 @@ import (
 )
 
 const (
-	// DefaultBaseURI is the default URI used for the service Videoanalyzer
+	// DefaultBaseURI is the default URI used for the service Webpubsub
 	DefaultBaseURI = "https://management.azure.com"
 )
 
-// BaseClient is the base client for Videoanalyzer.
+// BaseClient is the base client for Webpubsub.
 type BaseClient struct {
 	autorest.Client
 	BaseURI        string
