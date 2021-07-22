@@ -31,12 +31,12 @@ func NewAvailableServiceAliasesClientWithBaseURI(baseURI string, subscriptionID 
 	return AvailableServiceAliasesClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
 
-// List gets all available service aliases for this subscription in this region.
+// ListABC gets all available service aliases for this subscription in this region.
 // Parameters:
 // location - the location.
-func (client AvailableServiceAliasesClient) List(ctx context.Context, location string) (result AvailableServiceAliasesResultPage, err error) {
+func (client AvailableServiceAliasesClient) ListABC(ctx context.Context, location string) (result AvailableServiceAliasesResultPage, err error) {
 	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/AvailableServiceAliasesClient.List")
+		ctx = tracing.StartSpan(ctx, fqdn+"/AvailableServiceAliasesClient.ListABC")
 		defer func() {
 			sc := -1
 			if result.asar.Response.Response != nil {
@@ -45,23 +45,23 @@ func (client AvailableServiceAliasesClient) List(ctx context.Context, location s
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	result.fn = client.listNextResults
-	req, err := client.ListPreparer(ctx, location)
+	result.fn = client.listABCNextResults
+	req, err := client.ListABCPreparer(ctx, location)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "network.AvailableServiceAliasesClient", "List", nil, "Failure preparing request")
+		err = autorest.NewErrorWithError(err, "network.AvailableServiceAliasesClient", "ListABC", nil, "Failure preparing request")
 		return
 	}
 
-	resp, err := client.ListSender(req)
+	resp, err := client.ListABCSender(req)
 	if err != nil {
 		result.asar.Response = autorest.Response{Response: resp}
-		err = autorest.NewErrorWithError(err, "network.AvailableServiceAliasesClient", "List", resp, "Failure sending request")
+		err = autorest.NewErrorWithError(err, "network.AvailableServiceAliasesClient", "ListABC", resp, "Failure sending request")
 		return
 	}
 
-	result.asar, err = client.ListResponder(resp)
+	result.asar, err = client.ListABCResponder(resp)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "network.AvailableServiceAliasesClient", "List", resp, "Failure responding to request")
+		err = autorest.NewErrorWithError(err, "network.AvailableServiceAliasesClient", "ListABC", resp, "Failure responding to request")
 		return
 	}
 	if result.asar.hasNextLink() && result.asar.IsEmpty() {
@@ -72,8 +72,8 @@ func (client AvailableServiceAliasesClient) List(ctx context.Context, location s
 	return
 }
 
-// ListPreparer prepares the List request.
-func (client AvailableServiceAliasesClient) ListPreparer(ctx context.Context, location string) (*http.Request, error) {
+// ListABCPreparer prepares the ListABC request.
+func (client AvailableServiceAliasesClient) ListABCPreparer(ctx context.Context, location string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"location":       autorest.Encode("path", location),
 		"subscriptionId": autorest.Encode("path", client.SubscriptionID),
@@ -92,15 +92,15 @@ func (client AvailableServiceAliasesClient) ListPreparer(ctx context.Context, lo
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
 }
 
-// ListSender sends the List request. The method will close the
+// ListABCSender sends the ListABC request. The method will close the
 // http.Response Body if it receives an error.
-func (client AvailableServiceAliasesClient) ListSender(req *http.Request) (*http.Response, error) {
+func (client AvailableServiceAliasesClient) ListABCSender(req *http.Request) (*http.Response, error) {
 	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
-// ListResponder handles the response to the List request. The method always
+// ListABCResponder handles the response to the ListABC request. The method always
 // closes the http.Response Body.
-func (client AvailableServiceAliasesClient) ListResponder(resp *http.Response) (result AvailableServiceAliasesResult, err error) {
+func (client AvailableServiceAliasesClient) ListABCResponder(resp *http.Response) (result AvailableServiceAliasesResult, err error) {
 	err = autorest.Respond(
 		resp,
 		azure.WithErrorUnlessStatusCode(http.StatusOK),
@@ -110,31 +110,31 @@ func (client AvailableServiceAliasesClient) ListResponder(resp *http.Response) (
 	return
 }
 
-// listNextResults retrieves the next set of results, if any.
-func (client AvailableServiceAliasesClient) listNextResults(ctx context.Context, lastResults AvailableServiceAliasesResult) (result AvailableServiceAliasesResult, err error) {
+// listABCNextResults retrieves the next set of results, if any.
+func (client AvailableServiceAliasesClient) listABCNextResults(ctx context.Context, lastResults AvailableServiceAliasesResult) (result AvailableServiceAliasesResult, err error) {
 	req, err := lastResults.availableServiceAliasesResultPreparer(ctx)
 	if err != nil {
-		return result, autorest.NewErrorWithError(err, "network.AvailableServiceAliasesClient", "listNextResults", nil, "Failure preparing next results request")
+		return result, autorest.NewErrorWithError(err, "network.AvailableServiceAliasesClient", "listABCNextResults", nil, "Failure preparing next results request")
 	}
 	if req == nil {
 		return
 	}
-	resp, err := client.ListSender(req)
+	resp, err := client.ListABCSender(req)
 	if err != nil {
 		result.Response = autorest.Response{Response: resp}
-		return result, autorest.NewErrorWithError(err, "network.AvailableServiceAliasesClient", "listNextResults", resp, "Failure sending next results request")
+		return result, autorest.NewErrorWithError(err, "network.AvailableServiceAliasesClient", "listABCNextResults", resp, "Failure sending next results request")
 	}
-	result, err = client.ListResponder(resp)
+	result, err = client.ListABCResponder(resp)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "network.AvailableServiceAliasesClient", "listNextResults", resp, "Failure responding to next results request")
+		err = autorest.NewErrorWithError(err, "network.AvailableServiceAliasesClient", "listABCNextResults", resp, "Failure responding to next results request")
 	}
 	return
 }
 
-// ListComplete enumerates all values, automatically crossing page boundaries as required.
-func (client AvailableServiceAliasesClient) ListComplete(ctx context.Context, location string) (result AvailableServiceAliasesResultIterator, err error) {
+// ListABCComplete enumerates all values, automatically crossing page boundaries as required.
+func (client AvailableServiceAliasesClient) ListABCComplete(ctx context.Context, location string) (result AvailableServiceAliasesResultIterator, err error) {
 	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/AvailableServiceAliasesClient.List")
+		ctx = tracing.StartSpan(ctx, fqdn+"/AvailableServiceAliasesClient.ListABC")
 		defer func() {
 			sc := -1
 			if result.Response().Response.Response != nil {
@@ -143,7 +143,7 @@ func (client AvailableServiceAliasesClient) ListComplete(ctx context.Context, lo
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	result.page, err = client.List(ctx, location)
+	result.page, err = client.ListABC(ctx, location)
 	return
 }
 

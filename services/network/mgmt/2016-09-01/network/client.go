@@ -44,14 +44,14 @@ func NewWithBaseURI(baseURI string, subscriptionID string) BaseClient {
 	}
 }
 
-// CheckDNSNameAvailability checks whether a domain name in the cloudapp.net zone is available for use.
+// ABC checks whether a domain name in the cloudapp.net zone is available for use.
 // Parameters:
 // location - the location of the domain name.
 // domainNameLabel - the domain name to be verified. It must conform to the following regular expression:
 // ^[a-z][a-z0-9-]{1,61}[a-z0-9]$.
-func (client BaseClient) CheckDNSNameAvailability(ctx context.Context, location string, domainNameLabel string) (result DNSNameAvailabilityResult, err error) {
+func (client BaseClient) ABC(ctx context.Context, location string, domainNameLabel string) (result DNSNameAvailabilityResult, err error) {
 	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/BaseClient.CheckDNSNameAvailability")
+		ctx = tracing.StartSpan(ctx, fqdn+"/BaseClient.ABC")
 		defer func() {
 			sc := -1
 			if result.Response.Response != nil {
@@ -60,30 +60,30 @@ func (client BaseClient) CheckDNSNameAvailability(ctx context.Context, location 
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	req, err := client.CheckDNSNameAvailabilityPreparer(ctx, location, domainNameLabel)
+	req, err := client.ABCPreparer(ctx, location, domainNameLabel)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "network.BaseClient", "CheckDNSNameAvailability", nil, "Failure preparing request")
+		err = autorest.NewErrorWithError(err, "network.BaseClient", "ABC", nil, "Failure preparing request")
 		return
 	}
 
-	resp, err := client.CheckDNSNameAvailabilitySender(req)
+	resp, err := client.ABCSender(req)
 	if err != nil {
 		result.Response = autorest.Response{Response: resp}
-		err = autorest.NewErrorWithError(err, "network.BaseClient", "CheckDNSNameAvailability", resp, "Failure sending request")
+		err = autorest.NewErrorWithError(err, "network.BaseClient", "ABC", resp, "Failure sending request")
 		return
 	}
 
-	result, err = client.CheckDNSNameAvailabilityResponder(resp)
+	result, err = client.ABCResponder(resp)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "network.BaseClient", "CheckDNSNameAvailability", resp, "Failure responding to request")
+		err = autorest.NewErrorWithError(err, "network.BaseClient", "ABC", resp, "Failure responding to request")
 		return
 	}
 
 	return
 }
 
-// CheckDNSNameAvailabilityPreparer prepares the CheckDNSNameAvailability request.
-func (client BaseClient) CheckDNSNameAvailabilityPreparer(ctx context.Context, location string, domainNameLabel string) (*http.Request, error) {
+// ABCPreparer prepares the ABC request.
+func (client BaseClient) ABCPreparer(ctx context.Context, location string, domainNameLabel string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"location":       autorest.Encode("path", location),
 		"subscriptionId": autorest.Encode("path", client.SubscriptionID),
@@ -105,20 +105,253 @@ func (client BaseClient) CheckDNSNameAvailabilityPreparer(ctx context.Context, l
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
 }
 
-// CheckDNSNameAvailabilitySender sends the CheckDNSNameAvailability request. The method will close the
+// ABCSender sends the ABC request. The method will close the
 // http.Response Body if it receives an error.
-func (client BaseClient) CheckDNSNameAvailabilitySender(req *http.Request) (*http.Response, error) {
+func (client BaseClient) ABCSender(req *http.Request) (*http.Response, error) {
 	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
-// CheckDNSNameAvailabilityResponder handles the response to the CheckDNSNameAvailability request. The method always
+// ABCResponder handles the response to the ABC request. The method always
 // closes the http.Response Body.
-func (client BaseClient) CheckDNSNameAvailabilityResponder(resp *http.Response) (result DNSNameAvailabilityResult, err error) {
+func (client BaseClient) ABCResponder(resp *http.Response) (result DNSNameAvailabilityResult, err error) {
 	err = autorest.Respond(
 		resp,
 		azure.WithErrorUnlessStatusCode(http.StatusOK),
 		autorest.ByUnmarshallingJSON(&result),
 		autorest.ByClosing())
 	result.Response = autorest.Response{Response: resp}
+	return
+}
+
+// ABC1 deletes the specified authorization from the specified express route circuit.
+// Parameters:
+// resourceGroupName - the name of the resource group.
+// circuitName - the name of the express route circuit.
+// authorizationName - the name of the authorization.
+func (client BaseClient) ABC1(ctx context.Context, resourceGroupName string, circuitName string, authorizationName string) (result ABC1Future, err error) {
+	if tracing.IsEnabled() {
+		ctx = tracing.StartSpan(ctx, fqdn+"/BaseClient.ABC1")
+		defer func() {
+			sc := -1
+			if result.FutureAPI != nil && result.FutureAPI.Response() != nil {
+				sc = result.FutureAPI.Response().StatusCode
+			}
+			tracing.EndSpan(ctx, sc, err)
+		}()
+	}
+	req, err := client.ABC1Preparer(ctx, resourceGroupName, circuitName, authorizationName)
+	if err != nil {
+		err = autorest.NewErrorWithError(err, "network.BaseClient", "ABC1", nil, "Failure preparing request")
+		return
+	}
+
+	result, err = client.ABC1Sender(req)
+	if err != nil {
+		err = autorest.NewErrorWithError(err, "network.BaseClient", "ABC1", nil, "Failure sending request")
+		return
+	}
+
+	return
+}
+
+// ABC1Preparer prepares the ABC1 request.
+func (client BaseClient) ABC1Preparer(ctx context.Context, resourceGroupName string, circuitName string, authorizationName string) (*http.Request, error) {
+	pathParameters := map[string]interface{}{
+		"authorizationName": autorest.Encode("path", authorizationName),
+		"circuitName":       autorest.Encode("path", circuitName),
+		"resourceGroupName": autorest.Encode("path", resourceGroupName),
+		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
+	}
+
+	const APIVersion = "2016-09-01"
+	queryParameters := map[string]interface{}{
+		"api-version": APIVersion,
+	}
+
+	preparer := autorest.CreatePreparer(
+		autorest.AsDelete(),
+		autorest.WithBaseURL(client.BaseURI),
+		autorest.WithPathParameters("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/authorizations/{authorizationName}", pathParameters),
+		autorest.WithQueryParameters(queryParameters))
+	return preparer.Prepare((&http.Request{}).WithContext(ctx))
+}
+
+// ABC1Sender sends the ABC1 request. The method will close the
+// http.Response Body if it receives an error.
+func (client BaseClient) ABC1Sender(req *http.Request) (future ABC1Future, err error) {
+	var resp *http.Response
+	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	if err != nil {
+		return
+	}
+	var azf azure.Future
+	azf, err = azure.NewFutureFromResponse(resp)
+	future.FutureAPI = &azf
+	future.Result = future.result
+	return
+}
+
+// ABC1Responder handles the response to the ABC1 request. The method always
+// closes the http.Response Body.
+func (client BaseClient) ABC1Responder(resp *http.Response) (result autorest.Response, err error) {
+	err = autorest.Respond(
+		resp,
+		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusAccepted, http.StatusNoContent),
+		autorest.ByClosing())
+	result.Response = resp
+	return
+}
+
+// ABCd deletes the specified network security group.
+// Parameters:
+// resourceGroupName - the name of the resource group.
+// networkSecurityGroupName - the name of the network security group.
+func (client BaseClient) ABCd(ctx context.Context, resourceGroupName string, networkSecurityGroupName string) (result ABCdFuture, err error) {
+	if tracing.IsEnabled() {
+		ctx = tracing.StartSpan(ctx, fqdn+"/BaseClient.ABCd")
+		defer func() {
+			sc := -1
+			if result.FutureAPI != nil && result.FutureAPI.Response() != nil {
+				sc = result.FutureAPI.Response().StatusCode
+			}
+			tracing.EndSpan(ctx, sc, err)
+		}()
+	}
+	req, err := client.ABCdPreparer(ctx, resourceGroupName, networkSecurityGroupName)
+	if err != nil {
+		err = autorest.NewErrorWithError(err, "network.BaseClient", "ABCd", nil, "Failure preparing request")
+		return
+	}
+
+	result, err = client.ABCdSender(req)
+	if err != nil {
+		err = autorest.NewErrorWithError(err, "network.BaseClient", "ABCd", nil, "Failure sending request")
+		return
+	}
+
+	return
+}
+
+// ABCdPreparer prepares the ABCd request.
+func (client BaseClient) ABCdPreparer(ctx context.Context, resourceGroupName string, networkSecurityGroupName string) (*http.Request, error) {
+	pathParameters := map[string]interface{}{
+		"networkSecurityGroupName": autorest.Encode("path", networkSecurityGroupName),
+		"resourceGroupName":        autorest.Encode("path", resourceGroupName),
+		"subscriptionId":           autorest.Encode("path", client.SubscriptionID),
+	}
+
+	const APIVersion = "2016-09-01"
+	queryParameters := map[string]interface{}{
+		"api-version": APIVersion,
+	}
+
+	preparer := autorest.CreatePreparer(
+		autorest.AsDelete(),
+		autorest.WithBaseURL(client.BaseURI),
+		autorest.WithPathParameters("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityGroups/{networkSecurityGroupName}", pathParameters),
+		autorest.WithQueryParameters(queryParameters))
+	return preparer.Prepare((&http.Request{}).WithContext(ctx))
+}
+
+// ABCdSender sends the ABCd request. The method will close the
+// http.Response Body if it receives an error.
+func (client BaseClient) ABCdSender(req *http.Request) (future ABCdFuture, err error) {
+	var resp *http.Response
+	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	if err != nil {
+		return
+	}
+	var azf azure.Future
+	azf, err = azure.NewFutureFromResponse(resp)
+	future.FutureAPI = &azf
+	future.Result = future.result
+	return
+}
+
+// ABCdResponder handles the response to the ABCd request. The method always
+// closes the http.Response Body.
+func (client BaseClient) ABCdResponder(resp *http.Response) (result autorest.Response, err error) {
+	err = autorest.Respond(
+		resp,
+		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusAccepted, http.StatusNoContent),
+		autorest.ByClosing())
+	result.Response = resp
+	return
+}
+
+// ABCe deletes the specified network interface.
+// Parameters:
+// resourceGroupName - the name of the resource group.
+// networkInterfaceName - the name of the network interface.
+func (client BaseClient) ABCe(ctx context.Context, resourceGroupName string, networkInterfaceName string) (result ABCeFuture, err error) {
+	if tracing.IsEnabled() {
+		ctx = tracing.StartSpan(ctx, fqdn+"/BaseClient.ABCe")
+		defer func() {
+			sc := -1
+			if result.FutureAPI != nil && result.FutureAPI.Response() != nil {
+				sc = result.FutureAPI.Response().StatusCode
+			}
+			tracing.EndSpan(ctx, sc, err)
+		}()
+	}
+	req, err := client.ABCePreparer(ctx, resourceGroupName, networkInterfaceName)
+	if err != nil {
+		err = autorest.NewErrorWithError(err, "network.BaseClient", "ABCe", nil, "Failure preparing request")
+		return
+	}
+
+	result, err = client.ABCeSender(req)
+	if err != nil {
+		err = autorest.NewErrorWithError(err, "network.BaseClient", "ABCe", nil, "Failure sending request")
+		return
+	}
+
+	return
+}
+
+// ABCePreparer prepares the ABCe request.
+func (client BaseClient) ABCePreparer(ctx context.Context, resourceGroupName string, networkInterfaceName string) (*http.Request, error) {
+	pathParameters := map[string]interface{}{
+		"networkInterfaceName": autorest.Encode("path", networkInterfaceName),
+		"resourceGroupName":    autorest.Encode("path", resourceGroupName),
+		"subscriptionId":       autorest.Encode("path", client.SubscriptionID),
+	}
+
+	const APIVersion = "2016-09-01"
+	queryParameters := map[string]interface{}{
+		"api-version": APIVersion,
+	}
+
+	preparer := autorest.CreatePreparer(
+		autorest.AsDelete(),
+		autorest.WithBaseURL(client.BaseURI),
+		autorest.WithPathParameters("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkInterfaces/{networkInterfaceName}", pathParameters),
+		autorest.WithQueryParameters(queryParameters))
+	return preparer.Prepare((&http.Request{}).WithContext(ctx))
+}
+
+// ABCeSender sends the ABCe request. The method will close the
+// http.Response Body if it receives an error.
+func (client BaseClient) ABCeSender(req *http.Request) (future ABCeFuture, err error) {
+	var resp *http.Response
+	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	if err != nil {
+		return
+	}
+	var azf azure.Future
+	azf, err = azure.NewFutureFromResponse(resp)
+	future.FutureAPI = &azf
+	future.Result = future.result
+	return
+}
+
+// ABCeResponder handles the response to the ABCe request. The method always
+// closes the http.Response Body.
+func (client BaseClient) ABCeResponder(resp *http.Response) (result autorest.Response, err error) {
+	err = autorest.Respond(
+		resp,
+		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusAccepted, http.StatusNoContent),
+		autorest.ByClosing())
+	result.Response = resp
 	return
 }

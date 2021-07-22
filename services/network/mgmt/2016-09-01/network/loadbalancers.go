@@ -111,13 +111,13 @@ func (client LoadBalancersClient) CreateOrUpdateResponder(resp *http.Response) (
 	return
 }
 
-// Delete deletes the specified load balancer.
+// DeleteABC deletes the specified load balancer.
 // Parameters:
 // resourceGroupName - the name of the resource group.
 // loadBalancerName - the name of the load balancer.
-func (client LoadBalancersClient) Delete(ctx context.Context, resourceGroupName string, loadBalancerName string) (result LoadBalancersDeleteFuture, err error) {
+func (client LoadBalancersClient) DeleteABC(ctx context.Context, resourceGroupName string, loadBalancerName string) (result LoadBalancersDeleteABCFuture, err error) {
 	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/LoadBalancersClient.Delete")
+		ctx = tracing.StartSpan(ctx, fqdn+"/LoadBalancersClient.DeleteABC")
 		defer func() {
 			sc := -1
 			if result.FutureAPI != nil && result.FutureAPI.Response() != nil {
@@ -126,23 +126,23 @@ func (client LoadBalancersClient) Delete(ctx context.Context, resourceGroupName 
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	req, err := client.DeletePreparer(ctx, resourceGroupName, loadBalancerName)
+	req, err := client.DeleteABCPreparer(ctx, resourceGroupName, loadBalancerName)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "network.LoadBalancersClient", "Delete", nil, "Failure preparing request")
+		err = autorest.NewErrorWithError(err, "network.LoadBalancersClient", "DeleteABC", nil, "Failure preparing request")
 		return
 	}
 
-	result, err = client.DeleteSender(req)
+	result, err = client.DeleteABCSender(req)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "network.LoadBalancersClient", "Delete", nil, "Failure sending request")
+		err = autorest.NewErrorWithError(err, "network.LoadBalancersClient", "DeleteABC", nil, "Failure sending request")
 		return
 	}
 
 	return
 }
 
-// DeletePreparer prepares the Delete request.
-func (client LoadBalancersClient) DeletePreparer(ctx context.Context, resourceGroupName string, loadBalancerName string) (*http.Request, error) {
+// DeleteABCPreparer prepares the DeleteABC request.
+func (client LoadBalancersClient) DeleteABCPreparer(ctx context.Context, resourceGroupName string, loadBalancerName string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"loadBalancerName":  autorest.Encode("path", loadBalancerName),
 		"resourceGroupName": autorest.Encode("path", resourceGroupName),
@@ -162,9 +162,9 @@ func (client LoadBalancersClient) DeletePreparer(ctx context.Context, resourceGr
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
 }
 
-// DeleteSender sends the Delete request. The method will close the
+// DeleteABCSender sends the DeleteABC request. The method will close the
 // http.Response Body if it receives an error.
-func (client LoadBalancersClient) DeleteSender(req *http.Request) (future LoadBalancersDeleteFuture, err error) {
+func (client LoadBalancersClient) DeleteABCSender(req *http.Request) (future LoadBalancersDeleteABCFuture, err error) {
 	var resp *http.Response
 	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
 	if err != nil {
@@ -177,9 +177,9 @@ func (client LoadBalancersClient) DeleteSender(req *http.Request) (future LoadBa
 	return
 }
 
-// DeleteResponder handles the response to the Delete request. The method always
+// DeleteABCResponder handles the response to the DeleteABC request. The method always
 // closes the http.Response Body.
-func (client LoadBalancersClient) DeleteResponder(resp *http.Response) (result autorest.Response, err error) {
+func (client LoadBalancersClient) DeleteABCResponder(resp *http.Response) (result autorest.Response, err error) {
 	err = autorest.Respond(
 		resp,
 		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusAccepted, http.StatusNoContent),

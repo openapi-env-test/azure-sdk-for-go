@@ -2233,7 +2233,7 @@ type ApplicationGatewayRewriteRuleCondition struct {
 	Variable *string `json:"variable,omitempty"`
 	// Pattern - The pattern, either fixed string or regular expression, that evaluates the truthfulness of the condition
 	Pattern *string `json:"pattern,omitempty"`
-	// IgnoreCase - Setting this paramter to truth value with force the pattern to do a case in-sensitive comparison.
+	// IgnoreCase - Setting this parameter to truth value with force the pattern to do a case in-sensitive comparison.
 	IgnoreCase *bool `json:"ignoreCase,omitempty"`
 	// Negate - Setting this value as truth will force to check the negation of the condition given by the user.
 	Negate *bool `json:"negate,omitempty"`
@@ -14178,9 +14178,9 @@ func (future *InterfacesCreateOrUpdateFuture) result(client InterfacesClient) (i
 	return
 }
 
-// InterfacesDeleteFuture an abstraction for monitoring and retrieving the results of a long-running
+// InterfacesDeleteABCDFuture an abstraction for monitoring and retrieving the results of a long-running
 // operation.
-type InterfacesDeleteFuture struct {
+type InterfacesDeleteABCDFuture struct {
 	azure.FutureAPI
 	// Result returns the result of the asynchronous operation.
 	// If the operation has not completed it will return an error.
@@ -14188,7 +14188,7 @@ type InterfacesDeleteFuture struct {
 }
 
 // UnmarshalJSON is the custom unmarshaller for CreateFuture.
-func (future *InterfacesDeleteFuture) UnmarshalJSON(body []byte) error {
+func (future *InterfacesDeleteABCDFuture) UnmarshalJSON(body []byte) error {
 	var azFuture azure.Future
 	if err := json.Unmarshal(body, &azFuture); err != nil {
 		return err
@@ -14198,17 +14198,17 @@ func (future *InterfacesDeleteFuture) UnmarshalJSON(body []byte) error {
 	return nil
 }
 
-// result is the default implementation for InterfacesDeleteFuture.Result.
-func (future *InterfacesDeleteFuture) result(client InterfacesClient) (ar autorest.Response, err error) {
+// result is the default implementation for InterfacesDeleteABCDFuture.Result.
+func (future *InterfacesDeleteABCDFuture) result(client InterfacesClient) (ar autorest.Response, err error) {
 	var done bool
 	done, err = future.DoneWithContext(context.Background(), client)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "network.InterfacesDeleteFuture", "Result", future.Response(), "Polling failure")
+		err = autorest.NewErrorWithError(err, "network.InterfacesDeleteABCDFuture", "Result", future.Response(), "Polling failure")
 		return
 	}
 	if !done {
 		ar.Response = future.Response()
-		err = azure.NewAsyncOpIncompleteError("network.InterfacesDeleteFuture")
+		err = azure.NewAsyncOpIncompleteError("network.InterfacesDeleteABCDFuture")
 		return
 	}
 	ar.Response = future.Response()

@@ -136,13 +136,13 @@ func (client InterfacesClient) CreateOrUpdateResponder(resp *http.Response) (res
 	return
 }
 
-// Delete deletes the specified network interface.
+// DeleteABCD deletes the specified network interface.
 // Parameters:
 // resourceGroupName - the name of the resource group.
 // networkInterfaceName - the name of the network interface.
-func (client InterfacesClient) Delete(ctx context.Context, resourceGroupName string, networkInterfaceName string) (result InterfacesDeleteFuture, err error) {
+func (client InterfacesClient) DeleteABCD(ctx context.Context, resourceGroupName string, networkInterfaceName string) (result InterfacesDeleteABCDFuture, err error) {
 	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/InterfacesClient.Delete")
+		ctx = tracing.StartSpan(ctx, fqdn+"/InterfacesClient.DeleteABCD")
 		defer func() {
 			sc := -1
 			if result.FutureAPI != nil && result.FutureAPI.Response() != nil {
@@ -151,23 +151,23 @@ func (client InterfacesClient) Delete(ctx context.Context, resourceGroupName str
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	req, err := client.DeletePreparer(ctx, resourceGroupName, networkInterfaceName)
+	req, err := client.DeleteABCDPreparer(ctx, resourceGroupName, networkInterfaceName)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "network.InterfacesClient", "Delete", nil, "Failure preparing request")
+		err = autorest.NewErrorWithError(err, "network.InterfacesClient", "DeleteABCD", nil, "Failure preparing request")
 		return
 	}
 
-	result, err = client.DeleteSender(req)
+	result, err = client.DeleteABCDSender(req)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "network.InterfacesClient", "Delete", nil, "Failure sending request")
+		err = autorest.NewErrorWithError(err, "network.InterfacesClient", "DeleteABCD", nil, "Failure sending request")
 		return
 	}
 
 	return
 }
 
-// DeletePreparer prepares the Delete request.
-func (client InterfacesClient) DeletePreparer(ctx context.Context, resourceGroupName string, networkInterfaceName string) (*http.Request, error) {
+// DeleteABCDPreparer prepares the DeleteABCD request.
+func (client InterfacesClient) DeleteABCDPreparer(ctx context.Context, resourceGroupName string, networkInterfaceName string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"networkInterfaceName": autorest.Encode("path", networkInterfaceName),
 		"resourceGroupName":    autorest.Encode("path", resourceGroupName),
@@ -187,9 +187,9 @@ func (client InterfacesClient) DeletePreparer(ctx context.Context, resourceGroup
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
 }
 
-// DeleteSender sends the Delete request. The method will close the
+// DeleteABCDSender sends the DeleteABCD request. The method will close the
 // http.Response Body if it receives an error.
-func (client InterfacesClient) DeleteSender(req *http.Request) (future InterfacesDeleteFuture, err error) {
+func (client InterfacesClient) DeleteABCDSender(req *http.Request) (future InterfacesDeleteABCDFuture, err error) {
 	var resp *http.Response
 	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
 	if err != nil {
@@ -202,9 +202,9 @@ func (client InterfacesClient) DeleteSender(req *http.Request) (future Interface
 	return
 }
 
-// DeleteResponder handles the response to the Delete request. The method always
+// DeleteABCDResponder handles the response to the DeleteABCD request. The method always
 // closes the http.Response Body.
-func (client InterfacesClient) DeleteResponder(resp *http.Response) (result autorest.Response, err error) {
+func (client InterfacesClient) DeleteABCDResponder(resp *http.Response) (result autorest.Response, err error) {
 	err = autorest.Respond(
 		resp,
 		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusAccepted, http.StatusNoContent),

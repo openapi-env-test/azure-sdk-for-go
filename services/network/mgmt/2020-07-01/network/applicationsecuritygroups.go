@@ -113,13 +113,13 @@ func (client ApplicationSecurityGroupsClient) CreateOrUpdateResponder(resp *http
 	return
 }
 
-// Delete deletes the specified application security group.
+// DeleteABC deletes the specified application security group.
 // Parameters:
 // resourceGroupName - the name of the resource group.
 // applicationSecurityGroupName - the name of the application security group.
-func (client ApplicationSecurityGroupsClient) Delete(ctx context.Context, resourceGroupName string, applicationSecurityGroupName string) (result ApplicationSecurityGroupsDeleteFuture, err error) {
+func (client ApplicationSecurityGroupsClient) DeleteABC(ctx context.Context, resourceGroupName string, applicationSecurityGroupName string) (result ApplicationSecurityGroupsDeleteABCFuture, err error) {
 	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/ApplicationSecurityGroupsClient.Delete")
+		ctx = tracing.StartSpan(ctx, fqdn+"/ApplicationSecurityGroupsClient.DeleteABC")
 		defer func() {
 			sc := -1
 			if result.FutureAPI != nil && result.FutureAPI.Response() != nil {
@@ -128,23 +128,23 @@ func (client ApplicationSecurityGroupsClient) Delete(ctx context.Context, resour
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	req, err := client.DeletePreparer(ctx, resourceGroupName, applicationSecurityGroupName)
+	req, err := client.DeleteABCPreparer(ctx, resourceGroupName, applicationSecurityGroupName)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "network.ApplicationSecurityGroupsClient", "Delete", nil, "Failure preparing request")
+		err = autorest.NewErrorWithError(err, "network.ApplicationSecurityGroupsClient", "DeleteABC", nil, "Failure preparing request")
 		return
 	}
 
-	result, err = client.DeleteSender(req)
+	result, err = client.DeleteABCSender(req)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "network.ApplicationSecurityGroupsClient", "Delete", nil, "Failure sending request")
+		err = autorest.NewErrorWithError(err, "network.ApplicationSecurityGroupsClient", "DeleteABC", nil, "Failure sending request")
 		return
 	}
 
 	return
 }
 
-// DeletePreparer prepares the Delete request.
-func (client ApplicationSecurityGroupsClient) DeletePreparer(ctx context.Context, resourceGroupName string, applicationSecurityGroupName string) (*http.Request, error) {
+// DeleteABCPreparer prepares the DeleteABC request.
+func (client ApplicationSecurityGroupsClient) DeleteABCPreparer(ctx context.Context, resourceGroupName string, applicationSecurityGroupName string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"applicationSecurityGroupName": autorest.Encode("path", applicationSecurityGroupName),
 		"resourceGroupName":            autorest.Encode("path", resourceGroupName),
@@ -164,9 +164,9 @@ func (client ApplicationSecurityGroupsClient) DeletePreparer(ctx context.Context
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
 }
 
-// DeleteSender sends the Delete request. The method will close the
+// DeleteABCSender sends the DeleteABC request. The method will close the
 // http.Response Body if it receives an error.
-func (client ApplicationSecurityGroupsClient) DeleteSender(req *http.Request) (future ApplicationSecurityGroupsDeleteFuture, err error) {
+func (client ApplicationSecurityGroupsClient) DeleteABCSender(req *http.Request) (future ApplicationSecurityGroupsDeleteABCFuture, err error) {
 	var resp *http.Response
 	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
 	if err != nil {
@@ -179,9 +179,9 @@ func (client ApplicationSecurityGroupsClient) DeleteSender(req *http.Request) (f
 	return
 }
 
-// DeleteResponder handles the response to the Delete request. The method always
+// DeleteABCResponder handles the response to the DeleteABC request. The method always
 // closes the http.Response Body.
-func (client ApplicationSecurityGroupsClient) DeleteResponder(resp *http.Response) (result autorest.Response, err error) {
+func (client ApplicationSecurityGroupsClient) DeleteABCResponder(resp *http.Response) (result autorest.Response, err error) {
 	err = autorest.Respond(
 		resp,
 		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusAccepted, http.StatusNoContent),

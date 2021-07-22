@@ -23,7 +23,7 @@ var _ BaseClientAPI = (*network.BaseClient)(nil)
 type ApplicationGatewaysClientAPI interface {
 	BackendHealth(ctx context.Context, resourceGroupName string, applicationGatewayName string, expand string) (result network.ApplicationGatewaysBackendHealthFuture, err error)
 	CreateOrUpdate(ctx context.Context, resourceGroupName string, applicationGatewayName string, parameters network.ApplicationGateway) (result network.ApplicationGatewaysCreateOrUpdateFuture, err error)
-	Delete(ctx context.Context, resourceGroupName string, applicationGatewayName string) (result network.ApplicationGatewaysDeleteFuture, err error)
+	DeleteABC(ctx context.Context, resourceGroupName string, applicationGatewayName string) (result network.ApplicationGatewaysDeleteABCFuture, err error)
 	Get(ctx context.Context, resourceGroupName string, applicationGatewayName string) (result network.ApplicationGateway, err error)
 	GetSslPredefinedPolicy(ctx context.Context, predefinedPolicyName string) (result network.ApplicationGatewaySslPredefinedPolicy, err error)
 	List(ctx context.Context, resourceGroupName string) (result network.ApplicationGatewayListResultPage, err error)
@@ -94,7 +94,7 @@ var _ AzureFirewallFqdnTagsClientAPI = (*network.AzureFirewallFqdnTagsClient)(ni
 // DdosProtectionPlansClientAPI contains the set of methods on the DdosProtectionPlansClient type.
 type DdosProtectionPlansClientAPI interface {
 	CreateOrUpdate(ctx context.Context, resourceGroupName string, ddosProtectionPlanName string, parameters network.DdosProtectionPlan) (result network.DdosProtectionPlansCreateOrUpdateFuture, err error)
-	Delete(ctx context.Context, resourceGroupName string, ddosProtectionPlanName string) (result network.DdosProtectionPlansDeleteFuture, err error)
+	DeleteABC(ctx context.Context, resourceGroupName string, ddosProtectionPlanName string) (result network.DdosProtectionPlansDeleteABCFuture, err error)
 	Get(ctx context.Context, resourceGroupName string, ddosProtectionPlanName string) (result network.DdosProtectionPlan, err error)
 	List(ctx context.Context) (result network.DdosProtectionPlanListResultPage, err error)
 	ListComplete(ctx context.Context) (result network.DdosProtectionPlanListResultIterator, err error)
@@ -344,7 +344,7 @@ var _ LoadBalancerProbesClientAPI = (*network.LoadBalancerProbesClient)(nil)
 // InterfacesClientAPI contains the set of methods on the InterfacesClient type.
 type InterfacesClientAPI interface {
 	CreateOrUpdate(ctx context.Context, resourceGroupName string, networkInterfaceName string, parameters network.Interface) (result network.InterfacesCreateOrUpdateFuture, err error)
-	Delete(ctx context.Context, resourceGroupName string, networkInterfaceName string) (result network.InterfacesDeleteFuture, err error)
+	DeleteABCD(ctx context.Context, resourceGroupName string, networkInterfaceName string) (result network.InterfacesDeleteABCDFuture, err error)
 	Get(ctx context.Context, resourceGroupName string, networkInterfaceName string, expand string) (result network.Interface, err error)
 	GetEffectiveRouteTable(ctx context.Context, resourceGroupName string, networkInterfaceName string) (result network.InterfacesGetEffectiveRouteTableFuture, err error)
 	GetVirtualMachineScaleSetIPConfiguration(ctx context.Context, resourceGroupName string, virtualMachineScaleSetName string, virtualmachineIndex string, networkInterfaceName string, IPConfigurationName string, expand string) (result network.InterfaceIPConfiguration, err error)
@@ -396,7 +396,7 @@ var _ InterfaceTapConfigurationsClientAPI = (*network.InterfaceTapConfigurations
 // ProfilesClientAPI contains the set of methods on the ProfilesClient type.
 type ProfilesClientAPI interface {
 	CreateOrUpdate(ctx context.Context, resourceGroupName string, networkProfileName string, parameters network.Profile) (result network.Profile, err error)
-	Delete(ctx context.Context, resourceGroupName string, networkProfileName string) (result network.ProfilesDeleteFuture, err error)
+	DeleteABC(ctx context.Context, resourceGroupName string, networkProfileName string) (result network.ProfilesDeleteABCFuture, err error)
 	Get(ctx context.Context, resourceGroupName string, networkProfileName string, expand string) (result network.Profile, err error)
 	List(ctx context.Context, resourceGroupName string) (result network.ProfileListResultPage, err error)
 	ListComplete(ctx context.Context, resourceGroupName string) (result network.ProfileListResultIterator, err error)

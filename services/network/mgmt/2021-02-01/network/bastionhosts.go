@@ -112,13 +112,13 @@ func (client BastionHostsClient) CreateOrUpdateResponder(resp *http.Response) (r
 	return
 }
 
-// Delete deletes the specified Bastion Host.
+// DeleteABC deletes the specified Bastion Host.
 // Parameters:
 // resourceGroupName - the name of the resource group.
 // bastionHostName - the name of the Bastion Host.
-func (client BastionHostsClient) Delete(ctx context.Context, resourceGroupName string, bastionHostName string) (result BastionHostsDeleteFuture, err error) {
+func (client BastionHostsClient) DeleteABC(ctx context.Context, resourceGroupName string, bastionHostName string) (result BastionHostsDeleteABCFuture, err error) {
 	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/BastionHostsClient.Delete")
+		ctx = tracing.StartSpan(ctx, fqdn+"/BastionHostsClient.DeleteABC")
 		defer func() {
 			sc := -1
 			if result.FutureAPI != nil && result.FutureAPI.Response() != nil {
@@ -127,23 +127,23 @@ func (client BastionHostsClient) Delete(ctx context.Context, resourceGroupName s
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	req, err := client.DeletePreparer(ctx, resourceGroupName, bastionHostName)
+	req, err := client.DeleteABCPreparer(ctx, resourceGroupName, bastionHostName)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "network.BastionHostsClient", "Delete", nil, "Failure preparing request")
+		err = autorest.NewErrorWithError(err, "network.BastionHostsClient", "DeleteABC", nil, "Failure preparing request")
 		return
 	}
 
-	result, err = client.DeleteSender(req)
+	result, err = client.DeleteABCSender(req)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "network.BastionHostsClient", "Delete", nil, "Failure sending request")
+		err = autorest.NewErrorWithError(err, "network.BastionHostsClient", "DeleteABC", nil, "Failure sending request")
 		return
 	}
 
 	return
 }
 
-// DeletePreparer prepares the Delete request.
-func (client BastionHostsClient) DeletePreparer(ctx context.Context, resourceGroupName string, bastionHostName string) (*http.Request, error) {
+// DeleteABCPreparer prepares the DeleteABC request.
+func (client BastionHostsClient) DeleteABCPreparer(ctx context.Context, resourceGroupName string, bastionHostName string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"bastionHostName":   autorest.Encode("path", bastionHostName),
 		"resourceGroupName": autorest.Encode("path", resourceGroupName),
@@ -163,9 +163,9 @@ func (client BastionHostsClient) DeletePreparer(ctx context.Context, resourceGro
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
 }
 
-// DeleteSender sends the Delete request. The method will close the
+// DeleteABCSender sends the DeleteABC request. The method will close the
 // http.Response Body if it receives an error.
-func (client BastionHostsClient) DeleteSender(req *http.Request) (future BastionHostsDeleteFuture, err error) {
+func (client BastionHostsClient) DeleteABCSender(req *http.Request) (future BastionHostsDeleteABCFuture, err error) {
 	var resp *http.Response
 	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
 	if err != nil {
@@ -178,9 +178,9 @@ func (client BastionHostsClient) DeleteSender(req *http.Request) (future Bastion
 	return
 }
 
-// DeleteResponder handles the response to the Delete request. The method always
+// DeleteABCResponder handles the response to the DeleteABC request. The method always
 // closes the http.Response Body.
-func (client BastionHostsClient) DeleteResponder(resp *http.Response) (result autorest.Response, err error) {
+func (client BastionHostsClient) DeleteABCResponder(resp *http.Response) (result autorest.Response, err error) {
 	err = autorest.Respond(
 		resp,
 		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusAccepted, http.StatusNoContent),

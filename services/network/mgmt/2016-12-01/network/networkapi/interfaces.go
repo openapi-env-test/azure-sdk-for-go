@@ -21,7 +21,7 @@ var _ BaseClientAPI = (*network.BaseClient)(nil)
 // InterfacesClientAPI contains the set of methods on the InterfacesClient type.
 type InterfacesClientAPI interface {
 	CreateOrUpdate(ctx context.Context, resourceGroupName string, networkInterfaceName string, parameters network.Interface) (result network.InterfacesCreateOrUpdateFuture, err error)
-	Delete(ctx context.Context, resourceGroupName string, networkInterfaceName string) (result network.InterfacesDeleteFuture, err error)
+	DeleteABCD(ctx context.Context, resourceGroupName string, networkInterfaceName string) (result network.InterfacesDeleteABCDFuture, err error)
 	Get(ctx context.Context, resourceGroupName string, networkInterfaceName string, expand string) (result network.Interface, err error)
 	GetEffectiveRouteTable(ctx context.Context, resourceGroupName string, networkInterfaceName string) (result network.InterfacesGetEffectiveRouteTableFuture, err error)
 	GetVirtualMachineScaleSetNetworkInterface(ctx context.Context, resourceGroupName string, virtualMachineScaleSetName string, virtualmachineIndex string, networkInterfaceName string, expand string) (result network.Interface, err error)
@@ -32,8 +32,8 @@ type InterfacesClientAPI interface {
 	ListEffectiveNetworkSecurityGroups(ctx context.Context, resourceGroupName string, networkInterfaceName string) (result network.InterfacesListEffectiveNetworkSecurityGroupsFuture, err error)
 	ListVirtualMachineScaleSetNetworkInterfaces(ctx context.Context, resourceGroupName string, virtualMachineScaleSetName string) (result network.InterfaceListResultPage, err error)
 	ListVirtualMachineScaleSetNetworkInterfacesComplete(ctx context.Context, resourceGroupName string, virtualMachineScaleSetName string) (result network.InterfaceListResultIterator, err error)
-	ListVirtualMachineScaleSetVMNetworkInterfaces(ctx context.Context, resourceGroupName string, virtualMachineScaleSetName string, virtualmachineIndex string) (result network.InterfaceListResultPage, err error)
-	ListVirtualMachineScaleSetVMNetworkInterfacesComplete(ctx context.Context, resourceGroupName string, virtualMachineScaleSetName string, virtualmachineIndex string) (result network.InterfaceListResultIterator, err error)
+	ListVirtualMachineScaleSetVMNetworkInterfacesABC(ctx context.Context, resourceGroupName string, virtualMachineScaleSetName string, virtualmachineIndex string) (result network.InterfaceListResultPage, err error)
+	ListVirtualMachineScaleSetVMNetworkInterfacesABCComplete(ctx context.Context, resourceGroupName string, virtualMachineScaleSetName string, virtualmachineIndex string) (result network.InterfaceListResultIterator, err error)
 }
 
 var _ InterfacesClientAPI = (*network.InterfacesClient)(nil)

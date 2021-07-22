@@ -124,13 +124,13 @@ func (client PublicIPAddressesClient) CreateOrUpdateResponder(resp *http.Respons
 	return
 }
 
-// Delete deletes the specified public IP address.
+// DeleteABC deletes the specified public IP address.
 // Parameters:
 // resourceGroupName - the name of the resource group.
 // publicIPAddressName - the name of the subnet.
-func (client PublicIPAddressesClient) Delete(ctx context.Context, resourceGroupName string, publicIPAddressName string) (result PublicIPAddressesDeleteFuture, err error) {
+func (client PublicIPAddressesClient) DeleteABC(ctx context.Context, resourceGroupName string, publicIPAddressName string) (result PublicIPAddressesDeleteABCFuture, err error) {
 	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/PublicIPAddressesClient.Delete")
+		ctx = tracing.StartSpan(ctx, fqdn+"/PublicIPAddressesClient.DeleteABC")
 		defer func() {
 			sc := -1
 			if result.FutureAPI != nil && result.FutureAPI.Response() != nil {
@@ -139,23 +139,23 @@ func (client PublicIPAddressesClient) Delete(ctx context.Context, resourceGroupN
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	req, err := client.DeletePreparer(ctx, resourceGroupName, publicIPAddressName)
+	req, err := client.DeleteABCPreparer(ctx, resourceGroupName, publicIPAddressName)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "network.PublicIPAddressesClient", "Delete", nil, "Failure preparing request")
+		err = autorest.NewErrorWithError(err, "network.PublicIPAddressesClient", "DeleteABC", nil, "Failure preparing request")
 		return
 	}
 
-	result, err = client.DeleteSender(req)
+	result, err = client.DeleteABCSender(req)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "network.PublicIPAddressesClient", "Delete", nil, "Failure sending request")
+		err = autorest.NewErrorWithError(err, "network.PublicIPAddressesClient", "DeleteABC", nil, "Failure sending request")
 		return
 	}
 
 	return
 }
 
-// DeletePreparer prepares the Delete request.
-func (client PublicIPAddressesClient) DeletePreparer(ctx context.Context, resourceGroupName string, publicIPAddressName string) (*http.Request, error) {
+// DeleteABCPreparer prepares the DeleteABC request.
+func (client PublicIPAddressesClient) DeleteABCPreparer(ctx context.Context, resourceGroupName string, publicIPAddressName string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"publicIpAddressName": autorest.Encode("path", publicIPAddressName),
 		"resourceGroupName":   autorest.Encode("path", resourceGroupName),
@@ -175,9 +175,9 @@ func (client PublicIPAddressesClient) DeletePreparer(ctx context.Context, resour
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
 }
 
-// DeleteSender sends the Delete request. The method will close the
+// DeleteABCSender sends the DeleteABC request. The method will close the
 // http.Response Body if it receives an error.
-func (client PublicIPAddressesClient) DeleteSender(req *http.Request) (future PublicIPAddressesDeleteFuture, err error) {
+func (client PublicIPAddressesClient) DeleteABCSender(req *http.Request) (future PublicIPAddressesDeleteABCFuture, err error) {
 	var resp *http.Response
 	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
 	if err != nil {
@@ -190,9 +190,9 @@ func (client PublicIPAddressesClient) DeleteSender(req *http.Request) (future Pu
 	return
 }
 
-// DeleteResponder handles the response to the Delete request. The method always
+// DeleteABCResponder handles the response to the DeleteABC request. The method always
 // closes the http.Response Body.
-func (client PublicIPAddressesClient) DeleteResponder(resp *http.Response) (result autorest.Response, err error) {
+func (client PublicIPAddressesClient) DeleteABCResponder(resp *http.Response) (result autorest.Response, err error) {
 	err = autorest.Respond(
 		resp,
 		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusAccepted, http.StatusNoContent),

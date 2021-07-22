@@ -116,13 +116,13 @@ func (client DdosProtectionPlansClient) CreateOrUpdateResponder(resp *http.Respo
 	return
 }
 
-// Delete deletes the specified DDoS protection plan.
+// DeleteABC deletes the specified DDoS protection plan.
 // Parameters:
 // resourceGroupName - the name of the resource group.
 // ddosProtectionPlanName - the name of the DDoS protection plan.
-func (client DdosProtectionPlansClient) Delete(ctx context.Context, resourceGroupName string, ddosProtectionPlanName string) (result DdosProtectionPlansDeleteFuture, err error) {
+func (client DdosProtectionPlansClient) DeleteABC(ctx context.Context, resourceGroupName string, ddosProtectionPlanName string) (result DdosProtectionPlansDeleteABCFuture, err error) {
 	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/DdosProtectionPlansClient.Delete")
+		ctx = tracing.StartSpan(ctx, fqdn+"/DdosProtectionPlansClient.DeleteABC")
 		defer func() {
 			sc := -1
 			if result.FutureAPI != nil && result.FutureAPI.Response() != nil {
@@ -131,23 +131,23 @@ func (client DdosProtectionPlansClient) Delete(ctx context.Context, resourceGrou
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	req, err := client.DeletePreparer(ctx, resourceGroupName, ddosProtectionPlanName)
+	req, err := client.DeleteABCPreparer(ctx, resourceGroupName, ddosProtectionPlanName)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "network.DdosProtectionPlansClient", "Delete", nil, "Failure preparing request")
+		err = autorest.NewErrorWithError(err, "network.DdosProtectionPlansClient", "DeleteABC", nil, "Failure preparing request")
 		return
 	}
 
-	result, err = client.DeleteSender(req)
+	result, err = client.DeleteABCSender(req)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "network.DdosProtectionPlansClient", "Delete", nil, "Failure sending request")
+		err = autorest.NewErrorWithError(err, "network.DdosProtectionPlansClient", "DeleteABC", nil, "Failure sending request")
 		return
 	}
 
 	return
 }
 
-// DeletePreparer prepares the Delete request.
-func (client DdosProtectionPlansClient) DeletePreparer(ctx context.Context, resourceGroupName string, ddosProtectionPlanName string) (*http.Request, error) {
+// DeleteABCPreparer prepares the DeleteABC request.
+func (client DdosProtectionPlansClient) DeleteABCPreparer(ctx context.Context, resourceGroupName string, ddosProtectionPlanName string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"ddosProtectionPlanName": autorest.Encode("path", ddosProtectionPlanName),
 		"resourceGroupName":      autorest.Encode("path", resourceGroupName),
@@ -167,9 +167,9 @@ func (client DdosProtectionPlansClient) DeletePreparer(ctx context.Context, reso
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
 }
 
-// DeleteSender sends the Delete request. The method will close the
+// DeleteABCSender sends the DeleteABC request. The method will close the
 // http.Response Body if it receives an error.
-func (client DdosProtectionPlansClient) DeleteSender(req *http.Request) (future DdosProtectionPlansDeleteFuture, err error) {
+func (client DdosProtectionPlansClient) DeleteABCSender(req *http.Request) (future DdosProtectionPlansDeleteABCFuture, err error) {
 	var resp *http.Response
 	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
 	if err != nil {
@@ -182,9 +182,9 @@ func (client DdosProtectionPlansClient) DeleteSender(req *http.Request) (future 
 	return
 }
 
-// DeleteResponder handles the response to the Delete request. The method always
+// DeleteABCResponder handles the response to the DeleteABC request. The method always
 // closes the http.Response Body.
-func (client DdosProtectionPlansClient) DeleteResponder(resp *http.Response) (result autorest.Response, err error) {
+func (client DdosProtectionPlansClient) DeleteABCResponder(resp *http.Response) (result autorest.Response, err error) {
 	err = autorest.Respond(
 		resp,
 		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusAccepted, http.StatusNoContent),

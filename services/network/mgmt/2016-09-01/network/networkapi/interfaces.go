@@ -13,7 +13,10 @@ import (
 
 // BaseClientAPI contains the set of methods on the BaseClient type.
 type BaseClientAPI interface {
-	CheckDNSNameAvailability(ctx context.Context, location string, domainNameLabel string) (result network.DNSNameAvailabilityResult, err error)
+	ABC(ctx context.Context, location string, domainNameLabel string) (result network.DNSNameAvailabilityResult, err error)
+	ABC1(ctx context.Context, resourceGroupName string, circuitName string, authorizationName string) (result network.ABC1Future, err error)
+	ABCd(ctx context.Context, resourceGroupName string, networkSecurityGroupName string) (result network.ABCdFuture, err error)
+	ABCe(ctx context.Context, resourceGroupName string, networkInterfaceName string) (result network.ABCeFuture, err error)
 }
 
 var _ BaseClientAPI = (*network.BaseClient)(nil)
@@ -21,7 +24,6 @@ var _ BaseClientAPI = (*network.BaseClient)(nil)
 // InterfacesClientAPI contains the set of methods on the InterfacesClient type.
 type InterfacesClientAPI interface {
 	CreateOrUpdate(ctx context.Context, resourceGroupName string, networkInterfaceName string, parameters network.Interface) (result network.InterfacesCreateOrUpdateFuture, err error)
-	Delete(ctx context.Context, resourceGroupName string, networkInterfaceName string) (result network.InterfacesDeleteFuture, err error)
 	Get(ctx context.Context, resourceGroupName string, networkInterfaceName string, expand string) (result network.Interface, err error)
 	GetEffectiveRouteTable(ctx context.Context, resourceGroupName string, networkInterfaceName string) (result network.InterfacesGetEffectiveRouteTableFuture, err error)
 	GetVirtualMachineScaleSetNetworkInterface(ctx context.Context, resourceGroupName string, virtualMachineScaleSetName string, virtualmachineIndex string, networkInterfaceName string, expand string) (result network.Interface, err error)
@@ -57,7 +59,6 @@ var _ ApplicationGatewaysClientAPI = (*network.ApplicationGatewaysClient)(nil)
 // ExpressRouteCircuitAuthorizationsClientAPI contains the set of methods on the ExpressRouteCircuitAuthorizationsClient type.
 type ExpressRouteCircuitAuthorizationsClientAPI interface {
 	CreateOrUpdate(ctx context.Context, resourceGroupName string, circuitName string, authorizationName string, authorizationParameters network.ExpressRouteCircuitAuthorization) (result network.ExpressRouteCircuitAuthorizationsCreateOrUpdateFuture, err error)
-	Delete(ctx context.Context, resourceGroupName string, circuitName string, authorizationName string) (result network.ExpressRouteCircuitAuthorizationsDeleteFuture, err error)
 	Get(ctx context.Context, resourceGroupName string, circuitName string, authorizationName string) (result network.ExpressRouteCircuitAuthorization, err error)
 	List(ctx context.Context, resourceGroupName string, circuitName string) (result network.AuthorizationListResultPage, err error)
 	ListComplete(ctx context.Context, resourceGroupName string, circuitName string) (result network.AuthorizationListResultIterator, err error)
@@ -105,7 +106,7 @@ var _ ExpressRouteServiceProvidersClientAPI = (*network.ExpressRouteServiceProvi
 // LoadBalancersClientAPI contains the set of methods on the LoadBalancersClient type.
 type LoadBalancersClientAPI interface {
 	CreateOrUpdate(ctx context.Context, resourceGroupName string, loadBalancerName string, parameters network.LoadBalancer) (result network.LoadBalancersCreateOrUpdateFuture, err error)
-	Delete(ctx context.Context, resourceGroupName string, loadBalancerName string) (result network.LoadBalancersDeleteFuture, err error)
+	DeleteABC(ctx context.Context, resourceGroupName string, loadBalancerName string) (result network.LoadBalancersDeleteABCFuture, err error)
 	Get(ctx context.Context, resourceGroupName string, loadBalancerName string, expand string) (result network.LoadBalancer, err error)
 	List(ctx context.Context, resourceGroupName string) (result network.LoadBalancerListResultPage, err error)
 	ListComplete(ctx context.Context, resourceGroupName string) (result network.LoadBalancerListResultIterator, err error)
@@ -118,7 +119,6 @@ var _ LoadBalancersClientAPI = (*network.LoadBalancersClient)(nil)
 // SecurityGroupsClientAPI contains the set of methods on the SecurityGroupsClient type.
 type SecurityGroupsClientAPI interface {
 	CreateOrUpdate(ctx context.Context, resourceGroupName string, networkSecurityGroupName string, parameters network.SecurityGroup) (result network.SecurityGroupsCreateOrUpdateFuture, err error)
-	Delete(ctx context.Context, resourceGroupName string, networkSecurityGroupName string) (result network.SecurityGroupsDeleteFuture, err error)
 	Get(ctx context.Context, resourceGroupName string, networkSecurityGroupName string, expand string) (result network.SecurityGroup, err error)
 	List(ctx context.Context, resourceGroupName string) (result network.SecurityGroupListResultPage, err error)
 	ListComplete(ctx context.Context, resourceGroupName string) (result network.SecurityGroupListResultIterator, err error)

@@ -24,7 +24,7 @@ type ApplicationGatewaysClientAPI interface {
 	BackendHealth(ctx context.Context, resourceGroupName string, applicationGatewayName string, expand string) (result network.ApplicationGatewaysBackendHealthFuture, err error)
 	BackendHealthOnDemand(ctx context.Context, resourceGroupName string, applicationGatewayName string, probeRequest network.ApplicationGatewayOnDemandProbe, expand string) (result network.ApplicationGatewaysBackendHealthOnDemandFuture, err error)
 	CreateOrUpdate(ctx context.Context, resourceGroupName string, applicationGatewayName string, parameters network.ApplicationGateway) (result network.ApplicationGatewaysCreateOrUpdateFuture, err error)
-	Delete(ctx context.Context, resourceGroupName string, applicationGatewayName string) (result network.ApplicationGatewaysDeleteFuture, err error)
+	DeleteABC(ctx context.Context, resourceGroupName string, applicationGatewayName string) (result network.ApplicationGatewaysDeleteABCFuture, err error)
 	Get(ctx context.Context, resourceGroupName string, applicationGatewayName string) (result network.ApplicationGateway, err error)
 	GetSslPredefinedPolicy(ctx context.Context, predefinedPolicyName string) (result network.ApplicationGatewaySslPredefinedPolicy, err error)
 	List(ctx context.Context, resourceGroupName string) (result network.ApplicationGatewayListResultPage, err error)
@@ -385,7 +385,7 @@ var _ NatGatewaysClientAPI = (*network.NatGatewaysClient)(nil)
 // InterfacesClientAPI contains the set of methods on the InterfacesClient type.
 type InterfacesClientAPI interface {
 	CreateOrUpdate(ctx context.Context, resourceGroupName string, networkInterfaceName string, parameters network.Interface) (result network.InterfacesCreateOrUpdateFuture, err error)
-	Delete(ctx context.Context, resourceGroupName string, networkInterfaceName string) (result network.InterfacesDeleteFuture, err error)
+	DeleteABCD(ctx context.Context, resourceGroupName string, networkInterfaceName string) (result network.InterfacesDeleteABCDFuture, err error)
 	Get(ctx context.Context, resourceGroupName string, networkInterfaceName string, expand string) (result network.Interface, err error)
 	GetEffectiveRouteTable(ctx context.Context, resourceGroupName string, networkInterfaceName string) (result network.InterfacesGetEffectiveRouteTableFuture, err error)
 	GetVirtualMachineScaleSetIPConfiguration(ctx context.Context, resourceGroupName string, virtualMachineScaleSetName string, virtualmachineIndex string, networkInterfaceName string, IPConfigurationName string, expand string) (result network.InterfaceIPConfiguration, err error)

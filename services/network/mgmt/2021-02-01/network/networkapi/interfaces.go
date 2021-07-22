@@ -138,7 +138,7 @@ var _ AzureFirewallFqdnTagsClientAPI = (*network.AzureFirewallFqdnTagsClient)(ni
 
 // WebCategoriesClientAPI contains the set of methods on the WebCategoriesClient type.
 type WebCategoriesClientAPI interface {
-	Get(ctx context.Context, name string, expand string) (result network.AzureWebCategory, err error)
+	GetABC(ctx context.Context, name string, expand string) (result network.AzureWebCategory, err error)
 	ListBySubscription(ctx context.Context) (result network.AzureWebCategoryListResultPage, err error)
 	ListBySubscriptionComplete(ctx context.Context) (result network.AzureWebCategoryListResultIterator, err error)
 }
@@ -148,7 +148,7 @@ var _ WebCategoriesClientAPI = (*network.WebCategoriesClient)(nil)
 // BastionHostsClientAPI contains the set of methods on the BastionHostsClient type.
 type BastionHostsClientAPI interface {
 	CreateOrUpdate(ctx context.Context, resourceGroupName string, bastionHostName string, parameters network.BastionHost) (result network.BastionHostsCreateOrUpdateFuture, err error)
-	Delete(ctx context.Context, resourceGroupName string, bastionHostName string) (result network.BastionHostsDeleteFuture, err error)
+	DeleteABC(ctx context.Context, resourceGroupName string, bastionHostName string) (result network.BastionHostsDeleteABCFuture, err error)
 	Get(ctx context.Context, resourceGroupName string, bastionHostName string) (result network.BastionHost, err error)
 	List(ctx context.Context) (result network.BastionHostListResultPage, err error)
 	ListComplete(ctx context.Context) (result network.BastionHostListResultIterator, err error)
@@ -161,7 +161,7 @@ var _ BastionHostsClientAPI = (*network.BastionHostsClient)(nil)
 // InterfacesClientAPI contains the set of methods on the InterfacesClient type.
 type InterfacesClientAPI interface {
 	CreateOrUpdate(ctx context.Context, resourceGroupName string, networkInterfaceName string, parameters network.Interface) (result network.InterfacesCreateOrUpdateFuture, err error)
-	Delete(ctx context.Context, resourceGroupName string, networkInterfaceName string) (result network.InterfacesDeleteFuture, err error)
+	DeleteABCD(ctx context.Context, resourceGroupName string, networkInterfaceName string) (result network.InterfacesDeleteABCDFuture, err error)
 	Get(ctx context.Context, resourceGroupName string, networkInterfaceName string, expand string) (result network.Interface, err error)
 	GetCloudServiceNetworkInterface(ctx context.Context, resourceGroupName string, cloudServiceName string, roleInstanceName string, networkInterfaceName string, expand string) (result network.Interface, err error)
 	GetEffectiveRouteTable(ctx context.Context, resourceGroupName string, networkInterfaceName string) (result network.InterfacesGetEffectiveRouteTableFuture, err error)
@@ -200,8 +200,8 @@ type PublicIPAddressesClientAPI interface {
 	ListAllComplete(ctx context.Context) (result network.PublicIPAddressListResultIterator, err error)
 	ListCloudServicePublicIPAddresses(ctx context.Context, resourceGroupName string, cloudServiceName string) (result network.PublicIPAddressListResultPage, err error)
 	ListCloudServicePublicIPAddressesComplete(ctx context.Context, resourceGroupName string, cloudServiceName string) (result network.PublicIPAddressListResultIterator, err error)
-	ListCloudServiceRoleInstancePublicIPAddresses(ctx context.Context, resourceGroupName string, cloudServiceName string, roleInstanceName string, networkInterfaceName string, IPConfigurationName string) (result network.PublicIPAddressListResultPage, err error)
-	ListCloudServiceRoleInstancePublicIPAddressesComplete(ctx context.Context, resourceGroupName string, cloudServiceName string, roleInstanceName string, networkInterfaceName string, IPConfigurationName string) (result network.PublicIPAddressListResultIterator, err error)
+	ListCloudServiceRoleInstancePublicIPAddresses(ctx context.Context, resourceGroupNameBC string, cloudServiceName string, roleInstanceName string, networkInterfaceName string, IPConfigurationName string) (result network.PublicIPAddressListResultPage, err error)
+	ListCloudServiceRoleInstancePublicIPAddressesComplete(ctx context.Context, resourceGroupNameBC string, cloudServiceName string, roleInstanceName string, networkInterfaceName string, IPConfigurationName string) (result network.PublicIPAddressListResultIterator, err error)
 	ListVirtualMachineScaleSetPublicIPAddresses(ctx context.Context, resourceGroupName string, virtualMachineScaleSetName string) (result network.PublicIPAddressListResultPage, err error)
 	ListVirtualMachineScaleSetPublicIPAddressesComplete(ctx context.Context, resourceGroupName string, virtualMachineScaleSetName string) (result network.PublicIPAddressListResultIterator, err error)
 	ListVirtualMachineScaleSetVMPublicIPAddresses(ctx context.Context, resourceGroupName string, virtualMachineScaleSetName string, virtualmachineIndex string, networkInterfaceName string, IPConfigurationName string) (result network.PublicIPAddressListResultPage, err error)

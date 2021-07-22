@@ -190,13 +190,13 @@ func (client ApplicationSecurityGroupsClient) DeleteResponder(resp *http.Respons
 	return
 }
 
-// Get gets information about the specified application security group.
+// GetABC gets information about the specified application security group.
 // Parameters:
 // resourceGroupName - the name of the resource group.
 // applicationSecurityGroupName - the name of the application security group.
-func (client ApplicationSecurityGroupsClient) Get(ctx context.Context, resourceGroupName string, applicationSecurityGroupName string) (result ApplicationSecurityGroup, err error) {
+func (client ApplicationSecurityGroupsClient) GetABC(ctx context.Context, resourceGroupName string, applicationSecurityGroupName string) (result ApplicationSecurityGroup, err error) {
 	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/ApplicationSecurityGroupsClient.Get")
+		ctx = tracing.StartSpan(ctx, fqdn+"/ApplicationSecurityGroupsClient.GetABC")
 		defer func() {
 			sc := -1
 			if result.Response.Response != nil {
@@ -205,30 +205,30 @@ func (client ApplicationSecurityGroupsClient) Get(ctx context.Context, resourceG
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	req, err := client.GetPreparer(ctx, resourceGroupName, applicationSecurityGroupName)
+	req, err := client.GetABCPreparer(ctx, resourceGroupName, applicationSecurityGroupName)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "network.ApplicationSecurityGroupsClient", "Get", nil, "Failure preparing request")
+		err = autorest.NewErrorWithError(err, "network.ApplicationSecurityGroupsClient", "GetABC", nil, "Failure preparing request")
 		return
 	}
 
-	resp, err := client.GetSender(req)
+	resp, err := client.GetABCSender(req)
 	if err != nil {
 		result.Response = autorest.Response{Response: resp}
-		err = autorest.NewErrorWithError(err, "network.ApplicationSecurityGroupsClient", "Get", resp, "Failure sending request")
+		err = autorest.NewErrorWithError(err, "network.ApplicationSecurityGroupsClient", "GetABC", resp, "Failure sending request")
 		return
 	}
 
-	result, err = client.GetResponder(resp)
+	result, err = client.GetABCResponder(resp)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "network.ApplicationSecurityGroupsClient", "Get", resp, "Failure responding to request")
+		err = autorest.NewErrorWithError(err, "network.ApplicationSecurityGroupsClient", "GetABC", resp, "Failure responding to request")
 		return
 	}
 
 	return
 }
 
-// GetPreparer prepares the Get request.
-func (client ApplicationSecurityGroupsClient) GetPreparer(ctx context.Context, resourceGroupName string, applicationSecurityGroupName string) (*http.Request, error) {
+// GetABCPreparer prepares the GetABC request.
+func (client ApplicationSecurityGroupsClient) GetABCPreparer(ctx context.Context, resourceGroupName string, applicationSecurityGroupName string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"applicationSecurityGroupName": autorest.Encode("path", applicationSecurityGroupName),
 		"resourceGroupName":            autorest.Encode("path", resourceGroupName),
@@ -248,15 +248,15 @@ func (client ApplicationSecurityGroupsClient) GetPreparer(ctx context.Context, r
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
 }
 
-// GetSender sends the Get request. The method will close the
+// GetABCSender sends the GetABC request. The method will close the
 // http.Response Body if it receives an error.
-func (client ApplicationSecurityGroupsClient) GetSender(req *http.Request) (*http.Response, error) {
+func (client ApplicationSecurityGroupsClient) GetABCSender(req *http.Request) (*http.Response, error) {
 	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
-// GetResponder handles the response to the Get request. The method always
+// GetABCResponder handles the response to the GetABC request. The method always
 // closes the http.Response Body.
-func (client ApplicationSecurityGroupsClient) GetResponder(resp *http.Response) (result ApplicationSecurityGroup, err error) {
+func (client ApplicationSecurityGroupsClient) GetABCResponder(resp *http.Response) (result ApplicationSecurityGroup, err error) {
 	err = autorest.Respond(
 		resp,
 		azure.WithErrorUnlessStatusCode(http.StatusOK),
