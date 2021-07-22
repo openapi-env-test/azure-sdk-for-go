@@ -30,13 +30,13 @@ func NewWebCategoriesClientWithBaseURI(baseURI string, subscriptionID string) We
 	return WebCategoriesClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
 
-// Get gets the specified Azure Web Category.
+// GetABC gets the specified Azure Web Category.
 // Parameters:
 // name - the name of the azureWebCategory.
 // expand - expands resourceIds back referenced by the azureWebCategory resource.
-func (client WebCategoriesClient) Get(ctx context.Context, name string, expand string) (result AzureWebCategory, err error) {
+func (client WebCategoriesClient) GetABC(ctx context.Context, name string, expand string) (result AzureWebCategory, err error) {
 	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/WebCategoriesClient.Get")
+		ctx = tracing.StartSpan(ctx, fqdn+"/WebCategoriesClient.GetABC")
 		defer func() {
 			sc := -1
 			if result.Response.Response != nil {
@@ -45,30 +45,30 @@ func (client WebCategoriesClient) Get(ctx context.Context, name string, expand s
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	req, err := client.GetPreparer(ctx, name, expand)
+	req, err := client.GetABCPreparer(ctx, name, expand)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "network.WebCategoriesClient", "Get", nil, "Failure preparing request")
+		err = autorest.NewErrorWithError(err, "network.WebCategoriesClient", "GetABC", nil, "Failure preparing request")
 		return
 	}
 
-	resp, err := client.GetSender(req)
+	resp, err := client.GetABCSender(req)
 	if err != nil {
 		result.Response = autorest.Response{Response: resp}
-		err = autorest.NewErrorWithError(err, "network.WebCategoriesClient", "Get", resp, "Failure sending request")
+		err = autorest.NewErrorWithError(err, "network.WebCategoriesClient", "GetABC", resp, "Failure sending request")
 		return
 	}
 
-	result, err = client.GetResponder(resp)
+	result, err = client.GetABCResponder(resp)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "network.WebCategoriesClient", "Get", resp, "Failure responding to request")
+		err = autorest.NewErrorWithError(err, "network.WebCategoriesClient", "GetABC", resp, "Failure responding to request")
 		return
 	}
 
 	return
 }
 
-// GetPreparer prepares the Get request.
-func (client WebCategoriesClient) GetPreparer(ctx context.Context, name string, expand string) (*http.Request, error) {
+// GetABCPreparer prepares the GetABC request.
+func (client WebCategoriesClient) GetABCPreparer(ctx context.Context, name string, expand string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"name":           autorest.Encode("path", name),
 		"subscriptionId": autorest.Encode("path", client.SubscriptionID),
@@ -90,15 +90,15 @@ func (client WebCategoriesClient) GetPreparer(ctx context.Context, name string, 
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
 }
 
-// GetSender sends the Get request. The method will close the
+// GetABCSender sends the GetABC request. The method will close the
 // http.Response Body if it receives an error.
-func (client WebCategoriesClient) GetSender(req *http.Request) (*http.Response, error) {
+func (client WebCategoriesClient) GetABCSender(req *http.Request) (*http.Response, error) {
 	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
-// GetResponder handles the response to the Get request. The method always
+// GetABCResponder handles the response to the GetABC request. The method always
 // closes the http.Response Body.
-func (client WebCategoriesClient) GetResponder(resp *http.Response) (result AzureWebCategory, err error) {
+func (client WebCategoriesClient) GetABCResponder(resp *http.Response) (result AzureWebCategory, err error) {
 	err = autorest.Respond(
 		resp,
 		azure.WithErrorUnlessStatusCode(http.StatusOK),

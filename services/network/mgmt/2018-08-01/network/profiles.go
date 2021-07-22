@@ -109,13 +109,13 @@ func (client ProfilesClient) CreateOrUpdateResponder(resp *http.Response) (resul
 	return
 }
 
-// Delete deletes the specified network profile.
+// DeleteABC deletes the specified network profile.
 // Parameters:
 // resourceGroupName - the name of the resource group.
 // networkProfileName - the name of the NetworkProfile.
-func (client ProfilesClient) Delete(ctx context.Context, resourceGroupName string, networkProfileName string) (result ProfilesDeleteFuture, err error) {
+func (client ProfilesClient) DeleteABC(ctx context.Context, resourceGroupName string, networkProfileName string) (result ProfilesDeleteABCFuture, err error) {
 	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/ProfilesClient.Delete")
+		ctx = tracing.StartSpan(ctx, fqdn+"/ProfilesClient.DeleteABC")
 		defer func() {
 			sc := -1
 			if result.FutureAPI != nil && result.FutureAPI.Response() != nil {
@@ -124,23 +124,23 @@ func (client ProfilesClient) Delete(ctx context.Context, resourceGroupName strin
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	req, err := client.DeletePreparer(ctx, resourceGroupName, networkProfileName)
+	req, err := client.DeleteABCPreparer(ctx, resourceGroupName, networkProfileName)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "network.ProfilesClient", "Delete", nil, "Failure preparing request")
+		err = autorest.NewErrorWithError(err, "network.ProfilesClient", "DeleteABC", nil, "Failure preparing request")
 		return
 	}
 
-	result, err = client.DeleteSender(req)
+	result, err = client.DeleteABCSender(req)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "network.ProfilesClient", "Delete", nil, "Failure sending request")
+		err = autorest.NewErrorWithError(err, "network.ProfilesClient", "DeleteABC", nil, "Failure sending request")
 		return
 	}
 
 	return
 }
 
-// DeletePreparer prepares the Delete request.
-func (client ProfilesClient) DeletePreparer(ctx context.Context, resourceGroupName string, networkProfileName string) (*http.Request, error) {
+// DeleteABCPreparer prepares the DeleteABC request.
+func (client ProfilesClient) DeleteABCPreparer(ctx context.Context, resourceGroupName string, networkProfileName string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"networkProfileName": autorest.Encode("path", networkProfileName),
 		"resourceGroupName":  autorest.Encode("path", resourceGroupName),
@@ -160,9 +160,9 @@ func (client ProfilesClient) DeletePreparer(ctx context.Context, resourceGroupNa
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
 }
 
-// DeleteSender sends the Delete request. The method will close the
+// DeleteABCSender sends the DeleteABC request. The method will close the
 // http.Response Body if it receives an error.
-func (client ProfilesClient) DeleteSender(req *http.Request) (future ProfilesDeleteFuture, err error) {
+func (client ProfilesClient) DeleteABCSender(req *http.Request) (future ProfilesDeleteABCFuture, err error) {
 	var resp *http.Response
 	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
 	if err != nil {
@@ -175,9 +175,9 @@ func (client ProfilesClient) DeleteSender(req *http.Request) (future ProfilesDel
 	return
 }
 
-// DeleteResponder handles the response to the Delete request. The method always
+// DeleteABCResponder handles the response to the DeleteABC request. The method always
 // closes the http.Response Body.
-func (client ProfilesClient) DeleteResponder(resp *http.Response) (result autorest.Response, err error) {
+func (client ProfilesClient) DeleteABCResponder(resp *http.Response) (result autorest.Response, err error) {
 	err = autorest.Respond(
 		resp,
 		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusAccepted, http.StatusNoContent),

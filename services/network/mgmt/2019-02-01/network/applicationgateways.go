@@ -309,13 +309,13 @@ func (client ApplicationGatewaysClient) CreateOrUpdateResponder(resp *http.Respo
 	return
 }
 
-// Delete deletes the specified application gateway.
+// DeleteABC deletes the specified application gateway.
 // Parameters:
 // resourceGroupName - the name of the resource group.
 // applicationGatewayName - the name of the application gateway.
-func (client ApplicationGatewaysClient) Delete(ctx context.Context, resourceGroupName string, applicationGatewayName string) (result ApplicationGatewaysDeleteFuture, err error) {
+func (client ApplicationGatewaysClient) DeleteABC(ctx context.Context, resourceGroupName string, applicationGatewayName string) (result ApplicationGatewaysDeleteABCFuture, err error) {
 	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/ApplicationGatewaysClient.Delete")
+		ctx = tracing.StartSpan(ctx, fqdn+"/ApplicationGatewaysClient.DeleteABC")
 		defer func() {
 			sc := -1
 			if result.FutureAPI != nil && result.FutureAPI.Response() != nil {
@@ -324,23 +324,23 @@ func (client ApplicationGatewaysClient) Delete(ctx context.Context, resourceGrou
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	req, err := client.DeletePreparer(ctx, resourceGroupName, applicationGatewayName)
+	req, err := client.DeleteABCPreparer(ctx, resourceGroupName, applicationGatewayName)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "network.ApplicationGatewaysClient", "Delete", nil, "Failure preparing request")
+		err = autorest.NewErrorWithError(err, "network.ApplicationGatewaysClient", "DeleteABC", nil, "Failure preparing request")
 		return
 	}
 
-	result, err = client.DeleteSender(req)
+	result, err = client.DeleteABCSender(req)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "network.ApplicationGatewaysClient", "Delete", nil, "Failure sending request")
+		err = autorest.NewErrorWithError(err, "network.ApplicationGatewaysClient", "DeleteABC", nil, "Failure sending request")
 		return
 	}
 
 	return
 }
 
-// DeletePreparer prepares the Delete request.
-func (client ApplicationGatewaysClient) DeletePreparer(ctx context.Context, resourceGroupName string, applicationGatewayName string) (*http.Request, error) {
+// DeleteABCPreparer prepares the DeleteABC request.
+func (client ApplicationGatewaysClient) DeleteABCPreparer(ctx context.Context, resourceGroupName string, applicationGatewayName string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"applicationGatewayName": autorest.Encode("path", applicationGatewayName),
 		"resourceGroupName":      autorest.Encode("path", resourceGroupName),
@@ -360,9 +360,9 @@ func (client ApplicationGatewaysClient) DeletePreparer(ctx context.Context, reso
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
 }
 
-// DeleteSender sends the Delete request. The method will close the
+// DeleteABCSender sends the DeleteABC request. The method will close the
 // http.Response Body if it receives an error.
-func (client ApplicationGatewaysClient) DeleteSender(req *http.Request) (future ApplicationGatewaysDeleteFuture, err error) {
+func (client ApplicationGatewaysClient) DeleteABCSender(req *http.Request) (future ApplicationGatewaysDeleteABCFuture, err error) {
 	var resp *http.Response
 	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
 	if err != nil {
@@ -375,9 +375,9 @@ func (client ApplicationGatewaysClient) DeleteSender(req *http.Request) (future 
 	return
 }
 
-// DeleteResponder handles the response to the Delete request. The method always
+// DeleteABCResponder handles the response to the DeleteABC request. The method always
 // closes the http.Response Body.
-func (client ApplicationGatewaysClient) DeleteResponder(resp *http.Response) (result autorest.Response, err error) {
+func (client ApplicationGatewaysClient) DeleteABCResponder(resp *http.Response) (result autorest.Response, err error) {
 	err = autorest.Respond(
 		resp,
 		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusAccepted, http.StatusNoContent),

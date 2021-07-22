@@ -98,7 +98,7 @@ var _ LoadBalancersClientAPI = (*network.LoadBalancersClient)(nil)
 // InterfacesClientAPI contains the set of methods on the InterfacesClient type.
 type InterfacesClientAPI interface {
 	CreateOrUpdate(ctx context.Context, resourceGroupName string, networkInterfaceName string, parameters network.Interface) (result network.InterfacesCreateOrUpdateFuture, err error)
-	Delete(ctx context.Context, resourceGroupName string, networkInterfaceName string) (result network.InterfacesDeleteFuture, err error)
+	DeleteABCD(ctx context.Context, resourceGroupName string, networkInterfaceName string) (result network.InterfacesDeleteABCDFuture, err error)
 	Get(ctx context.Context, resourceGroupName string, networkInterfaceName string, expand string) (result network.Interface, err error)
 	GetVirtualMachineScaleSetNetworkInterface(ctx context.Context, resourceGroupName string, virtualMachineScaleSetName string, virtualmachineIndex string, networkInterfaceName string, expand string) (result network.Interface, err error)
 	List(ctx context.Context, resourceGroupName string) (result network.InterfaceListResultPage, err error)
@@ -140,7 +140,7 @@ var _ SecurityRulesClientAPI = (*network.SecurityRulesClient)(nil)
 // PublicIPAddressesClientAPI contains the set of methods on the PublicIPAddressesClient type.
 type PublicIPAddressesClientAPI interface {
 	CreateOrUpdate(ctx context.Context, resourceGroupName string, publicIPAddressName string, parameters network.PublicIPAddress) (result network.PublicIPAddressesCreateOrUpdateFuture, err error)
-	Delete(ctx context.Context, resourceGroupName string, publicIPAddressName string) (result network.PublicIPAddressesDeleteFuture, err error)
+	DeleteABC(ctx context.Context, resourceGroupName string, publicIPAddressName string) (result network.PublicIPAddressesDeleteABCFuture, err error)
 	Get(ctx context.Context, resourceGroupName string, publicIPAddressName string, expand string) (result network.PublicIPAddress, err error)
 	List(ctx context.Context, resourceGroupName string) (result network.PublicIPAddressListResultPage, err error)
 	ListComplete(ctx context.Context, resourceGroupName string) (result network.PublicIPAddressListResultIterator, err error)

@@ -810,12 +810,12 @@ func (client PublicIPAddressesClient) ListCloudServicePublicIPAddressesComplete(
 // ListCloudServiceRoleInstancePublicIPAddresses gets information about all public IP addresses in a role instance IP
 // configuration in a cloud service.
 // Parameters:
-// resourceGroupName - the name of the resource group.
+// resourceGroupNameBC - the name of the resource group.
 // cloudServiceName - the name of the cloud service.
 // roleInstanceName - the name of role instance.
 // networkInterfaceName - the network interface name.
 // IPConfigurationName - the IP configuration name.
-func (client PublicIPAddressesClient) ListCloudServiceRoleInstancePublicIPAddresses(ctx context.Context, resourceGroupName string, cloudServiceName string, roleInstanceName string, networkInterfaceName string, IPConfigurationName string) (result PublicIPAddressListResultPage, err error) {
+func (client PublicIPAddressesClient) ListCloudServiceRoleInstancePublicIPAddresses(ctx context.Context, resourceGroupNameBC string, cloudServiceName string, roleInstanceName string, networkInterfaceName string, IPConfigurationName string) (result PublicIPAddressListResultPage, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/PublicIPAddressesClient.ListCloudServiceRoleInstancePublicIPAddresses")
 		defer func() {
@@ -827,7 +827,7 @@ func (client PublicIPAddressesClient) ListCloudServiceRoleInstancePublicIPAddres
 		}()
 	}
 	result.fn = client.listCloudServiceRoleInstancePublicIPAddressesNextResults
-	req, err := client.ListCloudServiceRoleInstancePublicIPAddressesPreparer(ctx, resourceGroupName, cloudServiceName, roleInstanceName, networkInterfaceName, IPConfigurationName)
+	req, err := client.ListCloudServiceRoleInstancePublicIPAddressesPreparer(ctx, resourceGroupNameBC, cloudServiceName, roleInstanceName, networkInterfaceName, IPConfigurationName)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "network.PublicIPAddressesClient", "ListCloudServiceRoleInstancePublicIPAddresses", nil, "Failure preparing request")
 		return
@@ -854,12 +854,12 @@ func (client PublicIPAddressesClient) ListCloudServiceRoleInstancePublicIPAddres
 }
 
 // ListCloudServiceRoleInstancePublicIPAddressesPreparer prepares the ListCloudServiceRoleInstancePublicIPAddresses request.
-func (client PublicIPAddressesClient) ListCloudServiceRoleInstancePublicIPAddressesPreparer(ctx context.Context, resourceGroupName string, cloudServiceName string, roleInstanceName string, networkInterfaceName string, IPConfigurationName string) (*http.Request, error) {
+func (client PublicIPAddressesClient) ListCloudServiceRoleInstancePublicIPAddressesPreparer(ctx context.Context, resourceGroupNameBC string, cloudServiceName string, roleInstanceName string, networkInterfaceName string, IPConfigurationName string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"cloudServiceName":     autorest.Encode("path", cloudServiceName),
 		"ipConfigurationName":  autorest.Encode("path", IPConfigurationName),
 		"networkInterfaceName": autorest.Encode("path", networkInterfaceName),
-		"resourceGroupName":    autorest.Encode("path", resourceGroupName),
+		"resourceGroupNameBC":  autorest.Encode("path", resourceGroupNameBC),
 		"roleInstanceName":     autorest.Encode("path", roleInstanceName),
 		"subscriptionId":       autorest.Encode("path", client.SubscriptionID),
 	}
@@ -917,7 +917,7 @@ func (client PublicIPAddressesClient) listCloudServiceRoleInstancePublicIPAddres
 }
 
 // ListCloudServiceRoleInstancePublicIPAddressesComplete enumerates all values, automatically crossing page boundaries as required.
-func (client PublicIPAddressesClient) ListCloudServiceRoleInstancePublicIPAddressesComplete(ctx context.Context, resourceGroupName string, cloudServiceName string, roleInstanceName string, networkInterfaceName string, IPConfigurationName string) (result PublicIPAddressListResultIterator, err error) {
+func (client PublicIPAddressesClient) ListCloudServiceRoleInstancePublicIPAddressesComplete(ctx context.Context, resourceGroupNameBC string, cloudServiceName string, roleInstanceName string, networkInterfaceName string, IPConfigurationName string) (result PublicIPAddressListResultIterator, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/PublicIPAddressesClient.ListCloudServiceRoleInstancePublicIPAddresses")
 		defer func() {
@@ -928,7 +928,7 @@ func (client PublicIPAddressesClient) ListCloudServiceRoleInstancePublicIPAddres
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	result.page, err = client.ListCloudServiceRoleInstancePublicIPAddresses(ctx, resourceGroupName, cloudServiceName, roleInstanceName, networkInterfaceName, IPConfigurationName)
+	result.page, err = client.ListCloudServiceRoleInstancePublicIPAddresses(ctx, resourceGroupNameBC, cloudServiceName, roleInstanceName, networkInterfaceName, IPConfigurationName)
 	return
 }
 

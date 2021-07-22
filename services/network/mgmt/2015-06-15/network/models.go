@@ -4409,9 +4409,9 @@ func (future *InterfacesCreateOrUpdateFuture) result(client InterfacesClient) (i
 	return
 }
 
-// InterfacesDeleteFuture an abstraction for monitoring and retrieving the results of a long-running
+// InterfacesDeleteABCDFuture an abstraction for monitoring and retrieving the results of a long-running
 // operation.
-type InterfacesDeleteFuture struct {
+type InterfacesDeleteABCDFuture struct {
 	azure.FutureAPI
 	// Result returns the result of the asynchronous operation.
 	// If the operation has not completed it will return an error.
@@ -4419,7 +4419,7 @@ type InterfacesDeleteFuture struct {
 }
 
 // UnmarshalJSON is the custom unmarshaller for CreateFuture.
-func (future *InterfacesDeleteFuture) UnmarshalJSON(body []byte) error {
+func (future *InterfacesDeleteABCDFuture) UnmarshalJSON(body []byte) error {
 	var azFuture azure.Future
 	if err := json.Unmarshal(body, &azFuture); err != nil {
 		return err
@@ -4429,17 +4429,17 @@ func (future *InterfacesDeleteFuture) UnmarshalJSON(body []byte) error {
 	return nil
 }
 
-// result is the default implementation for InterfacesDeleteFuture.Result.
-func (future *InterfacesDeleteFuture) result(client InterfacesClient) (ar autorest.Response, err error) {
+// result is the default implementation for InterfacesDeleteABCDFuture.Result.
+func (future *InterfacesDeleteABCDFuture) result(client InterfacesClient) (ar autorest.Response, err error) {
 	var done bool
 	done, err = future.DoneWithContext(context.Background(), client)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "network.InterfacesDeleteFuture", "Result", future.Response(), "Polling failure")
+		err = autorest.NewErrorWithError(err, "network.InterfacesDeleteABCDFuture", "Result", future.Response(), "Polling failure")
 		return
 	}
 	if !done {
 		ar.Response = future.Response()
-		err = azure.NewAsyncOpIncompleteError("network.InterfacesDeleteFuture")
+		err = azure.NewAsyncOpIncompleteError("network.InterfacesDeleteABCDFuture")
 		return
 	}
 	ar.Response = future.Response()
@@ -5753,9 +5753,9 @@ func (future *PublicIPAddressesCreateOrUpdateFuture) result(client PublicIPAddre
 	return
 }
 
-// PublicIPAddressesDeleteFuture an abstraction for monitoring and retrieving the results of a long-running
-// operation.
-type PublicIPAddressesDeleteFuture struct {
+// PublicIPAddressesDeleteABCFuture an abstraction for monitoring and retrieving the results of a
+// long-running operation.
+type PublicIPAddressesDeleteABCFuture struct {
 	azure.FutureAPI
 	// Result returns the result of the asynchronous operation.
 	// If the operation has not completed it will return an error.
@@ -5763,7 +5763,7 @@ type PublicIPAddressesDeleteFuture struct {
 }
 
 // UnmarshalJSON is the custom unmarshaller for CreateFuture.
-func (future *PublicIPAddressesDeleteFuture) UnmarshalJSON(body []byte) error {
+func (future *PublicIPAddressesDeleteABCFuture) UnmarshalJSON(body []byte) error {
 	var azFuture azure.Future
 	if err := json.Unmarshal(body, &azFuture); err != nil {
 		return err
@@ -5773,17 +5773,17 @@ func (future *PublicIPAddressesDeleteFuture) UnmarshalJSON(body []byte) error {
 	return nil
 }
 
-// result is the default implementation for PublicIPAddressesDeleteFuture.Result.
-func (future *PublicIPAddressesDeleteFuture) result(client PublicIPAddressesClient) (ar autorest.Response, err error) {
+// result is the default implementation for PublicIPAddressesDeleteABCFuture.Result.
+func (future *PublicIPAddressesDeleteABCFuture) result(client PublicIPAddressesClient) (ar autorest.Response, err error) {
 	var done bool
 	done, err = future.DoneWithContext(context.Background(), client)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "network.PublicIPAddressesDeleteFuture", "Result", future.Response(), "Polling failure")
+		err = autorest.NewErrorWithError(err, "network.PublicIPAddressesDeleteABCFuture", "Result", future.Response(), "Polling failure")
 		return
 	}
 	if !done {
 		ar.Response = future.Response()
-		err = azure.NewAsyncOpIncompleteError("network.PublicIPAddressesDeleteFuture")
+		err = azure.NewAsyncOpIncompleteError("network.PublicIPAddressesDeleteABCFuture")
 		return
 	}
 	ar.Response = future.Response()

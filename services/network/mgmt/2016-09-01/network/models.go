@@ -20,6 +20,114 @@ import (
 // The package's fully qualified name.
 const fqdn = "github.com/Azure/azure-sdk-for-go/services/network/mgmt/2016-09-01/network"
 
+// ABC1Future an abstraction for monitoring and retrieving the results of a long-running operation.
+type ABC1Future struct {
+	azure.FutureAPI
+	// Result returns the result of the asynchronous operation.
+	// If the operation has not completed it will return an error.
+	Result func(BaseClient) (autorest.Response, error)
+}
+
+// UnmarshalJSON is the custom unmarshaller for CreateFuture.
+func (future *ABC1Future) UnmarshalJSON(body []byte) error {
+	var azFuture azure.Future
+	if err := json.Unmarshal(body, &azFuture); err != nil {
+		return err
+	}
+	future.FutureAPI = &azFuture
+	future.Result = future.result
+	return nil
+}
+
+// result is the default implementation for ABC1Future.Result.
+func (future *ABC1Future) result(client BaseClient) (ar autorest.Response, err error) {
+	var done bool
+	done, err = future.DoneWithContext(context.Background(), client)
+	if err != nil {
+		err = autorest.NewErrorWithError(err, "network.ABC1Future", "Result", future.Response(), "Polling failure")
+		return
+	}
+	if !done {
+		ar.Response = future.Response()
+		err = azure.NewAsyncOpIncompleteError("network.ABC1Future")
+		return
+	}
+	ar.Response = future.Response()
+	return
+}
+
+// ABCdFuture an abstraction for monitoring and retrieving the results of a long-running operation.
+type ABCdFuture struct {
+	azure.FutureAPI
+	// Result returns the result of the asynchronous operation.
+	// If the operation has not completed it will return an error.
+	Result func(BaseClient) (autorest.Response, error)
+}
+
+// UnmarshalJSON is the custom unmarshaller for CreateFuture.
+func (future *ABCdFuture) UnmarshalJSON(body []byte) error {
+	var azFuture azure.Future
+	if err := json.Unmarshal(body, &azFuture); err != nil {
+		return err
+	}
+	future.FutureAPI = &azFuture
+	future.Result = future.result
+	return nil
+}
+
+// result is the default implementation for ABCdFuture.Result.
+func (future *ABCdFuture) result(client BaseClient) (ar autorest.Response, err error) {
+	var done bool
+	done, err = future.DoneWithContext(context.Background(), client)
+	if err != nil {
+		err = autorest.NewErrorWithError(err, "network.ABCdFuture", "Result", future.Response(), "Polling failure")
+		return
+	}
+	if !done {
+		ar.Response = future.Response()
+		err = azure.NewAsyncOpIncompleteError("network.ABCdFuture")
+		return
+	}
+	ar.Response = future.Response()
+	return
+}
+
+// ABCeFuture an abstraction for monitoring and retrieving the results of a long-running operation.
+type ABCeFuture struct {
+	azure.FutureAPI
+	// Result returns the result of the asynchronous operation.
+	// If the operation has not completed it will return an error.
+	Result func(BaseClient) (autorest.Response, error)
+}
+
+// UnmarshalJSON is the custom unmarshaller for CreateFuture.
+func (future *ABCeFuture) UnmarshalJSON(body []byte) error {
+	var azFuture azure.Future
+	if err := json.Unmarshal(body, &azFuture); err != nil {
+		return err
+	}
+	future.FutureAPI = &azFuture
+	future.Result = future.result
+	return nil
+}
+
+// result is the default implementation for ABCeFuture.Result.
+func (future *ABCeFuture) result(client BaseClient) (ar autorest.Response, err error) {
+	var done bool
+	done, err = future.DoneWithContext(context.Background(), client)
+	if err != nil {
+		err = autorest.NewErrorWithError(err, "network.ABCeFuture", "Result", future.Response(), "Polling failure")
+		return
+	}
+	if !done {
+		ar.Response = future.Response()
+		err = azure.NewAsyncOpIncompleteError("network.ABCeFuture")
+		return
+	}
+	ar.Response = future.Response()
+	return
+}
+
 // AddressSpace addressSpace contains an array of IP address ranges that can be used by subnets of the
 // virtual network.
 type AddressSpace struct {
@@ -2496,43 +2604,6 @@ func (future *ExpressRouteCircuitAuthorizationsCreateOrUpdateFuture) result(clie
 	return
 }
 
-// ExpressRouteCircuitAuthorizationsDeleteFuture an abstraction for monitoring and retrieving the results
-// of a long-running operation.
-type ExpressRouteCircuitAuthorizationsDeleteFuture struct {
-	azure.FutureAPI
-	// Result returns the result of the asynchronous operation.
-	// If the operation has not completed it will return an error.
-	Result func(ExpressRouteCircuitAuthorizationsClient) (autorest.Response, error)
-}
-
-// UnmarshalJSON is the custom unmarshaller for CreateFuture.
-func (future *ExpressRouteCircuitAuthorizationsDeleteFuture) UnmarshalJSON(body []byte) error {
-	var azFuture azure.Future
-	if err := json.Unmarshal(body, &azFuture); err != nil {
-		return err
-	}
-	future.FutureAPI = &azFuture
-	future.Result = future.result
-	return nil
-}
-
-// result is the default implementation for ExpressRouteCircuitAuthorizationsDeleteFuture.Result.
-func (future *ExpressRouteCircuitAuthorizationsDeleteFuture) result(client ExpressRouteCircuitAuthorizationsClient) (ar autorest.Response, err error) {
-	var done bool
-	done, err = future.DoneWithContext(context.Background(), client)
-	if err != nil {
-		err = autorest.NewErrorWithError(err, "network.ExpressRouteCircuitAuthorizationsDeleteFuture", "Result", future.Response(), "Polling failure")
-		return
-	}
-	if !done {
-		ar.Response = future.Response()
-		err = azure.NewAsyncOpIncompleteError("network.ExpressRouteCircuitAuthorizationsDeleteFuture")
-		return
-	}
-	ar.Response = future.Response()
-	return
-}
-
 // ExpressRouteCircuitListResult response for ListExpressRouteCircuit API service call.
 type ExpressRouteCircuitListResult struct {
 	autorest.Response `json:"-"`
@@ -4586,43 +4657,6 @@ func (future *InterfacesCreateOrUpdateFuture) result(client InterfacesClient) (i
 	return
 }
 
-// InterfacesDeleteFuture an abstraction for monitoring and retrieving the results of a long-running
-// operation.
-type InterfacesDeleteFuture struct {
-	azure.FutureAPI
-	// Result returns the result of the asynchronous operation.
-	// If the operation has not completed it will return an error.
-	Result func(InterfacesClient) (autorest.Response, error)
-}
-
-// UnmarshalJSON is the custom unmarshaller for CreateFuture.
-func (future *InterfacesDeleteFuture) UnmarshalJSON(body []byte) error {
-	var azFuture azure.Future
-	if err := json.Unmarshal(body, &azFuture); err != nil {
-		return err
-	}
-	future.FutureAPI = &azFuture
-	future.Result = future.result
-	return nil
-}
-
-// result is the default implementation for InterfacesDeleteFuture.Result.
-func (future *InterfacesDeleteFuture) result(client InterfacesClient) (ar autorest.Response, err error) {
-	var done bool
-	done, err = future.DoneWithContext(context.Background(), client)
-	if err != nil {
-		err = autorest.NewErrorWithError(err, "network.InterfacesDeleteFuture", "Result", future.Response(), "Polling failure")
-		return
-	}
-	if !done {
-		ar.Response = future.Response()
-		err = azure.NewAsyncOpIncompleteError("network.InterfacesDeleteFuture")
-		return
-	}
-	ar.Response = future.Response()
-	return
-}
-
 // InterfacesGetEffectiveRouteTableFuture an abstraction for monitoring and retrieving the results of a
 // long-running operation.
 type InterfacesGetEffectiveRouteTableFuture struct {
@@ -5153,9 +5187,9 @@ func (future *LoadBalancersCreateOrUpdateFuture) result(client LoadBalancersClie
 	return
 }
 
-// LoadBalancersDeleteFuture an abstraction for monitoring and retrieving the results of a long-running
+// LoadBalancersDeleteABCFuture an abstraction for monitoring and retrieving the results of a long-running
 // operation.
-type LoadBalancersDeleteFuture struct {
+type LoadBalancersDeleteABCFuture struct {
 	azure.FutureAPI
 	// Result returns the result of the asynchronous operation.
 	// If the operation has not completed it will return an error.
@@ -5163,7 +5197,7 @@ type LoadBalancersDeleteFuture struct {
 }
 
 // UnmarshalJSON is the custom unmarshaller for CreateFuture.
-func (future *LoadBalancersDeleteFuture) UnmarshalJSON(body []byte) error {
+func (future *LoadBalancersDeleteABCFuture) UnmarshalJSON(body []byte) error {
 	var azFuture azure.Future
 	if err := json.Unmarshal(body, &azFuture); err != nil {
 		return err
@@ -5173,17 +5207,17 @@ func (future *LoadBalancersDeleteFuture) UnmarshalJSON(body []byte) error {
 	return nil
 }
 
-// result is the default implementation for LoadBalancersDeleteFuture.Result.
-func (future *LoadBalancersDeleteFuture) result(client LoadBalancersClient) (ar autorest.Response, err error) {
+// result is the default implementation for LoadBalancersDeleteABCFuture.Result.
+func (future *LoadBalancersDeleteABCFuture) result(client LoadBalancersClient) (ar autorest.Response, err error) {
 	var done bool
 	done, err = future.DoneWithContext(context.Background(), client)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "network.LoadBalancersDeleteFuture", "Result", future.Response(), "Polling failure")
+		err = autorest.NewErrorWithError(err, "network.LoadBalancersDeleteABCFuture", "Result", future.Response(), "Polling failure")
 		return
 	}
 	if !done {
 		ar.Response = future.Response()
-		err = azure.NewAsyncOpIncompleteError("network.LoadBalancersDeleteFuture")
+		err = azure.NewAsyncOpIncompleteError("network.LoadBalancersDeleteABCFuture")
 		return
 	}
 	ar.Response = future.Response()
@@ -7890,43 +7924,6 @@ func (future *SecurityGroupsCreateOrUpdateFuture) result(client SecurityGroupsCl
 			err = autorest.NewErrorWithError(err, "network.SecurityGroupsCreateOrUpdateFuture", "Result", sg.Response.Response, "Failure responding to request")
 		}
 	}
-	return
-}
-
-// SecurityGroupsDeleteFuture an abstraction for monitoring and retrieving the results of a long-running
-// operation.
-type SecurityGroupsDeleteFuture struct {
-	azure.FutureAPI
-	// Result returns the result of the asynchronous operation.
-	// If the operation has not completed it will return an error.
-	Result func(SecurityGroupsClient) (autorest.Response, error)
-}
-
-// UnmarshalJSON is the custom unmarshaller for CreateFuture.
-func (future *SecurityGroupsDeleteFuture) UnmarshalJSON(body []byte) error {
-	var azFuture azure.Future
-	if err := json.Unmarshal(body, &azFuture); err != nil {
-		return err
-	}
-	future.FutureAPI = &azFuture
-	future.Result = future.result
-	return nil
-}
-
-// result is the default implementation for SecurityGroupsDeleteFuture.Result.
-func (future *SecurityGroupsDeleteFuture) result(client SecurityGroupsClient) (ar autorest.Response, err error) {
-	var done bool
-	done, err = future.DoneWithContext(context.Background(), client)
-	if err != nil {
-		err = autorest.NewErrorWithError(err, "network.SecurityGroupsDeleteFuture", "Result", future.Response(), "Polling failure")
-		return
-	}
-	if !done {
-		ar.Response = future.Response()
-		err = azure.NewAsyncOpIncompleteError("network.SecurityGroupsDeleteFuture")
-		return
-	}
-	ar.Response = future.Response()
 	return
 }
 

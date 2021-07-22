@@ -111,13 +111,13 @@ func (client InterfacesClient) CreateOrUpdateResponder(resp *http.Response) (res
 	return
 }
 
-// Delete deletes the specified network interface.
+// DeleteABCD deletes the specified network interface.
 // Parameters:
 // resourceGroupName - the name of the resource group.
 // networkInterfaceName - the name of the network interface.
-func (client InterfacesClient) Delete(ctx context.Context, resourceGroupName string, networkInterfaceName string) (result InterfacesDeleteFuture, err error) {
+func (client InterfacesClient) DeleteABCD(ctx context.Context, resourceGroupName string, networkInterfaceName string) (result InterfacesDeleteABCDFuture, err error) {
 	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/InterfacesClient.Delete")
+		ctx = tracing.StartSpan(ctx, fqdn+"/InterfacesClient.DeleteABCD")
 		defer func() {
 			sc := -1
 			if result.FutureAPI != nil && result.FutureAPI.Response() != nil {
@@ -126,23 +126,23 @@ func (client InterfacesClient) Delete(ctx context.Context, resourceGroupName str
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	req, err := client.DeletePreparer(ctx, resourceGroupName, networkInterfaceName)
+	req, err := client.DeleteABCDPreparer(ctx, resourceGroupName, networkInterfaceName)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "network.InterfacesClient", "Delete", nil, "Failure preparing request")
+		err = autorest.NewErrorWithError(err, "network.InterfacesClient", "DeleteABCD", nil, "Failure preparing request")
 		return
 	}
 
-	result, err = client.DeleteSender(req)
+	result, err = client.DeleteABCDSender(req)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "network.InterfacesClient", "Delete", nil, "Failure sending request")
+		err = autorest.NewErrorWithError(err, "network.InterfacesClient", "DeleteABCD", nil, "Failure sending request")
 		return
 	}
 
 	return
 }
 
-// DeletePreparer prepares the Delete request.
-func (client InterfacesClient) DeletePreparer(ctx context.Context, resourceGroupName string, networkInterfaceName string) (*http.Request, error) {
+// DeleteABCDPreparer prepares the DeleteABCD request.
+func (client InterfacesClient) DeleteABCDPreparer(ctx context.Context, resourceGroupName string, networkInterfaceName string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"networkInterfaceName": autorest.Encode("path", networkInterfaceName),
 		"resourceGroupName":    autorest.Encode("path", resourceGroupName),
@@ -162,9 +162,9 @@ func (client InterfacesClient) DeletePreparer(ctx context.Context, resourceGroup
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
 }
 
-// DeleteSender sends the Delete request. The method will close the
+// DeleteABCDSender sends the DeleteABCD request. The method will close the
 // http.Response Body if it receives an error.
-func (client InterfacesClient) DeleteSender(req *http.Request) (future InterfacesDeleteFuture, err error) {
+func (client InterfacesClient) DeleteABCDSender(req *http.Request) (future InterfacesDeleteABCDFuture, err error) {
 	var resp *http.Response
 	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
 	if err != nil {
@@ -177,9 +177,9 @@ func (client InterfacesClient) DeleteSender(req *http.Request) (future Interface
 	return
 }
 
-// DeleteResponder handles the response to the Delete request. The method always
+// DeleteABCDResponder handles the response to the DeleteABCD request. The method always
 // closes the http.Response Body.
-func (client InterfacesClient) DeleteResponder(resp *http.Response) (result autorest.Response, err error) {
+func (client InterfacesClient) DeleteABCDResponder(resp *http.Response) (result autorest.Response, err error) {
 	err = autorest.Respond(
 		resp,
 		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusAccepted, http.StatusNoContent),
@@ -855,15 +855,15 @@ func (client InterfacesClient) ListVirtualMachineScaleSetNetworkInterfacesComple
 	return
 }
 
-// ListVirtualMachineScaleSetVMNetworkInterfaces gets information about all network interfaces in a virtual machine in
-// a virtual machine scale set.
+// ListVirtualMachineScaleSetVMNetworkInterfacesABC gets information about all network interfaces in a virtual machine
+// in a virtual machine scale set.
 // Parameters:
 // resourceGroupName - the name of the resource group.
 // virtualMachineScaleSetName - the name of the virtual machine scale set.
 // virtualmachineIndex - the virtual machine index.
-func (client InterfacesClient) ListVirtualMachineScaleSetVMNetworkInterfaces(ctx context.Context, resourceGroupName string, virtualMachineScaleSetName string, virtualmachineIndex string) (result InterfaceListResultPage, err error) {
+func (client InterfacesClient) ListVirtualMachineScaleSetVMNetworkInterfacesABC(ctx context.Context, resourceGroupName string, virtualMachineScaleSetName string, virtualmachineIndex string) (result InterfaceListResultPage, err error) {
 	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/InterfacesClient.ListVirtualMachineScaleSetVMNetworkInterfaces")
+		ctx = tracing.StartSpan(ctx, fqdn+"/InterfacesClient.ListVirtualMachineScaleSetVMNetworkInterfacesABC")
 		defer func() {
 			sc := -1
 			if result.ilr.Response.Response != nil {
@@ -872,23 +872,23 @@ func (client InterfacesClient) ListVirtualMachineScaleSetVMNetworkInterfaces(ctx
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	result.fn = client.listVirtualMachineScaleSetVMNetworkInterfacesNextResults
-	req, err := client.ListVirtualMachineScaleSetVMNetworkInterfacesPreparer(ctx, resourceGroupName, virtualMachineScaleSetName, virtualmachineIndex)
+	result.fn = client.listVirtualMachineScaleSetVMNetworkInterfacesABCNextResults
+	req, err := client.ListVirtualMachineScaleSetVMNetworkInterfacesABCPreparer(ctx, resourceGroupName, virtualMachineScaleSetName, virtualmachineIndex)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "network.InterfacesClient", "ListVirtualMachineScaleSetVMNetworkInterfaces", nil, "Failure preparing request")
+		err = autorest.NewErrorWithError(err, "network.InterfacesClient", "ListVirtualMachineScaleSetVMNetworkInterfacesABC", nil, "Failure preparing request")
 		return
 	}
 
-	resp, err := client.ListVirtualMachineScaleSetVMNetworkInterfacesSender(req)
+	resp, err := client.ListVirtualMachineScaleSetVMNetworkInterfacesABCSender(req)
 	if err != nil {
 		result.ilr.Response = autorest.Response{Response: resp}
-		err = autorest.NewErrorWithError(err, "network.InterfacesClient", "ListVirtualMachineScaleSetVMNetworkInterfaces", resp, "Failure sending request")
+		err = autorest.NewErrorWithError(err, "network.InterfacesClient", "ListVirtualMachineScaleSetVMNetworkInterfacesABC", resp, "Failure sending request")
 		return
 	}
 
-	result.ilr, err = client.ListVirtualMachineScaleSetVMNetworkInterfacesResponder(resp)
+	result.ilr, err = client.ListVirtualMachineScaleSetVMNetworkInterfacesABCResponder(resp)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "network.InterfacesClient", "ListVirtualMachineScaleSetVMNetworkInterfaces", resp, "Failure responding to request")
+		err = autorest.NewErrorWithError(err, "network.InterfacesClient", "ListVirtualMachineScaleSetVMNetworkInterfacesABC", resp, "Failure responding to request")
 		return
 	}
 	if result.ilr.hasNextLink() && result.ilr.IsEmpty() {
@@ -899,8 +899,8 @@ func (client InterfacesClient) ListVirtualMachineScaleSetVMNetworkInterfaces(ctx
 	return
 }
 
-// ListVirtualMachineScaleSetVMNetworkInterfacesPreparer prepares the ListVirtualMachineScaleSetVMNetworkInterfaces request.
-func (client InterfacesClient) ListVirtualMachineScaleSetVMNetworkInterfacesPreparer(ctx context.Context, resourceGroupName string, virtualMachineScaleSetName string, virtualmachineIndex string) (*http.Request, error) {
+// ListVirtualMachineScaleSetVMNetworkInterfacesABCPreparer prepares the ListVirtualMachineScaleSetVMNetworkInterfacesABC request.
+func (client InterfacesClient) ListVirtualMachineScaleSetVMNetworkInterfacesABCPreparer(ctx context.Context, resourceGroupName string, virtualMachineScaleSetName string, virtualmachineIndex string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"resourceGroupName":          autorest.Encode("path", resourceGroupName),
 		"subscriptionId":             autorest.Encode("path", client.SubscriptionID),
@@ -921,15 +921,15 @@ func (client InterfacesClient) ListVirtualMachineScaleSetVMNetworkInterfacesPrep
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
 }
 
-// ListVirtualMachineScaleSetVMNetworkInterfacesSender sends the ListVirtualMachineScaleSetVMNetworkInterfaces request. The method will close the
+// ListVirtualMachineScaleSetVMNetworkInterfacesABCSender sends the ListVirtualMachineScaleSetVMNetworkInterfacesABC request. The method will close the
 // http.Response Body if it receives an error.
-func (client InterfacesClient) ListVirtualMachineScaleSetVMNetworkInterfacesSender(req *http.Request) (*http.Response, error) {
+func (client InterfacesClient) ListVirtualMachineScaleSetVMNetworkInterfacesABCSender(req *http.Request) (*http.Response, error) {
 	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
-// ListVirtualMachineScaleSetVMNetworkInterfacesResponder handles the response to the ListVirtualMachineScaleSetVMNetworkInterfaces request. The method always
+// ListVirtualMachineScaleSetVMNetworkInterfacesABCResponder handles the response to the ListVirtualMachineScaleSetVMNetworkInterfacesABC request. The method always
 // closes the http.Response Body.
-func (client InterfacesClient) ListVirtualMachineScaleSetVMNetworkInterfacesResponder(resp *http.Response) (result InterfaceListResult, err error) {
+func (client InterfacesClient) ListVirtualMachineScaleSetVMNetworkInterfacesABCResponder(resp *http.Response) (result InterfaceListResult, err error) {
 	err = autorest.Respond(
 		resp,
 		azure.WithErrorUnlessStatusCode(http.StatusOK),
@@ -939,31 +939,31 @@ func (client InterfacesClient) ListVirtualMachineScaleSetVMNetworkInterfacesResp
 	return
 }
 
-// listVirtualMachineScaleSetVMNetworkInterfacesNextResults retrieves the next set of results, if any.
-func (client InterfacesClient) listVirtualMachineScaleSetVMNetworkInterfacesNextResults(ctx context.Context, lastResults InterfaceListResult) (result InterfaceListResult, err error) {
+// listVirtualMachineScaleSetVMNetworkInterfacesABCNextResults retrieves the next set of results, if any.
+func (client InterfacesClient) listVirtualMachineScaleSetVMNetworkInterfacesABCNextResults(ctx context.Context, lastResults InterfaceListResult) (result InterfaceListResult, err error) {
 	req, err := lastResults.interfaceListResultPreparer(ctx)
 	if err != nil {
-		return result, autorest.NewErrorWithError(err, "network.InterfacesClient", "listVirtualMachineScaleSetVMNetworkInterfacesNextResults", nil, "Failure preparing next results request")
+		return result, autorest.NewErrorWithError(err, "network.InterfacesClient", "listVirtualMachineScaleSetVMNetworkInterfacesABCNextResults", nil, "Failure preparing next results request")
 	}
 	if req == nil {
 		return
 	}
-	resp, err := client.ListVirtualMachineScaleSetVMNetworkInterfacesSender(req)
+	resp, err := client.ListVirtualMachineScaleSetVMNetworkInterfacesABCSender(req)
 	if err != nil {
 		result.Response = autorest.Response{Response: resp}
-		return result, autorest.NewErrorWithError(err, "network.InterfacesClient", "listVirtualMachineScaleSetVMNetworkInterfacesNextResults", resp, "Failure sending next results request")
+		return result, autorest.NewErrorWithError(err, "network.InterfacesClient", "listVirtualMachineScaleSetVMNetworkInterfacesABCNextResults", resp, "Failure sending next results request")
 	}
-	result, err = client.ListVirtualMachineScaleSetVMNetworkInterfacesResponder(resp)
+	result, err = client.ListVirtualMachineScaleSetVMNetworkInterfacesABCResponder(resp)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "network.InterfacesClient", "listVirtualMachineScaleSetVMNetworkInterfacesNextResults", resp, "Failure responding to next results request")
+		err = autorest.NewErrorWithError(err, "network.InterfacesClient", "listVirtualMachineScaleSetVMNetworkInterfacesABCNextResults", resp, "Failure responding to next results request")
 	}
 	return
 }
 
-// ListVirtualMachineScaleSetVMNetworkInterfacesComplete enumerates all values, automatically crossing page boundaries as required.
-func (client InterfacesClient) ListVirtualMachineScaleSetVMNetworkInterfacesComplete(ctx context.Context, resourceGroupName string, virtualMachineScaleSetName string, virtualmachineIndex string) (result InterfaceListResultIterator, err error) {
+// ListVirtualMachineScaleSetVMNetworkInterfacesABCComplete enumerates all values, automatically crossing page boundaries as required.
+func (client InterfacesClient) ListVirtualMachineScaleSetVMNetworkInterfacesABCComplete(ctx context.Context, resourceGroupName string, virtualMachineScaleSetName string, virtualmachineIndex string) (result InterfaceListResultIterator, err error) {
 	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/InterfacesClient.ListVirtualMachineScaleSetVMNetworkInterfaces")
+		ctx = tracing.StartSpan(ctx, fqdn+"/InterfacesClient.ListVirtualMachineScaleSetVMNetworkInterfacesABC")
 		defer func() {
 			sc := -1
 			if result.Response().Response.Response != nil {
@@ -972,6 +972,6 @@ func (client InterfacesClient) ListVirtualMachineScaleSetVMNetworkInterfacesComp
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	result.page, err = client.ListVirtualMachineScaleSetVMNetworkInterfaces(ctx, resourceGroupName, virtualMachineScaleSetName, virtualmachineIndex)
+	result.page, err = client.ListVirtualMachineScaleSetVMNetworkInterfacesABC(ctx, resourceGroupName, virtualMachineScaleSetName, virtualmachineIndex)
 	return
 }
