@@ -129,9 +129,9 @@ func (a *Account) UnmarshalJSON(body []byte) error {
 	return nil
 }
 
-// AccountCreateFuture an abstraction for monitoring and retrieving the results of a long-running
+// AccountCreateABCFuture an abstraction for monitoring and retrieving the results of a long-running
 // operation.
-type AccountCreateFuture struct {
+type AccountCreateABCFuture struct {
 	azure.FutureAPI
 	// Result returns the result of the asynchronous operation.
 	// If the operation has not completed it will return an error.
@@ -139,7 +139,7 @@ type AccountCreateFuture struct {
 }
 
 // UnmarshalJSON is the custom unmarshaller for CreateFuture.
-func (future *AccountCreateFuture) UnmarshalJSON(body []byte) error {
+func (future *AccountCreateABCFuture) UnmarshalJSON(body []byte) error {
 	var azFuture azure.Future
 	if err := json.Unmarshal(body, &azFuture); err != nil {
 		return err
@@ -149,24 +149,24 @@ func (future *AccountCreateFuture) UnmarshalJSON(body []byte) error {
 	return nil
 }
 
-// result is the default implementation for AccountCreateFuture.Result.
-func (future *AccountCreateFuture) result(client AccountClient) (a Account, err error) {
+// result is the default implementation for AccountCreateABCFuture.Result.
+func (future *AccountCreateABCFuture) result(client AccountClient) (a Account, err error) {
 	var done bool
 	done, err = future.DoneWithContext(context.Background(), client)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "batch.AccountCreateFuture", "Result", future.Response(), "Polling failure")
+		err = autorest.NewErrorWithError(err, "batch.AccountCreateABCFuture", "Result", future.Response(), "Polling failure")
 		return
 	}
 	if !done {
 		a.Response.Response = future.Response()
-		err = azure.NewAsyncOpIncompleteError("batch.AccountCreateFuture")
+		err = azure.NewAsyncOpIncompleteError("batch.AccountCreateABCFuture")
 		return
 	}
 	sender := autorest.DecorateSender(client, autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
 	if a.Response.Response, err = future.GetResult(sender); err == nil && a.Response.Response.StatusCode != http.StatusNoContent {
-		a, err = client.CreateResponder(a.Response.Response)
+		a, err = client.CreateABCResponder(a.Response.Response)
 		if err != nil {
-			err = autorest.NewErrorWithError(err, "batch.AccountCreateFuture", "Result", a.Response.Response, "Failure responding to request")
+			err = autorest.NewErrorWithError(err, "batch.AccountCreateABCFuture", "Result", a.Response.Response, "Failure responding to request")
 		}
 	}
 	return

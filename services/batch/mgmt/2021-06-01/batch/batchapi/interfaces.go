@@ -14,7 +14,7 @@ import (
 
 // AccountClientAPI contains the set of methods on the AccountClient type.
 type AccountClientAPI interface {
-	Create(ctx context.Context, resourceGroupName string, accountName string, parameters batch.AccountCreateParameters) (result batch.AccountCreateFuture, err error)
+	CreateABC(ctx context.Context, resourceGroupName string, accountName string, parameters batch.AccountCreateParameters) (result batch.AccountCreateABCFuture, err error)
 	Delete(ctx context.Context, resourceGroupName string, accountName string) (result batch.AccountDeleteFuture, err error)
 	Get(ctx context.Context, resourceGroupName string, accountName string) (result batch.Account, err error)
 	GetKeys(ctx context.Context, resourceGroupName string, accountName string) (result batch.AccountKeys, err error)

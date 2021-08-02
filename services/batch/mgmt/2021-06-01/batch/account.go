@@ -15,7 +15,7 @@ import (
 	"net/http"
 )
 
-// AccountClient is the client for the Account methods of the Batch service.
+// AccountClient is the batch Client
 type AccountClient struct {
 	BaseClient
 }
@@ -31,8 +31,8 @@ func NewAccountClientWithBaseURI(baseURI string, subscriptionID string) AccountC
 	return AccountClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
 
-// Create creates a new Batch account with the specified parameters. Existing accounts cannot be updated with this API
-// and should instead be updated with the Update Batch Account API.
+// CreateABC creates a new Batch account with the specified parameters. Existing accounts cannot be updated with this
+// API and should instead be updated with the Update Batch Account API.
 // Parameters:
 // resourceGroupName - the name of the resource group that contains the Batch account.
 // accountName - a name for the Batch account which must be unique within the region. Batch account names must
@@ -40,9 +40,9 @@ func NewAccountClientWithBaseURI(baseURI string, subscriptionID string) AccountC
 // as part of the DNS name that is used to access the Batch service in the region in which the account is
 // created. For example: http://accountname.region.batch.azure.com/.
 // parameters - additional parameters for account creation.
-func (client AccountClient) Create(ctx context.Context, resourceGroupName string, accountName string, parameters AccountCreateParameters) (result AccountCreateFuture, err error) {
+func (client AccountClient) CreateABC(ctx context.Context, resourceGroupName string, accountName string, parameters AccountCreateParameters) (result AccountCreateABCFuture, err error) {
 	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/AccountClient.Create")
+		ctx = tracing.StartSpan(ctx, fqdn+"/AccountClient.CreateABC")
 		defer func() {
 			sc := -1
 			if result.FutureAPI != nil && result.FutureAPI.Response() != nil {
@@ -66,26 +66,26 @@ func (client AccountClient) Create(ctx context.Context, resourceGroupName string
 								{Target: "parameters.AccountCreateProperties.KeyVaultReference.URL", Name: validation.Null, Rule: true, Chain: nil},
 							}},
 					}}}}}); err != nil {
-		return result, validation.NewError("batch.AccountClient", "Create", err.Error())
+		return result, validation.NewError("batch.AccountClient", "CreateABC", err.Error())
 	}
 
-	req, err := client.CreatePreparer(ctx, resourceGroupName, accountName, parameters)
+	req, err := client.CreateABCPreparer(ctx, resourceGroupName, accountName, parameters)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "batch.AccountClient", "Create", nil, "Failure preparing request")
+		err = autorest.NewErrorWithError(err, "batch.AccountClient", "CreateABC", nil, "Failure preparing request")
 		return
 	}
 
-	result, err = client.CreateSender(req)
+	result, err = client.CreateABCSender(req)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "batch.AccountClient", "Create", nil, "Failure sending request")
+		err = autorest.NewErrorWithError(err, "batch.AccountClient", "CreateABC", nil, "Failure sending request")
 		return
 	}
 
 	return
 }
 
-// CreatePreparer prepares the Create request.
-func (client AccountClient) CreatePreparer(ctx context.Context, resourceGroupName string, accountName string, parameters AccountCreateParameters) (*http.Request, error) {
+// CreateABCPreparer prepares the CreateABC request.
+func (client AccountClient) CreateABCPreparer(ctx context.Context, resourceGroupName string, accountName string, parameters AccountCreateParameters) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"accountName":       autorest.Encode("path", accountName),
 		"resourceGroupName": autorest.Encode("path", resourceGroupName),
@@ -107,9 +107,9 @@ func (client AccountClient) CreatePreparer(ctx context.Context, resourceGroupNam
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
 }
 
-// CreateSender sends the Create request. The method will close the
+// CreateABCSender sends the CreateABC request. The method will close the
 // http.Response Body if it receives an error.
-func (client AccountClient) CreateSender(req *http.Request) (future AccountCreateFuture, err error) {
+func (client AccountClient) CreateABCSender(req *http.Request) (future AccountCreateABCFuture, err error) {
 	var resp *http.Response
 	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
 	if err != nil {
@@ -122,9 +122,9 @@ func (client AccountClient) CreateSender(req *http.Request) (future AccountCreat
 	return
 }
 
-// CreateResponder handles the response to the Create request. The method always
+// CreateABCResponder handles the response to the CreateABC request. The method always
 // closes the http.Response Body.
-func (client AccountClient) CreateResponder(resp *http.Response) (result Account, err error) {
+func (client AccountClient) CreateABCResponder(resp *http.Response) (result Account, err error) {
 	err = autorest.Respond(
 		resp,
 		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusAccepted),
