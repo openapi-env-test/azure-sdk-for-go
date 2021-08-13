@@ -10,7 +10,7 @@ export GO111MODULE=on
 cd tools/generator && go build && cp generator $GOPATH/bin && cd ../..
 ln -s /usr/bin/pwsh $GOPATH/bin/pwsh.exe
 cd ./sdk/postgresql/armpostgresql
-pwsh ./eng/scripts/build.ps1 -skipBuild -format -tidy -generate armpostgresql
+pwsh ../../../eng/scripts/build.ps1 -skipBuild -format -tidy -generate armpostgresql
 cat > $2 << EOF
 {
   "envs": {
