@@ -5,6 +5,7 @@ package common
 
 import (
 	"fmt"
+	"log"
 	"os/exec"
 )
 
@@ -15,5 +16,6 @@ func ExecuteGoGenerate(path string) error {
 	if err != nil {
 		return fmt.Errorf("failed to execute go generate '%s': %+v", string(output), err)
 	}
+	log.Printf("go generate run result: %s", string(output))
 	return nil
 }
