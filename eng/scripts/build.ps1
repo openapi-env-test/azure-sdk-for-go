@@ -76,6 +76,8 @@ if (![string]::IsNullOrWhiteSpace($filter)) {
     $keys = $keys.Where( { $_ -match $filter })
 }
 
+Write-Host "keys: $keys"
+
 try {
     $keys | ForEach-Object { $sdks[$_] } | ForEach-Object {
         Push-Location $_.path
