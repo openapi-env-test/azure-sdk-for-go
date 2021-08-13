@@ -7,7 +7,9 @@ then
 fi
 PATH=$PATH:$GOPATH/bin
 export GO111MODULE=on
-go get github.com/openapi-env-test/azure-sdk-for-go/tools/generator@track2_automation_and_release
+cd tools/generator
+go build
+ls
 cat > $2 << EOF
 {
   "envs": {
