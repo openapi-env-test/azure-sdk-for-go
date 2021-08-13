@@ -8,6 +8,7 @@ fi
 PATH=$PATH:$GOPATH/bin
 export GO111MODULE=on
 cd tools/generator && go build && cp generator $GOPATH/bin && cd ../..
+whereis pwsh
 cat > $2 << EOF
 {
   "envs": {
