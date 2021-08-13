@@ -70,6 +70,8 @@ foreach ($sdk in (Get-ModuleDirs 'sdk/...')) {
     }
 }
 
+Write-Host "root: $root"
+
 $keys = $sdks.Keys | Sort-Object;
 if (![string]::IsNullOrWhiteSpace($filter)) {
     Write-Host "Using filter: $filter"
