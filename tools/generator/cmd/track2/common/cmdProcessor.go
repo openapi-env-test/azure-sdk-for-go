@@ -11,6 +11,7 @@ import (
 
 func ExecuteGoGenerate(path string) error {
 	cmd := exec.Command("go", "generate")
+	log.Printf("execute path: %s", path)
 	cmd.Dir = path
 	output, err := cmd.CombinedOutput()
 	if err != nil {
