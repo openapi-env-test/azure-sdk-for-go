@@ -31,14 +31,14 @@ func NewAvailabilitySetsClientWithBaseURI(baseURI string, subscriptionID string)
 	return AvailabilitySetsClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
 
-// CreateOrUpdate create or update an availability set.
+// CreateOrUpdateA create or update an availability set.
 // Parameters:
 // resourceGroupName - the name of the resource group.
 // availabilitySetName - the name of the availability set.
 // parameters - parameters supplied to the Create Availability Set operation.
-func (client AvailabilitySetsClient) CreateOrUpdate(ctx context.Context, resourceGroupName string, availabilitySetName string, parameters AvailabilitySet) (result AvailabilitySet, err error) {
+func (client AvailabilitySetsClient) CreateOrUpdateA(ctx context.Context, resourceGroupName string, availabilitySetName string, parameters AvailabilitySet) (result AvailabilitySet, err error) {
 	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/AvailabilitySetsClient.CreateOrUpdate")
+		ctx = tracing.StartSpan(ctx, fqdn+"/AvailabilitySetsClient.CreateOrUpdateA")
 		defer func() {
 			sc := -1
 			if result.Response.Response != nil {
@@ -47,30 +47,30 @@ func (client AvailabilitySetsClient) CreateOrUpdate(ctx context.Context, resourc
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	req, err := client.CreateOrUpdatePreparer(ctx, resourceGroupName, availabilitySetName, parameters)
+	req, err := client.CreateOrUpdateAPreparer(ctx, resourceGroupName, availabilitySetName, parameters)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "compute.AvailabilitySetsClient", "CreateOrUpdate", nil, "Failure preparing request")
+		err = autorest.NewErrorWithError(err, "compute.AvailabilitySetsClient", "CreateOrUpdateA", nil, "Failure preparing request")
 		return
 	}
 
-	resp, err := client.CreateOrUpdateSender(req)
+	resp, err := client.CreateOrUpdateASender(req)
 	if err != nil {
 		result.Response = autorest.Response{Response: resp}
-		err = autorest.NewErrorWithError(err, "compute.AvailabilitySetsClient", "CreateOrUpdate", resp, "Failure sending request")
+		err = autorest.NewErrorWithError(err, "compute.AvailabilitySetsClient", "CreateOrUpdateA", resp, "Failure sending request")
 		return
 	}
 
-	result, err = client.CreateOrUpdateResponder(resp)
+	result, err = client.CreateOrUpdateAResponder(resp)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "compute.AvailabilitySetsClient", "CreateOrUpdate", resp, "Failure responding to request")
+		err = autorest.NewErrorWithError(err, "compute.AvailabilitySetsClient", "CreateOrUpdateA", resp, "Failure responding to request")
 		return
 	}
 
 	return
 }
 
-// CreateOrUpdatePreparer prepares the CreateOrUpdate request.
-func (client AvailabilitySetsClient) CreateOrUpdatePreparer(ctx context.Context, resourceGroupName string, availabilitySetName string, parameters AvailabilitySet) (*http.Request, error) {
+// CreateOrUpdateAPreparer prepares the CreateOrUpdateA request.
+func (client AvailabilitySetsClient) CreateOrUpdateAPreparer(ctx context.Context, resourceGroupName string, availabilitySetName string, parameters AvailabilitySet) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"availabilitySetName": autorest.Encode("path", availabilitySetName),
 		"resourceGroupName":   autorest.Encode("path", resourceGroupName),
@@ -92,15 +92,15 @@ func (client AvailabilitySetsClient) CreateOrUpdatePreparer(ctx context.Context,
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
 }
 
-// CreateOrUpdateSender sends the CreateOrUpdate request. The method will close the
+// CreateOrUpdateASender sends the CreateOrUpdateA request. The method will close the
 // http.Response Body if it receives an error.
-func (client AvailabilitySetsClient) CreateOrUpdateSender(req *http.Request) (*http.Response, error) {
+func (client AvailabilitySetsClient) CreateOrUpdateASender(req *http.Request) (*http.Response, error) {
 	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
-// CreateOrUpdateResponder handles the response to the CreateOrUpdate request. The method always
+// CreateOrUpdateAResponder handles the response to the CreateOrUpdateA request. The method always
 // closes the http.Response Body.
-func (client AvailabilitySetsClient) CreateOrUpdateResponder(resp *http.Response) (result AvailabilitySet, err error) {
+func (client AvailabilitySetsClient) CreateOrUpdateAResponder(resp *http.Response) (result AvailabilitySet, err error) {
 	err = autorest.Respond(
 		resp,
 		azure.WithErrorUnlessStatusCode(http.StatusOK),
