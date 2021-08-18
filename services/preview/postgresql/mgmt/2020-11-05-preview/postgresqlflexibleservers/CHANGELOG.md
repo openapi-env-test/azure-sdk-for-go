@@ -1,21 +1,40 @@
-# Change History
+# Unreleased
+
+## Breaking Changes
+
+### Signature Changes
+
+#### Const Types
+
+1. Disabled changed type from HAEnabledEnum to GeoRedundantBackupEnum
+1. Enabled changed type from HAEnabledEnum to GeoRedundantBackupEnum
 
 ## Additive Changes
 
+### New Constants
+
+1. HAEnabledEnum.HAEnabledEnumDisabled
+1. HAEnabledEnum.HAEnabledEnumEnabled
+
 ### New Funcs
 
-1. AzureEntityResource.MarshalJSON() ([]byte, error)
-1. CapabilitiesListResult.MarshalJSON() ([]byte, error)
-1. CapabilityProperties.MarshalJSON() ([]byte, error)
-1. DelegatedSubnetUsage.MarshalJSON() ([]byte, error)
-1. ErrorAdditionalInfo.MarshalJSON() ([]byte, error)
-1. ErrorResponse.MarshalJSON() ([]byte, error)
-1. OperationDisplay.MarshalJSON() ([]byte, error)
-1. ProxyResource.MarshalJSON() ([]byte, error)
-1. Resource.MarshalJSON() ([]byte, error)
-1. ServerEditionCapability.MarshalJSON() ([]byte, error)
-1. ServerVersionCapability.MarshalJSON() ([]byte, error)
-1. StorageEditionCapability.MarshalJSON() ([]byte, error)
-1. StorageMBCapability.MarshalJSON() ([]byte, error)
-1. VcoreCapability.MarshalJSON() ([]byte, error)
-1. VirtualNetworkSubnetUsageResult.MarshalJSON() ([]byte, error)
+1. PossibleGeoRedundantBackupEnumValues() []GeoRedundantBackupEnum
+1. StorageProfile.MarshalJSON() ([]byte, error)
+
+### Struct Changes
+
+#### New Structs
+
+1. ServerPropertiesPrivateDNSZoneArguments
+
+#### New Struct Fields
+
+1. ServerProperties.LogBackupStorageSku
+1. ServerProperties.MinorVersion
+1. ServerProperties.PrivateDNSZoneArguments
+1. ServerProperties.SourceResourceGroupName
+1. ServerProperties.SourceSubscriptionID
+1. ServerProperties.StandbyCount
+1. ServerPropertiesForUpdate.StandbyCount
+1. StorageProfile.EarliestRestoreDate
+1. StorageProfile.GeoRedundantBackup

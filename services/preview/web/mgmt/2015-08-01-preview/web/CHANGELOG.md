@@ -1,7 +1,16 @@
-# Change History
+# Unreleased
 
-## Additive Changes
+## Breaking Changes
 
-### New Funcs
+### Signature Changes
 
-1. KeyValuePairStringString.MarshalJSON() ([]byte, error)
+#### Funcs
+
+1. ManagedApisClient.Get
+	- Params
+		- From: context.Context, string, string, *bool
+		- To: context.Context, string, string, string, *bool
+1. ManagedApisClient.GetPreparer
+	- Params
+		- From: context.Context, string, string, *bool
+		- To: context.Context, string, string, string, *bool

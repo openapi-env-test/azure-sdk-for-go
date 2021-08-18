@@ -39,6 +39,7 @@ type DatabaseAccountsClientAPI interface {
 	OfflineRegion(ctx context.Context, resourceGroupName string, accountName string, regionParameterForOffline documentdb.RegionForOnlineOffline) (result documentdb.DatabaseAccountsOfflineRegionFuture, err error)
 	OnlineRegion(ctx context.Context, resourceGroupName string, accountName string, regionParameterForOnline documentdb.RegionForOnlineOffline) (result documentdb.DatabaseAccountsOnlineRegionFuture, err error)
 	RegenerateKey(ctx context.Context, resourceGroupName string, accountName string, keyToRegenerate documentdb.DatabaseAccountRegenerateKeyParameters) (result documentdb.DatabaseAccountsRegenerateKeyFuture, err error)
+	Test(ctx context.Context) (result documentdb.DatabaseAccountsListResult, err error)
 	Update(ctx context.Context, resourceGroupName string, accountName string, updateParameters documentdb.DatabaseAccountUpdateParameters) (result documentdb.DatabaseAccountsUpdateFuture, err error)
 }
 
