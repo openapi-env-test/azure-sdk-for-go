@@ -1,3 +1,269 @@
 # Release History
 
+## v0.2.0 (released)
+### Breaking Changes
+
+- Function `*WebAppsClient.CreateOrUpdateVnetConnection` parameter(s) have been changed from `(context.Context, string, string, string, VnetInfo, *WebAppsCreateOrUpdateVnetConnectionOptions)` to `(context.Context, string, string, string, VnetInfoResource, *WebAppsCreateOrUpdateVnetConnectionOptions)`
+- Function `*WebAppsClient.UpdateVnetConnectionSlot` parameter(s) have been changed from `(context.Context, string, string, string, string, VnetInfo, *WebAppsUpdateVnetConnectionSlotOptions)` to `(context.Context, string, string, string, string, VnetInfoResource, *WebAppsUpdateVnetConnectionSlotOptions)`
+- Function `*WebAppsClient.UpdateVnetConnection` parameter(s) have been changed from `(context.Context, string, string, string, VnetInfo, *WebAppsUpdateVnetConnectionOptions)` to `(context.Context, string, string, string, VnetInfoResource, *WebAppsUpdateVnetConnectionOptions)`
+- Function `*WebAppsClient.CreateOrUpdateVnetConnectionSlot` parameter(s) have been changed from `(context.Context, string, string, string, string, VnetInfo, *WebAppsCreateOrUpdateVnetConnectionSlotOptions)` to `(context.Context, string, string, string, string, VnetInfoResource, *WebAppsCreateOrUpdateVnetConnectionSlotOptions)`
+- Type of `DiagnosticDetectorCollection.Value` has been changed from `[]*DetectorDefinition` to `[]*DetectorDefinitionResource`
+- Function `Nonce.MarshalJSON` has been removed
+- Function `TriggeredJobRunProperties.MarshalJSON` has been removed
+- Function `ClientRegistration.MarshalJSON` has been removed
+- Function `DetectorDefinition.MarshalJSON` has been removed
+- Function `AppleRegistration.MarshalJSON` has been removed
+- Function `CookieExpiration.MarshalJSON` has been removed
+- Function `LoginScopesProperties.MarshalJSON` has been removed
+- Function `LoginRoutes.MarshalJSON` has been removed
+- Function `TwitterRegistration.MarshalJSON` has been removed
+- Function `TokenStore.MarshalJSON` has been removed
+- Function `OpenIDConnectLoginProperties.MarshalJSON` has been removed
+- Function `OpenIDConnectClientCredential.MarshalJSON` has been removed
+- Function `LoginProperties.MarshalJSON` has been removed
+- Function `FileSystemTokenStore.MarshalJSON` has been removed
+- Function `OpenIDConnectConfig.MarshalJSON` has been removed
+- Function `Facebook.MarshalJSON` has been removed
+- Function `AllowedAudiencesValidationProperties.MarshalJSON` has been removed
+- Function `OpenIDConnectRegistration.MarshalJSON` has been removed
+- Function `AzureActiveDirectory.MarshalJSON` has been removed
+- Function `JwtClaimChecksProperties.MarshalJSON` has been removed
+- Function `*TriggeredJobRunProperties.UnmarshalJSON` has been removed
+- Function `HTTPSettingsRoutes.MarshalJSON` has been removed
+- Function `IdentityProvidersProperties.MarshalJSON` has been removed
+- Function `VnetInfoProperties.MarshalJSON` has been removed
+- Function `AzureStaticWebAppsRegistration.MarshalJSON` has been removed
+- Function `HTTPSettings.MarshalJSON` has been removed
+- Function `AuthPlatform.MarshalJSON` has been removed
+- Function `GlobalValidationProperties.MarshalJSON` has been removed
+- Function `ForwardProxy.MarshalJSON` has been removed
+- Struct `AllowedAudiencesValidationProperties` has been removed
+- Struct `AppleRegistrationProperties` has been removed
+- Struct `AuthPlatformProperties` has been removed
+- Struct `AzureActiveDirectoryProperties` has been removed
+- Struct `AzureStaticWebAppsRegistrationProperties` has been removed
+- Struct `ClientRegistrationProperties` has been removed
+- Struct `CookieExpirationProperties` has been removed
+- Struct `DetectorDefinitionProperties` has been removed
+- Struct `FacebookProperties` has been removed
+- Struct `FileSystemTokenStoreProperties` has been removed
+- Struct `ForwardProxyProperties` has been removed
+- Struct `GlobalValidationProperties` has been removed
+- Struct `HTTPSettingsProperties` has been removed
+- Struct `HTTPSettingsRoutesProperties` has been removed
+- Struct `IdentityProvidersProperties` has been removed
+- Struct `JwtClaimChecksProperties` has been removed
+- Struct `LoginProperties` has been removed
+- Struct `LoginRoutesProperties` has been removed
+- Struct `LoginScopesProperties` has been removed
+- Struct `NonceProperties` has been removed
+- Struct `OpenIDConnectClientCredentialProperties` has been removed
+- Struct `OpenIDConnectConfigProperties` has been removed
+- Struct `OpenIDConnectLoginProperties` has been removed
+- Struct `OpenIDConnectRegistrationProperties` has been removed
+- Struct `TokenStoreProperties` has been removed
+- Struct `TriggeredJobRunProperties` has been removed
+- Struct `TwitterRegistrationProperties` has been removed
+- Struct `VnetInfoProperties` has been removed
+- Field `VnetInfo` of struct `WebAppsCreateOrUpdateVnetConnectionResult` has been removed
+- Field `ProxyOnlyResource` of struct `IdentityProviders` has been removed
+- Field `Properties` of struct `IdentityProviders` has been removed
+- Field `ProxyOnlyResource` of struct `HTTPSettingsRoutes` has been removed
+- Field `Properties` of struct `HTTPSettingsRoutes` has been removed
+- Field `VnetInfo` of struct `WebAppsCreateOrUpdateVnetConnectionSlotResult` has been removed
+- Field `ProxyOnlyResource` of struct `OpenIDConnectClientCredential` has been removed
+- Field `Properties` of struct `OpenIDConnectClientCredential` has been removed
+- Field `DetectorDefinition` of struct `DiagnosticsGetSiteDetectorResult` has been removed
+- Field `ProxyOnlyResource` of struct `AzureStaticWebAppsRegistration` has been removed
+- Field `Properties` of struct `AzureStaticWebAppsRegistration` has been removed
+- Field `ProxyOnlyResource` of struct `FileSystemTokenStore` has been removed
+- Field `Properties` of struct `FileSystemTokenStore` has been removed
+- Field `ProxyOnlyResource` of struct `VnetInfo` has been removed
+- Field `Properties` of struct `VnetInfo` has been removed
+- Field `VnetInfo` of struct `WebAppsGetVnetConnectionSlotResult` has been removed
+- Field `ProxyOnlyResource` of struct `AllowedAudiencesValidation` has been removed
+- Field `Properties` of struct `AllowedAudiencesValidation` has been removed
+- Field `ProxyOnlyResource` of struct `OpenIDConnectConfig` has been removed
+- Field `Properties` of struct `OpenIDConnectConfig` has been removed
+- Field `ProxyOnlyResource` of struct `AzureActiveDirectory` has been removed
+- Field `Properties` of struct `AzureActiveDirectory` has been removed
+- Field `ProxyOnlyResource` of struct `DetectorDefinition` has been removed
+- Field `Properties` of struct `DetectorDefinition` has been removed
+- Field `VnetInfoArray` of struct `WebAppsListVnetConnectionsResult` has been removed
+- Field `ProxyOnlyResource` of struct `ForwardProxy` has been removed
+- Field `Properties` of struct `ForwardProxy` has been removed
+- Field `VnetInfo` of struct `WebAppsUpdateVnetConnectionSlotResult` has been removed
+- Field `VnetInfo` of struct `AppServicePlansGetVnetFromServerFarmResult` has been removed
+- Field `ProxyOnlyResource` of struct `TokenStore` has been removed
+- Field `Properties` of struct `TokenStore` has been removed
+- Field `ProxyOnlyResource` of struct `Facebook` has been removed
+- Field `Properties` of struct `Facebook` has been removed
+- Field `DetectorDefinition` of struct `DiagnosticsGetSiteDetectorSlotResult` has been removed
+- Field `ProxyOnlyResource` of struct `OpenIDConnectRegistration` has been removed
+- Field `Properties` of struct `OpenIDConnectRegistration` has been removed
+- Field `ProxyOnlyResource` of struct `TriggeredJobRun` has been removed
+- Field `Properties` of struct `TriggeredJobRun` has been removed
+- Field `ProxyOnlyResource` of struct `AppleRegistration` has been removed
+- Field `Properties` of struct `AppleRegistration` has been removed
+- Field `ProxyOnlyResource` of struct `LoginScopes` has been removed
+- Field `Properties` of struct `LoginScopes` has been removed
+- Field `VnetInfo` of struct `WebAppsGetVnetConnectionResult` has been removed
+- Field `ProxyOnlyResource` of struct `Nonce` has been removed
+- Field `Properties` of struct `Nonce` has been removed
+- Field `ProxyOnlyResource` of struct `TwitterRegistration` has been removed
+- Field `Properties` of struct `TwitterRegistration` has been removed
+- Field `ProxyOnlyResource` of struct `CookieExpiration` has been removed
+- Field `Properties` of struct `CookieExpiration` has been removed
+- Field `ProxyOnlyResource` of struct `JwtClaimChecks` has been removed
+- Field `Properties` of struct `JwtClaimChecks` has been removed
+- Field `ProxyOnlyResource` of struct `HTTPSettings` has been removed
+- Field `Properties` of struct `HTTPSettings` has been removed
+- Field `VnetInfoArray` of struct `WebAppsListVnetConnectionsSlotResult` has been removed
+- Field `ProxyOnlyResource` of struct `OpenIDConnectLogin` has been removed
+- Field `Properties` of struct `OpenIDConnectLogin` has been removed
+- Field `ProxyOnlyResource` of struct `AuthPlatform` has been removed
+- Field `Properties` of struct `AuthPlatform` has been removed
+- Field `ProxyOnlyResource` of struct `Login` has been removed
+- Field `Properties` of struct `Login` has been removed
+- Field `VnetInfo` of struct `WebAppsUpdateVnetConnectionResult` has been removed
+- Field `ProxyOnlyResource` of struct `GlobalValidation` has been removed
+- Field `Properties` of struct `GlobalValidation` has been removed
+- Field `ProxyOnlyResource` of struct `LoginRoutes` has been removed
+- Field `Properties` of struct `LoginRoutes` has been removed
+- Field `VnetInfoArray` of struct `AppServicePlansListVnetsResult` has been removed
+- Field `ProxyOnlyResource` of struct `ClientRegistration` has been removed
+- Field `Properties` of struct `ClientRegistration` has been removed
+
+### New Content
+
+- New function `DetectorDefinitionResource.MarshalJSON() ([]byte, error)`
+- New function `DefaultAuthorizationPolicy.MarshalJSON() ([]byte, error)`
+- New function `AllowedPrincipalsProperties.MarshalJSON() ([]byte, error)`
+- New function `AllowedPrincipals.MarshalJSON() ([]byte, error)`
+- New function `*TriggeredJobRun.UnmarshalJSON([]byte) error`
+- New function `VnetInfoResource.MarshalJSON() ([]byte, error)`
+- New struct `AllowedPrincipals`
+- New struct `AllowedPrincipalsProperties`
+- New struct `DefaultAuthorizationPolicy`
+- New struct `DetectorDefinitionResource`
+- New struct `VnetInfoResource`
+- New field `ClientSecretSettingName` in struct `AppleRegistration`
+- New field `ClientID` in struct `AppleRegistration`
+- New field `AzureBlobStorage` in struct `TokenStore`
+- New field `Enabled` in struct `TokenStore`
+- New field `FileSystem` in struct `TokenStore`
+- New field `TokenRefreshExtensionHours` in struct `TokenStore`
+- New field `Scopes` in struct `LoginScopes`
+- New anonymous field `VnetInfoResource` in struct `WebAppsUpdateVnetConnectionResult`
+- New anonymous field `VnetInfoResource` in struct `AppServicePlansGetVnetFromServerFarmResult`
+- New anonymous field `VnetInfoResource` in struct `WebAppsCreateOrUpdateVnetConnectionResult`
+- New field `DefaultAuthorizationPolicy` in struct `AzureActiveDirectoryValidationProperties`
+- New field `Directory` in struct `FileSystemTokenStore`
+- New field `Convention` in struct `CookieExpiration`
+- New field `TimeToExpiration` in struct `CookieExpiration`
+- New field `Facebook` in struct `IdentityProviders`
+- New field `GitHub` in struct `IdentityProviders`
+- New field `CustomOpenIDConnectProviders` in struct `IdentityProviders`
+- New field `LegacyMicrosoftAccount` in struct `IdentityProviders`
+- New field `Google` in struct `IdentityProviders`
+- New field `Twitter` in struct `IdentityProviders`
+- New field `AzureActiveDirectory` in struct `IdentityProviders`
+- New field `Apple` in struct `IdentityProviders`
+- New field `AzureStaticWebApps` in struct `IdentityProviders`
+- New anonymous field `DetectorDefinitionResource` in struct `DiagnosticsGetSiteDetectorSlotResult`
+- New field `ConfigFilePath` in struct `AuthPlatform`
+- New field `Enabled` in struct `AuthPlatform`
+- New field `RuntimeVersion` in struct `AuthPlatform`
+- New field `AllowedClientApplications` in struct `JwtClaimChecks`
+- New field `AllowedGroups` in struct `JwtClaimChecks`
+- New field `Description` in struct `DetectorDefinition`
+- New field `DisplayName` in struct `DetectorDefinition`
+- New field `IsEnabled` in struct `DetectorDefinition`
+- New field `Rank` in struct `DetectorDefinition`
+- New anonymous field `VnetInfoResource` in struct `WebAppsCreateOrUpdateVnetConnectionSlotResult`
+- New field `TokenStore` in struct `Login`
+- New field `AllowedExternalRedirectUrls` in struct `Login`
+- New field `CookieExpiration` in struct `Login`
+- New field `Nonce` in struct `Login`
+- New field `PreserveURLFragmentsForLogins` in struct `Login`
+- New field `Routes` in struct `Login`
+- New field `VnetInfoResourceArray` in struct `AppServicePlansListVnetsResult`
+- New field `VnetResourceID` in struct `VnetInfo`
+- New field `CertThumbprint` in struct `VnetInfo`
+- New field `ResyncRequired` in struct `VnetInfo`
+- New field `Routes` in struct `VnetInfo`
+- New field `CertBlob` in struct `VnetInfo`
+- New field `DNSServers` in struct `VnetInfo`
+- New field `IsSwift` in struct `VnetInfo`
+- New field `ClientID` in struct `ClientRegistration`
+- New field `ClientSecretSettingName` in struct `ClientRegistration`
+- New field `ClientID` in struct `AzureStaticWebAppsRegistration`
+- New field `ConsumerSecretSettingName` in struct `TwitterRegistration`
+- New field `ConsumerKey` in struct `TwitterRegistration`
+- New field `NameClaimType` in struct `OpenIDConnectLogin`
+- New field `Scopes` in struct `OpenIDConnectLogin`
+- New anonymous field `VnetInfoResource` in struct `WebAppsGetVnetConnectionSlotResult`
+- New anonymous field `VnetInfoResource` in struct `WebAppsUpdateVnetConnectionSlotResult`
+- New field `GraphAPIVersion` in struct `Facebook`
+- New field `Login` in struct `Facebook`
+- New field `Registration` in struct `Facebook`
+- New field `Enabled` in struct `Facebook`
+- New field `ClientSecretCertificateIssuer` in struct `AzureActiveDirectoryRegistrationProperties`
+- New field `ClientSecretCertificateSubjectAlternativeName` in struct `AzureActiveDirectoryRegistrationProperties`
+- New field `Details` in struct `ErrorEntity`
+- New field `Target` in struct `ErrorEntity`
+- New field `UnauthenticatedClientAction` in struct `GlobalValidation`
+- New field `ExcludedPaths` in struct `GlobalValidation`
+- New field `RedirectToProvider` in struct `GlobalValidation`
+- New field `RequireAuthentication` in struct `GlobalValidation`
+- New field `ExternalInboundIPAddresses` in struct `AseV3NetworkingConfigurationProperties`
+- New field `InternalInboundIPAddresses` in struct `AseV3NetworkingConfigurationProperties`
+- New field `NonceExpirationInterval` in struct `Nonce`
+- New field `ValidateNonce` in struct `Nonce`
+- New field `ClientSecretSettingName` in struct `OpenIDConnectClientCredential`
+- New field `Method` in struct `OpenIDConnectClientCredential`
+- New field `Enabled` in struct `AzureActiveDirectory`
+- New field `IsAutoProvisioned` in struct `AzureActiveDirectory`
+- New field `Login` in struct `AzureActiveDirectory`
+- New field `Registration` in struct `AzureActiveDirectory`
+- New field `Validation` in struct `AzureActiveDirectory`
+- New field `Convention` in struct `ForwardProxy`
+- New field `CustomHostHeaderName` in struct `ForwardProxy`
+- New field `CustomProtoHeaderName` in struct `ForwardProxy`
+- New field `ZoneRedundant` in struct `AppServicePlanProperties`
+- New anonymous field `VnetInfoResource` in struct `WebAppsGetVnetConnectionResult`
+- New field `RequireHTTPS` in struct `HTTPSettings`
+- New field `Routes` in struct `HTTPSettings`
+- New field `ForwardProxy` in struct `HTTPSettings`
+- New field `APIPrefix` in struct `HTTPSettingsRoutes`
+- New field `ZoneRedundant` in struct `AppServiceEnvironment`
+- New field `CertificationURI` in struct `OpenIDConnectConfig`
+- New field `Issuer` in struct `OpenIDConnectConfig`
+- New field `TokenEndpoint` in struct `OpenIDConnectConfig`
+- New field `WellKnownOpenIDConfiguration` in struct `OpenIDConnectConfig`
+- New field `AuthorizationEndpoint` in struct `OpenIDConnectConfig`
+- New field `ClientCredential` in struct `OpenIDConnectRegistration`
+- New field `ClientID` in struct `OpenIDConnectRegistration`
+- New field `OpenIDConnectConfiguration` in struct `OpenIDConnectRegistration`
+- New field `EndTime` in struct `TriggeredJobRun`
+- New field `ErrorURL` in struct `TriggeredJobRun`
+- New field `JobName` in struct `TriggeredJobRun`
+- New field `OutputURL` in struct `TriggeredJobRun`
+- New field `URL` in struct `TriggeredJobRun`
+- New field `WebJobID` in struct `TriggeredJobRun`
+- New field `WebJobName` in struct `TriggeredJobRun`
+- New field `StartTime` in struct `TriggeredJobRun`
+- New field `Duration` in struct `TriggeredJobRun`
+- New field `Trigger` in struct `TriggeredJobRun`
+- New field `Status` in struct `TriggeredJobRun`
+- New field `VnetInfoResourceArray` in struct `WebAppsListVnetConnectionsSlotResult`
+- New anonymous field `DetectorDefinitionResource` in struct `DiagnosticsGetSiteDetectorResult`
+- New field `LogoutEndpoint` in struct `LoginRoutes`
+- New field `ZoneRedundant` in struct `AppServicePlanPatchResourceProperties`
+- New field `AllowedAudiences` in struct `AllowedAudiencesValidation`
+- New field `VnetInfoResourceArray` in struct `WebAppsListVnetConnectionsResult`
+
+Total 130 breaking change(s), 63 additive change(s).
+
+
 ## v0.1.0 (released)
