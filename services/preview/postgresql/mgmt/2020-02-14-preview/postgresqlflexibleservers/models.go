@@ -1530,6 +1530,8 @@ type ServerProperties struct {
 	AdministratorLoginPassword *string `json:"administratorLoginPassword,omitempty"`
 	// Version - PostgreSQL Server version. Possible values include: 'OneTwo', 'OneOne'
 	Version ServerVersion `json:"version,omitempty"`
+	// MinorVersion - READ-ONLY; The minor version of the server.
+	MinorVersion *string `json:"minorVersion,omitempty"`
 	// State - READ-ONLY; A state of a server that is visible to user. Possible values include: 'ServerStateReady', 'ServerStateDropping', 'ServerStateDisabled', 'ServerStateStarting', 'ServerStateStopping', 'ServerStateStopped', 'ServerStateUpdating'
 	State ServerState `json:"state,omitempty"`
 	// HaState - READ-ONLY; A state of a HA server that is visible to user. Possible values include: 'NotEnabled', 'CreatingStandby', 'ReplicatingData', 'FailingOver', 'Healthy', 'RemovingStandby'
@@ -1544,8 +1546,12 @@ type ServerProperties struct {
 	PublicNetworkAccess ServerPublicNetworkAccessState `json:"publicNetworkAccess,omitempty"`
 	// MaintenanceWindow - Maintenance window of a server.
 	MaintenanceWindow *MaintenanceWindow `json:"maintenanceWindow,omitempty"`
-	// HaEnabled - stand by count value can be either enabled or disabled. Possible values include: 'Enabled', 'Disabled'
+	// HaEnabled - stand by count value can be either enabled or disabled. Possible values include: 'HAEnabledEnumEnabled', 'HAEnabledEnumDisabled'
 	HaEnabled HAEnabledEnum `json:"haEnabled,omitempty"`
+	// StandbyCount - The number of standbys.
+	StandbyCount *int32 `json:"standbyCount,omitempty"`
+	// LogBackupStorageSku - The log backup storage sku of the server.
+	LogBackupStorageSku *string `json:"logBackupStorageSku,omitempty"`
 	// SourceServerName - The source PostgreSQL server name to restore from.
 	SourceServerName *string `json:"sourceServerName,omitempty"`
 	// SourceSubscriptionID - The subscription id of source serve PostgreSQL server name to restore from.
@@ -1592,6 +1598,12 @@ func (sp ServerProperties) MarshalJSON() ([]byte, error) {
 	if sp.HaEnabled != "" {
 		objectMap["haEnabled"] = sp.HaEnabled
 	}
+	if sp.StandbyCount != nil {
+		objectMap["standbyCount"] = sp.StandbyCount
+	}
+	if sp.LogBackupStorageSku != nil {
+		objectMap["logBackupStorageSku"] = sp.LogBackupStorageSku
+	}
 	if sp.SourceServerName != nil {
 		objectMap["sourceServerName"] = sp.SourceServerName
 	}
@@ -1634,8 +1646,10 @@ type ServerPropertiesForUpdate struct {
 	AdministratorLoginPassword *string `json:"administratorLoginPassword,omitempty"`
 	// StorageProfile - Storage profile of a server.
 	StorageProfile *StorageProfile `json:"storageProfile,omitempty"`
-	// HaEnabled - stand by count value can be either enabled or disabled. Possible values include: 'Enabled', 'Disabled'
+	// HaEnabled - stand by count value can be either enabled or disabled. Possible values include: 'HAEnabledEnumEnabled', 'HAEnabledEnumDisabled'
 	HaEnabled HAEnabledEnum `json:"haEnabled,omitempty"`
+	// StandbyCount - The number of standbys.
+	StandbyCount *int32 `json:"standbyCount,omitempty"`
 	// MaintenanceWindow - Maintenance window of a server.
 	MaintenanceWindow *MaintenanceWindow `json:"maintenanceWindow,omitempty"`
 }
@@ -1936,6 +1950,25 @@ type StorageProfile struct {
 	BackupRetentionDays *int32 `json:"backupRetentionDays,omitempty"`
 	// StorageMB - Max storage allowed for a server.
 	StorageMB *int32 `json:"storageMB,omitempty"`
+	// GeoRedundantBackup - A value indicating whether Geo-Redundant backup is enabled on the server. Possible values include: 'Enabled', 'Disabled'
+	GeoRedundantBackup GeoRedundantBackupEnum `json:"geoRedundantBackup,omitempty"`
+	// EarliestRestoreDate - READ-ONLY; The earliest restore point time (ISO8601 format) for server.
+	EarliestRestoreDate *date.Time `json:"earliestRestoreDate,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for StorageProfile.
+func (sp StorageProfile) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if sp.BackupRetentionDays != nil {
+		objectMap["backupRetentionDays"] = sp.BackupRetentionDays
+	}
+	if sp.StorageMB != nil {
+		objectMap["storageMB"] = sp.StorageMB
+	}
+	if sp.GeoRedundantBackup != "" {
+		objectMap["geoRedundantBackup"] = sp.GeoRedundantBackup
+	}
+	return json.Marshal(objectMap)
 }
 
 // TrackedResource the resource model definition for an Azure Resource Manager tracked top level resource
