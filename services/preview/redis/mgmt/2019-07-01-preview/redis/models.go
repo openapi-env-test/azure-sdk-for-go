@@ -1252,7 +1252,6 @@ func NewListResultPage(cur ListResult, getNextPage func(context.Context, ListRes
 
 // NotificationListResponse the response of listUpgradeNotifications.
 type NotificationListResponse struct {
-	autorest.Response `json:"-"`
 	// Value - List of all notifications.
 	Value *[]UpgradeNotification `json:"value,omitempty"`
 	// NextLink - READ-ONLY; Link for next set of notifications.
