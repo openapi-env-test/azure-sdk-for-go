@@ -34,7 +34,6 @@ type ClientAPI interface {
 	ListByResourceGroup(ctx context.Context, resourceGroupName string) (result redis.ListResultPage, err error)
 	ListByResourceGroupComplete(ctx context.Context, resourceGroupName string) (result redis.ListResultIterator, err error)
 	ListKeys(ctx context.Context, resourceGroupName string, name string) (result redis.AccessKeys, err error)
-	ListUpgradeNotifications(ctx context.Context, resourceGroupName string, name string, history float64) (result redis.NotificationListResponse, err error)
 	RegenerateKey(ctx context.Context, resourceGroupName string, name string, parameters redis.RegenerateKeyParameters) (result redis.AccessKeys, err error)
 	Update(ctx context.Context, resourceGroupName string, name string, parameters redis.UpdateParameters) (result redis.ResourceType, err error)
 }

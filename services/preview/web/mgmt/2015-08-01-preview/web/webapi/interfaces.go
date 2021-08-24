@@ -471,7 +471,7 @@ var _ UsageClientAPI = (*web.UsageClient)(nil)
 
 // ManagedApisClientAPI contains the set of methods on the ManagedApisClient type.
 type ManagedApisClientAPI interface {
-	Get(ctx context.Context, location string, APIName string, export *bool) (result web.APIEntity, err error)
+	Get(ctx context.Context, location string, APIName string, test string, export *bool) (result web.APIEntity, err error)
 	List(ctx context.Context, location string) (result web.ApisCollectionPage, err error)
 	ListComplete(ctx context.Context, location string) (result web.ApisCollectionIterator, err error)
 }
