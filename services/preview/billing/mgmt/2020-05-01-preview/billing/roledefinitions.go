@@ -14,7 +14,7 @@ import (
 	"net/http"
 )
 
-// RoleDefinitionsClient is the billing client provides access to billing resources for Azure subscriptions.
+// RoleDefinitionsClient is the client for the RoleDefinitions methods of the Billing service.
 type RoleDefinitionsClient struct {
 	BaseClient
 }

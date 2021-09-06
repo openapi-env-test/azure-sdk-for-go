@@ -1,6 +1,6 @@
 // Package billing implements the Azure ARM Billing service API version .
 //
-// Billing client provides access to billing resources for Azure subscriptions.
+//
 package billing
 
 // Copyright (c) Microsoft Corporation. All rights reserved.

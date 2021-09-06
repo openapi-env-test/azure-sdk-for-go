@@ -14,7 +14,7 @@ import (
 	"net/http"
 )
 
-// RoleAssignmentsClient is the billing client provides access to billing resources for Azure subscriptions.
+// RoleAssignmentsClient is the client for the RoleAssignments methods of the Billing service.
 type RoleAssignmentsClient struct {
 	BaseClient
 }

@@ -14,7 +14,7 @@ import (
 	"net/http"
 )
 
-// TransactionsClient is the billing client provides access to billing resources for Azure subscriptions.
+// TransactionsClient is the client for the Transactions methods of the Billing service.
 type TransactionsClient struct {
 	BaseClient
 }

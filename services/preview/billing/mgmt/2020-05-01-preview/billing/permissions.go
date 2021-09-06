@@ -14,7 +14,7 @@ import (
 	"net/http"
 )
 
-// PermissionsClient is the billing client provides access to billing resources for Azure subscriptions.
+// PermissionsClient is the client for the Permissions methods of the Billing service.
 type PermissionsClient struct {
 	BaseClient
 }

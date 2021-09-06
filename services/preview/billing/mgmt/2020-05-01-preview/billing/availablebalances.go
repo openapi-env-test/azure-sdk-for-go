@@ -14,7 +14,7 @@ import (
 	"net/http"
 )
 
-// AvailableBalancesClient is the billing client provides access to billing resources for Azure subscriptions.
+// AvailableBalancesClient is the client for the AvailableBalances methods of the Billing service.
 type AvailableBalancesClient struct {
 	BaseClient
 }

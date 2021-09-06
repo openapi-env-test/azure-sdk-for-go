@@ -15,7 +15,7 @@ import (
 	"net/http"
 )
 
-// SubscriptionsClient is the billing client provides access to billing resources for Azure subscriptions.
+// SubscriptionsClient is the client for the Subscriptions methods of the Billing service.
 type SubscriptionsClient struct {
 	BaseClient
 }
@@ -609,7 +609,7 @@ func (client SubscriptionsClient) Move(ctx context.Context, billingAccountName s
 
 	result, err = client.MoveSender(req)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "billing.SubscriptionsClient", "Move", nil, "Failure sending request")
+		err = autorest.NewErrorWithError(err, "billing.SubscriptionsClient", "Move", result.Response(), "Failure sending request")
 		return
 	}
 
@@ -642,6 +642,7 @@ func (client SubscriptionsClient) MovePreparer(ctx context.Context, billingAccou
 // http.Response Body if it receives an error.
 func (client SubscriptionsClient) MoveSender(req *http.Request) (future SubscriptionsMoveFuture, err error) {
 	var resp *http.Response
+	future.FutureAPI = &azure.Future{}
 	resp, err = client.Send(req, autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
 	if err != nil {
 		return

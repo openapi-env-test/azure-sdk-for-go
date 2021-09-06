@@ -14,7 +14,7 @@ import (
 	"net/http"
 )
 
-// AgreementsClient is the billing client provides access to billing resources for Azure subscriptions.
+// AgreementsClient is the client for the Agreements methods of the Billing service.
 type AgreementsClient struct {
 	BaseClient
 }

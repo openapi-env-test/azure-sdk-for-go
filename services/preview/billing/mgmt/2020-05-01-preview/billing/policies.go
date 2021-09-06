@@ -14,7 +14,7 @@ import (
 	"net/http"
 )
 
-// PoliciesClient is the billing client provides access to billing resources for Azure subscriptions.
+// PoliciesClient is the client for the Policies methods of the Billing service.
 type PoliciesClient struct {
 	BaseClient
 }
