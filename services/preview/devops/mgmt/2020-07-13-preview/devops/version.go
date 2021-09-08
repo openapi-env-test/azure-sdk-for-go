@@ -1,4 +1,4 @@
-package compute
+package devops
 
 import "github.com/Azure/azure-sdk-for-go/version"
 
@@ -10,7 +10,7 @@ import "github.com/Azure/azure-sdk-for-go/version"
 
 // UserAgent returns the UserAgent string to use when sending http.Requests.
 func UserAgent() string {
-	return "Azure-SDK-For-Go/" + Version() + " compute/2021-07-01"
+	return "Azure-SDK-For-Go/" + Version() + " devops/2020-07-13-preview"
 }
 
 // Version returns the semantic version (see http://semver.org) of the client.

@@ -1,55 +1,8 @@
-# Change History
+# Unreleased
 
 ## Breaking Changes
 
 ### Removed Constants
-
-1. CreatedByType.Application
-1. CreatedByType.Key
-1. CreatedByType.ManagedIdentity
-1. CreatedByType.User
-1. LiftrResourceCategories.MonitorLogs
-1. LiftrResourceCategories.Unknown
-1. ManagedIdentityTypes.SystemAssigned
-1. ManagedIdentityTypes.UserAssigned
-1. MarketplaceSubscriptionStatus.Active
-1. MarketplaceSubscriptionStatus.Provisioning
-1. MarketplaceSubscriptionStatus.Suspended
-1. MarketplaceSubscriptionStatus.Unsubscribed
-1. MonitoringStatus.Disabled
-1. MonitoringStatus.Enabled
-1. ProvisioningState.Accepted
-1. ProvisioningState.Canceled
-1. ProvisioningState.Creating
-1. ProvisioningState.Deleted
-1. ProvisioningState.Deleting
-1. ProvisioningState.Failed
-1. ProvisioningState.NotSpecified
-1. ProvisioningState.Succeeded
-1. ProvisioningState.Updating
-1. SingleSignOnStates.Disable
-1. SingleSignOnStates.Enable
-1. SingleSignOnStates.Existing
-1. SingleSignOnStates.Initial
-1. TagAction.Exclude
-1. TagAction.Include
-
-### Signature Changes
-
-#### Funcs
-
-1. MonitorsClient.Update
-	- Returns
-		- From: MonitorResource, error
-		- To: MonitorsUpdateFuture, error
-1. MonitorsClient.UpdateSender
-	- Returns
-		- From: *http.Response, error
-		- To: MonitorsUpdateFuture, error
-
-## Additive Changes
-
-### New Constants
 
 1. CreatedByType.CreatedByTypeApplication
 1. CreatedByType.CreatedByTypeKey
@@ -81,18 +34,36 @@
 1. TagAction.TagActionExclude
 1. TagAction.TagActionInclude
 
-### New Funcs
+## Additive Changes
 
-1. *MonitorsUpdateFuture.UnmarshalJSON([]byte) error
-1. ErrorAdditionalInfo.MarshalJSON() ([]byte, error)
-1. ErrorDetail.MarshalJSON() ([]byte, error)
+### New Constants
 
-### Struct Changes
-
-#### New Structs
-
-1. MonitorsUpdateFuture
-
-#### New Struct Fields
-
-1. MonitorResourceUpdateParameters.Sku
+1. CreatedByType.Application
+1. CreatedByType.Key
+1. CreatedByType.ManagedIdentity
+1. CreatedByType.User
+1. LiftrResourceCategories.MonitorLogs
+1. LiftrResourceCategories.Unknown
+1. ManagedIdentityTypes.SystemAssigned
+1. ManagedIdentityTypes.UserAssigned
+1. MarketplaceSubscriptionStatus.Active
+1. MarketplaceSubscriptionStatus.Provisioning
+1. MarketplaceSubscriptionStatus.Suspended
+1. MarketplaceSubscriptionStatus.Unsubscribed
+1. MonitoringStatus.Disabled
+1. MonitoringStatus.Enabled
+1. ProvisioningState.Accepted
+1. ProvisioningState.Canceled
+1. ProvisioningState.Creating
+1. ProvisioningState.Deleted
+1. ProvisioningState.Deleting
+1. ProvisioningState.Failed
+1. ProvisioningState.NotSpecified
+1. ProvisioningState.Succeeded
+1. ProvisioningState.Updating
+1. SingleSignOnStates.Disable
+1. SingleSignOnStates.Enable
+1. SingleSignOnStates.Existing
+1. SingleSignOnStates.Initial
+1. TagAction.Exclude
+1. TagAction.Include

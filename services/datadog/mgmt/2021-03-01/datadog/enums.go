@@ -10,144 +10,144 @@ package datadog
 type CreatedByType string
 
 const (
-	// CreatedByTypeApplication ...
-	CreatedByTypeApplication CreatedByType = "Application"
-	// CreatedByTypeKey ...
-	CreatedByTypeKey CreatedByType = "Key"
-	// CreatedByTypeManagedIdentity ...
-	CreatedByTypeManagedIdentity CreatedByType = "ManagedIdentity"
-	// CreatedByTypeUser ...
-	CreatedByTypeUser CreatedByType = "User"
+	// Application ...
+	Application CreatedByType = "Application"
+	// Key ...
+	Key CreatedByType = "Key"
+	// ManagedIdentity ...
+	ManagedIdentity CreatedByType = "ManagedIdentity"
+	// User ...
+	User CreatedByType = "User"
 )
 
 // PossibleCreatedByTypeValues returns an array of possible values for the CreatedByType const type.
 func PossibleCreatedByTypeValues() []CreatedByType {
-	return []CreatedByType{CreatedByTypeApplication, CreatedByTypeKey, CreatedByTypeManagedIdentity, CreatedByTypeUser}
+	return []CreatedByType{Application, Key, ManagedIdentity, User}
 }
 
 // LiftrResourceCategories enumerates the values for liftr resource categories.
 type LiftrResourceCategories string
 
 const (
-	// LiftrResourceCategoriesMonitorLogs ...
-	LiftrResourceCategoriesMonitorLogs LiftrResourceCategories = "MonitorLogs"
-	// LiftrResourceCategoriesUnknown ...
-	LiftrResourceCategoriesUnknown LiftrResourceCategories = "Unknown"
+	// MonitorLogs ...
+	MonitorLogs LiftrResourceCategories = "MonitorLogs"
+	// Unknown ...
+	Unknown LiftrResourceCategories = "Unknown"
 )
 
 // PossibleLiftrResourceCategoriesValues returns an array of possible values for the LiftrResourceCategories const type.
 func PossibleLiftrResourceCategoriesValues() []LiftrResourceCategories {
-	return []LiftrResourceCategories{LiftrResourceCategoriesMonitorLogs, LiftrResourceCategoriesUnknown}
+	return []LiftrResourceCategories{MonitorLogs, Unknown}
 }
 
 // ManagedIdentityTypes enumerates the values for managed identity types.
 type ManagedIdentityTypes string
 
 const (
-	// ManagedIdentityTypesSystemAssigned ...
-	ManagedIdentityTypesSystemAssigned ManagedIdentityTypes = "SystemAssigned"
-	// ManagedIdentityTypesUserAssigned ...
-	ManagedIdentityTypesUserAssigned ManagedIdentityTypes = "UserAssigned"
+	// SystemAssigned ...
+	SystemAssigned ManagedIdentityTypes = "SystemAssigned"
+	// UserAssigned ...
+	UserAssigned ManagedIdentityTypes = "UserAssigned"
 )
 
 // PossibleManagedIdentityTypesValues returns an array of possible values for the ManagedIdentityTypes const type.
 func PossibleManagedIdentityTypesValues() []ManagedIdentityTypes {
-	return []ManagedIdentityTypes{ManagedIdentityTypesSystemAssigned, ManagedIdentityTypesUserAssigned}
+	return []ManagedIdentityTypes{SystemAssigned, UserAssigned}
 }
 
 // MarketplaceSubscriptionStatus enumerates the values for marketplace subscription status.
 type MarketplaceSubscriptionStatus string
 
 const (
-	// MarketplaceSubscriptionStatusActive ...
-	MarketplaceSubscriptionStatusActive MarketplaceSubscriptionStatus = "Active"
-	// MarketplaceSubscriptionStatusProvisioning ...
-	MarketplaceSubscriptionStatusProvisioning MarketplaceSubscriptionStatus = "Provisioning"
-	// MarketplaceSubscriptionStatusSuspended ...
-	MarketplaceSubscriptionStatusSuspended MarketplaceSubscriptionStatus = "Suspended"
-	// MarketplaceSubscriptionStatusUnsubscribed ...
-	MarketplaceSubscriptionStatusUnsubscribed MarketplaceSubscriptionStatus = "Unsubscribed"
+	// Active ...
+	Active MarketplaceSubscriptionStatus = "Active"
+	// Provisioning ...
+	Provisioning MarketplaceSubscriptionStatus = "Provisioning"
+	// Suspended ...
+	Suspended MarketplaceSubscriptionStatus = "Suspended"
+	// Unsubscribed ...
+	Unsubscribed MarketplaceSubscriptionStatus = "Unsubscribed"
 )
 
 // PossibleMarketplaceSubscriptionStatusValues returns an array of possible values for the MarketplaceSubscriptionStatus const type.
 func PossibleMarketplaceSubscriptionStatusValues() []MarketplaceSubscriptionStatus {
-	return []MarketplaceSubscriptionStatus{MarketplaceSubscriptionStatusActive, MarketplaceSubscriptionStatusProvisioning, MarketplaceSubscriptionStatusSuspended, MarketplaceSubscriptionStatusUnsubscribed}
+	return []MarketplaceSubscriptionStatus{Active, Provisioning, Suspended, Unsubscribed}
 }
 
 // MonitoringStatus enumerates the values for monitoring status.
 type MonitoringStatus string
 
 const (
-	// MonitoringStatusDisabled ...
-	MonitoringStatusDisabled MonitoringStatus = "Disabled"
-	// MonitoringStatusEnabled ...
-	MonitoringStatusEnabled MonitoringStatus = "Enabled"
+	// Disabled ...
+	Disabled MonitoringStatus = "Disabled"
+	// Enabled ...
+	Enabled MonitoringStatus = "Enabled"
 )
 
 // PossibleMonitoringStatusValues returns an array of possible values for the MonitoringStatus const type.
 func PossibleMonitoringStatusValues() []MonitoringStatus {
-	return []MonitoringStatus{MonitoringStatusDisabled, MonitoringStatusEnabled}
+	return []MonitoringStatus{Disabled, Enabled}
 }
 
 // ProvisioningState enumerates the values for provisioning state.
 type ProvisioningState string
 
 const (
-	// ProvisioningStateAccepted ...
-	ProvisioningStateAccepted ProvisioningState = "Accepted"
-	// ProvisioningStateCanceled ...
-	ProvisioningStateCanceled ProvisioningState = "Canceled"
-	// ProvisioningStateCreating ...
-	ProvisioningStateCreating ProvisioningState = "Creating"
-	// ProvisioningStateDeleted ...
-	ProvisioningStateDeleted ProvisioningState = "Deleted"
-	// ProvisioningStateDeleting ...
-	ProvisioningStateDeleting ProvisioningState = "Deleting"
-	// ProvisioningStateFailed ...
-	ProvisioningStateFailed ProvisioningState = "Failed"
-	// ProvisioningStateNotSpecified ...
-	ProvisioningStateNotSpecified ProvisioningState = "NotSpecified"
-	// ProvisioningStateSucceeded ...
-	ProvisioningStateSucceeded ProvisioningState = "Succeeded"
-	// ProvisioningStateUpdating ...
-	ProvisioningStateUpdating ProvisioningState = "Updating"
+	// Accepted ...
+	Accepted ProvisioningState = "Accepted"
+	// Canceled ...
+	Canceled ProvisioningState = "Canceled"
+	// Creating ...
+	Creating ProvisioningState = "Creating"
+	// Deleted ...
+	Deleted ProvisioningState = "Deleted"
+	// Deleting ...
+	Deleting ProvisioningState = "Deleting"
+	// Failed ...
+	Failed ProvisioningState = "Failed"
+	// NotSpecified ...
+	NotSpecified ProvisioningState = "NotSpecified"
+	// Succeeded ...
+	Succeeded ProvisioningState = "Succeeded"
+	// Updating ...
+	Updating ProvisioningState = "Updating"
 )
 
 // PossibleProvisioningStateValues returns an array of possible values for the ProvisioningState const type.
 func PossibleProvisioningStateValues() []ProvisioningState {
-	return []ProvisioningState{ProvisioningStateAccepted, ProvisioningStateCanceled, ProvisioningStateCreating, ProvisioningStateDeleted, ProvisioningStateDeleting, ProvisioningStateFailed, ProvisioningStateNotSpecified, ProvisioningStateSucceeded, ProvisioningStateUpdating}
+	return []ProvisioningState{Accepted, Canceled, Creating, Deleted, Deleting, Failed, NotSpecified, Succeeded, Updating}
 }
 
 // SingleSignOnStates enumerates the values for single sign on states.
 type SingleSignOnStates string
 
 const (
-	// SingleSignOnStatesDisable ...
-	SingleSignOnStatesDisable SingleSignOnStates = "Disable"
-	// SingleSignOnStatesEnable ...
-	SingleSignOnStatesEnable SingleSignOnStates = "Enable"
-	// SingleSignOnStatesExisting ...
-	SingleSignOnStatesExisting SingleSignOnStates = "Existing"
-	// SingleSignOnStatesInitial ...
-	SingleSignOnStatesInitial SingleSignOnStates = "Initial"
+	// Disable ...
+	Disable SingleSignOnStates = "Disable"
+	// Enable ...
+	Enable SingleSignOnStates = "Enable"
+	// Existing ...
+	Existing SingleSignOnStates = "Existing"
+	// Initial ...
+	Initial SingleSignOnStates = "Initial"
 )
 
 // PossibleSingleSignOnStatesValues returns an array of possible values for the SingleSignOnStates const type.
 func PossibleSingleSignOnStatesValues() []SingleSignOnStates {
-	return []SingleSignOnStates{SingleSignOnStatesDisable, SingleSignOnStatesEnable, SingleSignOnStatesExisting, SingleSignOnStatesInitial}
+	return []SingleSignOnStates{Disable, Enable, Existing, Initial}
 }
 
 // TagAction enumerates the values for tag action.
 type TagAction string
 
 const (
-	// TagActionExclude ...
-	TagActionExclude TagAction = "Exclude"
-	// TagActionInclude ...
-	TagActionInclude TagAction = "Include"
+	// Exclude ...
+	Exclude TagAction = "Exclude"
+	// Include ...
+	Include TagAction = "Include"
 )
 
 // PossibleTagActionValues returns an array of possible values for the TagAction const type.
 func PossibleTagActionValues() []TagAction {
-	return []TagAction{TagActionExclude, TagActionInclude}
+	return []TagAction{Exclude, Include}
 }
