@@ -50,18 +50,20 @@ func (client RestorePointsClient) Create(ctx context.Context, resourceGroupName 
 	}
 	if err := validation.Validate([]validation.Validation{
 		{TargetValue: parameters,
-			Constraints: []validation.Constraint{{Target: "parameters.SourceMetadata", Name: validation.Null, Rule: false,
-				Chain: []validation.Constraint{{Target: "parameters.SourceMetadata.StorageProfile", Name: validation.Null, Rule: false,
-					Chain: []validation.Constraint{{Target: "parameters.SourceMetadata.StorageProfile.OsDisk", Name: validation.Null, Rule: false,
-						Chain: []validation.Constraint{{Target: "parameters.SourceMetadata.StorageProfile.OsDisk.EncryptionSettings", Name: validation.Null, Rule: false,
-							Chain: []validation.Constraint{{Target: "parameters.SourceMetadata.StorageProfile.OsDisk.EncryptionSettings.DiskEncryptionKey", Name: validation.Null, Rule: false,
-								Chain: []validation.Constraint{{Target: "parameters.SourceMetadata.StorageProfile.OsDisk.EncryptionSettings.DiskEncryptionKey.SecretURL", Name: validation.Null, Rule: true, Chain: nil},
-									{Target: "parameters.SourceMetadata.StorageProfile.OsDisk.EncryptionSettings.DiskEncryptionKey.SourceVault", Name: validation.Null, Rule: true, Chain: nil},
-								}},
-								{Target: "parameters.SourceMetadata.StorageProfile.OsDisk.EncryptionSettings.KeyEncryptionKey", Name: validation.Null, Rule: false,
-									Chain: []validation.Constraint{{Target: "parameters.SourceMetadata.StorageProfile.OsDisk.EncryptionSettings.KeyEncryptionKey.KeyURL", Name: validation.Null, Rule: true, Chain: nil},
-										{Target: "parameters.SourceMetadata.StorageProfile.OsDisk.EncryptionSettings.KeyEncryptionKey.SourceVault", Name: validation.Null, Rule: true, Chain: nil},
+			Constraints: []validation.Constraint{{Target: "parameters.RestorePointProperties", Name: validation.Null, Rule: false,
+				Chain: []validation.Constraint{{Target: "parameters.RestorePointProperties.SourceMetadata", Name: validation.Null, Rule: false,
+					Chain: []validation.Constraint{{Target: "parameters.RestorePointProperties.SourceMetadata.StorageProfile", Name: validation.Null, Rule: false,
+						Chain: []validation.Constraint{{Target: "parameters.RestorePointProperties.SourceMetadata.StorageProfile.OsDisk", Name: validation.Null, Rule: false,
+							Chain: []validation.Constraint{{Target: "parameters.RestorePointProperties.SourceMetadata.StorageProfile.OsDisk.EncryptionSettings", Name: validation.Null, Rule: false,
+								Chain: []validation.Constraint{{Target: "parameters.RestorePointProperties.SourceMetadata.StorageProfile.OsDisk.EncryptionSettings.DiskEncryptionKey", Name: validation.Null, Rule: false,
+									Chain: []validation.Constraint{{Target: "parameters.RestorePointProperties.SourceMetadata.StorageProfile.OsDisk.EncryptionSettings.DiskEncryptionKey.SecretURL", Name: validation.Null, Rule: true, Chain: nil},
+										{Target: "parameters.RestorePointProperties.SourceMetadata.StorageProfile.OsDisk.EncryptionSettings.DiskEncryptionKey.SourceVault", Name: validation.Null, Rule: true, Chain: nil},
 									}},
+									{Target: "parameters.RestorePointProperties.SourceMetadata.StorageProfile.OsDisk.EncryptionSettings.KeyEncryptionKey", Name: validation.Null, Rule: false,
+										Chain: []validation.Constraint{{Target: "parameters.RestorePointProperties.SourceMetadata.StorageProfile.OsDisk.EncryptionSettings.KeyEncryptionKey.KeyURL", Name: validation.Null, Rule: true, Chain: nil},
+											{Target: "parameters.RestorePointProperties.SourceMetadata.StorageProfile.OsDisk.EncryptionSettings.KeyEncryptionKey.SourceVault", Name: validation.Null, Rule: true, Chain: nil},
+										}},
+								}},
 							}},
 						}},
 					}},
@@ -77,7 +79,7 @@ func (client RestorePointsClient) Create(ctx context.Context, resourceGroupName 
 
 	result, err = client.CreateSender(req)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "compute.RestorePointsClient", "Create", nil, "Failure sending request")
+		err = autorest.NewErrorWithError(err, "compute.RestorePointsClient", "Create", result.Response(), "Failure sending request")
 		return
 	}
 
@@ -98,10 +100,6 @@ func (client RestorePointsClient) CreatePreparer(ctx context.Context, resourceGr
 		"api-version": APIVersion,
 	}
 
-	parameters.SourceMetadata = nil
-	parameters.ProvisioningState = nil
-	parameters.ConsistencyMode = ""
-	parameters.ProvisioningDetails = nil
 	preparer := autorest.CreatePreparer(
 		autorest.AsContentType("application/json; charset=utf-8"),
 		autorest.AsPut(),
@@ -116,6 +114,7 @@ func (client RestorePointsClient) CreatePreparer(ctx context.Context, resourceGr
 // http.Response Body if it receives an error.
 func (client RestorePointsClient) CreateSender(req *http.Request) (future RestorePointsCreateFuture, err error) {
 	var resp *http.Response
+	future.FutureAPI = &azure.Future{}
 	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
 	if err != nil {
 		return
@@ -163,7 +162,7 @@ func (client RestorePointsClient) Delete(ctx context.Context, resourceGroupName 
 
 	result, err = client.DeleteSender(req)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "compute.RestorePointsClient", "Delete", nil, "Failure sending request")
+		err = autorest.NewErrorWithError(err, "compute.RestorePointsClient", "Delete", result.Response(), "Failure sending request")
 		return
 	}
 
@@ -196,6 +195,7 @@ func (client RestorePointsClient) DeletePreparer(ctx context.Context, resourceGr
 // http.Response Body if it receives an error.
 func (client RestorePointsClient) DeleteSender(req *http.Request) (future RestorePointsDeleteFuture, err error) {
 	var resp *http.Response
+	future.FutureAPI = &azure.Future{}
 	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
 	if err != nil {
 		return

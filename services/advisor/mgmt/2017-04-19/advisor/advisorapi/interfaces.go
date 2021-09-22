@@ -15,7 +15,7 @@ import (
 
 // RecommendationMetadataClientAPI contains the set of methods on the RecommendationMetadataClient type.
 type RecommendationMetadataClientAPI interface {
-	Get(ctx context.Context, name string) (result advisor.SetObject, err error)
+	Get(ctx context.Context, name string) (result advisor.MetadataEntity, err error)
 	List(ctx context.Context) (result advisor.MetadataEntityListResultPage, err error)
 	ListComplete(ctx context.Context) (result advisor.MetadataEntityListResultIterator, err error)
 }

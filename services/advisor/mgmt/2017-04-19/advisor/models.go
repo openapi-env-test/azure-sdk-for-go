@@ -272,6 +272,7 @@ func NewConfigurationListResultPage(cur ConfigurationListResult, getNextPage fun
 
 // MetadataEntity the metadata entity contract.
 type MetadataEntity struct {
+	autorest.Response `json:"-"`
 	// ID - The resource Id of the metadata entity.
 	ID *string `json:"id,omitempty"`
 	// Type - The type of the metadata entity.
@@ -1021,12 +1022,6 @@ func NewResourceRecommendationBaseListResultPage(cur ResourceRecommendationBaseL
 		fn:    getNextPage,
 		rrblr: cur,
 	}
-}
-
-// SetObject ...
-type SetObject struct {
-	autorest.Response `json:"-"`
-	Value             interface{} `json:"value,omitempty"`
 }
 
 // ShortDescription a summary of the recommendation.

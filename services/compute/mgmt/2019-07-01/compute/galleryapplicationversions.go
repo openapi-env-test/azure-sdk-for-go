@@ -59,9 +59,11 @@ func (client GalleryApplicationVersionsClient) CreateOrUpdate(ctx context.Contex
 			Constraints: []validation.Constraint{{Target: "galleryApplicationVersion.GalleryApplicationVersionProperties", Name: validation.Null, Rule: false,
 				Chain: []validation.Constraint{{Target: "galleryApplicationVersion.GalleryApplicationVersionProperties.PublishingProfile", Name: validation.Null, Rule: true,
 					Chain: []validation.Constraint{{Target: "galleryApplicationVersion.GalleryApplicationVersionProperties.PublishingProfile.Source", Name: validation.Null, Rule: true,
-						Chain: []validation.Constraint{{Target: "galleryApplicationVersion.GalleryApplicationVersionProperties.PublishingProfile.Source.FileName", Name: validation.Null, Rule: true, Chain: nil},
-							{Target: "galleryApplicationVersion.GalleryApplicationVersionProperties.PublishingProfile.Source.MediaLink", Name: validation.Null, Rule: true, Chain: nil},
-						}},
+						Chain: []validation.Constraint{{Target: "galleryApplicationVersion.GalleryApplicationVersionProperties.PublishingProfile.Source.MediaLink", Name: validation.Null, Rule: true, Chain: nil}}},
+						{Target: "galleryApplicationVersion.GalleryApplicationVersionProperties.PublishingProfile.ManageActions", Name: validation.Null, Rule: false,
+							Chain: []validation.Constraint{{Target: "galleryApplicationVersion.GalleryApplicationVersionProperties.PublishingProfile.ManageActions.Install", Name: validation.Null, Rule: true, Chain: nil},
+								{Target: "galleryApplicationVersion.GalleryApplicationVersionProperties.PublishingProfile.ManageActions.Remove", Name: validation.Null, Rule: true, Chain: nil},
+							}},
 					}},
 				}}}}}); err != nil {
 		return result, validation.NewError("compute.GalleryApplicationVersionsClient", "CreateOrUpdate", err.Error())
@@ -75,7 +77,7 @@ func (client GalleryApplicationVersionsClient) CreateOrUpdate(ctx context.Contex
 
 	result, err = client.CreateOrUpdateSender(req)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "compute.GalleryApplicationVersionsClient", "CreateOrUpdate", nil, "Failure sending request")
+		err = autorest.NewErrorWithError(err, "compute.GalleryApplicationVersionsClient", "CreateOrUpdate", result.Response(), "Failure sending request")
 		return
 	}
 
@@ -111,6 +113,7 @@ func (client GalleryApplicationVersionsClient) CreateOrUpdatePreparer(ctx contex
 // http.Response Body if it receives an error.
 func (client GalleryApplicationVersionsClient) CreateOrUpdateSender(req *http.Request) (future GalleryApplicationVersionsCreateOrUpdateFuture, err error) {
 	var resp *http.Response
+	future.FutureAPI = &azure.Future{}
 	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
 	if err != nil {
 		return
@@ -160,7 +163,7 @@ func (client GalleryApplicationVersionsClient) Delete(ctx context.Context, resou
 
 	result, err = client.DeleteSender(req)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "compute.GalleryApplicationVersionsClient", "Delete", nil, "Failure sending request")
+		err = autorest.NewErrorWithError(err, "compute.GalleryApplicationVersionsClient", "Delete", result.Response(), "Failure sending request")
 		return
 	}
 
@@ -194,6 +197,7 @@ func (client GalleryApplicationVersionsClient) DeletePreparer(ctx context.Contex
 // http.Response Body if it receives an error.
 func (client GalleryApplicationVersionsClient) DeleteSender(req *http.Request) (future GalleryApplicationVersionsDeleteFuture, err error) {
 	var resp *http.Response
+	future.FutureAPI = &azure.Future{}
 	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
 	if err != nil {
 		return
@@ -451,7 +455,7 @@ func (client GalleryApplicationVersionsClient) Update(ctx context.Context, resou
 
 	result, err = client.UpdateSender(req)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "compute.GalleryApplicationVersionsClient", "Update", nil, "Failure sending request")
+		err = autorest.NewErrorWithError(err, "compute.GalleryApplicationVersionsClient", "Update", result.Response(), "Failure sending request")
 		return
 	}
 
@@ -487,6 +491,7 @@ func (client GalleryApplicationVersionsClient) UpdatePreparer(ctx context.Contex
 // http.Response Body if it receives an error.
 func (client GalleryApplicationVersionsClient) UpdateSender(req *http.Request) (future GalleryApplicationVersionsUpdateFuture, err error) {
 	var resp *http.Response
+	future.FutureAPI = &azure.Future{}
 	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
 	if err != nil {
 		return
