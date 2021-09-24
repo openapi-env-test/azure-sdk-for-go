@@ -2450,6 +2450,8 @@ type MetricSpecification struct {
 	FillGapWithZero *bool `json:"fillGapWithZero,omitempty"`
 	// Dimensions - Dimensions of the metric
 	Dimensions *[]MetricDimension `json:"dimensions,omitempty"`
+	// SourceMdmNamespace - Name of the MDM namespace. Optional.
+	SourceMdmNamespace *string `json:"sourceMdmNamespace,omitempty"`
 }
 
 // MonitoringSettingProperties monitoring Setting properties payload
