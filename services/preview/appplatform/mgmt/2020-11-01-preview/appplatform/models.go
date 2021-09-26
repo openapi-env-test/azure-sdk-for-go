@@ -238,14 +238,14 @@ type AppResourceProperties struct {
 	Fqdn *string `json:"fqdn,omitempty"`
 	// HTTPSOnly - Indicate if only https is allowed.
 	HTTPSOnly *bool `json:"httpsOnly,omitempty"`
-	// EnableEndToEndTLS - Indicate if end to end TLS is enabled.
-	EnableEndToEndTLS *bool `json:"enableEndToEndTLS,omitempty"`
 	// CreatedTime - READ-ONLY; Date time when the resource is created
 	CreatedTime *date.Time `json:"createdTime,omitempty"`
 	// TemporaryDisk - Temporary disk settings
 	TemporaryDisk *TemporaryDisk `json:"temporaryDisk,omitempty"`
 	// PersistentDisk - Persistent disk settings
 	PersistentDisk *PersistentDisk `json:"persistentDisk,omitempty"`
+	// EnableEndToEndTLS - Indicate if end to end TLS is enabled.
+	EnableEndToEndTLS *bool `json:"enableEndToEndTLS,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for AppResourceProperties.
@@ -263,14 +263,14 @@ func (arp AppResourceProperties) MarshalJSON() ([]byte, error) {
 	if arp.HTTPSOnly != nil {
 		objectMap["httpsOnly"] = arp.HTTPSOnly
 	}
-	if arp.EnableEndToEndTLS != nil {
-		objectMap["enableEndToEndTLS"] = arp.EnableEndToEndTLS
-	}
 	if arp.TemporaryDisk != nil {
 		objectMap["temporaryDisk"] = arp.TemporaryDisk
 	}
 	if arp.PersistentDisk != nil {
 		objectMap["persistentDisk"] = arp.PersistentDisk
+	}
+	if arp.EnableEndToEndTLS != nil {
+		objectMap["enableEndToEndTLS"] = arp.EnableEndToEndTLS
 	}
 	return json.Marshal(objectMap)
 }
@@ -2397,6 +2397,8 @@ type MetricDimension struct {
 	Name *string `json:"name,omitempty"`
 	// DisplayName - Localized friendly display name of the dimension
 	DisplayName *string `json:"displayName,omitempty"`
+	// ToBeExportedForShoebox - Whether this dimension should be included for the Shoebox export scenario
+	ToBeExportedForShoebox *bool `json:"toBeExportedForShoebox,omitempty"`
 }
 
 // MetricSpecification specifications of the Metrics for Azure Monitoring
@@ -2421,6 +2423,8 @@ type MetricSpecification struct {
 	FillGapWithZero *bool `json:"fillGapWithZero,omitempty"`
 	// Dimensions - Dimensions of the metric
 	Dimensions *[]MetricDimension `json:"dimensions,omitempty"`
+	// SourceMdmNamespace - Name of the MDM namespace. Optional.
+	SourceMdmNamespace *string `json:"sourceMdmNamespace,omitempty"`
 }
 
 // MonitoringSettingProperties monitoring Setting properties payload
