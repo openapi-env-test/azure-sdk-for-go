@@ -443,7 +443,7 @@ type FilteringTag struct {
 	Name *string `json:"name,omitempty"`
 	// Value - The value of the tag.
 	Value *string `json:"value,omitempty"`
-	// Action - Possible values include: 'TagActionInclude', 'TagActionExclude'
+	// Action - Possible values include: 'Include', 'Exclude'
 	Action TagAction `json:"action,omitempty"`
 }
 
@@ -631,7 +631,7 @@ type IdentityProperties struct {
 	PrincipalID *string `json:"principalId,omitempty"`
 	// TenantID - READ-ONLY; The tenant ID of resource.
 	TenantID *string `json:"tenantId,omitempty"`
-	// Type - Possible values include: 'ManagedIdentityTypesSystemAssigned', 'ManagedIdentityTypesUserAssigned'
+	// Type - Possible values include: 'SystemAssigned', 'UserAssigned'
 	Type ManagedIdentityTypes `json:"type,omitempty"`
 }
 
@@ -1202,7 +1202,7 @@ func NewMonitoringTagRulesListResponsePage(cur MonitoringTagRulesListResponse, g
 
 // MonitoringTagRulesProperties definition of the properties for a TagRules resource.
 type MonitoringTagRulesProperties struct {
-	// ProvisioningState - Possible values include: 'ProvisioningStateAccepted', 'ProvisioningStateCreating', 'ProvisioningStateUpdating', 'ProvisioningStateDeleting', 'ProvisioningStateSucceeded', 'ProvisioningStateFailed', 'ProvisioningStateCanceled', 'ProvisioningStateDeleted', 'ProvisioningStateNotSpecified'
+	// ProvisioningState - Possible values include: 'Accepted', 'Creating', 'Updating', 'Deleting', 'Succeeded', 'Failed', 'Canceled', 'Deleted', 'NotSpecified'
 	ProvisioningState ProvisioningState `json:"provisioningState,omitempty"`
 	LogRules          *LogRules         `json:"logRules,omitempty"`
 	MetricRules       *MetricRules      `json:"metricRules,omitempty"`
@@ -1210,15 +1210,15 @@ type MonitoringTagRulesProperties struct {
 
 // MonitorProperties properties specific to the monitor resource.
 type MonitorProperties struct {
-	// ProvisioningState - Possible values include: 'ProvisioningStateAccepted', 'ProvisioningStateCreating', 'ProvisioningStateUpdating', 'ProvisioningStateDeleting', 'ProvisioningStateSucceeded', 'ProvisioningStateFailed', 'ProvisioningStateCanceled', 'ProvisioningStateDeleted', 'ProvisioningStateNotSpecified'
+	// ProvisioningState - Possible values include: 'Accepted', 'Creating', 'Updating', 'Deleting', 'Succeeded', 'Failed', 'Canceled', 'Deleted', 'NotSpecified'
 	ProvisioningState ProvisioningState `json:"provisioningState,omitempty"`
-	// MonitoringStatus - Possible values include: 'MonitoringStatusEnabled', 'MonitoringStatusDisabled'
+	// MonitoringStatus - Possible values include: 'Enabled', 'Disabled'
 	MonitoringStatus MonitoringStatus `json:"monitoringStatus,omitempty"`
-	// MarketplaceSubscriptionStatus - Possible values include: 'MarketplaceSubscriptionStatusProvisioning', 'MarketplaceSubscriptionStatusActive', 'MarketplaceSubscriptionStatusSuspended', 'MarketplaceSubscriptionStatusUnsubscribed'
+	// MarketplaceSubscriptionStatus - Possible values include: 'Provisioning', 'Active', 'Suspended', 'Unsubscribed'
 	MarketplaceSubscriptionStatus MarketplaceSubscriptionStatus `json:"marketplaceSubscriptionStatus,omitempty"`
 	DatadogOrganizationProperties *OrganizationProperties       `json:"datadogOrganizationProperties,omitempty"`
 	UserInfo                      *UserInfo                     `json:"userInfo,omitempty"`
-	// LiftrResourceCategory - Possible values include: 'LiftrResourceCategoriesUnknown', 'LiftrResourceCategoriesMonitorLogs'
+	// LiftrResourceCategory - Possible values include: 'Unknown', 'MonitorLogs'
 	LiftrResourceCategory LiftrResourceCategories `json:"liftrResourceCategory,omitempty"`
 	// LiftrResourcePreference - READ-ONLY; The priority of the resource.
 	LiftrResourcePreference *int32 `json:"liftrResourcePreference,omitempty"`
@@ -1595,13 +1595,13 @@ func (future *MonitorsUpdateFuture) result(client MonitorsClient) (mr MonitorRes
 // MonitorUpdateProperties the set of properties that can be update in a PATCH request to a monitor
 // resource.
 type MonitorUpdateProperties struct {
-	// MonitoringStatus - Possible values include: 'MonitoringStatusEnabled', 'MonitoringStatusDisabled'
+	// MonitoringStatus - Possible values include: 'Enabled', 'Disabled'
 	MonitoringStatus MonitoringStatus `json:"monitoringStatus,omitempty"`
 }
 
 // OperationDisplay the object that represents the operation.
 type OperationDisplay struct {
-	// Provider - Service provider, i.e., Microsoft.Datadog.
+	// Provider - Service provider, i.e., Microsoft.DatadogNew.
 	Provider *string `json:"provider,omitempty"`
 	// Resource - Type on which the operation is performed, e.g., 'monitors'.
 	Resource *string `json:"resource,omitempty"`
@@ -1611,10 +1611,10 @@ type OperationDisplay struct {
 	Description *string `json:"description,omitempty"`
 }
 
-// OperationListResult result of GET request to list the Microsoft.Datadog operations.
+// OperationListResult result of GET request to list the Microsoft.DatadogNew operations.
 type OperationListResult struct {
 	autorest.Response `json:"-"`
-	// Value - List of operations supported by the Microsoft.Datadog provider.
+	// Value - List of operations supported by the Microsoft.DatadogNew provider.
 	Value *[]OperationResult `json:"value,omitempty"`
 	// NextLink - URL to get the next set of operation list results if there are any.
 	NextLink *string `json:"nextLink,omitempty"`
@@ -1770,7 +1770,7 @@ func NewOperationListResultPage(cur OperationListResult, getNextPage func(contex
 	}
 }
 
-// OperationResult a Microsoft.Datadog REST API operation.
+// OperationResult a Microsoft.DatadogNew REST API operation.
 type OperationResult struct {
 	// Name - Operation name, i.e., {provider}/{resource}/{operation}.
 	Name    *string           `json:"name,omitempty"`
@@ -1880,9 +1880,9 @@ func (future *SingleSignOnConfigurationsCreateOrUpdateFuture) result(client Sing
 
 // SingleSignOnProperties ...
 type SingleSignOnProperties struct {
-	// ProvisioningState - Possible values include: 'ProvisioningStateAccepted', 'ProvisioningStateCreating', 'ProvisioningStateUpdating', 'ProvisioningStateDeleting', 'ProvisioningStateSucceeded', 'ProvisioningStateFailed', 'ProvisioningStateCanceled', 'ProvisioningStateDeleted', 'ProvisioningStateNotSpecified'
+	// ProvisioningState - Possible values include: 'Accepted', 'Creating', 'Updating', 'Deleting', 'Succeeded', 'Failed', 'Canceled', 'Deleted', 'NotSpecified'
 	ProvisioningState ProvisioningState `json:"provisioningState,omitempty"`
-	// SingleSignOnState - Possible values include: 'SingleSignOnStatesInitial', 'SingleSignOnStatesEnable', 'SingleSignOnStatesDisable', 'SingleSignOnStatesExisting'
+	// SingleSignOnState - Possible values include: 'Initial', 'Enable', 'Disable', 'Existing'
 	SingleSignOnState SingleSignOnStates `json:"singleSignOnState,omitempty"`
 	// EnterpriseAppID - The Id of the Enterprise App used for Single sign-on.
 	EnterpriseAppID *string `json:"enterpriseAppId,omitempty"`
@@ -2092,13 +2092,13 @@ func NewSingleSignOnResourceListResponsePage(cur SingleSignOnResourceListRespons
 type SystemData struct {
 	// CreatedBy - The identity that created the resource.
 	CreatedBy *string `json:"createdBy,omitempty"`
-	// CreatedByType - The type of identity that created the resource. Possible values include: 'CreatedByTypeUser', 'CreatedByTypeApplication', 'CreatedByTypeManagedIdentity', 'CreatedByTypeKey'
+	// CreatedByType - The type of identity that created the resource. Possible values include: 'User', 'Application', 'ManagedIdentity', 'Key'
 	CreatedByType CreatedByType `json:"createdByType,omitempty"`
 	// CreatedAt - The timestamp of resource creation (UTC).
 	CreatedAt *date.Time `json:"createdAt,omitempty"`
 	// LastModifiedBy - The identity that last modified the resource.
 	LastModifiedBy *string `json:"lastModifiedBy,omitempty"`
-	// LastModifiedByType - The type of identity that last modified the resource. Possible values include: 'CreatedByTypeUser', 'CreatedByTypeApplication', 'CreatedByTypeManagedIdentity', 'CreatedByTypeKey'
+	// LastModifiedByType - The type of identity that last modified the resource. Possible values include: 'User', 'Application', 'ManagedIdentity', 'Key'
 	LastModifiedByType CreatedByType `json:"lastModifiedByType,omitempty"`
 	// LastModifiedAt - The timestamp of resource last modification (UTC)
 	LastModifiedAt *date.Time `json:"lastModifiedAt,omitempty"`
