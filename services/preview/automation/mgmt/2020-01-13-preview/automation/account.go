@@ -85,7 +85,7 @@ func (client AccountClient) CreateOrUpdatePreparer(ctx context.Context, resource
 		"subscriptionId":        autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2019-06-01"
+	const APIVersion = "2020-01-13-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -171,7 +171,7 @@ func (client AccountClient) DeletePreparer(ctx context.Context, resourceGroupNam
 		"subscriptionId":        autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2019-06-01"
+	const APIVersion = "2020-01-13-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -254,7 +254,7 @@ func (client AccountClient) GetPreparer(ctx context.Context, resourceGroupName s
 		"subscriptionId":        autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2019-06-01"
+	const APIVersion = "2020-01-13-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -330,7 +330,7 @@ func (client AccountClient) ListPreparer(ctx context.Context) (*http.Request, er
 		"subscriptionId": autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2019-06-01"
+	const APIVersion = "2020-01-13-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -454,7 +454,7 @@ func (client AccountClient) ListByResourceGroupPreparer(ctx context.Context, res
 		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2019-06-01"
+	const APIVersion = "2020-01-13-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -522,7 +522,7 @@ func (client AccountClient) ListByResourceGroupComplete(ctx context.Context, res
 	return
 }
 
-// Update update an automation account. abc
+// Update update an automation account.
 // Parameters:
 // resourceGroupName - name of an Azure Resource group.
 // automationAccountName - the name of the automation account.
@@ -576,7 +576,7 @@ func (client AccountClient) UpdatePreparer(ctx context.Context, resourceGroupNam
 		"subscriptionId":        autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2019-06-01"
+	const APIVersion = "2020-01-13-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
