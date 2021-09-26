@@ -55,7 +55,7 @@ func (client SingleSignOnConfigurationsClient) CreateOrUpdate(ctx context.Contex
 
 	result, err = client.CreateOrUpdateSender(req)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "datadog.SingleSignOnConfigurationsClient", "CreateOrUpdate", nil, "Failure sending request")
+		err = autorest.NewErrorWithError(err, "datadog.SingleSignOnConfigurationsClient", "CreateOrUpdate", result.Response(), "Failure sending request")
 		return
 	}
 
@@ -83,7 +83,7 @@ func (client SingleSignOnConfigurationsClient) CreateOrUpdatePreparer(ctx contex
 		autorest.AsContentType("application/json; charset=utf-8"),
 		autorest.AsPut(),
 		autorest.WithBaseURL(client.BaseURI),
-		autorest.WithPathParameters("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/singleSignOnConfigurations/{configurationName}", pathParameters),
+		autorest.WithPathParameters("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DatadogNew/monitors/{monitorName}/singleSignOnConfigurations/{configurationName}", pathParameters),
 		autorest.WithQueryParameters(queryParameters))
 	if body != nil {
 		preparer = autorest.DecoratePreparer(preparer,
@@ -96,6 +96,7 @@ func (client SingleSignOnConfigurationsClient) CreateOrUpdatePreparer(ctx contex
 // http.Response Body if it receives an error.
 func (client SingleSignOnConfigurationsClient) CreateOrUpdateSender(req *http.Request) (future SingleSignOnConfigurationsCreateOrUpdateFuture, err error) {
 	var resp *http.Response
+	future.FutureAPI = &azure.Future{}
 	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
 	if err != nil {
 		return
@@ -174,7 +175,7 @@ func (client SingleSignOnConfigurationsClient) GetPreparer(ctx context.Context, 
 	preparer := autorest.CreatePreparer(
 		autorest.AsGet(),
 		autorest.WithBaseURL(client.BaseURI),
-		autorest.WithPathParameters("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/singleSignOnConfigurations/{configurationName}", pathParameters),
+		autorest.WithPathParameters("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DatadogNew/monitors/{monitorName}/singleSignOnConfigurations/{configurationName}", pathParameters),
 		autorest.WithQueryParameters(queryParameters))
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
 }
@@ -255,7 +256,7 @@ func (client SingleSignOnConfigurationsClient) ListPreparer(ctx context.Context,
 	preparer := autorest.CreatePreparer(
 		autorest.AsGet(),
 		autorest.WithBaseURL(client.BaseURI),
-		autorest.WithPathParameters("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/singleSignOnConfigurations", pathParameters),
+		autorest.WithPathParameters("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DatadogNew/monitors/{monitorName}/singleSignOnConfigurations", pathParameters),
 		autorest.WithQueryParameters(queryParameters))
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
 }

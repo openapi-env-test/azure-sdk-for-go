@@ -1,7 +1,7 @@
-// Package compute implements the Azure ARM Compute service API version .
+// Package devops implements the Azure ARM Devops service API version 2020-07-13-preview.
 //
-// Compute Client
-package compute
+// Azure DevOps Resource Provider
+package devops
 
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
@@ -14,11 +14,11 @@ import (
 )
 
 const (
-	// DefaultBaseURI is the default URI used for the service Compute
+	// DefaultBaseURI is the default URI used for the service Devops
 	DefaultBaseURI = "https://management.azure.com"
 )
 
-// BaseClient is the base client for Compute.
+// BaseClient is the base client for Devops.
 type BaseClient struct {
 	autorest.Client
 	BaseURI        string
