@@ -15,7 +15,7 @@ import (
 	"net/http"
 )
 
-// InstructionsClient is the billing client provides access to billing resources for Azure subscriptions.
+// InstructionsClient is the client for the Instructions methods of the Billing service.
 type InstructionsClient struct {
 	BaseClient
 }

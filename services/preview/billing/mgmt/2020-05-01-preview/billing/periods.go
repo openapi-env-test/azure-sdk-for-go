@@ -15,7 +15,7 @@ import (
 	"net/http"
 )
 
-// PeriodsClient is the billing client provides access to billing resources for Azure subscriptions.
+// PeriodsClient is the client for the Periods methods of the Billing service.
 type PeriodsClient struct {
 	BaseClient
 }

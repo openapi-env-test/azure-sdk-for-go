@@ -14,7 +14,7 @@ import (
 	"net/http"
 )
 
-// CustomersClient is the billing client provides access to billing resources for Azure subscriptions.
+// CustomersClient is the client for the Customers methods of the Billing service.
 type CustomersClient struct {
 	BaseClient
 }

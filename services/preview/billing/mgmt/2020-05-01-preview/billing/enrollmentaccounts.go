@@ -14,7 +14,7 @@ import (
 	"net/http"
 )
 
-// EnrollmentAccountsClient is the billing client provides access to billing resources for Azure subscriptions.
+// EnrollmentAccountsClient is the client for the EnrollmentAccounts methods of the Billing service.
 type EnrollmentAccountsClient struct {
 	BaseClient
 }

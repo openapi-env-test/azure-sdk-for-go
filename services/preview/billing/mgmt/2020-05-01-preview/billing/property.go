@@ -14,7 +14,7 @@ import (
 	"net/http"
 )
 
-// PropertyClient is the billing client provides access to billing resources for Azure subscriptions.
+// PropertyClient is the client for the Property methods of the Billing service.
 type PropertyClient struct {
 	BaseClient
 }

@@ -15,7 +15,7 @@ import (
 	"net/http"
 )
 
-// AddressClient is the billing client provides access to billing resources for Azure subscriptions.
+// AddressClient is the client for the Address methods of the Billing service.
 type AddressClient struct {
 	BaseClient
 }

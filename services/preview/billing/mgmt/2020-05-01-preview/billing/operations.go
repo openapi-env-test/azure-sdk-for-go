@@ -14,7 +14,7 @@ import (
 	"net/http"
 )
 
-// OperationsClient is the billing client provides access to billing resources for Azure subscriptions.
+// OperationsClient is the client for the Operations methods of the Billing service.
 type OperationsClient struct {
 	BaseClient
 }
