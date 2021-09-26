@@ -2610,7 +2610,7 @@ type CloudServiceVaultSecretGroup struct {
 
 // CreationData data used when creating a disk.
 type CreationData struct {
-	// CreateOption - This enumerates the possible sources of a disk's creation. Possible values include: 'DiskCreateOptionEmpty', 'DiskCreateOptionAttach', 'DiskCreateOptionFromImage', 'DiskCreateOptionImport', 'DiskCreateOptionCopy', 'DiskCreateOptionRestore', 'DiskCreateOptionUpload'
+	// CreateOption - This enumerates the possible sources of a disk's creation. Possible values include: 'DiskCreateOptionEmpty', 'DiskCreateOptionAttach', 'DiskCreateOptionFromImage', 'DiskCreateOptionImport', 'DiskCreateOptionCopy', 'DiskCreateOptionRestore', 'DiskCreateOptionUpload', 'DiskCreateOptionCopyStart'
 	CreateOption DiskCreateOption `json:"createOption,omitempty"`
 	// StorageAccountID - Required if createOption is Import. The Azure Resource Manager identifier of the storage account containing the blob to import as a disk.
 	StorageAccountID *string `json:"storageAccountId,omitempty"`
@@ -3867,6 +3867,8 @@ func (d *Disk) UnmarshalJSON(body []byte) error {
 type DiskAccess struct {
 	autorest.Response     `json:"-"`
 	*DiskAccessProperties `json:"properties,omitempty"`
+	// ExtendedLocation - The extended location where the disk access will be created. Extended location cannot be changed.
+	ExtendedLocation *ExtendedLocation `json:"extendedLocation,omitempty"`
 	// ID - READ-ONLY; Resource Id
 	ID *string `json:"id,omitempty"`
 	// Name - READ-ONLY; Resource name
@@ -3884,6 +3886,9 @@ func (da DiskAccess) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
 	if da.DiskAccessProperties != nil {
 		objectMap["properties"] = da.DiskAccessProperties
+	}
+	if da.ExtendedLocation != nil {
+		objectMap["extendedLocation"] = da.ExtendedLocation
 	}
 	if da.Location != nil {
 		objectMap["location"] = da.Location
@@ -3911,6 +3916,15 @@ func (da *DiskAccess) UnmarshalJSON(body []byte) error {
 					return err
 				}
 				da.DiskAccessProperties = &diskAccessProperties
+			}
+		case "extendedLocation":
+			if v != nil {
+				var extendedLocation ExtendedLocation
+				err = json.Unmarshal(*v, &extendedLocation)
+				if err != nil {
+					return err
+				}
+				da.ExtendedLocation = &extendedLocation
 			}
 		case "id":
 			if v != nil {
@@ -5028,6 +5042,8 @@ type DiskProperties struct {
 	HyperVGeneration HyperVGeneration `json:"hyperVGeneration,omitempty"`
 	// PurchasePlan - Purchase plan information for the the image from which the OS disk was created. E.g. - {name: 2019-Datacenter, publisher: MicrosoftWindowsServer, product: WindowsServer}
 	PurchasePlan *PurchasePlan `json:"purchasePlan,omitempty"`
+	// SupportedCapabilities - List of supported capabilities for the image from which the OS disk was created.
+	SupportedCapabilities *SupportedCapabilities `json:"supportedCapabilities,omitempty"`
 	// CreationData - Disk source information. CreationData information cannot be changed after the disk has been created.
 	CreationData *CreationData `json:"creationData,omitempty"`
 	// DiskSizeGB - If creationData.createOption is Empty, this field is mandatory and it indicates the size of the disk to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the disk is not attached to a running VM, and can only increase the disk's size.
@@ -5048,7 +5064,7 @@ type DiskProperties struct {
 	DiskIOPSReadOnly *int64 `json:"diskIOPSReadOnly,omitempty"`
 	// DiskMBpsReadOnly - The total throughput (MBps) that will be allowed across all VMs mounting the shared disk as ReadOnly. MBps means millions of bytes per second - MB here uses the ISO notation, of powers of 10.
 	DiskMBpsReadOnly *int64 `json:"diskMBpsReadOnly,omitempty"`
-	// DiskState - The state of the disk. Possible values include: 'DiskStateUnattached', 'DiskStateAttached', 'DiskStateReserved', 'DiskStateActiveSAS', 'DiskStateReadyToUpload', 'DiskStateActiveUpload'
+	// DiskState - The state of the disk. Possible values include: 'DiskStateUnattached', 'DiskStateAttached', 'DiskStateReserved', 'DiskStateFrozen', 'DiskStateActiveSAS', 'DiskStateActiveSASFrozen', 'DiskStateReadyToUpload', 'DiskStateActiveUpload'
 	DiskState DiskState `json:"diskState,omitempty"`
 	// Encryption - Encryption property can be used to encrypt data at rest with customer managed keys or platform managed keys.
 	Encryption *Encryption `json:"encryption,omitempty"`
@@ -5070,6 +5086,10 @@ type DiskProperties struct {
 	SupportsHibernation *bool `json:"supportsHibernation,omitempty"`
 	// SecurityProfile - Contains the security related information for the resource.
 	SecurityProfile *DiskSecurityProfile `json:"securityProfile,omitempty"`
+	// CompletionPercent - Percentage complete for the background copy when a resource is created via the CopyStart operation.
+	CompletionPercent *float64 `json:"completionPercent,omitempty"`
+	// PublicNetworkAccess - Possible values include: 'PublicNetworkAccessEnabled', 'PublicNetworkAccessDisabled'
+	PublicNetworkAccess PublicNetworkAccess `json:"publicNetworkAccess,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for DiskProperties.
@@ -5083,6 +5103,9 @@ func (dp DiskProperties) MarshalJSON() ([]byte, error) {
 	}
 	if dp.PurchasePlan != nil {
 		objectMap["purchasePlan"] = dp.PurchasePlan
+	}
+	if dp.SupportedCapabilities != nil {
+		objectMap["supportedCapabilities"] = dp.SupportedCapabilities
 	}
 	if dp.CreationData != nil {
 		objectMap["creationData"] = dp.CreationData
@@ -5131,6 +5154,12 @@ func (dp DiskProperties) MarshalJSON() ([]byte, error) {
 	}
 	if dp.SecurityProfile != nil {
 		objectMap["securityProfile"] = dp.SecurityProfile
+	}
+	if dp.CompletionPercent != nil {
+		objectMap["completionPercent"] = dp.CompletionPercent
+	}
+	if dp.PublicNetworkAccess != "" {
+		objectMap["publicNetworkAccess"] = dp.PublicNetworkAccess
 	}
 	return json.Marshal(objectMap)
 }
@@ -5421,6 +5450,8 @@ type DiskRestorePointProperties struct {
 	HyperVGeneration HyperVGeneration `json:"hyperVGeneration,omitempty"`
 	// PurchasePlan - Purchase plan information for the the image from which the OS disk was created.
 	PurchasePlan *PurchasePlan `json:"purchasePlan,omitempty"`
+	// SupportedCapabilities - List of supported capabilities (like accelerated networking) for the image from which the OS disk was created.
+	SupportedCapabilities *SupportedCapabilities `json:"supportedCapabilities,omitempty"`
 	// FamilyID - READ-ONLY; id of the backing snapshot's MIS family
 	FamilyID *string `json:"familyId,omitempty"`
 	// SourceUniqueID - READ-ONLY; unique incarnation id of the source disk
@@ -5429,6 +5460,14 @@ type DiskRestorePointProperties struct {
 	Encryption *Encryption `json:"encryption,omitempty"`
 	// SupportsHibernation - Indicates the OS on a disk supports hibernation.
 	SupportsHibernation *bool `json:"supportsHibernation,omitempty"`
+	// NetworkAccessPolicy - Possible values include: 'NetworkAccessPolicyAllowAll', 'NetworkAccessPolicyAllowPrivate', 'NetworkAccessPolicyDenyAll'
+	NetworkAccessPolicy NetworkAccessPolicy `json:"networkAccessPolicy,omitempty"`
+	// PublicNetworkAccess - Possible values include: 'PublicNetworkAccessEnabled', 'PublicNetworkAccessDisabled'
+	PublicNetworkAccess PublicNetworkAccess `json:"publicNetworkAccess,omitempty"`
+	// DiskAccessID - ARM id of the DiskAccess resource for using private endpoints on disks.
+	DiskAccessID *string `json:"diskAccessId,omitempty"`
+	// CompletionPercent - Percentage complete for the background copy when a resource is created via the CopyStart operation.
+	CompletionPercent *float64 `json:"completionPercent,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for DiskRestorePointProperties.
@@ -5440,8 +5479,23 @@ func (drpp DiskRestorePointProperties) MarshalJSON() ([]byte, error) {
 	if drpp.PurchasePlan != nil {
 		objectMap["purchasePlan"] = drpp.PurchasePlan
 	}
+	if drpp.SupportedCapabilities != nil {
+		objectMap["supportedCapabilities"] = drpp.SupportedCapabilities
+	}
 	if drpp.SupportsHibernation != nil {
 		objectMap["supportsHibernation"] = drpp.SupportsHibernation
+	}
+	if drpp.NetworkAccessPolicy != "" {
+		objectMap["networkAccessPolicy"] = drpp.NetworkAccessPolicy
+	}
+	if drpp.PublicNetworkAccess != "" {
+		objectMap["publicNetworkAccess"] = drpp.PublicNetworkAccess
+	}
+	if drpp.DiskAccessID != nil {
+		objectMap["diskAccessId"] = drpp.DiskAccessID
+	}
+	if drpp.CompletionPercent != nil {
+		objectMap["completionPercent"] = drpp.CompletionPercent
 	}
 	return json.Marshal(objectMap)
 }
@@ -5803,10 +5857,14 @@ type DiskUpdateProperties struct {
 	BurstingEnabled *bool `json:"burstingEnabled,omitempty"`
 	// PurchasePlan - Purchase plan information to be added on the OS disk
 	PurchasePlan *PurchasePlan `json:"purchasePlan,omitempty"`
+	// SupportedCapabilities - List of supported capabilities (like accelerated networking) to be added on the OS disk.
+	SupportedCapabilities *SupportedCapabilities `json:"supportedCapabilities,omitempty"`
 	// PropertyUpdatesInProgress - READ-ONLY; Properties of the disk for which update is pending.
 	PropertyUpdatesInProgress *PropertyUpdatesInProgress `json:"propertyUpdatesInProgress,omitempty"`
 	// SupportsHibernation - Indicates the OS on a disk supports hibernation.
 	SupportsHibernation *bool `json:"supportsHibernation,omitempty"`
+	// PublicNetworkAccess - Possible values include: 'PublicNetworkAccessEnabled', 'PublicNetworkAccessDisabled'
+	PublicNetworkAccess PublicNetworkAccess `json:"publicNetworkAccess,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for DiskUpdateProperties.
@@ -5854,8 +5912,14 @@ func (dup DiskUpdateProperties) MarshalJSON() ([]byte, error) {
 	if dup.PurchasePlan != nil {
 		objectMap["purchasePlan"] = dup.PurchasePlan
 	}
+	if dup.SupportedCapabilities != nil {
+		objectMap["supportedCapabilities"] = dup.SupportedCapabilities
+	}
 	if dup.SupportsHibernation != nil {
 		objectMap["supportsHibernation"] = dup.SupportsHibernation
+	}
+	if dup.PublicNetworkAccess != "" {
+		objectMap["publicNetworkAccess"] = dup.PublicNetworkAccess
 	}
 	return json.Marshal(objectMap)
 }
@@ -5910,6 +5974,8 @@ type EncryptionSetProperties struct {
 	RotationToLatestKeyVersionEnabled *bool `json:"rotationToLatestKeyVersionEnabled,omitempty"`
 	// LastKeyRotationTimestamp - READ-ONLY; The time when the active key of this disk encryption set was updated.
 	LastKeyRotationTimestamp *date.Time `json:"lastKeyRotationTimestamp,omitempty"`
+	// AutoKeyRotationError - READ-ONLY; The error that was encountered during auto-key rotation. If an error is present, then auto-key rotation will not be attempted until the error on this disk encryption set is fixed.
+	AutoKeyRotationError *APIError `json:"autoKeyRotationError,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for EncryptionSetProperties.
@@ -14451,13 +14517,15 @@ type SnapshotProperties struct {
 	HyperVGeneration HyperVGeneration `json:"hyperVGeneration,omitempty"`
 	// PurchasePlan - Purchase plan information for the image from which the source disk for the snapshot was originally created.
 	PurchasePlan *PurchasePlan `json:"purchasePlan,omitempty"`
+	// SupportedCapabilities - List of supported capabilities (like Accelerated Networking) for the image from which the source disk from the snapshot was originally created.
+	SupportedCapabilities *SupportedCapabilities `json:"supportedCapabilities,omitempty"`
 	// CreationData - Disk source information. CreationData information cannot be changed after the disk has been created.
 	CreationData *CreationData `json:"creationData,omitempty"`
 	// DiskSizeGB - If creationData.createOption is Empty, this field is mandatory and it indicates the size of the disk to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the disk is not attached to a running VM, and can only increase the disk's size.
 	DiskSizeGB *int32 `json:"diskSizeGB,omitempty"`
 	// DiskSizeBytes - READ-ONLY; The size of the disk in bytes. This field is read only.
 	DiskSizeBytes *int64 `json:"diskSizeBytes,omitempty"`
-	// DiskState - The state of the snapshot. Possible values include: 'DiskStateUnattached', 'DiskStateAttached', 'DiskStateReserved', 'DiskStateActiveSAS', 'DiskStateReadyToUpload', 'DiskStateActiveUpload'
+	// DiskState - The state of the snapshot. Possible values include: 'DiskStateUnattached', 'DiskStateAttached', 'DiskStateReserved', 'DiskStateFrozen', 'DiskStateActiveSAS', 'DiskStateActiveSASFrozen', 'DiskStateReadyToUpload', 'DiskStateActiveUpload'
 	DiskState DiskState `json:"diskState,omitempty"`
 	// UniqueID - READ-ONLY; Unique Guid identifying the resource.
 	UniqueID *string `json:"uniqueId,omitempty"`
@@ -14475,6 +14543,10 @@ type SnapshotProperties struct {
 	DiskAccessID *string `json:"diskAccessId,omitempty"`
 	// SupportsHibernation - Indicates the OS on a snapshot supports hibernation.
 	SupportsHibernation *bool `json:"supportsHibernation,omitempty"`
+	// PublicNetworkAccess - Possible values include: 'PublicNetworkAccessEnabled', 'PublicNetworkAccessDisabled'
+	PublicNetworkAccess PublicNetworkAccess `json:"publicNetworkAccess,omitempty"`
+	// CompletionPercent - Percentage complete for the background copy when a resource is created via the CopyStart operation.
+	CompletionPercent *float64 `json:"completionPercent,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for SnapshotProperties.
@@ -14488,6 +14560,9 @@ func (sp SnapshotProperties) MarshalJSON() ([]byte, error) {
 	}
 	if sp.PurchasePlan != nil {
 		objectMap["purchasePlan"] = sp.PurchasePlan
+	}
+	if sp.SupportedCapabilities != nil {
+		objectMap["supportedCapabilities"] = sp.SupportedCapabilities
 	}
 	if sp.CreationData != nil {
 		objectMap["creationData"] = sp.CreationData
@@ -14515,6 +14590,12 @@ func (sp SnapshotProperties) MarshalJSON() ([]byte, error) {
 	}
 	if sp.SupportsHibernation != nil {
 		objectMap["supportsHibernation"] = sp.SupportsHibernation
+	}
+	if sp.PublicNetworkAccess != "" {
+		objectMap["publicNetworkAccess"] = sp.PublicNetworkAccess
+	}
+	if sp.CompletionPercent != nil {
+		objectMap["completionPercent"] = sp.CompletionPercent
 	}
 	return json.Marshal(objectMap)
 }
@@ -14822,6 +14903,8 @@ type SnapshotUpdateProperties struct {
 	DiskAccessID *string `json:"diskAccessId,omitempty"`
 	// SupportsHibernation - Indicates the OS on a snapshot supports hibernation.
 	SupportsHibernation *bool `json:"supportsHibernation,omitempty"`
+	// PublicNetworkAccess - Possible values include: 'PublicNetworkAccessEnabled', 'PublicNetworkAccessDisabled'
+	PublicNetworkAccess PublicNetworkAccess `json:"publicNetworkAccess,omitempty"`
 }
 
 // SoftDeletePolicy contains information about the soft deletion policy of the gallery.
@@ -15241,6 +15324,13 @@ type SubResourceWithColocationStatus struct {
 	ColocationStatus *InstanceViewStatus `json:"colocationStatus,omitempty"`
 	// ID - Resource Id
 	ID *string `json:"id,omitempty"`
+}
+
+// SupportedCapabilities list of supported capabilities (like accelerated networking) persisted on the disk
+// resource for VM use.
+type SupportedCapabilities struct {
+	// AcceleratedNetwork - True if the image from which the OS disk is created supports accelerated networking.
+	AcceleratedNetwork *bool `json:"acceleratedNetwork,omitempty"`
 }
 
 // TargetRegion describes the target region information.
