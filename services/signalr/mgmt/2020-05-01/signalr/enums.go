@@ -111,11 +111,13 @@ const (
 	RESTAPI RequestType = "RESTAPI"
 	// ServerConnection ...
 	ServerConnection RequestType = "ServerConnection"
+	// Trace ...
+	Trace RequestType = "Trace"
 )
 
 // PossibleRequestTypeValues returns an array of possible values for the RequestType const type.
 func PossibleRequestTypeValues() []RequestType {
-	return []RequestType{ClientConnection, RESTAPI, ServerConnection}
+	return []RequestType{ClientConnection, RESTAPI, ServerConnection, Trace}
 }
 
 // ServiceKind enumerates the values for service kind.
