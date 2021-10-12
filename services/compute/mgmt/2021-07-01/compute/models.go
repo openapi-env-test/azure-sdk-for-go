@@ -6345,43 +6345,6 @@ func (future *GalleriesCreateOrUpdateFuture) result(client GalleriesClient) (g G
 	return
 }
 
-// GalleriesDeleteFuture an abstraction for monitoring and retrieving the results of a long-running
-// operation.
-type GalleriesDeleteFuture struct {
-	azure.FutureAPI
-	// Result returns the result of the asynchronous operation.
-	// If the operation has not completed it will return an error.
-	Result func(GalleriesClient) (autorest.Response, error)
-}
-
-// UnmarshalJSON is the custom unmarshaller for CreateFuture.
-func (future *GalleriesDeleteFuture) UnmarshalJSON(body []byte) error {
-	var azFuture azure.Future
-	if err := json.Unmarshal(body, &azFuture); err != nil {
-		return err
-	}
-	future.FutureAPI = &azFuture
-	future.Result = future.result
-	return nil
-}
-
-// result is the default implementation for GalleriesDeleteFuture.Result.
-func (future *GalleriesDeleteFuture) result(client GalleriesClient) (ar autorest.Response, err error) {
-	var done bool
-	done, err = future.DoneWithContext(context.Background(), client)
-	if err != nil {
-		err = autorest.NewErrorWithError(err, "compute.GalleriesDeleteFuture", "Result", future.Response(), "Polling failure")
-		return
-	}
-	if !done {
-		ar.Response = future.Response()
-		err = azure.NewAsyncOpIncompleteError("compute.GalleriesDeleteFuture")
-		return
-	}
-	ar.Response = future.Response()
-	return
-}
-
 // GalleriesUpdateFuture an abstraction for monitoring and retrieving the results of a long-running
 // operation.
 type GalleriesUpdateFuture struct {
@@ -13848,7 +13811,6 @@ type SharedGalleryIdentifier struct {
 // SharedGalleryImage specifies information about the gallery image definition that you want to create or
 // update.
 type SharedGalleryImage struct {
-	autorest.Response             `json:"-"`
 	*SharedGalleryImageProperties `json:"properties,omitempty"`
 	*SharedGalleryIdentifier      `json:"identifier,omitempty"`
 	// Name - READ-ONLY; Resource name
