@@ -34,8 +34,9 @@ func NewManagedApisClientWithBaseURI(baseURI string, subscriptionID string) Mana
 // Parameters:
 // location - the location.
 // APIName - the managed API name.
+// test - test.
 // export - flag showing whether to export API definition in format specified by Accept header.
-func (client ManagedApisClient) Get(ctx context.Context, location string, APIName string, export *bool) (result APIEntity, err error) {
+func (client ManagedApisClient) Get(ctx context.Context, location string, APIName string, test string, export *bool) (result APIEntity, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/ManagedApisClient.Get")
 		defer func() {
@@ -46,7 +47,7 @@ func (client ManagedApisClient) Get(ctx context.Context, location string, APINam
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	req, err := client.GetPreparer(ctx, location, APIName, export)
+	req, err := client.GetPreparer(ctx, location, APIName, test, export)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "web.ManagedApisClient", "Get", nil, "Failure preparing request")
 		return
@@ -69,7 +70,7 @@ func (client ManagedApisClient) Get(ctx context.Context, location string, APINam
 }
 
 // GetPreparer prepares the Get request.
-func (client ManagedApisClient) GetPreparer(ctx context.Context, location string, APIName string, export *bool) (*http.Request, error) {
+func (client ManagedApisClient) GetPreparer(ctx context.Context, location string, APIName string, test string, export *bool) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"apiName":        autorest.Encode("path", APIName),
 		"location":       autorest.Encode("path", location),
@@ -79,6 +80,9 @@ func (client ManagedApisClient) GetPreparer(ctx context.Context, location string
 	const APIVersion = "2015-08-01-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
+	}
+	if len(test) > 0 {
+		queryParameters["test"] = autorest.Encode("query", test)
 	}
 	if export != nil {
 		queryParameters["export"] = autorest.Encode("query", *export)
