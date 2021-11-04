@@ -12,8 +12,6 @@ type AppResourceProvisioningState string
 const (
 	// Creating ...
 	Creating AppResourceProvisioningState = "Creating"
-	// Deleting ...
-	Deleting AppResourceProvisioningState = "Deleting"
 	// Failed ...
 	Failed AppResourceProvisioningState = "Failed"
 	// Succeeded ...
@@ -24,7 +22,7 @@ const (
 
 // PossibleAppResourceProvisioningStateValues returns an array of possible values for the AppResourceProvisioningState const type.
 func PossibleAppResourceProvisioningStateValues() []AppResourceProvisioningState {
-	return []AppResourceProvisioningState{Creating, Deleting, Failed, Succeeded, Updating}
+	return []AppResourceProvisioningState{Creating, Failed, Succeeded, Updating}
 }
 
 // ConfigServerState enumerates the values for config server state.
@@ -48,14 +46,31 @@ func PossibleConfigServerStateValues() []ConfigServerState {
 	return []ConfigServerState{ConfigServerStateDeleted, ConfigServerStateFailed, ConfigServerStateNotAvailable, ConfigServerStateSucceeded, ConfigServerStateUpdating}
 }
 
+// CreatedByType enumerates the values for created by type.
+type CreatedByType string
+
+const (
+	// Application ...
+	Application CreatedByType = "Application"
+	// Key ...
+	Key CreatedByType = "Key"
+	// ManagedIdentity ...
+	ManagedIdentity CreatedByType = "ManagedIdentity"
+	// User ...
+	User CreatedByType = "User"
+)
+
+// PossibleCreatedByTypeValues returns an array of possible values for the CreatedByType const type.
+func PossibleCreatedByTypeValues() []CreatedByType {
+	return []CreatedByType{Application, Key, ManagedIdentity, User}
+}
+
 // DeploymentResourceProvisioningState enumerates the values for deployment resource provisioning state.
 type DeploymentResourceProvisioningState string
 
 const (
 	// DeploymentResourceProvisioningStateCreating ...
 	DeploymentResourceProvisioningStateCreating DeploymentResourceProvisioningState = "Creating"
-	// DeploymentResourceProvisioningStateDeleting ...
-	DeploymentResourceProvisioningStateDeleting DeploymentResourceProvisioningState = "Deleting"
 	// DeploymentResourceProvisioningStateFailed ...
 	DeploymentResourceProvisioningStateFailed DeploymentResourceProvisioningState = "Failed"
 	// DeploymentResourceProvisioningStateSucceeded ...
@@ -66,7 +81,7 @@ const (
 
 // PossibleDeploymentResourceProvisioningStateValues returns an array of possible values for the DeploymentResourceProvisioningState const type.
 func PossibleDeploymentResourceProvisioningStateValues() []DeploymentResourceProvisioningState {
-	return []DeploymentResourceProvisioningState{DeploymentResourceProvisioningStateCreating, DeploymentResourceProvisioningStateDeleting, DeploymentResourceProvisioningStateFailed, DeploymentResourceProvisioningStateSucceeded, DeploymentResourceProvisioningStateUpdating}
+	return []DeploymentResourceProvisioningState{DeploymentResourceProvisioningStateCreating, DeploymentResourceProvisioningStateFailed, DeploymentResourceProvisioningStateSucceeded, DeploymentResourceProvisioningStateUpdating}
 }
 
 // DeploymentResourceStatus enumerates the values for deployment resource status.
@@ -111,6 +126,40 @@ const (
 // PossibleManagedIdentityTypeValues returns an array of possible values for the ManagedIdentityType const type.
 func PossibleManagedIdentityTypeValues() []ManagedIdentityType {
 	return []ManagedIdentityType{None, SystemAssigned, SystemAssignedUserAssigned, UserAssigned}
+}
+
+// MonitoringSettingState enumerates the values for monitoring setting state.
+type MonitoringSettingState string
+
+const (
+	// MonitoringSettingStateFailed ...
+	MonitoringSettingStateFailed MonitoringSettingState = "Failed"
+	// MonitoringSettingStateNotAvailable ...
+	MonitoringSettingStateNotAvailable MonitoringSettingState = "NotAvailable"
+	// MonitoringSettingStateSucceeded ...
+	MonitoringSettingStateSucceeded MonitoringSettingState = "Succeeded"
+	// MonitoringSettingStateUpdating ...
+	MonitoringSettingStateUpdating MonitoringSettingState = "Updating"
+)
+
+// PossibleMonitoringSettingStateValues returns an array of possible values for the MonitoringSettingState const type.
+func PossibleMonitoringSettingStateValues() []MonitoringSettingState {
+	return []MonitoringSettingState{MonitoringSettingStateFailed, MonitoringSettingStateNotAvailable, MonitoringSettingStateSucceeded, MonitoringSettingStateUpdating}
+}
+
+// PowerState enumerates the values for power state.
+type PowerState string
+
+const (
+	// Running ...
+	Running PowerState = "Running"
+	// Stopped ...
+	Stopped PowerState = "Stopped"
+)
+
+// PossiblePowerStateValues returns an array of possible values for the PowerState const type.
+func PossiblePowerStateValues() []PowerState {
+	return []PowerState{Running, Stopped}
 }
 
 // ProvisioningState enumerates the values for provisioning state.
@@ -206,6 +255,21 @@ func PossibleSkuScaleTypeValues() []SkuScaleType {
 	return []SkuScaleType{SkuScaleTypeAutomatic, SkuScaleTypeManual, SkuScaleTypeNone}
 }
 
+// StorageType enumerates the values for storage type.
+type StorageType string
+
+const (
+	// StorageTypeStorageAccount ...
+	StorageTypeStorageAccount StorageType = "StorageAccount"
+	// StorageTypeStorageProperties ...
+	StorageTypeStorageProperties StorageType = "StorageProperties"
+)
+
+// PossibleStorageTypeValues returns an array of possible values for the StorageType const type.
+func PossibleStorageTypeValues() []StorageType {
+	return []StorageType{StorageTypeStorageAccount, StorageTypeStorageProperties}
+}
+
 // SupportedRuntimePlatform enumerates the values for supported runtime platform.
 type SupportedRuntimePlatform string
 
@@ -253,25 +317,6 @@ func PossibleTestKeyTypeValues() []TestKeyType {
 	return []TestKeyType{Primary, Secondary}
 }
 
-// TraceProxyState enumerates the values for trace proxy state.
-type TraceProxyState string
-
-const (
-	// TraceProxyStateFailed ...
-	TraceProxyStateFailed TraceProxyState = "Failed"
-	// TraceProxyStateNotAvailable ...
-	TraceProxyStateNotAvailable TraceProxyState = "NotAvailable"
-	// TraceProxyStateSucceeded ...
-	TraceProxyStateSucceeded TraceProxyState = "Succeeded"
-	// TraceProxyStateUpdating ...
-	TraceProxyStateUpdating TraceProxyState = "Updating"
-)
-
-// PossibleTraceProxyStateValues returns an array of possible values for the TraceProxyState const type.
-func PossibleTraceProxyStateValues() []TraceProxyState {
-	return []TraceProxyState{TraceProxyStateFailed, TraceProxyStateNotAvailable, TraceProxyStateSucceeded, TraceProxyStateUpdating}
-}
-
 // TrafficDirection enumerates the values for traffic direction.
 type TrafficDirection string
 
@@ -287,10 +332,44 @@ func PossibleTrafficDirectionValues() []TrafficDirection {
 	return []TrafficDirection{Inbound, Outbound}
 }
 
+// Type enumerates the values for type.
+type Type string
+
+const (
+	// TypeAzureFileVolume ...
+	TypeAzureFileVolume Type = "AzureFileVolume"
+	// TypeCustomPersistentDiskProperties ...
+	TypeCustomPersistentDiskProperties Type = "CustomPersistentDiskProperties"
+)
+
+// PossibleTypeValues returns an array of possible values for the Type const type.
+func PossibleTypeValues() []Type {
+	return []Type{TypeAzureFileVolume, TypeCustomPersistentDiskProperties}
+}
+
+// TypeBasicCertificateProperties enumerates the values for type basic certificate properties.
+type TypeBasicCertificateProperties string
+
+const (
+	// TypeCertificateProperties ...
+	TypeCertificateProperties TypeBasicCertificateProperties = "CertificateProperties"
+	// TypeContentCertificate ...
+	TypeContentCertificate TypeBasicCertificateProperties = "ContentCertificate"
+	// TypeKeyVaultCertificate ...
+	TypeKeyVaultCertificate TypeBasicCertificateProperties = "KeyVaultCertificate"
+)
+
+// PossibleTypeBasicCertificatePropertiesValues returns an array of possible values for the TypeBasicCertificateProperties const type.
+func PossibleTypeBasicCertificatePropertiesValues() []TypeBasicCertificateProperties {
+	return []TypeBasicCertificateProperties{TypeCertificateProperties, TypeContentCertificate, TypeKeyVaultCertificate}
+}
+
 // UserSourceType enumerates the values for user source type.
 type UserSourceType string
 
 const (
+	// Container ...
+	Container UserSourceType = "Container"
 	// Jar ...
 	Jar UserSourceType = "Jar"
 	// NetCoreZip ...
@@ -301,5 +380,5 @@ const (
 
 // PossibleUserSourceTypeValues returns an array of possible values for the UserSourceType const type.
 func PossibleUserSourceTypeValues() []UserSourceType {
-	return []UserSourceType{Jar, NetCoreZip, Source}
+	return []UserSourceType{Container, Jar, NetCoreZip, Source}
 }
