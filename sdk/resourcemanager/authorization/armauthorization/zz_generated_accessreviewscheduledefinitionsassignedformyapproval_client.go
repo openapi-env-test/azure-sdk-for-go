@@ -11,11 +11,10 @@ package armauthorization
 import (
 	"context"
 	"fmt"
-	"net/http"
-
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore/arm"
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore/policy"
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore/runtime"
+	"net/http"
 )
 
 // AccessReviewScheduleDefinitionsAssignedForMyApprovalClient contains the methods for the AccessReviewScheduleDefinitionsAssignedForMyApproval group.
