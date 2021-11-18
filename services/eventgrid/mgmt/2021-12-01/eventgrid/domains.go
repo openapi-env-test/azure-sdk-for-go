@@ -192,7 +192,7 @@ func (client DomainsClient) DeleteResponder(resp *http.Response) (result autores
 	return
 }
 
-// Get get properties of a domain.
+// Get get properties of a domain touch.
 // Parameters:
 // resourceGroupName - the name of the resource group within the user's subscription.
 // domainName - name of the domain.
