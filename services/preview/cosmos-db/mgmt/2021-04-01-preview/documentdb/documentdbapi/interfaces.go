@@ -39,6 +39,7 @@ type DatabaseAccountsClientAPI interface {
 	OfflineRegion(ctx context.Context, resourceGroupName string, accountName string, regionParameterForOffline documentdb.RegionForOnlineOffline) (result documentdb.DatabaseAccountsOfflineRegionFuture, err error)
 	OnlineRegion(ctx context.Context, resourceGroupName string, accountName string, regionParameterForOnline documentdb.RegionForOnlineOffline) (result documentdb.DatabaseAccountsOnlineRegionFuture, err error)
 	RegenerateKey(ctx context.Context, resourceGroupName string, accountName string, keyToRegenerate documentdb.DatabaseAccountRegenerateKeyParameters) (result documentdb.DatabaseAccountsRegenerateKeyFuture, err error)
+	Test(ctx context.Context) (result documentdb.DatabaseAccountsListResult, err error)
 	Update(ctx context.Context, resourceGroupName string, accountName string, updateParameters documentdb.DatabaseAccountUpdateParameters) (result documentdb.DatabaseAccountsUpdateFuture, err error)
 }
 
@@ -368,7 +369,7 @@ var _ PrivateEndpointConnectionsClientAPI = (*documentdb.PrivateEndpointConnecti
 
 // ServiceClientAPI contains the set of methods on the ServiceClient type.
 type ServiceClientAPI interface {
-	Create(ctx context.Context, resourceGroupName string, accountName string, serviceName string, createUpdateParameters documentdb.ServiceResource) (result documentdb.ServiceCreateFuture, err error)
+	Create(ctx context.Context, resourceGroupName string, accountName string, serviceName string, createUpdateParameters documentdb.ServiceResourceCreateUpdateParameters) (result documentdb.ServiceCreateFuture, err error)
 	Delete(ctx context.Context, resourceGroupName string, accountName string, serviceName string) (result documentdb.ServiceDeleteFuture, err error)
 	Get(ctx context.Context, resourceGroupName string, accountName string, serviceName string) (result documentdb.ServiceResource, err error)
 	List(ctx context.Context, resourceGroupName string, accountName string) (result documentdb.ServiceResourceListResult, err error)
