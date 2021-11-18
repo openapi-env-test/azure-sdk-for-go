@@ -22,26 +22,18 @@ func unmarshalAdvancedFilterClassification(rawMsg json.RawMessage) (AdvancedFilt
 	switch m["operatorType"] {
 	case string(AdvancedFilterOperatorTypeBoolEquals):
 		b = &BoolEqualsAdvancedFilter{}
-	case string(AdvancedFilterOperatorTypeIsNotNull):
-		b = &IsNotNullAdvancedFilter{}
-	case string(AdvancedFilterOperatorTypeIsNullOrUndefined):
-		b = &IsNullOrUndefinedAdvancedFilter{}
 	case string(AdvancedFilterOperatorTypeNumberGreaterThan):
 		b = &NumberGreaterThanAdvancedFilter{}
 	case string(AdvancedFilterOperatorTypeNumberGreaterThanOrEquals):
 		b = &NumberGreaterThanOrEqualsAdvancedFilter{}
 	case string(AdvancedFilterOperatorTypeNumberIn):
 		b = &NumberInAdvancedFilter{}
-	case string(AdvancedFilterOperatorTypeNumberInRange):
-		b = &NumberInRangeAdvancedFilter{}
 	case string(AdvancedFilterOperatorTypeNumberLessThan):
 		b = &NumberLessThanAdvancedFilter{}
 	case string(AdvancedFilterOperatorTypeNumberLessThanOrEquals):
 		b = &NumberLessThanOrEqualsAdvancedFilter{}
 	case string(AdvancedFilterOperatorTypeNumberNotIn):
 		b = &NumberNotInAdvancedFilter{}
-	case string(AdvancedFilterOperatorTypeNumberNotInRange):
-		b = &NumberNotInRangeAdvancedFilter{}
 	case string(AdvancedFilterOperatorTypeStringBeginsWith):
 		b = &StringBeginsWithAdvancedFilter{}
 	case string(AdvancedFilterOperatorTypeStringContains):
@@ -50,12 +42,6 @@ func unmarshalAdvancedFilterClassification(rawMsg json.RawMessage) (AdvancedFilt
 		b = &StringEndsWithAdvancedFilter{}
 	case string(AdvancedFilterOperatorTypeStringIn):
 		b = &StringInAdvancedFilter{}
-	case string(AdvancedFilterOperatorTypeStringNotBeginsWith):
-		b = &StringNotBeginsWithAdvancedFilter{}
-	case string(AdvancedFilterOperatorTypeStringNotContains):
-		b = &StringNotContainsAdvancedFilter{}
-	case string(AdvancedFilterOperatorTypeStringNotEndsWith):
-		b = &StringNotEndsWithAdvancedFilter{}
 	case string(AdvancedFilterOperatorTypeStringNotIn):
 		b = &StringNotInAdvancedFilter{}
 	default:

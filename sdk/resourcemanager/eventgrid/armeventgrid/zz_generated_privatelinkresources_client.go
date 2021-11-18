@@ -11,14 +11,13 @@ package armeventgrid
 import (
 	"context"
 	"errors"
+	"github.com/Azure/azure-sdk-for-go/sdk/azcore/arm"
+	"github.com/Azure/azure-sdk-for-go/sdk/azcore/policy"
+	"github.com/Azure/azure-sdk-for-go/sdk/azcore/runtime"
 	"net/http"
 	"net/url"
 	"strconv"
 	"strings"
-
-	"github.com/Azure/azure-sdk-for-go/sdk/azcore/arm"
-	"github.com/Azure/azure-sdk-for-go/sdk/azcore/policy"
-	"github.com/Azure/azure-sdk-for-go/sdk/azcore/runtime"
 )
 
 // PrivateLinkResourcesClient contains the methods for the PrivateLinkResources group.
@@ -79,7 +78,7 @@ func (client *PrivateLinkResourcesClient) getCreateRequest(ctx context.Context, 
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-06-01-preview")
+	reqQP.Set("api-version", "2021-12-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -106,7 +105,7 @@ func (client *PrivateLinkResourcesClient) getHandleError(resp *http.Response) er
 	return runtime.NewResponseError(errors.New(string(body)), resp)
 }
 
-// ListByResource - List all the private link resources under a topic, domain, or partner namespace.
+// ListByResource - List all the private link resources under a topic or domain.
 // If the operation fails it returns a generic error.
 func (client *PrivateLinkResourcesClient) ListByResource(resourceGroupName string, parentType string, parentName string, options *PrivateLinkResourcesListByResourceOptions) *PrivateLinkResourcesListByResourcePager {
 	return &PrivateLinkResourcesListByResourcePager{
@@ -144,7 +143,7 @@ func (client *PrivateLinkResourcesClient) listByResourceCreateRequest(ctx contex
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-06-01-preview")
+	reqQP.Set("api-version", "2021-12-01")
 	if options != nil && options.Filter != nil {
 		reqQP.Set("$filter", *options.Filter)
 	}
