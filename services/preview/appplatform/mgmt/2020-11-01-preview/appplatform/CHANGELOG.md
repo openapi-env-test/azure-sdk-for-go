@@ -1,2 +1,10 @@
-# Change History
+# Unreleased
 
+## Additive Changes
+
+### Struct Changes
+
+#### New Struct Fields
+
+1. MetricDimension.ToBeExportedForShoebox
+1. MetricSpecification.SourceMdmNamespace

@@ -74,7 +74,7 @@ func (client DeploymentsClient) CreateOrUpdatePreparer(ctx context.Context, reso
 		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2019-05-01-preview"
+	const APIVersion = "2021-09-01-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -124,13 +124,13 @@ func (client DeploymentsClient) CreateOrUpdateResponder(resp *http.Response) (re
 // serviceName - the name of the Service resource.
 // appName - the name of the App resource.
 // deploymentName - the name of the Deployment resource.
-func (client DeploymentsClient) Delete(ctx context.Context, resourceGroupName string, serviceName string, appName string, deploymentName string) (result autorest.Response, err error) {
+func (client DeploymentsClient) Delete(ctx context.Context, resourceGroupName string, serviceName string, appName string, deploymentName string) (result DeploymentsDeleteFuture, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/DeploymentsClient.Delete")
 		defer func() {
 			sc := -1
-			if result.Response != nil {
-				sc = result.Response.StatusCode
+			if result.FutureAPI != nil && result.FutureAPI.Response() != nil {
+				sc = result.FutureAPI.Response().StatusCode
 			}
 			tracing.EndSpan(ctx, sc, err)
 		}()
@@ -141,16 +141,9 @@ func (client DeploymentsClient) Delete(ctx context.Context, resourceGroupName st
 		return
 	}
 
-	resp, err := client.DeleteSender(req)
+	result, err = client.DeleteSender(req)
 	if err != nil {
-		result.Response = resp
-		err = autorest.NewErrorWithError(err, "appplatform.DeploymentsClient", "Delete", resp, "Failure sending request")
-		return
-	}
-
-	result, err = client.DeleteResponder(resp)
-	if err != nil {
-		err = autorest.NewErrorWithError(err, "appplatform.DeploymentsClient", "Delete", resp, "Failure responding to request")
+		err = autorest.NewErrorWithError(err, "appplatform.DeploymentsClient", "Delete", result.Response(), "Failure sending request")
 		return
 	}
 
@@ -167,7 +160,7 @@ func (client DeploymentsClient) DeletePreparer(ctx context.Context, resourceGrou
 		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2019-05-01-preview"
+	const APIVersion = "2021-09-01-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -182,8 +175,18 @@ func (client DeploymentsClient) DeletePreparer(ctx context.Context, resourceGrou
 
 // DeleteSender sends the Delete request. The method will close the
 // http.Response Body if it receives an error.
-func (client DeploymentsClient) DeleteSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+func (client DeploymentsClient) DeleteSender(req *http.Request) (future DeploymentsDeleteFuture, err error) {
+	var resp *http.Response
+	future.FutureAPI = &azure.Future{}
+	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	if err != nil {
+		return
+	}
+	var azf azure.Future
+	azf, err = azure.NewFutureFromResponse(resp)
+	future.FutureAPI = &azf
+	future.Result = future.result
+	return
 }
 
 // DeleteResponder handles the response to the Delete request. The method always
@@ -191,7 +194,179 @@ func (client DeploymentsClient) DeleteSender(req *http.Request) (*http.Response,
 func (client DeploymentsClient) DeleteResponder(resp *http.Response) (result autorest.Response, err error) {
 	err = autorest.Respond(
 		resp,
-		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusNoContent),
+		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusAccepted, http.StatusNoContent),
+		autorest.ByClosing())
+	result.Response = resp
+	return
+}
+
+// GenerateHeapDump generate Heap Dump
+// Parameters:
+// resourceGroupName - the name of the resource group that contains the resource. You can obtain this value
+// from the Azure Resource Manager API or the portal.
+// serviceName - the name of the Service resource.
+// appName - the name of the App resource.
+// deploymentName - the name of the Deployment resource.
+// diagnosticParameters - parameters for the diagnostic operation
+func (client DeploymentsClient) GenerateHeapDump(ctx context.Context, resourceGroupName string, serviceName string, appName string, deploymentName string, diagnosticParameters DiagnosticParameters) (result DeploymentsGenerateHeapDumpFuture, err error) {
+	if tracing.IsEnabled() {
+		ctx = tracing.StartSpan(ctx, fqdn+"/DeploymentsClient.GenerateHeapDump")
+		defer func() {
+			sc := -1
+			if result.FutureAPI != nil && result.FutureAPI.Response() != nil {
+				sc = result.FutureAPI.Response().StatusCode
+			}
+			tracing.EndSpan(ctx, sc, err)
+		}()
+	}
+	req, err := client.GenerateHeapDumpPreparer(ctx, resourceGroupName, serviceName, appName, deploymentName, diagnosticParameters)
+	if err != nil {
+		err = autorest.NewErrorWithError(err, "appplatform.DeploymentsClient", "GenerateHeapDump", nil, "Failure preparing request")
+		return
+	}
+
+	result, err = client.GenerateHeapDumpSender(req)
+	if err != nil {
+		err = autorest.NewErrorWithError(err, "appplatform.DeploymentsClient", "GenerateHeapDump", result.Response(), "Failure sending request")
+		return
+	}
+
+	return
+}
+
+// GenerateHeapDumpPreparer prepares the GenerateHeapDump request.
+func (client DeploymentsClient) GenerateHeapDumpPreparer(ctx context.Context, resourceGroupName string, serviceName string, appName string, deploymentName string, diagnosticParameters DiagnosticParameters) (*http.Request, error) {
+	pathParameters := map[string]interface{}{
+		"appName":           autorest.Encode("path", appName),
+		"deploymentName":    autorest.Encode("path", deploymentName),
+		"resourceGroupName": autorest.Encode("path", resourceGroupName),
+		"serviceName":       autorest.Encode("path", serviceName),
+		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
+	}
+
+	const APIVersion = "2021-09-01-preview"
+	queryParameters := map[string]interface{}{
+		"api-version": APIVersion,
+	}
+
+	preparer := autorest.CreatePreparer(
+		autorest.AsContentType("application/json; charset=utf-8"),
+		autorest.AsPost(),
+		autorest.WithBaseURL(client.BaseURI),
+		autorest.WithPathParameters("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apps/{appName}/deployments/{deploymentName}/generateHeapDump", pathParameters),
+		autorest.WithJSON(diagnosticParameters),
+		autorest.WithQueryParameters(queryParameters))
+	return preparer.Prepare((&http.Request{}).WithContext(ctx))
+}
+
+// GenerateHeapDumpSender sends the GenerateHeapDump request. The method will close the
+// http.Response Body if it receives an error.
+func (client DeploymentsClient) GenerateHeapDumpSender(req *http.Request) (future DeploymentsGenerateHeapDumpFuture, err error) {
+	var resp *http.Response
+	future.FutureAPI = &azure.Future{}
+	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	if err != nil {
+		return
+	}
+	var azf azure.Future
+	azf, err = azure.NewFutureFromResponse(resp)
+	future.FutureAPI = &azf
+	future.Result = future.result
+	return
+}
+
+// GenerateHeapDumpResponder handles the response to the GenerateHeapDump request. The method always
+// closes the http.Response Body.
+func (client DeploymentsClient) GenerateHeapDumpResponder(resp *http.Response) (result autorest.Response, err error) {
+	err = autorest.Respond(
+		resp,
+		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusAccepted),
+		autorest.ByClosing())
+	result.Response = resp
+	return
+}
+
+// GenerateThreadDump generate Thread Dump
+// Parameters:
+// resourceGroupName - the name of the resource group that contains the resource. You can obtain this value
+// from the Azure Resource Manager API or the portal.
+// serviceName - the name of the Service resource.
+// appName - the name of the App resource.
+// deploymentName - the name of the Deployment resource.
+// diagnosticParameters - parameters for the diagnostic operation
+func (client DeploymentsClient) GenerateThreadDump(ctx context.Context, resourceGroupName string, serviceName string, appName string, deploymentName string, diagnosticParameters DiagnosticParameters) (result DeploymentsGenerateThreadDumpFuture, err error) {
+	if tracing.IsEnabled() {
+		ctx = tracing.StartSpan(ctx, fqdn+"/DeploymentsClient.GenerateThreadDump")
+		defer func() {
+			sc := -1
+			if result.FutureAPI != nil && result.FutureAPI.Response() != nil {
+				sc = result.FutureAPI.Response().StatusCode
+			}
+			tracing.EndSpan(ctx, sc, err)
+		}()
+	}
+	req, err := client.GenerateThreadDumpPreparer(ctx, resourceGroupName, serviceName, appName, deploymentName, diagnosticParameters)
+	if err != nil {
+		err = autorest.NewErrorWithError(err, "appplatform.DeploymentsClient", "GenerateThreadDump", nil, "Failure preparing request")
+		return
+	}
+
+	result, err = client.GenerateThreadDumpSender(req)
+	if err != nil {
+		err = autorest.NewErrorWithError(err, "appplatform.DeploymentsClient", "GenerateThreadDump", result.Response(), "Failure sending request")
+		return
+	}
+
+	return
+}
+
+// GenerateThreadDumpPreparer prepares the GenerateThreadDump request.
+func (client DeploymentsClient) GenerateThreadDumpPreparer(ctx context.Context, resourceGroupName string, serviceName string, appName string, deploymentName string, diagnosticParameters DiagnosticParameters) (*http.Request, error) {
+	pathParameters := map[string]interface{}{
+		"appName":           autorest.Encode("path", appName),
+		"deploymentName":    autorest.Encode("path", deploymentName),
+		"resourceGroupName": autorest.Encode("path", resourceGroupName),
+		"serviceName":       autorest.Encode("path", serviceName),
+		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
+	}
+
+	const APIVersion = "2021-09-01-preview"
+	queryParameters := map[string]interface{}{
+		"api-version": APIVersion,
+	}
+
+	preparer := autorest.CreatePreparer(
+		autorest.AsContentType("application/json; charset=utf-8"),
+		autorest.AsPost(),
+		autorest.WithBaseURL(client.BaseURI),
+		autorest.WithPathParameters("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apps/{appName}/deployments/{deploymentName}/generateThreadDump", pathParameters),
+		autorest.WithJSON(diagnosticParameters),
+		autorest.WithQueryParameters(queryParameters))
+	return preparer.Prepare((&http.Request{}).WithContext(ctx))
+}
+
+// GenerateThreadDumpSender sends the GenerateThreadDump request. The method will close the
+// http.Response Body if it receives an error.
+func (client DeploymentsClient) GenerateThreadDumpSender(req *http.Request) (future DeploymentsGenerateThreadDumpFuture, err error) {
+	var resp *http.Response
+	future.FutureAPI = &azure.Future{}
+	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	if err != nil {
+		return
+	}
+	var azf azure.Future
+	azf, err = azure.NewFutureFromResponse(resp)
+	future.FutureAPI = &azf
+	future.Result = future.result
+	return
+}
+
+// GenerateThreadDumpResponder handles the response to the GenerateThreadDump request. The method always
+// closes the http.Response Body.
+func (client DeploymentsClient) GenerateThreadDumpResponder(resp *http.Response) (result autorest.Response, err error) {
+	err = autorest.Respond(
+		resp,
+		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusAccepted),
 		autorest.ByClosing())
 	result.Response = resp
 	return
@@ -247,7 +422,7 @@ func (client DeploymentsClient) GetPreparer(ctx context.Context, resourceGroupNa
 		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2019-05-01-preview"
+	const APIVersion = "2021-09-01-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -328,7 +503,7 @@ func (client DeploymentsClient) GetLogFileURLPreparer(ctx context.Context, resou
 		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2019-05-01-preview"
+	const APIVersion = "2021-09-01-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -413,7 +588,7 @@ func (client DeploymentsClient) ListPreparer(ctx context.Context, resourceGroupN
 		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2019-05-01-preview"
+	const APIVersion = "2021-09-01-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -484,15 +659,15 @@ func (client DeploymentsClient) ListComplete(ctx context.Context, resourceGroupN
 	return
 }
 
-// ListClusterAllDeployments list deployments for a certain service
+// ListForCluster list deployments for a certain service
 // Parameters:
 // resourceGroupName - the name of the resource group that contains the resource. You can obtain this value
 // from the Azure Resource Manager API or the portal.
 // serviceName - the name of the Service resource.
 // version - version of the deployments to be listed
-func (client DeploymentsClient) ListClusterAllDeployments(ctx context.Context, resourceGroupName string, serviceName string, version []string) (result DeploymentResourceCollectionPage, err error) {
+func (client DeploymentsClient) ListForCluster(ctx context.Context, resourceGroupName string, serviceName string, version []string) (result DeploymentResourceCollectionPage, err error) {
 	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/DeploymentsClient.ListClusterAllDeployments")
+		ctx = tracing.StartSpan(ctx, fqdn+"/DeploymentsClient.ListForCluster")
 		defer func() {
 			sc := -1
 			if result.drc.Response.Response != nil {
@@ -501,23 +676,23 @@ func (client DeploymentsClient) ListClusterAllDeployments(ctx context.Context, r
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	result.fn = client.listClusterAllDeploymentsNextResults
-	req, err := client.ListClusterAllDeploymentsPreparer(ctx, resourceGroupName, serviceName, version)
+	result.fn = client.listForClusterNextResults
+	req, err := client.ListForClusterPreparer(ctx, resourceGroupName, serviceName, version)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "appplatform.DeploymentsClient", "ListClusterAllDeployments", nil, "Failure preparing request")
+		err = autorest.NewErrorWithError(err, "appplatform.DeploymentsClient", "ListForCluster", nil, "Failure preparing request")
 		return
 	}
 
-	resp, err := client.ListClusterAllDeploymentsSender(req)
+	resp, err := client.ListForClusterSender(req)
 	if err != nil {
 		result.drc.Response = autorest.Response{Response: resp}
-		err = autorest.NewErrorWithError(err, "appplatform.DeploymentsClient", "ListClusterAllDeployments", resp, "Failure sending request")
+		err = autorest.NewErrorWithError(err, "appplatform.DeploymentsClient", "ListForCluster", resp, "Failure sending request")
 		return
 	}
 
-	result.drc, err = client.ListClusterAllDeploymentsResponder(resp)
+	result.drc, err = client.ListForClusterResponder(resp)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "appplatform.DeploymentsClient", "ListClusterAllDeployments", resp, "Failure responding to request")
+		err = autorest.NewErrorWithError(err, "appplatform.DeploymentsClient", "ListForCluster", resp, "Failure responding to request")
 		return
 	}
 	if result.drc.hasNextLink() && result.drc.IsEmpty() {
@@ -528,15 +703,15 @@ func (client DeploymentsClient) ListClusterAllDeployments(ctx context.Context, r
 	return
 }
 
-// ListClusterAllDeploymentsPreparer prepares the ListClusterAllDeployments request.
-func (client DeploymentsClient) ListClusterAllDeploymentsPreparer(ctx context.Context, resourceGroupName string, serviceName string, version []string) (*http.Request, error) {
+// ListForClusterPreparer prepares the ListForCluster request.
+func (client DeploymentsClient) ListForClusterPreparer(ctx context.Context, resourceGroupName string, serviceName string, version []string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"resourceGroupName": autorest.Encode("path", resourceGroupName),
 		"serviceName":       autorest.Encode("path", serviceName),
 		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2019-05-01-preview"
+	const APIVersion = "2021-09-01-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -552,15 +727,15 @@ func (client DeploymentsClient) ListClusterAllDeploymentsPreparer(ctx context.Co
 	return preparer.Prepare((&http.Request{}).WithContext(ctx))
 }
 
-// ListClusterAllDeploymentsSender sends the ListClusterAllDeployments request. The method will close the
+// ListForClusterSender sends the ListForCluster request. The method will close the
 // http.Response Body if it receives an error.
-func (client DeploymentsClient) ListClusterAllDeploymentsSender(req *http.Request) (*http.Response, error) {
+func (client DeploymentsClient) ListForClusterSender(req *http.Request) (*http.Response, error) {
 	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
-// ListClusterAllDeploymentsResponder handles the response to the ListClusterAllDeployments request. The method always
+// ListForClusterResponder handles the response to the ListForCluster request. The method always
 // closes the http.Response Body.
-func (client DeploymentsClient) ListClusterAllDeploymentsResponder(resp *http.Response) (result DeploymentResourceCollection, err error) {
+func (client DeploymentsClient) ListForClusterResponder(resp *http.Response) (result DeploymentResourceCollection, err error) {
 	err = autorest.Respond(
 		resp,
 		azure.WithErrorUnlessStatusCode(http.StatusOK),
@@ -570,31 +745,31 @@ func (client DeploymentsClient) ListClusterAllDeploymentsResponder(resp *http.Re
 	return
 }
 
-// listClusterAllDeploymentsNextResults retrieves the next set of results, if any.
-func (client DeploymentsClient) listClusterAllDeploymentsNextResults(ctx context.Context, lastResults DeploymentResourceCollection) (result DeploymentResourceCollection, err error) {
+// listForClusterNextResults retrieves the next set of results, if any.
+func (client DeploymentsClient) listForClusterNextResults(ctx context.Context, lastResults DeploymentResourceCollection) (result DeploymentResourceCollection, err error) {
 	req, err := lastResults.deploymentResourceCollectionPreparer(ctx)
 	if err != nil {
-		return result, autorest.NewErrorWithError(err, "appplatform.DeploymentsClient", "listClusterAllDeploymentsNextResults", nil, "Failure preparing next results request")
+		return result, autorest.NewErrorWithError(err, "appplatform.DeploymentsClient", "listForClusterNextResults", nil, "Failure preparing next results request")
 	}
 	if req == nil {
 		return
 	}
-	resp, err := client.ListClusterAllDeploymentsSender(req)
+	resp, err := client.ListForClusterSender(req)
 	if err != nil {
 		result.Response = autorest.Response{Response: resp}
-		return result, autorest.NewErrorWithError(err, "appplatform.DeploymentsClient", "listClusterAllDeploymentsNextResults", resp, "Failure sending next results request")
+		return result, autorest.NewErrorWithError(err, "appplatform.DeploymentsClient", "listForClusterNextResults", resp, "Failure sending next results request")
 	}
-	result, err = client.ListClusterAllDeploymentsResponder(resp)
+	result, err = client.ListForClusterResponder(resp)
 	if err != nil {
-		err = autorest.NewErrorWithError(err, "appplatform.DeploymentsClient", "listClusterAllDeploymentsNextResults", resp, "Failure responding to next results request")
+		err = autorest.NewErrorWithError(err, "appplatform.DeploymentsClient", "listForClusterNextResults", resp, "Failure responding to next results request")
 	}
 	return
 }
 
-// ListClusterAllDeploymentsComplete enumerates all values, automatically crossing page boundaries as required.
-func (client DeploymentsClient) ListClusterAllDeploymentsComplete(ctx context.Context, resourceGroupName string, serviceName string, version []string) (result DeploymentResourceCollectionIterator, err error) {
+// ListForClusterComplete enumerates all values, automatically crossing page boundaries as required.
+func (client DeploymentsClient) ListForClusterComplete(ctx context.Context, resourceGroupName string, serviceName string, version []string) (result DeploymentResourceCollectionIterator, err error) {
 	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/DeploymentsClient.ListClusterAllDeployments")
+		ctx = tracing.StartSpan(ctx, fqdn+"/DeploymentsClient.ListForCluster")
 		defer func() {
 			sc := -1
 			if result.Response().Response.Response != nil {
@@ -603,7 +778,7 @@ func (client DeploymentsClient) ListClusterAllDeploymentsComplete(ctx context.Co
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	result.page, err = client.ListClusterAllDeployments(ctx, resourceGroupName, serviceName, version)
+	result.page, err = client.ListForCluster(ctx, resourceGroupName, serviceName, version)
 	return
 }
 
@@ -650,7 +825,7 @@ func (client DeploymentsClient) RestartPreparer(ctx context.Context, resourceGro
 		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2019-05-01-preview"
+	const APIVersion = "2021-09-01-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -733,7 +908,7 @@ func (client DeploymentsClient) StartPreparer(ctx context.Context, resourceGroup
 		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2019-05-01-preview"
+	const APIVersion = "2021-09-01-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -765,6 +940,92 @@ func (client DeploymentsClient) StartSender(req *http.Request) (future Deploymen
 // StartResponder handles the response to the Start request. The method always
 // closes the http.Response Body.
 func (client DeploymentsClient) StartResponder(resp *http.Response) (result autorest.Response, err error) {
+	err = autorest.Respond(
+		resp,
+		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusAccepted),
+		autorest.ByClosing())
+	result.Response = resp
+	return
+}
+
+// StartJFR start JFR
+// Parameters:
+// resourceGroupName - the name of the resource group that contains the resource. You can obtain this value
+// from the Azure Resource Manager API or the portal.
+// serviceName - the name of the Service resource.
+// appName - the name of the App resource.
+// deploymentName - the name of the Deployment resource.
+// diagnosticParameters - parameters for the diagnostic operation
+func (client DeploymentsClient) StartJFR(ctx context.Context, resourceGroupName string, serviceName string, appName string, deploymentName string, diagnosticParameters DiagnosticParameters) (result DeploymentsStartJFRFuture, err error) {
+	if tracing.IsEnabled() {
+		ctx = tracing.StartSpan(ctx, fqdn+"/DeploymentsClient.StartJFR")
+		defer func() {
+			sc := -1
+			if result.FutureAPI != nil && result.FutureAPI.Response() != nil {
+				sc = result.FutureAPI.Response().StatusCode
+			}
+			tracing.EndSpan(ctx, sc, err)
+		}()
+	}
+	req, err := client.StartJFRPreparer(ctx, resourceGroupName, serviceName, appName, deploymentName, diagnosticParameters)
+	if err != nil {
+		err = autorest.NewErrorWithError(err, "appplatform.DeploymentsClient", "StartJFR", nil, "Failure preparing request")
+		return
+	}
+
+	result, err = client.StartJFRSender(req)
+	if err != nil {
+		err = autorest.NewErrorWithError(err, "appplatform.DeploymentsClient", "StartJFR", result.Response(), "Failure sending request")
+		return
+	}
+
+	return
+}
+
+// StartJFRPreparer prepares the StartJFR request.
+func (client DeploymentsClient) StartJFRPreparer(ctx context.Context, resourceGroupName string, serviceName string, appName string, deploymentName string, diagnosticParameters DiagnosticParameters) (*http.Request, error) {
+	pathParameters := map[string]interface{}{
+		"appName":           autorest.Encode("path", appName),
+		"deploymentName":    autorest.Encode("path", deploymentName),
+		"resourceGroupName": autorest.Encode("path", resourceGroupName),
+		"serviceName":       autorest.Encode("path", serviceName),
+		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
+	}
+
+	const APIVersion = "2021-09-01-preview"
+	queryParameters := map[string]interface{}{
+		"api-version": APIVersion,
+	}
+
+	preparer := autorest.CreatePreparer(
+		autorest.AsContentType("application/json; charset=utf-8"),
+		autorest.AsPost(),
+		autorest.WithBaseURL(client.BaseURI),
+		autorest.WithPathParameters("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apps/{appName}/deployments/{deploymentName}/StartJFR", pathParameters),
+		autorest.WithJSON(diagnosticParameters),
+		autorest.WithQueryParameters(queryParameters))
+	return preparer.Prepare((&http.Request{}).WithContext(ctx))
+}
+
+// StartJFRSender sends the StartJFR request. The method will close the
+// http.Response Body if it receives an error.
+func (client DeploymentsClient) StartJFRSender(req *http.Request) (future DeploymentsStartJFRFuture, err error) {
+	var resp *http.Response
+	future.FutureAPI = &azure.Future{}
+	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	if err != nil {
+		return
+	}
+	var azf azure.Future
+	azf, err = azure.NewFutureFromResponse(resp)
+	future.FutureAPI = &azf
+	future.Result = future.result
+	return
+}
+
+// StartJFRResponder handles the response to the StartJFR request. The method always
+// closes the http.Response Body.
+func (client DeploymentsClient) StartJFRResponder(resp *http.Response) (result autorest.Response, err error) {
 	err = autorest.Respond(
 		resp,
 		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusAccepted),
@@ -816,7 +1077,7 @@ func (client DeploymentsClient) StopPreparer(ctx context.Context, resourceGroupN
 		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2019-05-01-preview"
+	const APIVersion = "2021-09-01-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -900,7 +1161,7 @@ func (client DeploymentsClient) UpdatePreparer(ctx context.Context, resourceGrou
 		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2019-05-01-preview"
+	const APIVersion = "2021-09-01-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
