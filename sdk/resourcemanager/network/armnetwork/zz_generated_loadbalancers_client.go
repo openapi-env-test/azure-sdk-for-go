@@ -12,14 +12,13 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"net/http"
-	"net/url"
-	"strings"
-
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore/arm"
 	armruntime "github.com/Azure/azure-sdk-for-go/sdk/azcore/arm/runtime"
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore/policy"
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore/runtime"
+	"net/http"
+	"net/url"
+	"strings"
 )
 
 // LoadBalancersClient contains the methods for the LoadBalancers group.
@@ -92,7 +91,7 @@ func (client *LoadBalancersClient) createOrUpdateCreateRequest(ctx context.Conte
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-03-01")
+	reqQP.Set("api-version", "2021-05-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, runtime.MarshalAsJSON(req, parameters)
@@ -168,7 +167,7 @@ func (client *LoadBalancersClient) deleteCreateRequest(ctx context.Context, reso
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-03-01")
+	reqQP.Set("api-version", "2021-05-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -224,7 +223,7 @@ func (client *LoadBalancersClient) getCreateRequest(ctx context.Context, resourc
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-03-01")
+	reqQP.Set("api-version", "2021-05-01")
 	if options != nil && options.Expand != nil {
 		reqQP.Set("$expand", *options.Expand)
 	}
@@ -285,7 +284,7 @@ func (client *LoadBalancersClient) listCreateRequest(ctx context.Context, resour
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-03-01")
+	reqQP.Set("api-version", "2021-05-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -339,7 +338,7 @@ func (client *LoadBalancersClient) listAllCreateRequest(ctx context.Context, opt
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-03-01")
+	reqQP.Set("api-version", "2021-05-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -356,6 +355,86 @@ func (client *LoadBalancersClient) listAllHandleResponse(resp *http.Response) (L
 
 // listAllHandleError handles the ListAll error response.
 func (client *LoadBalancersClient) listAllHandleError(resp *http.Response) error {
+	body, err := runtime.Payload(resp)
+	if err != nil {
+		return runtime.NewResponseError(err, resp)
+	}
+	errType := CloudError{raw: string(body)}
+	if err := runtime.UnmarshalAsJSON(resp, &errType); err != nil {
+		return runtime.NewResponseError(fmt.Errorf("%s\n%s", string(body), err), resp)
+	}
+	return runtime.NewResponseError(&errType, resp)
+}
+
+// BeginListInboundNatRulePortMappings - List of inbound NAT rule port mappings.
+// If the operation fails it returns the *CloudError error type.
+func (client *LoadBalancersClient) BeginListInboundNatRulePortMappings(ctx context.Context, groupName string, loadBalancerName string, backendPoolName string, parameters QueryInboundNatRulePortMappingRequest, options *LoadBalancersBeginListInboundNatRulePortMappingsOptions) (LoadBalancersListInboundNatRulePortMappingsPollerResponse, error) {
+	resp, err := client.listInboundNatRulePortMappings(ctx, groupName, loadBalancerName, backendPoolName, parameters, options)
+	if err != nil {
+		return LoadBalancersListInboundNatRulePortMappingsPollerResponse{}, err
+	}
+	result := LoadBalancersListInboundNatRulePortMappingsPollerResponse{
+		RawResponse: resp,
+	}
+	pt, err := armruntime.NewPoller("LoadBalancersClient.ListInboundNatRulePortMappings", "location", resp, client.pl, client.listInboundNatRulePortMappingsHandleError)
+	if err != nil {
+		return LoadBalancersListInboundNatRulePortMappingsPollerResponse{}, err
+	}
+	result.Poller = &LoadBalancersListInboundNatRulePortMappingsPoller{
+		pt: pt,
+	}
+	return result, nil
+}
+
+// ListInboundNatRulePortMappings - List of inbound NAT rule port mappings.
+// If the operation fails it returns the *CloudError error type.
+func (client *LoadBalancersClient) listInboundNatRulePortMappings(ctx context.Context, groupName string, loadBalancerName string, backendPoolName string, parameters QueryInboundNatRulePortMappingRequest, options *LoadBalancersBeginListInboundNatRulePortMappingsOptions) (*http.Response, error) {
+	req, err := client.listInboundNatRulePortMappingsCreateRequest(ctx, groupName, loadBalancerName, backendPoolName, parameters, options)
+	if err != nil {
+		return nil, err
+	}
+	resp, err := client.pl.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	if !runtime.HasStatusCode(resp, http.StatusOK, http.StatusAccepted) {
+		return nil, client.listInboundNatRulePortMappingsHandleError(resp)
+	}
+	return resp, nil
+}
+
+// listInboundNatRulePortMappingsCreateRequest creates the ListInboundNatRulePortMappings request.
+func (client *LoadBalancersClient) listInboundNatRulePortMappingsCreateRequest(ctx context.Context, groupName string, loadBalancerName string, backendPoolName string, parameters QueryInboundNatRulePortMappingRequest, options *LoadBalancersBeginListInboundNatRulePortMappingsOptions) (*policy.Request, error) {
+	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/backendAddressPools/{backendPoolName}/queryInboundNatRulePortMapping"
+	if groupName == "" {
+		return nil, errors.New("parameter groupName cannot be empty")
+	}
+	urlPath = strings.ReplaceAll(urlPath, "{groupName}", url.PathEscape(groupName))
+	if loadBalancerName == "" {
+		return nil, errors.New("parameter loadBalancerName cannot be empty")
+	}
+	urlPath = strings.ReplaceAll(urlPath, "{loadBalancerName}", url.PathEscape(loadBalancerName))
+	if backendPoolName == "" {
+		return nil, errors.New("parameter backendPoolName cannot be empty")
+	}
+	urlPath = strings.ReplaceAll(urlPath, "{backendPoolName}", url.PathEscape(backendPoolName))
+	if client.subscriptionID == "" {
+		return nil, errors.New("parameter client.subscriptionID cannot be empty")
+	}
+	urlPath = strings.ReplaceAll(urlPath, "{subscriptionId}", url.PathEscape(client.subscriptionID))
+	req, err := runtime.NewRequest(ctx, http.MethodPost, runtime.JoinPaths(client.ep, urlPath))
+	if err != nil {
+		return nil, err
+	}
+	reqQP := req.Raw().URL.Query()
+	reqQP.Set("api-version", "2021-05-01")
+	req.Raw().URL.RawQuery = reqQP.Encode()
+	req.Raw().Header.Set("Accept", "application/json")
+	return req, runtime.MarshalAsJSON(req, parameters)
+}
+
+// listInboundNatRulePortMappingsHandleError handles the ListInboundNatRulePortMappings error response.
+func (client *LoadBalancersClient) listInboundNatRulePortMappingsHandleError(resp *http.Response) error {
 	body, err := runtime.Payload(resp)
 	if err != nil {
 		return runtime.NewResponseError(err, resp)
@@ -420,7 +499,7 @@ func (client *LoadBalancersClient) swapPublicIPAddressesCreateRequest(ctx contex
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-03-01")
+	reqQP.Set("api-version", "2021-05-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, runtime.MarshalAsJSON(req, parameters)
@@ -476,7 +555,7 @@ func (client *LoadBalancersClient) updateTagsCreateRequest(ctx context.Context, 
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-03-01")
+	reqQP.Set("api-version", "2021-05-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, runtime.MarshalAsJSON(req, parameters)

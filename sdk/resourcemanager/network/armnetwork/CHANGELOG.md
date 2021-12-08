@@ -1,4 +1,173 @@
 # Release History
 
+## 0.2.0 (2021-12-08)
+### Breaking Changes
+
+- Type of `CustomIPPrefixPropertiesFormat.ChildCustomIPPrefixes` has been changed from `[]*CustomIPPrefix` to `[]*SubResource`
+- Type of `CustomIPPrefixPropertiesFormat.CustomIPPrefixParent` has been changed from `*CustomIPPrefix` to `*SubResource`
+
+### New Content
+
+- New const `SingleQueryResultDirectionOne`
+- New const `VirtualNetworkEncryptionEnforcementAllowUnencrypted`
+- New const `OrderByOrderAscending`
+- New const `OwaspCrsExclusionEntryMatchVariableRequestCookieKeys`
+- New const `SingleQueryResultSeverityOne`
+- New const `OrderByOrderDescending`
+- New const `FirewallPolicySKUTierBasic`
+- New const `OwaspCrsExclusionEntryMatchVariableRequestHeaderKeys`
+- New const `SingleQueryResultSeverityTwo`
+- New const `SingleQueryResultDirectionZero`
+- New const `SingleQueryResultModeTwo`
+- New const `SingleQueryResultModeOne`
+- New const `AzureFirewallSKUTierBasic`
+- New const `SingleQueryResultSeverityThree`
+- New const `OwaspCrsExclusionEntryMatchVariableRequestCookieValues`
+- New const `OwaspCrsExclusionEntryMatchVariableRequestArgValues`
+- New const `OwaspCrsExclusionEntryMatchVariableRequestHeaderValues`
+- New const `OwaspCrsExclusionEntryMatchVariableRequestArgKeys`
+- New const `VirtualNetworkEncryptionEnforcementDropUnencrypted`
+- New const `SingleQueryResultDirectionTwo`
+- New const `SingleQueryResultModeZero`
+- New function `NewFirewallPolicyIdpsSignaturesClient(*arm.Connection, string) *FirewallPolicyIdpsSignaturesClient`
+- New function `*RoutingIntentDeletePoller.FinalResponse(context.Context) (RoutingIntentDeleteResponse, error)`
+- New function `*LoadBalancersListInboundNatRulePortMappingsPollerResponse.Resume(context.Context, *LoadBalancersClient, string) error`
+- New function `PossibleOrderByOrderValues() []OrderByOrder`
+- New function `*RoutingIntentListPager.PageResponse() RoutingIntentListResponse`
+- New function `OwaspCrsExclusionEntry.MarshalJSON() ([]byte, error)`
+- New function `*RoutingIntentListPager.Err() error`
+- New function `QueryResults.MarshalJSON() ([]byte, error)`
+- New function `*RoutingIntentDeletePoller.Done() bool`
+- New function `VirtualNetworkEncryptionEnforcement.ToPtr() *VirtualNetworkEncryptionEnforcement`
+- New function `*RoutingIntentCreateOrUpdatePoller.ResumeToken() (string, error)`
+- New function `RoutingPolicy.MarshalJSON() ([]byte, error)`
+- New function `*FirewallPolicyIdpsSignaturesClient.List(context.Context, string, string, IDPSQueryObject, *FirewallPolicyIdpsSignaturesListOptions) (FirewallPolicyIdpsSignaturesListResponse, error)`
+- New function `*RoutingIntentCreateOrUpdatePoller.Done() bool`
+- New function `*RoutingIntentDeletePollerResponse.Resume(context.Context, *RoutingIntentClient, string) error`
+- New function `*RoutingIntentClient.BeginDelete(context.Context, string, string, string, *RoutingIntentBeginDeleteOptions) (RoutingIntentDeletePollerResponse, error)`
+- New function `*RoutingIntentDeletePoller.Poll(context.Context) (*http.Response, error)`
+- New function `SingleQueryResultDirection.ToPtr() *SingleQueryResultDirection`
+- New function `*RoutingIntentListPager.NextPage(context.Context) bool`
+- New function `*FirewallPolicyIdpsSignaturesFilterValuesClient.List(context.Context, string, string, SignatureOverridesFilterValuesQuery, *FirewallPolicyIdpsSignaturesFilterValuesListOptions) (FirewallPolicyIdpsSignaturesFilterValuesListResponse, error)`
+- New function `LoadBalancersListInboundNatRulePortMappingsPollerResponse.PollUntilDone(context.Context, time.Duration) (LoadBalancersListInboundNatRulePortMappingsResponse, error)`
+- New function `*LoadBalancersClient.BeginListInboundNatRulePortMappings(context.Context, string, string, string, QueryInboundNatRulePortMappingRequest, *LoadBalancersBeginListInboundNatRulePortMappingsOptions) (LoadBalancersListInboundNatRulePortMappingsPollerResponse, error)`
+- New function `*RoutingIntentClient.List(string, string, *RoutingIntentListOptions) *RoutingIntentListPager`
+- New function `*LoadBalancersListInboundNatRulePortMappingsPoller.Poll(context.Context) (*http.Response, error)`
+- New function `NewFirewallPolicyIdpsSignaturesFilterValuesClient(*arm.Connection, string) *FirewallPolicyIdpsSignaturesFilterValuesClient`
+- New function `RoutingIntentProperties.MarshalJSON() ([]byte, error)`
+- New function `SignatureOverridesFilterValuesResponse.MarshalJSON() ([]byte, error)`
+- New function `*FirewallPolicyIdpsSignaturesOverridesClient.List(context.Context, string, string, *FirewallPolicyIdpsSignaturesOverridesListOptions) (FirewallPolicyIdpsSignaturesOverridesListResponse, error)`
+- New function `*LoadBalancersListInboundNatRulePortMappingsPoller.FinalResponse(context.Context) (LoadBalancersListInboundNatRulePortMappingsResponse, error)`
+- New function `SignaturesOverridesList.MarshalJSON() ([]byte, error)`
+- New function `PossibleVirtualNetworkEncryptionEnforcementValues() []VirtualNetworkEncryptionEnforcement`
+- New function `*FirewallPolicyIdpsSignaturesOverridesClient.Put(context.Context, string, string, SignaturesOverrides, *FirewallPolicyIdpsSignaturesOverridesPutOptions) (FirewallPolicyIdpsSignaturesOverridesPutResponse, error)`
+- New function `ExclusionManagedRuleGroup.MarshalJSON() ([]byte, error)`
+- New function `*RoutingIntentCreateOrUpdatePoller.Poll(context.Context) (*http.Response, error)`
+- New function `*RoutingIntentCreateOrUpdatePollerResponse.Resume(context.Context, *RoutingIntentClient, string) error`
+- New function `*RoutingIntentClient.Get(context.Context, string, string, string, *RoutingIntentGetOptions) (RoutingIntentGetResponse, error)`
+- New function `RoutingIntentCreateOrUpdatePollerResponse.PollUntilDone(context.Context, time.Duration) (RoutingIntentCreateOrUpdateResponse, error)`
+- New function `*RoutingIntentCreateOrUpdatePoller.FinalResponse(context.Context) (RoutingIntentCreateOrUpdateResponse, error)`
+- New function `*FirewallPolicyIdpsSignaturesOverridesClient.Get(context.Context, string, string, *FirewallPolicyIdpsSignaturesOverridesGetOptions) (FirewallPolicyIdpsSignaturesOverridesGetResponse, error)`
+- New function `LoadBalancerBackendAddressPropertiesFormat.MarshalJSON() ([]byte, error)`
+- New function `SingleQueryResultMode.ToPtr() *SingleQueryResultMode`
+- New function `ExclusionManagedRuleSet.MarshalJSON() ([]byte, error)`
+- New function `OrderByOrder.ToPtr() *OrderByOrder`
+- New function `PossibleSingleQueryResultSeverityValues() []SingleQueryResultSeverity`
+- New function `IDPSQueryObject.MarshalJSON() ([]byte, error)`
+- New function `SignaturesOverrides.MarshalJSON() ([]byte, error)`
+- New function `RoutingIntentDeletePollerResponse.PollUntilDone(context.Context, time.Duration) (RoutingIntentDeleteResponse, error)`
+- New function `SignaturesOverridesProperties.MarshalJSON() ([]byte, error)`
+- New function `*LoadBalancersListInboundNatRulePortMappingsPoller.Done() bool`
+- New function `ListRoutingIntentResult.MarshalJSON() ([]byte, error)`
+- New function `*RoutingIntentDeletePoller.ResumeToken() (string, error)`
+- New function `FilterItems.MarshalJSON() ([]byte, error)`
+- New function `PossibleSingleQueryResultModeValues() []SingleQueryResultMode`
+- New function `NewFirewallPolicyIdpsSignaturesOverridesClient(*arm.Connection, string) *FirewallPolicyIdpsSignaturesOverridesClient`
+- New function `*LoadBalancersListInboundNatRulePortMappingsPoller.ResumeToken() (string, error)`
+- New function `PossibleSingleQueryResultDirectionValues() []SingleQueryResultDirection`
+- New function `NewRoutingIntentClient(*arm.Connection, string) *RoutingIntentClient`
+- New function `SingleQueryResultSeverity.ToPtr() *SingleQueryResultSeverity`
+- New function `BackendAddressInboundNatRulePortMappings.MarshalJSON() ([]byte, error)`
+- New function `SingleQueryResult.MarshalJSON() ([]byte, error)`
+- New function `RoutingIntent.MarshalJSON() ([]byte, error)`
+- New function `*FirewallPolicyIdpsSignaturesOverridesClient.Patch(context.Context, string, string, SignaturesOverrides, *FirewallPolicyIdpsSignaturesOverridesPatchOptions) (FirewallPolicyIdpsSignaturesOverridesPatchResponse, error)`
+- New function `*RoutingIntentClient.BeginCreateOrUpdate(context.Context, string, string, string, RoutingIntent, *RoutingIntentBeginCreateOrUpdateOptions) (RoutingIntentCreateOrUpdatePollerResponse, error)`
+- New struct `BackendAddressInboundNatRulePortMappings`
+- New struct `ExclusionManagedRule`
+- New struct `ExclusionManagedRuleGroup`
+- New struct `ExclusionManagedRuleSet`
+- New struct `FilterItems`
+- New struct `FirewallPolicyIdpsSignaturesClient`
+- New struct `FirewallPolicyIdpsSignaturesFilterValuesClient`
+- New struct `FirewallPolicyIdpsSignaturesFilterValuesListOptions`
+- New struct `FirewallPolicyIdpsSignaturesFilterValuesListResponse`
+- New struct `FirewallPolicyIdpsSignaturesFilterValuesListResult`
+- New struct `FirewallPolicyIdpsSignaturesListOptions`
+- New struct `FirewallPolicyIdpsSignaturesListResponse`
+- New struct `FirewallPolicyIdpsSignaturesListResult`
+- New struct `FirewallPolicyIdpsSignaturesOverridesClient`
+- New struct `FirewallPolicyIdpsSignaturesOverridesGetOptions`
+- New struct `FirewallPolicyIdpsSignaturesOverridesGetResponse`
+- New struct `FirewallPolicyIdpsSignaturesOverridesGetResult`
+- New struct `FirewallPolicyIdpsSignaturesOverridesListOptions`
+- New struct `FirewallPolicyIdpsSignaturesOverridesListResponse`
+- New struct `FirewallPolicyIdpsSignaturesOverridesListResult`
+- New struct `FirewallPolicyIdpsSignaturesOverridesPatchOptions`
+- New struct `FirewallPolicyIdpsSignaturesOverridesPatchResponse`
+- New struct `FirewallPolicyIdpsSignaturesOverridesPatchResult`
+- New struct `FirewallPolicyIdpsSignaturesOverridesPutOptions`
+- New struct `FirewallPolicyIdpsSignaturesOverridesPutResponse`
+- New struct `FirewallPolicyIdpsSignaturesOverridesPutResult`
+- New struct `IDPSQueryObject`
+- New struct `InboundNatRulePortMapping`
+- New struct `ListRoutingIntentResult`
+- New struct `LoadBalancersBeginListInboundNatRulePortMappingsOptions`
+- New struct `LoadBalancersListInboundNatRulePortMappingsPoller`
+- New struct `LoadBalancersListInboundNatRulePortMappingsPollerResponse`
+- New struct `LoadBalancersListInboundNatRulePortMappingsResponse`
+- New struct `LoadBalancersListInboundNatRulePortMappingsResult`
+- New struct `NatRulePortMapping`
+- New struct `OrderBy`
+- New struct `QueryInboundNatRulePortMappingRequest`
+- New struct `QueryResults`
+- New struct `RoutingIntent`
+- New struct `RoutingIntentBeginCreateOrUpdateOptions`
+- New struct `RoutingIntentBeginDeleteOptions`
+- New struct `RoutingIntentClient`
+- New struct `RoutingIntentCreateOrUpdatePoller`
+- New struct `RoutingIntentCreateOrUpdatePollerResponse`
+- New struct `RoutingIntentCreateOrUpdateResponse`
+- New struct `RoutingIntentCreateOrUpdateResult`
+- New struct `RoutingIntentDeletePoller`
+- New struct `RoutingIntentDeletePollerResponse`
+- New struct `RoutingIntentDeleteResponse`
+- New struct `RoutingIntentGetOptions`
+- New struct `RoutingIntentGetResponse`
+- New struct `RoutingIntentGetResult`
+- New struct `RoutingIntentListOptions`
+- New struct `RoutingIntentListPager`
+- New struct `RoutingIntentListResponse`
+- New struct `RoutingIntentListResult`
+- New struct `RoutingIntentProperties`
+- New struct `RoutingPolicy`
+- New struct `SignatureOverridesFilterValuesQuery`
+- New struct `SignatureOverridesFilterValuesResponse`
+- New struct `SignaturesOverrides`
+- New struct `SignaturesOverridesList`
+- New struct `SignaturesOverridesProperties`
+- New struct `SingleQueryResult`
+- New struct `VirtualNetworkEncryption`
+- New field `VnetEncryptionSupported` in struct `NetworkInterfacePropertiesFormat`
+- New field `RemoteVirtualNetworkEncryption` in struct `VirtualNetworkPeeringPropertiesFormat`
+- New field `PortRange` in struct `VPNNatRuleMapping`
+- New field `ExclusionManagedRuleSets` in struct `OwaspCrsExclusionEntry`
+- New field `InboundNatRules` in struct `BackendAddressPoolPropertiesFormat`
+- New field `DisableIPSecReplayProtection` in struct `VirtualNetworkGatewayPropertiesFormat`
+- New field `InboundNatRulesPortMapping` in struct `LoadBalancerBackendAddressPropertiesFormat`
+- New field `Encryption` in struct `VirtualNetworkPropertiesFormat`
+
+Total 1 breaking change(s), 222 additive change(s).
+
+
 ## 0.1.0 (2021-09-29)
 - To better align with the Azure SDK guidelines (https://azure.github.io/azure-sdk/general_introduction.html), we have decided to change the module path to "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/network/armnetwork". Therefore, we are deprecating the old module path (which is "github.com/Azure/azure-sdk-for-go/sdk/network/armnetwork") to avoid confusion. 

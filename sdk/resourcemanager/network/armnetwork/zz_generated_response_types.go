@@ -10,10 +10,9 @@ package armnetwork
 
 import (
 	"context"
+	armruntime "github.com/Azure/azure-sdk-for-go/sdk/azcore/arm/runtime"
 	"net/http"
 	"time"
-
-	armruntime "github.com/Azure/azure-sdk-for-go/sdk/azcore/arm/runtime"
 )
 
 // ApplicationGatewayPrivateEndpointConnectionsDeletePollerResponse contains the response from method ApplicationGatewayPrivateEndpointConnections.Delete.
@@ -3675,6 +3674,78 @@ type FirewallPoliciesListResult struct {
 	FirewallPolicyListResult
 }
 
+// FirewallPolicyIdpsSignaturesFilterValuesListResponse contains the response from method FirewallPolicyIdpsSignaturesFilterValues.List.
+type FirewallPolicyIdpsSignaturesFilterValuesListResponse struct {
+	FirewallPolicyIdpsSignaturesFilterValuesListResult
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// FirewallPolicyIdpsSignaturesFilterValuesListResult contains the result from method FirewallPolicyIdpsSignaturesFilterValues.List.
+type FirewallPolicyIdpsSignaturesFilterValuesListResult struct {
+	SignatureOverridesFilterValuesResponse
+}
+
+// FirewallPolicyIdpsSignaturesListResponse contains the response from method FirewallPolicyIdpsSignatures.List.
+type FirewallPolicyIdpsSignaturesListResponse struct {
+	FirewallPolicyIdpsSignaturesListResult
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// FirewallPolicyIdpsSignaturesListResult contains the result from method FirewallPolicyIdpsSignatures.List.
+type FirewallPolicyIdpsSignaturesListResult struct {
+	QueryResults
+}
+
+// FirewallPolicyIdpsSignaturesOverridesGetResponse contains the response from method FirewallPolicyIdpsSignaturesOverrides.Get.
+type FirewallPolicyIdpsSignaturesOverridesGetResponse struct {
+	FirewallPolicyIdpsSignaturesOverridesGetResult
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// FirewallPolicyIdpsSignaturesOverridesGetResult contains the result from method FirewallPolicyIdpsSignaturesOverrides.Get.
+type FirewallPolicyIdpsSignaturesOverridesGetResult struct {
+	SignaturesOverrides
+}
+
+// FirewallPolicyIdpsSignaturesOverridesListResponse contains the response from method FirewallPolicyIdpsSignaturesOverrides.List.
+type FirewallPolicyIdpsSignaturesOverridesListResponse struct {
+	FirewallPolicyIdpsSignaturesOverridesListResult
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// FirewallPolicyIdpsSignaturesOverridesListResult contains the result from method FirewallPolicyIdpsSignaturesOverrides.List.
+type FirewallPolicyIdpsSignaturesOverridesListResult struct {
+	SignaturesOverridesList
+}
+
+// FirewallPolicyIdpsSignaturesOverridesPatchResponse contains the response from method FirewallPolicyIdpsSignaturesOverrides.Patch.
+type FirewallPolicyIdpsSignaturesOverridesPatchResponse struct {
+	FirewallPolicyIdpsSignaturesOverridesPatchResult
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// FirewallPolicyIdpsSignaturesOverridesPatchResult contains the result from method FirewallPolicyIdpsSignaturesOverrides.Patch.
+type FirewallPolicyIdpsSignaturesOverridesPatchResult struct {
+	SignaturesOverrides
+}
+
+// FirewallPolicyIdpsSignaturesOverridesPutResponse contains the response from method FirewallPolicyIdpsSignaturesOverrides.Put.
+type FirewallPolicyIdpsSignaturesOverridesPutResponse struct {
+	FirewallPolicyIdpsSignaturesOverridesPutResult
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// FirewallPolicyIdpsSignaturesOverridesPutResult contains the result from method FirewallPolicyIdpsSignaturesOverrides.Put.
+type FirewallPolicyIdpsSignaturesOverridesPutResult struct {
+	SignaturesOverrides
+}
+
 // FirewallPolicyRuleCollectionGroupsCreateOrUpdatePollerResponse contains the response from method FirewallPolicyRuleCollectionGroups.CreateOrUpdate.
 type FirewallPolicyRuleCollectionGroupsCreateOrUpdatePollerResponse struct {
 	// Poller contains an initialized poller.
@@ -4953,6 +5024,56 @@ type LoadBalancersListAllResponse struct {
 // LoadBalancersListAllResult contains the result from method LoadBalancers.ListAll.
 type LoadBalancersListAllResult struct {
 	LoadBalancerListResult
+}
+
+// LoadBalancersListInboundNatRulePortMappingsPollerResponse contains the response from method LoadBalancers.ListInboundNatRulePortMappings.
+type LoadBalancersListInboundNatRulePortMappingsPollerResponse struct {
+	// Poller contains an initialized poller.
+	Poller *LoadBalancersListInboundNatRulePortMappingsPoller
+
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// PollUntilDone will poll the service endpoint until a terminal state is reached or an error is received.
+func (l LoadBalancersListInboundNatRulePortMappingsPollerResponse) PollUntilDone(ctx context.Context, freq time.Duration) (LoadBalancersListInboundNatRulePortMappingsResponse, error) {
+	respType := LoadBalancersListInboundNatRulePortMappingsResponse{}
+	resp, err := l.Poller.pt.PollUntilDone(ctx, freq, &respType.BackendAddressInboundNatRulePortMappings)
+	if err != nil {
+		return respType, err
+	}
+	respType.RawResponse = resp
+	return respType, nil
+}
+
+// Resume rehydrates a LoadBalancersListInboundNatRulePortMappingsPollerResponse from the provided client and resume token.
+func (l *LoadBalancersListInboundNatRulePortMappingsPollerResponse) Resume(ctx context.Context, client *LoadBalancersClient, token string) error {
+	pt, err := armruntime.NewPollerFromResumeToken("LoadBalancersClient.ListInboundNatRulePortMappings", token, client.pl, client.listInboundNatRulePortMappingsHandleError)
+	if err != nil {
+		return err
+	}
+	poller := &LoadBalancersListInboundNatRulePortMappingsPoller{
+		pt: pt,
+	}
+	resp, err := poller.Poll(ctx)
+	if err != nil {
+		return err
+	}
+	l.Poller = poller
+	l.RawResponse = resp
+	return nil
+}
+
+// LoadBalancersListInboundNatRulePortMappingsResponse contains the response from method LoadBalancers.ListInboundNatRulePortMappings.
+type LoadBalancersListInboundNatRulePortMappingsResponse struct {
+	LoadBalancersListInboundNatRulePortMappingsResult
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// LoadBalancersListInboundNatRulePortMappingsResult contains the result from method LoadBalancers.ListInboundNatRulePortMappings.
+type LoadBalancersListInboundNatRulePortMappingsResult struct {
+	BackendAddressInboundNatRulePortMappings
 }
 
 // LoadBalancersListResponse contains the response from method LoadBalancers.List.
@@ -9345,6 +9466,124 @@ type RoutesListResponse struct {
 // RoutesListResult contains the result from method Routes.List.
 type RoutesListResult struct {
 	RouteListResult
+}
+
+// RoutingIntentCreateOrUpdatePollerResponse contains the response from method RoutingIntent.CreateOrUpdate.
+type RoutingIntentCreateOrUpdatePollerResponse struct {
+	// Poller contains an initialized poller.
+	Poller *RoutingIntentCreateOrUpdatePoller
+
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// PollUntilDone will poll the service endpoint until a terminal state is reached or an error is received.
+func (l RoutingIntentCreateOrUpdatePollerResponse) PollUntilDone(ctx context.Context, freq time.Duration) (RoutingIntentCreateOrUpdateResponse, error) {
+	respType := RoutingIntentCreateOrUpdateResponse{}
+	resp, err := l.Poller.pt.PollUntilDone(ctx, freq, &respType.RoutingIntent)
+	if err != nil {
+		return respType, err
+	}
+	respType.RawResponse = resp
+	return respType, nil
+}
+
+// Resume rehydrates a RoutingIntentCreateOrUpdatePollerResponse from the provided client and resume token.
+func (l *RoutingIntentCreateOrUpdatePollerResponse) Resume(ctx context.Context, client *RoutingIntentClient, token string) error {
+	pt, err := armruntime.NewPollerFromResumeToken("RoutingIntentClient.CreateOrUpdate", token, client.pl, client.createOrUpdateHandleError)
+	if err != nil {
+		return err
+	}
+	poller := &RoutingIntentCreateOrUpdatePoller{
+		pt: pt,
+	}
+	resp, err := poller.Poll(ctx)
+	if err != nil {
+		return err
+	}
+	l.Poller = poller
+	l.RawResponse = resp
+	return nil
+}
+
+// RoutingIntentCreateOrUpdateResponse contains the response from method RoutingIntent.CreateOrUpdate.
+type RoutingIntentCreateOrUpdateResponse struct {
+	RoutingIntentCreateOrUpdateResult
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// RoutingIntentCreateOrUpdateResult contains the result from method RoutingIntent.CreateOrUpdate.
+type RoutingIntentCreateOrUpdateResult struct {
+	RoutingIntent
+}
+
+// RoutingIntentDeletePollerResponse contains the response from method RoutingIntent.Delete.
+type RoutingIntentDeletePollerResponse struct {
+	// Poller contains an initialized poller.
+	Poller *RoutingIntentDeletePoller
+
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// PollUntilDone will poll the service endpoint until a terminal state is reached or an error is received.
+func (l RoutingIntentDeletePollerResponse) PollUntilDone(ctx context.Context, freq time.Duration) (RoutingIntentDeleteResponse, error) {
+	respType := RoutingIntentDeleteResponse{}
+	resp, err := l.Poller.pt.PollUntilDone(ctx, freq, nil)
+	if err != nil {
+		return respType, err
+	}
+	respType.RawResponse = resp
+	return respType, nil
+}
+
+// Resume rehydrates a RoutingIntentDeletePollerResponse from the provided client and resume token.
+func (l *RoutingIntentDeletePollerResponse) Resume(ctx context.Context, client *RoutingIntentClient, token string) error {
+	pt, err := armruntime.NewPollerFromResumeToken("RoutingIntentClient.Delete", token, client.pl, client.deleteHandleError)
+	if err != nil {
+		return err
+	}
+	poller := &RoutingIntentDeletePoller{
+		pt: pt,
+	}
+	resp, err := poller.Poll(ctx)
+	if err != nil {
+		return err
+	}
+	l.Poller = poller
+	l.RawResponse = resp
+	return nil
+}
+
+// RoutingIntentDeleteResponse contains the response from method RoutingIntent.Delete.
+type RoutingIntentDeleteResponse struct {
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// RoutingIntentGetResponse contains the response from method RoutingIntent.Get.
+type RoutingIntentGetResponse struct {
+	RoutingIntentGetResult
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// RoutingIntentGetResult contains the result from method RoutingIntent.Get.
+type RoutingIntentGetResult struct {
+	RoutingIntent
+}
+
+// RoutingIntentListResponse contains the response from method RoutingIntent.List.
+type RoutingIntentListResponse struct {
+	RoutingIntentListResult
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// RoutingIntentListResult contains the result from method RoutingIntent.List.
+type RoutingIntentListResult struct {
+	ListRoutingIntentResult
 }
 
 // SecurityPartnerProvidersCreateOrUpdatePollerResponse contains the response from method SecurityPartnerProviders.CreateOrUpdate.
