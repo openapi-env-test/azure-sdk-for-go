@@ -21,7 +21,6 @@ var _ OperationsClientAPI = (*compute.OperationsClient)(nil)
 
 // AvailabilitySetsClientAPI contains the set of methods on the AvailabilitySetsClient type.
 type AvailabilitySetsClientAPI interface {
-	CreateOrUpdate(ctx context.Context, resourceGroupName string, availabilitySetName string, parameters compute.AvailabilitySet) (result compute.AvailabilitySet, err error)
 	Delete(ctx context.Context, resourceGroupName string, availabilitySetName string) (result autorest.Response, err error)
 	Get(ctx context.Context, resourceGroupName string, availabilitySetName string) (result compute.AvailabilitySet, err error)
 	List(ctx context.Context, resourceGroupName string) (result compute.AvailabilitySetListResultPage, err error)
