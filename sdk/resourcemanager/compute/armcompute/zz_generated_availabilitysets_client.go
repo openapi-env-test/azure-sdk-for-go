@@ -11,13 +11,12 @@ package armcompute
 import (
 	"context"
 	"errors"
-	"net/http"
-	"net/url"
-	"strings"
-
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore/arm"
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore/policy"
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore/runtime"
+	"net/http"
+	"net/url"
+	"strings"
 )
 
 // AvailabilitySetsClient contains the methods for the AvailabilitySets group.
@@ -31,70 +30,6 @@ type AvailabilitySetsClient struct {
 // NewAvailabilitySetsClient creates a new instance of AvailabilitySetsClient with the specified values.
 func NewAvailabilitySetsClient(con *arm.Connection, subscriptionID string) *AvailabilitySetsClient {
 	return &AvailabilitySetsClient{ep: con.Endpoint(), pl: con.NewPipeline(module, version), subscriptionID: subscriptionID}
-}
-
-// CreateOrUpdate - Create or update an availability set.
-// If the operation fails it returns a generic error.
-func (client *AvailabilitySetsClient) CreateOrUpdate(ctx context.Context, resourceGroupName string, availabilitySetName string, parameters AvailabilitySet, options *AvailabilitySetsCreateOrUpdateOptions) (AvailabilitySetsCreateOrUpdateResponse, error) {
-	req, err := client.createOrUpdateCreateRequest(ctx, resourceGroupName, availabilitySetName, parameters, options)
-	if err != nil {
-		return AvailabilitySetsCreateOrUpdateResponse{}, err
-	}
-	resp, err := client.pl.Do(req)
-	if err != nil {
-		return AvailabilitySetsCreateOrUpdateResponse{}, err
-	}
-	if !runtime.HasStatusCode(resp, http.StatusOK) {
-		return AvailabilitySetsCreateOrUpdateResponse{}, client.createOrUpdateHandleError(resp)
-	}
-	return client.createOrUpdateHandleResponse(resp)
-}
-
-// createOrUpdateCreateRequest creates the CreateOrUpdate request.
-func (client *AvailabilitySetsClient) createOrUpdateCreateRequest(ctx context.Context, resourceGroupName string, availabilitySetName string, parameters AvailabilitySet, options *AvailabilitySetsCreateOrUpdateOptions) (*policy.Request, error) {
-	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}"
-	if resourceGroupName == "" {
-		return nil, errors.New("parameter resourceGroupName cannot be empty")
-	}
-	urlPath = strings.ReplaceAll(urlPath, "{resourceGroupName}", url.PathEscape(resourceGroupName))
-	if availabilitySetName == "" {
-		return nil, errors.New("parameter availabilitySetName cannot be empty")
-	}
-	urlPath = strings.ReplaceAll(urlPath, "{availabilitySetName}", url.PathEscape(availabilitySetName))
-	if client.subscriptionID == "" {
-		return nil, errors.New("parameter client.subscriptionID cannot be empty")
-	}
-	urlPath = strings.ReplaceAll(urlPath, "{subscriptionId}", url.PathEscape(client.subscriptionID))
-	req, err := runtime.NewRequest(ctx, http.MethodPut, runtime.JoinPaths(client.ep, urlPath))
-	if err != nil {
-		return nil, err
-	}
-	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-07-01")
-	req.Raw().URL.RawQuery = reqQP.Encode()
-	req.Raw().Header.Set("Accept", "application/json")
-	return req, runtime.MarshalAsJSON(req, parameters)
-}
-
-// createOrUpdateHandleResponse handles the CreateOrUpdate response.
-func (client *AvailabilitySetsClient) createOrUpdateHandleResponse(resp *http.Response) (AvailabilitySetsCreateOrUpdateResponse, error) {
-	result := AvailabilitySetsCreateOrUpdateResponse{RawResponse: resp}
-	if err := runtime.UnmarshalAsJSON(resp, &result.AvailabilitySet); err != nil {
-		return AvailabilitySetsCreateOrUpdateResponse{}, err
-	}
-	return result, nil
-}
-
-// createOrUpdateHandleError handles the CreateOrUpdate error response.
-func (client *AvailabilitySetsClient) createOrUpdateHandleError(resp *http.Response) error {
-	body, err := runtime.Payload(resp)
-	if err != nil {
-		return runtime.NewResponseError(err, resp)
-	}
-	if len(body) == 0 {
-		return runtime.NewResponseError(errors.New(resp.Status), resp)
-	}
-	return runtime.NewResponseError(errors.New(string(body)), resp)
 }
 
 // Delete - Delete an availability set.
