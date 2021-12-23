@@ -12,13 +12,13 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/Azure/azure-sdk-for-go/sdk/azcore/arm"
+	armruntime "github.com/Azure/azure-sdk-for-go/sdk/azcore/arm/runtime"
+	"github.com/Azure/azure-sdk-for-go/sdk/azcore/policy"
+	"github.com/Azure/azure-sdk-for-go/sdk/azcore/runtime"
 	"net/http"
 	"net/url"
 	"strings"
-
-	"github.com/Azure/azure-sdk-for-go/sdk/azcore/arm"
-	"github.com/Azure/azure-sdk-for-go/sdk/azcore/policy"
-	"github.com/Azure/azure-sdk-for-go/sdk/azcore/runtime"
 )
 
 // ActionGroupsClient contains the methods for the ActionGroups group.
@@ -53,7 +53,7 @@ func (client *ActionGroupsClient) CreateOrUpdate(ctx context.Context, resourceGr
 
 // createOrUpdateCreateRequest creates the CreateOrUpdate request.
 func (client *ActionGroupsClient) createOrUpdateCreateRequest(ctx context.Context, resourceGroupName string, actionGroupName string, actionGroup ActionGroupResource, options *ActionGroupsCreateOrUpdateOptions) (*policy.Request, error) {
-	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/actionGroups/{actionGroupName}"
+	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/actionGroups/{actionGroupName}"
 	if resourceGroupName == "" {
 		return nil, errors.New("parameter resourceGroupName cannot be empty")
 	}
@@ -71,7 +71,7 @@ func (client *ActionGroupsClient) createOrUpdateCreateRequest(ctx context.Contex
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2019-06-01")
+	reqQP.Set("api-version", "2021-09-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, runtime.MarshalAsJSON(req, actionGroup)
@@ -118,7 +118,7 @@ func (client *ActionGroupsClient) Delete(ctx context.Context, resourceGroupName 
 
 // deleteCreateRequest creates the Delete request.
 func (client *ActionGroupsClient) deleteCreateRequest(ctx context.Context, resourceGroupName string, actionGroupName string, options *ActionGroupsDeleteOptions) (*policy.Request, error) {
-	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/actionGroups/{actionGroupName}"
+	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/actionGroups/{actionGroupName}"
 	if resourceGroupName == "" {
 		return nil, errors.New("parameter resourceGroupName cannot be empty")
 	}
@@ -136,7 +136,7 @@ func (client *ActionGroupsClient) deleteCreateRequest(ctx context.Context, resou
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2019-06-01")
+	reqQP.Set("api-version", "2021-09-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -167,7 +167,7 @@ func (client *ActionGroupsClient) EnableReceiver(ctx context.Context, resourceGr
 	if err != nil {
 		return ActionGroupsEnableReceiverResponse{}, err
 	}
-	if !runtime.HasStatusCode(resp, http.StatusOK, http.StatusConflict) {
+	if !runtime.HasStatusCode(resp, http.StatusOK) {
 		return ActionGroupsEnableReceiverResponse{}, client.enableReceiverHandleError(resp)
 	}
 	return ActionGroupsEnableReceiverResponse{RawResponse: resp}, nil
@@ -175,7 +175,7 @@ func (client *ActionGroupsClient) EnableReceiver(ctx context.Context, resourceGr
 
 // enableReceiverCreateRequest creates the EnableReceiver request.
 func (client *ActionGroupsClient) enableReceiverCreateRequest(ctx context.Context, resourceGroupName string, actionGroupName string, enableRequest EnableRequest, options *ActionGroupsEnableReceiverOptions) (*policy.Request, error) {
-	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/actionGroups/{actionGroupName}/subscribe"
+	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/actionGroups/{actionGroupName}/subscribe"
 	if resourceGroupName == "" {
 		return nil, errors.New("parameter resourceGroupName cannot be empty")
 	}
@@ -193,7 +193,7 @@ func (client *ActionGroupsClient) enableReceiverCreateRequest(ctx context.Contex
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2019-06-01")
+	reqQP.Set("api-version", "2021-09-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, runtime.MarshalAsJSON(req, enableRequest)
@@ -205,11 +205,19 @@ func (client *ActionGroupsClient) enableReceiverHandleError(resp *http.Response)
 	if err != nil {
 		return runtime.NewResponseError(err, resp)
 	}
-	errType := ErrorResponse{raw: string(body)}
-	if err := runtime.UnmarshalAsJSON(resp, &errType); err != nil {
-		return runtime.NewResponseError(fmt.Errorf("%s\n%s", string(body), err), resp)
+	switch resp.StatusCode {
+	case http.StatusConflict:
+		if len(body) == 0 {
+			return runtime.NewResponseError(errors.New(resp.Status), resp)
+		}
+		return runtime.NewResponseError(errors.New(string(body)), resp)
+	default:
+		errType := ErrorResponse{raw: string(body)}
+		if err := runtime.UnmarshalAsJSON(resp, &errType); err != nil {
+			return runtime.NewResponseError(fmt.Errorf("%s\n%s", string(body), err), resp)
+		}
+		return runtime.NewResponseError(&errType, resp)
 	}
-	return runtime.NewResponseError(&errType, resp)
 }
 
 // Get - Get an action group.
@@ -231,7 +239,7 @@ func (client *ActionGroupsClient) Get(ctx context.Context, resourceGroupName str
 
 // getCreateRequest creates the Get request.
 func (client *ActionGroupsClient) getCreateRequest(ctx context.Context, resourceGroupName string, actionGroupName string, options *ActionGroupsGetOptions) (*policy.Request, error) {
-	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/actionGroups/{actionGroupName}"
+	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/actionGroups/{actionGroupName}"
 	if resourceGroupName == "" {
 		return nil, errors.New("parameter resourceGroupName cannot be empty")
 	}
@@ -249,7 +257,7 @@ func (client *ActionGroupsClient) getCreateRequest(ctx context.Context, resource
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2019-06-01")
+	reqQP.Set("api-version", "2021-09-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -266,6 +274,67 @@ func (client *ActionGroupsClient) getHandleResponse(resp *http.Response) (Action
 
 // getHandleError handles the Get error response.
 func (client *ActionGroupsClient) getHandleError(resp *http.Response) error {
+	body, err := runtime.Payload(resp)
+	if err != nil {
+		return runtime.NewResponseError(err, resp)
+	}
+	errType := ErrorResponse{raw: string(body)}
+	if err := runtime.UnmarshalAsJSON(resp, &errType); err != nil {
+		return runtime.NewResponseError(fmt.Errorf("%s\n%s", string(body), err), resp)
+	}
+	return runtime.NewResponseError(&errType, resp)
+}
+
+// GetTestNotifications - Get the test notifications by the notification id
+// If the operation fails it returns the *ErrorResponse error type.
+func (client *ActionGroupsClient) GetTestNotifications(ctx context.Context, notificationID string, options *ActionGroupsGetTestNotificationsOptions) (ActionGroupsGetTestNotificationsResponse, error) {
+	req, err := client.getTestNotificationsCreateRequest(ctx, notificationID, options)
+	if err != nil {
+		return ActionGroupsGetTestNotificationsResponse{}, err
+	}
+	resp, err := client.pl.Do(req)
+	if err != nil {
+		return ActionGroupsGetTestNotificationsResponse{}, err
+	}
+	if !runtime.HasStatusCode(resp, http.StatusOK) {
+		return ActionGroupsGetTestNotificationsResponse{}, client.getTestNotificationsHandleError(resp)
+	}
+	return client.getTestNotificationsHandleResponse(resp)
+}
+
+// getTestNotificationsCreateRequest creates the GetTestNotifications request.
+func (client *ActionGroupsClient) getTestNotificationsCreateRequest(ctx context.Context, notificationID string, options *ActionGroupsGetTestNotificationsOptions) (*policy.Request, error) {
+	urlPath := "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/notificationStatus/{notificationId}"
+	if client.subscriptionID == "" {
+		return nil, errors.New("parameter client.subscriptionID cannot be empty")
+	}
+	urlPath = strings.ReplaceAll(urlPath, "{subscriptionId}", url.PathEscape(client.subscriptionID))
+	if notificationID == "" {
+		return nil, errors.New("parameter notificationID cannot be empty")
+	}
+	urlPath = strings.ReplaceAll(urlPath, "{notificationId}", url.PathEscape(notificationID))
+	req, err := runtime.NewRequest(ctx, http.MethodGet, runtime.JoinPaths(client.ep, urlPath))
+	if err != nil {
+		return nil, err
+	}
+	reqQP := req.Raw().URL.Query()
+	reqQP.Set("api-version", "2021-09-01")
+	req.Raw().URL.RawQuery = reqQP.Encode()
+	req.Raw().Header.Set("Accept", "application/json")
+	return req, nil
+}
+
+// getTestNotificationsHandleResponse handles the GetTestNotifications response.
+func (client *ActionGroupsClient) getTestNotificationsHandleResponse(resp *http.Response) (ActionGroupsGetTestNotificationsResponse, error) {
+	result := ActionGroupsGetTestNotificationsResponse{RawResponse: resp}
+	if err := runtime.UnmarshalAsJSON(resp, &result.TestNotificationDetailsResponse); err != nil {
+		return ActionGroupsGetTestNotificationsResponse{}, err
+	}
+	return result, nil
+}
+
+// getTestNotificationsHandleError handles the GetTestNotifications error response.
+func (client *ActionGroupsClient) getTestNotificationsHandleError(resp *http.Response) error {
 	body, err := runtime.Payload(resp)
 	if err != nil {
 		return runtime.NewResponseError(err, resp)
@@ -296,7 +365,7 @@ func (client *ActionGroupsClient) ListByResourceGroup(ctx context.Context, resou
 
 // listByResourceGroupCreateRequest creates the ListByResourceGroup request.
 func (client *ActionGroupsClient) listByResourceGroupCreateRequest(ctx context.Context, resourceGroupName string, options *ActionGroupsListByResourceGroupOptions) (*policy.Request, error) {
-	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/actionGroups"
+	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/actionGroups"
 	if resourceGroupName == "" {
 		return nil, errors.New("parameter resourceGroupName cannot be empty")
 	}
@@ -310,7 +379,7 @@ func (client *ActionGroupsClient) listByResourceGroupCreateRequest(ctx context.C
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2019-06-01")
+	reqQP.Set("api-version", "2021-09-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -357,7 +426,7 @@ func (client *ActionGroupsClient) ListBySubscriptionID(ctx context.Context, opti
 
 // listBySubscriptionIDCreateRequest creates the ListBySubscriptionID request.
 func (client *ActionGroupsClient) listBySubscriptionIDCreateRequest(ctx context.Context, options *ActionGroupsListBySubscriptionIDOptions) (*policy.Request, error) {
-	urlPath := "/subscriptions/{subscriptionId}/providers/microsoft.insights/actionGroups"
+	urlPath := "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/actionGroups"
 	if client.subscriptionID == "" {
 		return nil, errors.New("parameter client.subscriptionID cannot be empty")
 	}
@@ -367,7 +436,7 @@ func (client *ActionGroupsClient) listBySubscriptionIDCreateRequest(ctx context.
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2019-06-01")
+	reqQP.Set("api-version", "2021-09-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -384,6 +453,74 @@ func (client *ActionGroupsClient) listBySubscriptionIDHandleResponse(resp *http.
 
 // listBySubscriptionIDHandleError handles the ListBySubscriptionID error response.
 func (client *ActionGroupsClient) listBySubscriptionIDHandleError(resp *http.Response) error {
+	body, err := runtime.Payload(resp)
+	if err != nil {
+		return runtime.NewResponseError(err, resp)
+	}
+	errType := ErrorResponse{raw: string(body)}
+	if err := runtime.UnmarshalAsJSON(resp, &errType); err != nil {
+		return runtime.NewResponseError(fmt.Errorf("%s\n%s", string(body), err), resp)
+	}
+	return runtime.NewResponseError(&errType, resp)
+}
+
+// BeginPostTestNotifications - Send test notifications to a set of provided receivers
+// If the operation fails it returns the *ErrorResponse error type.
+func (client *ActionGroupsClient) BeginPostTestNotifications(ctx context.Context, notificationRequest NotificationRequestBody, options *ActionGroupsBeginPostTestNotificationsOptions) (ActionGroupsPostTestNotificationsPollerResponse, error) {
+	resp, err := client.postTestNotifications(ctx, notificationRequest, options)
+	if err != nil {
+		return ActionGroupsPostTestNotificationsPollerResponse{}, err
+	}
+	result := ActionGroupsPostTestNotificationsPollerResponse{
+		RawResponse: resp,
+	}
+	pt, err := armruntime.NewPoller("ActionGroupsClient.PostTestNotifications", "location", resp, client.pl, client.postTestNotificationsHandleError)
+	if err != nil {
+		return ActionGroupsPostTestNotificationsPollerResponse{}, err
+	}
+	result.Poller = &ActionGroupsPostTestNotificationsPoller{
+		pt: pt,
+	}
+	return result, nil
+}
+
+// PostTestNotifications - Send test notifications to a set of provided receivers
+// If the operation fails it returns the *ErrorResponse error type.
+func (client *ActionGroupsClient) postTestNotifications(ctx context.Context, notificationRequest NotificationRequestBody, options *ActionGroupsBeginPostTestNotificationsOptions) (*http.Response, error) {
+	req, err := client.postTestNotificationsCreateRequest(ctx, notificationRequest, options)
+	if err != nil {
+		return nil, err
+	}
+	resp, err := client.pl.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	if !runtime.HasStatusCode(resp, http.StatusAccepted) {
+		return nil, client.postTestNotificationsHandleError(resp)
+	}
+	return resp, nil
+}
+
+// postTestNotificationsCreateRequest creates the PostTestNotifications request.
+func (client *ActionGroupsClient) postTestNotificationsCreateRequest(ctx context.Context, notificationRequest NotificationRequestBody, options *ActionGroupsBeginPostTestNotificationsOptions) (*policy.Request, error) {
+	urlPath := "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/createNotifications"
+	if client.subscriptionID == "" {
+		return nil, errors.New("parameter client.subscriptionID cannot be empty")
+	}
+	urlPath = strings.ReplaceAll(urlPath, "{subscriptionId}", url.PathEscape(client.subscriptionID))
+	req, err := runtime.NewRequest(ctx, http.MethodPost, runtime.JoinPaths(client.ep, urlPath))
+	if err != nil {
+		return nil, err
+	}
+	reqQP := req.Raw().URL.Query()
+	reqQP.Set("api-version", "2021-09-01")
+	req.Raw().URL.RawQuery = reqQP.Encode()
+	req.Raw().Header.Set("Accept", "application/json")
+	return req, runtime.MarshalAsJSON(req, notificationRequest)
+}
+
+// postTestNotificationsHandleError handles the PostTestNotifications error response.
+func (client *ActionGroupsClient) postTestNotificationsHandleError(resp *http.Response) error {
 	body, err := runtime.Payload(resp)
 	if err != nil {
 		return runtime.NewResponseError(err, resp)
@@ -414,7 +551,7 @@ func (client *ActionGroupsClient) Update(ctx context.Context, resourceGroupName 
 
 // updateCreateRequest creates the Update request.
 func (client *ActionGroupsClient) updateCreateRequest(ctx context.Context, resourceGroupName string, actionGroupName string, actionGroupPatch ActionGroupPatchBody, options *ActionGroupsUpdateOptions) (*policy.Request, error) {
-	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/actionGroups/{actionGroupName}"
+	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/actionGroups/{actionGroupName}"
 	if client.subscriptionID == "" {
 		return nil, errors.New("parameter client.subscriptionID cannot be empty")
 	}
@@ -432,7 +569,7 @@ func (client *ActionGroupsClient) updateCreateRequest(ctx context.Context, resou
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2019-06-01")
+	reqQP.Set("api-version", "2021-09-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, runtime.MarshalAsJSON(req, actionGroupPatch)
