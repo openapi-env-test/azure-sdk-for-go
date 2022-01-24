@@ -43,7 +43,7 @@ func NewClient(credential azcore.TokenCredential, options *arm.ClientOptions) *C
 	return client
 }
 
-// Resources - Queries the resources managed by Azure Resource Manager for scopes specified in the request.
+// Resources - Change Test.
 // If the operation fails it returns an *azcore.ResponseError type.
 // query - Request specifying query and its options.
 // options - ClientResourcesOptions contains the optional parameters for the Client.Resources method.
