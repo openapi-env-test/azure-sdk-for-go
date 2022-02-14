@@ -186,7 +186,7 @@ func (client DataLakeStoreAccountsClient) DeleteSender(req *http.Request) (*http
 func (client DataLakeStoreAccountsClient) DeleteResponder(resp *http.Response) (result autorest.Response, err error) {
 	err = autorest.Respond(
 		resp,
-		azure.WithErrorUnlessStatusCode(http.StatusOK),
+		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusNoContent),
 		autorest.ByClosing())
 	result.Response = resp
 	return
