@@ -12604,8 +12604,6 @@ type Error struct {
 	Target *string `json:"target,omitempty"`
 	// Details - Error details.
 	Details *[]ErrorDetails `json:"details,omitempty"`
-	// InnerError - Inner error message.
-	InnerError *string `json:"innerError,omitempty"`
 }
 
 // ErrorDetails common error details representation.
