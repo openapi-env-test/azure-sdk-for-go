@@ -494,7 +494,7 @@ func (client AddsServicesClient) GetMetricMetadataForGroupResponder(resp *http.R
 }
 
 // List gets the details of Active Directory Domain Service, for a tenant, that are onboarded to Azure Active Directory
-// Connect Health.
+// Connect Health.test
 // Parameters:
 // filter - the service property filter to apply.
 // serviceType - the service type for the services onboarded to Azure Active Directory Connect Health.
