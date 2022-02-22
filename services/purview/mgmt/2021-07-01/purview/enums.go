@@ -158,11 +158,15 @@ func PossibleStatusValues() []Status {
 type Type string
 
 const (
+	// TypeNone ...
+	TypeNone Type = "None"
 	// TypeSystemAssigned ...
 	TypeSystemAssigned Type = "SystemAssigned"
+	// TypeUserAssigned ...
+	TypeUserAssigned Type = "UserAssigned"
 )
 
 // PossibleTypeValues returns an array of possible values for the Type const type.
 func PossibleTypeValues() []Type {
-	return []Type{TypeSystemAssigned}
+	return []Type{TypeNone, TypeSystemAssigned, TypeUserAssigned}
 }
