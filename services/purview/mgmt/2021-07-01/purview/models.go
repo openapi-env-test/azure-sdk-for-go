@@ -34,7 +34,7 @@ type Account struct {
 	autorest.Response `json:"-"`
 	// AccountProperties - Gets or sets the properties.
 	*AccountProperties `json:"properties,omitempty"`
-	// Sku - Gets or sets the Sku.
+	// Sku - READ-ONLY; Gets or sets the Sku.
 	Sku *AccountSku `json:"sku,omitempty"`
 	// ID - READ-ONLY; Gets or sets the identifier.
 	ID *string `json:"id,omitempty"`
@@ -57,9 +57,6 @@ func (a Account) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
 	if a.AccountProperties != nil {
 		objectMap["properties"] = a.AccountProperties
-	}
-	if a.Sku != nil {
-		objectMap["sku"] = a.Sku
 	}
 	if a.Identity != nil {
 		objectMap["identity"] = a.Identity
@@ -500,9 +497,17 @@ func (future *AccountsDeleteFuture) result(client AccountsClient) (ar autorest.R
 	return
 }
 
-// AccountSku the Sku
+// AccountSku gets or sets the Sku.
 type AccountSku struct {
-	// Capacity - Gets or sets the sku capacity. Possible values include: 4, 16
+	// Capacity - Gets or sets the sku capacity.
+	Capacity *int32 `json:"capacity,omitempty"`
+	// Name - Gets or sets the sku name. Possible values include: 'NameStandard'
+	Name Name `json:"name,omitempty"`
+}
+
+// AccountSkuModel the Sku
+type AccountSkuModel struct {
+	// Capacity - Gets or sets the sku capacity.
 	Capacity *int32 `json:"capacity,omitempty"`
 	// Name - Gets or sets the sku name. Possible values include: 'NameStandard'
 	Name Name `json:"name,omitempty"`
@@ -553,6 +558,8 @@ func (future *AccountsUpdateFuture) result(client AccountsClient) (a Account, er
 
 // AccountUpdateParameters the account update properties.
 type AccountUpdateParameters struct {
+	// Identity - Identity related info to add/remove userAssignedIdentities.
+	Identity *Identity `json:"identity,omitempty"`
 	// Properties - The account properties.
 	Properties *AccountProperties `json:"properties,omitempty"`
 	// Tags - Tags on the azure resource.
@@ -562,6 +569,9 @@ type AccountUpdateParameters struct {
 // MarshalJSON is the custom marshaler for AccountUpdateParameters.
 func (aup AccountUpdateParameters) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
+	if aup.Identity != nil {
+		objectMap["identity"] = aup.Identity
+	}
 	if aup.Properties != nil {
 		objectMap["properties"] = aup.Properties
 	}
@@ -590,7 +600,7 @@ type CheckNameAvailabilityResult struct {
 	Reason Reason `json:"reason,omitempty"`
 }
 
-// CloudConnectors ...
+// CloudConnectors external Cloud Service connectors
 type CloudConnectors struct {
 	// AwsExternalID - READ-ONLY; AWS external identifier.
 	// Configured in AWS to allow use of the role arn used for scanning
@@ -690,8 +700,10 @@ type Identity struct {
 	PrincipalID *string `json:"principalId,omitempty"`
 	// TenantID - READ-ONLY; Tenant Id
 	TenantID *string `json:"tenantId,omitempty"`
-	// Type - Identity Type. Possible values include: 'TypeSystemAssigned'
+	// Type - Identity Type. Possible values include: 'TypeNone', 'TypeSystemAssigned', 'TypeUserAssigned'
 	Type Type `json:"type,omitempty"`
+	// UserAssignedIdentities - User Assigned Identities
+	UserAssignedIdentities map[string]*UserAssignedIdentity `json:"userAssignedIdentities"`
 }
 
 // MarshalJSON is the custom marshaler for Identity.
@@ -699,6 +711,9 @@ func (i Identity) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
 	if i.Type != "" {
 		objectMap["type"] = i.Type
+	}
+	if i.UserAssignedIdentities != nil {
+		objectMap["userAssignedIdentities"] = i.UserAssignedIdentities
 	}
 	return json.Marshal(objectMap)
 }
@@ -1679,6 +1694,20 @@ type TrackedResourceSystemData struct {
 
 // MarshalJSON is the custom marshaler for TrackedResourceSystemData.
 func (trD TrackedResourceSystemData) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	return json.Marshal(objectMap)
+}
+
+// UserAssignedIdentity uses client ID and Principal ID
+type UserAssignedIdentity struct {
+	// ClientID - READ-ONLY; Gets or Sets Client ID
+	ClientID *string `json:"clientId,omitempty"`
+	// PrincipalID - READ-ONLY; Gets or Sets Principal ID
+	PrincipalID *string `json:"principalId,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for UserAssignedIdentity.
+func (uai UserAssignedIdentity) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
 	return json.Marshal(objectMap)
 }

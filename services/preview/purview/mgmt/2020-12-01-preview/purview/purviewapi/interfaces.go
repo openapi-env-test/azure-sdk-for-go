@@ -48,7 +48,7 @@ var _ OperationsClientAPI = (*purview.OperationsClient)(nil)
 
 // PrivateEndpointConnectionsClientAPI contains the set of methods on the PrivateEndpointConnectionsClient type.
 type PrivateEndpointConnectionsClientAPI interface {
-	CreateOrUpdate(ctx context.Context, resourceGroupName string, accountName string, privateEndpointConnectionName string, request purview.PrivateEndpointConnection) (result purview.PrivateEndpointConnection, err error)
+	CreateOrUpdate(ctx context.Context, resourceGroupName string, accountName string, privateEndpointConnectionName string, request purview.PrivateEndpointConnection) (result purview.PrivateEndpointConnectionsCreateOrUpdateFuture, err error)
 	Delete(ctx context.Context, resourceGroupName string, accountName string, privateEndpointConnectionName string) (result purview.PrivateEndpointConnectionsDeleteFuture, err error)
 	Get(ctx context.Context, resourceGroupName string, accountName string, privateEndpointConnectionName string) (result purview.PrivateEndpointConnection, err error)
 	ListByAccount(ctx context.Context, resourceGroupName string, accountName string, skipToken string) (result purview.PrivateEndpointConnectionListPage, err error)

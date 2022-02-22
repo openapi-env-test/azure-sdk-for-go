@@ -19,7 +19,6 @@ type AccountsClientAPI interface {
 	CheckNameAvailability(ctx context.Context, checkNameAvailabilityRequest purview.CheckNameAvailabilityRequest) (result purview.CheckNameAvailabilityResult, err error)
 	CreateOrUpdate(ctx context.Context, resourceGroupName string, accountName string, account purview.Account) (result purview.AccountsCreateOrUpdateFuture, err error)
 	Delete(ctx context.Context, resourceGroupName string, accountName string) (result purview.AccountsDeleteFuture, err error)
-	Get(ctx context.Context, resourceGroupName string, accountName string) (result purview.Account, err error)
 	ListByResourceGroup(ctx context.Context, resourceGroupName string, skipToken string) (result purview.AccountListPage, err error)
 	ListByResourceGroupComplete(ctx context.Context, resourceGroupName string, skipToken string) (result purview.AccountListIterator, err error)
 	ListBySubscription(ctx context.Context, skipToken string) (result purview.AccountListPage, err error)

@@ -227,6 +227,7 @@ func (client AccountsClient) CreateOrUpdatePreparer(ctx context.Context, resourc
 		"api-version": APIVersion,
 	}
 
+	account.Sku = nil
 	preparer := autorest.CreatePreparer(
 		autorest.AsContentType("application/json; charset=utf-8"),
 		autorest.AsPut(),
@@ -340,82 +341,6 @@ func (client AccountsClient) DeleteResponder(resp *http.Response) (result autore
 		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusAccepted, http.StatusNoContent),
 		autorest.ByClosing())
 	result.Response = resp
-	return
-}
-
-// Get get an account
-// Parameters:
-// resourceGroupName - the resource group name.
-// accountName - the name of the account.
-func (client AccountsClient) Get(ctx context.Context, resourceGroupName string, accountName string) (result Account, err error) {
-	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/AccountsClient.Get")
-		defer func() {
-			sc := -1
-			if result.Response.Response != nil {
-				sc = result.Response.Response.StatusCode
-			}
-			tracing.EndSpan(ctx, sc, err)
-		}()
-	}
-	req, err := client.GetPreparer(ctx, resourceGroupName, accountName)
-	if err != nil {
-		err = autorest.NewErrorWithError(err, "purview.AccountsClient", "Get", nil, "Failure preparing request")
-		return
-	}
-
-	resp, err := client.GetSender(req)
-	if err != nil {
-		result.Response = autorest.Response{Response: resp}
-		err = autorest.NewErrorWithError(err, "purview.AccountsClient", "Get", resp, "Failure sending request")
-		return
-	}
-
-	result, err = client.GetResponder(resp)
-	if err != nil {
-		err = autorest.NewErrorWithError(err, "purview.AccountsClient", "Get", resp, "Failure responding to request")
-		return
-	}
-
-	return
-}
-
-// GetPreparer prepares the Get request.
-func (client AccountsClient) GetPreparer(ctx context.Context, resourceGroupName string, accountName string) (*http.Request, error) {
-	pathParameters := map[string]interface{}{
-		"accountName":       autorest.Encode("path", accountName),
-		"resourceGroupName": autorest.Encode("path", resourceGroupName),
-		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
-	}
-
-	const APIVersion = "2021-07-01"
-	queryParameters := map[string]interface{}{
-		"api-version": APIVersion,
-	}
-
-	preparer := autorest.CreatePreparer(
-		autorest.AsGet(),
-		autorest.WithBaseURL(client.BaseURI),
-		autorest.WithPathParameters("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Purview/accounts/{accountName}", pathParameters),
-		autorest.WithQueryParameters(queryParameters))
-	return preparer.Prepare((&http.Request{}).WithContext(ctx))
-}
-
-// GetSender sends the Get request. The method will close the
-// http.Response Body if it receives an error.
-func (client AccountsClient) GetSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
-}
-
-// GetResponder handles the response to the Get request. The method always
-// closes the http.Response Body.
-func (client AccountsClient) GetResponder(resp *http.Response) (result Account, err error) {
-	err = autorest.Respond(
-		resp,
-		azure.WithErrorUnlessStatusCode(http.StatusOK),
-		autorest.ByUnmarshallingJSON(&result),
-		autorest.ByClosing())
-	result.Response = autorest.Response{Response: resp}
 	return
 }
 
