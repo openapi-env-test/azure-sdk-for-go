@@ -185,7 +185,7 @@ func (client OperationsClient) ListSender(req *http.Request) (*http.Response, er
 func (client OperationsClient) ListResponder(resp *http.Response) (result OperationDefinitionListResult, err error) {
 	err = autorest.Respond(
 		resp,
-		azure.WithErrorUnlessStatusCode(http.StatusOK),
+		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusCreated),
 		autorest.ByUnmarshallingJSON(&result),
 		autorest.ByClosing())
 	result.Response = autorest.Response{Response: resp}
