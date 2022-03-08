@@ -7216,6 +7216,8 @@ type KeyWrapMetadata struct {
 	Type *string `json:"type,omitempty"`
 	// Value - Reference / link to the KeyEncryptionKey.
 	Value *string `json:"value,omitempty"`
+	// Algorithm - Algorithm used in wrapping and unwrapping of the data encryption key.
+	Algorithm *string `json:"algorithm,omitempty"`
 }
 
 // ListBackups list of restorable backups for a Cassandra cluster.
@@ -9269,6 +9271,8 @@ func (mudlr MongoUserDefinitionListResult) MarshalJSON() ([]byte, error) {
 type MongoUserDefinitionResource struct {
 	// UserName - The user name for User Definition.
 	UserName *string `json:"userName,omitempty"`
+	// DisplayName - The display name for User Definition.
+	DisplayName *string `json:"displayName,omitempty"`
 	// Password - The password for User Definition. Response does not contain user password.
 	Password *string `json:"password,omitempty"`
 	// DatabaseName - The database name for which access is being granted for this User Definition.
@@ -11370,6 +11374,8 @@ type RestorableTableProperties struct {
 type RestorableTablePropertiesResource struct {
 	// Rid - READ-ONLY; A system generated property. A unique identifier.
 	Rid *string `json:"_rid,omitempty"`
+	// DisplayName - READ-ONLY; The display name of the Table.
+	DisplayName *string `json:"displayName,omitempty"`
 	// OperationType - READ-ONLY; The operation type of this table event. Possible values include: 'OperationTypeCreate', 'OperationTypeReplace', 'OperationTypeDelete', 'OperationTypeSystemOperation'
 	OperationType OperationType `json:"operationType,omitempty"`
 	// EventTimestamp - READ-ONLY; The time when this table event happened.
