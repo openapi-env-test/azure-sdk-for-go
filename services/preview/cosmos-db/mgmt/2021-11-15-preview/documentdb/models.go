@@ -7216,6 +7216,8 @@ type KeyWrapMetadata struct {
 	Type *string `json:"type,omitempty"`
 	// Value - Reference / link to the KeyEncryptionKey.
 	Value *string `json:"value,omitempty"`
+	// Algorithm - Algorithm used in wrapping and unwrapping of the data encryption key.
+	Algorithm *string `json:"algorithm,omitempty"`
 }
 
 // ListBackups list of restorable backups for a Cassandra cluster.
@@ -9269,6 +9271,8 @@ func (mudlr MongoUserDefinitionListResult) MarshalJSON() ([]byte, error) {
 type MongoUserDefinitionResource struct {
 	// UserName - The user name for User Definition.
 	UserName *string `json:"userName,omitempty"`
+	// DisplayName - The display name for User Definition.
+	DisplayName *string `json:"displayName,omitempty"`
 	// Password - The password for User Definition. Response does not contain user password.
 	Password *string `json:"password,omitempty"`
 	// DatabaseName - The database name for which access is being granted for this User Definition.
