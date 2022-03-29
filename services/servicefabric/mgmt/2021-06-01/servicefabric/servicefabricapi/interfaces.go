@@ -18,7 +18,6 @@ type ClustersClientAPI interface {
 	Delete(ctx context.Context, resourceGroupName string, clusterName string) (result autorest.Response, err error)
 	Get(ctx context.Context, resourceGroupName string, clusterName string) (result servicefabric.Cluster, err error)
 	List(ctx context.Context) (result servicefabric.ClusterListResult, err error)
-	ListByResourceGroup(ctx context.Context, resourceGroupName string) (result servicefabric.ClusterListResult, err error)
 	ListUpgradableVersions(ctx context.Context, resourceGroupName string, clusterName string, versionsDescription *servicefabric.UpgradableVersionsDescription) (result servicefabric.UpgradableVersionPathResult, err error)
 	Update(ctx context.Context, resourceGroupName string, clusterName string, parameters servicefabric.ClusterUpdateParameters) (result servicefabric.ClustersUpdateFuture, err error)
 }
@@ -28,9 +27,9 @@ var _ ClustersClientAPI = (*servicefabric.ClustersClient)(nil)
 // ClusterVersionsClientAPI contains the set of methods on the ClusterVersionsClient type.
 type ClusterVersionsClientAPI interface {
 	Get(ctx context.Context, location string, clusterVersion string) (result servicefabric.ClusterCodeVersionsListResult, err error)
-	GetByEnvironment(ctx context.Context, location string, environment string, clusterVersion string) (result servicefabric.ClusterCodeVersionsListResult, err error)
+	GetByEnvironment(ctx context.Context, location string, environment servicefabric.ClusterVersionsEnvironment, clusterVersion string) (result servicefabric.ClusterCodeVersionsListResult, err error)
 	List(ctx context.Context, location string) (result servicefabric.ClusterCodeVersionsListResult, err error)
-	ListByEnvironment(ctx context.Context, location string, environment string) (result servicefabric.ClusterCodeVersionsListResult, err error)
+	ListByEnvironment(ctx context.Context, location string, environment servicefabric.ClusterVersionsEnvironment) (result servicefabric.ClusterCodeVersionsListResult, err error)
 }
 
 var _ ClusterVersionsClientAPI = (*servicefabric.ClusterVersionsClient)(nil)
