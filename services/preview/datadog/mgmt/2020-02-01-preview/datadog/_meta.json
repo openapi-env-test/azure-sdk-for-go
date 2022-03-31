@@ -1,5 +1,5 @@
 {
-  "commit": "d9506558e6389e62926ae385f1d625a1376a0f9d",
+  "commit": "391fdf521ab7c9ee6ee2856895fe9f2d7a03a9db",
   "readme": "/_/azure-rest-api-specs/specification/datadog/resource-manager/readme.md",
   "tag": "package-2020-02-preview",
   "use": "@microsoft.azure/autorest.go@2.1.187",
