@@ -29,7 +29,6 @@ type AvailabilitySetsClientAPI interface {
 	ListAvailableSizes(ctx context.Context, resourceGroupName string, availabilitySetName string) (result compute.VirtualMachineSizeListResult, err error)
 	ListBySubscription(ctx context.Context, expand string) (result compute.AvailabilitySetListResultPage, err error)
 	ListBySubscriptionComplete(ctx context.Context, expand string) (result compute.AvailabilitySetListResultIterator, err error)
-	Update(ctx context.Context, resourceGroupName string, availabilitySetName string, parameters compute.AvailabilitySetUpdate) (result compute.AvailabilitySet, err error)
 }
 
 var _ AvailabilitySetsClientAPI = (*compute.AvailabilitySetsClient)(nil)
