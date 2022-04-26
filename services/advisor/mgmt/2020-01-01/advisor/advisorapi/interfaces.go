@@ -13,9 +13,15 @@ import (
 	"github.com/gofrs/uuid"
 )
 
+// RecommendationClientAPI contains the set of methods on the RecommendationClient type.
+type RecommendationClientAPI interface {
+	Get(ctx context.Context, name string) (result advisor.MetadataEntity, err error)
+}
+
+var _ RecommendationClientAPI = (*advisor.RecommendationClient)(nil)
+
 // RecommendationMetadataClientAPI contains the set of methods on the RecommendationMetadataClient type.
 type RecommendationMetadataClientAPI interface {
-	Get(ctx context.Context, name string) (result advisor.SetObject, err error)
 	List(ctx context.Context) (result advisor.MetadataEntityListResultPage, err error)
 	ListComplete(ctx context.Context) (result advisor.MetadataEntityListResultIterator, err error)
 }
@@ -56,7 +62,7 @@ var _ OperationsClientAPI = (*advisor.OperationsClient)(nil)
 type SuppressionsClientAPI interface {
 	Create(ctx context.Context, resourceURI string, recommendationID string, name string, suppressionContract advisor.SuppressionContract) (result advisor.SuppressionContract, err error)
 	Delete(ctx context.Context, resourceURI string, recommendationID string, name string) (result autorest.Response, err error)
-	Get(ctx context.Context, resourceURI string, recommendationID string, name string) (result advisor.SetObject, err error)
+	Get(ctx context.Context, resourceURI string, recommendationID string, name string) (result advisor.SuppressionContract, err error)
 	List(ctx context.Context, top *int32, skipToken string) (result advisor.SuppressionContractListResultPage, err error)
 	ListComplete(ctx context.Context, top *int32, skipToken string) (result advisor.SuppressionContractListResultIterator, err error)
 }
