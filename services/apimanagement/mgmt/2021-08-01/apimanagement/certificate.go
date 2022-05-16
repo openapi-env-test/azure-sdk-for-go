@@ -223,6 +223,96 @@ func (client CertificateClient) DeleteResponder(resp *http.Response) (result aut
 	return
 }
 
+// EntityTag gets the entity state (Etag) version of the certificate specified by its identifier.
+// Parameters:
+// resourceGroupName - the name of the resource group.
+// serviceName - the name of the API Management service.
+// certificateID - identifier of the certificate entity. Must be unique in the current API Management service
+// instance.
+func (client CertificateClient) EntityTag(ctx context.Context, resourceGroupName string, serviceName string, certificateID string) (result autorest.Response, err error) {
+	if tracing.IsEnabled() {
+		ctx = tracing.StartSpan(ctx, fqdn+"/CertificateClient.EntityTag")
+		defer func() {
+			sc := -1
+			if result.Response != nil {
+				sc = result.Response.StatusCode
+			}
+			tracing.EndSpan(ctx, sc, err)
+		}()
+	}
+	if err := validation.Validate([]validation.Validation{
+		{TargetValue: serviceName,
+			Constraints: []validation.Constraint{{Target: "serviceName", Name: validation.MaxLength, Rule: 50, Chain: nil},
+				{Target: "serviceName", Name: validation.MinLength, Rule: 1, Chain: nil},
+				{Target: "serviceName", Name: validation.Pattern, Rule: `^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$`, Chain: nil}}},
+		{TargetValue: certificateID,
+			Constraints: []validation.Constraint{{Target: "certificateID", Name: validation.MaxLength, Rule: 80, Chain: nil},
+				{Target: "certificateID", Name: validation.MinLength, Rule: 1, Chain: nil},
+				{Target: "certificateID", Name: validation.Pattern, Rule: `^[^*#&+:<>?]+$`, Chain: nil}}}}); err != nil {
+		return result, validation.NewError("apimanagement.CertificateClient", "EntityTag", err.Error())
+	}
+
+	req, err := client.EntityTagPreparer(ctx, resourceGroupName, serviceName, certificateID)
+	if err != nil {
+		err = autorest.NewErrorWithError(err, "apimanagement.CertificateClient", "EntityTag", nil, "Failure preparing request")
+		return
+	}
+
+	resp, err := client.EntityTagSender(req)
+	if err != nil {
+		result.Response = resp
+		err = autorest.NewErrorWithError(err, "apimanagement.CertificateClient", "EntityTag", resp, "Failure sending request")
+		return
+	}
+
+	result, err = client.EntityTagResponder(resp)
+	if err != nil {
+		err = autorest.NewErrorWithError(err, "apimanagement.CertificateClient", "EntityTag", resp, "Failure responding to request")
+		return
+	}
+
+	return
+}
+
+// EntityTagPreparer prepares the EntityTag request.
+func (client CertificateClient) EntityTagPreparer(ctx context.Context, resourceGroupName string, serviceName string, certificateID string) (*http.Request, error) {
+	pathParameters := map[string]interface{}{
+		"certificateId":     autorest.Encode("path", certificateID),
+		"resourceGroupName": autorest.Encode("path", resourceGroupName),
+		"serviceName":       autorest.Encode("path", serviceName),
+		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
+	}
+
+	const APIVersion = "2021-08-01"
+	queryParameters := map[string]interface{}{
+		"api-version": APIVersion,
+	}
+
+	preparer := autorest.CreatePreparer(
+		autorest.AsHead(),
+		autorest.WithBaseURL(client.BaseURI),
+		autorest.WithPathParameters("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/certificates/{certificateId}", pathParameters),
+		autorest.WithQueryParameters(queryParameters))
+	return preparer.Prepare((&http.Request{}).WithContext(ctx))
+}
+
+// EntityTagSender sends the EntityTag request. The method will close the
+// http.Response Body if it receives an error.
+func (client CertificateClient) EntityTagSender(req *http.Request) (*http.Response, error) {
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+}
+
+// EntityTagResponder handles the response to the EntityTag request. The method always
+// closes the http.Response Body.
+func (client CertificateClient) EntityTagResponder(resp *http.Response) (result autorest.Response, err error) {
+	err = autorest.Respond(
+		resp,
+		azure.WithErrorUnlessStatusCode(http.StatusOK),
+		autorest.ByClosing())
+	result.Response = resp
+	return
+}
+
 // Get gets the details of the certificate specified by its identifier.
 // Parameters:
 // resourceGroupName - the name of the resource group.
@@ -311,96 +401,6 @@ func (client CertificateClient) GetResponder(resp *http.Response) (result Certif
 		autorest.ByUnmarshallingJSON(&result),
 		autorest.ByClosing())
 	result.Response = autorest.Response{Response: resp}
-	return
-}
-
-// GetEntityTag gets the entity state (Etag) version of the certificate specified by its identifier.
-// Parameters:
-// resourceGroupName - the name of the resource group.
-// serviceName - the name of the API Management service.
-// certificateID - identifier of the certificate entity. Must be unique in the current API Management service
-// instance.
-func (client CertificateClient) GetEntityTag(ctx context.Context, resourceGroupName string, serviceName string, certificateID string) (result autorest.Response, err error) {
-	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/CertificateClient.GetEntityTag")
-		defer func() {
-			sc := -1
-			if result.Response != nil {
-				sc = result.Response.StatusCode
-			}
-			tracing.EndSpan(ctx, sc, err)
-		}()
-	}
-	if err := validation.Validate([]validation.Validation{
-		{TargetValue: serviceName,
-			Constraints: []validation.Constraint{{Target: "serviceName", Name: validation.MaxLength, Rule: 50, Chain: nil},
-				{Target: "serviceName", Name: validation.MinLength, Rule: 1, Chain: nil},
-				{Target: "serviceName", Name: validation.Pattern, Rule: `^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$`, Chain: nil}}},
-		{TargetValue: certificateID,
-			Constraints: []validation.Constraint{{Target: "certificateID", Name: validation.MaxLength, Rule: 80, Chain: nil},
-				{Target: "certificateID", Name: validation.MinLength, Rule: 1, Chain: nil},
-				{Target: "certificateID", Name: validation.Pattern, Rule: `^[^*#&+:<>?]+$`, Chain: nil}}}}); err != nil {
-		return result, validation.NewError("apimanagement.CertificateClient", "GetEntityTag", err.Error())
-	}
-
-	req, err := client.GetEntityTagPreparer(ctx, resourceGroupName, serviceName, certificateID)
-	if err != nil {
-		err = autorest.NewErrorWithError(err, "apimanagement.CertificateClient", "GetEntityTag", nil, "Failure preparing request")
-		return
-	}
-
-	resp, err := client.GetEntityTagSender(req)
-	if err != nil {
-		result.Response = resp
-		err = autorest.NewErrorWithError(err, "apimanagement.CertificateClient", "GetEntityTag", resp, "Failure sending request")
-		return
-	}
-
-	result, err = client.GetEntityTagResponder(resp)
-	if err != nil {
-		err = autorest.NewErrorWithError(err, "apimanagement.CertificateClient", "GetEntityTag", resp, "Failure responding to request")
-		return
-	}
-
-	return
-}
-
-// GetEntityTagPreparer prepares the GetEntityTag request.
-func (client CertificateClient) GetEntityTagPreparer(ctx context.Context, resourceGroupName string, serviceName string, certificateID string) (*http.Request, error) {
-	pathParameters := map[string]interface{}{
-		"certificateId":     autorest.Encode("path", certificateID),
-		"resourceGroupName": autorest.Encode("path", resourceGroupName),
-		"serviceName":       autorest.Encode("path", serviceName),
-		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
-	}
-
-	const APIVersion = "2021-08-01"
-	queryParameters := map[string]interface{}{
-		"api-version": APIVersion,
-	}
-
-	preparer := autorest.CreatePreparer(
-		autorest.AsHead(),
-		autorest.WithBaseURL(client.BaseURI),
-		autorest.WithPathParameters("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/certificates/{certificateId}", pathParameters),
-		autorest.WithQueryParameters(queryParameters))
-	return preparer.Prepare((&http.Request{}).WithContext(ctx))
-}
-
-// GetEntityTagSender sends the GetEntityTag request. The method will close the
-// http.Response Body if it receives an error.
-func (client CertificateClient) GetEntityTagSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
-}
-
-// GetEntityTagResponder handles the response to the GetEntityTag request. The method always
-// closes the http.Response Body.
-func (client CertificateClient) GetEntityTagResponder(resp *http.Response) (result autorest.Response, err error) {
-	err = autorest.Respond(
-		resp,
-		azure.WithErrorUnlessStatusCode(http.StatusOK),
-		autorest.ByClosing())
-	result.Response = resp
 	return
 }
 
