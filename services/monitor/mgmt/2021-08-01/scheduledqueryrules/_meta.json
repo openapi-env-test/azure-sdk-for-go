@@ -1,5 +1,5 @@
 {
-  "commit": "9d8640319ef481ae301b67b033d6ae0bd30422c3",
+  "commit": "00fbd6e0cf5e93393fdb5448de1b743eb56c0b93",
   "readme": "/_/azure-rest-api-specs/specification/monitor/resource-manager/readme.md",
   "tag": "package-2021-08-scheduledqueryrules",
   "use": "@microsoft.azure/autorest.go@2.1.187",
