@@ -4268,6 +4268,83 @@ type WorkspaceManagedSQLServerBlobAuditingPoliciesClientListByWorkspaceResult st
 	ServerBlobAuditingPolicyListResult
 }
 
+// WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientGetResponse contains the response from method WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClient.Get.
+type WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientGetResponse struct {
+	WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientGetResult
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientGetResult contains the result from method WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClient.Get.
+type WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientGetResult struct {
+	DedicatedSQLminimalTLSSettings
+}
+
+// WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientListResponse contains the response from method WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClient.List.
+type WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientListResponse struct {
+	WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientListResult
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientListResult contains the result from method WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClient.List.
+type WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientListResult struct {
+	DedicatedSQLminimalTLSSettingsListResult
+}
+
+// WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientUpdatePollerResponse contains the response from method WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClient.Update.
+type WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientUpdatePollerResponse struct {
+	// Poller contains an initialized poller.
+	Poller *WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientUpdatePoller
+
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// PollUntilDone will poll the service endpoint until a terminal state is reached or an error is received.
+// freq: the time to wait between intervals in absence of a Retry-After header. Allowed minimum is one second.
+// A good starting value is 30 seconds. Note that some resources might benefit from a different value.
+func (l WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientUpdatePollerResponse) PollUntilDone(ctx context.Context, freq time.Duration) (WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientUpdateResponse, error) {
+	respType := WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientUpdateResponse{}
+	resp, err := l.Poller.pt.PollUntilDone(ctx, freq, &respType.DedicatedSQLminimalTLSSettings)
+	if err != nil {
+		return respType, err
+	}
+	respType.RawResponse = resp
+	return respType, nil
+}
+
+// Resume rehydrates a WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientUpdatePollerResponse from the provided
+// client and resume token.
+func (l *WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientUpdatePollerResponse) Resume(ctx context.Context, client *WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClient, token string) error {
+	pt, err := armruntime.NewPollerFromResumeToken("WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClient.Update", token, client.pl)
+	if err != nil {
+		return err
+	}
+	poller := &WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientUpdatePoller{
+		pt: pt,
+	}
+	resp, err := poller.Poll(ctx)
+	if err != nil {
+		return err
+	}
+	l.Poller = poller
+	l.RawResponse = resp
+	return nil
+}
+
+// WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientUpdateResponse contains the response from method WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClient.Update.
+type WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientUpdateResponse struct {
+	WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientUpdateResult
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientUpdateResult contains the result from method WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClient.Update.
+type WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientUpdateResult struct {
+	DedicatedSQLminimalTLSSettings
+}
+
 // WorkspaceManagedSQLServerEncryptionProtectorClientCreateOrUpdatePollerResponse contains the response from method WorkspaceManagedSQLServerEncryptionProtectorClient.CreateOrUpdate.
 type WorkspaceManagedSQLServerEncryptionProtectorClientCreateOrUpdatePollerResponse struct {
 	// Poller contains an initialized poller.

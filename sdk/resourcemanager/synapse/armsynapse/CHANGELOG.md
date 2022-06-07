@@ -1,5 +1,54 @@
 # Release History
 
+## 0.3.0 (2022-06-07)
+### Breaking Changes
+
+- Function `*ExtendedSQLPoolBlobAuditingPoliciesClient.Get` parameter(s) have been changed from `(context.Context, string, string, string, Enum11, *ExtendedSQLPoolBlobAuditingPoliciesClientGetOptions)` to `(context.Context, string, string, string, *ExtendedSQLPoolBlobAuditingPoliciesClientGetOptions)`
+- Function `*ExtendedSQLPoolBlobAuditingPoliciesClient.CreateOrUpdate` parameter(s) have been changed from `(context.Context, string, string, string, Enum11, ExtendedSQLPoolBlobAuditingPolicy, *ExtendedSQLPoolBlobAuditingPoliciesClientCreateOrUpdateOptions)` to `(context.Context, string, string, string, ExtendedSQLPoolBlobAuditingPolicy, *ExtendedSQLPoolBlobAuditingPoliciesClientCreateOrUpdateOptions)`
+- Function `*SQLPoolBlobAuditingPoliciesClient.Get` parameter(s) have been changed from `(context.Context, string, string, string, Enum11, *SQLPoolBlobAuditingPoliciesClientGetOptions)` to `(context.Context, string, string, string, *SQLPoolBlobAuditingPoliciesClientGetOptions)`
+- Function `*SQLPoolBlobAuditingPoliciesClient.CreateOrUpdate` parameter(s) have been changed from `(context.Context, string, string, string, Enum11, SQLPoolBlobAuditingPolicy, *SQLPoolBlobAuditingPoliciesClientCreateOrUpdateOptions)` to `(context.Context, string, string, string, SQLPoolBlobAuditingPolicy, *SQLPoolBlobAuditingPoliciesClientCreateOrUpdateOptions)`
+- Const `Enum11Default` has been removed
+- Function `PossibleEnum11Values` has been removed
+- Function `Enum11.ToPtr` has been removed
+
+### Features Added
+
+- New const `DedicatedSQLMinimalTLSSettingsNameDefault`
+- New function `*WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientUpdatePoller.Poll(context.Context) (*http.Response, error)`
+- New function `*WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientUpdatePoller.ResumeToken() (string, error)`
+- New function `PossibleDedicatedSQLMinimalTLSSettingsNameValues() []DedicatedSQLMinimalTLSSettingsName`
+- New function `*WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientUpdatePoller.Done() bool`
+- New function `*WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientUpdatePollerResponse.Resume(context.Context, *WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClient, string) error`
+- New function `DedicatedSQLminimalTLSSettingsListResult.MarshalJSON() ([]byte, error)`
+- New function `WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientUpdatePollerResponse.PollUntilDone(context.Context, time.Duration) (WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientUpdateResponse, error)`
+- New function `*WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientUpdatePoller.FinalResponse(context.Context) (WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientUpdateResponse, error)`
+- New function `*WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClient.BeginUpdate(context.Context, string, string, DedicatedSQLMinimalTLSSettingsName, DedicatedSQLminimalTLSSettings, *WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientBeginUpdateOptions) (WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientUpdatePollerResponse, error)`
+- New function `DedicatedSQLMinimalTLSSettingsName.ToPtr() *DedicatedSQLMinimalTLSSettingsName`
+- New function `*WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClient.Get(context.Context, string, string, string, *WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientGetOptions) (WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientGetResponse, error)`
+- New function `*WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientListPager.PageResponse() WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientListResponse`
+- New function `*WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClient.List(string, string, *WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientListOptions) *WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientListPager`
+- New function `*WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientListPager.Err() error`
+- New function `NewWorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClient(string, azcore.TokenCredential, *arm.ClientOptions) *WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClient`
+- New function `*WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientListPager.NextPage(context.Context) bool`
+- New struct `DedicatedSQLminimalTLSSettings`
+- New struct `DedicatedSQLminimalTLSSettingsListResult`
+- New struct `DedicatedSQLminimalTLSSettingsPatchInfo`
+- New struct `DedicatedSQLminimalTLSSettingsProperties`
+- New struct `WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClient`
+- New struct `WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientBeginUpdateOptions`
+- New struct `WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientGetOptions`
+- New struct `WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientGetResponse`
+- New struct `WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientGetResult`
+- New struct `WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientListOptions`
+- New struct `WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientListPager`
+- New struct `WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientListResponse`
+- New struct `WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientListResult`
+- New struct `WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientUpdatePoller`
+- New struct `WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientUpdatePollerResponse`
+- New struct `WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientUpdateResponse`
+- New struct `WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientUpdateResult`
+
+
 ## 0.2.0 (2022-01-13)
 ### Breaking Changes
 

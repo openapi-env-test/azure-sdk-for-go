@@ -1321,6 +1321,53 @@ type DatabaseStatistics struct {
 	Size *float32 `json:"size,omitempty"`
 }
 
+// DedicatedSQLminimalTLSSettings - Dedicated Sql Minimal Tls Settings Info
+type DedicatedSQLminimalTLSSettings struct {
+	// Resource properties.
+	Properties *DedicatedSQLminimalTLSSettingsProperties `json:"properties,omitempty"`
+
+	// READ-ONLY; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+	ID *string `json:"id,omitempty" azure:"ro"`
+
+	// READ-ONLY; Resource location.
+	Location *string `json:"location,omitempty" azure:"ro"`
+
+	// READ-ONLY; The name of the resource
+	Name *string `json:"name,omitempty" azure:"ro"`
+
+	// READ-ONLY; The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
+	Type *string `json:"type,omitempty" azure:"ro"`
+}
+
+// DedicatedSQLminimalTLSSettingsListResult - A list of the server's dedicated sql minimal tls settings.
+type DedicatedSQLminimalTLSSettingsListResult struct {
+	// READ-ONLY; Link to retrieve next page of results.
+	NextLink *string `json:"nextLink,omitempty" azure:"ro"`
+
+	// READ-ONLY; Array of results.
+	Value []*DedicatedSQLminimalTLSSettings `json:"value,omitempty" azure:"ro"`
+}
+
+// MarshalJSON implements the json.Marshaller interface for type DedicatedSQLminimalTLSSettingsListResult.
+func (d DedicatedSQLminimalTLSSettingsListResult) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	populate(objectMap, "nextLink", d.NextLink)
+	populate(objectMap, "value", d.Value)
+	return json.Marshal(objectMap)
+}
+
+// DedicatedSQLminimalTLSSettingsPatchInfo - Dedicated SQL minimal tls settings patch info
+type DedicatedSQLminimalTLSSettingsPatchInfo struct {
+	// minimal tls version
+	MinimalTLSVersion *string `json:"minimalTlsVersion,omitempty"`
+}
+
+// DedicatedSQLminimalTLSSettingsProperties - Properties of a dedicated sql minimal tls settings.
+type DedicatedSQLminimalTLSSettingsProperties struct {
+	// The minimal tls version of the sql server.
+	MinimalTLSVersion *string `json:"minimalTlsVersion,omitempty"`
+}
+
 // DynamicExecutorAllocation - Dynamic Executor Allocation Properties
 type DynamicExecutorAllocation struct {
 	// Indicates whether Dynamic Executor Allocation is enabled or not.
@@ -10196,6 +10243,24 @@ type WorkspaceManagedSQLServerBlobAuditingPoliciesClientGetOptions struct {
 // WorkspaceManagedSQLServerBlobAuditingPoliciesClientListByWorkspaceOptions contains the optional parameters for the WorkspaceManagedSQLServerBlobAuditingPoliciesClient.ListByWorkspace
 // method.
 type WorkspaceManagedSQLServerBlobAuditingPoliciesClientListByWorkspaceOptions struct {
+	// placeholder for future optional parameters
+}
+
+// WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientBeginUpdateOptions contains the optional parameters for the
+// WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClient.BeginUpdate method.
+type WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientBeginUpdateOptions struct {
+	// placeholder for future optional parameters
+}
+
+// WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientGetOptions contains the optional parameters for the WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClient.Get
+// method.
+type WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientGetOptions struct {
+	// placeholder for future optional parameters
+}
+
+// WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientListOptions contains the optional parameters for the WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClient.List
+// method.
+type WorkspaceManagedSQLServerDedicatedSQLMinimalTLSSettingsClientListOptions struct {
 	// placeholder for future optional parameters
 }
 
