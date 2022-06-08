@@ -1,5 +1,5 @@
 {
-  "commit": "bb4175d29020cfff55f1d9087c2a5a89765067dc",
+  "commit": "a5e5c4cb215b8f14c3e9227e4ebfc7e71d8839fc",
   "readme": "/_/azure-rest-api-specs/specification/cognitiveservices/resource-manager/readme.md",
   "tag": "package-2017-04",
   "use": "@microsoft.azure/autorest.go@2.1.187",
