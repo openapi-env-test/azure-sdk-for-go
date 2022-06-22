@@ -10,7 +10,7 @@ package armbilling
 
 const (
 	moduleName    = "armbilling"
-	moduleVersion = "v0.2.0"
+	moduleVersion = "v0.3.0"
 )
 
 // AcceptanceMode - The mode of acceptance for an agreement.
@@ -94,15 +94,15 @@ func (c AccountType) ToPtr() *AccountType {
 type AddressValidationStatus string
 
 const (
-	AddressValidationStatusInvalid AddressValidationStatus = "Invalid"
 	AddressValidationStatusValid   AddressValidationStatus = "Valid"
+	AddressValidationStatusInvalid AddressValidationStatus = "Invalid"
 )
 
 // PossibleAddressValidationStatusValues returns the possible values for the AddressValidationStatus const type.
 func PossibleAddressValidationStatusValues() []AddressValidationStatus {
 	return []AddressValidationStatus{
-		AddressValidationStatusInvalid,
 		AddressValidationStatusValid,
+		AddressValidationStatusInvalid,
 	}
 }
 

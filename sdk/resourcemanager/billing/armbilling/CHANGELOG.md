@@ -1,5 +1,17 @@
 # Release History
 
+## 0.3.0 (2022-06-22)
+### Breaking Changes
+
+### Features Added
+
+- New struct `OperationsErrorDetails`
+- New struct `OperationsErrorResponse`
+- New struct `ProfileInfo`
+- New field `BillingProfileInfo` in struct `AgreementProperties`
+- New field `TotalCount` in struct `ProfileListResult`
+
+
 ## 0.2.0 (2022-01-13)
 ### Breaking Changes
 

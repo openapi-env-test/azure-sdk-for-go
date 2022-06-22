@@ -230,6 +230,9 @@ type AgreementProperties struct {
 	// READ-ONLY; The URL to download the agreement.
 	AgreementLink *string `json:"agreementLink,omitempty" azure:"ro"`
 
+	// READ-ONLY; The list of billing profiles associated with agreement and present only for specific agreements.
+	BillingProfileInfo *ProfileInfo `json:"billingProfileInfo,omitempty" azure:"ro"`
+
 	// READ-ONLY; The category of the agreement signed by a customer.
 	Category *Category `json:"category,omitempty" azure:"ro"`
 
@@ -248,6 +251,7 @@ func (a AgreementProperties) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
 	populate(objectMap, "acceptanceMode", a.AcceptanceMode)
 	populate(objectMap, "agreementLink", a.AgreementLink)
+	populate(objectMap, "billingProfileInfo", a.BillingProfileInfo)
 	populate(objectMap, "category", a.Category)
 	populateTimeRFC3339(objectMap, "effectiveDate", a.EffectiveDate)
 	populateTimeRFC3339(objectMap, "expirationDate", a.ExpirationDate)
@@ -270,6 +274,9 @@ func (a *AgreementProperties) UnmarshalJSON(data []byte) error {
 			delete(rawMsg, key)
 		case "agreementLink":
 			err = unpopulate(val, &a.AgreementLink)
+			delete(rawMsg, key)
+		case "billingProfileInfo":
+			err = unpopulate(val, &a.BillingProfileInfo)
 			delete(rawMsg, key)
 		case "category":
 			err = unpopulate(val, &a.Category)
@@ -1547,6 +1554,25 @@ type OperationsClientListOptions struct {
 	// placeholder for future optional parameters
 }
 
+// OperationsErrorDetails - The details of the error.
+type OperationsErrorDetails struct {
+	// READ-ONLY; Error code.
+	Code *string `json:"code,omitempty" azure:"ro"`
+
+	// READ-ONLY; Error message indicating why the operation failed.
+	Message *string `json:"message,omitempty" azure:"ro"`
+
+	// READ-ONLY; The target of the particular error.
+	Target *string `json:"target,omitempty" azure:"ro"`
+}
+
+// OperationsErrorResponse - Error response indicates that the service is not able to process the incoming request. The reason
+// is provided in the error message.
+type OperationsErrorResponse struct {
+	// The details of the error.
+	Error *OperationsErrorDetails `json:"error,omitempty"`
+}
+
 // Participants - The details about a participant.
 type Participants struct {
 	// READ-ONLY; The email address of the participant.
@@ -2182,10 +2208,25 @@ func (p ProfileCreationRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(objectMap)
 }
 
+// ProfileInfo - Details about billing profile associated with agreement and available only for specific agreements.
+type ProfileInfo struct {
+	// The name of the billing profile
+	BillingProfileDisplayName *string `json:"billingProfileDisplayName,omitempty"`
+
+	// The unique identifier for the billing profile.
+	BillingProfileID *string `json:"billingProfileId,omitempty"`
+
+	// Billing account name. This property is available for a specific type of agreement.
+	IndirectRelationshipOrganizationName *string `json:"indirectRelationshipOrganizationName,omitempty"`
+}
+
 // ProfileListResult - The list of billing profiles.
 type ProfileListResult struct {
 	// READ-ONLY; The link (url) to the next page of results.
 	NextLink *string `json:"nextLink,omitempty" azure:"ro"`
+
+	// READ-ONLY; Total number of records.
+	TotalCount *int32 `json:"totalCount,omitempty" azure:"ro"`
 
 	// READ-ONLY; The list of billing profiles.
 	Value []*Profile `json:"value,omitempty" azure:"ro"`
@@ -2195,6 +2236,7 @@ type ProfileListResult struct {
 func (p ProfileListResult) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
 	populate(objectMap, "nextLink", p.NextLink)
+	populate(objectMap, "totalCount", p.TotalCount)
 	populate(objectMap, "value", p.Value)
 	return json.Marshal(objectMap)
 }
