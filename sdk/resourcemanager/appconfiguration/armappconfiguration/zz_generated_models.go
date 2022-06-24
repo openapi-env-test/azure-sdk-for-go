@@ -112,7 +112,7 @@ type CheckNameAvailabilityParameters struct {
 // ConfigurationStore - The configuration store along with all resource properties. The Configuration Store will have all
 // information to begin utilizing it.
 type ConfigurationStore struct {
-	// REQUIRED; The geo-location where the resource lives
+	// REQUIRED; The location of the resource. This cannot be changed after the resource is created.
 	Location *string `json:"location,omitempty"`
 
 	// REQUIRED; The sku of the configuration store.
@@ -124,19 +124,16 @@ type ConfigurationStore struct {
 	// The properties of a configuration store.
 	Properties *ConfigurationStoreProperties `json:"properties,omitempty"`
 
-	// Resource tags.
+	// The tags of the resource.
 	Tags map[string]*string `json:"tags,omitempty"`
 
-	// READ-ONLY; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+	// READ-ONLY; The resource ID.
 	ID *string `json:"id,omitempty" azure:"ro"`
 
-	// READ-ONLY; The name of the resource
+	// READ-ONLY; The name of the resource.
 	Name *string `json:"name,omitempty" azure:"ro"`
 
-	// READ-ONLY; Resource system metadata.
-	SystemData *SystemData `json:"systemData,omitempty" azure:"ro"`
-
-	// READ-ONLY; The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
+	// READ-ONLY; The type of the resource.
 	Type *string `json:"type,omitempty" azure:"ro"`
 }
 
@@ -149,7 +146,6 @@ func (c ConfigurationStore) MarshalJSON() ([]byte, error) {
 	populate(objectMap, "name", c.Name)
 	populate(objectMap, "properties", c.Properties)
 	populate(objectMap, "sku", c.SKU)
-	populate(objectMap, "systemData", c.SystemData)
 	populate(objectMap, "tags", c.Tags)
 	populate(objectMap, "type", c.Type)
 	return json.Marshal(objectMap)
@@ -174,9 +170,6 @@ func (c ConfigurationStoreListResult) MarshalJSON() ([]byte, error) {
 
 // ConfigurationStoreProperties - The properties of a configuration store.
 type ConfigurationStoreProperties struct {
-	// Disables all authentication methods other than AAD authentication.
-	DisableLocalAuth *bool `json:"disableLocalAuth,omitempty"`
-
 	// The encryption settings of the configuration store.
 	Encryption *EncryptionProperties `json:"encryption,omitempty"`
 
@@ -200,7 +193,6 @@ type ConfigurationStoreProperties struct {
 func (c ConfigurationStoreProperties) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
 	populateTimeRFC3339(objectMap, "creationDate", c.CreationDate)
-	populate(objectMap, "disableLocalAuth", c.DisableLocalAuth)
 	populate(objectMap, "encryption", c.Encryption)
 	populate(objectMap, "endpoint", c.Endpoint)
 	populate(objectMap, "privateEndpointConnections", c.PrivateEndpointConnections)
@@ -220,9 +212,6 @@ func (c *ConfigurationStoreProperties) UnmarshalJSON(data []byte) error {
 		switch key {
 		case "creationDate":
 			err = unpopulateTimeRFC3339(val, &c.CreationDate)
-			delete(rawMsg, key)
-		case "disableLocalAuth":
-			err = unpopulate(val, &c.DisableLocalAuth)
 			delete(rawMsg, key)
 		case "encryption":
 			err = unpopulate(val, &c.Encryption)
@@ -249,9 +238,6 @@ func (c *ConfigurationStoreProperties) UnmarshalJSON(data []byte) error {
 
 // ConfigurationStorePropertiesUpdateParameters - The properties for updating a configuration store.
 type ConfigurationStorePropertiesUpdateParameters struct {
-	// Disables all authentication methods other than AAD authentication.
-	DisableLocalAuth *bool `json:"disableLocalAuth,omitempty"`
-
 	// The encryption settings of the configuration store.
 	Encryption *EncryptionProperties `json:"encryption,omitempty"`
 
@@ -316,6 +302,12 @@ type ConfigurationStoresClientListByResourceGroupOptions struct {
 	SkipToken *string
 }
 
+// ConfigurationStoresClientListKeyValueOptions contains the optional parameters for the ConfigurationStoresClient.ListKeyValue
+// method.
+type ConfigurationStoresClientListKeyValueOptions struct {
+	// placeholder for future optional parameters
+}
+
 // ConfigurationStoresClientListKeysOptions contains the optional parameters for the ConfigurationStoresClient.ListKeys method.
 type ConfigurationStoresClientListKeysOptions struct {
 	// A skip token is used to continue retrieving items after an operation returns a partial result. If a previous response contains
@@ -344,86 +336,20 @@ type EncryptionProperties struct {
 	KeyVaultProperties *KeyVaultProperties `json:"keyVaultProperties,omitempty"`
 }
 
-// ErrorAdditionalInfo - The resource management error additional info.
-type ErrorAdditionalInfo struct {
-	// READ-ONLY; The additional info.
-	Info map[string]interface{} `json:"info,omitempty" azure:"ro"`
+// Error - AppConfiguration error object.
+type Error struct {
+	// Error code.
+	Code *string `json:"code,omitempty"`
 
-	// READ-ONLY; The additional info type.
-	Type *string `json:"type,omitempty" azure:"ro"`
+	// Error message.
+	Message *string `json:"message,omitempty"`
 }
 
-// ErrorDetails - The details of the error.
-type ErrorDetails struct {
-	// READ-ONLY; The error additional info.
-	AdditionalInfo []*ErrorAdditionalInfo `json:"additionalInfo,omitempty" azure:"ro"`
-
-	// READ-ONLY; Error code.
-	Code *string `json:"code,omitempty" azure:"ro"`
-
-	// READ-ONLY; Error message indicating why the operation failed.
-	Message *string `json:"message,omitempty" azure:"ro"`
-}
-
-// MarshalJSON implements the json.Marshaller interface for type ErrorDetails.
-func (e ErrorDetails) MarshalJSON() ([]byte, error) {
-	objectMap := make(map[string]interface{})
-	populate(objectMap, "additionalInfo", e.AdditionalInfo)
-	populate(objectMap, "code", e.Code)
-	populate(objectMap, "message", e.Message)
-	return json.Marshal(objectMap)
-}
-
-// ErrorResponse - Error response indicates that the service is not able to process the incoming request. The reason is provided
-// in the error message.
-type ErrorResponse struct {
-	// The details of the error.
-	Error *ErrorDetails `json:"error,omitempty"`
-}
-
-// KeyValue - The key-value resource along with all resource properties.
+// KeyValue - The result of a request to retrieve a key-value from the specified configuration store.
 type KeyValue struct {
-	// All key-value properties.
-	Properties *KeyValueProperties `json:"properties,omitempty"`
-
-	// READ-ONLY; The resource ID.
-	ID *string `json:"id,omitempty" azure:"ro"`
-
-	// READ-ONLY; The name of the resource.
-	Name *string `json:"name,omitempty" azure:"ro"`
-
-	// READ-ONLY; The type of the resource.
-	Type *string `json:"type,omitempty" azure:"ro"`
-}
-
-// KeyValueListResult - The result of a request to list key-values.
-type KeyValueListResult struct {
-	// The URI that can be used to request the next set of paged results.
-	NextLink *string `json:"nextLink,omitempty"`
-
-	// The collection value.
-	Value []*KeyValue `json:"value,omitempty"`
-}
-
-// MarshalJSON implements the json.Marshaller interface for type KeyValueListResult.
-func (k KeyValueListResult) MarshalJSON() ([]byte, error) {
-	objectMap := make(map[string]interface{})
-	populate(objectMap, "nextLink", k.NextLink)
-	populate(objectMap, "value", k.Value)
-	return json.Marshal(objectMap)
-}
-
-// KeyValueProperties - All key-value properties.
-type KeyValueProperties struct {
-	// The content type of the key-value's value. Providing a proper content-type can enable transformations of values when they
-	// are retrieved by applications.
-	ContentType *string `json:"contentType,omitempty"`
-
-	// A dictionary of tags that can help identify what a key-value may be applicable for.
-	Tags map[string]*string `json:"tags,omitempty"`
-
-	// The value of the key-value.
-	Value *string `json:"value,omitempty"`
+	// READ-ONLY; The content type of the key-value's value. Providing a proper content-type can enable transformations of values
+	// when they are retrieved by applications.
+	ContentType *string `json:"contentType,omitempty" azure:"ro"`
 
 	// READ-ONLY; An ETag indicating the state of a key-value within a configuration store.
 	ETag *string `json:"eTag,omitempty" azure:"ro"`
@@ -439,10 +365,16 @@ type KeyValueProperties struct {
 
 	// READ-ONLY; A value indicating whether the key-value is locked. A locked key-value may not be modified until it is unlocked.
 	Locked *bool `json:"locked,omitempty" azure:"ro"`
+
+	// READ-ONLY; A dictionary of tags that can help identify what a key-value may be applicable for.
+	Tags map[string]*string `json:"tags,omitempty" azure:"ro"`
+
+	// READ-ONLY; The value of the key-value.
+	Value *string `json:"value,omitempty" azure:"ro"`
 }
 
-// MarshalJSON implements the json.Marshaller interface for type KeyValueProperties.
-func (k KeyValueProperties) MarshalJSON() ([]byte, error) {
+// MarshalJSON implements the json.Marshaller interface for type KeyValue.
+func (k KeyValue) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
 	populate(objectMap, "contentType", k.ContentType)
 	populate(objectMap, "eTag", k.ETag)
@@ -455,8 +387,8 @@ func (k KeyValueProperties) MarshalJSON() ([]byte, error) {
 	return json.Marshal(objectMap)
 }
 
-// UnmarshalJSON implements the json.Unmarshaller interface for type KeyValueProperties.
-func (k *KeyValueProperties) UnmarshalJSON(data []byte) error {
+// UnmarshalJSON implements the json.Unmarshaller interface for type KeyValue.
+func (k *KeyValue) UnmarshalJSON(data []byte) error {
 	var rawMsg map[string]json.RawMessage
 	if err := json.Unmarshal(data, &rawMsg); err != nil {
 		return err
@@ -496,31 +428,6 @@ func (k *KeyValueProperties) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-// KeyValuesClientBeginDeleteOptions contains the optional parameters for the KeyValuesClient.BeginDelete method.
-type KeyValuesClientBeginDeleteOptions struct {
-	// placeholder for future optional parameters
-}
-
-// KeyValuesClientCreateOrUpdateOptions contains the optional parameters for the KeyValuesClient.CreateOrUpdate method.
-type KeyValuesClientCreateOrUpdateOptions struct {
-	// The parameters for creating a key-value.
-	KeyValueParameters *KeyValue
-}
-
-// KeyValuesClientGetOptions contains the optional parameters for the KeyValuesClient.Get method.
-type KeyValuesClientGetOptions struct {
-	// placeholder for future optional parameters
-}
-
-// KeyValuesClientListByConfigurationStoreOptions contains the optional parameters for the KeyValuesClient.ListByConfigurationStore
-// method.
-type KeyValuesClientListByConfigurationStoreOptions struct {
-	// A skip token is used to continue retrieving items after an operation returns a partial result. If a previous response contains
-	// a nextLink element, the value of the nextLink element will include a
-	// skipToken parameter that specifies a starting point to use for subsequent calls.
-	SkipToken *string
-}
-
 // KeyVaultProperties - Settings concerning key vault encryption for a configuration store.
 type KeyVaultProperties struct {
 	// The client id of the identity which will be used to access key vault.
@@ -530,69 +437,13 @@ type KeyVaultProperties struct {
 	KeyIdentifier *string `json:"keyIdentifier,omitempty"`
 }
 
-// LogSpecification - Specifications of the Log for Azure Monitoring
-type LogSpecification struct {
-	// Blob duration of the log
-	BlobDuration *string `json:"blobDuration,omitempty"`
+// ListKeyValueParameters - The parameters used to list a configuration store key-value
+type ListKeyValueParameters struct {
+	// REQUIRED; The key to retrieve.
+	Key *string `json:"key,omitempty"`
 
-	// Localized friendly display name of the log
-	DisplayName *string `json:"displayName,omitempty"`
-
-	// Name of the log
-	Name *string `json:"name,omitempty"`
-}
-
-// MetricDimension - Specifications of the Dimension of metrics
-type MetricDimension struct {
-	// Localized friendly display name of the dimension
-	DisplayName *string `json:"displayName,omitempty"`
-
-	// Internal name of the dimension.
-	InternalName *string `json:"internalName,omitempty"`
-
-	// Name of the dimension
-	Name *string `json:"name,omitempty"`
-}
-
-// MetricSpecification - Specifications of the Metrics for Azure Monitoring
-type MetricSpecification struct {
-	// Only provide one value for this field. Valid values: Average, Minimum, Maximum, Total, Count.
-	AggregationType *string `json:"aggregationType,omitempty"`
-
-	// Dimensions of the metric
-	Dimensions []*MetricDimension `json:"dimensions,omitempty"`
-
-	// Localized friendly description of the metric
-	DisplayDescription *string `json:"displayDescription,omitempty"`
-
-	// Localized friendly display name of the metric
-	DisplayName *string `json:"displayName,omitempty"`
-
-	// Optional. If set to true, then zero will be returned for time duration where no metric is emitted/published.
-	FillGapWithZero *bool `json:"fillGapWithZero,omitempty"`
-
-	// Internal metric name.
-	InternalMetricName *string `json:"internalMetricName,omitempty"`
-
-	// Name of the metric
-	Name *string `json:"name,omitempty"`
-
-	// Unit that makes sense for the metric
-	Unit *string `json:"unit,omitempty"`
-}
-
-// MarshalJSON implements the json.Marshaller interface for type MetricSpecification.
-func (m MetricSpecification) MarshalJSON() ([]byte, error) {
-	objectMap := make(map[string]interface{})
-	populate(objectMap, "aggregationType", m.AggregationType)
-	populate(objectMap, "dimensions", m.Dimensions)
-	populate(objectMap, "displayDescription", m.DisplayDescription)
-	populate(objectMap, "displayName", m.DisplayName)
-	populate(objectMap, "fillGapWithZero", m.FillGapWithZero)
-	populate(objectMap, "internalMetricName", m.InternalMetricName)
-	populate(objectMap, "name", m.Name)
-	populate(objectMap, "unit", m.Unit)
-	return json.Marshal(objectMap)
+	// The label of the key.
+	Label *string `json:"label,omitempty"`
 }
 
 // NameAvailabilityStatus - The result of a request to check the availability of a resource name.
@@ -612,17 +463,8 @@ type OperationDefinition struct {
 	// The display information for the configuration store operation.
 	Display *OperationDefinitionDisplay `json:"display,omitempty"`
 
-	// Indicates whether the operation is a data action
-	IsDataAction *bool `json:"isDataAction,omitempty"`
-
 	// Operation name: {provider}/{resource}/{operation}.
 	Name *string `json:"name,omitempty"`
-
-	// Origin of the operation
-	Origin *string `json:"origin,omitempty"`
-
-	// Properties of the operation
-	Properties *OperationProperties `json:"properties,omitempty"`
 }
 
 // OperationDefinitionDisplay - The display information for a configuration store operation.
@@ -655,12 +497,6 @@ func (o OperationDefinitionListResult) MarshalJSON() ([]byte, error) {
 	populate(objectMap, "nextLink", o.NextLink)
 	populate(objectMap, "value", o.Value)
 	return json.Marshal(objectMap)
-}
-
-// OperationProperties - Extra Operation properties
-type OperationProperties struct {
-	// Service specifications of the operation
-	ServiceSpecification *ServiceSpecification `json:"serviceSpecification,omitempty"`
 }
 
 // OperationsClientCheckNameAvailabilityOptions contains the optional parameters for the OperationsClient.CheckNameAvailability
@@ -848,16 +684,33 @@ type RegenerateKeyParameters struct {
 	ID *string `json:"id,omitempty"`
 }
 
-// Resource - Common fields that are returned in the response for all Azure Resource Manager resources
+// Resource - An Azure resource.
 type Resource struct {
-	// READ-ONLY; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+	// REQUIRED; The location of the resource. This cannot be changed after the resource is created.
+	Location *string `json:"location,omitempty"`
+
+	// The tags of the resource.
+	Tags map[string]*string `json:"tags,omitempty"`
+
+	// READ-ONLY; The resource ID.
 	ID *string `json:"id,omitempty" azure:"ro"`
 
-	// READ-ONLY; The name of the resource
+	// READ-ONLY; The name of the resource.
 	Name *string `json:"name,omitempty" azure:"ro"`
 
-	// READ-ONLY; The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
+	// READ-ONLY; The type of the resource.
 	Type *string `json:"type,omitempty" azure:"ro"`
+}
+
+// MarshalJSON implements the json.Marshaller interface for type Resource.
+func (r Resource) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	populate(objectMap, "id", r.ID)
+	populate(objectMap, "location", r.Location)
+	populate(objectMap, "name", r.Name)
+	populate(objectMap, "tags", r.Tags)
+	populate(objectMap, "type", r.Type)
+	return json.Marshal(objectMap)
 }
 
 // ResourceIdentity - An identity that can be associated with a resource.
@@ -894,121 +747,6 @@ func (r ResourceIdentity) MarshalJSON() ([]byte, error) {
 type SKU struct {
 	// REQUIRED; The SKU name of the configuration store.
 	Name *string `json:"name,omitempty"`
-}
-
-// ServiceSpecification - Service specification payload
-type ServiceSpecification struct {
-	// Specifications of the Log for Azure Monitoring
-	LogSpecifications []*LogSpecification `json:"logSpecifications,omitempty"`
-
-	// Specifications of the Metrics for Azure Monitoring
-	MetricSpecifications []*MetricSpecification `json:"metricSpecifications,omitempty"`
-}
-
-// MarshalJSON implements the json.Marshaller interface for type ServiceSpecification.
-func (s ServiceSpecification) MarshalJSON() ([]byte, error) {
-	objectMap := make(map[string]interface{})
-	populate(objectMap, "logSpecifications", s.LogSpecifications)
-	populate(objectMap, "metricSpecifications", s.MetricSpecifications)
-	return json.Marshal(objectMap)
-}
-
-// SystemData - Metadata pertaining to creation and last modification of the resource.
-type SystemData struct {
-	// The timestamp of resource creation (UTC).
-	CreatedAt *time.Time `json:"createdAt,omitempty"`
-
-	// The identity that created the resource.
-	CreatedBy *string `json:"createdBy,omitempty"`
-
-	// The type of identity that created the resource.
-	CreatedByType *CreatedByType `json:"createdByType,omitempty"`
-
-	// The timestamp of resource last modification (UTC)
-	LastModifiedAt *time.Time `json:"lastModifiedAt,omitempty"`
-
-	// The identity that last modified the resource.
-	LastModifiedBy *string `json:"lastModifiedBy,omitempty"`
-
-	// The type of identity that last modified the resource.
-	LastModifiedByType *CreatedByType `json:"lastModifiedByType,omitempty"`
-}
-
-// MarshalJSON implements the json.Marshaller interface for type SystemData.
-func (s SystemData) MarshalJSON() ([]byte, error) {
-	objectMap := make(map[string]interface{})
-	populateTimeRFC3339(objectMap, "createdAt", s.CreatedAt)
-	populate(objectMap, "createdBy", s.CreatedBy)
-	populate(objectMap, "createdByType", s.CreatedByType)
-	populateTimeRFC3339(objectMap, "lastModifiedAt", s.LastModifiedAt)
-	populate(objectMap, "lastModifiedBy", s.LastModifiedBy)
-	populate(objectMap, "lastModifiedByType", s.LastModifiedByType)
-	return json.Marshal(objectMap)
-}
-
-// UnmarshalJSON implements the json.Unmarshaller interface for type SystemData.
-func (s *SystemData) UnmarshalJSON(data []byte) error {
-	var rawMsg map[string]json.RawMessage
-	if err := json.Unmarshal(data, &rawMsg); err != nil {
-		return err
-	}
-	for key, val := range rawMsg {
-		var err error
-		switch key {
-		case "createdAt":
-			err = unpopulateTimeRFC3339(val, &s.CreatedAt)
-			delete(rawMsg, key)
-		case "createdBy":
-			err = unpopulate(val, &s.CreatedBy)
-			delete(rawMsg, key)
-		case "createdByType":
-			err = unpopulate(val, &s.CreatedByType)
-			delete(rawMsg, key)
-		case "lastModifiedAt":
-			err = unpopulateTimeRFC3339(val, &s.LastModifiedAt)
-			delete(rawMsg, key)
-		case "lastModifiedBy":
-			err = unpopulate(val, &s.LastModifiedBy)
-			delete(rawMsg, key)
-		case "lastModifiedByType":
-			err = unpopulate(val, &s.LastModifiedByType)
-			delete(rawMsg, key)
-		}
-		if err != nil {
-			return err
-		}
-	}
-	return nil
-}
-
-// TrackedResource - The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags'
-// and a 'location'
-type TrackedResource struct {
-	// REQUIRED; The geo-location where the resource lives
-	Location *string `json:"location,omitempty"`
-
-	// Resource tags.
-	Tags map[string]*string `json:"tags,omitempty"`
-
-	// READ-ONLY; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
-	ID *string `json:"id,omitempty" azure:"ro"`
-
-	// READ-ONLY; The name of the resource
-	Name *string `json:"name,omitempty" azure:"ro"`
-
-	// READ-ONLY; The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
-	Type *string `json:"type,omitempty" azure:"ro"`
-}
-
-// MarshalJSON implements the json.Marshaller interface for type TrackedResource.
-func (t TrackedResource) MarshalJSON() ([]byte, error) {
-	objectMap := make(map[string]interface{})
-	populate(objectMap, "id", t.ID)
-	populate(objectMap, "location", t.Location)
-	populate(objectMap, "name", t.Name)
-	populate(objectMap, "tags", t.Tags)
-	populate(objectMap, "type", t.Type)
-	return json.Marshal(objectMap)
 }
 
 // UserIdentity - A resource identity that is managed by the user of the service.
