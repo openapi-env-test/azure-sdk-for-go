@@ -1,5 +1,5 @@
 {
-  "commit": "a8a52b9e6c305f03c3a4c5411d59fc4454b5b372",
+  "commit": "f06c7415c69ace0ff2356453ac384035fb9a0365",
   "readme": "/_/azure-rest-api-specs/specification/deviceupdate/resource-manager/readme.md",
   "tag": "package-2022-04-01-preview",
   "use": "@microsoft.azure/autorest.go@2.1.187",
