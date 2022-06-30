@@ -15,7 +15,7 @@ import (
 	"net/http"
 )
 
-// LocalUsersClient is the the Azure Storage Management API.
+// LocalUsersClient is the client for the LocalUsers methods of the Storage service.
 type LocalUsersClient struct {
 	BaseClient
 }

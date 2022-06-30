@@ -15,7 +15,7 @@ import (
 	"net/http"
 )
 
-// PrivateLinkResourcesClient is the the Azure Storage Management API.
+// PrivateLinkResourcesClient is the client for the PrivateLinkResources methods of the Storage service.
 type PrivateLinkResourcesClient struct {
 	BaseClient
 }
