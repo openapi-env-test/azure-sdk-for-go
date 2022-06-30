@@ -15,7 +15,7 @@ import (
 	"net/http"
 )
 
-// QueueClient is the the Azure Storage Management API.
+// QueueClient is the client for the Queue methods of the Storage service.
 type QueueClient struct {
 	BaseClient
 }

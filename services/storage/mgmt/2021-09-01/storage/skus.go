@@ -15,7 +15,7 @@ import (
 	"net/http"
 )
 
-// SkusClient is the the Azure Storage Management API.
+// SkusClient is the client for the Skus methods of the Storage service.
 type SkusClient struct {
 	BaseClient
 }

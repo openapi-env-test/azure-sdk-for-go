@@ -15,7 +15,7 @@ import (
 	"net/http"
 )
 
-// ManagementPoliciesClient is the the Azure Storage Management API.
+// ManagementPoliciesClient is the client for the ManagementPolicies methods of the Storage service.
 type ManagementPoliciesClient struct {
 	BaseClient
 }

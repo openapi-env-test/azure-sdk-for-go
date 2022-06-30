@@ -15,7 +15,7 @@ import (
 	"net/http"
 )
 
-// EncryptionScopesClient is the the Azure Storage Management API.
+// EncryptionScopesClient is the client for the EncryptionScopes methods of the Storage service.
 type EncryptionScopesClient struct {
 	BaseClient
 }

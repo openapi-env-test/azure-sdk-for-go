@@ -15,7 +15,7 @@ import (
 	"net/http"
 )
 
-// DeletedAccountsClient is the the Azure Storage Management API.
+// DeletedAccountsClient is the client for the DeletedAccounts methods of the Storage service.
 type DeletedAccountsClient struct {
 	BaseClient
 }

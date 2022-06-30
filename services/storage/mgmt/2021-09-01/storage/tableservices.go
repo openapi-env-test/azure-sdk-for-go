@@ -15,7 +15,7 @@ import (
 	"net/http"
 )
 
-// TableServicesClient is the the Azure Storage Management API.
+// TableServicesClient is the client for the TableServices methods of the Storage service.
 type TableServicesClient struct {
 	BaseClient
 }

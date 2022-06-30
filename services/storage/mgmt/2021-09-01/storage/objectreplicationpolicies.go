@@ -15,7 +15,7 @@ import (
 	"net/http"
 )
 
-// ObjectReplicationPoliciesClient is the the Azure Storage Management API.
+// ObjectReplicationPoliciesClient is the client for the ObjectReplicationPolicies methods of the Storage service.
 type ObjectReplicationPoliciesClient struct {
 	BaseClient
 }

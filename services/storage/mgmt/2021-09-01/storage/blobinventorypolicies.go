@@ -15,7 +15,7 @@ import (
 	"net/http"
 )
 
-// BlobInventoryPoliciesClient is the the Azure Storage Management API.
+// BlobInventoryPoliciesClient is the client for the BlobInventoryPolicies methods of the Storage service.
 type BlobInventoryPoliciesClient struct {
 	BaseClient
 }

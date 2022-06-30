@@ -15,7 +15,7 @@ import (
 	"net/http"
 )
 
-// PrivateEndpointConnectionsClient is the the Azure Storage Management API.
+// PrivateEndpointConnectionsClient is the client for the PrivateEndpointConnections methods of the Storage service.
 type PrivateEndpointConnectionsClient struct {
 	BaseClient
 }

@@ -15,7 +15,7 @@ import (
 	"net/http"
 )
 
-// FileSharesClient is the the Azure Storage Management API.
+// FileSharesClient is the client for the FileShares methods of the Storage service.
 type FileSharesClient struct {
 	BaseClient
 }
