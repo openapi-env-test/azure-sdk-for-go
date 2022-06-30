@@ -323,6 +323,11 @@ type AccountProperties struct {
 	// Provides the identity based authentication settings for Azure Files.
 	AzureFilesIdentityBasedAuthentication *AzureFilesIdentityBasedAuthentication `json:"azureFilesIdentityBasedAuthentication,omitempty"`
 
+	// Allows you to specify the type of endpoint. Set this to AzureDNSZone to create a large number of accounts in a single subscription,
+	// which creates accounts in an Azure DNS Zone and the endpoint URL
+	// will have an alphanumeric DNS Zone identifier.
+	DNSEndpointType *DNSEndpointType `json:"dnsEndpointType,omitempty"`
+
 	// A boolean flag which indicates whether the default authentication is OAuth or not. The default interpretation is false
 	// for this property.
 	DefaultToOAuthAuthentication *bool `json:"defaultToOAuthAuthentication,omitempty"`
@@ -358,7 +363,12 @@ type AccountProperties struct {
 	// Maintains information about the network routing choice opted by the user for data transfer
 	RoutingPreference *RoutingPreference `json:"routingPreference,omitempty"`
 
-	// READ-ONLY; Required for storage accounts where kind = BlobStorage. The access tier used for billing.
+	// This property is readOnly and is set by server during asynchronous storage account sku conversion operations.
+	StorageAccountSKUConversionStatus *AccountSKUConversionStatus `json:"storageAccountSkuConversionStatus,omitempty"`
+
+	// READ-ONLY; Required for storage accounts where kind = BlobStorage. The access tier is used for billing. The 'Premium' access
+	// tier is the default value for premium block blobs storage account type and it cannot
+	// be changed for the premium block blobs storage account type.
 	AccessTier *AccessTier `json:"accessTier,omitempty" azure:"ro"`
 
 	// READ-ONLY; Blob restore status
@@ -437,6 +447,7 @@ func (a AccountProperties) MarshalJSON() ([]byte, error) {
 	populate(objectMap, "blobRestoreStatus", a.BlobRestoreStatus)
 	populateTimeRFC3339(objectMap, "creationTime", a.CreationTime)
 	populate(objectMap, "customDomain", a.CustomDomain)
+	populate(objectMap, "dnsEndpointType", a.DNSEndpointType)
 	populate(objectMap, "defaultToOAuthAuthentication", a.DefaultToOAuthAuthentication)
 	populate(objectMap, "supportsHttpsTrafficOnly", a.EnableHTTPSTrafficOnly)
 	populate(objectMap, "isNfsV3Enabled", a.EnableNfsV3)
@@ -464,6 +475,7 @@ func (a AccountProperties) MarshalJSON() ([]byte, error) {
 	populate(objectMap, "secondaryLocation", a.SecondaryLocation)
 	populate(objectMap, "statusOfPrimary", a.StatusOfPrimary)
 	populate(objectMap, "statusOfSecondary", a.StatusOfSecondary)
+	populate(objectMap, "storageAccountSkuConversionStatus", a.StorageAccountSKUConversionStatus)
 	return json.Marshal(objectMap)
 }
 
@@ -502,6 +514,9 @@ func (a *AccountProperties) UnmarshalJSON(data []byte) error {
 			delete(rawMsg, key)
 		case "customDomain":
 			err = unpopulate(val, &a.CustomDomain)
+			delete(rawMsg, key)
+		case "dnsEndpointType":
+			err = unpopulate(val, &a.DNSEndpointType)
 			delete(rawMsg, key)
 		case "defaultToOAuthAuthentication":
 			err = unpopulate(val, &a.DefaultToOAuthAuthentication)
@@ -584,6 +599,9 @@ func (a *AccountProperties) UnmarshalJSON(data []byte) error {
 		case "statusOfSecondary":
 			err = unpopulate(val, &a.StatusOfSecondary)
 			delete(rawMsg, key)
+		case "storageAccountSkuConversionStatus":
+			err = unpopulate(val, &a.StorageAccountSKUConversionStatus)
+			delete(rawMsg, key)
 		}
 		if err != nil {
 			return err
@@ -594,7 +612,9 @@ func (a *AccountProperties) UnmarshalJSON(data []byte) error {
 
 // AccountPropertiesCreateParameters - The parameters used to create the storage account.
 type AccountPropertiesCreateParameters struct {
-	// Required for storage accounts where kind = BlobStorage. The access tier used for billing.
+	// Required for storage accounts where kind = BlobStorage. The access tier is used for billing. The 'Premium' access tier
+	// is the default value for premium block blobs storage account type and it cannot
+	// be changed for the premium block blobs storage account type.
 	AccessTier *AccessTier `json:"accessTier,omitempty"`
 
 	// Allow or disallow public access to all blobs or containers in the storage account. The default interpretation is true for
@@ -619,6 +639,11 @@ type AccountPropertiesCreateParameters struct {
 	// account at this time. To clear the existing custom domain, use an empty string
 	// for the custom domain name property.
 	CustomDomain *CustomDomain `json:"customDomain,omitempty"`
+
+	// Allows you to specify the type of endpoint. Set this to AzureDNSZone to create a large number of accounts in a single subscription,
+	// which creates accounts in an Azure DNS Zone and the endpoint URL
+	// will have an alphanumeric DNS Zone identifier.
+	DNSEndpointType *DNSEndpointType `json:"dnsEndpointType,omitempty"`
 
 	// A boolean flag which indicates whether the default authentication is OAuth or not. The default interpretation is false
 	// for this property.
@@ -670,7 +695,9 @@ type AccountPropertiesCreateParameters struct {
 
 // AccountPropertiesUpdateParameters - The parameters used when updating a storage account.
 type AccountPropertiesUpdateParameters struct {
-	// Required for storage accounts where kind = BlobStorage. The access tier used for billing.
+	// Required for storage accounts where kind = BlobStorage. The access tier is used for billing. The 'Premium' access tier
+	// is the default value for premium block blobs storage account type and it cannot
+	// be changed for the premium block blobs storage account type.
 	AccessTier *AccessTier `json:"accessTier,omitempty"`
 
 	// Allow or disallow public access to all blobs or containers in the storage account. The default interpretation is true for
@@ -695,6 +722,11 @@ type AccountPropertiesUpdateParameters struct {
 	// per storage account at this time. To clear the existing custom domain, use an
 	// empty string for the custom domain name property.
 	CustomDomain *CustomDomain `json:"customDomain,omitempty"`
+
+	// Allows you to specify the type of endpoint. Set this to AzureDNSZone to create a large number of accounts in a single subscription,
+	// which creates accounts in an Azure DNS Zone and the endpoint URL
+	// will have an alphanumeric DNS Zone identifier.
+	DNSEndpointType *DNSEndpointType `json:"dnsEndpointType,omitempty"`
 
 	// A boolean flag which indicates whether the default authentication is OAuth or not. The default interpretation is false
 	// for this property.
@@ -742,6 +774,21 @@ type AccountPropertiesUpdateParameters struct {
 type AccountRegenerateKeyParameters struct {
 	// REQUIRED; The name of storage keys that want to be regenerated, possible values are key1, key2, kerb1, kerb2.
 	KeyName *string `json:"keyName,omitempty"`
+}
+
+// AccountSKUConversionStatus - This defines the sku conversion status object for asynchronous sku conversions.
+type AccountSKUConversionStatus struct {
+	// This property represents the target sku name to which the account sku is being converted asynchronously.
+	TargetSKUName *SKUName `json:"targetSkuName,omitempty"`
+
+	// READ-ONLY; This property represents the sku conversion end time.
+	EndTime *string `json:"endTime,omitempty" azure:"ro"`
+
+	// READ-ONLY; This property indicates the current sku conversion status.
+	SKUConversionStatus *SKUConversionStatus `json:"skuConversionStatus,omitempty" azure:"ro"`
+
+	// READ-ONLY; This property represents the sku conversion start time.
+	StartTime *string `json:"startTime,omitempty" azure:"ro"`
 }
 
 // AccountSasParameters - The parameters to list SAS credentials of a storage account.
@@ -1180,11 +1227,19 @@ type BlobInventoryPolicyDefinition struct {
 	// inventory. The Schema field value 'Name' is always required. The valid values for this
 	// field for the 'Blob' definition.objectType include 'Name, Creation-Time, Last-Modified, Content-Length, Content-MD5, BlobType,
 	// AccessTier, AccessTierChangeTime, AccessTierInferred, Tags, Expiry-Time,
-	// hdiisfolder, Owner, Group, Permissions, Acl, Snapshot, VersionId, IsCurrentVersion, Metadata, LastAccessTime'. The valid
-	// values for 'Container' definition.objectType include 'Name, Last-Modified,
-	// Metadata, LeaseStatus, LeaseState, LeaseDuration, PublicAccess, HasImmutabilityPolicy, HasLegalHold'. Schema field values
-	// 'Expiry-Time, hdiisfolder, Owner, Group, Permissions, Acl' are valid only for
-	// Hns enabled accounts.'Tags' field is only valid for non Hns accounts
+	// hdiisfolder, Owner, Group, Permissions, Acl, Snapshot, VersionId, IsCurrentVersion, Metadata, LastAccessTime, Tags, Etag,
+	// ContentType, ContentEncoding, ContentLanguage, ContentCRC64, CacheControl,
+	// ContentDisposition, LeaseStatus, LeaseState, LeaseDuration, ServerEncrypted, Deleted, DeletionId, DeletedTime, RemainingRetentionDays,
+	// ImmutabilityPolicyUntilDate, ImmutabilityPolicyMode, LegalHold,
+	// CopyId, CopyStatus, CopySource, CopyProgress, CopyCompletionTime, CopyStatusDescription, CustomerProvidedKeySha256, RehydratePriority,
+	// ArchiveStatus, XmsBlobSequenceNumber, EncryptionScope,
+	// IncrementalCopy, TagCount'. For Blob object type schema field value 'DeletedTime' is applicable only for Hns enabled accounts.
+	// The valid values for 'Container' definition.objectType include 'Name,
+	// Last-Modified, Metadata, LeaseStatus, LeaseState, LeaseDuration, PublicAccess, HasImmutabilityPolicy, HasLegalHold, Etag,
+	// DefaultEncryptionScope, DenyEncryptionScopeOverride,
+	// ImmutableStorageWithVersioningEnabled, Deleted, Version, DeletedTime, RemainingRetentionDays'. Schema field values 'Expiry-Time,
+	// hdiisfolder, Owner, Group, Permissions, Acl, DeletionId' are valid only
+	// for Hns enabled accounts.Schema field values 'Tags, TagCount' are only valid for Non-Hns accounts.
 	SchemaFields []*string `json:"schemaFields,omitempty"`
 
 	// An object that defines the filter set.
@@ -1211,16 +1266,26 @@ type BlobInventoryPolicyFilter struct {
 	// 'Blob'.
 	BlobTypes []*string `json:"blobTypes,omitempty"`
 
+	// An array of strings with maximum 10 blob prefixes to be excluded from the inventory.
+	ExcludePrefix []*string `json:"excludePrefix,omitempty"`
+
 	// Includes blob versions in blob inventory when value is set to true. The definition.schemaFields values 'VersionId and IsCurrentVersion'
 	// are required if this property is set to true, else they must be
 	// excluded.
 	IncludeBlobVersions *bool `json:"includeBlobVersions,omitempty"`
 
+	// For 'Container' definition.objectType the definition.schemaFields must include 'Deleted, Version, DeletedTime and RemainingRetentionDays'.
+	// For 'Blob' definition.objectType and HNS enabled storage
+	// accounts the definition.schemaFields must include 'DeletionId, Deleted, DeletedTime and RemainingRetentionDays' and for
+	// Hns disabled accounts the definition.schemaFields must include 'Deleted and
+	// RemainingRetentionDays', else it must be excluded.
+	IncludeDeleted *bool `json:"includeDeleted,omitempty"`
+
 	// Includes blob snapshots in blob inventory when value is set to true. The definition.schemaFields value 'Snapshot' is required
 	// if this property is set to true, else it must be excluded.
 	IncludeSnapshots *bool `json:"includeSnapshots,omitempty"`
 
-	// An array of strings for blob prefixes to be matched.
+	// An array of strings with maximum 10 blob prefixes to be included in the inventory.
 	PrefixMatch []*string `json:"prefixMatch,omitempty"`
 }
 
@@ -1228,7 +1293,9 @@ type BlobInventoryPolicyFilter struct {
 func (b BlobInventoryPolicyFilter) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
 	populate(objectMap, "blobTypes", b.BlobTypes)
+	populate(objectMap, "excludePrefix", b.ExcludePrefix)
 	populate(objectMap, "includeBlobVersions", b.IncludeBlobVersions)
+	populate(objectMap, "includeDeleted", b.IncludeDeleted)
 	populate(objectMap, "includeSnapshots", b.IncludeSnapshots)
 	populate(objectMap, "prefixMatch", b.PrefixMatch)
 	return json.Marshal(objectMap)
@@ -1300,11 +1367,16 @@ type BlobInventoryPolicySchema struct {
 
 	// REQUIRED; The valid value is Inventory
 	Type *InventoryRuleType `json:"type,omitempty"`
+
+	// READ-ONLY; Deprecated Property from API version 2021-04-01 onwards, the required destination container name must be specified
+	// at the rule level 'policy.rule.destination'
+	Destination *string `json:"destination,omitempty" azure:"ro"`
 }
 
 // MarshalJSON implements the json.Marshaller interface for type BlobInventoryPolicySchema.
 func (b BlobInventoryPolicySchema) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
+	populate(objectMap, "destination", b.Destination)
 	populate(objectMap, "enabled", b.Enabled)
 	populate(objectMap, "rules", b.Rules)
 	populate(objectMap, "type", b.Type)
@@ -1488,12 +1560,6 @@ type CloudError struct {
 	Error *CloudErrorBody `json:"error,omitempty"`
 }
 
-// CloudErrorAutoGenerated - An error response from the Storage service.
-type CloudErrorAutoGenerated struct {
-	// An error response from the Storage service.
-	Error *CloudErrorBodyAutoGenerated `json:"error,omitempty"`
-}
-
 // CloudErrorBody - An error response from the Storage service.
 type CloudErrorBody struct {
 	// An identifier for the error. Codes are invariant and are intended to be consumed programmatically.
@@ -1511,31 +1577,6 @@ type CloudErrorBody struct {
 
 // MarshalJSON implements the json.Marshaller interface for type CloudErrorBody.
 func (c CloudErrorBody) MarshalJSON() ([]byte, error) {
-	objectMap := make(map[string]interface{})
-	populate(objectMap, "code", c.Code)
-	populate(objectMap, "details", c.Details)
-	populate(objectMap, "message", c.Message)
-	populate(objectMap, "target", c.Target)
-	return json.Marshal(objectMap)
-}
-
-// CloudErrorBodyAutoGenerated - An error response from the Storage service.
-type CloudErrorBodyAutoGenerated struct {
-	// An identifier for the error. Codes are invariant and are intended to be consumed programmatically.
-	Code *string `json:"code,omitempty"`
-
-	// A list of additional details about the error.
-	Details []*CloudErrorBodyAutoGenerated `json:"details,omitempty"`
-
-	// A message describing the error, intended to be suitable for display in a user interface.
-	Message *string `json:"message,omitempty"`
-
-	// The target of the particular error. For example, the name of the property in error.
-	Target *string `json:"target,omitempty"`
-}
-
-// MarshalJSON implements the json.Marshaller interface for type CloudErrorBodyAutoGenerated.
-func (c CloudErrorBodyAutoGenerated) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
 	populate(objectMap, "code", c.Code)
 	populate(objectMap, "details", c.Details)
@@ -1761,18 +1802,34 @@ type CustomDomain struct {
 	UseSubDomainName *bool `json:"useSubDomainName,omitempty"`
 }
 
-// DateAfterCreation - Object to define the number of days after creation.
+// DateAfterCreation - Object to define snapshot and version action conditions.
 type DateAfterCreation struct {
 	// REQUIRED; Value indicating the age in days after creation
 	DaysAfterCreationGreaterThan *float32 `json:"daysAfterCreationGreaterThan,omitempty"`
+
+	// Value indicating the age in days after last blob tier change time. This property is only applicable for tierToArchive actions
+	// and requires daysAfterCreationGreaterThan to be set for snapshots and blob
+	// version based actions. The blob will be archived if both the conditions are satisfied.
+	DaysAfterLastTierChangeGreaterThan *float32 `json:"daysAfterLastTierChangeGreaterThan,omitempty"`
 }
 
-// DateAfterModification - Object to define the number of days after object last modification Or last access. Properties daysAfterModificationGreaterThan
-// and daysAfterLastAccessTimeGreaterThan are mutually exclusive.
+// DateAfterModification - Object to define the base blob action conditions. Properties daysAfterModificationGreaterThan,
+// daysAfterLastAccessTimeGreaterThan and daysAfterCreationGreaterThan are mutually exclusive. The
+// daysAfterLastTierChangeGreaterThan property is only applicable for tierToArchive actions which requires daysAfterModificationGreaterThan
+// to be set, also it cannot be used in conjunction with
+// daysAfterLastAccessTimeGreaterThan or daysAfterCreationGreaterThan.
 type DateAfterModification struct {
+	// Value indicating the age in days after blob creation.
+	DaysAfterCreationGreaterThan *float32 `json:"daysAfterCreationGreaterThan,omitempty"`
+
 	// Value indicating the age in days after last blob access. This property can only be used in conjunction with last access
 	// time tracking policy
 	DaysAfterLastAccessTimeGreaterThan *float32 `json:"daysAfterLastAccessTimeGreaterThan,omitempty"`
+
+	// Value indicating the age in days after last blob tier change time. This property is only applicable for tierToArchive actions
+	// and requires daysAfterModificationGreaterThan to be set for baseBlobs
+	// based actions. The blob will be archived if both the conditions are satisfied.
+	DaysAfterLastTierChangeGreaterThan *float32 `json:"daysAfterLastTierChangeGreaterThan,omitempty"`
 
 	// Value indicating the age in days after last modification
 	DaysAfterModificationGreaterThan *float32 `json:"daysAfterModificationGreaterThan,omitempty"`
@@ -1780,6 +1837,11 @@ type DateAfterModification struct {
 
 // DeleteRetentionPolicy - The service properties for soft delete.
 type DeleteRetentionPolicy struct {
+	// This property when set to true allows deletion of the soft deleted blob versions and snapshots. This property cannot be
+	// used blob restore policy. This property only applies to blob service and does
+	// not apply to containers or file share.
+	AllowPermanentDelete *bool `json:"allowPermanentDelete,omitempty"`
+
 	// Indicates the number of days that the deleted item should be retained. The minimum specified value can be 1 and the maximum
 	// value can be 365.
 	Days *int32 `json:"days,omitempty"`
@@ -2799,6 +2861,10 @@ type KeyVaultProperties struct {
 	// The version of KeyVault key.
 	KeyVersion *string `json:"keyversion,omitempty"`
 
+	// READ-ONLY; This is a read only property that represents the expiration time of the current version of the customer managed
+	// key used for encryption.
+	CurrentVersionedKeyExpirationTimestamp *time.Time `json:"currentVersionedKeyExpirationTimestamp,omitempty" azure:"ro"`
+
 	// READ-ONLY; The object identifier of the current versioned Key Vault Key in use.
 	CurrentVersionedKeyIdentifier *string `json:"currentVersionedKeyIdentifier,omitempty" azure:"ro"`
 
@@ -2809,6 +2875,7 @@ type KeyVaultProperties struct {
 // MarshalJSON implements the json.Marshaller interface for type KeyVaultProperties.
 func (k KeyVaultProperties) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
+	populateTimeRFC3339(objectMap, "currentVersionedKeyExpirationTimestamp", k.CurrentVersionedKeyExpirationTimestamp)
 	populate(objectMap, "currentVersionedKeyIdentifier", k.CurrentVersionedKeyIdentifier)
 	populate(objectMap, "keyname", k.KeyName)
 	populate(objectMap, "keyvaulturi", k.KeyVaultURI)
@@ -2826,6 +2893,9 @@ func (k *KeyVaultProperties) UnmarshalJSON(data []byte) error {
 	for key, val := range rawMsg {
 		var err error
 		switch key {
+		case "currentVersionedKeyExpirationTimestamp":
+			err = unpopulateTimeRFC3339(val, &k.CurrentVersionedKeyExpirationTimestamp)
+			delete(rawMsg, key)
 		case "currentVersionedKeyIdentifier":
 			err = unpopulate(val, &k.CurrentVersionedKeyIdentifier)
 			delete(rawMsg, key)
@@ -4528,9 +4598,67 @@ type Table struct {
 	Type *string `json:"type,omitempty" azure:"ro"`
 }
 
+// MarshalJSON implements the json.Marshaller interface for type Table.
+func (t Table) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	populate(objectMap, "id", t.ID)
+	populate(objectMap, "name", t.Name)
+	populate(objectMap, "properties", t.TableProperties)
+	populate(objectMap, "type", t.Type)
+	return json.Marshal(objectMap)
+}
+
+// TableAccessPolicy - Table Access Policy Properties Object.
+type TableAccessPolicy struct {
+	// REQUIRED; Required. List of abbreviated permissions. Supported permission values include 'r','a','u','d'
+	Permission *string `json:"permission,omitempty"`
+
+	// Expiry time of the access policy
+	ExpiryTime *time.Time `json:"expiryTime,omitempty"`
+
+	// Start time of the access policy
+	StartTime *time.Time `json:"startTime,omitempty"`
+}
+
+// MarshalJSON implements the json.Marshaller interface for type TableAccessPolicy.
+func (t TableAccessPolicy) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	populateTimeRFC3339(objectMap, "expiryTime", t.ExpiryTime)
+	populate(objectMap, "permission", t.Permission)
+	populateTimeRFC3339(objectMap, "startTime", t.StartTime)
+	return json.Marshal(objectMap)
+}
+
+// UnmarshalJSON implements the json.Unmarshaller interface for type TableAccessPolicy.
+func (t *TableAccessPolicy) UnmarshalJSON(data []byte) error {
+	var rawMsg map[string]json.RawMessage
+	if err := json.Unmarshal(data, &rawMsg); err != nil {
+		return err
+	}
+	for key, val := range rawMsg {
+		var err error
+		switch key {
+		case "expiryTime":
+			err = unpopulateTimeRFC3339(val, &t.ExpiryTime)
+			delete(rawMsg, key)
+		case "permission":
+			err = unpopulate(val, &t.Permission)
+			delete(rawMsg, key)
+		case "startTime":
+			err = unpopulateTimeRFC3339(val, &t.StartTime)
+			delete(rawMsg, key)
+		}
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 // TableClientCreateOptions contains the optional parameters for the TableClient.Create method.
 type TableClientCreateOptions struct {
-	// placeholder for future optional parameters
+	// The parameters to provide to create a table.
+	Parameters *Table
 }
 
 // TableClientDeleteOptions contains the optional parameters for the TableClient.Delete method.
@@ -4550,12 +4678,24 @@ type TableClientListOptions struct {
 
 // TableClientUpdateOptions contains the optional parameters for the TableClient.Update method.
 type TableClientUpdateOptions struct {
-	// placeholder for future optional parameters
+	// The parameters to provide to create a table.
+	Parameters *Table
 }
 
 type TableProperties struct {
+	// List of stored access policies specified on the table.
+	SignedIdentifiers []*TableSignedIdentifier `json:"signedIdentifiers,omitempty"`
+
 	// READ-ONLY; Table name under the specified account
 	TableName *string `json:"tableName,omitempty" azure:"ro"`
+}
+
+// MarshalJSON implements the json.Marshaller interface for type TableProperties.
+func (t TableProperties) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	populate(objectMap, "signedIdentifiers", t.SignedIdentifiers)
+	populate(objectMap, "tableName", t.TableName)
+	return json.Marshal(objectMap)
 }
 
 // TableServiceProperties - The properties of a storage account’s Table service.
@@ -4596,6 +4736,15 @@ type TableServicesClientListOptions struct {
 // method.
 type TableServicesClientSetServicePropertiesOptions struct {
 	// placeholder for future optional parameters
+}
+
+// TableSignedIdentifier - Object to set Table Access Policy.
+type TableSignedIdentifier struct {
+	// REQUIRED; unique-64-character-value of the stored access policy.
+	ID *string `json:"id,omitempty"`
+
+	// Access policy
+	AccessPolicy *TableAccessPolicy `json:"accessPolicy,omitempty"`
 }
 
 // TagFilter - Blob index tag based filtering for blob objects
