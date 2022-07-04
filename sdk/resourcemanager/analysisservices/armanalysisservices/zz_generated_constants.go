@@ -10,7 +10,7 @@ package armanalysisservices
 
 const (
 	moduleName    = "armanalysisservices"
-	moduleVersion = "v0.2.0"
+	moduleVersion = "v0.2.1"
 )
 
 // ConnectionMode - How the read-write server's participation in the query pool is controlled.
@@ -65,34 +65,34 @@ type ProvisioningState string
 
 const (
 	ProvisioningStateDeleting     ProvisioningState = "Deleting"
+	ProvisioningStateSucceeded    ProvisioningState = "Succeeded"
 	ProvisioningStateFailed       ProvisioningState = "Failed"
 	ProvisioningStatePaused       ProvisioningState = "Paused"
-	ProvisioningStatePausing      ProvisioningState = "Pausing"
-	ProvisioningStatePreparing    ProvisioningState = "Preparing"
-	ProvisioningStateProvisioning ProvisioningState = "Provisioning"
-	ProvisioningStateResuming     ProvisioningState = "Resuming"
-	ProvisioningStateScaling      ProvisioningState = "Scaling"
-	ProvisioningStateSucceeded    ProvisioningState = "Succeeded"
 	ProvisioningStateSuspended    ProvisioningState = "Suspended"
-	ProvisioningStateSuspending   ProvisioningState = "Suspending"
+	ProvisioningStateProvisioning ProvisioningState = "Provisioning"
 	ProvisioningStateUpdating     ProvisioningState = "Updating"
+	ProvisioningStateSuspending   ProvisioningState = "Suspending"
+	ProvisioningStatePausing      ProvisioningState = "Pausing"
+	ProvisioningStateResuming     ProvisioningState = "Resuming"
+	ProvisioningStatePreparing    ProvisioningState = "Preparing"
+	ProvisioningStateScaling      ProvisioningState = "Scaling"
 )
 
 // PossibleProvisioningStateValues returns the possible values for the ProvisioningState const type.
 func PossibleProvisioningStateValues() []ProvisioningState {
 	return []ProvisioningState{
 		ProvisioningStateDeleting,
+		ProvisioningStateSucceeded,
 		ProvisioningStateFailed,
 		ProvisioningStatePaused,
-		ProvisioningStatePausing,
-		ProvisioningStatePreparing,
-		ProvisioningStateProvisioning,
-		ProvisioningStateResuming,
-		ProvisioningStateScaling,
-		ProvisioningStateSucceeded,
 		ProvisioningStateSuspended,
-		ProvisioningStateSuspending,
+		ProvisioningStateProvisioning,
 		ProvisioningStateUpdating,
+		ProvisioningStateSuspending,
+		ProvisioningStatePausing,
+		ProvisioningStateResuming,
+		ProvisioningStatePreparing,
+		ProvisioningStateScaling,
 	}
 }
 
