@@ -107,16 +107,3 @@ const (
 func PossibleStateValues() []State {
 	return []State{StateDeleting, StateFailed, StatePaused, StatePausing, StatePreparing, StateProvisioning, StateResuming, StateScaling, StateSucceeded, StateSuspended, StateSuspending, StateUpdating}
 }
-
-// Status enumerates the values for status.
-type Status string
-
-const (
-	// Live ...
-	Live Status = "Live"
-)
-
-// PossibleStatusValues returns an array of possible values for the Status const type.
-func PossibleStatusValues() []Status {
-	return []Status{Live}
-}
