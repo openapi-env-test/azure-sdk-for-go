@@ -51,14 +51,14 @@ func NewBackupPoliciesClient(subscriptionID string, credential azcore.TokenCrede
 
 // CreateOrUpdate - Creates or Updates a backup policy belonging to a backup vault
 // If the operation fails it returns an *azcore.ResponseError type.
-// vaultName - The name of the backup vault.
 // resourceGroupName - The name of the resource group where the backup vault is present.
+// vaultName - The name of the backup vault.
 // backupPolicyName - Name of the policy
 // parameters - Request body for operation
 // options - BackupPoliciesClientCreateOrUpdateOptions contains the optional parameters for the BackupPoliciesClient.CreateOrUpdate
 // method.
-func (client *BackupPoliciesClient) CreateOrUpdate(ctx context.Context, vaultName string, resourceGroupName string, backupPolicyName string, parameters BaseBackupPolicyResource, options *BackupPoliciesClientCreateOrUpdateOptions) (BackupPoliciesClientCreateOrUpdateResponse, error) {
-	req, err := client.createOrUpdateCreateRequest(ctx, vaultName, resourceGroupName, backupPolicyName, parameters, options)
+func (client *BackupPoliciesClient) CreateOrUpdate(ctx context.Context, resourceGroupName string, vaultName string, backupPolicyName string, parameters BaseBackupPolicyResource, options *BackupPoliciesClientCreateOrUpdateOptions) (BackupPoliciesClientCreateOrUpdateResponse, error) {
+	req, err := client.createOrUpdateCreateRequest(ctx, resourceGroupName, vaultName, backupPolicyName, parameters, options)
 	if err != nil {
 		return BackupPoliciesClientCreateOrUpdateResponse{}, err
 	}
@@ -73,20 +73,20 @@ func (client *BackupPoliciesClient) CreateOrUpdate(ctx context.Context, vaultNam
 }
 
 // createOrUpdateCreateRequest creates the CreateOrUpdate request.
-func (client *BackupPoliciesClient) createOrUpdateCreateRequest(ctx context.Context, vaultName string, resourceGroupName string, backupPolicyName string, parameters BaseBackupPolicyResource, options *BackupPoliciesClientCreateOrUpdateOptions) (*policy.Request, error) {
+func (client *BackupPoliciesClient) createOrUpdateCreateRequest(ctx context.Context, resourceGroupName string, vaultName string, backupPolicyName string, parameters BaseBackupPolicyResource, options *BackupPoliciesClientCreateOrUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupPolicies/{backupPolicyName}"
-	if vaultName == "" {
-		return nil, errors.New("parameter vaultName cannot be empty")
-	}
-	urlPath = strings.ReplaceAll(urlPath, "{vaultName}", url.PathEscape(vaultName))
-	if resourceGroupName == "" {
-		return nil, errors.New("parameter resourceGroupName cannot be empty")
-	}
-	urlPath = strings.ReplaceAll(urlPath, "{resourceGroupName}", url.PathEscape(resourceGroupName))
 	if client.subscriptionID == "" {
 		return nil, errors.New("parameter client.subscriptionID cannot be empty")
 	}
 	urlPath = strings.ReplaceAll(urlPath, "{subscriptionId}", url.PathEscape(client.subscriptionID))
+	if resourceGroupName == "" {
+		return nil, errors.New("parameter resourceGroupName cannot be empty")
+	}
+	urlPath = strings.ReplaceAll(urlPath, "{resourceGroupName}", url.PathEscape(resourceGroupName))
+	if vaultName == "" {
+		return nil, errors.New("parameter vaultName cannot be empty")
+	}
+	urlPath = strings.ReplaceAll(urlPath, "{vaultName}", url.PathEscape(vaultName))
 	if backupPolicyName == "" {
 		return nil, errors.New("parameter backupPolicyName cannot be empty")
 	}
@@ -96,7 +96,7 @@ func (client *BackupPoliciesClient) createOrUpdateCreateRequest(ctx context.Cont
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-07-01")
+	reqQP.Set("api-version", "2022-04-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, runtime.MarshalAsJSON(req, parameters)
@@ -113,11 +113,11 @@ func (client *BackupPoliciesClient) createOrUpdateHandleResponse(resp *http.Resp
 
 // Delete - Deletes a backup policy belonging to a backup vault
 // If the operation fails it returns an *azcore.ResponseError type.
-// vaultName - The name of the backup vault.
 // resourceGroupName - The name of the resource group where the backup vault is present.
+// vaultName - The name of the backup vault.
 // options - BackupPoliciesClientDeleteOptions contains the optional parameters for the BackupPoliciesClient.Delete method.
-func (client *BackupPoliciesClient) Delete(ctx context.Context, vaultName string, resourceGroupName string, backupPolicyName string, options *BackupPoliciesClientDeleteOptions) (BackupPoliciesClientDeleteResponse, error) {
-	req, err := client.deleteCreateRequest(ctx, vaultName, resourceGroupName, backupPolicyName, options)
+func (client *BackupPoliciesClient) Delete(ctx context.Context, resourceGroupName string, vaultName string, backupPolicyName string, options *BackupPoliciesClientDeleteOptions) (BackupPoliciesClientDeleteResponse, error) {
+	req, err := client.deleteCreateRequest(ctx, resourceGroupName, vaultName, backupPolicyName, options)
 	if err != nil {
 		return BackupPoliciesClientDeleteResponse{}, err
 	}
@@ -132,20 +132,20 @@ func (client *BackupPoliciesClient) Delete(ctx context.Context, vaultName string
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *BackupPoliciesClient) deleteCreateRequest(ctx context.Context, vaultName string, resourceGroupName string, backupPolicyName string, options *BackupPoliciesClientDeleteOptions) (*policy.Request, error) {
+func (client *BackupPoliciesClient) deleteCreateRequest(ctx context.Context, resourceGroupName string, vaultName string, backupPolicyName string, options *BackupPoliciesClientDeleteOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupPolicies/{backupPolicyName}"
-	if vaultName == "" {
-		return nil, errors.New("parameter vaultName cannot be empty")
-	}
-	urlPath = strings.ReplaceAll(urlPath, "{vaultName}", url.PathEscape(vaultName))
-	if resourceGroupName == "" {
-		return nil, errors.New("parameter resourceGroupName cannot be empty")
-	}
-	urlPath = strings.ReplaceAll(urlPath, "{resourceGroupName}", url.PathEscape(resourceGroupName))
 	if client.subscriptionID == "" {
 		return nil, errors.New("parameter client.subscriptionID cannot be empty")
 	}
 	urlPath = strings.ReplaceAll(urlPath, "{subscriptionId}", url.PathEscape(client.subscriptionID))
+	if resourceGroupName == "" {
+		return nil, errors.New("parameter resourceGroupName cannot be empty")
+	}
+	urlPath = strings.ReplaceAll(urlPath, "{resourceGroupName}", url.PathEscape(resourceGroupName))
+	if vaultName == "" {
+		return nil, errors.New("parameter vaultName cannot be empty")
+	}
+	urlPath = strings.ReplaceAll(urlPath, "{vaultName}", url.PathEscape(vaultName))
 	if backupPolicyName == "" {
 		return nil, errors.New("parameter backupPolicyName cannot be empty")
 	}
@@ -155,7 +155,7 @@ func (client *BackupPoliciesClient) deleteCreateRequest(ctx context.Context, vau
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-07-01")
+	reqQP.Set("api-version", "2022-04-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -163,11 +163,11 @@ func (client *BackupPoliciesClient) deleteCreateRequest(ctx context.Context, vau
 
 // Get - Gets a backup policy belonging to a backup vault
 // If the operation fails it returns an *azcore.ResponseError type.
-// vaultName - The name of the backup vault.
 // resourceGroupName - The name of the resource group where the backup vault is present.
+// vaultName - The name of the backup vault.
 // options - BackupPoliciesClientGetOptions contains the optional parameters for the BackupPoliciesClient.Get method.
-func (client *BackupPoliciesClient) Get(ctx context.Context, vaultName string, resourceGroupName string, backupPolicyName string, options *BackupPoliciesClientGetOptions) (BackupPoliciesClientGetResponse, error) {
-	req, err := client.getCreateRequest(ctx, vaultName, resourceGroupName, backupPolicyName, options)
+func (client *BackupPoliciesClient) Get(ctx context.Context, resourceGroupName string, vaultName string, backupPolicyName string, options *BackupPoliciesClientGetOptions) (BackupPoliciesClientGetResponse, error) {
+	req, err := client.getCreateRequest(ctx, resourceGroupName, vaultName, backupPolicyName, options)
 	if err != nil {
 		return BackupPoliciesClientGetResponse{}, err
 	}
@@ -182,20 +182,20 @@ func (client *BackupPoliciesClient) Get(ctx context.Context, vaultName string, r
 }
 
 // getCreateRequest creates the Get request.
-func (client *BackupPoliciesClient) getCreateRequest(ctx context.Context, vaultName string, resourceGroupName string, backupPolicyName string, options *BackupPoliciesClientGetOptions) (*policy.Request, error) {
+func (client *BackupPoliciesClient) getCreateRequest(ctx context.Context, resourceGroupName string, vaultName string, backupPolicyName string, options *BackupPoliciesClientGetOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupPolicies/{backupPolicyName}"
-	if vaultName == "" {
-		return nil, errors.New("parameter vaultName cannot be empty")
-	}
-	urlPath = strings.ReplaceAll(urlPath, "{vaultName}", url.PathEscape(vaultName))
-	if resourceGroupName == "" {
-		return nil, errors.New("parameter resourceGroupName cannot be empty")
-	}
-	urlPath = strings.ReplaceAll(urlPath, "{resourceGroupName}", url.PathEscape(resourceGroupName))
 	if client.subscriptionID == "" {
 		return nil, errors.New("parameter client.subscriptionID cannot be empty")
 	}
 	urlPath = strings.ReplaceAll(urlPath, "{subscriptionId}", url.PathEscape(client.subscriptionID))
+	if resourceGroupName == "" {
+		return nil, errors.New("parameter resourceGroupName cannot be empty")
+	}
+	urlPath = strings.ReplaceAll(urlPath, "{resourceGroupName}", url.PathEscape(resourceGroupName))
+	if vaultName == "" {
+		return nil, errors.New("parameter vaultName cannot be empty")
+	}
+	urlPath = strings.ReplaceAll(urlPath, "{vaultName}", url.PathEscape(vaultName))
 	if backupPolicyName == "" {
 		return nil, errors.New("parameter backupPolicyName cannot be empty")
 	}
@@ -205,7 +205,7 @@ func (client *BackupPoliciesClient) getCreateRequest(ctx context.Context, vaultN
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-07-01")
+	reqQP.Set("api-version", "2022-04-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -222,14 +222,14 @@ func (client *BackupPoliciesClient) getHandleResponse(resp *http.Response) (Back
 
 // List - Returns list of backup policies belonging to a backup vault
 // If the operation fails it returns an *azcore.ResponseError type.
-// vaultName - The name of the backup vault.
 // resourceGroupName - The name of the resource group where the backup vault is present.
+// vaultName - The name of the backup vault.
 // options - BackupPoliciesClientListOptions contains the optional parameters for the BackupPoliciesClient.List method.
-func (client *BackupPoliciesClient) List(vaultName string, resourceGroupName string, options *BackupPoliciesClientListOptions) *BackupPoliciesClientListPager {
+func (client *BackupPoliciesClient) List(resourceGroupName string, vaultName string, options *BackupPoliciesClientListOptions) *BackupPoliciesClientListPager {
 	return &BackupPoliciesClientListPager{
 		client: client,
 		requester: func(ctx context.Context) (*policy.Request, error) {
-			return client.listCreateRequest(ctx, vaultName, resourceGroupName, options)
+			return client.listCreateRequest(ctx, resourceGroupName, vaultName, options)
 		},
 		advancer: func(ctx context.Context, resp BackupPoliciesClientListResponse) (*policy.Request, error) {
 			return runtime.NewRequest(ctx, http.MethodGet, *resp.BaseBackupPolicyResourceList.NextLink)
@@ -238,26 +238,26 @@ func (client *BackupPoliciesClient) List(vaultName string, resourceGroupName str
 }
 
 // listCreateRequest creates the List request.
-func (client *BackupPoliciesClient) listCreateRequest(ctx context.Context, vaultName string, resourceGroupName string, options *BackupPoliciesClientListOptions) (*policy.Request, error) {
+func (client *BackupPoliciesClient) listCreateRequest(ctx context.Context, resourceGroupName string, vaultName string, options *BackupPoliciesClientListOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupPolicies"
-	if vaultName == "" {
-		return nil, errors.New("parameter vaultName cannot be empty")
-	}
-	urlPath = strings.ReplaceAll(urlPath, "{vaultName}", url.PathEscape(vaultName))
-	if resourceGroupName == "" {
-		return nil, errors.New("parameter resourceGroupName cannot be empty")
-	}
-	urlPath = strings.ReplaceAll(urlPath, "{resourceGroupName}", url.PathEscape(resourceGroupName))
 	if client.subscriptionID == "" {
 		return nil, errors.New("parameter client.subscriptionID cannot be empty")
 	}
 	urlPath = strings.ReplaceAll(urlPath, "{subscriptionId}", url.PathEscape(client.subscriptionID))
+	if resourceGroupName == "" {
+		return nil, errors.New("parameter resourceGroupName cannot be empty")
+	}
+	urlPath = strings.ReplaceAll(urlPath, "{resourceGroupName}", url.PathEscape(resourceGroupName))
+	if vaultName == "" {
+		return nil, errors.New("parameter vaultName cannot be empty")
+	}
+	urlPath = strings.ReplaceAll(urlPath, "{vaultName}", url.PathEscape(vaultName))
 	req, err := runtime.NewRequest(ctx, http.MethodGet, runtime.JoinPaths(client.host, urlPath))
 	if err != nil {
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-07-01")
+	reqQP.Set("api-version", "2022-04-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil

@@ -665,6 +665,9 @@ type AzureBackupRecoveryPointBasedRestoreRequest struct {
 
 	// REQUIRED; Gets or sets the type of the source data store.
 	SourceDataStoreType *SourceDataStoreType `json:"sourceDataStoreType,omitempty"`
+
+	// Fully qualified Azure Resource Manager ID of the datasource which is being recovered.
+	SourceResourceID *string `json:"sourceResourceId,omitempty"`
 }
 
 // GetAzureBackupRecoveryPointBasedRestoreRequest implements the AzureBackupRecoveryPointBasedRestoreRequestClassification
@@ -679,6 +682,7 @@ func (a *AzureBackupRecoveryPointBasedRestoreRequest) GetAzureBackupRestoreReque
 		ObjectType:          a.ObjectType,
 		RestoreTargetInfo:   a.RestoreTargetInfo,
 		SourceDataStoreType: a.SourceDataStoreType,
+		SourceResourceID:    a.SourceResourceID,
 	}
 }
 
@@ -689,6 +693,7 @@ func (a AzureBackupRecoveryPointBasedRestoreRequest) MarshalJSON() ([]byte, erro
 	populate(objectMap, "recoveryPointId", a.RecoveryPointID)
 	populate(objectMap, "restoreTargetInfo", a.RestoreTargetInfo)
 	populate(objectMap, "sourceDataStoreType", a.SourceDataStoreType)
+	populate(objectMap, "sourceResourceId", a.SourceResourceID)
 	return json.Marshal(objectMap)
 }
 
@@ -712,6 +717,9 @@ func (a *AzureBackupRecoveryPointBasedRestoreRequest) UnmarshalJSON(data []byte)
 			delete(rawMsg, key)
 		case "sourceDataStoreType":
 			err = unpopulate(val, &a.SourceDataStoreType)
+			delete(rawMsg, key)
+		case "sourceResourceId":
+			err = unpopulate(val, &a.SourceResourceID)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -812,6 +820,9 @@ type AzureBackupRecoveryTimeBasedRestoreRequest struct {
 
 	// REQUIRED; Gets or sets the type of the source data store.
 	SourceDataStoreType *SourceDataStoreType `json:"sourceDataStoreType,omitempty"`
+
+	// Fully qualified Azure Resource Manager ID of the datasource which is being recovered.
+	SourceResourceID *string `json:"sourceResourceId,omitempty"`
 }
 
 // GetAzureBackupRestoreRequest implements the AzureBackupRestoreRequestClassification interface for type AzureBackupRecoveryTimeBasedRestoreRequest.
@@ -820,6 +831,7 @@ func (a *AzureBackupRecoveryTimeBasedRestoreRequest) GetAzureBackupRestoreReques
 		ObjectType:          a.ObjectType,
 		RestoreTargetInfo:   a.RestoreTargetInfo,
 		SourceDataStoreType: a.SourceDataStoreType,
+		SourceResourceID:    a.SourceResourceID,
 	}
 }
 
@@ -830,6 +842,7 @@ func (a AzureBackupRecoveryTimeBasedRestoreRequest) MarshalJSON() ([]byte, error
 	populate(objectMap, "recoveryPointTime", a.RecoveryPointTime)
 	populate(objectMap, "restoreTargetInfo", a.RestoreTargetInfo)
 	populate(objectMap, "sourceDataStoreType", a.SourceDataStoreType)
+	populate(objectMap, "sourceResourceId", a.SourceResourceID)
 	return json.Marshal(objectMap)
 }
 
@@ -853,6 +866,9 @@ func (a *AzureBackupRecoveryTimeBasedRestoreRequest) UnmarshalJSON(data []byte) 
 			delete(rawMsg, key)
 		case "sourceDataStoreType":
 			err = unpopulate(val, &a.SourceDataStoreType)
+			delete(rawMsg, key)
+		case "sourceResourceId":
+			err = unpopulate(val, &a.SourceResourceID)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -894,6 +910,9 @@ type AzureBackupRestoreRequest struct {
 
 	// REQUIRED; Gets or sets the type of the source data store.
 	SourceDataStoreType *SourceDataStoreType `json:"sourceDataStoreType,omitempty"`
+
+	// Fully qualified Azure Resource Manager ID of the datasource which is being recovered.
+	SourceResourceID *string `json:"sourceResourceId,omitempty"`
 }
 
 // GetAzureBackupRestoreRequest implements the AzureBackupRestoreRequestClassification interface for type AzureBackupRestoreRequest.
@@ -907,6 +926,7 @@ func (a AzureBackupRestoreRequest) MarshalJSON() ([]byte, error) {
 	objectMap["objectType"] = a.ObjectType
 	populate(objectMap, "restoreTargetInfo", a.RestoreTargetInfo)
 	populate(objectMap, "sourceDataStoreType", a.SourceDataStoreType)
+	populate(objectMap, "sourceResourceId", a.SourceResourceID)
 	return json.Marshal(objectMap)
 }
 
@@ -927,6 +947,9 @@ func (a *AzureBackupRestoreRequest) UnmarshalJSON(data []byte) error {
 			delete(rawMsg, key)
 		case "sourceDataStoreType":
 			err = unpopulate(val, &a.SourceDataStoreType)
+			delete(rawMsg, key)
+		case "sourceResourceId":
+			err = unpopulate(val, &a.SourceResourceID)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -955,6 +978,9 @@ type AzureBackupRestoreWithRehydrationRequest struct {
 
 	// REQUIRED; Gets or sets the type of the source data store.
 	SourceDataStoreType *SourceDataStoreType `json:"sourceDataStoreType,omitempty"`
+
+	// Fully qualified Azure Resource Manager ID of the datasource which is being recovered.
+	SourceResourceID *string `json:"sourceResourceId,omitempty"`
 }
 
 // GetAzureBackupRecoveryPointBasedRestoreRequest implements the AzureBackupRecoveryPointBasedRestoreRequestClassification
@@ -965,6 +991,7 @@ func (a *AzureBackupRestoreWithRehydrationRequest) GetAzureBackupRecoveryPointBa
 		ObjectType:          a.ObjectType,
 		RestoreTargetInfo:   a.RestoreTargetInfo,
 		SourceDataStoreType: a.SourceDataStoreType,
+		SourceResourceID:    a.SourceResourceID,
 	}
 }
 
@@ -974,6 +1001,7 @@ func (a *AzureBackupRestoreWithRehydrationRequest) GetAzureBackupRestoreRequest(
 		ObjectType:          a.ObjectType,
 		RestoreTargetInfo:   a.RestoreTargetInfo,
 		SourceDataStoreType: a.SourceDataStoreType,
+		SourceResourceID:    a.SourceResourceID,
 	}
 }
 
@@ -986,6 +1014,7 @@ func (a AzureBackupRestoreWithRehydrationRequest) MarshalJSON() ([]byte, error) 
 	populate(objectMap, "rehydrationRetentionDuration", a.RehydrationRetentionDuration)
 	populate(objectMap, "restoreTargetInfo", a.RestoreTargetInfo)
 	populate(objectMap, "sourceDataStoreType", a.SourceDataStoreType)
+	populate(objectMap, "sourceResourceId", a.SourceResourceID)
 	return json.Marshal(objectMap)
 }
 
@@ -1015,6 +1044,9 @@ func (a *AzureBackupRestoreWithRehydrationRequest) UnmarshalJSON(data []byte) er
 			delete(rawMsg, key)
 		case "sourceDataStoreType":
 			err = unpopulate(val, &a.SourceDataStoreType)
+			delete(rawMsg, key)
+		case "sourceResourceId":
+			err = unpopulate(val, &a.SourceResourceID)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -1091,6 +1123,11 @@ func (a *AzureBackupRule) UnmarshalJSON(data []byte) error {
 		}
 	}
 	return nil
+}
+
+// AzureMonitorAlertSettings - Settings for Azure Monitor based alerts
+type AzureMonitorAlertSettings struct {
+	AlertsForAllJobFailures *AlertsState `json:"alertsForAllJobFailures,omitempty"`
 }
 
 // AzureOperationalStoreParameters - Parameters for Operational-Tier DataStore
@@ -1246,6 +1283,9 @@ type BackupInstance struct {
 	// Gets or sets the Backup Instance friendly name.
 	FriendlyName *string `json:"friendlyName,omitempty"`
 
+	// Specifies the type of validation. In case of DeepValidation, all validations from /validateForBackup API will run again.
+	ValidationType *ValidationType `json:"validationType,omitempty"`
+
 	// READ-ONLY; Specifies the current protection state of the resource
 	CurrentProtectionState *CurrentProtectionState `json:"currentProtectionState,omitempty" azure:"ro"`
 
@@ -1272,6 +1312,7 @@ func (b BackupInstance) MarshalJSON() ([]byte, error) {
 	populate(objectMap, "protectionErrorDetails", b.ProtectionErrorDetails)
 	populate(objectMap, "protectionStatus", b.ProtectionStatus)
 	populate(objectMap, "provisioningState", b.ProvisioningState)
+	populate(objectMap, "validationType", b.ValidationType)
 	return json.Marshal(objectMap)
 }
 
@@ -1313,6 +1354,9 @@ func (b *BackupInstance) UnmarshalJSON(data []byte) error {
 			delete(rawMsg, key)
 		case "provisioningState":
 			err = unpopulate(val, &b.ProvisioningState)
+			delete(rawMsg, key)
+		case "validationType":
+			err = unpopulate(val, &b.ValidationType)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -1374,6 +1418,36 @@ type BackupInstancesClientBeginDeleteOptions struct {
 	// placeholder for future optional parameters
 }
 
+// BackupInstancesClientBeginResumeBackupsOptions contains the optional parameters for the BackupInstancesClient.BeginResumeBackups
+// method.
+type BackupInstancesClientBeginResumeBackupsOptions struct {
+	// placeholder for future optional parameters
+}
+
+// BackupInstancesClientBeginResumeProtectionOptions contains the optional parameters for the BackupInstancesClient.BeginResumeProtection
+// method.
+type BackupInstancesClientBeginResumeProtectionOptions struct {
+	// placeholder for future optional parameters
+}
+
+// BackupInstancesClientBeginStopProtectionOptions contains the optional parameters for the BackupInstancesClient.BeginStopProtection
+// method.
+type BackupInstancesClientBeginStopProtectionOptions struct {
+	// placeholder for future optional parameters
+}
+
+// BackupInstancesClientBeginSuspendBackupsOptions contains the optional parameters for the BackupInstancesClient.BeginSuspendBackups
+// method.
+type BackupInstancesClientBeginSuspendBackupsOptions struct {
+	// placeholder for future optional parameters
+}
+
+// BackupInstancesClientBeginSyncBackupInstanceOptions contains the optional parameters for the BackupInstancesClient.BeginSyncBackupInstance
+// method.
+type BackupInstancesClientBeginSyncBackupInstanceOptions struct {
+	// placeholder for future optional parameters
+}
+
 // BackupInstancesClientBeginTriggerRehydrateOptions contains the optional parameters for the BackupInstancesClient.BeginTriggerRehydrate
 // method.
 type BackupInstancesClientBeginTriggerRehydrateOptions struct {
@@ -1395,6 +1469,12 @@ type BackupInstancesClientBeginValidateForBackupOptions struct {
 // BackupInstancesClientBeginValidateForRestoreOptions contains the optional parameters for the BackupInstancesClient.BeginValidateForRestore
 // method.
 type BackupInstancesClientBeginValidateForRestoreOptions struct {
+	// placeholder for future optional parameters
+}
+
+// BackupInstancesClientGetBackupInstanceOperationResultOptions contains the optional parameters for the BackupInstancesClient.GetBackupInstanceOperationResult
+// method.
+type BackupInstancesClientGetBackupInstanceOperationResultOptions struct {
 	// placeholder for future optional parameters
 }
 
@@ -1524,6 +1604,9 @@ type BackupVault struct {
 	// REQUIRED; Storage Settings
 	StorageSettings []*StorageSetting `json:"storageSettings,omitempty"`
 
+	// Monitoring Settings
+	MonitoringSettings *MonitoringSettings `json:"monitoringSettings,omitempty"`
+
 	// READ-ONLY; Provisioning state of the BackupVault resource
 	ProvisioningState *ProvisioningState `json:"provisioningState,omitempty" azure:"ro"`
 
@@ -1537,6 +1620,7 @@ type BackupVault struct {
 // MarshalJSON implements the json.Marshaller interface for type BackupVault.
 func (b BackupVault) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
+	populate(objectMap, "monitoringSettings", b.MonitoringSettings)
 	populate(objectMap, "provisioningState", b.ProvisioningState)
 	populate(objectMap, "resourceMoveDetails", b.ResourceMoveDetails)
 	populate(objectMap, "resourceMoveState", b.ResourceMoveState)
@@ -2518,7 +2602,7 @@ func (i InnerError) MarshalJSON() ([]byte, error) {
 // ItemLevelRestoreCriteriaClassification provides polymorphic access to related types.
 // Call the interface's GetItemLevelRestoreCriteria() method to access the common type.
 // Use a type switch to determine the concrete type.  The possible types are:
-// - *ItemLevelRestoreCriteria, *RangeBasedItemLevelRestoreCriteria
+// - *ItemLevelRestoreCriteria, *KubernetesPVRestoreCriteria, *KubernetesStorageClassRestoreCriteria, *RangeBasedItemLevelRestoreCriteria
 type ItemLevelRestoreCriteriaClassification interface {
 	// GetItemLevelRestoreCriteria returns the ItemLevelRestoreCriteria content of the underlying type.
 	GetItemLevelRestoreCriteria() *ItemLevelRestoreCriteria
@@ -2693,6 +2777,120 @@ type JobsClientListOptions struct {
 	// placeholder for future optional parameters
 }
 
+// KubernetesPVRestoreCriteria - Item Level kubernetes persistent volume target info for restore operation
+type KubernetesPVRestoreCriteria struct {
+	// REQUIRED; Type of the specific object - used for deserializing
+	ObjectType *string `json:"objectType,omitempty"`
+
+	// Selected persistent volume claim name
+	Name *string `json:"name,omitempty"`
+
+	// Selected storage class name for restore operation
+	StorageClassName *string `json:"storageClassName,omitempty"`
+}
+
+// GetItemLevelRestoreCriteria implements the ItemLevelRestoreCriteriaClassification interface for type KubernetesPVRestoreCriteria.
+func (k *KubernetesPVRestoreCriteria) GetItemLevelRestoreCriteria() *ItemLevelRestoreCriteria {
+	return &ItemLevelRestoreCriteria{
+		ObjectType: k.ObjectType,
+	}
+}
+
+// MarshalJSON implements the json.Marshaller interface for type KubernetesPVRestoreCriteria.
+func (k KubernetesPVRestoreCriteria) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	populate(objectMap, "name", k.Name)
+	objectMap["objectType"] = "KubernetesPVRestoreCriteria"
+	populate(objectMap, "storageClassName", k.StorageClassName)
+	return json.Marshal(objectMap)
+}
+
+// UnmarshalJSON implements the json.Unmarshaller interface for type KubernetesPVRestoreCriteria.
+func (k *KubernetesPVRestoreCriteria) UnmarshalJSON(data []byte) error {
+	var rawMsg map[string]json.RawMessage
+	if err := json.Unmarshal(data, &rawMsg); err != nil {
+		return err
+	}
+	for key, val := range rawMsg {
+		var err error
+		switch key {
+		case "name":
+			err = unpopulate(val, &k.Name)
+			delete(rawMsg, key)
+		case "objectType":
+			err = unpopulate(val, &k.ObjectType)
+			delete(rawMsg, key)
+		case "storageClassName":
+			err = unpopulate(val, &k.StorageClassName)
+			delete(rawMsg, key)
+		}
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// KubernetesStorageClassRestoreCriteria - Item Level kubernetes storage class target info for restore operation
+type KubernetesStorageClassRestoreCriteria struct {
+	// REQUIRED; Type of the specific object - used for deserializing
+	ObjectType *string `json:"objectType,omitempty"`
+
+	// Provisioner of the storage class
+	Provisioner *string `json:"provisioner,omitempty"`
+
+	// Selected storage class name
+	SelectedStorageClassName *string `json:"selectedStorageClassName,omitempty"`
+}
+
+// GetItemLevelRestoreCriteria implements the ItemLevelRestoreCriteriaClassification interface for type KubernetesStorageClassRestoreCriteria.
+func (k *KubernetesStorageClassRestoreCriteria) GetItemLevelRestoreCriteria() *ItemLevelRestoreCriteria {
+	return &ItemLevelRestoreCriteria{
+		ObjectType: k.ObjectType,
+	}
+}
+
+// MarshalJSON implements the json.Marshaller interface for type KubernetesStorageClassRestoreCriteria.
+func (k KubernetesStorageClassRestoreCriteria) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	objectMap["objectType"] = "KubernetesStorageClassRestoreCriteria"
+	populate(objectMap, "provisioner", k.Provisioner)
+	populate(objectMap, "selectedStorageClassName", k.SelectedStorageClassName)
+	return json.Marshal(objectMap)
+}
+
+// UnmarshalJSON implements the json.Unmarshaller interface for type KubernetesStorageClassRestoreCriteria.
+func (k *KubernetesStorageClassRestoreCriteria) UnmarshalJSON(data []byte) error {
+	var rawMsg map[string]json.RawMessage
+	if err := json.Unmarshal(data, &rawMsg); err != nil {
+		return err
+	}
+	for key, val := range rawMsg {
+		var err error
+		switch key {
+		case "objectType":
+			err = unpopulate(val, &k.ObjectType)
+			delete(rawMsg, key)
+		case "provisioner":
+			err = unpopulate(val, &k.Provisioner)
+			delete(rawMsg, key)
+		case "selectedStorageClassName":
+			err = unpopulate(val, &k.SelectedStorageClassName)
+			delete(rawMsg, key)
+		}
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// MonitoringSettings - Monitoring Settings
+type MonitoringSettings struct {
+	// Settings for Azure Monitor based alerts
+	AzureMonitorAlertSettings *AzureMonitorAlertSettings `json:"azureMonitorAlertSettings,omitempty"`
+}
+
 // OperationExtendedInfoClassification provides polymorphic access to related types.
 // Call the interface's GetOperationExtendedInfo() method to access the common type.
 // Use a type switch to determine the concrete type.  The possible types are:
@@ -2838,8 +3036,20 @@ type OperationResultClientGetOptions struct {
 	// placeholder for future optional parameters
 }
 
+// OperationStatusBackupVaultContextClientGetOptions contains the optional parameters for the OperationStatusBackupVaultContextClient.Get
+// method.
+type OperationStatusBackupVaultContextClientGetOptions struct {
+	// placeholder for future optional parameters
+}
+
 // OperationStatusClientGetOptions contains the optional parameters for the OperationStatusClient.Get method.
 type OperationStatusClientGetOptions struct {
+	// placeholder for future optional parameters
+}
+
+// OperationStatusResourceGroupContextClientGetOptions contains the optional parameters for the OperationStatusResourceGroupContextClient.Get
+// method.
+type OperationStatusResourceGroupContextClientGetOptions struct {
 	// placeholder for future optional parameters
 }
 
@@ -2848,10 +3058,19 @@ type OperationsClientListOptions struct {
 	// placeholder for future optional parameters
 }
 
+// PatchBackupVaultInput - Backup Vault Contract for Patch Backup Vault API.
+type PatchBackupVaultInput struct {
+	// Monitoring Settings
+	MonitoringSettings *MonitoringSettings `json:"monitoringSettings,omitempty"`
+}
+
 // PatchResourceRequestInput - Patch Request content for Microsoft.DataProtection resources
 type PatchResourceRequestInput struct {
 	// Input Managed Identity Details
 	Identity *DppIdentityDetails `json:"identity,omitempty"`
+
+	// Resource properties.
+	Properties *PatchBackupVaultInput `json:"properties,omitempty"`
 
 	// Resource tags.
 	Tags map[string]*string `json:"tags,omitempty"`
@@ -2861,6 +3080,7 @@ type PatchResourceRequestInput struct {
 func (p PatchResourceRequestInput) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
 	populate(objectMap, "identity", p.Identity)
+	populate(objectMap, "properties", p.Properties)
 	populate(objectMap, "tags", p.Tags)
 	return json.Marshal(objectMap)
 }
@@ -3072,6 +3292,9 @@ type RecoveryPointsFilters struct {
 }
 
 type ResourceGuard struct {
+	// List of critical operations which are not protected by this resourceGuard
+	VaultCriticalOperationExclusionList []*string `json:"vaultCriticalOperationExclusionList,omitempty"`
+
 	// READ-ONLY; This flag indicates whether auto approval is allowed or not.
 	AllowAutoApprovals *bool `json:"allowAutoApprovals,omitempty" azure:"ro"`
 
@@ -3083,9 +3306,6 @@ type ResourceGuard struct {
 
 	// READ-ONLY; {readonly} List of operation details those are protected by the ResourceGuard resource
 	ResourceGuardOperations []*ResourceGuardOperation `json:"resourceGuardOperations,omitempty" azure:"ro"`
-
-	// READ-ONLY; List of critical operations which are not protected by this resourceGuard
-	VaultCriticalOperationExclusionList []*string `json:"vaultCriticalOperationExclusionList,omitempty" azure:"ro"`
 }
 
 // MarshalJSON implements the json.Marshaller interface for type ResourceGuard.
@@ -3716,6 +3936,9 @@ type SecretStoreResource struct {
 
 	// Uri to get to the resource
 	URI *string `json:"uri,omitempty"`
+
+	// Gets or sets value stored in secret store resource
+	Value *string `json:"value,omitempty"`
 }
 
 // SourceLifeCycle - Source LifeCycle
@@ -3791,6 +4014,12 @@ func (s SupportedFeature) MarshalJSON() ([]byte, error) {
 	populate(objectMap, "featureName", s.FeatureName)
 	populate(objectMap, "supportStatus", s.SupportStatus)
 	return json.Marshal(objectMap)
+}
+
+// SyncBackupInstanceRequest - Sync BackupInstance Request
+type SyncBackupInstanceRequest struct {
+	// Field indicating sync type e.g. to sync only in case of failure or in all cases
+	SyncType *SyncType `json:"syncType,omitempty"`
 }
 
 // SystemData - Metadata pertaining to creation and last modification of the resource.

@@ -52,12 +52,12 @@ func NewBackupVaultOperationResultsClient(subscriptionID string, credential azco
 
 // Get -
 // If the operation fails it returns an *azcore.ResponseError type.
-// vaultName - The name of the backup vault.
 // resourceGroupName - The name of the resource group where the backup vault is present.
+// vaultName - The name of the backup vault.
 // options - BackupVaultOperationResultsClientGetOptions contains the optional parameters for the BackupVaultOperationResultsClient.Get
 // method.
-func (client *BackupVaultOperationResultsClient) Get(ctx context.Context, vaultName string, resourceGroupName string, operationID string, options *BackupVaultOperationResultsClientGetOptions) (BackupVaultOperationResultsClientGetResponse, error) {
-	req, err := client.getCreateRequest(ctx, vaultName, resourceGroupName, operationID, options)
+func (client *BackupVaultOperationResultsClient) Get(ctx context.Context, resourceGroupName string, vaultName string, operationID string, options *BackupVaultOperationResultsClientGetOptions) (BackupVaultOperationResultsClientGetResponse, error) {
+	req, err := client.getCreateRequest(ctx, resourceGroupName, vaultName, operationID, options)
 	if err != nil {
 		return BackupVaultOperationResultsClientGetResponse{}, err
 	}
@@ -72,20 +72,20 @@ func (client *BackupVaultOperationResultsClient) Get(ctx context.Context, vaultN
 }
 
 // getCreateRequest creates the Get request.
-func (client *BackupVaultOperationResultsClient) getCreateRequest(ctx context.Context, vaultName string, resourceGroupName string, operationID string, options *BackupVaultOperationResultsClientGetOptions) (*policy.Request, error) {
+func (client *BackupVaultOperationResultsClient) getCreateRequest(ctx context.Context, resourceGroupName string, vaultName string, operationID string, options *BackupVaultOperationResultsClientGetOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/operationResults/{operationId}"
-	if vaultName == "" {
-		return nil, errors.New("parameter vaultName cannot be empty")
-	}
-	urlPath = strings.ReplaceAll(urlPath, "{vaultName}", url.PathEscape(vaultName))
-	if resourceGroupName == "" {
-		return nil, errors.New("parameter resourceGroupName cannot be empty")
-	}
-	urlPath = strings.ReplaceAll(urlPath, "{resourceGroupName}", url.PathEscape(resourceGroupName))
 	if client.subscriptionID == "" {
 		return nil, errors.New("parameter client.subscriptionID cannot be empty")
 	}
 	urlPath = strings.ReplaceAll(urlPath, "{subscriptionId}", url.PathEscape(client.subscriptionID))
+	if resourceGroupName == "" {
+		return nil, errors.New("parameter resourceGroupName cannot be empty")
+	}
+	urlPath = strings.ReplaceAll(urlPath, "{resourceGroupName}", url.PathEscape(resourceGroupName))
+	if vaultName == "" {
+		return nil, errors.New("parameter vaultName cannot be empty")
+	}
+	urlPath = strings.ReplaceAll(urlPath, "{vaultName}", url.PathEscape(vaultName))
 	if operationID == "" {
 		return nil, errors.New("parameter operationID cannot be empty")
 	}
@@ -95,7 +95,7 @@ func (client *BackupVaultOperationResultsClient) getCreateRequest(ctx context.Co
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-07-01")
+	reqQP.Set("api-version", "2022-04-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil

@@ -143,6 +143,221 @@ func (p *BackupInstancesClientDeletePoller) ResumeToken() (string, error) {
 	return p.pt.ResumeToken()
 }
 
+// BackupInstancesClientResumeBackupsPoller provides polling facilities until the operation reaches a terminal state.
+type BackupInstancesClientResumeBackupsPoller struct {
+	pt *azcore.Poller
+}
+
+// Done returns true if the LRO has reached a terminal state.
+func (p *BackupInstancesClientResumeBackupsPoller) Done() bool {
+	return p.pt.Done()
+}
+
+// Poll fetches the latest state of the LRO.  It returns an HTTP response or error.
+// If the LRO has completed successfully, the poller's state is updated and the HTTP
+// response is returned.
+// If the LRO has completed with failure or was cancelled, the poller's state is
+// updated and the error is returned.
+// If the LRO has not reached a terminal state, the poller's state is updated and
+// the latest HTTP response is returned.
+// If Poll fails, the poller's state is unmodified and the error is returned.
+// Calling Poll on an LRO that has reached a terminal state will return the final
+// HTTP response or error.
+func (p *BackupInstancesClientResumeBackupsPoller) Poll(ctx context.Context) (*http.Response, error) {
+	return p.pt.Poll(ctx)
+}
+
+// FinalResponse performs a final GET to the service and returns the final response
+// for the polling operation. If there is an error performing the final GET then an error is returned.
+// If the final GET succeeded then the final BackupInstancesClientResumeBackupsResponse will be returned.
+func (p *BackupInstancesClientResumeBackupsPoller) FinalResponse(ctx context.Context) (BackupInstancesClientResumeBackupsResponse, error) {
+	respType := BackupInstancesClientResumeBackupsResponse{}
+	resp, err := p.pt.FinalResponse(ctx, nil)
+	if err != nil {
+		return BackupInstancesClientResumeBackupsResponse{}, err
+	}
+	respType.RawResponse = resp
+	return respType, nil
+}
+
+// ResumeToken returns a value representing the poller that can be used to resume
+// the LRO at a later time. ResumeTokens are unique per service operation.
+func (p *BackupInstancesClientResumeBackupsPoller) ResumeToken() (string, error) {
+	return p.pt.ResumeToken()
+}
+
+// BackupInstancesClientResumeProtectionPoller provides polling facilities until the operation reaches a terminal state.
+type BackupInstancesClientResumeProtectionPoller struct {
+	pt *azcore.Poller
+}
+
+// Done returns true if the LRO has reached a terminal state.
+func (p *BackupInstancesClientResumeProtectionPoller) Done() bool {
+	return p.pt.Done()
+}
+
+// Poll fetches the latest state of the LRO.  It returns an HTTP response or error.
+// If the LRO has completed successfully, the poller's state is updated and the HTTP
+// response is returned.
+// If the LRO has completed with failure or was cancelled, the poller's state is
+// updated and the error is returned.
+// If the LRO has not reached a terminal state, the poller's state is updated and
+// the latest HTTP response is returned.
+// If Poll fails, the poller's state is unmodified and the error is returned.
+// Calling Poll on an LRO that has reached a terminal state will return the final
+// HTTP response or error.
+func (p *BackupInstancesClientResumeProtectionPoller) Poll(ctx context.Context) (*http.Response, error) {
+	return p.pt.Poll(ctx)
+}
+
+// FinalResponse performs a final GET to the service and returns the final response
+// for the polling operation. If there is an error performing the final GET then an error is returned.
+// If the final GET succeeded then the final BackupInstancesClientResumeProtectionResponse will be returned.
+func (p *BackupInstancesClientResumeProtectionPoller) FinalResponse(ctx context.Context) (BackupInstancesClientResumeProtectionResponse, error) {
+	respType := BackupInstancesClientResumeProtectionResponse{}
+	resp, err := p.pt.FinalResponse(ctx, nil)
+	if err != nil {
+		return BackupInstancesClientResumeProtectionResponse{}, err
+	}
+	respType.RawResponse = resp
+	return respType, nil
+}
+
+// ResumeToken returns a value representing the poller that can be used to resume
+// the LRO at a later time. ResumeTokens are unique per service operation.
+func (p *BackupInstancesClientResumeProtectionPoller) ResumeToken() (string, error) {
+	return p.pt.ResumeToken()
+}
+
+// BackupInstancesClientStopProtectionPoller provides polling facilities until the operation reaches a terminal state.
+type BackupInstancesClientStopProtectionPoller struct {
+	pt *azcore.Poller
+}
+
+// Done returns true if the LRO has reached a terminal state.
+func (p *BackupInstancesClientStopProtectionPoller) Done() bool {
+	return p.pt.Done()
+}
+
+// Poll fetches the latest state of the LRO.  It returns an HTTP response or error.
+// If the LRO has completed successfully, the poller's state is updated and the HTTP
+// response is returned.
+// If the LRO has completed with failure or was cancelled, the poller's state is
+// updated and the error is returned.
+// If the LRO has not reached a terminal state, the poller's state is updated and
+// the latest HTTP response is returned.
+// If Poll fails, the poller's state is unmodified and the error is returned.
+// Calling Poll on an LRO that has reached a terminal state will return the final
+// HTTP response or error.
+func (p *BackupInstancesClientStopProtectionPoller) Poll(ctx context.Context) (*http.Response, error) {
+	return p.pt.Poll(ctx)
+}
+
+// FinalResponse performs a final GET to the service and returns the final response
+// for the polling operation. If there is an error performing the final GET then an error is returned.
+// If the final GET succeeded then the final BackupInstancesClientStopProtectionResponse will be returned.
+func (p *BackupInstancesClientStopProtectionPoller) FinalResponse(ctx context.Context) (BackupInstancesClientStopProtectionResponse, error) {
+	respType := BackupInstancesClientStopProtectionResponse{}
+	resp, err := p.pt.FinalResponse(ctx, nil)
+	if err != nil {
+		return BackupInstancesClientStopProtectionResponse{}, err
+	}
+	respType.RawResponse = resp
+	return respType, nil
+}
+
+// ResumeToken returns a value representing the poller that can be used to resume
+// the LRO at a later time. ResumeTokens are unique per service operation.
+func (p *BackupInstancesClientStopProtectionPoller) ResumeToken() (string, error) {
+	return p.pt.ResumeToken()
+}
+
+// BackupInstancesClientSuspendBackupsPoller provides polling facilities until the operation reaches a terminal state.
+type BackupInstancesClientSuspendBackupsPoller struct {
+	pt *azcore.Poller
+}
+
+// Done returns true if the LRO has reached a terminal state.
+func (p *BackupInstancesClientSuspendBackupsPoller) Done() bool {
+	return p.pt.Done()
+}
+
+// Poll fetches the latest state of the LRO.  It returns an HTTP response or error.
+// If the LRO has completed successfully, the poller's state is updated and the HTTP
+// response is returned.
+// If the LRO has completed with failure or was cancelled, the poller's state is
+// updated and the error is returned.
+// If the LRO has not reached a terminal state, the poller's state is updated and
+// the latest HTTP response is returned.
+// If Poll fails, the poller's state is unmodified and the error is returned.
+// Calling Poll on an LRO that has reached a terminal state will return the final
+// HTTP response or error.
+func (p *BackupInstancesClientSuspendBackupsPoller) Poll(ctx context.Context) (*http.Response, error) {
+	return p.pt.Poll(ctx)
+}
+
+// FinalResponse performs a final GET to the service and returns the final response
+// for the polling operation. If there is an error performing the final GET then an error is returned.
+// If the final GET succeeded then the final BackupInstancesClientSuspendBackupsResponse will be returned.
+func (p *BackupInstancesClientSuspendBackupsPoller) FinalResponse(ctx context.Context) (BackupInstancesClientSuspendBackupsResponse, error) {
+	respType := BackupInstancesClientSuspendBackupsResponse{}
+	resp, err := p.pt.FinalResponse(ctx, nil)
+	if err != nil {
+		return BackupInstancesClientSuspendBackupsResponse{}, err
+	}
+	respType.RawResponse = resp
+	return respType, nil
+}
+
+// ResumeToken returns a value representing the poller that can be used to resume
+// the LRO at a later time. ResumeTokens are unique per service operation.
+func (p *BackupInstancesClientSuspendBackupsPoller) ResumeToken() (string, error) {
+	return p.pt.ResumeToken()
+}
+
+// BackupInstancesClientSyncBackupInstancePoller provides polling facilities until the operation reaches a terminal state.
+type BackupInstancesClientSyncBackupInstancePoller struct {
+	pt *azcore.Poller
+}
+
+// Done returns true if the LRO has reached a terminal state.
+func (p *BackupInstancesClientSyncBackupInstancePoller) Done() bool {
+	return p.pt.Done()
+}
+
+// Poll fetches the latest state of the LRO.  It returns an HTTP response or error.
+// If the LRO has completed successfully, the poller's state is updated and the HTTP
+// response is returned.
+// If the LRO has completed with failure or was cancelled, the poller's state is
+// updated and the error is returned.
+// If the LRO has not reached a terminal state, the poller's state is updated and
+// the latest HTTP response is returned.
+// If Poll fails, the poller's state is unmodified and the error is returned.
+// Calling Poll on an LRO that has reached a terminal state will return the final
+// HTTP response or error.
+func (p *BackupInstancesClientSyncBackupInstancePoller) Poll(ctx context.Context) (*http.Response, error) {
+	return p.pt.Poll(ctx)
+}
+
+// FinalResponse performs a final GET to the service and returns the final response
+// for the polling operation. If there is an error performing the final GET then an error is returned.
+// If the final GET succeeded then the final BackupInstancesClientSyncBackupInstanceResponse will be returned.
+func (p *BackupInstancesClientSyncBackupInstancePoller) FinalResponse(ctx context.Context) (BackupInstancesClientSyncBackupInstanceResponse, error) {
+	respType := BackupInstancesClientSyncBackupInstanceResponse{}
+	resp, err := p.pt.FinalResponse(ctx, nil)
+	if err != nil {
+		return BackupInstancesClientSyncBackupInstanceResponse{}, err
+	}
+	respType.RawResponse = resp
+	return respType, nil
+}
+
+// ResumeToken returns a value representing the poller that can be used to resume
+// the LRO at a later time. ResumeTokens are unique per service operation.
+func (p *BackupInstancesClientSyncBackupInstancePoller) ResumeToken() (string, error) {
+	return p.pt.ResumeToken()
+}
+
 // BackupInstancesClientTriggerRehydratePoller provides polling facilities until the operation reaches a terminal state.
 type BackupInstancesClientTriggerRehydratePoller struct {
 	pt *azcore.Poller

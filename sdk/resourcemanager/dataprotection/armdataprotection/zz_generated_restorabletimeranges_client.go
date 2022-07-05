@@ -51,14 +51,14 @@ func NewRestorableTimeRangesClient(subscriptionID string, credential azcore.Toke
 
 // Find -
 // If the operation fails it returns an *azcore.ResponseError type.
-// vaultName - The name of the backup vault.
 // resourceGroupName - The name of the resource group where the backup vault is present.
+// vaultName - The name of the backup vault.
 // backupInstanceName - The name of the backup instance
 // parameters - Request body for operation
 // options - RestorableTimeRangesClientFindOptions contains the optional parameters for the RestorableTimeRangesClient.Find
 // method.
-func (client *RestorableTimeRangesClient) Find(ctx context.Context, vaultName string, resourceGroupName string, backupInstanceName string, parameters AzureBackupFindRestorableTimeRangesRequest, options *RestorableTimeRangesClientFindOptions) (RestorableTimeRangesClientFindResponse, error) {
-	req, err := client.findCreateRequest(ctx, vaultName, resourceGroupName, backupInstanceName, parameters, options)
+func (client *RestorableTimeRangesClient) Find(ctx context.Context, resourceGroupName string, vaultName string, backupInstanceName string, parameters AzureBackupFindRestorableTimeRangesRequest, options *RestorableTimeRangesClientFindOptions) (RestorableTimeRangesClientFindResponse, error) {
+	req, err := client.findCreateRequest(ctx, resourceGroupName, vaultName, backupInstanceName, parameters, options)
 	if err != nil {
 		return RestorableTimeRangesClientFindResponse{}, err
 	}
@@ -73,20 +73,20 @@ func (client *RestorableTimeRangesClient) Find(ctx context.Context, vaultName st
 }
 
 // findCreateRequest creates the Find request.
-func (client *RestorableTimeRangesClient) findCreateRequest(ctx context.Context, vaultName string, resourceGroupName string, backupInstanceName string, parameters AzureBackupFindRestorableTimeRangesRequest, options *RestorableTimeRangesClientFindOptions) (*policy.Request, error) {
+func (client *RestorableTimeRangesClient) findCreateRequest(ctx context.Context, resourceGroupName string, vaultName string, backupInstanceName string, parameters AzureBackupFindRestorableTimeRangesRequest, options *RestorableTimeRangesClientFindOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupInstances/{backupInstanceName}/findRestorableTimeRanges"
-	if vaultName == "" {
-		return nil, errors.New("parameter vaultName cannot be empty")
-	}
-	urlPath = strings.ReplaceAll(urlPath, "{vaultName}", url.PathEscape(vaultName))
-	if resourceGroupName == "" {
-		return nil, errors.New("parameter resourceGroupName cannot be empty")
-	}
-	urlPath = strings.ReplaceAll(urlPath, "{resourceGroupName}", url.PathEscape(resourceGroupName))
 	if client.subscriptionID == "" {
 		return nil, errors.New("parameter client.subscriptionID cannot be empty")
 	}
 	urlPath = strings.ReplaceAll(urlPath, "{subscriptionId}", url.PathEscape(client.subscriptionID))
+	if resourceGroupName == "" {
+		return nil, errors.New("parameter resourceGroupName cannot be empty")
+	}
+	urlPath = strings.ReplaceAll(urlPath, "{resourceGroupName}", url.PathEscape(resourceGroupName))
+	if vaultName == "" {
+		return nil, errors.New("parameter vaultName cannot be empty")
+	}
+	urlPath = strings.ReplaceAll(urlPath, "{vaultName}", url.PathEscape(vaultName))
 	if backupInstanceName == "" {
 		return nil, errors.New("parameter backupInstanceName cannot be empty")
 	}
@@ -96,7 +96,7 @@ func (client *RestorableTimeRangesClient) findCreateRequest(ctx context.Context,
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-07-01")
+	reqQP.Set("api-version", "2022-04-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, runtime.MarshalAsJSON(req, parameters)

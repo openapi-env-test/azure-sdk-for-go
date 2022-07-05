@@ -10,7 +10,7 @@ package armdataprotection
 
 const (
 	moduleName    = "armdataprotection"
-	moduleVersion = "v0.2.0"
+	moduleVersion = "v0.3.0"
 )
 
 type AbsoluteMarker string
@@ -36,6 +36,26 @@ func PossibleAbsoluteMarkerValues() []AbsoluteMarker {
 
 // ToPtr returns a *AbsoluteMarker pointing to the current value.
 func (c AbsoluteMarker) ToPtr() *AbsoluteMarker {
+	return &c
+}
+
+type AlertsState string
+
+const (
+	AlertsStateDisabled AlertsState = "Disabled"
+	AlertsStateEnabled  AlertsState = "Enabled"
+)
+
+// PossibleAlertsStateValues returns the possible values for the AlertsState const type.
+func PossibleAlertsStateValues() []AlertsState {
+	return []AlertsState{
+		AlertsStateDisabled,
+		AlertsStateEnabled,
+	}
+}
+
+// ToPtr returns a *AlertsState pointing to the current value.
+func (c AlertsState) ToPtr() *AlertsState {
 	return &c
 }
 
@@ -540,6 +560,49 @@ func PossibleStorageSettingTypesValues() []StorageSettingTypes {
 
 // ToPtr returns a *StorageSettingTypes pointing to the current value.
 func (c StorageSettingTypes) ToPtr() *StorageSettingTypes {
+	return &c
+}
+
+// SyncType - Field indicating sync type e.g. to sync only in case of failure or in all cases
+type SyncType string
+
+const (
+	SyncTypeDefault     SyncType = "Default"
+	SyncTypeForceResync SyncType = "ForceResync"
+)
+
+// PossibleSyncTypeValues returns the possible values for the SyncType const type.
+func PossibleSyncTypeValues() []SyncType {
+	return []SyncType{
+		SyncTypeDefault,
+		SyncTypeForceResync,
+	}
+}
+
+// ToPtr returns a *SyncType pointing to the current value.
+func (c SyncType) ToPtr() *SyncType {
+	return &c
+}
+
+// ValidationType - Specifies the type of validation. In case of DeepValidation, all validations from /validateForBackup API
+// will run again.
+type ValidationType string
+
+const (
+	ValidationTypeDeepValidation    ValidationType = "DeepValidation"
+	ValidationTypeShallowValidation ValidationType = "ShallowValidation"
+)
+
+// PossibleValidationTypeValues returns the possible values for the ValidationType const type.
+func PossibleValidationTypeValues() []ValidationType {
+	return []ValidationType{
+		ValidationTypeDeepValidation,
+		ValidationTypeShallowValidation,
+	}
+}
+
+// ToPtr returns a *ValidationType pointing to the current value.
+func (c ValidationType) ToPtr() *ValidationType {
 	return &c
 }
 
