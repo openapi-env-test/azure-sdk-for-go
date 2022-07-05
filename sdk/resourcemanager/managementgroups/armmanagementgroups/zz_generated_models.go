@@ -103,7 +103,7 @@ type ClientGetOptions struct {
 	// The $expand=children query string parameter allows clients to request inclusion of children in the response payload. $expand=path
 	// includes the path from the root group to the current group.
 	// $expand=ancestors includes the ancestor Ids of the current group.
-	Expand *Enum0
+	Expand *ManagementGroupExpandType
 	// A filter which allows the exclusion of subscriptions from results (i.e. '$filter=children.childType ne Subscription')
 	Filter *string
 	// The $recurse=true query string parameter allows clients to request inclusion of entire hierarchy in the response payload.
@@ -358,7 +358,7 @@ type EntitiesClientListOptions struct {
 	// $search=ChildrenOnly the API will return only the first level of children of the group entity info specified in $filter.
 	// The user must have direct access to the children entities or one of it's
 	// descendants for it to show up in the results.
-	Search *Enum2
+	Search *EntitySearchType
 	// This parameter specifies the fields to include in the response. Can include any combination of Name,DisplayName,Type,ParentDisplayNameChain,ParentChain,
 	// e.g.
 	// '$select=Name,DisplayName,Type,ParentDisplayNameChain,ParentNameChain'. When specified the $select parameter can override
@@ -373,7 +373,7 @@ type EntitiesClientListOptions struct {
 	// Number of elements to return when retrieving results. Passing this in will override $skipToken.
 	Top *int32
 	// The view parameter allows clients to filter the type of data that is returned by the getEntities call.
-	View *Enum3
+	View *EntityViewParameterType
 }
 
 // EntityHierarchyItem - The management group details for the hierarchy view.
