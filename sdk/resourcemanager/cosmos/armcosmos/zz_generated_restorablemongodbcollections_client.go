@@ -92,9 +92,15 @@ func (client *RestorableMongodbCollectionsClient) listCreateRequest(ctx context.
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-10-15")
+	reqQP.Set("api-version", "2022-02-15-preview")
 	if options != nil && options.RestorableMongodbDatabaseRid != nil {
 		reqQP.Set("restorableMongodbDatabaseRid", *options.RestorableMongodbDatabaseRid)
+	}
+	if options != nil && options.StartTime != nil {
+		reqQP.Set("startTime", *options.StartTime)
+	}
+	if options != nil && options.EndTime != nil {
+		reqQP.Set("endTime", *options.EndTime)
 	}
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")

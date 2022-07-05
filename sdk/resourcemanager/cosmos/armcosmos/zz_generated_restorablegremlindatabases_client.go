@@ -21,19 +21,19 @@ import (
 	"strings"
 )
 
-// RestorableSQLContainersClient contains the methods for the RestorableSQLContainers group.
-// Don't use this type directly, use NewRestorableSQLContainersClient() instead.
-type RestorableSQLContainersClient struct {
+// RestorableGremlinDatabasesClient contains the methods for the RestorableGremlinDatabases group.
+// Don't use this type directly, use NewRestorableGremlinDatabasesClient() instead.
+type RestorableGremlinDatabasesClient struct {
 	host           string
 	subscriptionID string
 	pl             runtime.Pipeline
 }
 
-// NewRestorableSQLContainersClient creates a new instance of RestorableSQLContainersClient with the specified values.
+// NewRestorableGremlinDatabasesClient creates a new instance of RestorableGremlinDatabasesClient with the specified values.
 // subscriptionID - The ID of the target subscription.
 // credential - used to authorize requests. Usually a credential from azidentity.
 // options - pass nil to accept the default values.
-func NewRestorableSQLContainersClient(subscriptionID string, credential azcore.TokenCredential, options *arm.ClientOptions) *RestorableSQLContainersClient {
+func NewRestorableGremlinDatabasesClient(subscriptionID string, credential azcore.TokenCredential, options *arm.ClientOptions) *RestorableGremlinDatabasesClient {
 	cp := arm.ClientOptions{}
 	if options != nil {
 		cp = *options
@@ -41,7 +41,7 @@ func NewRestorableSQLContainersClient(subscriptionID string, credential azcore.T
 	if len(cp.Endpoint) == 0 {
 		cp.Endpoint = arm.AzurePublicCloud
 	}
-	client := &RestorableSQLContainersClient{
+	client := &RestorableGremlinDatabasesClient{
 		subscriptionID: subscriptionID,
 		host:           string(cp.Endpoint),
 		pl:             armruntime.NewPipeline(moduleName, moduleVersion, credential, runtime.PipelineOptions{}, &cp),
@@ -49,32 +49,32 @@ func NewRestorableSQLContainersClient(subscriptionID string, credential azcore.T
 	return client
 }
 
-// List - Show the event feed of all mutations done on all the Azure Cosmos DB SQL containers under a specific database. This
-// helps in scenario where container was accidentally deleted. This API requires
-// 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/…/read' permission
+// List - Show the event feed of all mutations done on all the Azure Cosmos DB Gremlin databases under the restorable account.
+// This helps in scenario where database was accidentally deleted to get the deletion
+// time. This API requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/…/read' permission
 // If the operation fails it returns an *azcore.ResponseError type.
 // location - Cosmos DB region, with spaces between words and each word capitalized.
 // instanceID - The instanceId GUID of a restorable database account.
-// options - RestorableSQLContainersClientListOptions contains the optional parameters for the RestorableSQLContainersClient.List
+// options - RestorableGremlinDatabasesClientListOptions contains the optional parameters for the RestorableGremlinDatabasesClient.List
 // method.
-func (client *RestorableSQLContainersClient) List(ctx context.Context, location string, instanceID string, options *RestorableSQLContainersClientListOptions) (RestorableSQLContainersClientListResponse, error) {
+func (client *RestorableGremlinDatabasesClient) List(ctx context.Context, location string, instanceID string, options *RestorableGremlinDatabasesClientListOptions) (RestorableGremlinDatabasesClientListResponse, error) {
 	req, err := client.listCreateRequest(ctx, location, instanceID, options)
 	if err != nil {
-		return RestorableSQLContainersClientListResponse{}, err
+		return RestorableGremlinDatabasesClientListResponse{}, err
 	}
 	resp, err := client.pl.Do(req)
 	if err != nil {
-		return RestorableSQLContainersClientListResponse{}, err
+		return RestorableGremlinDatabasesClientListResponse{}, err
 	}
 	if !runtime.HasStatusCode(resp, http.StatusOK) {
-		return RestorableSQLContainersClientListResponse{}, runtime.NewResponseError(resp)
+		return RestorableGremlinDatabasesClientListResponse{}, runtime.NewResponseError(resp)
 	}
 	return client.listHandleResponse(resp)
 }
 
 // listCreateRequest creates the List request.
-func (client *RestorableSQLContainersClient) listCreateRequest(ctx context.Context, location string, instanceID string, options *RestorableSQLContainersClientListOptions) (*policy.Request, error) {
-	urlPath := "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}/restorableSqlContainers"
+func (client *RestorableGremlinDatabasesClient) listCreateRequest(ctx context.Context, location string, instanceID string, options *RestorableGremlinDatabasesClientListOptions) (*policy.Request, error) {
+	urlPath := "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}/restorableGremlinDatabases"
 	if client.subscriptionID == "" {
 		return nil, errors.New("parameter client.subscriptionID cannot be empty")
 	}
@@ -93,25 +93,16 @@ func (client *RestorableSQLContainersClient) listCreateRequest(ctx context.Conte
 	}
 	reqQP := req.Raw().URL.Query()
 	reqQP.Set("api-version", "2022-02-15-preview")
-	if options != nil && options.RestorableSQLDatabaseRid != nil {
-		reqQP.Set("restorableSqlDatabaseRid", *options.RestorableSQLDatabaseRid)
-	}
-	if options != nil && options.StartTime != nil {
-		reqQP.Set("startTime", *options.StartTime)
-	}
-	if options != nil && options.EndTime != nil {
-		reqQP.Set("endTime", *options.EndTime)
-	}
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
 }
 
 // listHandleResponse handles the List response.
-func (client *RestorableSQLContainersClient) listHandleResponse(resp *http.Response) (RestorableSQLContainersClientListResponse, error) {
-	result := RestorableSQLContainersClientListResponse{RawResponse: resp}
-	if err := runtime.UnmarshalAsJSON(resp, &result.RestorableSQLContainersListResult); err != nil {
-		return RestorableSQLContainersClientListResponse{}, err
+func (client *RestorableGremlinDatabasesClient) listHandleResponse(resp *http.Response) (RestorableGremlinDatabasesClientListResponse, error) {
+	result := RestorableGremlinDatabasesClientListResponse{RawResponse: resp}
+	if err := runtime.UnmarshalAsJSON(resp, &result.RestorableGremlinDatabasesListResult); err != nil {
+		return RestorableGremlinDatabasesClientListResponse{}, err
 	}
 	return result, nil
 }
