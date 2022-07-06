@@ -10,7 +10,7 @@ package armcosmos
 
 const (
 	moduleName    = "armcosmos"
-	moduleVersion = "v0.3.0"
+	moduleVersion = "v0.4.0"
 )
 
 // APIType - Enum to indicate the API type of the restorable database account.
@@ -65,11 +65,12 @@ func (c AnalyticalStorageSchemaType) ToPtr() *AnalyticalStorageSchemaType {
 
 // AuthenticationMethod - Which authentication method Cassandra should use to authenticate clients. 'None' turns off authentication,
 // so should not be used except in emergencies. 'Cassandra' is the default password based
-// authentication. The default is 'Cassandra'.
+// authentication. The default is 'Cassandra'. 'Ldap' is in preview.
 type AuthenticationMethod string
 
 const (
 	AuthenticationMethodCassandra AuthenticationMethod = "Cassandra"
+	AuthenticationMethodLdap      AuthenticationMethod = "Ldap"
 	AuthenticationMethodNone      AuthenticationMethod = "None"
 )
 
@@ -77,6 +78,7 @@ const (
 func PossibleAuthenticationMethodValues() []AuthenticationMethod {
 	return []AuthenticationMethod{
 		AuthenticationMethodCassandra,
+		AuthenticationMethodLdap,
 		AuthenticationMethodNone,
 	}
 }
@@ -245,6 +247,27 @@ func (c ConnectorOffer) ToPtr() *ConnectorOffer {
 	return &c
 }
 
+// ContinuousTier - Enum to indicate type of Continuous backup tier.
+type ContinuousTier string
+
+const (
+	ContinuousTierContinuous30Days ContinuousTier = "Continuous30Days"
+	ContinuousTierContinuous7Days  ContinuousTier = "Continuous7Days"
+)
+
+// PossibleContinuousTierValues returns the possible values for the ContinuousTier const type.
+func PossibleContinuousTierValues() []ContinuousTier {
+	return []ContinuousTier{
+		ContinuousTierContinuous30Days,
+		ContinuousTierContinuous7Days,
+	}
+}
+
+// ToPtr returns a *ContinuousTier pointing to the current value.
+func (c ContinuousTier) ToPtr() *ContinuousTier {
+	return &c
+}
+
 // CreateMode - Enum to indicate the mode of account creation.
 type CreateMode string
 
@@ -288,6 +311,28 @@ func PossibleCreatedByTypeValues() []CreatedByType {
 
 // ToPtr returns a *CreatedByType pointing to the current value.
 func (c CreatedByType) ToPtr() *CreatedByType {
+	return &c
+}
+
+type DataTransferComponent string
+
+const (
+	DataTransferComponentAzureBlobStorage  DataTransferComponent = "AzureBlobStorage"
+	DataTransferComponentCosmosDBCassandra DataTransferComponent = "CosmosDBCassandra"
+	DataTransferComponentCosmosDBSQL       DataTransferComponent = "CosmosDBSql"
+)
+
+// PossibleDataTransferComponentValues returns the possible values for the DataTransferComponent const type.
+func PossibleDataTransferComponentValues() []DataTransferComponent {
+	return []DataTransferComponent{
+		DataTransferComponentAzureBlobStorage,
+		DataTransferComponentCosmosDBCassandra,
+		DataTransferComponentCosmosDBSQL,
+	}
+}
+
+// ToPtr returns a *DataTransferComponent pointing to the current value.
+func (c DataTransferComponent) ToPtr() *DataTransferComponent {
 	return &c
 }
 
@@ -367,6 +412,29 @@ func PossibleDefaultConsistencyLevelValues() []DefaultConsistencyLevel {
 
 // ToPtr returns a *DefaultConsistencyLevel pointing to the current value.
 func (c DefaultConsistencyLevel) ToPtr() *DefaultConsistencyLevel {
+	return &c
+}
+
+// EnableFullTextQuery - Describe the level of detail with which queries are to be logged.
+type EnableFullTextQuery string
+
+const (
+	EnableFullTextQueryNone  EnableFullTextQuery = "None"
+	EnableFullTextQueryTrue  EnableFullTextQuery = "True"
+	EnableFullTextQueryFalse EnableFullTextQuery = "False"
+)
+
+// PossibleEnableFullTextQueryValues returns the possible values for the EnableFullTextQuery const type.
+func PossibleEnableFullTextQueryValues() []EnableFullTextQuery {
+	return []EnableFullTextQuery{
+		EnableFullTextQueryNone,
+		EnableFullTextQueryTrue,
+		EnableFullTextQueryFalse,
+	}
+}
+
+// ToPtr returns a *EnableFullTextQuery pointing to the current value.
+func (c EnableFullTextQuery) ToPtr() *EnableFullTextQuery {
 	return &c
 }
 
@@ -488,6 +556,27 @@ func PossibleManagedCassandraResourceIdentityTypeValues() []ManagedCassandraReso
 
 // ToPtr returns a *ManagedCassandraResourceIdentityType pointing to the current value.
 func (c ManagedCassandraResourceIdentityType) ToPtr() *ManagedCassandraResourceIdentityType {
+	return &c
+}
+
+// MongoRoleDefinitionType - Indicates whether the Role Definition was built-in or user created.
+type MongoRoleDefinitionType string
+
+const (
+	MongoRoleDefinitionTypeBuiltInRole MongoRoleDefinitionType = "BuiltInRole"
+	MongoRoleDefinitionTypeCustomRole  MongoRoleDefinitionType = "CustomRole"
+)
+
+// PossibleMongoRoleDefinitionTypeValues returns the possible values for the MongoRoleDefinitionType const type.
+func PossibleMongoRoleDefinitionTypeValues() []MongoRoleDefinitionType {
+	return []MongoRoleDefinitionType{
+		MongoRoleDefinitionTypeBuiltInRole,
+		MongoRoleDefinitionTypeCustomRole,
+	}
+}
+
+// ToPtr returns a *MongoRoleDefinitionType pointing to the current value.
+func (c MongoRoleDefinitionType) ToPtr() *MongoRoleDefinitionType {
 	return &c
 }
 
@@ -749,6 +838,7 @@ type ServerVersion string
 
 const (
 	ServerVersionFour0  ServerVersion = "4.0"
+	ServerVersionFour2  ServerVersion = "4.2"
 	ServerVersionThree2 ServerVersion = "3.2"
 	ServerVersionThree6 ServerVersion = "3.6"
 )
@@ -757,6 +847,7 @@ const (
 func PossibleServerVersionValues() []ServerVersion {
 	return []ServerVersion{
 		ServerVersionFour0,
+		ServerVersionFour2,
 		ServerVersionThree2,
 		ServerVersionThree6,
 	}
@@ -764,6 +855,83 @@ func PossibleServerVersionValues() []ServerVersion {
 
 // ToPtr returns a *ServerVersion pointing to the current value.
 func (c ServerVersion) ToPtr() *ServerVersion {
+	return &c
+}
+
+// ServiceSize - Instance type for the service.
+type ServiceSize string
+
+const (
+	ServiceSizeCosmosD16S ServiceSize = "Cosmos.D16s"
+	ServiceSizeCosmosD4S  ServiceSize = "Cosmos.D4s"
+	ServiceSizeCosmosD8S  ServiceSize = "Cosmos.D8s"
+)
+
+// PossibleServiceSizeValues returns the possible values for the ServiceSize const type.
+func PossibleServiceSizeValues() []ServiceSize {
+	return []ServiceSize{
+		ServiceSizeCosmosD16S,
+		ServiceSizeCosmosD4S,
+		ServiceSizeCosmosD8S,
+	}
+}
+
+// ToPtr returns a *ServiceSize pointing to the current value.
+func (c ServiceSize) ToPtr() *ServiceSize {
+	return &c
+}
+
+// ServiceStatus - Describes the status of a service.
+type ServiceStatus string
+
+const (
+	ServiceStatusCreating ServiceStatus = "Creating"
+	ServiceStatusDeleting ServiceStatus = "Deleting"
+	ServiceStatusError    ServiceStatus = "Error"
+	ServiceStatusRunning  ServiceStatus = "Running"
+	ServiceStatusStopped  ServiceStatus = "Stopped"
+	ServiceStatusUpdating ServiceStatus = "Updating"
+)
+
+// PossibleServiceStatusValues returns the possible values for the ServiceStatus const type.
+func PossibleServiceStatusValues() []ServiceStatus {
+	return []ServiceStatus{
+		ServiceStatusCreating,
+		ServiceStatusDeleting,
+		ServiceStatusError,
+		ServiceStatusRunning,
+		ServiceStatusStopped,
+		ServiceStatusUpdating,
+	}
+}
+
+// ToPtr returns a *ServiceStatus pointing to the current value.
+func (c ServiceStatus) ToPtr() *ServiceStatus {
+	return &c
+}
+
+// ServiceType - ServiceType for the service.
+type ServiceType string
+
+const (
+	ServiceTypeDataTransfer             ServiceType = "DataTransfer"
+	ServiceTypeGraphAPICompute          ServiceType = "GraphAPICompute"
+	ServiceTypeMaterializedViewsBuilder ServiceType = "MaterializedViewsBuilder"
+	ServiceTypeSQLDedicatedGateway      ServiceType = "SqlDedicatedGateway"
+)
+
+// PossibleServiceTypeValues returns the possible values for the ServiceType const type.
+func PossibleServiceTypeValues() []ServiceType {
+	return []ServiceType{
+		ServiceTypeDataTransfer,
+		ServiceTypeGraphAPICompute,
+		ServiceTypeMaterializedViewsBuilder,
+		ServiceTypeSQLDedicatedGateway,
+	}
+}
+
+// ToPtr returns a *ServiceType pointing to the current value.
+func (c ServiceType) ToPtr() *ServiceType {
 	return &c
 }
 
@@ -789,6 +957,29 @@ func PossibleSpatialTypeValues() []SpatialType {
 
 // ToPtr returns a *SpatialType pointing to the current value.
 func (c SpatialType) ToPtr() *SpatialType {
+	return &c
+}
+
+// ThroughputPolicyType - ThroughputPolicy to apply for throughput redistribution
+type ThroughputPolicyType string
+
+const (
+	ThroughputPolicyTypeCustom ThroughputPolicyType = "custom"
+	ThroughputPolicyTypeEqual  ThroughputPolicyType = "equal"
+	ThroughputPolicyTypeNone   ThroughputPolicyType = "none"
+)
+
+// PossibleThroughputPolicyTypeValues returns the possible values for the ThroughputPolicyType const type.
+func PossibleThroughputPolicyTypeValues() []ThroughputPolicyType {
+	return []ThroughputPolicyType{
+		ThroughputPolicyTypeCustom,
+		ThroughputPolicyTypeEqual,
+		ThroughputPolicyTypeNone,
+	}
+}
+
+// ToPtr returns a *ThroughputPolicyType pointing to the current value.
+func (c ThroughputPolicyType) ToPtr() *ThroughputPolicyType {
 	return &c
 }
 
