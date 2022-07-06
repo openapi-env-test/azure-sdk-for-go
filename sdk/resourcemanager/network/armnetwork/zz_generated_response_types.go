@@ -1206,6 +1206,128 @@ type BgpServiceCommunitiesClientListResult struct {
 	BgpServiceCommunityListResult
 }
 
+// ConfigurationPolicyGroupsClientCreateOrUpdatePollerResponse contains the response from method ConfigurationPolicyGroupsClient.CreateOrUpdate.
+type ConfigurationPolicyGroupsClientCreateOrUpdatePollerResponse struct {
+	// Poller contains an initialized poller.
+	Poller *ConfigurationPolicyGroupsClientCreateOrUpdatePoller
+
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// PollUntilDone will poll the service endpoint until a terminal state is reached or an error is received.
+// freq: the time to wait between intervals in absence of a Retry-After header. Allowed minimum is one second.
+// A good starting value is 30 seconds. Note that some resources might benefit from a different value.
+func (l ConfigurationPolicyGroupsClientCreateOrUpdatePollerResponse) PollUntilDone(ctx context.Context, freq time.Duration) (ConfigurationPolicyGroupsClientCreateOrUpdateResponse, error) {
+	respType := ConfigurationPolicyGroupsClientCreateOrUpdateResponse{}
+	resp, err := l.Poller.pt.PollUntilDone(ctx, freq, &respType.VPNServerConfigurationPolicyGroup)
+	if err != nil {
+		return respType, err
+	}
+	respType.RawResponse = resp
+	return respType, nil
+}
+
+// Resume rehydrates a ConfigurationPolicyGroupsClientCreateOrUpdatePollerResponse from the provided client and resume token.
+func (l *ConfigurationPolicyGroupsClientCreateOrUpdatePollerResponse) Resume(ctx context.Context, client *ConfigurationPolicyGroupsClient, token string) error {
+	pt, err := armruntime.NewPollerFromResumeToken("ConfigurationPolicyGroupsClient.CreateOrUpdate", token, client.pl)
+	if err != nil {
+		return err
+	}
+	poller := &ConfigurationPolicyGroupsClientCreateOrUpdatePoller{
+		pt: pt,
+	}
+	resp, err := poller.Poll(ctx)
+	if err != nil {
+		return err
+	}
+	l.Poller = poller
+	l.RawResponse = resp
+	return nil
+}
+
+// ConfigurationPolicyGroupsClientCreateOrUpdateResponse contains the response from method ConfigurationPolicyGroupsClient.CreateOrUpdate.
+type ConfigurationPolicyGroupsClientCreateOrUpdateResponse struct {
+	ConfigurationPolicyGroupsClientCreateOrUpdateResult
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// ConfigurationPolicyGroupsClientCreateOrUpdateResult contains the result from method ConfigurationPolicyGroupsClient.CreateOrUpdate.
+type ConfigurationPolicyGroupsClientCreateOrUpdateResult struct {
+	VPNServerConfigurationPolicyGroup
+}
+
+// ConfigurationPolicyGroupsClientDeletePollerResponse contains the response from method ConfigurationPolicyGroupsClient.Delete.
+type ConfigurationPolicyGroupsClientDeletePollerResponse struct {
+	// Poller contains an initialized poller.
+	Poller *ConfigurationPolicyGroupsClientDeletePoller
+
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// PollUntilDone will poll the service endpoint until a terminal state is reached or an error is received.
+// freq: the time to wait between intervals in absence of a Retry-After header. Allowed minimum is one second.
+// A good starting value is 30 seconds. Note that some resources might benefit from a different value.
+func (l ConfigurationPolicyGroupsClientDeletePollerResponse) PollUntilDone(ctx context.Context, freq time.Duration) (ConfigurationPolicyGroupsClientDeleteResponse, error) {
+	respType := ConfigurationPolicyGroupsClientDeleteResponse{}
+	resp, err := l.Poller.pt.PollUntilDone(ctx, freq, nil)
+	if err != nil {
+		return respType, err
+	}
+	respType.RawResponse = resp
+	return respType, nil
+}
+
+// Resume rehydrates a ConfigurationPolicyGroupsClientDeletePollerResponse from the provided client and resume token.
+func (l *ConfigurationPolicyGroupsClientDeletePollerResponse) Resume(ctx context.Context, client *ConfigurationPolicyGroupsClient, token string) error {
+	pt, err := armruntime.NewPollerFromResumeToken("ConfigurationPolicyGroupsClient.Delete", token, client.pl)
+	if err != nil {
+		return err
+	}
+	poller := &ConfigurationPolicyGroupsClientDeletePoller{
+		pt: pt,
+	}
+	resp, err := poller.Poll(ctx)
+	if err != nil {
+		return err
+	}
+	l.Poller = poller
+	l.RawResponse = resp
+	return nil
+}
+
+// ConfigurationPolicyGroupsClientDeleteResponse contains the response from method ConfigurationPolicyGroupsClient.Delete.
+type ConfigurationPolicyGroupsClientDeleteResponse struct {
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// ConfigurationPolicyGroupsClientGetResponse contains the response from method ConfigurationPolicyGroupsClient.Get.
+type ConfigurationPolicyGroupsClientGetResponse struct {
+	ConfigurationPolicyGroupsClientGetResult
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// ConfigurationPolicyGroupsClientGetResult contains the result from method ConfigurationPolicyGroupsClient.Get.
+type ConfigurationPolicyGroupsClientGetResult struct {
+	VPNServerConfigurationPolicyGroup
+}
+
+// ConfigurationPolicyGroupsClientListByVPNServerConfigurationResponse contains the response from method ConfigurationPolicyGroupsClient.ListByVPNServerConfiguration.
+type ConfigurationPolicyGroupsClientListByVPNServerConfigurationResponse struct {
+	ConfigurationPolicyGroupsClientListByVPNServerConfigurationResult
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// ConfigurationPolicyGroupsClientListByVPNServerConfigurationResult contains the result from method ConfigurationPolicyGroupsClient.ListByVPNServerConfiguration.
+type ConfigurationPolicyGroupsClientListByVPNServerConfigurationResult struct {
+	ListVPNServerConfigurationPolicyGroupsResult
+}
+
 // ConnectionMonitorsClientCreateOrUpdatePollerResponse contains the response from method ConnectionMonitorsClient.CreateOrUpdate.
 type ConnectionMonitorsClientCreateOrUpdatePollerResponse struct {
 	// Poller contains an initialized poller.
@@ -3465,6 +3587,129 @@ type ExpressRouteLinksClientListResult struct {
 	ExpressRouteLinkListResult
 }
 
+// ExpressRoutePortAuthorizationsClientCreateOrUpdatePollerResponse contains the response from method ExpressRoutePortAuthorizationsClient.CreateOrUpdate.
+type ExpressRoutePortAuthorizationsClientCreateOrUpdatePollerResponse struct {
+	// Poller contains an initialized poller.
+	Poller *ExpressRoutePortAuthorizationsClientCreateOrUpdatePoller
+
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// PollUntilDone will poll the service endpoint until a terminal state is reached or an error is received.
+// freq: the time to wait between intervals in absence of a Retry-After header. Allowed minimum is one second.
+// A good starting value is 30 seconds. Note that some resources might benefit from a different value.
+func (l ExpressRoutePortAuthorizationsClientCreateOrUpdatePollerResponse) PollUntilDone(ctx context.Context, freq time.Duration) (ExpressRoutePortAuthorizationsClientCreateOrUpdateResponse, error) {
+	respType := ExpressRoutePortAuthorizationsClientCreateOrUpdateResponse{}
+	resp, err := l.Poller.pt.PollUntilDone(ctx, freq, &respType.ExpressRoutePortAuthorization)
+	if err != nil {
+		return respType, err
+	}
+	respType.RawResponse = resp
+	return respType, nil
+}
+
+// Resume rehydrates a ExpressRoutePortAuthorizationsClientCreateOrUpdatePollerResponse from the provided client and resume
+// token.
+func (l *ExpressRoutePortAuthorizationsClientCreateOrUpdatePollerResponse) Resume(ctx context.Context, client *ExpressRoutePortAuthorizationsClient, token string) error {
+	pt, err := armruntime.NewPollerFromResumeToken("ExpressRoutePortAuthorizationsClient.CreateOrUpdate", token, client.pl)
+	if err != nil {
+		return err
+	}
+	poller := &ExpressRoutePortAuthorizationsClientCreateOrUpdatePoller{
+		pt: pt,
+	}
+	resp, err := poller.Poll(ctx)
+	if err != nil {
+		return err
+	}
+	l.Poller = poller
+	l.RawResponse = resp
+	return nil
+}
+
+// ExpressRoutePortAuthorizationsClientCreateOrUpdateResponse contains the response from method ExpressRoutePortAuthorizationsClient.CreateOrUpdate.
+type ExpressRoutePortAuthorizationsClientCreateOrUpdateResponse struct {
+	ExpressRoutePortAuthorizationsClientCreateOrUpdateResult
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// ExpressRoutePortAuthorizationsClientCreateOrUpdateResult contains the result from method ExpressRoutePortAuthorizationsClient.CreateOrUpdate.
+type ExpressRoutePortAuthorizationsClientCreateOrUpdateResult struct {
+	ExpressRoutePortAuthorization
+}
+
+// ExpressRoutePortAuthorizationsClientDeletePollerResponse contains the response from method ExpressRoutePortAuthorizationsClient.Delete.
+type ExpressRoutePortAuthorizationsClientDeletePollerResponse struct {
+	// Poller contains an initialized poller.
+	Poller *ExpressRoutePortAuthorizationsClientDeletePoller
+
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// PollUntilDone will poll the service endpoint until a terminal state is reached or an error is received.
+// freq: the time to wait between intervals in absence of a Retry-After header. Allowed minimum is one second.
+// A good starting value is 30 seconds. Note that some resources might benefit from a different value.
+func (l ExpressRoutePortAuthorizationsClientDeletePollerResponse) PollUntilDone(ctx context.Context, freq time.Duration) (ExpressRoutePortAuthorizationsClientDeleteResponse, error) {
+	respType := ExpressRoutePortAuthorizationsClientDeleteResponse{}
+	resp, err := l.Poller.pt.PollUntilDone(ctx, freq, nil)
+	if err != nil {
+		return respType, err
+	}
+	respType.RawResponse = resp
+	return respType, nil
+}
+
+// Resume rehydrates a ExpressRoutePortAuthorizationsClientDeletePollerResponse from the provided client and resume token.
+func (l *ExpressRoutePortAuthorizationsClientDeletePollerResponse) Resume(ctx context.Context, client *ExpressRoutePortAuthorizationsClient, token string) error {
+	pt, err := armruntime.NewPollerFromResumeToken("ExpressRoutePortAuthorizationsClient.Delete", token, client.pl)
+	if err != nil {
+		return err
+	}
+	poller := &ExpressRoutePortAuthorizationsClientDeletePoller{
+		pt: pt,
+	}
+	resp, err := poller.Poll(ctx)
+	if err != nil {
+		return err
+	}
+	l.Poller = poller
+	l.RawResponse = resp
+	return nil
+}
+
+// ExpressRoutePortAuthorizationsClientDeleteResponse contains the response from method ExpressRoutePortAuthorizationsClient.Delete.
+type ExpressRoutePortAuthorizationsClientDeleteResponse struct {
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// ExpressRoutePortAuthorizationsClientGetResponse contains the response from method ExpressRoutePortAuthorizationsClient.Get.
+type ExpressRoutePortAuthorizationsClientGetResponse struct {
+	ExpressRoutePortAuthorizationsClientGetResult
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// ExpressRoutePortAuthorizationsClientGetResult contains the result from method ExpressRoutePortAuthorizationsClient.Get.
+type ExpressRoutePortAuthorizationsClientGetResult struct {
+	ExpressRoutePortAuthorization
+}
+
+// ExpressRoutePortAuthorizationsClientListResponse contains the response from method ExpressRoutePortAuthorizationsClient.List.
+type ExpressRoutePortAuthorizationsClientListResponse struct {
+	ExpressRoutePortAuthorizationsClientListResult
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// ExpressRoutePortAuthorizationsClientListResult contains the result from method ExpressRoutePortAuthorizationsClient.List.
+type ExpressRoutePortAuthorizationsClientListResult struct {
+	ExpressRoutePortAuthorizationListResult
+}
+
 // ExpressRoutePortsClientCreateOrUpdatePollerResponse contains the response from method ExpressRoutePortsClient.CreateOrUpdate.
 type ExpressRoutePortsClientCreateOrUpdatePollerResponse struct {
 	// Poller contains an initialized poller.
@@ -3791,6 +4036,18 @@ type FirewallPoliciesClientListResponse struct {
 // FirewallPoliciesClientListResult contains the result from method FirewallPoliciesClient.List.
 type FirewallPoliciesClientListResult struct {
 	FirewallPolicyListResult
+}
+
+// FirewallPoliciesClientUpdateTagsResponse contains the response from method FirewallPoliciesClient.UpdateTags.
+type FirewallPoliciesClientUpdateTagsResponse struct {
+	FirewallPoliciesClientUpdateTagsResult
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// FirewallPoliciesClientUpdateTagsResult contains the result from method FirewallPoliciesClient.UpdateTags.
+type FirewallPoliciesClientUpdateTagsResult struct {
+	FirewallPolicy
 }
 
 // FirewallPolicyIdpsSignaturesClientListResponse contains the response from method FirewallPolicyIdpsSignaturesClient.List.

@@ -10,7 +10,7 @@ package armnetwork
 
 const (
 	moduleName    = "armnetwork"
-	moduleVersion = "v0.3.0"
+	moduleVersion = "v0.4.0"
 )
 
 // Access - Access to be allowed or denied.
@@ -178,6 +178,8 @@ type ApplicationGatewayProtocol string
 const (
 	ApplicationGatewayProtocolHTTP  ApplicationGatewayProtocol = "Http"
 	ApplicationGatewayProtocolHTTPS ApplicationGatewayProtocol = "Https"
+	ApplicationGatewayProtocolTCP   ApplicationGatewayProtocol = "Tcp"
+	ApplicationGatewayProtocolTLS   ApplicationGatewayProtocol = "Tls"
 )
 
 // PossibleApplicationGatewayProtocolValues returns the possible values for the ApplicationGatewayProtocol const type.
@@ -185,6 +187,8 @@ func PossibleApplicationGatewayProtocolValues() []ApplicationGatewayProtocol {
 	return []ApplicationGatewayProtocol{
 		ApplicationGatewayProtocolHTTP,
 		ApplicationGatewayProtocolHTTPS,
+		ApplicationGatewayProtocolTCP,
+		ApplicationGatewayProtocolTLS,
 	}
 }
 
@@ -1472,6 +1476,27 @@ func (c ExpressRoutePeeringType) ToPtr() *ExpressRoutePeeringType {
 	return &c
 }
 
+// ExpressRoutePortAuthorizationUseStatus - The authorization use status.
+type ExpressRoutePortAuthorizationUseStatus string
+
+const (
+	ExpressRoutePortAuthorizationUseStatusAvailable ExpressRoutePortAuthorizationUseStatus = "Available"
+	ExpressRoutePortAuthorizationUseStatusInUse     ExpressRoutePortAuthorizationUseStatus = "InUse"
+)
+
+// PossibleExpressRoutePortAuthorizationUseStatusValues returns the possible values for the ExpressRoutePortAuthorizationUseStatus const type.
+func PossibleExpressRoutePortAuthorizationUseStatusValues() []ExpressRoutePortAuthorizationUseStatus {
+	return []ExpressRoutePortAuthorizationUseStatus{
+		ExpressRoutePortAuthorizationUseStatusAvailable,
+		ExpressRoutePortAuthorizationUseStatusInUse,
+	}
+}
+
+// ToPtr returns a *ExpressRoutePortAuthorizationUseStatus pointing to the current value.
+func (c ExpressRoutePortAuthorizationUseStatus) ToPtr() *ExpressRoutePortAuthorizationUseStatus {
+	return &c
+}
+
 // ExpressRoutePortsEncapsulation - Encapsulation method on physical ports.
 type ExpressRoutePortsEncapsulation string
 
@@ -1531,6 +1556,97 @@ func PossibleFirewallPolicyFilterRuleCollectionActionTypeValues() []FirewallPoli
 
 // ToPtr returns a *FirewallPolicyFilterRuleCollectionActionType pointing to the current value.
 func (c FirewallPolicyFilterRuleCollectionActionType) ToPtr() *FirewallPolicyFilterRuleCollectionActionType {
+	return &c
+}
+
+// FirewallPolicyIDPSQuerySortOrder - Describes if results should be in ascending/descending order
+type FirewallPolicyIDPSQuerySortOrder string
+
+const (
+	FirewallPolicyIDPSQuerySortOrderAscending  FirewallPolicyIDPSQuerySortOrder = "Ascending"
+	FirewallPolicyIDPSQuerySortOrderDescending FirewallPolicyIDPSQuerySortOrder = "Descending"
+)
+
+// PossibleFirewallPolicyIDPSQuerySortOrderValues returns the possible values for the FirewallPolicyIDPSQuerySortOrder const type.
+func PossibleFirewallPolicyIDPSQuerySortOrderValues() []FirewallPolicyIDPSQuerySortOrder {
+	return []FirewallPolicyIDPSQuerySortOrder{
+		FirewallPolicyIDPSQuerySortOrderAscending,
+		FirewallPolicyIDPSQuerySortOrderDescending,
+	}
+}
+
+// ToPtr returns a *FirewallPolicyIDPSQuerySortOrder pointing to the current value.
+func (c FirewallPolicyIDPSQuerySortOrder) ToPtr() *FirewallPolicyIDPSQuerySortOrder {
+	return &c
+}
+
+// FirewallPolicyIDPSSignatureDirection - Describes in which direction signature is being enforced: 0 - Inbound, 1 - OutBound,
+// 2 - Bidirectional
+type FirewallPolicyIDPSSignatureDirection int32
+
+const (
+	FirewallPolicyIDPSSignatureDirectionZero FirewallPolicyIDPSSignatureDirection = 0
+	FirewallPolicyIDPSSignatureDirectionOne  FirewallPolicyIDPSSignatureDirection = 1
+	FirewallPolicyIDPSSignatureDirectionTwo  FirewallPolicyIDPSSignatureDirection = 2
+)
+
+// PossibleFirewallPolicyIDPSSignatureDirectionValues returns the possible values for the FirewallPolicyIDPSSignatureDirection const type.
+func PossibleFirewallPolicyIDPSSignatureDirectionValues() []FirewallPolicyIDPSSignatureDirection {
+	return []FirewallPolicyIDPSSignatureDirection{
+		FirewallPolicyIDPSSignatureDirectionZero,
+		FirewallPolicyIDPSSignatureDirectionOne,
+		FirewallPolicyIDPSSignatureDirectionTwo,
+	}
+}
+
+// ToPtr returns a *FirewallPolicyIDPSSignatureDirection pointing to the current value.
+func (c FirewallPolicyIDPSSignatureDirection) ToPtr() *FirewallPolicyIDPSSignatureDirection {
+	return &c
+}
+
+// FirewallPolicyIDPSSignatureMode - The current mode enforced, 0 - Disabled, 1 - Alert, 2 -Deny
+type FirewallPolicyIDPSSignatureMode int32
+
+const (
+	FirewallPolicyIDPSSignatureModeZero FirewallPolicyIDPSSignatureMode = 0
+	FirewallPolicyIDPSSignatureModeOne  FirewallPolicyIDPSSignatureMode = 1
+	FirewallPolicyIDPSSignatureModeTwo  FirewallPolicyIDPSSignatureMode = 2
+)
+
+// PossibleFirewallPolicyIDPSSignatureModeValues returns the possible values for the FirewallPolicyIDPSSignatureMode const type.
+func PossibleFirewallPolicyIDPSSignatureModeValues() []FirewallPolicyIDPSSignatureMode {
+	return []FirewallPolicyIDPSSignatureMode{
+		FirewallPolicyIDPSSignatureModeZero,
+		FirewallPolicyIDPSSignatureModeOne,
+		FirewallPolicyIDPSSignatureModeTwo,
+	}
+}
+
+// ToPtr returns a *FirewallPolicyIDPSSignatureMode pointing to the current value.
+func (c FirewallPolicyIDPSSignatureMode) ToPtr() *FirewallPolicyIDPSSignatureMode {
+	return &c
+}
+
+// FirewallPolicyIDPSSignatureSeverity - Describes the severity of signature: 1 - Low, 2 - Medium, 3 - High
+type FirewallPolicyIDPSSignatureSeverity int32
+
+const (
+	FirewallPolicyIDPSSignatureSeverityOne   FirewallPolicyIDPSSignatureSeverity = 1
+	FirewallPolicyIDPSSignatureSeverityTwo   FirewallPolicyIDPSSignatureSeverity = 2
+	FirewallPolicyIDPSSignatureSeverityThree FirewallPolicyIDPSSignatureSeverity = 3
+)
+
+// PossibleFirewallPolicyIDPSSignatureSeverityValues returns the possible values for the FirewallPolicyIDPSSignatureSeverity const type.
+func PossibleFirewallPolicyIDPSSignatureSeverityValues() []FirewallPolicyIDPSSignatureSeverity {
+	return []FirewallPolicyIDPSSignatureSeverity{
+		FirewallPolicyIDPSSignatureSeverityOne,
+		FirewallPolicyIDPSSignatureSeverityTwo,
+		FirewallPolicyIDPSSignatureSeverityThree,
+	}
+}
+
+// ToPtr returns a *FirewallPolicyIDPSSignatureSeverity pointing to the current value.
+func (c FirewallPolicyIDPSSignatureSeverity) ToPtr() *FirewallPolicyIDPSSignatureSeverity {
 	return &c
 }
 
@@ -1844,6 +1960,29 @@ func (c HubBgpConnectionStatus) ToPtr() *HubBgpConnectionStatus {
 	return &c
 }
 
+// HubRoutingPreference - The hub routing preference gateway types
+type HubRoutingPreference string
+
+const (
+	HubRoutingPreferenceASPath       HubRoutingPreference = "ASPath"
+	HubRoutingPreferenceExpressRoute HubRoutingPreference = "ExpressRoute"
+	HubRoutingPreferenceVPNGateway   HubRoutingPreference = "VpnGateway"
+)
+
+// PossibleHubRoutingPreferenceValues returns the possible values for the HubRoutingPreference const type.
+func PossibleHubRoutingPreferenceValues() []HubRoutingPreference {
+	return []HubRoutingPreference{
+		HubRoutingPreferenceASPath,
+		HubRoutingPreferenceExpressRoute,
+		HubRoutingPreferenceVPNGateway,
+	}
+}
+
+// ToPtr returns a *HubRoutingPreference pointing to the current value.
+func (c HubRoutingPreference) ToPtr() *HubRoutingPreference {
+	return &c
+}
+
 // HubVirtualNetworkConnectionStatus - The current state of the VirtualHub to vnet connection.
 type HubVirtualNetworkConnectionStatus string
 
@@ -2133,6 +2272,32 @@ func (c IssueType) ToPtr() *IssueType {
 	return &c
 }
 
+// LoadBalancerBackendAddressAdminState - A list of administrative states which once set can override health probe so that
+// Load Balancer will always forward new connections to backend, or deny new connections and reset existing connections.
+type LoadBalancerBackendAddressAdminState string
+
+const (
+	LoadBalancerBackendAddressAdminStateDown  LoadBalancerBackendAddressAdminState = "Down"
+	LoadBalancerBackendAddressAdminStateDrain LoadBalancerBackendAddressAdminState = "Drain"
+	LoadBalancerBackendAddressAdminStateNone  LoadBalancerBackendAddressAdminState = "None"
+	LoadBalancerBackendAddressAdminStateUp    LoadBalancerBackendAddressAdminState = "Up"
+)
+
+// PossibleLoadBalancerBackendAddressAdminStateValues returns the possible values for the LoadBalancerBackendAddressAdminState const type.
+func PossibleLoadBalancerBackendAddressAdminStateValues() []LoadBalancerBackendAddressAdminState {
+	return []LoadBalancerBackendAddressAdminState{
+		LoadBalancerBackendAddressAdminStateDown,
+		LoadBalancerBackendAddressAdminStateDrain,
+		LoadBalancerBackendAddressAdminStateNone,
+		LoadBalancerBackendAddressAdminStateUp,
+	}
+}
+
+// ToPtr returns a *LoadBalancerBackendAddressAdminState pointing to the current value.
+func (c LoadBalancerBackendAddressAdminState) ToPtr() *LoadBalancerBackendAddressAdminState {
+	return &c
+}
+
 // LoadBalancerOutboundRuleProtocol - The protocol for the outbound rule in load balancer.
 type LoadBalancerOutboundRuleProtocol string
 
@@ -2261,6 +2426,29 @@ func (c NatGatewaySKUName) ToPtr() *NatGatewaySKUName {
 	return &c
 }
 
+// NetworkInterfaceAuxiliaryMode - Auxiliary mode of Network Interface resource.
+type NetworkInterfaceAuxiliaryMode string
+
+const (
+	NetworkInterfaceAuxiliaryModeFloating       NetworkInterfaceAuxiliaryMode = "Floating"
+	NetworkInterfaceAuxiliaryModeMaxConnections NetworkInterfaceAuxiliaryMode = "MaxConnections"
+	NetworkInterfaceAuxiliaryModeNone           NetworkInterfaceAuxiliaryMode = "None"
+)
+
+// PossibleNetworkInterfaceAuxiliaryModeValues returns the possible values for the NetworkInterfaceAuxiliaryMode const type.
+func PossibleNetworkInterfaceAuxiliaryModeValues() []NetworkInterfaceAuxiliaryMode {
+	return []NetworkInterfaceAuxiliaryMode{
+		NetworkInterfaceAuxiliaryModeFloating,
+		NetworkInterfaceAuxiliaryModeMaxConnections,
+		NetworkInterfaceAuxiliaryModeNone,
+	}
+}
+
+// ToPtr returns a *NetworkInterfaceAuxiliaryMode pointing to the current value.
+func (c NetworkInterfaceAuxiliaryMode) ToPtr() *NetworkInterfaceAuxiliaryMode {
+	return &c
+}
+
 // NetworkInterfaceMigrationPhase - Migration phase of Network Interface resource.
 type NetworkInterfaceMigrationPhase string
 
@@ -2383,27 +2571,6 @@ func PossibleOfficeTrafficCategoryValues() []OfficeTrafficCategory {
 
 // ToPtr returns a *OfficeTrafficCategory pointing to the current value.
 func (c OfficeTrafficCategory) ToPtr() *OfficeTrafficCategory {
-	return &c
-}
-
-// OrderByOrder - Describes if results should be in ascending/descending order
-type OrderByOrder string
-
-const (
-	OrderByOrderAscending  OrderByOrder = "Ascending"
-	OrderByOrderDescending OrderByOrder = "Descending"
-)
-
-// PossibleOrderByOrderValues returns the possible values for the OrderByOrder const type.
-func PossibleOrderByOrderValues() []OrderByOrder {
-	return []OrderByOrder{
-		OrderByOrderAscending,
-		OrderByOrderDescending,
-	}
-}
-
-// ToPtr returns a *OrderByOrder pointing to the current value.
-func (c OrderByOrder) ToPtr() *OrderByOrder {
 	return &c
 }
 
@@ -3172,75 +3339,6 @@ func (c Severity) ToPtr() *Severity {
 	return &c
 }
 
-// SingleQueryResultDirection - Describes in which direction signature is being enforced: 0 - Inbound, 1 - OutBound, 2 - Bidirectional
-type SingleQueryResultDirection int32
-
-const (
-	SingleQueryResultDirectionOne  SingleQueryResultDirection = 1
-	SingleQueryResultDirectionTwo  SingleQueryResultDirection = 2
-	SingleQueryResultDirectionZero SingleQueryResultDirection = 0
-)
-
-// PossibleSingleQueryResultDirectionValues returns the possible values for the SingleQueryResultDirection const type.
-func PossibleSingleQueryResultDirectionValues() []SingleQueryResultDirection {
-	return []SingleQueryResultDirection{
-		SingleQueryResultDirectionOne,
-		SingleQueryResultDirectionTwo,
-		SingleQueryResultDirectionZero,
-	}
-}
-
-// ToPtr returns a *SingleQueryResultDirection pointing to the current value.
-func (c SingleQueryResultDirection) ToPtr() *SingleQueryResultDirection {
-	return &c
-}
-
-// SingleQueryResultMode - The current mode enforced, 0 - Disabled, 1 - Alert, 2 -Deny
-type SingleQueryResultMode int32
-
-const (
-	SingleQueryResultModeOne  SingleQueryResultMode = 1
-	SingleQueryResultModeTwo  SingleQueryResultMode = 2
-	SingleQueryResultModeZero SingleQueryResultMode = 0
-)
-
-// PossibleSingleQueryResultModeValues returns the possible values for the SingleQueryResultMode const type.
-func PossibleSingleQueryResultModeValues() []SingleQueryResultMode {
-	return []SingleQueryResultMode{
-		SingleQueryResultModeOne,
-		SingleQueryResultModeTwo,
-		SingleQueryResultModeZero,
-	}
-}
-
-// ToPtr returns a *SingleQueryResultMode pointing to the current value.
-func (c SingleQueryResultMode) ToPtr() *SingleQueryResultMode {
-	return &c
-}
-
-// SingleQueryResultSeverity - Describes the severity of signature: 1 - Low, 2 - Medium, 3 - High
-type SingleQueryResultSeverity int32
-
-const (
-	SingleQueryResultSeverityOne   SingleQueryResultSeverity = 1
-	SingleQueryResultSeverityThree SingleQueryResultSeverity = 3
-	SingleQueryResultSeverityTwo   SingleQueryResultSeverity = 2
-)
-
-// PossibleSingleQueryResultSeverityValues returns the possible values for the SingleQueryResultSeverity const type.
-func PossibleSingleQueryResultSeverityValues() []SingleQueryResultSeverity {
-	return []SingleQueryResultSeverity{
-		SingleQueryResultSeverityOne,
-		SingleQueryResultSeverityThree,
-		SingleQueryResultSeverityTwo,
-	}
-}
-
-// ToPtr returns a *SingleQueryResultSeverity pointing to the current value.
-func (c SingleQueryResultSeverity) ToPtr() *SingleQueryResultSeverity {
-	return &c
-}
-
 type SyncRemoteAddressSpace string
 
 const (
@@ -3503,6 +3601,29 @@ func PossibleVPNNatRuleTypeValues() []VPNNatRuleType {
 
 // ToPtr returns a *VPNNatRuleType pointing to the current value.
 func (c VPNNatRuleType) ToPtr() *VPNNatRuleType {
+	return &c
+}
+
+// VPNPolicyMemberAttributeType - The Vpn Policy member attribute type.
+type VPNPolicyMemberAttributeType string
+
+const (
+	VPNPolicyMemberAttributeTypeAADGroupID         VPNPolicyMemberAttributeType = "AADGroupId"
+	VPNPolicyMemberAttributeTypeCertificateGroupID VPNPolicyMemberAttributeType = "CertificateGroupId"
+	VPNPolicyMemberAttributeTypeRadiusAzureGroupID VPNPolicyMemberAttributeType = "RadiusAzureGroupId"
+)
+
+// PossibleVPNPolicyMemberAttributeTypeValues returns the possible values for the VPNPolicyMemberAttributeType const type.
+func PossibleVPNPolicyMemberAttributeTypeValues() []VPNPolicyMemberAttributeType {
+	return []VPNPolicyMemberAttributeType{
+		VPNPolicyMemberAttributeTypeAADGroupID,
+		VPNPolicyMemberAttributeTypeCertificateGroupID,
+		VPNPolicyMemberAttributeTypeRadiusAzureGroupID,
+	}
+}
+
+// ToPtr returns a *VPNPolicyMemberAttributeType pointing to the current value.
+func (c VPNPolicyMemberAttributeType) ToPtr() *VPNPolicyMemberAttributeType {
 	return &c
 }
 

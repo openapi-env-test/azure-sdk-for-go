@@ -1096,6 +1096,60 @@ func (p *BgpServiceCommunitiesClientListPager) PageResponse() BgpServiceCommunit
 	return p.current
 }
 
+// ConfigurationPolicyGroupsClientListByVPNServerConfigurationPager provides operations for iterating over paged responses.
+type ConfigurationPolicyGroupsClientListByVPNServerConfigurationPager struct {
+	client    *ConfigurationPolicyGroupsClient
+	current   ConfigurationPolicyGroupsClientListByVPNServerConfigurationResponse
+	err       error
+	requester func(context.Context) (*policy.Request, error)
+	advancer  func(context.Context, ConfigurationPolicyGroupsClientListByVPNServerConfigurationResponse) (*policy.Request, error)
+}
+
+// Err returns the last error encountered while paging.
+func (p *ConfigurationPolicyGroupsClientListByVPNServerConfigurationPager) Err() error {
+	return p.err
+}
+
+// NextPage returns true if the pager advanced to the next page.
+// Returns false if there are no more pages or an error occurred.
+func (p *ConfigurationPolicyGroupsClientListByVPNServerConfigurationPager) NextPage(ctx context.Context) bool {
+	var req *policy.Request
+	var err error
+	if !reflect.ValueOf(p.current).IsZero() {
+		if p.current.ListVPNServerConfigurationPolicyGroupsResult.NextLink == nil || len(*p.current.ListVPNServerConfigurationPolicyGroupsResult.NextLink) == 0 {
+			return false
+		}
+		req, err = p.advancer(ctx, p.current)
+	} else {
+		req, err = p.requester(ctx)
+	}
+	if err != nil {
+		p.err = err
+		return false
+	}
+	resp, err := p.client.pl.Do(req)
+	if err != nil {
+		p.err = err
+		return false
+	}
+	if !runtime.HasStatusCode(resp, http.StatusOK) {
+		p.err = runtime.NewResponseError(resp)
+		return false
+	}
+	result, err := p.client.listByVPNServerConfigurationHandleResponse(resp)
+	if err != nil {
+		p.err = err
+		return false
+	}
+	p.current = result
+	return true
+}
+
+// PageResponse returns the current ConfigurationPolicyGroupsClientListByVPNServerConfigurationResponse page.
+func (p *ConfigurationPolicyGroupsClientListByVPNServerConfigurationPager) PageResponse() ConfigurationPolicyGroupsClientListByVPNServerConfigurationResponse {
+	return p.current
+}
+
 // CustomIPPrefixesClientListAllPager provides operations for iterating over paged responses.
 type CustomIPPrefixesClientListAllPager struct {
 	client    *CustomIPPrefixesClient
@@ -1957,6 +2011,60 @@ func (p *ExpressRouteLinksClientListPager) NextPage(ctx context.Context) bool {
 
 // PageResponse returns the current ExpressRouteLinksClientListResponse page.
 func (p *ExpressRouteLinksClientListPager) PageResponse() ExpressRouteLinksClientListResponse {
+	return p.current
+}
+
+// ExpressRoutePortAuthorizationsClientListPager provides operations for iterating over paged responses.
+type ExpressRoutePortAuthorizationsClientListPager struct {
+	client    *ExpressRoutePortAuthorizationsClient
+	current   ExpressRoutePortAuthorizationsClientListResponse
+	err       error
+	requester func(context.Context) (*policy.Request, error)
+	advancer  func(context.Context, ExpressRoutePortAuthorizationsClientListResponse) (*policy.Request, error)
+}
+
+// Err returns the last error encountered while paging.
+func (p *ExpressRoutePortAuthorizationsClientListPager) Err() error {
+	return p.err
+}
+
+// NextPage returns true if the pager advanced to the next page.
+// Returns false if there are no more pages or an error occurred.
+func (p *ExpressRoutePortAuthorizationsClientListPager) NextPage(ctx context.Context) bool {
+	var req *policy.Request
+	var err error
+	if !reflect.ValueOf(p.current).IsZero() {
+		if p.current.ExpressRoutePortAuthorizationListResult.NextLink == nil || len(*p.current.ExpressRoutePortAuthorizationListResult.NextLink) == 0 {
+			return false
+		}
+		req, err = p.advancer(ctx, p.current)
+	} else {
+		req, err = p.requester(ctx)
+	}
+	if err != nil {
+		p.err = err
+		return false
+	}
+	resp, err := p.client.pl.Do(req)
+	if err != nil {
+		p.err = err
+		return false
+	}
+	if !runtime.HasStatusCode(resp, http.StatusOK) {
+		p.err = runtime.NewResponseError(resp)
+		return false
+	}
+	result, err := p.client.listHandleResponse(resp)
+	if err != nil {
+		p.err = err
+		return false
+	}
+	p.current = result
+	return true
+}
+
+// PageResponse returns the current ExpressRoutePortAuthorizationsClientListResponse page.
+func (p *ExpressRoutePortAuthorizationsClientListPager) PageResponse() ExpressRoutePortAuthorizationsClientListResponse {
 	return p.current
 }
 
