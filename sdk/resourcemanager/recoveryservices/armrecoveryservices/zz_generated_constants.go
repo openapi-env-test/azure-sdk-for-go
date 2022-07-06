@@ -10,8 +10,28 @@ package armrecoveryservices
 
 const (
 	moduleName    = "armrecoveryservices"
-	moduleVersion = "v0.3.0"
+	moduleVersion = "v0.4.0"
 )
+
+type AlertsState string
+
+const (
+	AlertsStateDisabled AlertsState = "Disabled"
+	AlertsStateEnabled  AlertsState = "Enabled"
+)
+
+// PossibleAlertsStateValues returns the possible values for the AlertsState const type.
+func PossibleAlertsStateValues() []AlertsState {
+	return []AlertsState{
+		AlertsStateDisabled,
+		AlertsStateEnabled,
+	}
+}
+
+// ToPtr returns a *AlertsState pointing to the current value.
+func (c AlertsState) ToPtr() *AlertsState {
+	return &c
+}
 
 // AuthType - Specifies the authentication type.
 type AuthType string
