@@ -10,7 +10,7 @@ package armeventhub
 
 const (
 	moduleName    = "armeventhub"
-	moduleVersion = "v0.3.0"
+	moduleVersion = "v0.4.0"
 )
 
 type AccessRights string
@@ -32,6 +32,25 @@ func PossibleAccessRightsValues() []AccessRights {
 
 // ToPtr returns a *AccessRights pointing to the current value.
 func (c AccessRights) ToPtr() *AccessRights {
+	return &c
+}
+
+// ApplicationGroupPolicyType - Application Group Policy types
+type ApplicationGroupPolicyType string
+
+const (
+	ApplicationGroupPolicyTypeThrottlingPolicy ApplicationGroupPolicyType = "ThrottlingPolicy"
+)
+
+// PossibleApplicationGroupPolicyTypeValues returns the possible values for the ApplicationGroupPolicyType const type.
+func PossibleApplicationGroupPolicyTypeValues() []ApplicationGroupPolicyType {
+	return []ApplicationGroupPolicyType{
+		ApplicationGroupPolicyTypeThrottlingPolicy,
+	}
+}
+
+// ToPtr returns a *ApplicationGroupPolicyType pointing to the current value.
+func (c ApplicationGroupPolicyType) ToPtr() *ApplicationGroupPolicyType {
 	return &c
 }
 
@@ -232,6 +251,32 @@ func (c ManagedServiceIdentityType) ToPtr() *ManagedServiceIdentityType {
 	return &c
 }
 
+// MetricID - Metric Id on which the throttle limit should be set, MetricId can be discovered by hovering over Metric in the
+// Metrics section of Event Hub Namespace inside Azure Portal
+type MetricID string
+
+const (
+	MetricIDIncomingBytes    MetricID = "IncomingBytes"
+	MetricIDIncomingMessages MetricID = "IncomingMessages"
+	MetricIDOutgoingBytes    MetricID = "OutgoingBytes"
+	MetricIDOutgoingMessages MetricID = "OutgoingMessages"
+)
+
+// PossibleMetricIDValues returns the possible values for the MetricID const type.
+func PossibleMetricIDValues() []MetricID {
+	return []MetricID{
+		MetricIDIncomingBytes,
+		MetricIDIncomingMessages,
+		MetricIDOutgoingBytes,
+		MetricIDOutgoingMessages,
+	}
+}
+
+// ToPtr returns a *MetricID pointing to the current value.
+func (c MetricID) ToPtr() *MetricID {
+	return &c
+}
+
 // NetworkRuleIPAction - The IP Filter Action
 type NetworkRuleIPAction string
 
@@ -248,6 +293,66 @@ func PossibleNetworkRuleIPActionValues() []NetworkRuleIPAction {
 
 // ToPtr returns a *NetworkRuleIPAction pointing to the current value.
 func (c NetworkRuleIPAction) ToPtr() *NetworkRuleIPAction {
+	return &c
+}
+
+// NetworkSecurityPerimeterConfigurationProvisioningState - Provisioning state of NetworkSecurityPerimeter configuration propagation
+type NetworkSecurityPerimeterConfigurationProvisioningState string
+
+const (
+	NetworkSecurityPerimeterConfigurationProvisioningStateAccepted            NetworkSecurityPerimeterConfigurationProvisioningState = "Accepted"
+	NetworkSecurityPerimeterConfigurationProvisioningStateCanceled            NetworkSecurityPerimeterConfigurationProvisioningState = "Canceled"
+	NetworkSecurityPerimeterConfigurationProvisioningStateCreating            NetworkSecurityPerimeterConfigurationProvisioningState = "Creating"
+	NetworkSecurityPerimeterConfigurationProvisioningStateDeleted             NetworkSecurityPerimeterConfigurationProvisioningState = "Deleted"
+	NetworkSecurityPerimeterConfigurationProvisioningStateDeleting            NetworkSecurityPerimeterConfigurationProvisioningState = "Deleting"
+	NetworkSecurityPerimeterConfigurationProvisioningStateFailed              NetworkSecurityPerimeterConfigurationProvisioningState = "Failed"
+	NetworkSecurityPerimeterConfigurationProvisioningStateInvalidResponse     NetworkSecurityPerimeterConfigurationProvisioningState = "InvalidResponse"
+	NetworkSecurityPerimeterConfigurationProvisioningStateSucceeded           NetworkSecurityPerimeterConfigurationProvisioningState = "Succeeded"
+	NetworkSecurityPerimeterConfigurationProvisioningStateSucceededWithIssues NetworkSecurityPerimeterConfigurationProvisioningState = "SucceededWithIssues"
+	NetworkSecurityPerimeterConfigurationProvisioningStateUnknown             NetworkSecurityPerimeterConfigurationProvisioningState = "Unknown"
+	NetworkSecurityPerimeterConfigurationProvisioningStateUpdating            NetworkSecurityPerimeterConfigurationProvisioningState = "Updating"
+)
+
+// PossibleNetworkSecurityPerimeterConfigurationProvisioningStateValues returns the possible values for the NetworkSecurityPerimeterConfigurationProvisioningState const type.
+func PossibleNetworkSecurityPerimeterConfigurationProvisioningStateValues() []NetworkSecurityPerimeterConfigurationProvisioningState {
+	return []NetworkSecurityPerimeterConfigurationProvisioningState{
+		NetworkSecurityPerimeterConfigurationProvisioningStateAccepted,
+		NetworkSecurityPerimeterConfigurationProvisioningStateCanceled,
+		NetworkSecurityPerimeterConfigurationProvisioningStateCreating,
+		NetworkSecurityPerimeterConfigurationProvisioningStateDeleted,
+		NetworkSecurityPerimeterConfigurationProvisioningStateDeleting,
+		NetworkSecurityPerimeterConfigurationProvisioningStateFailed,
+		NetworkSecurityPerimeterConfigurationProvisioningStateInvalidResponse,
+		NetworkSecurityPerimeterConfigurationProvisioningStateSucceeded,
+		NetworkSecurityPerimeterConfigurationProvisioningStateSucceededWithIssues,
+		NetworkSecurityPerimeterConfigurationProvisioningStateUnknown,
+		NetworkSecurityPerimeterConfigurationProvisioningStateUpdating,
+	}
+}
+
+// ToPtr returns a *NetworkSecurityPerimeterConfigurationProvisioningState pointing to the current value.
+func (c NetworkSecurityPerimeterConfigurationProvisioningState) ToPtr() *NetworkSecurityPerimeterConfigurationProvisioningState {
+	return &c
+}
+
+// NspAccessRuleDirection - Direction of Access Rule
+type NspAccessRuleDirection string
+
+const (
+	NspAccessRuleDirectionInbound  NspAccessRuleDirection = "Inbound"
+	NspAccessRuleDirectionOutbound NspAccessRuleDirection = "Outbound"
+)
+
+// PossibleNspAccessRuleDirectionValues returns the possible values for the NspAccessRuleDirection const type.
+func PossibleNspAccessRuleDirectionValues() []NspAccessRuleDirection {
+	return []NspAccessRuleDirection{
+		NspAccessRuleDirectionInbound,
+		NspAccessRuleDirectionOutbound,
+	}
+}
+
+// ToPtr returns a *NspAccessRuleDirection pointing to the current value.
+func (c NspAccessRuleDirection) ToPtr() *NspAccessRuleDirection {
 	return &c
 }
 
@@ -300,12 +405,38 @@ func (c ProvisioningStateDR) ToPtr() *ProvisioningStateDR {
 	return &c
 }
 
-// PublicNetworkAccessFlag - This determines if traffic is allowed over public network. By default it is enabled.
+// PublicNetworkAccess - This determines if traffic is allowed over public network. By default it is enabled.
+type PublicNetworkAccess string
+
+const (
+	PublicNetworkAccessDisabled           PublicNetworkAccess = "Disabled"
+	PublicNetworkAccessEnabled            PublicNetworkAccess = "Enabled"
+	PublicNetworkAccessSecuredByPerimeter PublicNetworkAccess = "SecuredByPerimeter"
+)
+
+// PossiblePublicNetworkAccessValues returns the possible values for the PublicNetworkAccess const type.
+func PossiblePublicNetworkAccessValues() []PublicNetworkAccess {
+	return []PublicNetworkAccess{
+		PublicNetworkAccessDisabled,
+		PublicNetworkAccessEnabled,
+		PublicNetworkAccessSecuredByPerimeter,
+	}
+}
+
+// ToPtr returns a *PublicNetworkAccess pointing to the current value.
+func (c PublicNetworkAccess) ToPtr() *PublicNetworkAccess {
+	return &c
+}
+
+// PublicNetworkAccessFlag - This determines if traffic is allowed over public network. By default it is enabled. If value
+// is SecuredByPerimeter then Inbound and Outbound communication is controlled by the network security
+// perimeter and profile's access rules.
 type PublicNetworkAccessFlag string
 
 const (
-	PublicNetworkAccessFlagDisabled PublicNetworkAccessFlag = "Disabled"
-	PublicNetworkAccessFlagEnabled  PublicNetworkAccessFlag = "Enabled"
+	PublicNetworkAccessFlagDisabled           PublicNetworkAccessFlag = "Disabled"
+	PublicNetworkAccessFlagEnabled            PublicNetworkAccessFlag = "Enabled"
+	PublicNetworkAccessFlagSecuredByPerimeter PublicNetworkAccessFlag = "SecuredByPerimeter"
 )
 
 // PossiblePublicNetworkAccessFlagValues returns the possible values for the PublicNetworkAccessFlag const type.
@@ -313,11 +444,39 @@ func PossiblePublicNetworkAccessFlagValues() []PublicNetworkAccessFlag {
 	return []PublicNetworkAccessFlag{
 		PublicNetworkAccessFlagDisabled,
 		PublicNetworkAccessFlagEnabled,
+		PublicNetworkAccessFlagSecuredByPerimeter,
 	}
 }
 
 // ToPtr returns a *PublicNetworkAccessFlag pointing to the current value.
 func (c PublicNetworkAccessFlag) ToPtr() *PublicNetworkAccessFlag {
+	return &c
+}
+
+// ResourceAssociationAccessMode - Access Mode of the resource association
+type ResourceAssociationAccessMode string
+
+const (
+	ResourceAssociationAccessModeAuditMode         ResourceAssociationAccessMode = "AuditMode"
+	ResourceAssociationAccessModeEnforcedMode      ResourceAssociationAccessMode = "EnforcedMode"
+	ResourceAssociationAccessModeLearningMode      ResourceAssociationAccessMode = "LearningMode"
+	ResourceAssociationAccessModeNoAssociationMode ResourceAssociationAccessMode = "NoAssociationMode"
+	ResourceAssociationAccessModeUnspecifiedMode   ResourceAssociationAccessMode = "UnspecifiedMode"
+)
+
+// PossibleResourceAssociationAccessModeValues returns the possible values for the ResourceAssociationAccessMode const type.
+func PossibleResourceAssociationAccessModeValues() []ResourceAssociationAccessMode {
+	return []ResourceAssociationAccessMode{
+		ResourceAssociationAccessModeAuditMode,
+		ResourceAssociationAccessModeEnforcedMode,
+		ResourceAssociationAccessModeLearningMode,
+		ResourceAssociationAccessModeNoAssociationMode,
+		ResourceAssociationAccessModeUnspecifiedMode,
+	}
+}
+
+// ToPtr returns a *ResourceAssociationAccessMode pointing to the current value.
+func (c ResourceAssociationAccessMode) ToPtr() *ResourceAssociationAccessMode {
 	return &c
 }
 
@@ -429,6 +588,29 @@ func PossibleSchemaTypeValues() []SchemaType {
 
 // ToPtr returns a *SchemaType pointing to the current value.
 func (c SchemaType) ToPtr() *SchemaType {
+	return &c
+}
+
+// TLSVersion - The minimum TLS version for the cluster to support, e.g. '1.2'
+type TLSVersion string
+
+const (
+	TLSVersionOne0 TLSVersion = "1.0"
+	TLSVersionOne1 TLSVersion = "1.1"
+	TLSVersionOne2 TLSVersion = "1.2"
+)
+
+// PossibleTLSVersionValues returns the possible values for the TLSVersion const type.
+func PossibleTLSVersionValues() []TLSVersion {
+	return []TLSVersion{
+		TLSVersionOne0,
+		TLSVersionOne1,
+		TLSVersionOne2,
+	}
+}
+
+// ToPtr returns a *TLSVersion pointing to the current value.
+func (c TLSVersion) ToPtr() *TLSVersion {
 	return &c
 }
 

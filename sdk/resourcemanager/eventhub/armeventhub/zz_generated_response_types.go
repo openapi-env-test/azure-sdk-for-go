@@ -15,6 +15,48 @@ import (
 	"time"
 )
 
+// ApplicationGroupClientCreateOrUpdateApplicationGroupResponse contains the response from method ApplicationGroupClient.CreateOrUpdateApplicationGroup.
+type ApplicationGroupClientCreateOrUpdateApplicationGroupResponse struct {
+	ApplicationGroupClientCreateOrUpdateApplicationGroupResult
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// ApplicationGroupClientCreateOrUpdateApplicationGroupResult contains the result from method ApplicationGroupClient.CreateOrUpdateApplicationGroup.
+type ApplicationGroupClientCreateOrUpdateApplicationGroupResult struct {
+	ApplicationGroup
+}
+
+// ApplicationGroupClientDeleteResponse contains the response from method ApplicationGroupClient.Delete.
+type ApplicationGroupClientDeleteResponse struct {
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// ApplicationGroupClientGetResponse contains the response from method ApplicationGroupClient.Get.
+type ApplicationGroupClientGetResponse struct {
+	ApplicationGroupClientGetResult
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// ApplicationGroupClientGetResult contains the result from method ApplicationGroupClient.Get.
+type ApplicationGroupClientGetResult struct {
+	ApplicationGroup
+}
+
+// ApplicationGroupClientListByNamespaceResponse contains the response from method ApplicationGroupClient.ListByNamespace.
+type ApplicationGroupClientListByNamespaceResponse struct {
+	ApplicationGroupClientListByNamespaceResult
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// ApplicationGroupClientListByNamespaceResult contains the result from method ApplicationGroupClient.ListByNamespace.
+type ApplicationGroupClientListByNamespaceResult struct {
+	ApplicationGroupListResult
+}
+
 // ClustersClientCreateOrUpdatePollerResponse contains the response from method ClustersClient.CreateOrUpdate.
 type ClustersClientCreateOrUpdatePollerResponse struct {
 	// Poller contains an initialized poller.
@@ -759,6 +801,65 @@ type NamespacesClientUpdateResponse struct {
 // NamespacesClientUpdateResult contains the result from method NamespacesClient.Update.
 type NamespacesClientUpdateResult struct {
 	EHNamespace
+}
+
+// NetworkSecurityPerimeterConfigurationClientListResponse contains the response from method NetworkSecurityPerimeterConfigurationClient.List.
+type NetworkSecurityPerimeterConfigurationClientListResponse struct {
+	NetworkSecurityPerimeterConfigurationClientListResult
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// NetworkSecurityPerimeterConfigurationClientListResult contains the result from method NetworkSecurityPerimeterConfigurationClient.List.
+type NetworkSecurityPerimeterConfigurationClientListResult struct {
+	NetworkSecurityPerimeterConfigurationList
+}
+
+// NetworkSecurityPerimeterConfigurationsClientCreateOrUpdatePollerResponse contains the response from method NetworkSecurityPerimeterConfigurationsClient.CreateOrUpdate.
+type NetworkSecurityPerimeterConfigurationsClientCreateOrUpdatePollerResponse struct {
+	// Poller contains an initialized poller.
+	Poller *NetworkSecurityPerimeterConfigurationsClientCreateOrUpdatePoller
+
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// PollUntilDone will poll the service endpoint until a terminal state is reached or an error is received.
+// freq: the time to wait between intervals in absence of a Retry-After header. Allowed minimum is one second.
+// A good starting value is 30 seconds. Note that some resources might benefit from a different value.
+func (l NetworkSecurityPerimeterConfigurationsClientCreateOrUpdatePollerResponse) PollUntilDone(ctx context.Context, freq time.Duration) (NetworkSecurityPerimeterConfigurationsClientCreateOrUpdateResponse, error) {
+	respType := NetworkSecurityPerimeterConfigurationsClientCreateOrUpdateResponse{}
+	resp, err := l.Poller.pt.PollUntilDone(ctx, freq, nil)
+	if err != nil {
+		return respType, err
+	}
+	respType.RawResponse = resp
+	return respType, nil
+}
+
+// Resume rehydrates a NetworkSecurityPerimeterConfigurationsClientCreateOrUpdatePollerResponse from the provided client and
+// resume token.
+func (l *NetworkSecurityPerimeterConfigurationsClientCreateOrUpdatePollerResponse) Resume(ctx context.Context, client *NetworkSecurityPerimeterConfigurationsClient, token string) error {
+	pt, err := armruntime.NewPollerFromResumeToken("NetworkSecurityPerimeterConfigurationsClient.CreateOrUpdate", token, client.pl)
+	if err != nil {
+		return err
+	}
+	poller := &NetworkSecurityPerimeterConfigurationsClientCreateOrUpdatePoller{
+		pt: pt,
+	}
+	resp, err := poller.Poll(ctx)
+	if err != nil {
+		return err
+	}
+	l.Poller = poller
+	l.RawResponse = resp
+	return nil
+}
+
+// NetworkSecurityPerimeterConfigurationsClientCreateOrUpdateResponse contains the response from method NetworkSecurityPerimeterConfigurationsClient.CreateOrUpdate.
+type NetworkSecurityPerimeterConfigurationsClientCreateOrUpdateResponse struct {
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
 }
 
 // OperationsClientListResponse contains the response from method OperationsClient.List.

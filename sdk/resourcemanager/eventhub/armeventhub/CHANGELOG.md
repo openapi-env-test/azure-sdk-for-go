@@ -1,5 +1,127 @@
 # Release History
 
+## 0.4.0 (2022-07-06)
+### Breaking Changes
+
+### Features Added
+
+- New const `MetricIDOutgoingMessages`
+- New const `ResourceAssociationAccessModeUnspecifiedMode`
+- New const `MetricIDIncomingMessages`
+- New const `TLSVersionOne2`
+- New const `NetworkSecurityPerimeterConfigurationProvisioningStateDeleting`
+- New const `TLSVersionOne1`
+- New const `NetworkSecurityPerimeterConfigurationProvisioningStateCreating`
+- New const `NetworkSecurityPerimeterConfigurationProvisioningStateAccepted`
+- New const `NetworkSecurityPerimeterConfigurationProvisioningStateFailed`
+- New const `ResourceAssociationAccessModeEnforcedMode`
+- New const `PublicNetworkAccessFlagSecuredByPerimeter`
+- New const `NspAccessRuleDirectionOutbound`
+- New const `PublicNetworkAccessDisabled`
+- New const `MetricIDIncomingBytes`
+- New const `ResourceAssociationAccessModeNoAssociationMode`
+- New const `TLSVersionOne0`
+- New const `NetworkSecurityPerimeterConfigurationProvisioningStateDeleted`
+- New const `NetworkSecurityPerimeterConfigurationProvisioningStateSucceededWithIssues`
+- New const `ResourceAssociationAccessModeAuditMode`
+- New const `ResourceAssociationAccessModeLearningMode`
+- New const `PublicNetworkAccessSecuredByPerimeter`
+- New const `NetworkSecurityPerimeterConfigurationProvisioningStateCanceled`
+- New const `NetworkSecurityPerimeterConfigurationProvisioningStateUpdating`
+- New const `PublicNetworkAccessEnabled`
+- New const `MetricIDOutgoingBytes`
+- New const `NspAccessRuleDirectionInbound`
+- New const `NetworkSecurityPerimeterConfigurationProvisioningStateUnknown`
+- New const `NetworkSecurityPerimeterConfigurationProvisioningStateSucceeded`
+- New const `ApplicationGroupPolicyTypeThrottlingPolicy`
+- New const `NetworkSecurityPerimeterConfigurationProvisioningStateInvalidResponse`
+- New function `NetworkSecurityPerimeterConfigurationList.MarshalJSON() ([]byte, error)`
+- New function `*ApplicationGroupClient.Delete(context.Context, string, string, string, *ApplicationGroupClientDeleteOptions) (ApplicationGroupClientDeleteResponse, error)`
+- New function `PossibleTLSVersionValues() []TLSVersion`
+- New function `*ThrottlingPolicy.GetApplicationGroupPolicy() *ApplicationGroupPolicy`
+- New function `PublicNetworkAccess.ToPtr() *PublicNetworkAccess`
+- New function `*ApplicationGroupClient.ListByNamespace(string, string, *ApplicationGroupClientListByNamespaceOptions) *ApplicationGroupClientListByNamespacePager`
+- New function `NetworkSecurityPerimeterConfiguration.MarshalJSON() ([]byte, error)`
+- New function `*NetworkSecurityPerimeterConfigurationsClientCreateOrUpdatePoller.ResumeToken() (string, error)`
+- New function `MetricID.ToPtr() *MetricID`
+- New function `*ApplicationGroupPolicy.GetApplicationGroupPolicy() *ApplicationGroupPolicy`
+- New function `PossibleNspAccessRuleDirectionValues() []NspAccessRuleDirection`
+- New function `ApplicationGroupPolicyType.ToPtr() *ApplicationGroupPolicyType`
+- New function `PossiblePublicNetworkAccessValues() []PublicNetworkAccess`
+- New function `PossibleMetricIDValues() []MetricID`
+- New function `NspAccessRuleProperties.MarshalJSON() ([]byte, error)`
+- New function `NetworkSecurityPerimeterConfigurationProperties.MarshalJSON() ([]byte, error)`
+- New function `*NetworkSecurityPerimeterConfigurationsClientCreateOrUpdatePoller.Poll(context.Context) (*http.Response, error)`
+- New function `*NetworkSecurityPerimeterConfigurationsClient.BeginCreateOrUpdate(context.Context, string, string, string, *NetworkSecurityPerimeterConfigurationsClientBeginCreateOrUpdateOptions) (NetworkSecurityPerimeterConfigurationsClientCreateOrUpdatePollerResponse, error)`
+- New function `NetworkSecurityPerimeterConfigurationsClientCreateOrUpdatePollerResponse.PollUntilDone(context.Context, time.Duration) (NetworkSecurityPerimeterConfigurationsClientCreateOrUpdateResponse, error)`
+- New function `*NetworkSecurityPerimeterConfigurationsClientCreateOrUpdatePoller.FinalResponse(context.Context) (NetworkSecurityPerimeterConfigurationsClientCreateOrUpdateResponse, error)`
+- New function `NetworkSecurityPerimeterConfigurationPropertiesProfile.MarshalJSON() ([]byte, error)`
+- New function `ApplicationGroupListResult.MarshalJSON() ([]byte, error)`
+- New function `*NetworkSecurityPerimeterConfigurationClient.List(context.Context, string, string, *NetworkSecurityPerimeterConfigurationClientListOptions) (NetworkSecurityPerimeterConfigurationClientListResponse, error)`
+- New function `*ApplicationGroupClientListByNamespacePager.NextPage(context.Context) bool`
+- New function `TLSVersion.ToPtr() *TLSVersion`
+- New function `NspAccessRuleDirection.ToPtr() *NspAccessRuleDirection`
+- New function `ResourceAssociationAccessMode.ToPtr() *ResourceAssociationAccessMode`
+- New function `*NetworkSecurityPerimeterConfigurationsClientCreateOrUpdatePollerResponse.Resume(context.Context, *NetworkSecurityPerimeterConfigurationsClient, string) error`
+- New function `NewNetworkSecurityPerimeterConfigurationsClient(string, azcore.TokenCredential, *arm.ClientOptions) *NetworkSecurityPerimeterConfigurationsClient`
+- New function `*ApplicationGroupClient.Get(context.Context, string, string, string, *ApplicationGroupClientGetOptions) (ApplicationGroupClientGetResponse, error)`
+- New function `NewNetworkSecurityPerimeterConfigurationClient(string, azcore.TokenCredential, *arm.ClientOptions) *NetworkSecurityPerimeterConfigurationClient`
+- New function `ApplicationGroupProperties.MarshalJSON() ([]byte, error)`
+- New function `*ApplicationGroupProperties.UnmarshalJSON([]byte) error`
+- New function `*ApplicationGroupClientListByNamespacePager.Err() error`
+- New function `NetworkSecurityPerimeterConfigurationProvisioningState.ToPtr() *NetworkSecurityPerimeterConfigurationProvisioningState`
+- New function `*ApplicationGroupClientListByNamespacePager.PageResponse() ApplicationGroupClientListByNamespaceResponse`
+- New function `PossibleNetworkSecurityPerimeterConfigurationProvisioningStateValues() []NetworkSecurityPerimeterConfigurationProvisioningState`
+- New function `ThrottlingPolicy.MarshalJSON() ([]byte, error)`
+- New function `*NetworkSecurityPerimeterConfigurationsClientCreateOrUpdatePoller.Done() bool`
+- New function `NewApplicationGroupClient(string, azcore.TokenCredential, *arm.ClientOptions) *ApplicationGroupClient`
+- New function `*ApplicationGroupClient.CreateOrUpdateApplicationGroup(context.Context, string, string, string, ApplicationGroup, *ApplicationGroupClientCreateOrUpdateApplicationGroupOptions) (ApplicationGroupClientCreateOrUpdateApplicationGroupResponse, error)`
+- New function `PossibleApplicationGroupPolicyTypeValues() []ApplicationGroupPolicyType`
+- New function `PossibleResourceAssociationAccessModeValues() []ResourceAssociationAccessMode`
+- New function `*ThrottlingPolicy.UnmarshalJSON([]byte) error`
+- New struct `ApplicationGroup`
+- New struct `ApplicationGroupClient`
+- New struct `ApplicationGroupClientCreateOrUpdateApplicationGroupOptions`
+- New struct `ApplicationGroupClientCreateOrUpdateApplicationGroupResponse`
+- New struct `ApplicationGroupClientCreateOrUpdateApplicationGroupResult`
+- New struct `ApplicationGroupClientDeleteOptions`
+- New struct `ApplicationGroupClientDeleteResponse`
+- New struct `ApplicationGroupClientGetOptions`
+- New struct `ApplicationGroupClientGetResponse`
+- New struct `ApplicationGroupClientGetResult`
+- New struct `ApplicationGroupClientListByNamespaceOptions`
+- New struct `ApplicationGroupClientListByNamespacePager`
+- New struct `ApplicationGroupClientListByNamespaceResponse`
+- New struct `ApplicationGroupClientListByNamespaceResult`
+- New struct `ApplicationGroupListResult`
+- New struct `ApplicationGroupPolicy`
+- New struct `ApplicationGroupProperties`
+- New struct `NetworkSecurityPerimeter`
+- New struct `NetworkSecurityPerimeterConfiguration`
+- New struct `NetworkSecurityPerimeterConfigurationClient`
+- New struct `NetworkSecurityPerimeterConfigurationClientListOptions`
+- New struct `NetworkSecurityPerimeterConfigurationClientListResponse`
+- New struct `NetworkSecurityPerimeterConfigurationClientListResult`
+- New struct `NetworkSecurityPerimeterConfigurationList`
+- New struct `NetworkSecurityPerimeterConfigurationProperties`
+- New struct `NetworkSecurityPerimeterConfigurationPropertiesProfile`
+- New struct `NetworkSecurityPerimeterConfigurationPropertiesResourceAssociation`
+- New struct `NetworkSecurityPerimeterConfigurationsClient`
+- New struct `NetworkSecurityPerimeterConfigurationsClientBeginCreateOrUpdateOptions`
+- New struct `NetworkSecurityPerimeterConfigurationsClientCreateOrUpdatePoller`
+- New struct `NetworkSecurityPerimeterConfigurationsClientCreateOrUpdatePollerResponse`
+- New struct `NetworkSecurityPerimeterConfigurationsClientCreateOrUpdateResponse`
+- New struct `NspAccessRule`
+- New struct `NspAccessRuleProperties`
+- New struct `NspAccessRulePropertiesSubscriptionsItem`
+- New struct `ProvisioningIssue`
+- New struct `ProvisioningIssueProperties`
+- New struct `ThrottlingPolicy`
+- New field `SupportsScaling` in struct `ClusterProperties`
+- New field `PublicNetworkAccess` in struct `EHNamespaceProperties`
+- New field `MinimumTLSVersion` in struct `EHNamespaceProperties`
+
+
 ## 0.3.0 (2022-01-13)
 ### Breaking Changes
 
