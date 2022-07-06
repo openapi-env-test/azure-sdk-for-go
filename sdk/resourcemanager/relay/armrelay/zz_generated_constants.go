@@ -10,28 +10,103 @@ package armrelay
 
 const (
 	moduleName    = "armrelay"
-	moduleVersion = "v0.3.0"
+	moduleVersion = "v0.4.0"
 )
 
 type AccessRights string
 
 const (
+	AccessRightsListen AccessRights = "Listen"
 	AccessRightsManage AccessRights = "Manage"
 	AccessRightsSend   AccessRights = "Send"
-	AccessRightsListen AccessRights = "Listen"
 )
 
 // PossibleAccessRightsValues returns the possible values for the AccessRights const type.
 func PossibleAccessRightsValues() []AccessRights {
 	return []AccessRights{
+		AccessRightsListen,
 		AccessRightsManage,
 		AccessRightsSend,
-		AccessRightsListen,
 	}
 }
 
 // ToPtr returns a *AccessRights pointing to the current value.
 func (c AccessRights) ToPtr() *AccessRights {
+	return &c
+}
+
+// CreatedByType - The type of identity that created the resource.
+type CreatedByType string
+
+const (
+	CreatedByTypeApplication     CreatedByType = "Application"
+	CreatedByTypeKey             CreatedByType = "Key"
+	CreatedByTypeManagedIdentity CreatedByType = "ManagedIdentity"
+	CreatedByTypeUser            CreatedByType = "User"
+)
+
+// PossibleCreatedByTypeValues returns the possible values for the CreatedByType const type.
+func PossibleCreatedByTypeValues() []CreatedByType {
+	return []CreatedByType{
+		CreatedByTypeApplication,
+		CreatedByTypeKey,
+		CreatedByTypeManagedIdentity,
+		CreatedByTypeUser,
+	}
+}
+
+// ToPtr returns a *CreatedByType pointing to the current value.
+func (c CreatedByType) ToPtr() *CreatedByType {
+	return &c
+}
+
+// DefaultAction - Default Action for Network Rule Set
+type DefaultAction string
+
+const (
+	DefaultActionAllow DefaultAction = "Allow"
+	DefaultActionDeny  DefaultAction = "Deny"
+)
+
+// PossibleDefaultActionValues returns the possible values for the DefaultAction const type.
+func PossibleDefaultActionValues() []DefaultAction {
+	return []DefaultAction{
+		DefaultActionAllow,
+		DefaultActionDeny,
+	}
+}
+
+// ToPtr returns a *DefaultAction pointing to the current value.
+func (c DefaultAction) ToPtr() *DefaultAction {
+	return &c
+}
+
+// EndPointProvisioningState - Provisioning state of the Private Endpoint Connection.
+type EndPointProvisioningState string
+
+const (
+	EndPointProvisioningStateCanceled  EndPointProvisioningState = "Canceled"
+	EndPointProvisioningStateCreating  EndPointProvisioningState = "Creating"
+	EndPointProvisioningStateDeleting  EndPointProvisioningState = "Deleting"
+	EndPointProvisioningStateFailed    EndPointProvisioningState = "Failed"
+	EndPointProvisioningStateSucceeded EndPointProvisioningState = "Succeeded"
+	EndPointProvisioningStateUpdating  EndPointProvisioningState = "Updating"
+)
+
+// PossibleEndPointProvisioningStateValues returns the possible values for the EndPointProvisioningState const type.
+func PossibleEndPointProvisioningStateValues() []EndPointProvisioningState {
+	return []EndPointProvisioningState{
+		EndPointProvisioningStateCanceled,
+		EndPointProvisioningStateCreating,
+		EndPointProvisioningStateDeleting,
+		EndPointProvisioningStateFailed,
+		EndPointProvisioningStateSucceeded,
+		EndPointProvisioningStateUpdating,
+	}
+}
+
+// ToPtr returns a *EndPointProvisioningState pointing to the current value.
+func (c EndPointProvisioningState) ToPtr() *EndPointProvisioningState {
 	return &c
 }
 
@@ -56,31 +131,70 @@ func (c KeyType) ToPtr() *KeyType {
 	return &c
 }
 
-type ProvisioningStateEnum string
+// NetworkRuleIPAction - The IP Filter Action
+type NetworkRuleIPAction string
 
 const (
-	ProvisioningStateEnumCreated   ProvisioningStateEnum = "Created"
-	ProvisioningStateEnumSucceeded ProvisioningStateEnum = "Succeeded"
-	ProvisioningStateEnumDeleted   ProvisioningStateEnum = "Deleted"
-	ProvisioningStateEnumFailed    ProvisioningStateEnum = "Failed"
-	ProvisioningStateEnumUpdating  ProvisioningStateEnum = "Updating"
-	ProvisioningStateEnumUnknown   ProvisioningStateEnum = "Unknown"
+	NetworkRuleIPActionAllow NetworkRuleIPAction = "Allow"
 )
 
-// PossibleProvisioningStateEnumValues returns the possible values for the ProvisioningStateEnum const type.
-func PossibleProvisioningStateEnumValues() []ProvisioningStateEnum {
-	return []ProvisioningStateEnum{
-		ProvisioningStateEnumCreated,
-		ProvisioningStateEnumSucceeded,
-		ProvisioningStateEnumDeleted,
-		ProvisioningStateEnumFailed,
-		ProvisioningStateEnumUpdating,
-		ProvisioningStateEnumUnknown,
+// PossibleNetworkRuleIPActionValues returns the possible values for the NetworkRuleIPAction const type.
+func PossibleNetworkRuleIPActionValues() []NetworkRuleIPAction {
+	return []NetworkRuleIPAction{
+		NetworkRuleIPActionAllow,
 	}
 }
 
-// ToPtr returns a *ProvisioningStateEnum pointing to the current value.
-func (c ProvisioningStateEnum) ToPtr() *ProvisioningStateEnum {
+// ToPtr returns a *NetworkRuleIPAction pointing to the current value.
+func (c NetworkRuleIPAction) ToPtr() *NetworkRuleIPAction {
+	return &c
+}
+
+// PrivateLinkConnectionStatus - Status of the connection.
+type PrivateLinkConnectionStatus string
+
+const (
+	PrivateLinkConnectionStatusApproved     PrivateLinkConnectionStatus = "Approved"
+	PrivateLinkConnectionStatusDisconnected PrivateLinkConnectionStatus = "Disconnected"
+	PrivateLinkConnectionStatusPending      PrivateLinkConnectionStatus = "Pending"
+	PrivateLinkConnectionStatusRejected     PrivateLinkConnectionStatus = "Rejected"
+)
+
+// PossiblePrivateLinkConnectionStatusValues returns the possible values for the PrivateLinkConnectionStatus const type.
+func PossiblePrivateLinkConnectionStatusValues() []PrivateLinkConnectionStatus {
+	return []PrivateLinkConnectionStatus{
+		PrivateLinkConnectionStatusApproved,
+		PrivateLinkConnectionStatusDisconnected,
+		PrivateLinkConnectionStatusPending,
+		PrivateLinkConnectionStatusRejected,
+	}
+}
+
+// ToPtr returns a *PrivateLinkConnectionStatus pointing to the current value.
+func (c PrivateLinkConnectionStatus) ToPtr() *PrivateLinkConnectionStatus {
+	return &c
+}
+
+// PublicNetworkAccess - This determines if traffic is allowed over public network. By default it is enabled.
+type PublicNetworkAccess string
+
+const (
+	PublicNetworkAccessDisabled           PublicNetworkAccess = "Disabled"
+	PublicNetworkAccessEnabled            PublicNetworkAccess = "Enabled"
+	PublicNetworkAccessSecuredByPerimeter PublicNetworkAccess = "SecuredByPerimeter"
+)
+
+// PossiblePublicNetworkAccessValues returns the possible values for the PublicNetworkAccess const type.
+func PossiblePublicNetworkAccessValues() []PublicNetworkAccess {
+	return []PublicNetworkAccess{
+		PublicNetworkAccessDisabled,
+		PublicNetworkAccessEnabled,
+		PublicNetworkAccessSecuredByPerimeter,
+	}
+}
+
+// ToPtr returns a *PublicNetworkAccess pointing to the current value.
+func (c PublicNetworkAccess) ToPtr() *PublicNetworkAccess {
 	return &c
 }
 
@@ -105,26 +219,64 @@ func (c Relaytype) ToPtr() *Relaytype {
 	return &c
 }
 
+// SKUName - Name of this SKU.
+type SKUName string
+
+const (
+	SKUNameStandard SKUName = "Standard"
+)
+
+// PossibleSKUNameValues returns the possible values for the SKUName const type.
+func PossibleSKUNameValues() []SKUName {
+	return []SKUName{
+		SKUNameStandard,
+	}
+}
+
+// ToPtr returns a *SKUName pointing to the current value.
+func (c SKUName) ToPtr() *SKUName {
+	return &c
+}
+
+// SKUTier - The tier of this SKU.
+type SKUTier string
+
+const (
+	SKUTierStandard SKUTier = "Standard"
+)
+
+// PossibleSKUTierValues returns the possible values for the SKUTier const type.
+func PossibleSKUTierValues() []SKUTier {
+	return []SKUTier{
+		SKUTierStandard,
+	}
+}
+
+// ToPtr returns a *SKUTier pointing to the current value.
+func (c SKUTier) ToPtr() *SKUTier {
+	return &c
+}
+
 // UnavailableReason - Specifies the reason for the unavailability of the service.
 type UnavailableReason string
 
 const (
-	UnavailableReasonNone                                  UnavailableReason = "None"
 	UnavailableReasonInvalidName                           UnavailableReason = "InvalidName"
-	UnavailableReasonSubscriptionIsDisabled                UnavailableReason = "SubscriptionIsDisabled"
-	UnavailableReasonNameInUse                             UnavailableReason = "NameInUse"
 	UnavailableReasonNameInLockdown                        UnavailableReason = "NameInLockdown"
+	UnavailableReasonNameInUse                             UnavailableReason = "NameInUse"
+	UnavailableReasonNone                                  UnavailableReason = "None"
+	UnavailableReasonSubscriptionIsDisabled                UnavailableReason = "SubscriptionIsDisabled"
 	UnavailableReasonTooManyNamespaceInCurrentSubscription UnavailableReason = "TooManyNamespaceInCurrentSubscription"
 )
 
 // PossibleUnavailableReasonValues returns the possible values for the UnavailableReason const type.
 func PossibleUnavailableReasonValues() []UnavailableReason {
 	return []UnavailableReason{
-		UnavailableReasonNone,
 		UnavailableReasonInvalidName,
-		UnavailableReasonSubscriptionIsDisabled,
-		UnavailableReasonNameInUse,
 		UnavailableReasonNameInLockdown,
+		UnavailableReasonNameInUse,
+		UnavailableReasonNone,
+		UnavailableReasonSubscriptionIsDisabled,
 		UnavailableReasonTooManyNamespaceInCurrentSubscription,
 	}
 }
