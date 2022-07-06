@@ -21,19 +21,19 @@ import (
 	"strings"
 )
 
-// RestorableSQLContainersClient contains the methods for the RestorableSQLContainers group.
-// Don't use this type directly, use NewRestorableSQLContainersClient() instead.
-type RestorableSQLContainersClient struct {
+// RestorableTableResourcesClient contains the methods for the RestorableTableResources group.
+// Don't use this type directly, use NewRestorableTableResourcesClient() instead.
+type RestorableTableResourcesClient struct {
 	host           string
 	subscriptionID string
 	pl             runtime.Pipeline
 }
 
-// NewRestorableSQLContainersClient creates a new instance of RestorableSQLContainersClient with the specified values.
+// NewRestorableTableResourcesClient creates a new instance of RestorableTableResourcesClient with the specified values.
 // subscriptionID - The ID of the target subscription.
 // credential - used to authorize requests. Usually a credential from azidentity.
 // options - pass nil to accept the default values.
-func NewRestorableSQLContainersClient(subscriptionID string, credential azcore.TokenCredential, options *arm.ClientOptions) *RestorableSQLContainersClient {
+func NewRestorableTableResourcesClient(subscriptionID string, credential azcore.TokenCredential, options *arm.ClientOptions) *RestorableTableResourcesClient {
 	cp := arm.ClientOptions{}
 	if options != nil {
 		cp = *options
@@ -41,7 +41,7 @@ func NewRestorableSQLContainersClient(subscriptionID string, credential azcore.T
 	if len(cp.Endpoint) == 0 {
 		cp.Endpoint = arm.AzurePublicCloud
 	}
-	client := &RestorableSQLContainersClient{
+	client := &RestorableTableResourcesClient{
 		subscriptionID: subscriptionID,
 		host:           string(cp.Endpoint),
 		pl:             armruntime.NewPipeline(moduleName, moduleVersion, credential, runtime.PipelineOptions{}, &cp),
@@ -49,32 +49,32 @@ func NewRestorableSQLContainersClient(subscriptionID string, credential azcore.T
 	return client
 }
 
-// List - Show the event feed of all mutations done on all the Azure Cosmos DB SQL containers under a specific database. This
-// helps in scenario where container was accidentally deleted. This API requires
-// 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/…/read' permission
+// List - Return a list of tables that exist on the account at the given timestamp and location. This helps in scenarios to
+// validate what resources exist at given timestamp and location. This API requires
+// 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/…/read' permission.
 // If the operation fails it returns an *azcore.ResponseError type.
 // location - Cosmos DB region, with spaces between words and each word capitalized.
 // instanceID - The instanceId GUID of a restorable database account.
-// options - RestorableSQLContainersClientListOptions contains the optional parameters for the RestorableSQLContainersClient.List
+// options - RestorableTableResourcesClientListOptions contains the optional parameters for the RestorableTableResourcesClient.List
 // method.
-func (client *RestorableSQLContainersClient) List(ctx context.Context, location string, instanceID string, options *RestorableSQLContainersClientListOptions) (RestorableSQLContainersClientListResponse, error) {
+func (client *RestorableTableResourcesClient) List(ctx context.Context, location string, instanceID string, options *RestorableTableResourcesClientListOptions) (RestorableTableResourcesClientListResponse, error) {
 	req, err := client.listCreateRequest(ctx, location, instanceID, options)
 	if err != nil {
-		return RestorableSQLContainersClientListResponse{}, err
+		return RestorableTableResourcesClientListResponse{}, err
 	}
 	resp, err := client.pl.Do(req)
 	if err != nil {
-		return RestorableSQLContainersClientListResponse{}, err
+		return RestorableTableResourcesClientListResponse{}, err
 	}
 	if !runtime.HasStatusCode(resp, http.StatusOK) {
-		return RestorableSQLContainersClientListResponse{}, runtime.NewResponseError(resp)
+		return RestorableTableResourcesClientListResponse{}, runtime.NewResponseError(resp)
 	}
 	return client.listHandleResponse(resp)
 }
 
 // listCreateRequest creates the List request.
-func (client *RestorableSQLContainersClient) listCreateRequest(ctx context.Context, location string, instanceID string, options *RestorableSQLContainersClientListOptions) (*policy.Request, error) {
-	urlPath := "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}/restorableSqlContainers"
+func (client *RestorableTableResourcesClient) listCreateRequest(ctx context.Context, location string, instanceID string, options *RestorableTableResourcesClientListOptions) (*policy.Request, error) {
+	urlPath := "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}/restorableTableResources"
 	if client.subscriptionID == "" {
 		return nil, errors.New("parameter client.subscriptionID cannot be empty")
 	}
@@ -93,14 +93,11 @@ func (client *RestorableSQLContainersClient) listCreateRequest(ctx context.Conte
 	}
 	reqQP := req.Raw().URL.Query()
 	reqQP.Set("api-version", "2022-02-15-preview")
-	if options != nil && options.RestorableSQLDatabaseRid != nil {
-		reqQP.Set("restorableSqlDatabaseRid", *options.RestorableSQLDatabaseRid)
+	if options != nil && options.RestoreLocation != nil {
+		reqQP.Set("restoreLocation", *options.RestoreLocation)
 	}
-	if options != nil && options.StartTime != nil {
-		reqQP.Set("startTime", *options.StartTime)
-	}
-	if options != nil && options.EndTime != nil {
-		reqQP.Set("endTime", *options.EndTime)
+	if options != nil && options.RestoreTimestampInUTC != nil {
+		reqQP.Set("restoreTimestampInUtc", *options.RestoreTimestampInUTC)
 	}
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
@@ -108,10 +105,10 @@ func (client *RestorableSQLContainersClient) listCreateRequest(ctx context.Conte
 }
 
 // listHandleResponse handles the List response.
-func (client *RestorableSQLContainersClient) listHandleResponse(resp *http.Response) (RestorableSQLContainersClientListResponse, error) {
-	result := RestorableSQLContainersClientListResponse{RawResponse: resp}
-	if err := runtime.UnmarshalAsJSON(resp, &result.RestorableSQLContainersListResult); err != nil {
-		return RestorableSQLContainersClientListResponse{}, err
+func (client *RestorableTableResourcesClient) listHandleResponse(resp *http.Response) (RestorableTableResourcesClientListResponse, error) {
+	result := RestorableTableResourcesClientListResponse{RawResponse: resp}
+	if err := runtime.UnmarshalAsJSON(resp, &result.RestorableTableResourcesListResult); err != nil {
+		return RestorableTableResourcesClientListResponse{}, err
 	}
 	return result, nil
 }

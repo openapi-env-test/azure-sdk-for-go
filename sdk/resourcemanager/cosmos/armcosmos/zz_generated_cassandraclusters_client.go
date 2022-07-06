@@ -113,7 +113,7 @@ func (client *CassandraClustersClient) createUpdateCreateRequest(ctx context.Con
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-10-15")
+	reqQP.Set("api-version", "2022-02-15-preview")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, runtime.MarshalAsJSON(req, body)
@@ -184,7 +184,7 @@ func (client *CassandraClustersClient) deallocateCreateRequest(ctx context.Conte
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-10-15")
+	reqQP.Set("api-version", "2022-02-15-preview")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -251,7 +251,7 @@ func (client *CassandraClustersClient) deleteCreateRequest(ctx context.Context, 
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-10-15")
+	reqQP.Set("api-version", "2022-02-15-preview")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -297,7 +297,7 @@ func (client *CassandraClustersClient) getCreateRequest(ctx context.Context, res
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-10-15")
+	reqQP.Set("api-version", "2022-02-15-preview")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -308,6 +308,67 @@ func (client *CassandraClustersClient) getHandleResponse(resp *http.Response) (C
 	result := CassandraClustersClientGetResponse{RawResponse: resp}
 	if err := runtime.UnmarshalAsJSON(resp, &result.ClusterResource); err != nil {
 		return CassandraClustersClientGetResponse{}, err
+	}
+	return result, nil
+}
+
+// GetBackup - Get the properties of an individual backup of this cluster that is available to restore.
+// If the operation fails it returns an *azcore.ResponseError type.
+// resourceGroupName - The name of the resource group. The name is case insensitive.
+// clusterName - Managed Cassandra cluster name.
+// backupID - Id of a restorable backup of a Cassandra cluster.
+// options - CassandraClustersClientGetBackupOptions contains the optional parameters for the CassandraClustersClient.GetBackup
+// method.
+func (client *CassandraClustersClient) GetBackup(ctx context.Context, resourceGroupName string, clusterName string, backupID string, options *CassandraClustersClientGetBackupOptions) (CassandraClustersClientGetBackupResponse, error) {
+	req, err := client.getBackupCreateRequest(ctx, resourceGroupName, clusterName, backupID, options)
+	if err != nil {
+		return CassandraClustersClientGetBackupResponse{}, err
+	}
+	resp, err := client.pl.Do(req)
+	if err != nil {
+		return CassandraClustersClientGetBackupResponse{}, err
+	}
+	if !runtime.HasStatusCode(resp, http.StatusOK) {
+		return CassandraClustersClientGetBackupResponse{}, runtime.NewResponseError(resp)
+	}
+	return client.getBackupHandleResponse(resp)
+}
+
+// getBackupCreateRequest creates the GetBackup request.
+func (client *CassandraClustersClient) getBackupCreateRequest(ctx context.Context, resourceGroupName string, clusterName string, backupID string, options *CassandraClustersClientGetBackupOptions) (*policy.Request, error) {
+	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/backups/{backupId}"
+	if client.subscriptionID == "" {
+		return nil, errors.New("parameter client.subscriptionID cannot be empty")
+	}
+	urlPath = strings.ReplaceAll(urlPath, "{subscriptionId}", url.PathEscape(client.subscriptionID))
+	if resourceGroupName == "" {
+		return nil, errors.New("parameter resourceGroupName cannot be empty")
+	}
+	urlPath = strings.ReplaceAll(urlPath, "{resourceGroupName}", url.PathEscape(resourceGroupName))
+	if clusterName == "" {
+		return nil, errors.New("parameter clusterName cannot be empty")
+	}
+	urlPath = strings.ReplaceAll(urlPath, "{clusterName}", url.PathEscape(clusterName))
+	if backupID == "" {
+		return nil, errors.New("parameter backupID cannot be empty")
+	}
+	urlPath = strings.ReplaceAll(urlPath, "{backupId}", url.PathEscape(backupID))
+	req, err := runtime.NewRequest(ctx, http.MethodGet, runtime.JoinPaths(client.host, urlPath))
+	if err != nil {
+		return nil, err
+	}
+	reqQP := req.Raw().URL.Query()
+	reqQP.Set("api-version", "2022-02-15-preview")
+	req.Raw().URL.RawQuery = reqQP.Encode()
+	req.Raw().Header.Set("Accept", "application/json")
+	return req, nil
+}
+
+// getBackupHandleResponse handles the GetBackup response.
+func (client *CassandraClustersClient) getBackupHandleResponse(resp *http.Response) (CassandraClustersClientGetBackupResponse, error) {
+	result := CassandraClustersClientGetBackupResponse{RawResponse: resp}
+	if err := runtime.UnmarshalAsJSON(resp, &result.BackupResource); err != nil {
+		return CassandraClustersClientGetBackupResponse{}, err
 	}
 	return result, nil
 }
@@ -374,10 +435,66 @@ func (client *CassandraClustersClient) invokeCommandCreateRequest(ctx context.Co
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-10-15")
+	reqQP.Set("api-version", "2022-02-15-preview")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, runtime.MarshalAsJSON(req, body)
+}
+
+// ListBackups - List the backups of this cluster that are available to restore.
+// If the operation fails it returns an *azcore.ResponseError type.
+// resourceGroupName - The name of the resource group. The name is case insensitive.
+// clusterName - Managed Cassandra cluster name.
+// options - CassandraClustersClientListBackupsOptions contains the optional parameters for the CassandraClustersClient.ListBackups
+// method.
+func (client *CassandraClustersClient) ListBackups(ctx context.Context, resourceGroupName string, clusterName string, options *CassandraClustersClientListBackupsOptions) (CassandraClustersClientListBackupsResponse, error) {
+	req, err := client.listBackupsCreateRequest(ctx, resourceGroupName, clusterName, options)
+	if err != nil {
+		return CassandraClustersClientListBackupsResponse{}, err
+	}
+	resp, err := client.pl.Do(req)
+	if err != nil {
+		return CassandraClustersClientListBackupsResponse{}, err
+	}
+	if !runtime.HasStatusCode(resp, http.StatusOK) {
+		return CassandraClustersClientListBackupsResponse{}, runtime.NewResponseError(resp)
+	}
+	return client.listBackupsHandleResponse(resp)
+}
+
+// listBackupsCreateRequest creates the ListBackups request.
+func (client *CassandraClustersClient) listBackupsCreateRequest(ctx context.Context, resourceGroupName string, clusterName string, options *CassandraClustersClientListBackupsOptions) (*policy.Request, error) {
+	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/backups"
+	if client.subscriptionID == "" {
+		return nil, errors.New("parameter client.subscriptionID cannot be empty")
+	}
+	urlPath = strings.ReplaceAll(urlPath, "{subscriptionId}", url.PathEscape(client.subscriptionID))
+	if resourceGroupName == "" {
+		return nil, errors.New("parameter resourceGroupName cannot be empty")
+	}
+	urlPath = strings.ReplaceAll(urlPath, "{resourceGroupName}", url.PathEscape(resourceGroupName))
+	if clusterName == "" {
+		return nil, errors.New("parameter clusterName cannot be empty")
+	}
+	urlPath = strings.ReplaceAll(urlPath, "{clusterName}", url.PathEscape(clusterName))
+	req, err := runtime.NewRequest(ctx, http.MethodGet, runtime.JoinPaths(client.host, urlPath))
+	if err != nil {
+		return nil, err
+	}
+	reqQP := req.Raw().URL.Query()
+	reqQP.Set("api-version", "2022-02-15-preview")
+	req.Raw().URL.RawQuery = reqQP.Encode()
+	req.Raw().Header.Set("Accept", "application/json")
+	return req, nil
+}
+
+// listBackupsHandleResponse handles the ListBackups response.
+func (client *CassandraClustersClient) listBackupsHandleResponse(resp *http.Response) (CassandraClustersClientListBackupsResponse, error) {
+	result := CassandraClustersClientListBackupsResponse{RawResponse: resp}
+	if err := runtime.UnmarshalAsJSON(resp, &result.ListBackups); err != nil {
+		return CassandraClustersClientListBackupsResponse{}, err
+	}
+	return result, nil
 }
 
 // ListByResourceGroup - List all managed Cassandra clusters in this resource group.
@@ -416,7 +533,7 @@ func (client *CassandraClustersClient) listByResourceGroupCreateRequest(ctx cont
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-10-15")
+	reqQP.Set("api-version", "2022-02-15-preview")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -462,7 +579,7 @@ func (client *CassandraClustersClient) listBySubscriptionCreateRequest(ctx conte
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-10-15")
+	reqQP.Set("api-version", "2022-02-15-preview")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -542,7 +659,7 @@ func (client *CassandraClustersClient) startCreateRequest(ctx context.Context, r
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-10-15")
+	reqQP.Set("api-version", "2022-02-15-preview")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -589,7 +706,7 @@ func (client *CassandraClustersClient) statusCreateRequest(ctx context.Context, 
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-10-15")
+	reqQP.Set("api-version", "2022-02-15-preview")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -666,7 +783,7 @@ func (client *CassandraClustersClient) updateCreateRequest(ctx context.Context, 
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-10-15")
+	reqQP.Set("api-version", "2022-02-15-preview")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, runtime.MarshalAsJSON(req, body)
