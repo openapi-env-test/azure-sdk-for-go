@@ -46,7 +46,7 @@ func NewRecommendationMetadataClient(credential azcore.TokenCredential, options 
 	return client
 }
 
-// Get - Gets the metadata entity.
+// Get - Gets the entity.
 // If the operation fails it returns an *azcore.ResponseError type.
 // name - Name of metadata entity.
 // options - RecommendationMetadataClientGetOptions contains the optional parameters for the RecommendationMetadataClient.Get
