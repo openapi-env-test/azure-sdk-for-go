@@ -86,7 +86,7 @@ func (client *AccessReviewInstanceClient) acceptRecommendationsCreateRequest(ctx
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2018-05-01-preview")
+	reqQP.Set("api-version", "2021-11-16-preview")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -133,7 +133,7 @@ func (client *AccessReviewInstanceClient) applyDecisionsCreateRequest(ctx contex
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2018-05-01-preview")
+	reqQP.Set("api-version", "2021-11-16-preview")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -180,7 +180,7 @@ func (client *AccessReviewInstanceClient) resetDecisionsCreateRequest(ctx contex
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2018-05-01-preview")
+	reqQP.Set("api-version", "2021-11-16-preview")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -227,7 +227,7 @@ func (client *AccessReviewInstanceClient) sendRemindersCreateRequest(ctx context
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2018-05-01-preview")
+	reqQP.Set("api-version", "2021-11-16-preview")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -274,7 +274,7 @@ func (client *AccessReviewInstanceClient) stopCreateRequest(ctx context.Context,
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2018-05-01-preview")
+	reqQP.Set("api-version", "2021-11-16-preview")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil

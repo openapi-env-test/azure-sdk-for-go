@@ -67,8 +67,13 @@ func (client *AccessReviewScheduleDefinitionsAssignedForMyApprovalClient) listCr
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2018-05-01-preview")
+	reqQP.Set("api-version", "2021-11-16-preview")
 	req.Raw().URL.RawQuery = reqQP.Encode()
+	unencodedParams := []string{req.Raw().URL.RawQuery}
+	if options != nil && options.Filter != nil {
+		unencodedParams = append(unencodedParams, "$filter="+*options.Filter)
+	}
+	req.Raw().URL.RawQuery = strings.Join(unencodedParams, "&")
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
 }

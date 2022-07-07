@@ -86,7 +86,7 @@ func (client *AccessReviewScheduleDefinitionsClient) createOrUpdateByIDCreateReq
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2018-05-01-preview")
+	reqQP.Set("api-version", "2021-11-16-preview")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, runtime.MarshalAsJSON(req, properties)
@@ -137,7 +137,7 @@ func (client *AccessReviewScheduleDefinitionsClient) deleteByIDCreateRequest(ctx
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2018-05-01-preview")
+	reqQP.Set("api-version", "2021-11-16-preview")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -179,7 +179,7 @@ func (client *AccessReviewScheduleDefinitionsClient) getByIDCreateRequest(ctx co
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2018-05-01-preview")
+	reqQP.Set("api-version", "2021-11-16-preview")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -222,8 +222,13 @@ func (client *AccessReviewScheduleDefinitionsClient) listCreateRequest(ctx conte
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2018-05-01-preview")
+	reqQP.Set("api-version", "2021-11-16-preview")
 	req.Raw().URL.RawQuery = reqQP.Encode()
+	unencodedParams := []string{req.Raw().URL.RawQuery}
+	if options != nil && options.Filter != nil {
+		unencodedParams = append(unencodedParams, "$filter="+*options.Filter)
+	}
+	req.Raw().URL.RawQuery = strings.Join(unencodedParams, "&")
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
 }
@@ -273,7 +278,7 @@ func (client *AccessReviewScheduleDefinitionsClient) stopCreateRequest(ctx conte
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2018-05-01-preview")
+	reqQP.Set("api-version", "2021-11-16-preview")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil

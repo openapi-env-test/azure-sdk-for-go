@@ -21,19 +21,19 @@ import (
 	"strings"
 )
 
-// AccessReviewInstanceDecisionsClient contains the methods for the AccessReviewInstanceDecisions group.
-// Don't use this type directly, use NewAccessReviewInstanceDecisionsClient() instead.
-type AccessReviewInstanceDecisionsClient struct {
+// AccessReviewInstanceContactedReviewersClient contains the methods for the AccessReviewInstanceContactedReviewers group.
+// Don't use this type directly, use NewAccessReviewInstanceContactedReviewersClient() instead.
+type AccessReviewInstanceContactedReviewersClient struct {
 	host           string
 	subscriptionID string
 	pl             runtime.Pipeline
 }
 
-// NewAccessReviewInstanceDecisionsClient creates a new instance of AccessReviewInstanceDecisionsClient with the specified values.
+// NewAccessReviewInstanceContactedReviewersClient creates a new instance of AccessReviewInstanceContactedReviewersClient with the specified values.
 // subscriptionID - The ID of the target subscription.
 // credential - used to authorize requests. Usually a credential from azidentity.
 // options - pass nil to accept the default values.
-func NewAccessReviewInstanceDecisionsClient(subscriptionID string, credential azcore.TokenCredential, options *arm.ClientOptions) *AccessReviewInstanceDecisionsClient {
+func NewAccessReviewInstanceContactedReviewersClient(subscriptionID string, credential azcore.TokenCredential, options *arm.ClientOptions) *AccessReviewInstanceContactedReviewersClient {
 	cp := arm.ClientOptions{}
 	if options != nil {
 		cp = *options
@@ -41,7 +41,7 @@ func NewAccessReviewInstanceDecisionsClient(subscriptionID string, credential az
 	if len(cp.Endpoint) == 0 {
 		cp.Endpoint = arm.AzurePublicCloud
 	}
-	client := &AccessReviewInstanceDecisionsClient{
+	client := &AccessReviewInstanceContactedReviewersClient{
 		subscriptionID: subscriptionID,
 		host:           string(cp.Endpoint),
 		pl:             armruntime.NewPipeline(moduleName, moduleVersion, credential, runtime.PipelineOptions{}, &cp),
@@ -49,27 +49,27 @@ func NewAccessReviewInstanceDecisionsClient(subscriptionID string, credential az
 	return client
 }
 
-// List - Get access review instance decisions
+// List - Get access review instance contacted reviewers
 // If the operation fails it returns an *azcore.ResponseError type.
 // scheduleDefinitionID - The id of the access review schedule definition.
 // id - The id of the access review instance.
-// options - AccessReviewInstanceDecisionsClientListOptions contains the optional parameters for the AccessReviewInstanceDecisionsClient.List
+// options - AccessReviewInstanceContactedReviewersClientListOptions contains the optional parameters for the AccessReviewInstanceContactedReviewersClient.List
 // method.
-func (client *AccessReviewInstanceDecisionsClient) List(scheduleDefinitionID string, id string, options *AccessReviewInstanceDecisionsClientListOptions) *AccessReviewInstanceDecisionsClientListPager {
-	return &AccessReviewInstanceDecisionsClientListPager{
+func (client *AccessReviewInstanceContactedReviewersClient) List(scheduleDefinitionID string, id string, options *AccessReviewInstanceContactedReviewersClientListOptions) *AccessReviewInstanceContactedReviewersClientListPager {
+	return &AccessReviewInstanceContactedReviewersClientListPager{
 		client: client,
 		requester: func(ctx context.Context) (*policy.Request, error) {
 			return client.listCreateRequest(ctx, scheduleDefinitionID, id, options)
 		},
-		advancer: func(ctx context.Context, resp AccessReviewInstanceDecisionsClientListResponse) (*policy.Request, error) {
-			return runtime.NewRequest(ctx, http.MethodGet, *resp.AccessReviewDecisionListResult.NextLink)
+		advancer: func(ctx context.Context, resp AccessReviewInstanceContactedReviewersClientListResponse) (*policy.Request, error) {
+			return runtime.NewRequest(ctx, http.MethodGet, *resp.AccessReviewContactedReviewerListResult.NextLink)
 		},
 	}
 }
 
 // listCreateRequest creates the List request.
-func (client *AccessReviewInstanceDecisionsClient) listCreateRequest(ctx context.Context, scheduleDefinitionID string, id string, options *AccessReviewInstanceDecisionsClientListOptions) (*policy.Request, error) {
-	urlPath := "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/decisions"
+func (client *AccessReviewInstanceContactedReviewersClient) listCreateRequest(ctx context.Context, scheduleDefinitionID string, id string, options *AccessReviewInstanceContactedReviewersClientListOptions) (*policy.Request, error) {
+	urlPath := "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/accessReviewScheduleDefinitions/{scheduleDefinitionId}/instances/{id}/contactedReviewers"
 	if scheduleDefinitionID == "" {
 		return nil, errors.New("parameter scheduleDefinitionID cannot be empty")
 	}
@@ -89,20 +89,15 @@ func (client *AccessReviewInstanceDecisionsClient) listCreateRequest(ctx context
 	reqQP := req.Raw().URL.Query()
 	reqQP.Set("api-version", "2021-11-16-preview")
 	req.Raw().URL.RawQuery = reqQP.Encode()
-	unencodedParams := []string{req.Raw().URL.RawQuery}
-	if options != nil && options.Filter != nil {
-		unencodedParams = append(unencodedParams, "$filter="+*options.Filter)
-	}
-	req.Raw().URL.RawQuery = strings.Join(unencodedParams, "&")
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
 }
 
 // listHandleResponse handles the List response.
-func (client *AccessReviewInstanceDecisionsClient) listHandleResponse(resp *http.Response) (AccessReviewInstanceDecisionsClientListResponse, error) {
-	result := AccessReviewInstanceDecisionsClientListResponse{RawResponse: resp}
-	if err := runtime.UnmarshalAsJSON(resp, &result.AccessReviewDecisionListResult); err != nil {
-		return AccessReviewInstanceDecisionsClientListResponse{}, err
+func (client *AccessReviewInstanceContactedReviewersClient) listHandleResponse(resp *http.Response) (AccessReviewInstanceContactedReviewersClientListResponse, error) {
+	result := AccessReviewInstanceContactedReviewersClientListResponse{RawResponse: resp}
+	if err := runtime.UnmarshalAsJSON(resp, &result.AccessReviewContactedReviewerListResult); err != nil {
+		return AccessReviewInstanceContactedReviewersClientListResponse{}, err
 	}
 	return result, nil
 }
