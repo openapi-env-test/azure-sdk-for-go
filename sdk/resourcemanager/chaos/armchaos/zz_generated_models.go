@@ -39,10 +39,16 @@ func (a *Action) GetAction() *Action { return a }
 // ActionStatus - Model that represents the an action and its status.
 type ActionStatus struct {
 	// READ-ONLY; The id of the action status.
-	ID *string `json:"id,omitempty" azure:"ro"`
+	ActionID *string `json:"actionId,omitempty" azure:"ro"`
 
 	// READ-ONLY; The name of the action status.
-	Name *string `json:"name,omitempty" azure:"ro"`
+	ActionName *string `json:"actionName,omitempty" azure:"ro"`
+
+	// READ-ONLY; String that represents the end time of the action.
+	EndTime *time.Time `json:"endTime,omitempty" azure:"ro"`
+
+	// READ-ONLY; String that represents the start time of the action.
+	StartTime *time.Time `json:"startTime,omitempty" azure:"ro"`
 
 	// READ-ONLY; The status of the action.
 	Status *string `json:"status,omitempty" azure:"ro"`
@@ -54,11 +60,48 @@ type ActionStatus struct {
 // MarshalJSON implements the json.Marshaller interface for type ActionStatus.
 func (a ActionStatus) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
-	populate(objectMap, "id", a.ID)
-	populate(objectMap, "name", a.Name)
+	populate(objectMap, "actionId", a.ActionID)
+	populate(objectMap, "actionName", a.ActionName)
+	populateTimeRFC3339(objectMap, "endTime", a.EndTime)
+	populateTimeRFC3339(objectMap, "startTime", a.StartTime)
 	populate(objectMap, "status", a.Status)
 	populate(objectMap, "targets", a.Targets)
 	return json.Marshal(objectMap)
+}
+
+// UnmarshalJSON implements the json.Unmarshaller interface for type ActionStatus.
+func (a *ActionStatus) UnmarshalJSON(data []byte) error {
+	var rawMsg map[string]json.RawMessage
+	if err := json.Unmarshal(data, &rawMsg); err != nil {
+		return err
+	}
+	for key, val := range rawMsg {
+		var err error
+		switch key {
+		case "actionId":
+			err = unpopulate(val, &a.ActionID)
+			delete(rawMsg, key)
+		case "actionName":
+			err = unpopulate(val, &a.ActionName)
+			delete(rawMsg, key)
+		case "endTime":
+			err = unpopulateTimeRFC3339(val, &a.EndTime)
+			delete(rawMsg, key)
+		case "startTime":
+			err = unpopulateTimeRFC3339(val, &a.StartTime)
+			delete(rawMsg, key)
+		case "status":
+			err = unpopulate(val, &a.Status)
+			delete(rawMsg, key)
+		case "targets":
+			err = unpopulate(val, &a.Targets)
+			delete(rawMsg, key)
+		}
+		if err != nil {
+			return err
+		}
+	}
+	return nil
 }
 
 // Branch - Model that represents a branch in the step.
@@ -107,10 +150,10 @@ type BranchStatus struct {
 	Actions []*ActionStatus `json:"actions,omitempty" azure:"ro"`
 
 	// READ-ONLY; The id of the branch status.
-	ID *string `json:"id,omitempty" azure:"ro"`
+	BranchID *string `json:"branchId,omitempty" azure:"ro"`
 
 	// READ-ONLY; The name of the branch status.
-	Name *string `json:"name,omitempty" azure:"ro"`
+	BranchName *string `json:"branchName,omitempty" azure:"ro"`
 
 	// READ-ONLY; The status of the branch.
 	Status *string `json:"status,omitempty" azure:"ro"`
@@ -120,8 +163,8 @@ type BranchStatus struct {
 func (b BranchStatus) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
 	populate(objectMap, "actions", b.Actions)
-	populate(objectMap, "id", b.ID)
-	populate(objectMap, "name", b.Name)
+	populate(objectMap, "branchId", b.BranchID)
+	populate(objectMap, "branchName", b.BranchName)
 	populate(objectMap, "status", b.Status)
 	return json.Marshal(objectMap)
 }
@@ -563,30 +606,30 @@ type ExperimentExecutionActionTargetDetailsError struct {
 // ExperimentExecutionActionTargetDetailsProperties - Model that represents the Experiment action target details properties
 // model.
 type ExperimentExecutionActionTargetDetailsProperties struct {
-	// READ-ONLY; String that represents the completed date time.
-	CompletedDateUTC *time.Time `json:"completedDateUtc,omitempty" azure:"ro"`
-
 	// READ-ONLY; The error of the action.
 	Error *ExperimentExecutionActionTargetDetailsError `json:"error,omitempty" azure:"ro"`
-
-	// READ-ONLY; String that represents the failed date time.
-	FailedDateUTC *time.Time `json:"failedDateUtc,omitempty" azure:"ro"`
 
 	// READ-ONLY; The status of the execution.
 	Status *string `json:"status,omitempty" azure:"ro"`
 
 	// READ-ONLY; The target for the action.
 	Target *string `json:"target,omitempty" azure:"ro"`
+
+	// READ-ONLY; String that represents the completed date time.
+	TargetCompletedTime *time.Time `json:"targetCompletedTime,omitempty" azure:"ro"`
+
+	// READ-ONLY; String that represents the failed date time.
+	TargetFailedTime *time.Time `json:"targetFailedTime,omitempty" azure:"ro"`
 }
 
 // MarshalJSON implements the json.Marshaller interface for type ExperimentExecutionActionTargetDetailsProperties.
 func (e ExperimentExecutionActionTargetDetailsProperties) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
-	populateTimeRFC3339(objectMap, "completedDateUtc", e.CompletedDateUTC)
 	populate(objectMap, "error", e.Error)
-	populateTimeRFC3339(objectMap, "failedDateUtc", e.FailedDateUTC)
 	populate(objectMap, "status", e.Status)
 	populate(objectMap, "target", e.Target)
+	populateTimeRFC3339(objectMap, "targetCompletedTime", e.TargetCompletedTime)
+	populateTimeRFC3339(objectMap, "targetFailedTime", e.TargetFailedTime)
 	return json.Marshal(objectMap)
 }
 
@@ -599,20 +642,20 @@ func (e *ExperimentExecutionActionTargetDetailsProperties) UnmarshalJSON(data []
 	for key, val := range rawMsg {
 		var err error
 		switch key {
-		case "completedDateUtc":
-			err = unpopulateTimeRFC3339(val, &e.CompletedDateUTC)
-			delete(rawMsg, key)
 		case "error":
 			err = unpopulate(val, &e.Error)
-			delete(rawMsg, key)
-		case "failedDateUtc":
-			err = unpopulateTimeRFC3339(val, &e.FailedDateUTC)
 			delete(rawMsg, key)
 		case "status":
 			err = unpopulate(val, &e.Status)
 			delete(rawMsg, key)
 		case "target":
 			err = unpopulate(val, &e.Target)
+			delete(rawMsg, key)
+		case "targetCompletedTime":
+			err = unpopulateTimeRFC3339(val, &e.TargetCompletedTime)
+			delete(rawMsg, key)
+		case "targetFailedTime":
+			err = unpopulateTimeRFC3339(val, &e.TargetFailedTime)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -657,7 +700,7 @@ func (e ExperimentExecutionDetailsListResult) MarshalJSON() ([]byte, error) {
 // ExperimentExecutionDetailsProperties - Model that represents the Experiment execution details properties model.
 type ExperimentExecutionDetailsProperties struct {
 	// READ-ONLY; String that represents the created date time.
-	CreatedDateUTC *time.Time `json:"createdDateUtc,omitempty" azure:"ro"`
+	CreatedDateTime *time.Time `json:"createdDateTime,omitempty" azure:"ro"`
 
 	// READ-ONLY; The id of the experiment.
 	ExperimentID *string `json:"experimentId,omitempty" azure:"ro"`
@@ -666,32 +709,32 @@ type ExperimentExecutionDetailsProperties struct {
 	FailureReason *string `json:"failureReason,omitempty" azure:"ro"`
 
 	// READ-ONLY; String that represents the last action date time.
-	LastActionDateUTC *time.Time `json:"lastActionDateUtc,omitempty" azure:"ro"`
+	LastActionDateTime *time.Time `json:"lastActionDateTime,omitempty" azure:"ro"`
 
 	// READ-ONLY; The information of the experiment run.
 	RunInformation *ExperimentExecutionDetailsPropertiesRunInformation `json:"runInformation,omitempty" azure:"ro"`
 
 	// READ-ONLY; String that represents the start date time.
-	StartDateUTC *time.Time `json:"startDateUtc,omitempty" azure:"ro"`
+	StartDateTime *time.Time `json:"startDateTime,omitempty" azure:"ro"`
 
 	// READ-ONLY; The value of the status of the experiment execution.
 	Status *string `json:"status,omitempty" azure:"ro"`
 
 	// READ-ONLY; String that represents the stop date time.
-	StopDateUTC *time.Time `json:"stopDateUtc,omitempty" azure:"ro"`
+	StopDateTime *time.Time `json:"stopDateTime,omitempty" azure:"ro"`
 }
 
 // MarshalJSON implements the json.Marshaller interface for type ExperimentExecutionDetailsProperties.
 func (e ExperimentExecutionDetailsProperties) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
-	populateTimeRFC3339(objectMap, "createdDateUtc", e.CreatedDateUTC)
+	populateTimeRFC3339(objectMap, "createdDateTime", e.CreatedDateTime)
 	populate(objectMap, "experimentId", e.ExperimentID)
 	populate(objectMap, "failureReason", e.FailureReason)
-	populateTimeRFC3339(objectMap, "lastActionDateUtc", e.LastActionDateUTC)
+	populateTimeRFC3339(objectMap, "lastActionDateTime", e.LastActionDateTime)
 	populate(objectMap, "runInformation", e.RunInformation)
-	populateTimeRFC3339(objectMap, "startDateUtc", e.StartDateUTC)
+	populateTimeRFC3339(objectMap, "startDateTime", e.StartDateTime)
 	populate(objectMap, "status", e.Status)
-	populateTimeRFC3339(objectMap, "stopDateUtc", e.StopDateUTC)
+	populateTimeRFC3339(objectMap, "stopDateTime", e.StopDateTime)
 	return json.Marshal(objectMap)
 }
 
@@ -704,8 +747,8 @@ func (e *ExperimentExecutionDetailsProperties) UnmarshalJSON(data []byte) error 
 	for key, val := range rawMsg {
 		var err error
 		switch key {
-		case "createdDateUtc":
-			err = unpopulateTimeRFC3339(val, &e.CreatedDateUTC)
+		case "createdDateTime":
+			err = unpopulateTimeRFC3339(val, &e.CreatedDateTime)
 			delete(rawMsg, key)
 		case "experimentId":
 			err = unpopulate(val, &e.ExperimentID)
@@ -713,20 +756,20 @@ func (e *ExperimentExecutionDetailsProperties) UnmarshalJSON(data []byte) error 
 		case "failureReason":
 			err = unpopulate(val, &e.FailureReason)
 			delete(rawMsg, key)
-		case "lastActionDateUtc":
-			err = unpopulateTimeRFC3339(val, &e.LastActionDateUTC)
+		case "lastActionDateTime":
+			err = unpopulateTimeRFC3339(val, &e.LastActionDateTime)
 			delete(rawMsg, key)
 		case "runInformation":
 			err = unpopulate(val, &e.RunInformation)
 			delete(rawMsg, key)
-		case "startDateUtc":
-			err = unpopulateTimeRFC3339(val, &e.StartDateUTC)
+		case "startDateTime":
+			err = unpopulateTimeRFC3339(val, &e.StartDateTime)
 			delete(rawMsg, key)
 		case "status":
 			err = unpopulate(val, &e.Status)
 			delete(rawMsg, key)
-		case "stopDateUtc":
-			err = unpopulateTimeRFC3339(val, &e.StopDateUTC)
+		case "stopDateTime":
+			err = unpopulateTimeRFC3339(val, &e.StopDateTime)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -909,8 +952,6 @@ type ExperimentsClientGetStatusOptions struct {
 
 // ExperimentsClientListAllOptions contains the optional parameters for the ExperimentsClient.ListAll method.
 type ExperimentsClientListAllOptions struct {
-	// String that sets the continuation token.
-	ContinuationToken *string
 	// Optional value that indicates whether to filter results based on if the Experiment is currently running. If null, then
 	// the results will not be filtered.
 	Running *bool
@@ -1079,23 +1120,23 @@ type StepStatus struct {
 	// READ-ONLY; The array of branches.
 	Branches []*BranchStatus `json:"branches,omitempty" azure:"ro"`
 
-	// READ-ONLY; The id of the step.
-	ID *string `json:"id,omitempty" azure:"ro"`
-
-	// READ-ONLY; The name of the step.
-	Name *string `json:"name,omitempty" azure:"ro"`
-
 	// READ-ONLY; The value of the status of the step.
 	Status *string `json:"status,omitempty" azure:"ro"`
+
+	// READ-ONLY; The id of the step.
+	StepID *string `json:"stepId,omitempty" azure:"ro"`
+
+	// READ-ONLY; The name of the step.
+	StepName *string `json:"stepName,omitempty" azure:"ro"`
 }
 
 // MarshalJSON implements the json.Marshaller interface for type StepStatus.
 func (s StepStatus) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
 	populate(objectMap, "branches", s.Branches)
-	populate(objectMap, "id", s.ID)
-	populate(objectMap, "name", s.Name)
 	populate(objectMap, "status", s.Status)
+	populate(objectMap, "stepId", s.StepID)
+	populate(objectMap, "stepName", s.StepName)
 	return json.Marshal(objectMap)
 }
 

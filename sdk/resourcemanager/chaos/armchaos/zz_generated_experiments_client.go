@@ -490,9 +490,6 @@ func (client *ExperimentsClient) listAllCreateRequest(ctx context.Context, optio
 	if options != nil && options.Running != nil {
 		reqQP.Set("running", strconv.FormatBool(*options.Running))
 	}
-	if options != nil && options.ContinuationToken != nil {
-		reqQP.Set("continuationToken", *options.ContinuationToken)
-	}
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
