@@ -80,7 +80,7 @@ func (client *RoleEligibilityScheduleRequestsClient) cancelCreateRequest(ctx con
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2020-10-01-preview")
+	reqQP.Set("api-version", "2022-06-02")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -126,7 +126,7 @@ func (client *RoleEligibilityScheduleRequestsClient) createCreateRequest(ctx con
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2020-10-01-preview")
+	reqQP.Set("api-version", "2022-06-02")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, runtime.MarshalAsJSON(req, parameters)
@@ -175,7 +175,7 @@ func (client *RoleEligibilityScheduleRequestsClient) getCreateRequest(ctx contex
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2020-10-01-preview")
+	reqQP.Set("api-version", "2022-06-02")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -219,7 +219,7 @@ func (client *RoleEligibilityScheduleRequestsClient) listForScopeCreateRequest(c
 	if options != nil && options.Filter != nil {
 		reqQP.Set("$filter", *options.Filter)
 	}
-	reqQP.Set("api-version", "2020-10-01-preview")
+	reqQP.Set("api-version", "2022-06-02")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -230,6 +230,56 @@ func (client *RoleEligibilityScheduleRequestsClient) listForScopeHandleResponse(
 	result := RoleEligibilityScheduleRequestsClientListForScopeResponse{RawResponse: resp}
 	if err := runtime.UnmarshalAsJSON(resp, &result.RoleEligibilityScheduleRequestListResult); err != nil {
 		return RoleEligibilityScheduleRequestsClientListForScopeResponse{}, err
+	}
+	return result, nil
+}
+
+// Validate - Validates a new role eligibility schedule request.
+// If the operation fails it returns an *azcore.ResponseError type.
+// scope - The scope of the role eligibility request to validate.
+// roleEligibilityScheduleRequestName - The name of the role eligibility request to validate.
+// parameters - Parameters for the role eligibility schedule request.
+// options - RoleEligibilityScheduleRequestsClientValidateOptions contains the optional parameters for the RoleEligibilityScheduleRequestsClient.Validate
+// method.
+func (client *RoleEligibilityScheduleRequestsClient) Validate(ctx context.Context, scope string, roleEligibilityScheduleRequestName string, parameters RoleEligibilityScheduleRequest, options *RoleEligibilityScheduleRequestsClientValidateOptions) (RoleEligibilityScheduleRequestsClientValidateResponse, error) {
+	req, err := client.validateCreateRequest(ctx, scope, roleEligibilityScheduleRequestName, parameters, options)
+	if err != nil {
+		return RoleEligibilityScheduleRequestsClientValidateResponse{}, err
+	}
+	resp, err := client.pl.Do(req)
+	if err != nil {
+		return RoleEligibilityScheduleRequestsClientValidateResponse{}, err
+	}
+	if !runtime.HasStatusCode(resp, http.StatusOK) {
+		return RoleEligibilityScheduleRequestsClientValidateResponse{}, runtime.NewResponseError(resp)
+	}
+	return client.validateHandleResponse(resp)
+}
+
+// validateCreateRequest creates the Validate request.
+func (client *RoleEligibilityScheduleRequestsClient) validateCreateRequest(ctx context.Context, scope string, roleEligibilityScheduleRequestName string, parameters RoleEligibilityScheduleRequest, options *RoleEligibilityScheduleRequestsClientValidateOptions) (*policy.Request, error) {
+	urlPath := "/{scope}/providers/Microsoft.Authorization/roleEligibilityScheduleRequests/{roleEligibilityScheduleRequestName}/validate"
+	urlPath = strings.ReplaceAll(urlPath, "{scope}", scope)
+	if roleEligibilityScheduleRequestName == "" {
+		return nil, errors.New("parameter roleEligibilityScheduleRequestName cannot be empty")
+	}
+	urlPath = strings.ReplaceAll(urlPath, "{roleEligibilityScheduleRequestName}", url.PathEscape(roleEligibilityScheduleRequestName))
+	req, err := runtime.NewRequest(ctx, http.MethodPost, runtime.JoinPaths(client.host, urlPath))
+	if err != nil {
+		return nil, err
+	}
+	reqQP := req.Raw().URL.Query()
+	reqQP.Set("api-version", "2022-06-02")
+	req.Raw().URL.RawQuery = reqQP.Encode()
+	req.Raw().Header.Set("Accept", "application/json")
+	return req, runtime.MarshalAsJSON(req, parameters)
+}
+
+// validateHandleResponse handles the Validate response.
+func (client *RoleEligibilityScheduleRequestsClient) validateHandleResponse(resp *http.Response) (RoleEligibilityScheduleRequestsClientValidateResponse, error) {
+	result := RoleEligibilityScheduleRequestsClientValidateResponse{RawResponse: resp}
+	if err := runtime.UnmarshalAsJSON(resp, &result.RoleEligibilityScheduleRequest); err != nil {
+		return RoleEligibilityScheduleRequestsClientValidateResponse{}, err
 	}
 	return result, nil
 }

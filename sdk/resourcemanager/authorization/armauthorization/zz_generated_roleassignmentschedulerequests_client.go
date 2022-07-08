@@ -80,7 +80,7 @@ func (client *RoleAssignmentScheduleRequestsClient) cancelCreateRequest(ctx cont
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2020-10-01-preview")
+	reqQP.Set("api-version", "2022-06-02")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -127,7 +127,7 @@ func (client *RoleAssignmentScheduleRequestsClient) createCreateRequest(ctx cont
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2020-10-01-preview")
+	reqQP.Set("api-version", "2022-06-02")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, runtime.MarshalAsJSON(req, parameters)
@@ -176,7 +176,7 @@ func (client *RoleAssignmentScheduleRequestsClient) getCreateRequest(ctx context
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2020-10-01-preview")
+	reqQP.Set("api-version", "2022-06-02")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -220,7 +220,7 @@ func (client *RoleAssignmentScheduleRequestsClient) listForScopeCreateRequest(ct
 	if options != nil && options.Filter != nil {
 		reqQP.Set("$filter", *options.Filter)
 	}
-	reqQP.Set("api-version", "2020-10-01-preview")
+	reqQP.Set("api-version", "2022-06-02")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -231,6 +231,56 @@ func (client *RoleAssignmentScheduleRequestsClient) listForScopeHandleResponse(r
 	result := RoleAssignmentScheduleRequestsClientListForScopeResponse{RawResponse: resp}
 	if err := runtime.UnmarshalAsJSON(resp, &result.RoleAssignmentScheduleRequestListResult); err != nil {
 		return RoleAssignmentScheduleRequestsClientListForScopeResponse{}, err
+	}
+	return result, nil
+}
+
+// Validate - Validates a new role assignment schedule request.
+// If the operation fails it returns an *azcore.ResponseError type.
+// scope - The scope of the role assignment request to validate.
+// roleAssignmentScheduleRequestName - The name of the role assignment request to validate.
+// parameters - Parameters for the role assignment schedule request.
+// options - RoleAssignmentScheduleRequestsClientValidateOptions contains the optional parameters for the RoleAssignmentScheduleRequestsClient.Validate
+// method.
+func (client *RoleAssignmentScheduleRequestsClient) Validate(ctx context.Context, scope string, roleAssignmentScheduleRequestName string, parameters RoleAssignmentScheduleRequest, options *RoleAssignmentScheduleRequestsClientValidateOptions) (RoleAssignmentScheduleRequestsClientValidateResponse, error) {
+	req, err := client.validateCreateRequest(ctx, scope, roleAssignmentScheduleRequestName, parameters, options)
+	if err != nil {
+		return RoleAssignmentScheduleRequestsClientValidateResponse{}, err
+	}
+	resp, err := client.pl.Do(req)
+	if err != nil {
+		return RoleAssignmentScheduleRequestsClientValidateResponse{}, err
+	}
+	if !runtime.HasStatusCode(resp, http.StatusOK) {
+		return RoleAssignmentScheduleRequestsClientValidateResponse{}, runtime.NewResponseError(resp)
+	}
+	return client.validateHandleResponse(resp)
+}
+
+// validateCreateRequest creates the Validate request.
+func (client *RoleAssignmentScheduleRequestsClient) validateCreateRequest(ctx context.Context, scope string, roleAssignmentScheduleRequestName string, parameters RoleAssignmentScheduleRequest, options *RoleAssignmentScheduleRequestsClientValidateOptions) (*policy.Request, error) {
+	urlPath := "/{scope}/providers/Microsoft.Authorization/roleAssignmentScheduleRequests/{roleAssignmentScheduleRequestName}/validate"
+	urlPath = strings.ReplaceAll(urlPath, "{scope}", scope)
+	if roleAssignmentScheduleRequestName == "" {
+		return nil, errors.New("parameter roleAssignmentScheduleRequestName cannot be empty")
+	}
+	urlPath = strings.ReplaceAll(urlPath, "{roleAssignmentScheduleRequestName}", url.PathEscape(roleAssignmentScheduleRequestName))
+	req, err := runtime.NewRequest(ctx, http.MethodPost, runtime.JoinPaths(client.host, urlPath))
+	if err != nil {
+		return nil, err
+	}
+	reqQP := req.Raw().URL.Query()
+	reqQP.Set("api-version", "2022-06-02")
+	req.Raw().URL.RawQuery = reqQP.Encode()
+	req.Raw().Header.Set("Accept", "application/json")
+	return req, runtime.MarshalAsJSON(req, parameters)
+}
+
+// validateHandleResponse handles the Validate response.
+func (client *RoleAssignmentScheduleRequestsClient) validateHandleResponse(resp *http.Response) (RoleAssignmentScheduleRequestsClientValidateResponse, error) {
+	result := RoleAssignmentScheduleRequestsClientValidateResponse{RawResponse: resp}
+	if err := runtime.UnmarshalAsJSON(resp, &result.RoleAssignmentScheduleRequest); err != nil {
+		return RoleAssignmentScheduleRequestsClientValidateResponse{}, err
 	}
 	return result, nil
 }
