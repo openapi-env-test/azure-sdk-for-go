@@ -111,7 +111,7 @@ func (client *MembersClient) createCreateRequest(ctx context.Context, blockchain
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2018-06-01-preview")
+	reqQP.Set("api-version", "2022-06-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	if options != nil && options.BlockchainMember != nil {
@@ -181,7 +181,7 @@ func (client *MembersClient) deleteCreateRequest(ctx context.Context, blockchain
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2018-06-01-preview")
+	reqQP.Set("api-version", "2022-06-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	return req, nil
 }
@@ -227,7 +227,7 @@ func (client *MembersClient) getCreateRequest(ctx context.Context, blockchainMem
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2018-06-01-preview")
+	reqQP.Set("api-version", "2022-06-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -275,7 +275,7 @@ func (client *MembersClient) listCreateRequest(ctx context.Context, resourceGrou
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2018-06-01-preview")
+	reqQP.Set("api-version", "2022-06-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -331,7 +331,7 @@ func (client *MembersClient) listAPIKeysCreateRequest(ctx context.Context, block
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2018-06-01-preview")
+	reqQP.Set("api-version", "2022-06-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -373,7 +373,7 @@ func (client *MembersClient) listAllCreateRequest(ctx context.Context, options *
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2018-06-01-preview")
+	reqQP.Set("api-version", "2022-06-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -427,7 +427,7 @@ func (client *MembersClient) listConsortiumMembersCreateRequest(ctx context.Cont
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2018-06-01-preview")
+	reqQP.Set("api-version", "2022-06-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -484,7 +484,7 @@ func (client *MembersClient) listRegenerateAPIKeysCreateRequest(ctx context.Cont
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2018-06-01-preview")
+	reqQP.Set("api-version", "2022-06-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	if options != nil && options.APIKey != nil {
@@ -543,7 +543,7 @@ func (client *MembersClient) updateCreateRequest(ctx context.Context, blockchain
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2018-06-01-preview")
+	reqQP.Set("api-version", "2022-06-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	if options != nil && options.BlockchainMember != nil {

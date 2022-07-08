@@ -117,7 +117,7 @@ func (client *TransactionNodesClient) createCreateRequest(ctx context.Context, b
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2018-06-01-preview")
+	reqQP.Set("api-version", "2022-06-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	if options != nil && options.TransactionNode != nil {
@@ -193,7 +193,7 @@ func (client *TransactionNodesClient) deleteCreateRequest(ctx context.Context, b
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2018-06-01-preview")
+	reqQP.Set("api-version", "2022-06-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	return req, nil
 }
@@ -244,7 +244,7 @@ func (client *TransactionNodesClient) getCreateRequest(ctx context.Context, bloc
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2018-06-01-preview")
+	reqQP.Set("api-version", "2022-06-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -297,7 +297,7 @@ func (client *TransactionNodesClient) listCreateRequest(ctx context.Context, blo
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2018-06-01-preview")
+	reqQP.Set("api-version", "2022-06-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -359,7 +359,7 @@ func (client *TransactionNodesClient) listAPIKeysCreateRequest(ctx context.Conte
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2018-06-01-preview")
+	reqQP.Set("api-version", "2022-06-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -421,7 +421,7 @@ func (client *TransactionNodesClient) listRegenerateAPIKeysCreateRequest(ctx con
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2018-06-01-preview")
+	reqQP.Set("api-version", "2022-06-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	if options != nil && options.APIKey != nil {
@@ -485,7 +485,7 @@ func (client *TransactionNodesClient) updateCreateRequest(ctx context.Context, b
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2018-06-01-preview")
+	reqQP.Set("api-version", "2022-06-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	if options != nil && options.TransactionNode != nil {
