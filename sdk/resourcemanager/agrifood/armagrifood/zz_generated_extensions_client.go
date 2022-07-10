@@ -95,7 +95,7 @@ func (client *ExtensionsClient) createCreateRequest(ctx context.Context, extensi
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2020-05-12-preview")
+	reqQP.Set("api-version", "2022-06-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -155,7 +155,7 @@ func (client *ExtensionsClient) deleteCreateRequest(ctx context.Context, extensi
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2020-05-12-preview")
+	reqQP.Set("api-version", "2022-06-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -206,7 +206,7 @@ func (client *ExtensionsClient) getCreateRequest(ctx context.Context, extensionI
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2020-05-12-preview")
+	reqQP.Set("api-version", "2022-06-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -259,7 +259,7 @@ func (client *ExtensionsClient) listByFarmBeatsCreateRequest(ctx context.Context
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2020-05-12-preview")
+	reqQP.Set("api-version", "2022-06-01")
 	if options != nil && options.ExtensionIDs != nil {
 		for _, qv := range options.ExtensionIDs {
 			reqQP.Add("extensionIds", qv)
@@ -335,7 +335,7 @@ func (client *ExtensionsClient) updateCreateRequest(ctx context.Context, extensi
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2020-05-12-preview")
+	reqQP.Set("api-version", "2022-06-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
