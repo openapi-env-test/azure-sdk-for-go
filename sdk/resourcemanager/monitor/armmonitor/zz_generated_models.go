@@ -215,6 +215,18 @@ func (a ActionGroupResource) MarshalJSON() ([]byte, error) {
 	return json.Marshal(objectMap)
 }
 
+// ActionGroupsClientBeginCreateNotificationsAtActionGroupResourceLevelOptions contains the optional parameters for the ActionGroupsClient.BeginCreateNotificationsAtActionGroupResourceLevel
+// method.
+type ActionGroupsClientBeginCreateNotificationsAtActionGroupResourceLevelOptions struct {
+	// placeholder for future optional parameters
+}
+
+// ActionGroupsClientBeginCreateNotificationsAtResourceGroupLevelOptions contains the optional parameters for the ActionGroupsClient.BeginCreateNotificationsAtResourceGroupLevel
+// method.
+type ActionGroupsClientBeginCreateNotificationsAtResourceGroupLevelOptions struct {
+	// placeholder for future optional parameters
+}
+
 // ActionGroupsClientBeginPostTestNotificationsOptions contains the optional parameters for the ActionGroupsClient.BeginPostTestNotifications
 // method.
 type ActionGroupsClientBeginPostTestNotificationsOptions struct {
@@ -238,6 +250,18 @@ type ActionGroupsClientEnableReceiverOptions struct {
 
 // ActionGroupsClientGetOptions contains the optional parameters for the ActionGroupsClient.Get method.
 type ActionGroupsClientGetOptions struct {
+	// placeholder for future optional parameters
+}
+
+// ActionGroupsClientGetTestNotificationsAtActionGroupResourceLevelOptions contains the optional parameters for the ActionGroupsClient.GetTestNotificationsAtActionGroupResourceLevel
+// method.
+type ActionGroupsClientGetTestNotificationsAtActionGroupResourceLevelOptions struct {
+	// placeholder for future optional parameters
+}
+
+// ActionGroupsClientGetTestNotificationsAtResourceGroupLevelOptions contains the optional parameters for the ActionGroupsClient.GetTestNotificationsAtResourceGroupLevel
+// method.
+type ActionGroupsClientGetTestNotificationsAtResourceGroupLevelOptions struct {
 	// placeholder for future optional parameters
 }
 
@@ -1207,6 +1231,15 @@ type BaselinesClientListOptions struct {
 	Timespan *string
 }
 
+// ColumnDefinition - Definition of custom data column.
+type ColumnDefinition struct {
+	// The name of the column.
+	Name *string `json:"name,omitempty"`
+
+	// The type of the column data.
+	Type *KnownColumnDefinitionType `json:"type,omitempty"`
+}
+
 // ConfigurationAccessEndpointSpec - Definition of the endpoint used for accessing configuration.
 type ConfigurationAccessEndpointSpec struct {
 	// READ-ONLY; The endpoint. This property is READ-ONLY.
@@ -1241,7 +1274,7 @@ func (c Criteria) MarshalJSON() ([]byte, error) {
 
 // DataCollectionEndpoint - Definition of data collection endpoint.
 type DataCollectionEndpoint struct {
-	// The endpoint used by agents to access their configuration.
+	// The endpoint used by clients to access their configuration.
 	ConfigurationAccess *DataCollectionEndpointConfigurationAccess `json:"configurationAccess,omitempty"`
 
 	// Description of the data collection endpoint.
@@ -1260,7 +1293,7 @@ type DataCollectionEndpoint struct {
 	ProvisioningState *KnownDataCollectionEndpointProvisioningState `json:"provisioningState,omitempty" azure:"ro"`
 }
 
-// DataCollectionEndpointConfigurationAccess - The endpoint used by agents to access their configuration.
+// DataCollectionEndpointConfigurationAccess - The endpoint used by clients to access their configuration.
 type DataCollectionEndpointConfigurationAccess struct {
 	// READ-ONLY; The endpoint. This property is READ-ONLY.
 	Endpoint *string `json:"endpoint,omitempty" azure:"ro"`
@@ -1342,7 +1375,7 @@ func (d DataCollectionEndpointResourceListResult) MarshalJSON() ([]byte, error) 
 
 // DataCollectionEndpointResourceProperties - Resource properties.
 type DataCollectionEndpointResourceProperties struct {
-	// The endpoint used by agents to access their configuration.
+	// The endpoint used by clients to access their configuration.
 	ConfigurationAccess *DataCollectionEndpointConfigurationAccess `json:"configurationAccess,omitempty"`
 
 	// Description of the data collection endpoint.
@@ -1468,6 +1501,9 @@ type DataCollectionEndpointsClientUpdateOptions struct {
 
 // DataCollectionRule - Definition of what monitoring data to collect and where that data should be sent.
 type DataCollectionRule struct {
+	// The resource ID of the data collection endpoint that this rule can be used with.
+	DataCollectionEndpointID *string `json:"dataCollectionEndpointId,omitempty"`
+
 	// The specification of data flows.
 	DataFlows []*DataFlow `json:"dataFlows,omitempty"`
 
@@ -1481,8 +1517,14 @@ type DataCollectionRule struct {
 	// The specification of destinations.
 	Destinations *DataCollectionRuleDestinations `json:"destinations,omitempty"`
 
+	// Declaration of custom streams used in this rule.
+	StreamDeclarations map[string]*StreamDeclaration `json:"streamDeclarations,omitempty"`
+
 	// READ-ONLY; The immutable ID of this data collection rule. This property is READ-ONLY.
 	ImmutableID *string `json:"immutableId,omitempty" azure:"ro"`
+
+	// READ-ONLY; Metadata about the resource
+	Metadata *DataCollectionRuleMetadata `json:"metadata,omitempty" azure:"ro"`
 
 	// READ-ONLY; The resource provisioning state.
 	ProvisioningState *KnownDataCollectionRuleProvisioningState `json:"provisioningState,omitempty" azure:"ro"`
@@ -1491,12 +1533,15 @@ type DataCollectionRule struct {
 // MarshalJSON implements the json.Marshaller interface for type DataCollectionRule.
 func (d DataCollectionRule) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
+	populate(objectMap, "dataCollectionEndpointId", d.DataCollectionEndpointID)
 	populate(objectMap, "dataFlows", d.DataFlows)
 	populate(objectMap, "dataSources", d.DataSources)
 	populate(objectMap, "description", d.Description)
 	populate(objectMap, "destinations", d.Destinations)
 	populate(objectMap, "immutableId", d.ImmutableID)
+	populate(objectMap, "metadata", d.Metadata)
 	populate(objectMap, "provisioningState", d.ProvisioningState)
+	populate(objectMap, "streamDeclarations", d.StreamDeclarations)
 	return json.Marshal(objectMap)
 }
 
@@ -1511,8 +1556,17 @@ type DataCollectionRuleAssociation struct {
 	// Description of the association.
 	Description *string `json:"description,omitempty"`
 
+	// READ-ONLY; Metadata about the resource
+	Metadata *DataCollectionRuleAssociationMetadata `json:"metadata,omitempty" azure:"ro"`
+
 	// READ-ONLY; The resource provisioning state.
 	ProvisioningState *KnownDataCollectionRuleAssociationProvisioningState `json:"provisioningState,omitempty" azure:"ro"`
+}
+
+// DataCollectionRuleAssociationMetadata - Metadata about the resource
+type DataCollectionRuleAssociationMetadata struct {
+	// READ-ONLY; Azure offering managing this resource on-behalf-of customer.
+	ProvisionedBy *string `json:"provisionedBy,omitempty" azure:"ro"`
 }
 
 // DataCollectionRuleAssociationProxyOnlyResource - Definition of generic ARM proxy resource.
@@ -1563,6 +1617,9 @@ type DataCollectionRuleAssociationProxyOnlyResourceProperties struct {
 
 	// Description of the association.
 	Description *string `json:"description,omitempty"`
+
+	// READ-ONLY; Metadata about the resource
+	Metadata *DataCollectionRuleAssociationMetadata `json:"metadata,omitempty" azure:"ro"`
 
 	// READ-ONLY; The resource provisioning state.
 	ProvisioningState *KnownDataCollectionRuleAssociationProvisioningState `json:"provisioningState,omitempty" azure:"ro"`
@@ -1656,6 +1713,12 @@ type DataCollectionRuleAssociationsClientGetOptions struct {
 	// placeholder for future optional parameters
 }
 
+// DataCollectionRuleAssociationsClientListByDataCollectionEndpointOptions contains the optional parameters for the DataCollectionRuleAssociationsClient.ListByDataCollectionEndpoint
+// method.
+type DataCollectionRuleAssociationsClientListByDataCollectionEndpointOptions struct {
+	// placeholder for future optional parameters
+}
+
 // DataCollectionRuleAssociationsClientListByResourceOptions contains the optional parameters for the DataCollectionRuleAssociationsClient.ListByResource
 // method.
 type DataCollectionRuleAssociationsClientListByResourceOptions struct {
@@ -1674,6 +1737,12 @@ type DataCollectionRuleDataSources struct {
 	// The list of Azure VM extension data source configurations.
 	Extensions []*ExtensionDataSource `json:"extensions,omitempty"`
 
+	// The list of IIS logs source configurations.
+	IisLogs []*IisLogsDataSource `json:"iisLogs,omitempty"`
+
+	// The list of Log files source configurations.
+	LogFiles []*LogFilesDataSource `json:"logFiles,omitempty"`
+
 	// The list of performance counter data source configurations.
 	PerformanceCounters []*PerfCounterDataSource `json:"performanceCounters,omitempty"`
 
@@ -1688,6 +1757,8 @@ type DataCollectionRuleDataSources struct {
 func (d DataCollectionRuleDataSources) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
 	populate(objectMap, "extensions", d.Extensions)
+	populate(objectMap, "iisLogs", d.IisLogs)
+	populate(objectMap, "logFiles", d.LogFiles)
 	populate(objectMap, "performanceCounters", d.PerformanceCounters)
 	populate(objectMap, "syslog", d.Syslog)
 	populate(objectMap, "windowsEventLogs", d.WindowsEventLogs)
@@ -1709,6 +1780,12 @@ func (d DataCollectionRuleDestinations) MarshalJSON() ([]byte, error) {
 	populate(objectMap, "azureMonitorMetrics", d.AzureMonitorMetrics)
 	populate(objectMap, "logAnalytics", d.LogAnalytics)
 	return json.Marshal(objectMap)
+}
+
+// DataCollectionRuleMetadata - Metadata about the resource
+type DataCollectionRuleMetadata struct {
+	// READ-ONLY; Azure offering managing this resource on-behalf-of customer.
+	ProvisionedBy *string `json:"provisionedBy,omitempty" azure:"ro"`
 }
 
 // DataCollectionRuleResource - Definition of ARM tracked top level resource.
@@ -1775,6 +1852,9 @@ func (d DataCollectionRuleResourceListResult) MarshalJSON() ([]byte, error) {
 
 // DataCollectionRuleResourceProperties - Resource properties.
 type DataCollectionRuleResourceProperties struct {
+	// The resource ID of the data collection endpoint that this rule can be used with.
+	DataCollectionEndpointID *string `json:"dataCollectionEndpointId,omitempty"`
+
 	// The specification of data flows.
 	DataFlows []*DataFlow `json:"dataFlows,omitempty"`
 
@@ -1788,8 +1868,14 @@ type DataCollectionRuleResourceProperties struct {
 	// The specification of destinations.
 	Destinations *DataCollectionRuleDestinations `json:"destinations,omitempty"`
 
+	// Declaration of custom streams used in this rule.
+	StreamDeclarations map[string]*StreamDeclaration `json:"streamDeclarations,omitempty"`
+
 	// READ-ONLY; The immutable ID of this data collection rule. This property is READ-ONLY.
 	ImmutableID *string `json:"immutableId,omitempty" azure:"ro"`
+
+	// READ-ONLY; Metadata about the resource
+	Metadata *DataCollectionRuleMetadata `json:"metadata,omitempty" azure:"ro"`
 
 	// READ-ONLY; The resource provisioning state.
 	ProvisioningState *KnownDataCollectionRuleProvisioningState `json:"provisioningState,omitempty" azure:"ro"`
@@ -1798,12 +1884,15 @@ type DataCollectionRuleResourceProperties struct {
 // MarshalJSON implements the json.Marshaller interface for type DataCollectionRuleResourceProperties.
 func (d DataCollectionRuleResourceProperties) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
+	populate(objectMap, "dataCollectionEndpointId", d.DataCollectionEndpointID)
 	populate(objectMap, "dataFlows", d.DataFlows)
 	populate(objectMap, "dataSources", d.DataSources)
 	populate(objectMap, "description", d.Description)
 	populate(objectMap, "destinations", d.Destinations)
 	populate(objectMap, "immutableId", d.ImmutableID)
+	populate(objectMap, "metadata", d.Metadata)
 	populate(objectMap, "provisioningState", d.ProvisioningState)
+	populate(objectMap, "streamDeclarations", d.StreamDeclarations)
 	return json.Marshal(objectMap)
 }
 
@@ -1920,15 +2009,23 @@ type DataFlow struct {
 	// List of destinations for this data flow.
 	Destinations []*string `json:"destinations,omitempty"`
 
+	// The output stream of the transform. Only required if the transform changes data to a different stream.
+	OutputStream *string `json:"outputStream,omitempty"`
+
 	// List of streams for this data flow.
 	Streams []*KnownDataFlowStreams `json:"streams,omitempty"`
+
+	// The KQL query to transform stream data.
+	TransformKql *string `json:"transformKql,omitempty"`
 }
 
 // MarshalJSON implements the json.Marshaller interface for type DataFlow.
 func (d DataFlow) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
 	populate(objectMap, "destinations", d.Destinations)
+	populate(objectMap, "outputStream", d.OutputStream)
 	populate(objectMap, "streams", d.Streams)
+	populate(objectMap, "transformKql", d.TransformKql)
 	return json.Marshal(objectMap)
 }
 
@@ -1936,6 +2033,12 @@ func (d DataFlow) MarshalJSON() ([]byte, error) {
 type DataSourcesSpec struct {
 	// The list of Azure VM extension data source configurations.
 	Extensions []*ExtensionDataSource `json:"extensions,omitempty"`
+
+	// The list of IIS logs source configurations.
+	IisLogs []*IisLogsDataSource `json:"iisLogs,omitempty"`
+
+	// The list of Log files source configurations.
+	LogFiles []*LogFilesDataSource `json:"logFiles,omitempty"`
 
 	// The list of performance counter data source configurations.
 	PerformanceCounters []*PerfCounterDataSource `json:"performanceCounters,omitempty"`
@@ -1951,6 +2054,8 @@ type DataSourcesSpec struct {
 func (d DataSourcesSpec) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
 	populate(objectMap, "extensions", d.Extensions)
+	populate(objectMap, "iisLogs", d.IisLogs)
+	populate(objectMap, "logFiles", d.LogFiles)
 	populate(objectMap, "performanceCounters", d.PerformanceCounters)
 	populate(objectMap, "syslog", d.Syslog)
 	populate(objectMap, "windowsEventLogs", d.WindowsEventLogs)
@@ -2745,6 +2850,28 @@ type HTTPRequestInfo struct {
 	URI *string `json:"uri,omitempty"`
 }
 
+// IisLogsDataSource - Enables IIS logs to be collected by this data collection rule.
+type IisLogsDataSource struct {
+	// REQUIRED; IIS streams
+	Streams []*string `json:"streams,omitempty"`
+
+	// Absolute paths file location
+	LogDirectories []*string `json:"logDirectories,omitempty"`
+
+	// A friendly name for the data source. This name should be unique across all data sources (regardless of type) within the
+	// data collection rule.
+	Name *string `json:"name,omitempty"`
+}
+
+// MarshalJSON implements the json.Marshaller interface for type IisLogsDataSource.
+func (i IisLogsDataSource) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	populate(objectMap, "logDirectories", i.LogDirectories)
+	populate(objectMap, "name", i.Name)
+	populate(objectMap, "streams", i.Streams)
+	return json.Marshal(objectMap)
+}
+
 // Incident - An alert incident indicates the activation status of an alert rule.
 type Incident struct {
 	// READ-ONLY; The time at which the incident was activated in ISO8601 format.
@@ -2923,6 +3050,61 @@ type LogAnalyticsDestination struct {
 
 	// READ-ONLY; The Customer ID of the Log Analytics workspace.
 	WorkspaceID *string `json:"workspaceId,omitempty" azure:"ro"`
+}
+
+// LogFileSettings - Settings for different log file formats
+type LogFileSettings struct {
+	// Text settings
+	Text *LogFileSettingsText `json:"text,omitempty"`
+}
+
+// LogFileSettingsText - Text settings
+type LogFileSettingsText struct {
+	// REQUIRED; One of the supported timestamp formats
+	RecordStartTimestampFormat *KnownLogFileTextSettingsRecordStartTimestampFormat `json:"recordStartTimestampFormat,omitempty"`
+}
+
+// LogFileTextSettings - Settings for text log files
+type LogFileTextSettings struct {
+	// REQUIRED; One of the supported timestamp formats
+	RecordStartTimestampFormat *KnownLogFileTextSettingsRecordStartTimestampFormat `json:"recordStartTimestampFormat,omitempty"`
+}
+
+// LogFilesDataSource - Definition of which custom log files will be collected by this data collection rule
+type LogFilesDataSource struct {
+	// REQUIRED; File Patterns where the log files are located
+	FilePatterns []*string `json:"filePatterns,omitempty"`
+
+	// REQUIRED; The data format of the log files
+	Format *KnownLogFilesDataSourceFormat `json:"format,omitempty"`
+
+	// REQUIRED; List of streams that this data source will be sent to. A stream indicates what schema will be used for this data
+	// source
+	Streams []*string `json:"streams,omitempty"`
+
+	// A friendly name for the data source. This name should be unique across all data sources (regardless of type) within the
+	// data collection rule.
+	Name *string `json:"name,omitempty"`
+
+	// The log files specific settings.
+	Settings *LogFilesDataSourceSettings `json:"settings,omitempty"`
+}
+
+// MarshalJSON implements the json.Marshaller interface for type LogFilesDataSource.
+func (l LogFilesDataSource) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	populate(objectMap, "filePatterns", l.FilePatterns)
+	populate(objectMap, "format", l.Format)
+	populate(objectMap, "name", l.Name)
+	populate(objectMap, "settings", l.Settings)
+	populate(objectMap, "streams", l.Streams)
+	return json.Marshal(objectMap)
+}
+
+// LogFilesDataSourceSettings - The log files specific settings.
+type LogFilesDataSourceSettings struct {
+	// Text settings
+	Text *LogFileSettingsText `json:"text,omitempty"`
 }
 
 // LogMetricTrigger - A log metrics trigger descriptor.
@@ -3397,6 +3579,12 @@ func (m *ManagementEventRuleCondition) UnmarshalJSON(data []byte) error {
 		}
 	}
 	return nil
+}
+
+// Metadata about the resource
+type Metadata struct {
+	// READ-ONLY; Azure offering managing this resource on-behalf-of customer.
+	ProvisionedBy *string `json:"provisionedBy,omitempty" azure:"ro"`
 }
 
 // MetadataValue - Represents a metric metadata value.
@@ -5987,6 +6175,19 @@ func (s Source) MarshalJSON() ([]byte, error) {
 	return json.Marshal(objectMap)
 }
 
+// StreamDeclaration - Declaration of a custom stream.
+type StreamDeclaration struct {
+	// List of columns used by data in this stream.
+	Columns []*ColumnDefinition `json:"columns,omitempty"`
+}
+
+// MarshalJSON implements the json.Marshaller interface for type StreamDeclaration.
+func (s StreamDeclaration) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	populate(objectMap, "columns", s.Columns)
+	return json.Marshal(objectMap)
+}
+
 // SyslogDataSource - Definition of which syslog data will be collected and how it will be collected. Only collected from
 // Linux machines.
 type SyslogDataSource struct {
@@ -6148,18 +6349,6 @@ func (t TestNotificationDetailsResponse) MarshalJSON() ([]byte, error) {
 	populate(objectMap, "CreatedTime", t.CreatedTime)
 	populate(objectMap, "State", t.State)
 	return json.Marshal(objectMap)
-}
-
-// TestNotificationResponse - The response when test notification succeeded
-type TestNotificationResponse struct {
-	// REQUIRED; The correlation id
-	CorrelationID *string `json:"correlationId,omitempty"`
-
-	// REQUIRED; The created time
-	CreatedTime *string `json:"createdTime,omitempty"`
-
-	// REQUIRED; The notification id
-	NotificationID *string `json:"notificationId,omitempty"`
 }
 
 // ThresholdRuleCondition - A rule condition based on a metric crossing a threshold.

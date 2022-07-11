@@ -1,5 +1,105 @@
 # Release History
 
+## 0.5.0 (2022-07-11)
+### Breaking Changes
+
+- Struct `ActionGroupsClientPostTestNotificationsResult` has been removed
+- Struct `TestNotificationResponse` has been removed
+- Field `ActionGroupsClientPostTestNotificationsResult` of struct `ActionGroupsClientPostTestNotificationsResponse` has been removed
+
+### Features Added
+
+- New const `KnownLogFileTextSettingsRecordStartTimestampFormatYYYYMMDDHHMMSS`
+- New const `KnownColumnDefinitionTypeBoolean`
+- New const `KnownLogFileTextSettingsRecordStartTimestampFormatMDYYYYHHMMSSAMPM`
+- New const `KnownLogFileTextSettingsRecordStartTimestampFormatYyMMddHHMmSs`
+- New const `KnownLogFileTextSettingsRecordStartTimestampFormatYyyyMMDdTHHMmSsK`
+- New const `KnownLogFileTextSettingsRecordStartTimestampFormatISO8601`
+- New const `KnownColumnDefinitionTypeReal`
+- New const `KnownLogFileTextSettingsRecordStartTimestampFormatMonDDYYYYHHMMSS`
+- New const `KnownLogFilesDataSourceFormatText`
+- New const `KnownColumnDefinitionTypeDynamic`
+- New const `KnownLogFileTextSettingsRecordStartTimestampFormatDdMMMYyyyHHMmSsZzz`
+- New const `KnownLogFileTextSettingsRecordStartTimestampFormatDdMMyyHHMmSs`
+- New const `KnownColumnDefinitionTypeLong`
+- New const `KnownColumnDefinitionTypeInt`
+- New const `KnownColumnDefinitionTypeDatetime`
+- New const `KnownColumnDefinitionTypeString`
+- New const `KnownLogFileTextSettingsRecordStartTimestampFormatMMMDHhMmSs`
+- New function `IisLogsDataSource.MarshalJSON() ([]byte, error)`
+- New function `ActionGroupsClientCreateNotificationsAtActionGroupResourceLevelPollerResponse.PollUntilDone(context.Context, time.Duration) (ActionGroupsClientCreateNotificationsAtActionGroupResourceLevelResponse, error)`
+- New function `PossibleKnownLogFilesDataSourceFormatValues() []KnownLogFilesDataSourceFormat`
+- New function `*ActionGroupsClientCreateNotificationsAtResourceGroupLevelPoller.ResumeToken() (string, error)`
+- New function `*ActionGroupsClientCreateNotificationsAtActionGroupResourceLevelPoller.FinalResponse(context.Context) (ActionGroupsClientCreateNotificationsAtActionGroupResourceLevelResponse, error)`
+- New function `KnownLogFilesDataSourceFormat.ToPtr() *KnownLogFilesDataSourceFormat`
+- New function `*ActionGroupsClientCreateNotificationsAtActionGroupResourceLevelPollerResponse.Resume(context.Context, *ActionGroupsClient, string) error`
+- New function `*ActionGroupsClientCreateNotificationsAtResourceGroupLevelPoller.Poll(context.Context) (*http.Response, error)`
+- New function `*ActionGroupsClient.GetTestNotificationsAtResourceGroupLevel(context.Context, string, string, *ActionGroupsClientGetTestNotificationsAtResourceGroupLevelOptions) (ActionGroupsClientGetTestNotificationsAtResourceGroupLevelResponse, error)`
+- New function `*ActionGroupsClientCreateNotificationsAtActionGroupResourceLevelPoller.Done() bool`
+- New function `PossibleKnownLogFileTextSettingsRecordStartTimestampFormatValues() []KnownLogFileTextSettingsRecordStartTimestampFormat`
+- New function `*ActionGroupsClientCreateNotificationsAtResourceGroupLevelPoller.Done() bool`
+- New function `KnownLogFileTextSettingsRecordStartTimestampFormat.ToPtr() *KnownLogFileTextSettingsRecordStartTimestampFormat`
+- New function `*ActionGroupsClientCreateNotificationsAtResourceGroupLevelPollerResponse.Resume(context.Context, *ActionGroupsClient, string) error`
+- New function `*DataCollectionRuleAssociationsClientListByDataCollectionEndpointPager.NextPage(context.Context) bool`
+- New function `*ActionGroupsClientCreateNotificationsAtResourceGroupLevelPoller.FinalResponse(context.Context) (ActionGroupsClientCreateNotificationsAtResourceGroupLevelResponse, error)`
+- New function `*ActionGroupsClient.BeginCreateNotificationsAtActionGroupResourceLevel(context.Context, string, string, NotificationRequestBody, *ActionGroupsClientBeginCreateNotificationsAtActionGroupResourceLevelOptions) (ActionGroupsClientCreateNotificationsAtActionGroupResourceLevelPollerResponse, error)`
+- New function `StreamDeclaration.MarshalJSON() ([]byte, error)`
+- New function `*ActionGroupsClientCreateNotificationsAtActionGroupResourceLevelPoller.ResumeToken() (string, error)`
+- New function `*DataCollectionRuleAssociationsClient.ListByDataCollectionEndpoint(string, string, *DataCollectionRuleAssociationsClientListByDataCollectionEndpointOptions) *DataCollectionRuleAssociationsClientListByDataCollectionEndpointPager`
+- New function `ActionGroupsClientCreateNotificationsAtResourceGroupLevelPollerResponse.PollUntilDone(context.Context, time.Duration) (ActionGroupsClientCreateNotificationsAtResourceGroupLevelResponse, error)`
+- New function `*ActionGroupsClientCreateNotificationsAtActionGroupResourceLevelPoller.Poll(context.Context) (*http.Response, error)`
+- New function `*DataCollectionRuleAssociationsClientListByDataCollectionEndpointPager.PageResponse() DataCollectionRuleAssociationsClientListByDataCollectionEndpointResponse`
+- New function `LogFilesDataSource.MarshalJSON() ([]byte, error)`
+- New function `KnownColumnDefinitionType.ToPtr() *KnownColumnDefinitionType`
+- New function `*DataCollectionRuleAssociationsClientListByDataCollectionEndpointPager.Err() error`
+- New function `*ActionGroupsClient.BeginCreateNotificationsAtResourceGroupLevel(context.Context, string, NotificationRequestBody, *ActionGroupsClientBeginCreateNotificationsAtResourceGroupLevelOptions) (ActionGroupsClientCreateNotificationsAtResourceGroupLevelPollerResponse, error)`
+- New function `*ActionGroupsClient.GetTestNotificationsAtActionGroupResourceLevel(context.Context, string, string, string, *ActionGroupsClientGetTestNotificationsAtActionGroupResourceLevelOptions) (ActionGroupsClientGetTestNotificationsAtActionGroupResourceLevelResponse, error)`
+- New function `PossibleKnownColumnDefinitionTypeValues() []KnownColumnDefinitionType`
+- New struct `ActionGroupsClientBeginCreateNotificationsAtActionGroupResourceLevelOptions`
+- New struct `ActionGroupsClientBeginCreateNotificationsAtResourceGroupLevelOptions`
+- New struct `ActionGroupsClientCreateNotificationsAtActionGroupResourceLevelPoller`
+- New struct `ActionGroupsClientCreateNotificationsAtActionGroupResourceLevelPollerResponse`
+- New struct `ActionGroupsClientCreateNotificationsAtActionGroupResourceLevelResponse`
+- New struct `ActionGroupsClientCreateNotificationsAtResourceGroupLevelPoller`
+- New struct `ActionGroupsClientCreateNotificationsAtResourceGroupLevelPollerResponse`
+- New struct `ActionGroupsClientCreateNotificationsAtResourceGroupLevelResponse`
+- New struct `ActionGroupsClientGetTestNotificationsAtActionGroupResourceLevelOptions`
+- New struct `ActionGroupsClientGetTestNotificationsAtActionGroupResourceLevelResponse`
+- New struct `ActionGroupsClientGetTestNotificationsAtActionGroupResourceLevelResult`
+- New struct `ActionGroupsClientGetTestNotificationsAtResourceGroupLevelOptions`
+- New struct `ActionGroupsClientGetTestNotificationsAtResourceGroupLevelResponse`
+- New struct `ActionGroupsClientGetTestNotificationsAtResourceGroupLevelResult`
+- New struct `ColumnDefinition`
+- New struct `DataCollectionRuleAssociationMetadata`
+- New struct `DataCollectionRuleAssociationsClientListByDataCollectionEndpointOptions`
+- New struct `DataCollectionRuleAssociationsClientListByDataCollectionEndpointPager`
+- New struct `DataCollectionRuleAssociationsClientListByDataCollectionEndpointResponse`
+- New struct `DataCollectionRuleAssociationsClientListByDataCollectionEndpointResult`
+- New struct `DataCollectionRuleMetadata`
+- New struct `IisLogsDataSource`
+- New struct `LogFileSettings`
+- New struct `LogFileSettingsText`
+- New struct `LogFileTextSettings`
+- New struct `LogFilesDataSource`
+- New struct `LogFilesDataSourceSettings`
+- New struct `Metadata`
+- New struct `StreamDeclaration`
+- New field `Metadata` in struct `DataCollectionRuleAssociation`
+- New field `DataCollectionEndpointID` in struct `DataCollectionRuleResourceProperties`
+- New field `StreamDeclarations` in struct `DataCollectionRuleResourceProperties`
+- New field `Metadata` in struct `DataCollectionRuleResourceProperties`
+- New field `LogFiles` in struct `DataCollectionRuleDataSources`
+- New field `IisLogs` in struct `DataCollectionRuleDataSources`
+- New field `DataCollectionEndpointID` in struct `DataCollectionRule`
+- New field `StreamDeclarations` in struct `DataCollectionRule`
+- New field `Metadata` in struct `DataCollectionRule`
+- New field `Metadata` in struct `DataCollectionRuleAssociationProxyOnlyResourceProperties`
+- New field `IisLogs` in struct `DataSourcesSpec`
+- New field `LogFiles` in struct `DataSourcesSpec`
+- New field `OutputStream` in struct `DataFlow`
+- New field `TransformKql` in struct `DataFlow`
+
+
 ## 0.4.0 (2022-01-13)
 ### Breaking Changes
 

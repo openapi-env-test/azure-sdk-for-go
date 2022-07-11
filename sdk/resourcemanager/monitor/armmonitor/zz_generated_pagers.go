@@ -394,6 +394,60 @@ func (p *DataCollectionEndpointsClientListBySubscriptionPager) PageResponse() Da
 	return p.current
 }
 
+// DataCollectionRuleAssociationsClientListByDataCollectionEndpointPager provides operations for iterating over paged responses.
+type DataCollectionRuleAssociationsClientListByDataCollectionEndpointPager struct {
+	client    *DataCollectionRuleAssociationsClient
+	current   DataCollectionRuleAssociationsClientListByDataCollectionEndpointResponse
+	err       error
+	requester func(context.Context) (*policy.Request, error)
+	advancer  func(context.Context, DataCollectionRuleAssociationsClientListByDataCollectionEndpointResponse) (*policy.Request, error)
+}
+
+// Err returns the last error encountered while paging.
+func (p *DataCollectionRuleAssociationsClientListByDataCollectionEndpointPager) Err() error {
+	return p.err
+}
+
+// NextPage returns true if the pager advanced to the next page.
+// Returns false if there are no more pages or an error occurred.
+func (p *DataCollectionRuleAssociationsClientListByDataCollectionEndpointPager) NextPage(ctx context.Context) bool {
+	var req *policy.Request
+	var err error
+	if !reflect.ValueOf(p.current).IsZero() {
+		if p.current.DataCollectionRuleAssociationProxyOnlyResourceListResult.NextLink == nil || len(*p.current.DataCollectionRuleAssociationProxyOnlyResourceListResult.NextLink) == 0 {
+			return false
+		}
+		req, err = p.advancer(ctx, p.current)
+	} else {
+		req, err = p.requester(ctx)
+	}
+	if err != nil {
+		p.err = err
+		return false
+	}
+	resp, err := p.client.pl.Do(req)
+	if err != nil {
+		p.err = err
+		return false
+	}
+	if !runtime.HasStatusCode(resp, http.StatusOK) {
+		p.err = runtime.NewResponseError(resp)
+		return false
+	}
+	result, err := p.client.listByDataCollectionEndpointHandleResponse(resp)
+	if err != nil {
+		p.err = err
+		return false
+	}
+	p.current = result
+	return true
+}
+
+// PageResponse returns the current DataCollectionRuleAssociationsClientListByDataCollectionEndpointResponse page.
+func (p *DataCollectionRuleAssociationsClientListByDataCollectionEndpointPager) PageResponse() DataCollectionRuleAssociationsClientListByDataCollectionEndpointResponse {
+	return p.current
+}
+
 // DataCollectionRuleAssociationsClientListByResourcePager provides operations for iterating over paged responses.
 type DataCollectionRuleAssociationsClientListByResourcePager struct {
 	client    *DataCollectionRuleAssociationsClient

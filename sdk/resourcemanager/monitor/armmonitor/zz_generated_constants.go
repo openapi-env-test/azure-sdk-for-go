@@ -10,7 +10,7 @@ package armmonitor
 
 const (
 	moduleName    = "armmonitor"
-	moduleVersion = "v0.4.0"
+	moduleVersion = "v0.5.0"
 )
 
 // AggregationType - the aggregation type of the metric.
@@ -384,6 +384,37 @@ func (c EventLevel) ToPtr() *EventLevel {
 	return &c
 }
 
+// KnownColumnDefinitionType - The type of the column data.
+type KnownColumnDefinitionType string
+
+const (
+	KnownColumnDefinitionTypeBoolean  KnownColumnDefinitionType = "boolean"
+	KnownColumnDefinitionTypeDatetime KnownColumnDefinitionType = "datetime"
+	KnownColumnDefinitionTypeDynamic  KnownColumnDefinitionType = "dynamic"
+	KnownColumnDefinitionTypeInt      KnownColumnDefinitionType = "int"
+	KnownColumnDefinitionTypeLong     KnownColumnDefinitionType = "long"
+	KnownColumnDefinitionTypeReal     KnownColumnDefinitionType = "real"
+	KnownColumnDefinitionTypeString   KnownColumnDefinitionType = "string"
+)
+
+// PossibleKnownColumnDefinitionTypeValues returns the possible values for the KnownColumnDefinitionType const type.
+func PossibleKnownColumnDefinitionTypeValues() []KnownColumnDefinitionType {
+	return []KnownColumnDefinitionType{
+		KnownColumnDefinitionTypeBoolean,
+		KnownColumnDefinitionTypeDatetime,
+		KnownColumnDefinitionTypeDynamic,
+		KnownColumnDefinitionTypeInt,
+		KnownColumnDefinitionTypeLong,
+		KnownColumnDefinitionTypeReal,
+		KnownColumnDefinitionTypeString,
+	}
+}
+
+// ToPtr returns a *KnownColumnDefinitionType pointing to the current value.
+func (c KnownColumnDefinitionType) ToPtr() *KnownColumnDefinitionType {
+	return &c
+}
+
 // KnownDataCollectionEndpointProvisioningState - The resource provisioning state. This property is READ-ONLY.
 type KnownDataCollectionEndpointProvisioningState string
 
@@ -556,6 +587,60 @@ func PossibleKnownExtensionDataSourceStreamsValues() []KnownExtensionDataSourceS
 
 // ToPtr returns a *KnownExtensionDataSourceStreams pointing to the current value.
 func (c KnownExtensionDataSourceStreams) ToPtr() *KnownExtensionDataSourceStreams {
+	return &c
+}
+
+// KnownLogFileTextSettingsRecordStartTimestampFormat - One of the supported timestamp formats
+type KnownLogFileTextSettingsRecordStartTimestampFormat string
+
+const (
+	KnownLogFileTextSettingsRecordStartTimestampFormatDdMMMYyyyHHMmSsZzz KnownLogFileTextSettingsRecordStartTimestampFormat = "dd/MMM/yyyy:HH:mm:ss zzz"
+	KnownLogFileTextSettingsRecordStartTimestampFormatDdMMyyHHMmSs       KnownLogFileTextSettingsRecordStartTimestampFormat = "ddMMyy HH:mm:ss"
+	KnownLogFileTextSettingsRecordStartTimestampFormatISO8601            KnownLogFileTextSettingsRecordStartTimestampFormat = "ISO 8601"
+	KnownLogFileTextSettingsRecordStartTimestampFormatMDYYYYHHMMSSAMPM   KnownLogFileTextSettingsRecordStartTimestampFormat = "M/D/YYYY HH:MM:SS AM/PM"
+	KnownLogFileTextSettingsRecordStartTimestampFormatMMMDHhMmSs         KnownLogFileTextSettingsRecordStartTimestampFormat = "MMM d hh:mm:ss"
+	KnownLogFileTextSettingsRecordStartTimestampFormatMonDDYYYYHHMMSS    KnownLogFileTextSettingsRecordStartTimestampFormat = "Mon DD, YYYY HH:MM:SS"
+	KnownLogFileTextSettingsRecordStartTimestampFormatYYYYMMDDHHMMSS     KnownLogFileTextSettingsRecordStartTimestampFormat = "YYYY-MM-DD HH:MM:SS"
+	KnownLogFileTextSettingsRecordStartTimestampFormatYyMMddHHMmSs       KnownLogFileTextSettingsRecordStartTimestampFormat = "yyMMdd HH:mm:ss"
+	KnownLogFileTextSettingsRecordStartTimestampFormatYyyyMMDdTHHMmSsK   KnownLogFileTextSettingsRecordStartTimestampFormat = "yyyy-MM-ddTHH:mm:ssK"
+)
+
+// PossibleKnownLogFileTextSettingsRecordStartTimestampFormatValues returns the possible values for the KnownLogFileTextSettingsRecordStartTimestampFormat const type.
+func PossibleKnownLogFileTextSettingsRecordStartTimestampFormatValues() []KnownLogFileTextSettingsRecordStartTimestampFormat {
+	return []KnownLogFileTextSettingsRecordStartTimestampFormat{
+		KnownLogFileTextSettingsRecordStartTimestampFormatDdMMMYyyyHHMmSsZzz,
+		KnownLogFileTextSettingsRecordStartTimestampFormatDdMMyyHHMmSs,
+		KnownLogFileTextSettingsRecordStartTimestampFormatISO8601,
+		KnownLogFileTextSettingsRecordStartTimestampFormatMDYYYYHHMMSSAMPM,
+		KnownLogFileTextSettingsRecordStartTimestampFormatMMMDHhMmSs,
+		KnownLogFileTextSettingsRecordStartTimestampFormatMonDDYYYYHHMMSS,
+		KnownLogFileTextSettingsRecordStartTimestampFormatYYYYMMDDHHMMSS,
+		KnownLogFileTextSettingsRecordStartTimestampFormatYyMMddHHMmSs,
+		KnownLogFileTextSettingsRecordStartTimestampFormatYyyyMMDdTHHMmSsK,
+	}
+}
+
+// ToPtr returns a *KnownLogFileTextSettingsRecordStartTimestampFormat pointing to the current value.
+func (c KnownLogFileTextSettingsRecordStartTimestampFormat) ToPtr() *KnownLogFileTextSettingsRecordStartTimestampFormat {
+	return &c
+}
+
+// KnownLogFilesDataSourceFormat - The data format of the log files
+type KnownLogFilesDataSourceFormat string
+
+const (
+	KnownLogFilesDataSourceFormatText KnownLogFilesDataSourceFormat = "text"
+)
+
+// PossibleKnownLogFilesDataSourceFormatValues returns the possible values for the KnownLogFilesDataSourceFormat const type.
+func PossibleKnownLogFilesDataSourceFormatValues() []KnownLogFilesDataSourceFormat {
+	return []KnownLogFilesDataSourceFormat{
+		KnownLogFilesDataSourceFormatText,
+	}
+}
+
+// ToPtr returns a *KnownLogFilesDataSourceFormat pointing to the current value.
+func (c KnownLogFilesDataSourceFormat) ToPtr() *KnownLogFilesDataSourceFormat {
 	return &c
 }
 

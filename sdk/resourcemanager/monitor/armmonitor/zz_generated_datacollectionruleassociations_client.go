@@ -83,7 +83,7 @@ func (client *DataCollectionRuleAssociationsClient) createCreateRequest(ctx cont
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-04-01")
+	reqQP.Set("api-version", "2021-09-01-preview")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	if options != nil && options.Body != nil {
@@ -135,7 +135,7 @@ func (client *DataCollectionRuleAssociationsClient) deleteCreateRequest(ctx cont
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-04-01")
+	reqQP.Set("api-version", "2021-09-01-preview")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -175,7 +175,7 @@ func (client *DataCollectionRuleAssociationsClient) getCreateRequest(ctx context
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-04-01")
+	reqQP.Set("api-version", "2021-09-01-preview")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -186,6 +186,59 @@ func (client *DataCollectionRuleAssociationsClient) getHandleResponse(resp *http
 	result := DataCollectionRuleAssociationsClientGetResponse{RawResponse: resp}
 	if err := runtime.UnmarshalAsJSON(resp, &result.DataCollectionRuleAssociationProxyOnlyResource); err != nil {
 		return DataCollectionRuleAssociationsClientGetResponse{}, err
+	}
+	return result, nil
+}
+
+// ListByDataCollectionEndpoint - Lists associations for the specified data collection endpoint.
+// If the operation fails it returns an *azcore.ResponseError type.
+// resourceGroupName - The name of the resource group. The name is case insensitive.
+// dataCollectionEndpointName - The name of the data collection endpoint. The name is case insensitive.
+// options - DataCollectionRuleAssociationsClientListByDataCollectionEndpointOptions contains the optional parameters for
+// the DataCollectionRuleAssociationsClient.ListByDataCollectionEndpoint method.
+func (client *DataCollectionRuleAssociationsClient) ListByDataCollectionEndpoint(resourceGroupName string, dataCollectionEndpointName string, options *DataCollectionRuleAssociationsClientListByDataCollectionEndpointOptions) *DataCollectionRuleAssociationsClientListByDataCollectionEndpointPager {
+	return &DataCollectionRuleAssociationsClientListByDataCollectionEndpointPager{
+		client: client,
+		requester: func(ctx context.Context) (*policy.Request, error) {
+			return client.listByDataCollectionEndpointCreateRequest(ctx, resourceGroupName, dataCollectionEndpointName, options)
+		},
+		advancer: func(ctx context.Context, resp DataCollectionRuleAssociationsClientListByDataCollectionEndpointResponse) (*policy.Request, error) {
+			return runtime.NewRequest(ctx, http.MethodGet, *resp.DataCollectionRuleAssociationProxyOnlyResourceListResult.NextLink)
+		},
+	}
+}
+
+// listByDataCollectionEndpointCreateRequest creates the ListByDataCollectionEndpoint request.
+func (client *DataCollectionRuleAssociationsClient) listByDataCollectionEndpointCreateRequest(ctx context.Context, resourceGroupName string, dataCollectionEndpointName string, options *DataCollectionRuleAssociationsClientListByDataCollectionEndpointOptions) (*policy.Request, error) {
+	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/dataCollectionEndpoints/{dataCollectionEndpointName}/associations"
+	if client.subscriptionID == "" {
+		return nil, errors.New("parameter client.subscriptionID cannot be empty")
+	}
+	urlPath = strings.ReplaceAll(urlPath, "{subscriptionId}", url.PathEscape(client.subscriptionID))
+	if resourceGroupName == "" {
+		return nil, errors.New("parameter resourceGroupName cannot be empty")
+	}
+	urlPath = strings.ReplaceAll(urlPath, "{resourceGroupName}", url.PathEscape(resourceGroupName))
+	if dataCollectionEndpointName == "" {
+		return nil, errors.New("parameter dataCollectionEndpointName cannot be empty")
+	}
+	urlPath = strings.ReplaceAll(urlPath, "{dataCollectionEndpointName}", url.PathEscape(dataCollectionEndpointName))
+	req, err := runtime.NewRequest(ctx, http.MethodGet, runtime.JoinPaths(client.host, urlPath))
+	if err != nil {
+		return nil, err
+	}
+	reqQP := req.Raw().URL.Query()
+	reqQP.Set("api-version", "2021-09-01-preview")
+	req.Raw().URL.RawQuery = reqQP.Encode()
+	req.Raw().Header.Set("Accept", "application/json")
+	return req, nil
+}
+
+// listByDataCollectionEndpointHandleResponse handles the ListByDataCollectionEndpoint response.
+func (client *DataCollectionRuleAssociationsClient) listByDataCollectionEndpointHandleResponse(resp *http.Response) (DataCollectionRuleAssociationsClientListByDataCollectionEndpointResponse, error) {
+	result := DataCollectionRuleAssociationsClientListByDataCollectionEndpointResponse{RawResponse: resp}
+	if err := runtime.UnmarshalAsJSON(resp, &result.DataCollectionRuleAssociationProxyOnlyResourceListResult); err != nil {
+		return DataCollectionRuleAssociationsClientListByDataCollectionEndpointResponse{}, err
 	}
 	return result, nil
 }
@@ -216,7 +269,7 @@ func (client *DataCollectionRuleAssociationsClient) listByResourceCreateRequest(
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-04-01")
+	reqQP.Set("api-version", "2021-09-01-preview")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -269,7 +322,7 @@ func (client *DataCollectionRuleAssociationsClient) listByRuleCreateRequest(ctx 
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-04-01")
+	reqQP.Set("api-version", "2021-09-01-preview")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil

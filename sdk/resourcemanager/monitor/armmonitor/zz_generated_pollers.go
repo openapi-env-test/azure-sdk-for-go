@@ -14,6 +14,92 @@ import (
 	"net/http"
 )
 
+// ActionGroupsClientCreateNotificationsAtActionGroupResourceLevelPoller provides polling facilities until the operation reaches a terminal state.
+type ActionGroupsClientCreateNotificationsAtActionGroupResourceLevelPoller struct {
+	pt *azcore.Poller
+}
+
+// Done returns true if the LRO has reached a terminal state.
+func (p *ActionGroupsClientCreateNotificationsAtActionGroupResourceLevelPoller) Done() bool {
+	return p.pt.Done()
+}
+
+// Poll fetches the latest state of the LRO.  It returns an HTTP response or error.
+// If the LRO has completed successfully, the poller's state is updated and the HTTP
+// response is returned.
+// If the LRO has completed with failure or was cancelled, the poller's state is
+// updated and the error is returned.
+// If the LRO has not reached a terminal state, the poller's state is updated and
+// the latest HTTP response is returned.
+// If Poll fails, the poller's state is unmodified and the error is returned.
+// Calling Poll on an LRO that has reached a terminal state will return the final
+// HTTP response or error.
+func (p *ActionGroupsClientCreateNotificationsAtActionGroupResourceLevelPoller) Poll(ctx context.Context) (*http.Response, error) {
+	return p.pt.Poll(ctx)
+}
+
+// FinalResponse performs a final GET to the service and returns the final response
+// for the polling operation. If there is an error performing the final GET then an error is returned.
+// If the final GET succeeded then the final ActionGroupsClientCreateNotificationsAtActionGroupResourceLevelResponse will be returned.
+func (p *ActionGroupsClientCreateNotificationsAtActionGroupResourceLevelPoller) FinalResponse(ctx context.Context) (ActionGroupsClientCreateNotificationsAtActionGroupResourceLevelResponse, error) {
+	respType := ActionGroupsClientCreateNotificationsAtActionGroupResourceLevelResponse{}
+	resp, err := p.pt.FinalResponse(ctx, nil)
+	if err != nil {
+		return ActionGroupsClientCreateNotificationsAtActionGroupResourceLevelResponse{}, err
+	}
+	respType.RawResponse = resp
+	return respType, nil
+}
+
+// ResumeToken returns a value representing the poller that can be used to resume
+// the LRO at a later time. ResumeTokens are unique per service operation.
+func (p *ActionGroupsClientCreateNotificationsAtActionGroupResourceLevelPoller) ResumeToken() (string, error) {
+	return p.pt.ResumeToken()
+}
+
+// ActionGroupsClientCreateNotificationsAtResourceGroupLevelPoller provides polling facilities until the operation reaches a terminal state.
+type ActionGroupsClientCreateNotificationsAtResourceGroupLevelPoller struct {
+	pt *azcore.Poller
+}
+
+// Done returns true if the LRO has reached a terminal state.
+func (p *ActionGroupsClientCreateNotificationsAtResourceGroupLevelPoller) Done() bool {
+	return p.pt.Done()
+}
+
+// Poll fetches the latest state of the LRO.  It returns an HTTP response or error.
+// If the LRO has completed successfully, the poller's state is updated and the HTTP
+// response is returned.
+// If the LRO has completed with failure or was cancelled, the poller's state is
+// updated and the error is returned.
+// If the LRO has not reached a terminal state, the poller's state is updated and
+// the latest HTTP response is returned.
+// If Poll fails, the poller's state is unmodified and the error is returned.
+// Calling Poll on an LRO that has reached a terminal state will return the final
+// HTTP response or error.
+func (p *ActionGroupsClientCreateNotificationsAtResourceGroupLevelPoller) Poll(ctx context.Context) (*http.Response, error) {
+	return p.pt.Poll(ctx)
+}
+
+// FinalResponse performs a final GET to the service and returns the final response
+// for the polling operation. If there is an error performing the final GET then an error is returned.
+// If the final GET succeeded then the final ActionGroupsClientCreateNotificationsAtResourceGroupLevelResponse will be returned.
+func (p *ActionGroupsClientCreateNotificationsAtResourceGroupLevelPoller) FinalResponse(ctx context.Context) (ActionGroupsClientCreateNotificationsAtResourceGroupLevelResponse, error) {
+	respType := ActionGroupsClientCreateNotificationsAtResourceGroupLevelResponse{}
+	resp, err := p.pt.FinalResponse(ctx, nil)
+	if err != nil {
+		return ActionGroupsClientCreateNotificationsAtResourceGroupLevelResponse{}, err
+	}
+	respType.RawResponse = resp
+	return respType, nil
+}
+
+// ResumeToken returns a value representing the poller that can be used to resume
+// the LRO at a later time. ResumeTokens are unique per service operation.
+func (p *ActionGroupsClientCreateNotificationsAtResourceGroupLevelPoller) ResumeToken() (string, error) {
+	return p.pt.ResumeToken()
+}
+
 // ActionGroupsClientPostTestNotificationsPoller provides polling facilities until the operation reaches a terminal state.
 type ActionGroupsClientPostTestNotificationsPoller struct {
 	pt *azcore.Poller
@@ -43,7 +129,7 @@ func (p *ActionGroupsClientPostTestNotificationsPoller) Poll(ctx context.Context
 // If the final GET succeeded then the final ActionGroupsClientPostTestNotificationsResponse will be returned.
 func (p *ActionGroupsClientPostTestNotificationsPoller) FinalResponse(ctx context.Context) (ActionGroupsClientPostTestNotificationsResponse, error) {
 	respType := ActionGroupsClientPostTestNotificationsResponse{}
-	resp, err := p.pt.FinalResponse(ctx, &respType.TestNotificationResponse)
+	resp, err := p.pt.FinalResponse(ctx, nil)
 	if err != nil {
 		return ActionGroupsClientPostTestNotificationsResponse{}, err
 	}

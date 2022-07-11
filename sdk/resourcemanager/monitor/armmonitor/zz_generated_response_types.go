@@ -15,6 +15,100 @@ import (
 	"time"
 )
 
+// ActionGroupsClientCreateNotificationsAtActionGroupResourceLevelPollerResponse contains the response from method ActionGroupsClient.CreateNotificationsAtActionGroupResourceLevel.
+type ActionGroupsClientCreateNotificationsAtActionGroupResourceLevelPollerResponse struct {
+	// Poller contains an initialized poller.
+	Poller *ActionGroupsClientCreateNotificationsAtActionGroupResourceLevelPoller
+
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// PollUntilDone will poll the service endpoint until a terminal state is reached or an error is received.
+// freq: the time to wait between intervals in absence of a Retry-After header. Allowed minimum is one second.
+// A good starting value is 30 seconds. Note that some resources might benefit from a different value.
+func (l ActionGroupsClientCreateNotificationsAtActionGroupResourceLevelPollerResponse) PollUntilDone(ctx context.Context, freq time.Duration) (ActionGroupsClientCreateNotificationsAtActionGroupResourceLevelResponse, error) {
+	respType := ActionGroupsClientCreateNotificationsAtActionGroupResourceLevelResponse{}
+	resp, err := l.Poller.pt.PollUntilDone(ctx, freq, nil)
+	if err != nil {
+		return respType, err
+	}
+	respType.RawResponse = resp
+	return respType, nil
+}
+
+// Resume rehydrates a ActionGroupsClientCreateNotificationsAtActionGroupResourceLevelPollerResponse from the provided client
+// and resume token.
+func (l *ActionGroupsClientCreateNotificationsAtActionGroupResourceLevelPollerResponse) Resume(ctx context.Context, client *ActionGroupsClient, token string) error {
+	pt, err := armruntime.NewPollerFromResumeToken("ActionGroupsClient.CreateNotificationsAtActionGroupResourceLevel", token, client.pl)
+	if err != nil {
+		return err
+	}
+	poller := &ActionGroupsClientCreateNotificationsAtActionGroupResourceLevelPoller{
+		pt: pt,
+	}
+	resp, err := poller.Poll(ctx)
+	if err != nil {
+		return err
+	}
+	l.Poller = poller
+	l.RawResponse = resp
+	return nil
+}
+
+// ActionGroupsClientCreateNotificationsAtActionGroupResourceLevelResponse contains the response from method ActionGroupsClient.CreateNotificationsAtActionGroupResourceLevel.
+type ActionGroupsClientCreateNotificationsAtActionGroupResourceLevelResponse struct {
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// ActionGroupsClientCreateNotificationsAtResourceGroupLevelPollerResponse contains the response from method ActionGroupsClient.CreateNotificationsAtResourceGroupLevel.
+type ActionGroupsClientCreateNotificationsAtResourceGroupLevelPollerResponse struct {
+	// Poller contains an initialized poller.
+	Poller *ActionGroupsClientCreateNotificationsAtResourceGroupLevelPoller
+
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// PollUntilDone will poll the service endpoint until a terminal state is reached or an error is received.
+// freq: the time to wait between intervals in absence of a Retry-After header. Allowed minimum is one second.
+// A good starting value is 30 seconds. Note that some resources might benefit from a different value.
+func (l ActionGroupsClientCreateNotificationsAtResourceGroupLevelPollerResponse) PollUntilDone(ctx context.Context, freq time.Duration) (ActionGroupsClientCreateNotificationsAtResourceGroupLevelResponse, error) {
+	respType := ActionGroupsClientCreateNotificationsAtResourceGroupLevelResponse{}
+	resp, err := l.Poller.pt.PollUntilDone(ctx, freq, nil)
+	if err != nil {
+		return respType, err
+	}
+	respType.RawResponse = resp
+	return respType, nil
+}
+
+// Resume rehydrates a ActionGroupsClientCreateNotificationsAtResourceGroupLevelPollerResponse from the provided client and
+// resume token.
+func (l *ActionGroupsClientCreateNotificationsAtResourceGroupLevelPollerResponse) Resume(ctx context.Context, client *ActionGroupsClient, token string) error {
+	pt, err := armruntime.NewPollerFromResumeToken("ActionGroupsClient.CreateNotificationsAtResourceGroupLevel", token, client.pl)
+	if err != nil {
+		return err
+	}
+	poller := &ActionGroupsClientCreateNotificationsAtResourceGroupLevelPoller{
+		pt: pt,
+	}
+	resp, err := poller.Poll(ctx)
+	if err != nil {
+		return err
+	}
+	l.Poller = poller
+	l.RawResponse = resp
+	return nil
+}
+
+// ActionGroupsClientCreateNotificationsAtResourceGroupLevelResponse contains the response from method ActionGroupsClient.CreateNotificationsAtResourceGroupLevel.
+type ActionGroupsClientCreateNotificationsAtResourceGroupLevelResponse struct {
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
 // ActionGroupsClientCreateOrUpdateResponse contains the response from method ActionGroupsClient.CreateOrUpdate.
 type ActionGroupsClientCreateOrUpdateResponse struct {
 	ActionGroupsClientCreateOrUpdateResult
@@ -49,6 +143,30 @@ type ActionGroupsClientGetResponse struct {
 // ActionGroupsClientGetResult contains the result from method ActionGroupsClient.Get.
 type ActionGroupsClientGetResult struct {
 	ActionGroupResource
+}
+
+// ActionGroupsClientGetTestNotificationsAtActionGroupResourceLevelResponse contains the response from method ActionGroupsClient.GetTestNotificationsAtActionGroupResourceLevel.
+type ActionGroupsClientGetTestNotificationsAtActionGroupResourceLevelResponse struct {
+	ActionGroupsClientGetTestNotificationsAtActionGroupResourceLevelResult
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// ActionGroupsClientGetTestNotificationsAtActionGroupResourceLevelResult contains the result from method ActionGroupsClient.GetTestNotificationsAtActionGroupResourceLevel.
+type ActionGroupsClientGetTestNotificationsAtActionGroupResourceLevelResult struct {
+	TestNotificationDetailsResponse
+}
+
+// ActionGroupsClientGetTestNotificationsAtResourceGroupLevelResponse contains the response from method ActionGroupsClient.GetTestNotificationsAtResourceGroupLevel.
+type ActionGroupsClientGetTestNotificationsAtResourceGroupLevelResponse struct {
+	ActionGroupsClientGetTestNotificationsAtResourceGroupLevelResult
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// ActionGroupsClientGetTestNotificationsAtResourceGroupLevelResult contains the result from method ActionGroupsClient.GetTestNotificationsAtResourceGroupLevel.
+type ActionGroupsClientGetTestNotificationsAtResourceGroupLevelResult struct {
+	TestNotificationDetailsResponse
 }
 
 // ActionGroupsClientGetTestNotificationsResponse contains the response from method ActionGroupsClient.GetTestNotifications.
@@ -101,7 +219,7 @@ type ActionGroupsClientPostTestNotificationsPollerResponse struct {
 // A good starting value is 30 seconds. Note that some resources might benefit from a different value.
 func (l ActionGroupsClientPostTestNotificationsPollerResponse) PollUntilDone(ctx context.Context, freq time.Duration) (ActionGroupsClientPostTestNotificationsResponse, error) {
 	respType := ActionGroupsClientPostTestNotificationsResponse{}
-	resp, err := l.Poller.pt.PollUntilDone(ctx, freq, &respType.TestNotificationResponse)
+	resp, err := l.Poller.pt.PollUntilDone(ctx, freq, nil)
 	if err != nil {
 		return respType, err
 	}
@@ -129,14 +247,8 @@ func (l *ActionGroupsClientPostTestNotificationsPollerResponse) Resume(ctx conte
 
 // ActionGroupsClientPostTestNotificationsResponse contains the response from method ActionGroupsClient.PostTestNotifications.
 type ActionGroupsClientPostTestNotificationsResponse struct {
-	ActionGroupsClientPostTestNotificationsResult
 	// RawResponse contains the underlying HTTP response.
 	RawResponse *http.Response
-}
-
-// ActionGroupsClientPostTestNotificationsResult contains the result from method ActionGroupsClient.PostTestNotifications.
-type ActionGroupsClientPostTestNotificationsResult struct {
-	TestNotificationResponse
 }
 
 // ActionGroupsClientUpdateResponse contains the response from method ActionGroupsClient.Update.
@@ -491,6 +603,18 @@ type DataCollectionRuleAssociationsClientGetResponse struct {
 // DataCollectionRuleAssociationsClientGetResult contains the result from method DataCollectionRuleAssociationsClient.Get.
 type DataCollectionRuleAssociationsClientGetResult struct {
 	DataCollectionRuleAssociationProxyOnlyResource
+}
+
+// DataCollectionRuleAssociationsClientListByDataCollectionEndpointResponse contains the response from method DataCollectionRuleAssociationsClient.ListByDataCollectionEndpoint.
+type DataCollectionRuleAssociationsClientListByDataCollectionEndpointResponse struct {
+	DataCollectionRuleAssociationsClientListByDataCollectionEndpointResult
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// DataCollectionRuleAssociationsClientListByDataCollectionEndpointResult contains the result from method DataCollectionRuleAssociationsClient.ListByDataCollectionEndpoint.
+type DataCollectionRuleAssociationsClientListByDataCollectionEndpointResult struct {
+	DataCollectionRuleAssociationProxyOnlyResourceListResult
 }
 
 // DataCollectionRuleAssociationsClientListByResourceResponse contains the response from method DataCollectionRuleAssociationsClient.ListByResource.
