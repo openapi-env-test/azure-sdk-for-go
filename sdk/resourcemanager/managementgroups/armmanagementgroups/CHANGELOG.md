@@ -1,5 +1,52 @@
 # Release History
 
+## 0.4.0 (2022-07-12)
+### Breaking Changes
+
+- Type of `EntitiesClientListOptions.View` has been changed from `*Enum3` to `*EntityViewParameterType`
+- Type of `EntitiesClientListOptions.Search` has been changed from `*Enum2` to `*EntitySearchType`
+- Type of `ClientGetOptions.Expand` has been changed from `*Enum0` to `*ManagementGroupExpandType`
+- Const `Enum2ParentAndFirstLevelChildren` has been removed
+- Const `Enum0Ancestors` has been removed
+- Const `Enum2AllowedParents` has been removed
+- Const `Enum3SubscriptionsOnly` has been removed
+- Const `Enum2AllowedChildren` has been removed
+- Const `Enum2ChildrenOnly` has been removed
+- Const `Enum3FullHierarchy` has been removed
+- Const `Enum0Children` has been removed
+- Const `Enum2ParentOnly` has been removed
+- Const `Enum3Audit` has been removed
+- Const `Enum0Path` has been removed
+- Const `Enum3GroupsOnly` has been removed
+- Function `PossibleEnum2Values` has been removed
+- Function `PossibleEnum0Values` has been removed
+- Function `PossibleEnum3Values` has been removed
+- Function `Enum0.ToPtr` has been removed
+- Function `Enum3.ToPtr` has been removed
+- Function `Enum2.ToPtr` has been removed
+
+### Features Added
+
+- New const `ManagementGroupExpandTypePath`
+- New const `EntitySearchTypeAllowedParents`
+- New const `ManagementGroupExpandTypeChildren`
+- New const `EntitySearchTypeChildrenOnly`
+- New const `EntitySearchTypeParentOnly`
+- New const `EntityViewParameterTypeFullHierarchy`
+- New const `EntityViewParameterTypeSubscriptionsOnly`
+- New const `EntityViewParameterTypeGroupsOnly`
+- New const `EntitySearchTypeParentAndFirstLevelChildren`
+- New const `EntitySearchTypeAllowedChildren`
+- New const `ManagementGroupExpandTypeAncestors`
+- New const `EntityViewParameterTypeAudit`
+- New function `PossibleEntityViewParameterTypeValues() []EntityViewParameterType`
+- New function `PossibleEntitySearchTypeValues() []EntitySearchType`
+- New function `EntityViewParameterType.ToPtr() *EntityViewParameterType`
+- New function `ManagementGroupExpandType.ToPtr() *ManagementGroupExpandType`
+- New function `PossibleManagementGroupExpandTypeValues() []ManagementGroupExpandType`
+- New function `EntitySearchType.ToPtr() *EntitySearchType`
+
+
 ## 0.3.0 (2022-01-13)
 ### Breaking Changes
 
