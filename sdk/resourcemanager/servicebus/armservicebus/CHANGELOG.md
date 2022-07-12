@@ -1,5 +1,29 @@
 # Release History
 
+## 0.4.0 (2022-07-12)
+### Breaking Changes
+
+- Type of `Encryption.KeySource` has been changed from `*string` to `*KeySource`
+
+### Features Added
+
+- New const `PublicNetworkAccessSecuredByPerimeter`
+- New const `PublicNetworkAccessEnabled`
+- New const `TLSVersionOne1`
+- New const `KeySourceMicrosoftKeyVault`
+- New const `PublicNetworkAccessDisabled`
+- New const `TLSVersionOne2`
+- New const `TLSVersionOne0`
+- New function `PublicNetworkAccess.ToPtr() *PublicNetworkAccess`
+- New function `KeySource.ToPtr() *KeySource`
+- New function `PossibleKeySourceValues() []KeySource`
+- New function `PossibleTLSVersionValues() []TLSVersion`
+- New function `TLSVersion.ToPtr() *TLSVersion`
+- New function `PossiblePublicNetworkAccessValues() []PublicNetworkAccess`
+- New field `PublicNetworkAccess` in struct `SBNamespaceProperties`
+- New field `MinimumTLSVersion` in struct `SBNamespaceProperties`
+
+
 ## 0.3.0 (2022-01-13)
 ### Breaking Changes
 

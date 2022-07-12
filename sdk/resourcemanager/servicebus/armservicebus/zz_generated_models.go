@@ -249,7 +249,7 @@ type DisasterRecoveryConfigsClientListOptions struct {
 // Encryption - Properties to configure Encryption
 type Encryption struct {
 	// Enumerates the possible value of keySource for Encryption
-	KeySource *string `json:"keySource,omitempty"`
+	KeySource *KeySource `json:"keySource,omitempty"`
 
 	// Properties of KeyVault
 	KeyVaultProperties []*KeyVaultProperties `json:"keyVaultProperties,omitempty"`
@@ -1177,8 +1177,14 @@ type SBNamespaceProperties struct {
 	// Properties of BYOK Encryption description
 	Encryption *Encryption `json:"encryption,omitempty"`
 
+	// The minimum TLS version for the cluster to support, e.g. '1.2'
+	MinimumTLSVersion *TLSVersion `json:"minimumTlsVersion,omitempty"`
+
 	// List of private endpoint connections.
 	PrivateEndpointConnections []*PrivateEndpointConnection `json:"privateEndpointConnections,omitempty"`
+
+	// This determines if traffic is allowed over public network. By default it is enabled.
+	PublicNetworkAccess *PublicNetworkAccess `json:"publicNetworkAccess,omitempty"`
 
 	// Enabling this property creates a Premium Service Bus Namespace in regions supported availability zones.
 	ZoneRedundant *bool `json:"zoneRedundant,omitempty"`
@@ -1210,8 +1216,10 @@ func (s SBNamespaceProperties) MarshalJSON() ([]byte, error) {
 	populate(objectMap, "disableLocalAuth", s.DisableLocalAuth)
 	populate(objectMap, "encryption", s.Encryption)
 	populate(objectMap, "metricId", s.MetricID)
+	populate(objectMap, "minimumTlsVersion", s.MinimumTLSVersion)
 	populate(objectMap, "privateEndpointConnections", s.PrivateEndpointConnections)
 	populate(objectMap, "provisioningState", s.ProvisioningState)
+	populate(objectMap, "publicNetworkAccess", s.PublicNetworkAccess)
 	populate(objectMap, "serviceBusEndpoint", s.ServiceBusEndpoint)
 	populate(objectMap, "status", s.Status)
 	populateTimeRFC3339(objectMap, "updatedAt", s.UpdatedAt)
@@ -1243,11 +1251,17 @@ func (s *SBNamespaceProperties) UnmarshalJSON(data []byte) error {
 		case "metricId":
 			err = unpopulate(val, &s.MetricID)
 			delete(rawMsg, key)
+		case "minimumTlsVersion":
+			err = unpopulate(val, &s.MinimumTLSVersion)
+			delete(rawMsg, key)
 		case "privateEndpointConnections":
 			err = unpopulate(val, &s.PrivateEndpointConnections)
 			delete(rawMsg, key)
 		case "provisioningState":
 			err = unpopulate(val, &s.ProvisioningState)
+			delete(rawMsg, key)
+		case "publicNetworkAccess":
+			err = unpopulate(val, &s.PublicNetworkAccess)
 			delete(rawMsg, key)
 		case "serviceBusEndpoint":
 			err = unpopulate(val, &s.ServiceBusEndpoint)
