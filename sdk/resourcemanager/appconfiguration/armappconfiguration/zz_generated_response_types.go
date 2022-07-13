@@ -137,6 +137,18 @@ type ConfigurationStoresClientListByResourceGroupResult struct {
 	ConfigurationStoreListResult
 }
 
+// ConfigurationStoresClientListKeyValueResponse contains the response from method ConfigurationStoresClient.ListKeyValue.
+type ConfigurationStoresClientListKeyValueResponse struct {
+	ConfigurationStoresClientListKeyValueResult
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// ConfigurationStoresClientListKeyValueResult contains the result from method ConfigurationStoresClient.ListKeyValue.
+type ConfigurationStoresClientListKeyValueResult struct {
+	KeyValue
+}
+
 // ConfigurationStoresClientListKeysResponse contains the response from method ConfigurationStoresClient.ListKeys.
 type ConfigurationStoresClientListKeysResponse struct {
 	ConfigurationStoresClientListKeysResult
@@ -223,88 +235,6 @@ type ConfigurationStoresClientUpdateResponse struct {
 // ConfigurationStoresClientUpdateResult contains the result from method ConfigurationStoresClient.Update.
 type ConfigurationStoresClientUpdateResult struct {
 	ConfigurationStore
-}
-
-// KeyValuesClientCreateOrUpdateResponse contains the response from method KeyValuesClient.CreateOrUpdate.
-type KeyValuesClientCreateOrUpdateResponse struct {
-	KeyValuesClientCreateOrUpdateResult
-	// RawResponse contains the underlying HTTP response.
-	RawResponse *http.Response
-}
-
-// KeyValuesClientCreateOrUpdateResult contains the result from method KeyValuesClient.CreateOrUpdate.
-type KeyValuesClientCreateOrUpdateResult struct {
-	KeyValue
-}
-
-// KeyValuesClientDeletePollerResponse contains the response from method KeyValuesClient.Delete.
-type KeyValuesClientDeletePollerResponse struct {
-	// Poller contains an initialized poller.
-	Poller *KeyValuesClientDeletePoller
-
-	// RawResponse contains the underlying HTTP response.
-	RawResponse *http.Response
-}
-
-// PollUntilDone will poll the service endpoint until a terminal state is reached or an error is received.
-// freq: the time to wait between intervals in absence of a Retry-After header. Allowed minimum is one second.
-// A good starting value is 30 seconds. Note that some resources might benefit from a different value.
-func (l KeyValuesClientDeletePollerResponse) PollUntilDone(ctx context.Context, freq time.Duration) (KeyValuesClientDeleteResponse, error) {
-	respType := KeyValuesClientDeleteResponse{}
-	resp, err := l.Poller.pt.PollUntilDone(ctx, freq, nil)
-	if err != nil {
-		return respType, err
-	}
-	respType.RawResponse = resp
-	return respType, nil
-}
-
-// Resume rehydrates a KeyValuesClientDeletePollerResponse from the provided client and resume token.
-func (l *KeyValuesClientDeletePollerResponse) Resume(ctx context.Context, client *KeyValuesClient, token string) error {
-	pt, err := armruntime.NewPollerFromResumeToken("KeyValuesClient.Delete", token, client.pl)
-	if err != nil {
-		return err
-	}
-	poller := &KeyValuesClientDeletePoller{
-		pt: pt,
-	}
-	resp, err := poller.Poll(ctx)
-	if err != nil {
-		return err
-	}
-	l.Poller = poller
-	l.RawResponse = resp
-	return nil
-}
-
-// KeyValuesClientDeleteResponse contains the response from method KeyValuesClient.Delete.
-type KeyValuesClientDeleteResponse struct {
-	// RawResponse contains the underlying HTTP response.
-	RawResponse *http.Response
-}
-
-// KeyValuesClientGetResponse contains the response from method KeyValuesClient.Get.
-type KeyValuesClientGetResponse struct {
-	KeyValuesClientGetResult
-	// RawResponse contains the underlying HTTP response.
-	RawResponse *http.Response
-}
-
-// KeyValuesClientGetResult contains the result from method KeyValuesClient.Get.
-type KeyValuesClientGetResult struct {
-	KeyValue
-}
-
-// KeyValuesClientListByConfigurationStoreResponse contains the response from method KeyValuesClient.ListByConfigurationStore.
-type KeyValuesClientListByConfigurationStoreResponse struct {
-	KeyValuesClientListByConfigurationStoreResult
-	// RawResponse contains the underlying HTTP response.
-	RawResponse *http.Response
-}
-
-// KeyValuesClientListByConfigurationStoreResult contains the result from method KeyValuesClient.ListByConfigurationStore.
-type KeyValuesClientListByConfigurationStoreResult struct {
-	KeyValueListResult
 }
 
 // OperationsClientCheckNameAvailabilityResponse contains the response from method OperationsClient.CheckNameAvailability.
