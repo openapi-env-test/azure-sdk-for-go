@@ -18,7 +18,6 @@ import (
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore/runtime"
 	"net/http"
 	"net/url"
-	"strconv"
 	"strings"
 )
 
@@ -94,7 +93,7 @@ func (client *SuppressionsClient) createCreateRequest(ctx context.Context, resou
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2020-01-01")
+	reqQP.Set("api-version", "2022-06-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, runtime.MarshalAsJSON(req, suppressionContract)
@@ -151,9 +150,8 @@ func (client *SuppressionsClient) deleteCreateRequest(ctx context.Context, resou
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2020-01-01")
+	reqQP.Set("api-version", "2022-06-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
-	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
 }
 
@@ -198,7 +196,7 @@ func (client *SuppressionsClient) getCreateRequest(ctx context.Context, resource
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2020-01-01")
+	reqQP.Set("api-version", "2022-06-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -217,16 +215,19 @@ func (client *SuppressionsClient) getHandleResponse(resp *http.Response) (Suppre
 // a recommendation is referred to as a suppression.
 // If the operation fails it returns an *azcore.ResponseError type.
 // options - SuppressionsClientListOptions contains the optional parameters for the SuppressionsClient.List method.
-func (client *SuppressionsClient) List(options *SuppressionsClientListOptions) *SuppressionsClientListPager {
-	return &SuppressionsClientListPager{
-		client: client,
-		requester: func(ctx context.Context) (*policy.Request, error) {
-			return client.listCreateRequest(ctx, options)
-		},
-		advancer: func(ctx context.Context, resp SuppressionsClientListResponse) (*policy.Request, error) {
-			return runtime.NewRequest(ctx, http.MethodGet, *resp.SuppressionContractListResult.NextLink)
-		},
+func (client *SuppressionsClient) List(ctx context.Context, options *SuppressionsClientListOptions) (SuppressionsClientListResponse, error) {
+	req, err := client.listCreateRequest(ctx, options)
+	if err != nil {
+		return SuppressionsClientListResponse{}, err
 	}
+	resp, err := client.pl.Do(req)
+	if err != nil {
+		return SuppressionsClientListResponse{}, err
+	}
+	if !runtime.HasStatusCode(resp, http.StatusOK) {
+		return SuppressionsClientListResponse{}, runtime.NewResponseError(resp)
+	}
+	return client.listHandleResponse(resp)
 }
 
 // listCreateRequest creates the List request.
@@ -241,13 +242,7 @@ func (client *SuppressionsClient) listCreateRequest(ctx context.Context, options
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2020-01-01")
-	if options != nil && options.Top != nil {
-		reqQP.Set("$top", strconv.FormatInt(int64(*options.Top), 10))
-	}
-	if options != nil && options.SkipToken != nil {
-		reqQP.Set("$skipToken", *options.SkipToken)
-	}
+	reqQP.Set("api-version", "2022-06-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -256,7 +251,7 @@ func (client *SuppressionsClient) listCreateRequest(ctx context.Context, options
 // listHandleResponse handles the List response.
 func (client *SuppressionsClient) listHandleResponse(resp *http.Response) (SuppressionsClientListResponse, error) {
 	result := SuppressionsClientListResponse{RawResponse: resp}
-	if err := runtime.UnmarshalAsJSON(resp, &result.SuppressionContractListResult); err != nil {
+	if err := runtime.UnmarshalAsJSON(resp, &result.SuppressionContractArray); err != nil {
 		return SuppressionsClientListResponse{}, err
 	}
 	return result, nil

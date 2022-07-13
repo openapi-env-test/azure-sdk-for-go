@@ -82,9 +82,8 @@ func (client *RecommendationsClient) generateCreateRequest(ctx context.Context, 
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2020-01-01")
+	reqQP.Set("api-version", "2022-06-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
-	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
 }
 
@@ -136,7 +135,7 @@ func (client *RecommendationsClient) getCreateRequest(ctx context.Context, resou
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2020-01-01")
+	reqQP.Set("api-version", "2022-06-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -151,30 +150,30 @@ func (client *RecommendationsClient) getHandleResponse(resp *http.Response) (Rec
 	return result, nil
 }
 
-// GetGenerateStatus - Retrieves the status of the recommendation computation or generation process. Invoke this API after
-// calling the generation recommendation. The URI of this API is returned in the Location field of the
+// GetGenerateRecommendationsStatus - Retrieves the status of the recommendation computation or generation process. Invoke
+// this API after calling the generation recommendation. The URI of this API is returned in the Location field of the
 // response header.
 // If the operation fails it returns an *azcore.ResponseError type.
 // operationID - The operation ID, which can be found from the Location field in the generate recommendation response header.
-// options - RecommendationsClientGetGenerateStatusOptions contains the optional parameters for the RecommendationsClient.GetGenerateStatus
+// options - RecommendationsClientGetGenerateRecommendationsStatusOptions contains the optional parameters for the RecommendationsClient.GetGenerateRecommendationsStatus
 // method.
-func (client *RecommendationsClient) GetGenerateStatus(ctx context.Context, operationID string, options *RecommendationsClientGetGenerateStatusOptions) (RecommendationsClientGetGenerateStatusResponse, error) {
-	req, err := client.getGenerateStatusCreateRequest(ctx, operationID, options)
+func (client *RecommendationsClient) GetGenerateRecommendationsStatus(ctx context.Context, operationID string, options *RecommendationsClientGetGenerateRecommendationsStatusOptions) (RecommendationsClientGetGenerateRecommendationsStatusResponse, error) {
+	req, err := client.getGenerateRecommendationsStatusCreateRequest(ctx, operationID, options)
 	if err != nil {
-		return RecommendationsClientGetGenerateStatusResponse{}, err
+		return RecommendationsClientGetGenerateRecommendationsStatusResponse{}, err
 	}
 	resp, err := client.pl.Do(req)
 	if err != nil {
-		return RecommendationsClientGetGenerateStatusResponse{}, err
+		return RecommendationsClientGetGenerateRecommendationsStatusResponse{}, err
 	}
 	if !runtime.HasStatusCode(resp, http.StatusAccepted, http.StatusNoContent) {
-		return RecommendationsClientGetGenerateStatusResponse{}, runtime.NewResponseError(resp)
+		return RecommendationsClientGetGenerateRecommendationsStatusResponse{}, runtime.NewResponseError(resp)
 	}
-	return RecommendationsClientGetGenerateStatusResponse{RawResponse: resp}, nil
+	return RecommendationsClientGetGenerateRecommendationsStatusResponse{RawResponse: resp}, nil
 }
 
-// getGenerateStatusCreateRequest creates the GetGenerateStatus request.
-func (client *RecommendationsClient) getGenerateStatusCreateRequest(ctx context.Context, operationID string, options *RecommendationsClientGetGenerateStatusOptions) (*policy.Request, error) {
+// getGenerateRecommendationsStatusCreateRequest creates the GetGenerateRecommendationsStatus request.
+func (client *RecommendationsClient) getGenerateRecommendationsStatusCreateRequest(ctx context.Context, operationID string, options *RecommendationsClientGetGenerateRecommendationsStatusOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/generateRecommendations/{operationId}"
 	if client.subscriptionID == "" {
 		return nil, errors.New("parameter client.subscriptionID cannot be empty")
@@ -186,9 +185,8 @@ func (client *RecommendationsClient) getGenerateStatusCreateRequest(ctx context.
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2020-01-01")
+	reqQP.Set("api-version", "2022-06-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
-	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
 }
 
@@ -219,7 +217,7 @@ func (client *RecommendationsClient) listCreateRequest(ctx context.Context, opti
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2020-01-01")
+	reqQP.Set("api-version", "2022-06-01")
 	if options != nil && options.Filter != nil {
 		reqQP.Set("$filter", *options.Filter)
 	}

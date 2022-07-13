@@ -1,5 +1,125 @@
 # Release History
 
+## 0.3.0 (2022-07-13)
+### Breaking Changes
+
+- Function `*SuppressionsClient.List` parameter(s) have been changed from `(*SuppressionsClientListOptions)` to `(context.Context, *SuppressionsClientListOptions)`
+- Function `*SuppressionsClient.List` return value(s) have been changed from `(*SuppressionsClientListPager)` to `(SuppressionsClientListResponse, error)`
+- Const `CPUThresholdTwenty` has been removed
+- Const `CPUThresholdFive` has been removed
+- Const `ScenarioAlerts` has been removed
+- Const `DigestConfigStateActive` has been removed
+- Const `DigestConfigStateDisabled` has been removed
+- Const `CPUThresholdTen` has been removed
+- Const `CPUThresholdFifteen` has been removed
+- Const `CategoryOperationalExcellence` has been removed
+- Const `ConfigurationNameDefault` has been removed
+- Function `*ConfigurationsClientListBySubscriptionPager.NextPage` has been removed
+- Function `PossibleDigestConfigStateValues` has been removed
+- Function `Scenario.ToPtr` has been removed
+- Function `NewRecommendationMetadataClient` has been removed
+- Function `*ConfigurationsClientListBySubscriptionPager.PageResponse` has been removed
+- Function `*ConfigurationsClientListBySubscriptionPager.Err` has been removed
+- Function `ConfigurationListResult.MarshalJSON` has been removed
+- Function `MetadataEntityProperties.MarshalJSON` has been removed
+- Function `*SuppressionProperties.UnmarshalJSON` has been removed
+- Function `*SuppressionsClientListPager.PageResponse` has been removed
+- Function `*ConfigurationsClient.CreateInResourceGroup` has been removed
+- Function `*RecommendationMetadataClientListPager.NextPage` has been removed
+- Function `*RecommendationMetadataClient.Get` has been removed
+- Function `NewConfigurationsClient` has been removed
+- Function `PossibleCPUThresholdValues` has been removed
+- Function `DigestConfigState.ToPtr` has been removed
+- Function `SuppressionContractListResult.MarshalJSON` has been removed
+- Function `*RecommendationMetadataClient.List` has been removed
+- Function `ResourceMetadata.MarshalJSON` has been removed
+- Function `*RecommendationMetadataClientListPager.Err` has been removed
+- Function `ConfigurationName.ToPtr` has been removed
+- Function `*ConfigurationsClient.ListBySubscription` has been removed
+- Function `*SuppressionsClientListPager.Err` has been removed
+- Function `*ConfigurationsClient.ListByResourceGroup` has been removed
+- Function `*RecommendationMetadataClientListPager.PageResponse` has been removed
+- Function `PossibleScenarioValues` has been removed
+- Function `DigestConfig.MarshalJSON` has been removed
+- Function `ConfigDataProperties.MarshalJSON` has been removed
+- Function `MetadataEntityListResult.MarshalJSON` has been removed
+- Function `PossibleConfigurationNameValues` has been removed
+- Function `SuppressionProperties.MarshalJSON` has been removed
+- Function `*ConfigurationsClient.CreateInSubscription` has been removed
+- Function `CPUThreshold.ToPtr` has been removed
+- Function `*RecommendationsClient.GetGenerateStatus` has been removed
+- Function `*SuppressionsClientListPager.NextPage` has been removed
+- Struct `ARMErrorResponseBody` has been removed
+- Struct `ArmErrorResponse` has been removed
+- Struct `ConfigData` has been removed
+- Struct `ConfigDataProperties` has been removed
+- Struct `ConfigurationListResult` has been removed
+- Struct `ConfigurationsClient` has been removed
+- Struct `ConfigurationsClientCreateInResourceGroupOptions` has been removed
+- Struct `ConfigurationsClientCreateInResourceGroupResponse` has been removed
+- Struct `ConfigurationsClientCreateInResourceGroupResult` has been removed
+- Struct `ConfigurationsClientCreateInSubscriptionOptions` has been removed
+- Struct `ConfigurationsClientCreateInSubscriptionResponse` has been removed
+- Struct `ConfigurationsClientCreateInSubscriptionResult` has been removed
+- Struct `ConfigurationsClientListByResourceGroupOptions` has been removed
+- Struct `ConfigurationsClientListByResourceGroupResponse` has been removed
+- Struct `ConfigurationsClientListByResourceGroupResult` has been removed
+- Struct `ConfigurationsClientListBySubscriptionOptions` has been removed
+- Struct `ConfigurationsClientListBySubscriptionPager` has been removed
+- Struct `ConfigurationsClientListBySubscriptionResponse` has been removed
+- Struct `ConfigurationsClientListBySubscriptionResult` has been removed
+- Struct `DigestConfig` has been removed
+- Struct `MetadataEntity` has been removed
+- Struct `MetadataEntityListResult` has been removed
+- Struct `MetadataEntityProperties` has been removed
+- Struct `MetadataSupportedValueDetail` has been removed
+- Struct `RecommendationMetadataClient` has been removed
+- Struct `RecommendationMetadataClientGetOptions` has been removed
+- Struct `RecommendationMetadataClientGetResponse` has been removed
+- Struct `RecommendationMetadataClientGetResult` has been removed
+- Struct `RecommendationMetadataClientListOptions` has been removed
+- Struct `RecommendationMetadataClientListPager` has been removed
+- Struct `RecommendationMetadataClientListResponse` has been removed
+- Struct `RecommendationMetadataClientListResult` has been removed
+- Struct `RecommendationsClientGetGenerateStatusOptions` has been removed
+- Struct `RecommendationsClientGetGenerateStatusResponse` has been removed
+- Struct `ResourceMetadata` has been removed
+- Struct `SuppressionContractListResult` has been removed
+- Struct `SuppressionProperties` has been removed
+- Struct `SuppressionsClientListPager` has been removed
+- Field `ExtendedProperties` of struct `RecommendationProperties` has been removed
+- Field `SuppressionIDs` of struct `RecommendationProperties` has been removed
+- Field `Label` of struct `RecommendationProperties` has been removed
+- Field `Description` of struct `RecommendationProperties` has been removed
+- Field `ExposedMetadataProperties` of struct `RecommendationProperties` has been removed
+- Field `ResourceMetadata` of struct `RecommendationProperties` has been removed
+- Field `PotentialBenefits` of struct `RecommendationProperties` has been removed
+- Field `Remediation` of struct `RecommendationProperties` has been removed
+- Field `LearnMoreLink` of struct `RecommendationProperties` has been removed
+- Field `Actions` of struct `RecommendationProperties` has been removed
+- Field `SkipToken` of struct `SuppressionsClientListOptions` has been removed
+- Field `Top` of struct `SuppressionsClientListOptions` has been removed
+- Field `SuppressionContractListResult` of struct `SuppressionsClientListResult` has been removed
+- Field `Properties` of struct `SuppressionContract` has been removed
+
+### Features Added
+
+- New function `*RecommendationsClient.GetGenerateRecommendationsStatus(context.Context, string, *RecommendationsClientGetGenerateRecommendationsStatusOptions) (RecommendationsClientGetGenerateRecommendationsStatusResponse, error)`
+- New function `ResourceRecommendationBase.MarshalJSON() ([]byte, error)`
+- New function `Resource.MarshalJSON() ([]byte, error)`
+- New function `SuppressionContract.MarshalJSON() ([]byte, error)`
+- New struct `RecommendationsClientGetGenerateRecommendationsStatusOptions`
+- New struct `RecommendationsClientGetGenerateRecommendationsStatusResponse`
+- New field `SuppressionContractArray` in struct `SuppressionsClientListResult`
+- New field `Location` in struct `Resource`
+- New field `Tags` in struct `Resource`
+- New field `Location` in struct `SuppressionContract`
+- New field `SuppressionID` in struct `SuppressionContract`
+- New field `TTL` in struct `SuppressionContract`
+- New field `Tags` in struct `SuppressionContract`
+- New field `SuppressionIDs` in struct `ResourceRecommendationBase`
+
+
 ## 0.2.0 (2022-01-13)
 ### Breaking Changes
 
