@@ -1,5 +1,115 @@
 # Release History
 
+## 0.3.0 (2022-07-13)
+### Breaking Changes
+
+### Features Added
+
+- New const `SyncTypeForceResync`
+- New const `AlertsStateEnabled`
+- New const `SyncTypeDefault`
+- New const `AlertsStateDisabled`
+- New const `ValidationTypeDeepValidation`
+- New const `ValidationTypeShallowValidation`
+- New function `*BackupInstancesClientSyncBackupInstancePollerResponse.Resume(context.Context, *BackupInstancesClient, string) error`
+- New function `*BackupInstancesClientResumeBackupsPoller.FinalResponse(context.Context) (BackupInstancesClientResumeBackupsResponse, error)`
+- New function `*BackupInstancesClientStopProtectionPollerResponse.Resume(context.Context, *BackupInstancesClient, string) error`
+- New function `*BackupInstancesClient.BeginSyncBackupInstance(context.Context, string, string, string, SyncBackupInstanceRequest, *BackupInstancesClientBeginSyncBackupInstanceOptions) (BackupInstancesClientSyncBackupInstancePollerResponse, error)`
+- New function `*BackupInstancesClientResumeProtectionPoller.Done() bool`
+- New function `*KubernetesStorageClassRestoreCriteria.GetItemLevelRestoreCriteria() *ItemLevelRestoreCriteria`
+- New function `PossibleValidationTypeValues() []ValidationType`
+- New function `*BackupInstancesClientResumeBackupsPoller.ResumeToken() (string, error)`
+- New function `*OperationStatusResourceGroupContextClient.Get(context.Context, string, string, *OperationStatusResourceGroupContextClientGetOptions) (OperationStatusResourceGroupContextClientGetResponse, error)`
+- New function `BackupInstancesClientResumeBackupsPollerResponse.PollUntilDone(context.Context, time.Duration) (BackupInstancesClientResumeBackupsResponse, error)`
+- New function `*BackupInstancesClientResumeProtectionPoller.FinalResponse(context.Context) (BackupInstancesClientResumeProtectionResponse, error)`
+- New function `BackupInstancesClientSyncBackupInstancePollerResponse.PollUntilDone(context.Context, time.Duration) (BackupInstancesClientSyncBackupInstanceResponse, error)`
+- New function `BackupInstancesClientResumeProtectionPollerResponse.PollUntilDone(context.Context, time.Duration) (BackupInstancesClientResumeProtectionResponse, error)`
+- New function `SyncType.ToPtr() *SyncType`
+- New function `*BackupInstancesClientResumeProtectionPoller.ResumeToken() (string, error)`
+- New function `ValidationType.ToPtr() *ValidationType`
+- New function `*BackupInstancesClient.BeginResumeProtection(context.Context, string, string, string, *BackupInstancesClientBeginResumeProtectionOptions) (BackupInstancesClientResumeProtectionPollerResponse, error)`
+- New function `*BackupInstancesClientResumeBackupsPoller.Poll(context.Context) (*http.Response, error)`
+- New function `*BackupInstancesClientResumeBackupsPoller.Done() bool`
+- New function `*BackupInstancesClientSuspendBackupsPollerResponse.Resume(context.Context, *BackupInstancesClient, string) error`
+- New function `*BackupInstancesClientSyncBackupInstancePoller.Poll(context.Context) (*http.Response, error)`
+- New function `*BackupInstancesClientSuspendBackupsPoller.ResumeToken() (string, error)`
+- New function `*BackupInstancesClientSyncBackupInstancePoller.Done() bool`
+- New function `*OperationStatusBackupVaultContextClient.Get(context.Context, string, string, string, *OperationStatusBackupVaultContextClientGetOptions) (OperationStatusBackupVaultContextClientGetResponse, error)`
+- New function `*BackupInstancesClient.GetBackupInstanceOperationResult(context.Context, string, string, string, string, *BackupInstancesClientGetBackupInstanceOperationResultOptions) (BackupInstancesClientGetBackupInstanceOperationResultResponse, error)`
+- New function `*BackupInstancesClientResumeProtectionPollerResponse.Resume(context.Context, *BackupInstancesClient, string) error`
+- New function `*BackupInstancesClient.BeginSuspendBackups(context.Context, string, string, string, *BackupInstancesClientBeginSuspendBackupsOptions) (BackupInstancesClientSuspendBackupsPollerResponse, error)`
+- New function `PossibleSyncTypeValues() []SyncType`
+- New function `*BackupInstancesClientSuspendBackupsPoller.Done() bool`
+- New function `*BackupInstancesClientResumeProtectionPoller.Poll(context.Context) (*http.Response, error)`
+- New function `KubernetesPVRestoreCriteria.MarshalJSON() ([]byte, error)`
+- New function `*BackupInstancesClientStopProtectionPoller.FinalResponse(context.Context) (BackupInstancesClientStopProtectionResponse, error)`
+- New function `*BackupInstancesClient.BeginStopProtection(context.Context, string, string, string, *BackupInstancesClientBeginStopProtectionOptions) (BackupInstancesClientStopProtectionPollerResponse, error)`
+- New function `*BackupInstancesClientSuspendBackupsPoller.Poll(context.Context) (*http.Response, error)`
+- New function `*BackupInstancesClientSyncBackupInstancePoller.FinalResponse(context.Context) (BackupInstancesClientSyncBackupInstanceResponse, error)`
+- New function `BackupInstancesClientStopProtectionPollerResponse.PollUntilDone(context.Context, time.Duration) (BackupInstancesClientStopProtectionResponse, error)`
+- New function `*KubernetesStorageClassRestoreCriteria.UnmarshalJSON([]byte) error`
+- New function `KubernetesStorageClassRestoreCriteria.MarshalJSON() ([]byte, error)`
+- New function `*BackupInstancesClientStopProtectionPoller.Done() bool`
+- New function `*BackupInstancesClientStopProtectionPoller.Poll(context.Context) (*http.Response, error)`
+- New function `AlertsState.ToPtr() *AlertsState`
+- New function `NewOperationStatusResourceGroupContextClient(string, azcore.TokenCredential, *arm.ClientOptions) *OperationStatusResourceGroupContextClient`
+- New function `*BackupInstancesClient.BeginResumeBackups(context.Context, string, string, string, *BackupInstancesClientBeginResumeBackupsOptions) (BackupInstancesClientResumeBackupsPollerResponse, error)`
+- New function `BackupInstancesClientSuspendBackupsPollerResponse.PollUntilDone(context.Context, time.Duration) (BackupInstancesClientSuspendBackupsResponse, error)`
+- New function `*BackupInstancesClientResumeBackupsPollerResponse.Resume(context.Context, *BackupInstancesClient, string) error`
+- New function `*KubernetesPVRestoreCriteria.GetItemLevelRestoreCriteria() *ItemLevelRestoreCriteria`
+- New function `*BackupInstancesClientStopProtectionPoller.ResumeToken() (string, error)`
+- New function `*BackupInstancesClientSyncBackupInstancePoller.ResumeToken() (string, error)`
+- New function `*KubernetesPVRestoreCriteria.UnmarshalJSON([]byte) error`
+- New function `NewOperationStatusBackupVaultContextClient(string, azcore.TokenCredential, *arm.ClientOptions) *OperationStatusBackupVaultContextClient`
+- New function `*BackupInstancesClientSuspendBackupsPoller.FinalResponse(context.Context) (BackupInstancesClientSuspendBackupsResponse, error)`
+- New function `PossibleAlertsStateValues() []AlertsState`
+- New struct `AzureMonitorAlertSettings`
+- New struct `BackupInstancesClientBeginResumeBackupsOptions`
+- New struct `BackupInstancesClientBeginResumeProtectionOptions`
+- New struct `BackupInstancesClientBeginStopProtectionOptions`
+- New struct `BackupInstancesClientBeginSuspendBackupsOptions`
+- New struct `BackupInstancesClientBeginSyncBackupInstanceOptions`
+- New struct `BackupInstancesClientGetBackupInstanceOperationResultOptions`
+- New struct `BackupInstancesClientGetBackupInstanceOperationResultResponse`
+- New struct `BackupInstancesClientGetBackupInstanceOperationResultResult`
+- New struct `BackupInstancesClientResumeBackupsPoller`
+- New struct `BackupInstancesClientResumeBackupsPollerResponse`
+- New struct `BackupInstancesClientResumeBackupsResponse`
+- New struct `BackupInstancesClientResumeProtectionPoller`
+- New struct `BackupInstancesClientResumeProtectionPollerResponse`
+- New struct `BackupInstancesClientResumeProtectionResponse`
+- New struct `BackupInstancesClientStopProtectionPoller`
+- New struct `BackupInstancesClientStopProtectionPollerResponse`
+- New struct `BackupInstancesClientStopProtectionResponse`
+- New struct `BackupInstancesClientSuspendBackupsPoller`
+- New struct `BackupInstancesClientSuspendBackupsPollerResponse`
+- New struct `BackupInstancesClientSuspendBackupsResponse`
+- New struct `BackupInstancesClientSyncBackupInstancePoller`
+- New struct `BackupInstancesClientSyncBackupInstancePollerResponse`
+- New struct `BackupInstancesClientSyncBackupInstanceResponse`
+- New struct `KubernetesPVRestoreCriteria`
+- New struct `KubernetesStorageClassRestoreCriteria`
+- New struct `MonitoringSettings`
+- New struct `OperationStatusBackupVaultContextClient`
+- New struct `OperationStatusBackupVaultContextClientGetOptions`
+- New struct `OperationStatusBackupVaultContextClientGetResponse`
+- New struct `OperationStatusBackupVaultContextClientGetResult`
+- New struct `OperationStatusResourceGroupContextClient`
+- New struct `OperationStatusResourceGroupContextClientGetOptions`
+- New struct `OperationStatusResourceGroupContextClientGetResponse`
+- New struct `OperationStatusResourceGroupContextClientGetResult`
+- New struct `PatchBackupVaultInput`
+- New struct `SyncBackupInstanceRequest`
+- New field `ValidationType` in struct `BackupInstance`
+- New field `SourceResourceID` in struct `AzureBackupRecoveryPointBasedRestoreRequest`
+- New field `SourceResourceID` in struct `AzureBackupRecoveryTimeBasedRestoreRequest`
+- New field `SourceResourceID` in struct `AzureBackupRestoreRequest`
+- New field `Properties` in struct `PatchResourceRequestInput`
+- New field `SourceResourceID` in struct `AzureBackupRestoreWithRehydrationRequest`
+- New field `Value` in struct `SecretStoreResource`
+- New field `MonitoringSettings` in struct `BackupVault`
+
+
 ## 0.2.0 (2022-01-13)
 ### Breaking Changes
 

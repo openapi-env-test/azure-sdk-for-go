@@ -165,6 +165,18 @@ type BackupInstancesClientDeleteResponse struct {
 	RawResponse *http.Response
 }
 
+// BackupInstancesClientGetBackupInstanceOperationResultResponse contains the response from method BackupInstancesClient.GetBackupInstanceOperationResult.
+type BackupInstancesClientGetBackupInstanceOperationResultResponse struct {
+	BackupInstancesClientGetBackupInstanceOperationResultResult
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// BackupInstancesClientGetBackupInstanceOperationResultResult contains the result from method BackupInstancesClient.GetBackupInstanceOperationResult.
+type BackupInstancesClientGetBackupInstanceOperationResultResult struct {
+	BackupInstanceResource
+}
+
 // BackupInstancesClientGetResponse contains the response from method BackupInstancesClient.Get.
 type BackupInstancesClientGetResponse struct {
 	BackupInstancesClientGetResult
@@ -187,6 +199,236 @@ type BackupInstancesClientListResponse struct {
 // BackupInstancesClientListResult contains the result from method BackupInstancesClient.List.
 type BackupInstancesClientListResult struct {
 	BackupInstanceResourceList
+}
+
+// BackupInstancesClientResumeBackupsPollerResponse contains the response from method BackupInstancesClient.ResumeBackups.
+type BackupInstancesClientResumeBackupsPollerResponse struct {
+	// Poller contains an initialized poller.
+	Poller *BackupInstancesClientResumeBackupsPoller
+
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// PollUntilDone will poll the service endpoint until a terminal state is reached or an error is received.
+// freq: the time to wait between intervals in absence of a Retry-After header. Allowed minimum is one second.
+// A good starting value is 30 seconds. Note that some resources might benefit from a different value.
+func (l BackupInstancesClientResumeBackupsPollerResponse) PollUntilDone(ctx context.Context, freq time.Duration) (BackupInstancesClientResumeBackupsResponse, error) {
+	respType := BackupInstancesClientResumeBackupsResponse{}
+	resp, err := l.Poller.pt.PollUntilDone(ctx, freq, nil)
+	if err != nil {
+		return respType, err
+	}
+	respType.RawResponse = resp
+	return respType, nil
+}
+
+// Resume rehydrates a BackupInstancesClientResumeBackupsPollerResponse from the provided client and resume token.
+func (l *BackupInstancesClientResumeBackupsPollerResponse) Resume(ctx context.Context, client *BackupInstancesClient, token string) error {
+	pt, err := armruntime.NewPollerFromResumeToken("BackupInstancesClient.ResumeBackups", token, client.pl)
+	if err != nil {
+		return err
+	}
+	poller := &BackupInstancesClientResumeBackupsPoller{
+		pt: pt,
+	}
+	resp, err := poller.Poll(ctx)
+	if err != nil {
+		return err
+	}
+	l.Poller = poller
+	l.RawResponse = resp
+	return nil
+}
+
+// BackupInstancesClientResumeBackupsResponse contains the response from method BackupInstancesClient.ResumeBackups.
+type BackupInstancesClientResumeBackupsResponse struct {
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// BackupInstancesClientResumeProtectionPollerResponse contains the response from method BackupInstancesClient.ResumeProtection.
+type BackupInstancesClientResumeProtectionPollerResponse struct {
+	// Poller contains an initialized poller.
+	Poller *BackupInstancesClientResumeProtectionPoller
+
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// PollUntilDone will poll the service endpoint until a terminal state is reached or an error is received.
+// freq: the time to wait between intervals in absence of a Retry-After header. Allowed minimum is one second.
+// A good starting value is 30 seconds. Note that some resources might benefit from a different value.
+func (l BackupInstancesClientResumeProtectionPollerResponse) PollUntilDone(ctx context.Context, freq time.Duration) (BackupInstancesClientResumeProtectionResponse, error) {
+	respType := BackupInstancesClientResumeProtectionResponse{}
+	resp, err := l.Poller.pt.PollUntilDone(ctx, freq, nil)
+	if err != nil {
+		return respType, err
+	}
+	respType.RawResponse = resp
+	return respType, nil
+}
+
+// Resume rehydrates a BackupInstancesClientResumeProtectionPollerResponse from the provided client and resume token.
+func (l *BackupInstancesClientResumeProtectionPollerResponse) Resume(ctx context.Context, client *BackupInstancesClient, token string) error {
+	pt, err := armruntime.NewPollerFromResumeToken("BackupInstancesClient.ResumeProtection", token, client.pl)
+	if err != nil {
+		return err
+	}
+	poller := &BackupInstancesClientResumeProtectionPoller{
+		pt: pt,
+	}
+	resp, err := poller.Poll(ctx)
+	if err != nil {
+		return err
+	}
+	l.Poller = poller
+	l.RawResponse = resp
+	return nil
+}
+
+// BackupInstancesClientResumeProtectionResponse contains the response from method BackupInstancesClient.ResumeProtection.
+type BackupInstancesClientResumeProtectionResponse struct {
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// BackupInstancesClientStopProtectionPollerResponse contains the response from method BackupInstancesClient.StopProtection.
+type BackupInstancesClientStopProtectionPollerResponse struct {
+	// Poller contains an initialized poller.
+	Poller *BackupInstancesClientStopProtectionPoller
+
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// PollUntilDone will poll the service endpoint until a terminal state is reached or an error is received.
+// freq: the time to wait between intervals in absence of a Retry-After header. Allowed minimum is one second.
+// A good starting value is 30 seconds. Note that some resources might benefit from a different value.
+func (l BackupInstancesClientStopProtectionPollerResponse) PollUntilDone(ctx context.Context, freq time.Duration) (BackupInstancesClientStopProtectionResponse, error) {
+	respType := BackupInstancesClientStopProtectionResponse{}
+	resp, err := l.Poller.pt.PollUntilDone(ctx, freq, nil)
+	if err != nil {
+		return respType, err
+	}
+	respType.RawResponse = resp
+	return respType, nil
+}
+
+// Resume rehydrates a BackupInstancesClientStopProtectionPollerResponse from the provided client and resume token.
+func (l *BackupInstancesClientStopProtectionPollerResponse) Resume(ctx context.Context, client *BackupInstancesClient, token string) error {
+	pt, err := armruntime.NewPollerFromResumeToken("BackupInstancesClient.StopProtection", token, client.pl)
+	if err != nil {
+		return err
+	}
+	poller := &BackupInstancesClientStopProtectionPoller{
+		pt: pt,
+	}
+	resp, err := poller.Poll(ctx)
+	if err != nil {
+		return err
+	}
+	l.Poller = poller
+	l.RawResponse = resp
+	return nil
+}
+
+// BackupInstancesClientStopProtectionResponse contains the response from method BackupInstancesClient.StopProtection.
+type BackupInstancesClientStopProtectionResponse struct {
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// BackupInstancesClientSuspendBackupsPollerResponse contains the response from method BackupInstancesClient.SuspendBackups.
+type BackupInstancesClientSuspendBackupsPollerResponse struct {
+	// Poller contains an initialized poller.
+	Poller *BackupInstancesClientSuspendBackupsPoller
+
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// PollUntilDone will poll the service endpoint until a terminal state is reached or an error is received.
+// freq: the time to wait between intervals in absence of a Retry-After header. Allowed minimum is one second.
+// A good starting value is 30 seconds. Note that some resources might benefit from a different value.
+func (l BackupInstancesClientSuspendBackupsPollerResponse) PollUntilDone(ctx context.Context, freq time.Duration) (BackupInstancesClientSuspendBackupsResponse, error) {
+	respType := BackupInstancesClientSuspendBackupsResponse{}
+	resp, err := l.Poller.pt.PollUntilDone(ctx, freq, nil)
+	if err != nil {
+		return respType, err
+	}
+	respType.RawResponse = resp
+	return respType, nil
+}
+
+// Resume rehydrates a BackupInstancesClientSuspendBackupsPollerResponse from the provided client and resume token.
+func (l *BackupInstancesClientSuspendBackupsPollerResponse) Resume(ctx context.Context, client *BackupInstancesClient, token string) error {
+	pt, err := armruntime.NewPollerFromResumeToken("BackupInstancesClient.SuspendBackups", token, client.pl)
+	if err != nil {
+		return err
+	}
+	poller := &BackupInstancesClientSuspendBackupsPoller{
+		pt: pt,
+	}
+	resp, err := poller.Poll(ctx)
+	if err != nil {
+		return err
+	}
+	l.Poller = poller
+	l.RawResponse = resp
+	return nil
+}
+
+// BackupInstancesClientSuspendBackupsResponse contains the response from method BackupInstancesClient.SuspendBackups.
+type BackupInstancesClientSuspendBackupsResponse struct {
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// BackupInstancesClientSyncBackupInstancePollerResponse contains the response from method BackupInstancesClient.SyncBackupInstance.
+type BackupInstancesClientSyncBackupInstancePollerResponse struct {
+	// Poller contains an initialized poller.
+	Poller *BackupInstancesClientSyncBackupInstancePoller
+
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// PollUntilDone will poll the service endpoint until a terminal state is reached or an error is received.
+// freq: the time to wait between intervals in absence of a Retry-After header. Allowed minimum is one second.
+// A good starting value is 30 seconds. Note that some resources might benefit from a different value.
+func (l BackupInstancesClientSyncBackupInstancePollerResponse) PollUntilDone(ctx context.Context, freq time.Duration) (BackupInstancesClientSyncBackupInstanceResponse, error) {
+	respType := BackupInstancesClientSyncBackupInstanceResponse{}
+	resp, err := l.Poller.pt.PollUntilDone(ctx, freq, nil)
+	if err != nil {
+		return respType, err
+	}
+	respType.RawResponse = resp
+	return respType, nil
+}
+
+// Resume rehydrates a BackupInstancesClientSyncBackupInstancePollerResponse from the provided client and resume token.
+func (l *BackupInstancesClientSyncBackupInstancePollerResponse) Resume(ctx context.Context, client *BackupInstancesClient, token string) error {
+	pt, err := armruntime.NewPollerFromResumeToken("BackupInstancesClient.SyncBackupInstance", token, client.pl)
+	if err != nil {
+		return err
+	}
+	poller := &BackupInstancesClientSyncBackupInstancePoller{
+		pt: pt,
+	}
+	resp, err := poller.Poll(ctx)
+	if err != nil {
+		return err
+	}
+	l.Poller = poller
+	l.RawResponse = resp
+	return nil
+}
+
+// BackupInstancesClientSyncBackupInstanceResponse contains the response from method BackupInstancesClient.SyncBackupInstance.
+type BackupInstancesClientSyncBackupInstanceResponse struct {
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
 }
 
 // BackupInstancesClientTriggerRehydratePollerResponse contains the response from method BackupInstancesClient.TriggerRehydrate.
@@ -735,6 +977,18 @@ type OperationResultClientGetResult struct {
 	RetryAfter *int32
 }
 
+// OperationStatusBackupVaultContextClientGetResponse contains the response from method OperationStatusBackupVaultContextClient.Get.
+type OperationStatusBackupVaultContextClientGetResponse struct {
+	OperationStatusBackupVaultContextClientGetResult
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// OperationStatusBackupVaultContextClientGetResult contains the result from method OperationStatusBackupVaultContextClient.Get.
+type OperationStatusBackupVaultContextClientGetResult struct {
+	OperationResource
+}
+
 // OperationStatusClientGetResponse contains the response from method OperationStatusClient.Get.
 type OperationStatusClientGetResponse struct {
 	OperationStatusClientGetResult
@@ -744,6 +998,18 @@ type OperationStatusClientGetResponse struct {
 
 // OperationStatusClientGetResult contains the result from method OperationStatusClient.Get.
 type OperationStatusClientGetResult struct {
+	OperationResource
+}
+
+// OperationStatusResourceGroupContextClientGetResponse contains the response from method OperationStatusResourceGroupContextClient.Get.
+type OperationStatusResourceGroupContextClientGetResponse struct {
+	OperationStatusResourceGroupContextClientGetResult
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// OperationStatusResourceGroupContextClientGetResult contains the result from method OperationStatusResourceGroupContextClient.Get.
+type OperationStatusResourceGroupContextClientGetResult struct {
 	OperationResource
 }
 
