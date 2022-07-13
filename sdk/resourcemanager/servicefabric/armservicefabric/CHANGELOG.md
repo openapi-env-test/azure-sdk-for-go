@@ -1,5 +1,23 @@
 # Release History
 
+## 0.4.0 (2022-07-13)
+### Breaking Changes
+
+- Function `*ClusterVersionsClient.GetByEnvironment` parameter(s) have been changed from `(context.Context, string, Enum14, string, *ClusterVersionsClientGetByEnvironmentOptions)` to `(context.Context, string, ClusterVersionsEnvironment, string, *ClusterVersionsClientGetByEnvironmentOptions)`
+- Function `*ClusterVersionsClient.ListByEnvironment` parameter(s) have been changed from `(context.Context, string, Enum14, *ClusterVersionsClientListByEnvironmentOptions)` to `(context.Context, string, ClusterVersionsEnvironment, *ClusterVersionsClientListByEnvironmentOptions)`
+- Const `Enum14Windows` has been removed
+- Const `Enum14Linux` has been removed
+- Function `Enum14.ToPtr` has been removed
+- Function `PossibleEnum14Values` has been removed
+
+### Features Added
+
+- New const `ClusterVersionsEnvironmentLinux`
+- New const `ClusterVersionsEnvironmentWindows`
+- New function `PossibleClusterVersionsEnvironmentValues() []ClusterVersionsEnvironment`
+- New function `ClusterVersionsEnvironment.ToPtr() *ClusterVersionsEnvironment`
+
+
 ## 0.3.0 (2022-01-13)
 ### Breaking Changes
 
