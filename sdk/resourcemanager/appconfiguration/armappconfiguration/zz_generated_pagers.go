@@ -178,60 +178,6 @@ func (p *ConfigurationStoresClientListPager) PageResponse() ConfigurationStoresC
 	return p.current
 }
 
-// KeyValuesClientListByConfigurationStorePager provides operations for iterating over paged responses.
-type KeyValuesClientListByConfigurationStorePager struct {
-	client    *KeyValuesClient
-	current   KeyValuesClientListByConfigurationStoreResponse
-	err       error
-	requester func(context.Context) (*policy.Request, error)
-	advancer  func(context.Context, KeyValuesClientListByConfigurationStoreResponse) (*policy.Request, error)
-}
-
-// Err returns the last error encountered while paging.
-func (p *KeyValuesClientListByConfigurationStorePager) Err() error {
-	return p.err
-}
-
-// NextPage returns true if the pager advanced to the next page.
-// Returns false if there are no more pages or an error occurred.
-func (p *KeyValuesClientListByConfigurationStorePager) NextPage(ctx context.Context) bool {
-	var req *policy.Request
-	var err error
-	if !reflect.ValueOf(p.current).IsZero() {
-		if p.current.KeyValueListResult.NextLink == nil || len(*p.current.KeyValueListResult.NextLink) == 0 {
-			return false
-		}
-		req, err = p.advancer(ctx, p.current)
-	} else {
-		req, err = p.requester(ctx)
-	}
-	if err != nil {
-		p.err = err
-		return false
-	}
-	resp, err := p.client.pl.Do(req)
-	if err != nil {
-		p.err = err
-		return false
-	}
-	if !runtime.HasStatusCode(resp, http.StatusOK) {
-		p.err = runtime.NewResponseError(resp)
-		return false
-	}
-	result, err := p.client.listByConfigurationStoreHandleResponse(resp)
-	if err != nil {
-		p.err = err
-		return false
-	}
-	p.current = result
-	return true
-}
-
-// PageResponse returns the current KeyValuesClientListByConfigurationStoreResponse page.
-func (p *KeyValuesClientListByConfigurationStorePager) PageResponse() KeyValuesClientListByConfigurationStoreResponse {
-	return p.current
-}
-
 // OperationsClientListPager provides operations for iterating over paged responses.
 type OperationsClientListPager struct {
 	client    *OperationsClient
