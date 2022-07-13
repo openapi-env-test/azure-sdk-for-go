@@ -147,6 +147,18 @@ type NamespacesClientCreateOrUpdateAuthorizationRuleResult struct {
 	AuthorizationRule
 }
 
+// NamespacesClientCreateOrUpdateNetworkRuleSetResponse contains the response from method NamespacesClient.CreateOrUpdateNetworkRuleSet.
+type NamespacesClientCreateOrUpdateNetworkRuleSetResponse struct {
+	NamespacesClientCreateOrUpdateNetworkRuleSetResult
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// NamespacesClientCreateOrUpdateNetworkRuleSetResult contains the result from method NamespacesClient.CreateOrUpdateNetworkRuleSet.
+type NamespacesClientCreateOrUpdateNetworkRuleSetResult struct {
+	NetworkRuleSet
+}
+
 // NamespacesClientCreateOrUpdatePollerResponse contains the response from method NamespacesClient.CreateOrUpdate.
 type NamespacesClientCreateOrUpdatePollerResponse struct {
 	// Poller contains an initialized poller.
@@ -263,6 +275,18 @@ type NamespacesClientGetAuthorizationRuleResult struct {
 	AuthorizationRule
 }
 
+// NamespacesClientGetNetworkRuleSetResponse contains the response from method NamespacesClient.GetNetworkRuleSet.
+type NamespacesClientGetNetworkRuleSetResponse struct {
+	NamespacesClientGetNetworkRuleSetResult
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// NamespacesClientGetNetworkRuleSetResult contains the result from method NamespacesClient.GetNetworkRuleSet.
+type NamespacesClientGetNetworkRuleSetResult struct {
+	NetworkRuleSet
+}
+
 // NamespacesClientGetResponse contains the response from method NamespacesClient.Get.
 type NamespacesClientGetResponse struct {
 	NamespacesClientGetResult
@@ -357,6 +381,112 @@ type OperationsClientListResponse struct {
 // OperationsClientListResult contains the result from method OperationsClient.List.
 type OperationsClientListResult struct {
 	OperationListResult
+}
+
+// PrivateEndpointConnectionsClientCreateOrUpdateResponse contains the response from method PrivateEndpointConnectionsClient.CreateOrUpdate.
+type PrivateEndpointConnectionsClientCreateOrUpdateResponse struct {
+	PrivateEndpointConnectionsClientCreateOrUpdateResult
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// PrivateEndpointConnectionsClientCreateOrUpdateResult contains the result from method PrivateEndpointConnectionsClient.CreateOrUpdate.
+type PrivateEndpointConnectionsClientCreateOrUpdateResult struct {
+	PrivateEndpointConnection
+}
+
+// PrivateEndpointConnectionsClientDeletePollerResponse contains the response from method PrivateEndpointConnectionsClient.Delete.
+type PrivateEndpointConnectionsClientDeletePollerResponse struct {
+	// Poller contains an initialized poller.
+	Poller *PrivateEndpointConnectionsClientDeletePoller
+
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// PollUntilDone will poll the service endpoint until a terminal state is reached or an error is received.
+// freq: the time to wait between intervals in absence of a Retry-After header. Allowed minimum is one second.
+// A good starting value is 30 seconds. Note that some resources might benefit from a different value.
+func (l PrivateEndpointConnectionsClientDeletePollerResponse) PollUntilDone(ctx context.Context, freq time.Duration) (PrivateEndpointConnectionsClientDeleteResponse, error) {
+	respType := PrivateEndpointConnectionsClientDeleteResponse{}
+	resp, err := l.Poller.pt.PollUntilDone(ctx, freq, nil)
+	if err != nil {
+		return respType, err
+	}
+	respType.RawResponse = resp
+	return respType, nil
+}
+
+// Resume rehydrates a PrivateEndpointConnectionsClientDeletePollerResponse from the provided client and resume token.
+func (l *PrivateEndpointConnectionsClientDeletePollerResponse) Resume(ctx context.Context, client *PrivateEndpointConnectionsClient, token string) error {
+	pt, err := armruntime.NewPollerFromResumeToken("PrivateEndpointConnectionsClient.Delete", token, client.pl)
+	if err != nil {
+		return err
+	}
+	poller := &PrivateEndpointConnectionsClientDeletePoller{
+		pt: pt,
+	}
+	resp, err := poller.Poll(ctx)
+	if err != nil {
+		return err
+	}
+	l.Poller = poller
+	l.RawResponse = resp
+	return nil
+}
+
+// PrivateEndpointConnectionsClientDeleteResponse contains the response from method PrivateEndpointConnectionsClient.Delete.
+type PrivateEndpointConnectionsClientDeleteResponse struct {
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// PrivateEndpointConnectionsClientGetResponse contains the response from method PrivateEndpointConnectionsClient.Get.
+type PrivateEndpointConnectionsClientGetResponse struct {
+	PrivateEndpointConnectionsClientGetResult
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// PrivateEndpointConnectionsClientGetResult contains the result from method PrivateEndpointConnectionsClient.Get.
+type PrivateEndpointConnectionsClientGetResult struct {
+	PrivateEndpointConnection
+}
+
+// PrivateEndpointConnectionsClientListResponse contains the response from method PrivateEndpointConnectionsClient.List.
+type PrivateEndpointConnectionsClientListResponse struct {
+	PrivateEndpointConnectionsClientListResult
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// PrivateEndpointConnectionsClientListResult contains the result from method PrivateEndpointConnectionsClient.List.
+type PrivateEndpointConnectionsClientListResult struct {
+	PrivateEndpointConnectionListResult
+}
+
+// PrivateLinkResourcesClientGetResponse contains the response from method PrivateLinkResourcesClient.Get.
+type PrivateLinkResourcesClientGetResponse struct {
+	PrivateLinkResourcesClientGetResult
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// PrivateLinkResourcesClientGetResult contains the result from method PrivateLinkResourcesClient.Get.
+type PrivateLinkResourcesClientGetResult struct {
+	PrivateLinkResource
+}
+
+// PrivateLinkResourcesClientListResponse contains the response from method PrivateLinkResourcesClient.List.
+type PrivateLinkResourcesClientListResponse struct {
+	PrivateLinkResourcesClientListResult
+	// RawResponse contains the underlying HTTP response.
+	RawResponse *http.Response
+}
+
+// PrivateLinkResourcesClientListResult contains the result from method PrivateLinkResourcesClient.List.
+type PrivateLinkResourcesClientListResult struct {
+	PrivateLinkResourcesListResult
 }
 
 // WCFRelaysClientCreateOrUpdateAuthorizationRuleResponse contains the response from method WCFRelaysClient.CreateOrUpdateAuthorizationRule.
