@@ -111,7 +111,7 @@ func (client *ConfigurationStoresClient) createCreateRequest(ctx context.Context
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-03-01-preview")
+	reqQP.Set("api-version", "2011-01-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, runtime.MarshalAsJSON(req, configStoreCreationParameters)
@@ -178,7 +178,7 @@ func (client *ConfigurationStoresClient) deleteCreateRequest(ctx context.Context
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-03-01-preview")
+	reqQP.Set("api-version", "2011-01-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -224,7 +224,7 @@ func (client *ConfigurationStoresClient) getCreateRequest(ctx context.Context, r
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-03-01-preview")
+	reqQP.Set("api-version", "2011-01-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -267,7 +267,7 @@ func (client *ConfigurationStoresClient) listCreateRequest(ctx context.Context, 
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-03-01-preview")
+	reqQP.Set("api-version", "2011-01-01")
 	if options != nil && options.SkipToken != nil {
 		reqQP.Set("$skipToken", *options.SkipToken)
 	}
@@ -318,7 +318,7 @@ func (client *ConfigurationStoresClient) listByResourceGroupCreateRequest(ctx co
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-03-01-preview")
+	reqQP.Set("api-version", "2011-01-01")
 	if options != nil && options.SkipToken != nil {
 		reqQP.Set("$skipToken", *options.SkipToken)
 	}
@@ -332,6 +332,63 @@ func (client *ConfigurationStoresClient) listByResourceGroupHandleResponse(resp 
 	result := ConfigurationStoresClientListByResourceGroupResponse{RawResponse: resp}
 	if err := runtime.UnmarshalAsJSON(resp, &result.ConfigurationStoreListResult); err != nil {
 		return ConfigurationStoresClientListByResourceGroupResponse{}, err
+	}
+	return result, nil
+}
+
+// ListKeyValue - Lists a configuration store key-value.
+// If the operation fails it returns an *azcore.ResponseError type.
+// resourceGroupName - The name of the resource group to which the container registry belongs.
+// configStoreName - The name of the configuration store.
+// listKeyValueParameters - The parameters for retrieving a key-value.
+// options - ConfigurationStoresClientListKeyValueOptions contains the optional parameters for the ConfigurationStoresClient.ListKeyValue
+// method.
+func (client *ConfigurationStoresClient) ListKeyValue(ctx context.Context, resourceGroupName string, configStoreName string, listKeyValueParameters ListKeyValueParameters, options *ConfigurationStoresClientListKeyValueOptions) (ConfigurationStoresClientListKeyValueResponse, error) {
+	req, err := client.listKeyValueCreateRequest(ctx, resourceGroupName, configStoreName, listKeyValueParameters, options)
+	if err != nil {
+		return ConfigurationStoresClientListKeyValueResponse{}, err
+	}
+	resp, err := client.pl.Do(req)
+	if err != nil {
+		return ConfigurationStoresClientListKeyValueResponse{}, err
+	}
+	if !runtime.HasStatusCode(resp, http.StatusOK) {
+		return ConfigurationStoresClientListKeyValueResponse{}, runtime.NewResponseError(resp)
+	}
+	return client.listKeyValueHandleResponse(resp)
+}
+
+// listKeyValueCreateRequest creates the ListKeyValue request.
+func (client *ConfigurationStoresClient) listKeyValueCreateRequest(ctx context.Context, resourceGroupName string, configStoreName string, listKeyValueParameters ListKeyValueParameters, options *ConfigurationStoresClientListKeyValueOptions) (*policy.Request, error) {
+	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/listKeyValue"
+	if client.subscriptionID == "" {
+		return nil, errors.New("parameter client.subscriptionID cannot be empty")
+	}
+	urlPath = strings.ReplaceAll(urlPath, "{subscriptionId}", url.PathEscape(client.subscriptionID))
+	if resourceGroupName == "" {
+		return nil, errors.New("parameter resourceGroupName cannot be empty")
+	}
+	urlPath = strings.ReplaceAll(urlPath, "{resourceGroupName}", url.PathEscape(resourceGroupName))
+	if configStoreName == "" {
+		return nil, errors.New("parameter configStoreName cannot be empty")
+	}
+	urlPath = strings.ReplaceAll(urlPath, "{configStoreName}", url.PathEscape(configStoreName))
+	req, err := runtime.NewRequest(ctx, http.MethodPost, runtime.JoinPaths(client.host, urlPath))
+	if err != nil {
+		return nil, err
+	}
+	reqQP := req.Raw().URL.Query()
+	reqQP.Set("api-version", "2011-01-01")
+	req.Raw().URL.RawQuery = reqQP.Encode()
+	req.Raw().Header.Set("Accept", "application/json")
+	return req, runtime.MarshalAsJSON(req, listKeyValueParameters)
+}
+
+// listKeyValueHandleResponse handles the ListKeyValue response.
+func (client *ConfigurationStoresClient) listKeyValueHandleResponse(resp *http.Response) (ConfigurationStoresClientListKeyValueResponse, error) {
+	result := ConfigurationStoresClientListKeyValueResponse{RawResponse: resp}
+	if err := runtime.UnmarshalAsJSON(resp, &result.KeyValue); err != nil {
+		return ConfigurationStoresClientListKeyValueResponse{}, err
 	}
 	return result, nil
 }
@@ -356,7 +413,7 @@ func (client *ConfigurationStoresClient) ListKeys(resourceGroupName string, conf
 
 // listKeysCreateRequest creates the ListKeys request.
 func (client *ConfigurationStoresClient) listKeysCreateRequest(ctx context.Context, resourceGroupName string, configStoreName string, options *ConfigurationStoresClientListKeysOptions) (*policy.Request, error) {
-	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/listKeys"
+	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/ListKeys"
 	if client.subscriptionID == "" {
 		return nil, errors.New("parameter client.subscriptionID cannot be empty")
 	}
@@ -374,7 +431,7 @@ func (client *ConfigurationStoresClient) listKeysCreateRequest(ctx context.Conte
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-03-01-preview")
+	reqQP.Set("api-version", "2011-01-01")
 	if options != nil && options.SkipToken != nil {
 		reqQP.Set("$skipToken", *options.SkipToken)
 	}
@@ -416,7 +473,7 @@ func (client *ConfigurationStoresClient) RegenerateKey(ctx context.Context, reso
 
 // regenerateKeyCreateRequest creates the RegenerateKey request.
 func (client *ConfigurationStoresClient) regenerateKeyCreateRequest(ctx context.Context, resourceGroupName string, configStoreName string, regenerateKeyParameters RegenerateKeyParameters, options *ConfigurationStoresClientRegenerateKeyOptions) (*policy.Request, error) {
-	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/regenerateKey"
+	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/RegenerateKey"
 	if client.subscriptionID == "" {
 		return nil, errors.New("parameter client.subscriptionID cannot be empty")
 	}
@@ -434,7 +491,7 @@ func (client *ConfigurationStoresClient) regenerateKeyCreateRequest(ctx context.
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-03-01-preview")
+	reqQP.Set("api-version", "2011-01-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, runtime.MarshalAsJSON(req, regenerateKeyParameters)
@@ -511,7 +568,7 @@ func (client *ConfigurationStoresClient) updateCreateRequest(ctx context.Context
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-03-01-preview")
+	reqQP.Set("api-version", "2011-01-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, runtime.MarshalAsJSON(req, configStoreUpdateParameters)

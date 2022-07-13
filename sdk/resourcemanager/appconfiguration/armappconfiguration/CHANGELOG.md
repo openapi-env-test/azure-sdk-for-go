@@ -1,5 +1,98 @@
 # Release History
 
+## 0.3.0 (2022-07-13)
+### Breaking Changes
+
+- Const `CreatedByTypeManagedIdentity` has been removed
+- Const `CreatedByTypeUser` has been removed
+- Const `CreatedByTypeApplication` has been removed
+- Const `CreatedByTypeKey` has been removed
+- Function `TrackedResource.MarshalJSON` has been removed
+- Function `KeyValueListResult.MarshalJSON` has been removed
+- Function `KeyValueProperties.MarshalJSON` has been removed
+- Function `*KeyValuesClient.BeginDelete` has been removed
+- Function `*KeyValuesClientListByConfigurationStorePager.Err` has been removed
+- Function `*KeyValuesClientListByConfigurationStorePager.NextPage` has been removed
+- Function `*KeyValueProperties.UnmarshalJSON` has been removed
+- Function `CreatedByType.ToPtr` has been removed
+- Function `*KeyValuesClientDeletePoller.Poll` has been removed
+- Function `*KeyValuesClient.CreateOrUpdate` has been removed
+- Function `MetricSpecification.MarshalJSON` has been removed
+- Function `*KeyValuesClient.ListByConfigurationStore` has been removed
+- Function `*SystemData.UnmarshalJSON` has been removed
+- Function `*KeyValuesClientDeletePoller.FinalResponse` has been removed
+- Function `*KeyValuesClientDeletePollerResponse.Resume` has been removed
+- Function `*KeyValuesClientDeletePoller.Done` has been removed
+- Function `*KeyValuesClient.Get` has been removed
+- Function `ServiceSpecification.MarshalJSON` has been removed
+- Function `*KeyValuesClientDeletePoller.ResumeToken` has been removed
+- Function `ErrorDetails.MarshalJSON` has been removed
+- Function `SystemData.MarshalJSON` has been removed
+- Function `NewKeyValuesClient` has been removed
+- Function `*KeyValuesClientListByConfigurationStorePager.PageResponse` has been removed
+- Function `KeyValuesClientDeletePollerResponse.PollUntilDone` has been removed
+- Function `PossibleCreatedByTypeValues` has been removed
+- Struct `ErrorAdditionalInfo` has been removed
+- Struct `ErrorDetails` has been removed
+- Struct `ErrorResponse` has been removed
+- Struct `KeyValueListResult` has been removed
+- Struct `KeyValueProperties` has been removed
+- Struct `KeyValuesClient` has been removed
+- Struct `KeyValuesClientBeginDeleteOptions` has been removed
+- Struct `KeyValuesClientCreateOrUpdateOptions` has been removed
+- Struct `KeyValuesClientCreateOrUpdateResponse` has been removed
+- Struct `KeyValuesClientCreateOrUpdateResult` has been removed
+- Struct `KeyValuesClientDeletePoller` has been removed
+- Struct `KeyValuesClientDeletePollerResponse` has been removed
+- Struct `KeyValuesClientDeleteResponse` has been removed
+- Struct `KeyValuesClientGetOptions` has been removed
+- Struct `KeyValuesClientGetResponse` has been removed
+- Struct `KeyValuesClientGetResult` has been removed
+- Struct `KeyValuesClientListByConfigurationStoreOptions` has been removed
+- Struct `KeyValuesClientListByConfigurationStorePager` has been removed
+- Struct `KeyValuesClientListByConfigurationStoreResponse` has been removed
+- Struct `KeyValuesClientListByConfigurationStoreResult` has been removed
+- Struct `LogSpecification` has been removed
+- Struct `MetricDimension` has been removed
+- Struct `MetricSpecification` has been removed
+- Struct `OperationProperties` has been removed
+- Struct `ServiceSpecification` has been removed
+- Struct `SystemData` has been removed
+- Struct `TrackedResource` has been removed
+- Field `SystemData` of struct `ConfigurationStore` has been removed
+- Field `Type` of struct `KeyValue` has been removed
+- Field `Properties` of struct `KeyValue` has been removed
+- Field `ID` of struct `KeyValue` has been removed
+- Field `Name` of struct `KeyValue` has been removed
+- Field `DisableLocalAuth` of struct `ConfigurationStorePropertiesUpdateParameters` has been removed
+- Field `IsDataAction` of struct `OperationDefinition` has been removed
+- Field `Origin` of struct `OperationDefinition` has been removed
+- Field `Properties` of struct `OperationDefinition` has been removed
+- Field `DisableLocalAuth` of struct `ConfigurationStoreProperties` has been removed
+
+### Features Added
+
+- New function `*KeyValue.UnmarshalJSON([]byte) error`
+- New function `*ConfigurationStoresClient.ListKeyValue(context.Context, string, string, ListKeyValueParameters, *ConfigurationStoresClientListKeyValueOptions) (ConfigurationStoresClientListKeyValueResponse, error)`
+- New function `Resource.MarshalJSON() ([]byte, error)`
+- New function `KeyValue.MarshalJSON() ([]byte, error)`
+- New struct `ConfigurationStoresClientListKeyValueOptions`
+- New struct `ConfigurationStoresClientListKeyValueResponse`
+- New struct `ConfigurationStoresClientListKeyValueResult`
+- New struct `Error`
+- New struct `ListKeyValueParameters`
+- New field `Location` in struct `Resource`
+- New field `Tags` in struct `Resource`
+- New field `Label` in struct `KeyValue`
+- New field `LastModified` in struct `KeyValue`
+- New field `Locked` in struct `KeyValue`
+- New field `Tags` in struct `KeyValue`
+- New field `Value` in struct `KeyValue`
+- New field `ContentType` in struct `KeyValue`
+- New field `ETag` in struct `KeyValue`
+- New field `Key` in struct `KeyValue`
+
+
 ## 0.2.0 (2022-01-13)
 ### Breaking Changes
 
