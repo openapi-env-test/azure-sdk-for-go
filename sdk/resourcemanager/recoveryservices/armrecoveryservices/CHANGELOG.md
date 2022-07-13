@@ -1,5 +1,20 @@
 # Release History
 
+## 0.4.0 (2022-07-13)
+### Breaking Changes
+
+### Features Added
+
+- New const `AlertsStateEnabled`
+- New const `AlertsStateDisabled`
+- New function `AlertsState.ToPtr() *AlertsState`
+- New function `PossibleAlertsStateValues() []AlertsState`
+- New struct `AzureMonitorAlertSettings`
+- New struct `ClassicAlertSettings`
+- New struct `MonitoringSettings`
+- New field `MonitoringSettings` in struct `VaultProperties`
+
+
 ## 0.3.0 (2022-01-13)
 ### Breaking Changes
 
