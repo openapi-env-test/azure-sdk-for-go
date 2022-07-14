@@ -10,15 +10,18 @@ package armstorage
 
 const (
 	moduleName    = "armstorage"
-	moduleVersion = "v0.3.0"
+	moduleVersion = "v0.4.0"
 )
 
-// AccessTier - Required for storage accounts where kind = BlobStorage. The access tier used for billing.
+// AccessTier - Required for storage accounts where kind = BlobStorage. The access tier is used for billing. The 'Premium'
+// access tier is the default value for premium block blobs storage account type and it cannot
+// be changed for the premium block blobs storage account type.
 type AccessTier string
 
 const (
-	AccessTierHot  AccessTier = "Hot"
-	AccessTierCool AccessTier = "Cool"
+	AccessTierHot     AccessTier = "Hot"
+	AccessTierCool    AccessTier = "Cool"
+	AccessTierPremium AccessTier = "Premium"
 )
 
 // PossibleAccessTierValues returns the possible values for the AccessTier const type.
@@ -26,6 +29,7 @@ func PossibleAccessTierValues() []AccessTier {
 	return []AccessTier{
 		AccessTierHot,
 		AccessTierCool,
+		AccessTierPremium,
 	}
 }
 
@@ -202,6 +206,7 @@ const (
 	CorsRuleAllowedMethodsItemHEAD    CorsRuleAllowedMethodsItem = "HEAD"
 	CorsRuleAllowedMethodsItemMERGE   CorsRuleAllowedMethodsItem = "MERGE"
 	CorsRuleAllowedMethodsItemOPTIONS CorsRuleAllowedMethodsItem = "OPTIONS"
+	CorsRuleAllowedMethodsItemPATCH   CorsRuleAllowedMethodsItem = "PATCH"
 	CorsRuleAllowedMethodsItemPOST    CorsRuleAllowedMethodsItem = "POST"
 	CorsRuleAllowedMethodsItemPUT     CorsRuleAllowedMethodsItem = "PUT"
 )
@@ -214,6 +219,7 @@ func PossibleCorsRuleAllowedMethodsItemValues() []CorsRuleAllowedMethodsItem {
 		CorsRuleAllowedMethodsItemHEAD,
 		CorsRuleAllowedMethodsItemMERGE,
 		CorsRuleAllowedMethodsItemOPTIONS,
+		CorsRuleAllowedMethodsItemPATCH,
 		CorsRuleAllowedMethodsItemPOST,
 		CorsRuleAllowedMethodsItemPUT,
 	}
@@ -246,6 +252,29 @@ func PossibleCreatedByTypeValues() []CreatedByType {
 
 // ToPtr returns a *CreatedByType pointing to the current value.
 func (c CreatedByType) ToPtr() *CreatedByType {
+	return &c
+}
+
+// DNSEndpointType - Allows you to specify the type of endpoint. Set this to AzureDNSZone to create a large number of accounts
+// in a single subscription, which creates accounts in an Azure DNS Zone and the endpoint URL
+// will have an alphanumeric DNS Zone identifier.
+type DNSEndpointType string
+
+const (
+	DNSEndpointTypeAzureDNSZone DNSEndpointType = "AzureDnsZone"
+	DNSEndpointTypeStandard     DNSEndpointType = "Standard"
+)
+
+// PossibleDNSEndpointTypeValues returns the possible values for the DNSEndpointType const type.
+func PossibleDNSEndpointTypeValues() []DNSEndpointType {
+	return []DNSEndpointType{
+		DNSEndpointTypeAzureDNSZone,
+		DNSEndpointTypeStandard,
+	}
+}
+
+// ToPtr returns a *DNSEndpointType pointing to the current value.
+func (c DNSEndpointType) ToPtr() *DNSEndpointType {
 	return &c
 }
 
@@ -1189,6 +1218,29 @@ func PossibleRuleTypeValues() []RuleType {
 
 // ToPtr returns a *RuleType pointing to the current value.
 func (c RuleType) ToPtr() *RuleType {
+	return &c
+}
+
+// SKUConversionStatus - This property indicates the current sku conversion status.
+type SKUConversionStatus string
+
+const (
+	SKUConversionStatusFailed     SKUConversionStatus = "Failed"
+	SKUConversionStatusInProgress SKUConversionStatus = "InProgress"
+	SKUConversionStatusSucceeded  SKUConversionStatus = "Succeeded"
+)
+
+// PossibleSKUConversionStatusValues returns the possible values for the SKUConversionStatus const type.
+func PossibleSKUConversionStatusValues() []SKUConversionStatus {
+	return []SKUConversionStatus{
+		SKUConversionStatusFailed,
+		SKUConversionStatusInProgress,
+		SKUConversionStatusSucceeded,
+	}
+}
+
+// ToPtr returns a *SKUConversionStatus pointing to the current value.
+func (c SKUConversionStatus) ToPtr() *SKUConversionStatus {
 	return &c
 }
 
