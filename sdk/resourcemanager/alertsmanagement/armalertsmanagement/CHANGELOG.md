@@ -1,5 +1,17 @@
 # Release History
 
+## 0.4.0 (2022-07-15)
+### Breaking Changes
+
+### Features Added
+
+- New struct `ActionStatus`
+- New field `Description` in struct `Essentials`
+- New field `ActionStatus` in struct `Essentials`
+- New field `Comment` in struct `AlertsClientChangeStateOptions`
+- New field `Origin` in struct `Operation`
+
+
 ## 0.3.0 (2022-01-13)
 ### Breaking Changes
 

@@ -275,7 +275,7 @@ func (client *AlertProcessingRulesClient) listByResourceGroupHandleResponse(resp
 	return result, nil
 }
 
-// ListBySubscription - List all alert processing rules in a subscription.
+// ListBySubscription - List all alert processing rules in a subcription.
 // If the operation fails it returns an *azcore.ResponseError type.
 // options - AlertProcessingRulesClientListBySubscriptionOptions contains the optional parameters for the AlertProcessingRulesClient.ListBySubscription
 // method.

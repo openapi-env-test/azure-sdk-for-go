@@ -90,6 +90,9 @@ func (client *AlertsClient) changeStateCreateRequest(ctx context.Context, alertI
 	reqQP.Set("newState", string(newState))
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
+	if options != nil && options.Comment != nil {
+		return req, runtime.MarshalAsJSON(req, *options.Comment)
+	}
 	return req, nil
 }
 
