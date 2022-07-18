@@ -22,14 +22,14 @@ type PolicyStatesClient struct {
 }
 
 // NewPolicyStatesClient creates an instance of the PolicyStatesClient client.
-func NewPolicyStatesClient(subscriptionID2 string) PolicyStatesClient {
-	return NewPolicyStatesClientWithBaseURI(DefaultBaseURI, subscriptionID2)
+func NewPolicyStatesClient(subscriptionID string, subscriptionID1 string) PolicyStatesClient {
+	return NewPolicyStatesClientWithBaseURI(DefaultBaseURI, subscriptionID, subscriptionID1)
 }
 
 // NewPolicyStatesClientWithBaseURI creates an instance of the PolicyStatesClient client using a custom endpoint.  Use
 // this when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure stack).
-func NewPolicyStatesClientWithBaseURI(baseURI string, subscriptionID2 string) PolicyStatesClient {
-	return PolicyStatesClient{NewWithBaseURI(baseURI, subscriptionID2)}
+func NewPolicyStatesClientWithBaseURI(baseURI string, subscriptionID string, subscriptionID1 string) PolicyStatesClient {
+	return PolicyStatesClient{NewWithBaseURI(baseURI, subscriptionID, subscriptionID1)}
 }
 
 // ListQueryResultsForManagementGroup queries policy states for the resources under the management group.
@@ -199,7 +199,6 @@ func (client PolicyStatesClient) ListQueryResultsForManagementGroupComplete(ctx 
 // Parameters:
 // policyStatesResource - the virtual resource under PolicyStates resource type. In a given time range,
 // 'latest' represents the latest policy state(s), whereas 'default' represents all policy state(s).
-// subscriptionID - microsoft Azure subscription ID.
 // policyDefinitionName - policy definition name.
 // top - maximum number of records to return.
 // orderBy - ordering expression using OData notation. One or more comma-separated column names with an
@@ -214,7 +213,7 @@ func (client PolicyStatesClient) ListQueryResultsForManagementGroupComplete(ctx 
 // apply - oData apply expression for aggregations.
 // skipToken - skiptoken is only provided if a previous response returned a partial result as a part of
 // nextLink element.
-func (client PolicyStatesClient) ListQueryResultsForPolicyDefinition(ctx context.Context, policyStatesResource PolicyStatesResource, subscriptionID string, policyDefinitionName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyStatesQueryResultsPage, err error) {
+func (client PolicyStatesClient) ListQueryResultsForPolicyDefinition(ctx context.Context, policyStatesResource PolicyStatesResource, policyDefinitionName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyStatesQueryResultsPage, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/PolicyStatesClient.ListQueryResultsForPolicyDefinition")
 		defer func() {
@@ -226,6 +225,8 @@ func (client PolicyStatesClient) ListQueryResultsForPolicyDefinition(ctx context
 		}()
 	}
 	if err := validation.Validate([]validation.Validation{
+		{TargetValue: client.SubscriptionID,
+			Constraints: []validation.Constraint{{Target: "client.SubscriptionID", Name: validation.MinLength, Rule: 1, Chain: nil}}},
 		{TargetValue: top,
 			Constraints: []validation.Constraint{{Target: "top", Name: validation.Null, Rule: false,
 				Chain: []validation.Constraint{{Target: "top", Name: validation.InclusiveMinimum, Rule: int64(0), Chain: nil}}}}}}); err != nil {
@@ -233,7 +234,7 @@ func (client PolicyStatesClient) ListQueryResultsForPolicyDefinition(ctx context
 	}
 
 	result.fn = client.listQueryResultsForPolicyDefinitionNextResults
-	req, err := client.ListQueryResultsForPolicyDefinitionPreparer(ctx, policyStatesResource, subscriptionID, policyDefinitionName, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
+	req, err := client.ListQueryResultsForPolicyDefinitionPreparer(ctx, policyStatesResource, policyDefinitionName, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "policyinsights.PolicyStatesClient", "ListQueryResultsForPolicyDefinition", nil, "Failure preparing request")
 		return
@@ -260,12 +261,12 @@ func (client PolicyStatesClient) ListQueryResultsForPolicyDefinition(ctx context
 }
 
 // ListQueryResultsForPolicyDefinitionPreparer prepares the ListQueryResultsForPolicyDefinition request.
-func (client PolicyStatesClient) ListQueryResultsForPolicyDefinitionPreparer(ctx context.Context, policyStatesResource PolicyStatesResource, subscriptionID string, policyDefinitionName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (*http.Request, error) {
+func (client PolicyStatesClient) ListQueryResultsForPolicyDefinitionPreparer(ctx context.Context, policyStatesResource PolicyStatesResource, policyDefinitionName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"authorizationNamespace": autorest.Encode("path", "Microsoft.Authorization"),
 		"policyDefinitionName":   autorest.Encode("path", policyDefinitionName),
 		"policyStatesResource":   autorest.Encode("path", policyStatesResource),
-		"subscriptionId":         autorest.Encode("path", subscriptionID),
+		"subscriptionId":         autorest.Encode("path", client.SubscriptionID),
 	}
 
 	const APIVersion = "2019-10-01"
@@ -345,7 +346,7 @@ func (client PolicyStatesClient) listQueryResultsForPolicyDefinitionNextResults(
 }
 
 // ListQueryResultsForPolicyDefinitionComplete enumerates all values, automatically crossing page boundaries as required.
-func (client PolicyStatesClient) ListQueryResultsForPolicyDefinitionComplete(ctx context.Context, policyStatesResource PolicyStatesResource, subscriptionID string, policyDefinitionName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyStatesQueryResultsIterator, err error) {
+func (client PolicyStatesClient) ListQueryResultsForPolicyDefinitionComplete(ctx context.Context, policyStatesResource PolicyStatesResource, policyDefinitionName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyStatesQueryResultsIterator, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/PolicyStatesClient.ListQueryResultsForPolicyDefinition")
 		defer func() {
@@ -356,7 +357,7 @@ func (client PolicyStatesClient) ListQueryResultsForPolicyDefinitionComplete(ctx
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	result.page, err = client.ListQueryResultsForPolicyDefinition(ctx, policyStatesResource, subscriptionID, policyDefinitionName, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
+	result.page, err = client.ListQueryResultsForPolicyDefinition(ctx, policyStatesResource, policyDefinitionName, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
 	return
 }
 
@@ -364,7 +365,6 @@ func (client PolicyStatesClient) ListQueryResultsForPolicyDefinitionComplete(ctx
 // Parameters:
 // policyStatesResource - the virtual resource under PolicyStates resource type. In a given time range,
 // 'latest' represents the latest policy state(s), whereas 'default' represents all policy state(s).
-// subscriptionID - microsoft Azure subscription ID.
 // policySetDefinitionName - policy set definition name.
 // top - maximum number of records to return.
 // orderBy - ordering expression using OData notation. One or more comma-separated column names with an
@@ -379,7 +379,7 @@ func (client PolicyStatesClient) ListQueryResultsForPolicyDefinitionComplete(ctx
 // apply - oData apply expression for aggregations.
 // skipToken - skiptoken is only provided if a previous response returned a partial result as a part of
 // nextLink element.
-func (client PolicyStatesClient) ListQueryResultsForPolicySetDefinition(ctx context.Context, policyStatesResource PolicyStatesResource, subscriptionID string, policySetDefinitionName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyStatesQueryResultsPage, err error) {
+func (client PolicyStatesClient) ListQueryResultsForPolicySetDefinition(ctx context.Context, policyStatesResource PolicyStatesResource, policySetDefinitionName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyStatesQueryResultsPage, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/PolicyStatesClient.ListQueryResultsForPolicySetDefinition")
 		defer func() {
@@ -391,6 +391,8 @@ func (client PolicyStatesClient) ListQueryResultsForPolicySetDefinition(ctx cont
 		}()
 	}
 	if err := validation.Validate([]validation.Validation{
+		{TargetValue: client.SubscriptionID,
+			Constraints: []validation.Constraint{{Target: "client.SubscriptionID", Name: validation.MinLength, Rule: 1, Chain: nil}}},
 		{TargetValue: top,
 			Constraints: []validation.Constraint{{Target: "top", Name: validation.Null, Rule: false,
 				Chain: []validation.Constraint{{Target: "top", Name: validation.InclusiveMinimum, Rule: int64(0), Chain: nil}}}}}}); err != nil {
@@ -398,7 +400,7 @@ func (client PolicyStatesClient) ListQueryResultsForPolicySetDefinition(ctx cont
 	}
 
 	result.fn = client.listQueryResultsForPolicySetDefinitionNextResults
-	req, err := client.ListQueryResultsForPolicySetDefinitionPreparer(ctx, policyStatesResource, subscriptionID, policySetDefinitionName, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
+	req, err := client.ListQueryResultsForPolicySetDefinitionPreparer(ctx, policyStatesResource, policySetDefinitionName, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "policyinsights.PolicyStatesClient", "ListQueryResultsForPolicySetDefinition", nil, "Failure preparing request")
 		return
@@ -425,12 +427,12 @@ func (client PolicyStatesClient) ListQueryResultsForPolicySetDefinition(ctx cont
 }
 
 // ListQueryResultsForPolicySetDefinitionPreparer prepares the ListQueryResultsForPolicySetDefinition request.
-func (client PolicyStatesClient) ListQueryResultsForPolicySetDefinitionPreparer(ctx context.Context, policyStatesResource PolicyStatesResource, subscriptionID string, policySetDefinitionName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (*http.Request, error) {
+func (client PolicyStatesClient) ListQueryResultsForPolicySetDefinitionPreparer(ctx context.Context, policyStatesResource PolicyStatesResource, policySetDefinitionName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"authorizationNamespace":  autorest.Encode("path", "Microsoft.Authorization"),
 		"policySetDefinitionName": autorest.Encode("path", policySetDefinitionName),
 		"policyStatesResource":    autorest.Encode("path", policyStatesResource),
-		"subscriptionId":          autorest.Encode("path", subscriptionID),
+		"subscriptionId":          autorest.Encode("path", client.SubscriptionID),
 	}
 
 	const APIVersion = "2019-10-01"
@@ -510,7 +512,7 @@ func (client PolicyStatesClient) listQueryResultsForPolicySetDefinitionNextResul
 }
 
 // ListQueryResultsForPolicySetDefinitionComplete enumerates all values, automatically crossing page boundaries as required.
-func (client PolicyStatesClient) ListQueryResultsForPolicySetDefinitionComplete(ctx context.Context, policyStatesResource PolicyStatesResource, subscriptionID string, policySetDefinitionName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyStatesQueryResultsIterator, err error) {
+func (client PolicyStatesClient) ListQueryResultsForPolicySetDefinitionComplete(ctx context.Context, policyStatesResource PolicyStatesResource, policySetDefinitionName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyStatesQueryResultsIterator, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/PolicyStatesClient.ListQueryResultsForPolicySetDefinition")
 		defer func() {
@@ -521,7 +523,7 @@ func (client PolicyStatesClient) ListQueryResultsForPolicySetDefinitionComplete(
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	result.page, err = client.ListQueryResultsForPolicySetDefinition(ctx, policyStatesResource, subscriptionID, policySetDefinitionName, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
+	result.page, err = client.ListQueryResultsForPolicySetDefinition(ctx, policyStatesResource, policySetDefinitionName, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
 	return
 }
 
@@ -695,8 +697,7 @@ func (client PolicyStatesClient) ListQueryResultsForResourceComplete(ctx context
 // Parameters:
 // policyStatesResource - the virtual resource under PolicyStates resource type. In a given time range,
 // 'latest' represents the latest policy state(s), whereas 'default' represents all policy state(s).
-// subscriptionID - microsoft Azure subscription ID.
-// resourceGroupName - resource group name.
+// resourceGroupName - the name of the resource group. The name is case insensitive.
 // top - maximum number of records to return.
 // orderBy - ordering expression using OData notation. One or more comma-separated column names with an
 // optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
@@ -710,7 +711,7 @@ func (client PolicyStatesClient) ListQueryResultsForResourceComplete(ctx context
 // apply - oData apply expression for aggregations.
 // skipToken - skiptoken is only provided if a previous response returned a partial result as a part of
 // nextLink element.
-func (client PolicyStatesClient) ListQueryResultsForResourceGroup(ctx context.Context, policyStatesResource PolicyStatesResource, subscriptionID string, resourceGroupName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyStatesQueryResultsPage, err error) {
+func (client PolicyStatesClient) ListQueryResultsForResourceGroup(ctx context.Context, policyStatesResource PolicyStatesResource, resourceGroupName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyStatesQueryResultsPage, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/PolicyStatesClient.ListQueryResultsForResourceGroup")
 		defer func() {
@@ -722,6 +723,11 @@ func (client PolicyStatesClient) ListQueryResultsForResourceGroup(ctx context.Co
 		}()
 	}
 	if err := validation.Validate([]validation.Validation{
+		{TargetValue: client.SubscriptionID,
+			Constraints: []validation.Constraint{{Target: "client.SubscriptionID", Name: validation.MinLength, Rule: 1, Chain: nil}}},
+		{TargetValue: resourceGroupName,
+			Constraints: []validation.Constraint{{Target: "resourceGroupName", Name: validation.MaxLength, Rule: 90, Chain: nil},
+				{Target: "resourceGroupName", Name: validation.MinLength, Rule: 1, Chain: nil}}},
 		{TargetValue: top,
 			Constraints: []validation.Constraint{{Target: "top", Name: validation.Null, Rule: false,
 				Chain: []validation.Constraint{{Target: "top", Name: validation.InclusiveMinimum, Rule: int64(0), Chain: nil}}}}}}); err != nil {
@@ -729,7 +735,7 @@ func (client PolicyStatesClient) ListQueryResultsForResourceGroup(ctx context.Co
 	}
 
 	result.fn = client.listQueryResultsForResourceGroupNextResults
-	req, err := client.ListQueryResultsForResourceGroupPreparer(ctx, policyStatesResource, subscriptionID, resourceGroupName, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
+	req, err := client.ListQueryResultsForResourceGroupPreparer(ctx, policyStatesResource, resourceGroupName, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "policyinsights.PolicyStatesClient", "ListQueryResultsForResourceGroup", nil, "Failure preparing request")
 		return
@@ -756,11 +762,11 @@ func (client PolicyStatesClient) ListQueryResultsForResourceGroup(ctx context.Co
 }
 
 // ListQueryResultsForResourceGroupPreparer prepares the ListQueryResultsForResourceGroup request.
-func (client PolicyStatesClient) ListQueryResultsForResourceGroupPreparer(ctx context.Context, policyStatesResource PolicyStatesResource, subscriptionID string, resourceGroupName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (*http.Request, error) {
+func (client PolicyStatesClient) ListQueryResultsForResourceGroupPreparer(ctx context.Context, policyStatesResource PolicyStatesResource, resourceGroupName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"policyStatesResource": autorest.Encode("path", policyStatesResource),
 		"resourceGroupName":    autorest.Encode("path", resourceGroupName),
-		"subscriptionId":       autorest.Encode("path", subscriptionID),
+		"subscriptionId":       autorest.Encode("path", client.SubscriptionID),
 	}
 
 	const APIVersion = "2019-10-01"
@@ -840,7 +846,7 @@ func (client PolicyStatesClient) listQueryResultsForResourceGroupNextResults(ctx
 }
 
 // ListQueryResultsForResourceGroupComplete enumerates all values, automatically crossing page boundaries as required.
-func (client PolicyStatesClient) ListQueryResultsForResourceGroupComplete(ctx context.Context, policyStatesResource PolicyStatesResource, subscriptionID string, resourceGroupName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyStatesQueryResultsIterator, err error) {
+func (client PolicyStatesClient) ListQueryResultsForResourceGroupComplete(ctx context.Context, policyStatesResource PolicyStatesResource, resourceGroupName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyStatesQueryResultsIterator, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/PolicyStatesClient.ListQueryResultsForResourceGroup")
 		defer func() {
@@ -851,7 +857,7 @@ func (client PolicyStatesClient) ListQueryResultsForResourceGroupComplete(ctx co
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	result.page, err = client.ListQueryResultsForResourceGroup(ctx, policyStatesResource, subscriptionID, resourceGroupName, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
+	result.page, err = client.ListQueryResultsForResourceGroup(ctx, policyStatesResource, resourceGroupName, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
 	return
 }
 
@@ -860,8 +866,7 @@ func (client PolicyStatesClient) ListQueryResultsForResourceGroupComplete(ctx co
 // Parameters:
 // policyStatesResource - the virtual resource under PolicyStates resource type. In a given time range,
 // 'latest' represents the latest policy state(s), whereas 'default' represents all policy state(s).
-// subscriptionID - microsoft Azure subscription ID.
-// resourceGroupName - resource group name.
+// resourceGroupName - the name of the resource group. The name is case insensitive.
 // policyAssignmentName - policy assignment name.
 // top - maximum number of records to return.
 // orderBy - ordering expression using OData notation. One or more comma-separated column names with an
@@ -876,7 +881,7 @@ func (client PolicyStatesClient) ListQueryResultsForResourceGroupComplete(ctx co
 // apply - oData apply expression for aggregations.
 // skipToken - skiptoken is only provided if a previous response returned a partial result as a part of
 // nextLink element.
-func (client PolicyStatesClient) ListQueryResultsForResourceGroupLevelPolicyAssignment(ctx context.Context, policyStatesResource PolicyStatesResource, subscriptionID string, resourceGroupName string, policyAssignmentName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyStatesQueryResultsPage, err error) {
+func (client PolicyStatesClient) ListQueryResultsForResourceGroupLevelPolicyAssignment(ctx context.Context, policyStatesResource PolicyStatesResource, resourceGroupName string, policyAssignmentName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyStatesQueryResultsPage, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/PolicyStatesClient.ListQueryResultsForResourceGroupLevelPolicyAssignment")
 		defer func() {
@@ -888,6 +893,11 @@ func (client PolicyStatesClient) ListQueryResultsForResourceGroupLevelPolicyAssi
 		}()
 	}
 	if err := validation.Validate([]validation.Validation{
+		{TargetValue: client.SubscriptionID,
+			Constraints: []validation.Constraint{{Target: "client.SubscriptionID", Name: validation.MinLength, Rule: 1, Chain: nil}}},
+		{TargetValue: resourceGroupName,
+			Constraints: []validation.Constraint{{Target: "resourceGroupName", Name: validation.MaxLength, Rule: 90, Chain: nil},
+				{Target: "resourceGroupName", Name: validation.MinLength, Rule: 1, Chain: nil}}},
 		{TargetValue: top,
 			Constraints: []validation.Constraint{{Target: "top", Name: validation.Null, Rule: false,
 				Chain: []validation.Constraint{{Target: "top", Name: validation.InclusiveMinimum, Rule: int64(0), Chain: nil}}}}}}); err != nil {
@@ -895,7 +905,7 @@ func (client PolicyStatesClient) ListQueryResultsForResourceGroupLevelPolicyAssi
 	}
 
 	result.fn = client.listQueryResultsForResourceGroupLevelPolicyAssignmentNextResults
-	req, err := client.ListQueryResultsForResourceGroupLevelPolicyAssignmentPreparer(ctx, policyStatesResource, subscriptionID, resourceGroupName, policyAssignmentName, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
+	req, err := client.ListQueryResultsForResourceGroupLevelPolicyAssignmentPreparer(ctx, policyStatesResource, resourceGroupName, policyAssignmentName, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "policyinsights.PolicyStatesClient", "ListQueryResultsForResourceGroupLevelPolicyAssignment", nil, "Failure preparing request")
 		return
@@ -922,13 +932,13 @@ func (client PolicyStatesClient) ListQueryResultsForResourceGroupLevelPolicyAssi
 }
 
 // ListQueryResultsForResourceGroupLevelPolicyAssignmentPreparer prepares the ListQueryResultsForResourceGroupLevelPolicyAssignment request.
-func (client PolicyStatesClient) ListQueryResultsForResourceGroupLevelPolicyAssignmentPreparer(ctx context.Context, policyStatesResource PolicyStatesResource, subscriptionID string, resourceGroupName string, policyAssignmentName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (*http.Request, error) {
+func (client PolicyStatesClient) ListQueryResultsForResourceGroupLevelPolicyAssignmentPreparer(ctx context.Context, policyStatesResource PolicyStatesResource, resourceGroupName string, policyAssignmentName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"authorizationNamespace": autorest.Encode("path", "Microsoft.Authorization"),
 		"policyAssignmentName":   autorest.Encode("path", policyAssignmentName),
 		"policyStatesResource":   autorest.Encode("path", policyStatesResource),
 		"resourceGroupName":      autorest.Encode("path", resourceGroupName),
-		"subscriptionId":         autorest.Encode("path", subscriptionID),
+		"subscriptionId":         autorest.Encode("path", client.SubscriptionID),
 	}
 
 	const APIVersion = "2019-10-01"
@@ -1008,7 +1018,7 @@ func (client PolicyStatesClient) listQueryResultsForResourceGroupLevelPolicyAssi
 }
 
 // ListQueryResultsForResourceGroupLevelPolicyAssignmentComplete enumerates all values, automatically crossing page boundaries as required.
-func (client PolicyStatesClient) ListQueryResultsForResourceGroupLevelPolicyAssignmentComplete(ctx context.Context, policyStatesResource PolicyStatesResource, subscriptionID string, resourceGroupName string, policyAssignmentName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyStatesQueryResultsIterator, err error) {
+func (client PolicyStatesClient) ListQueryResultsForResourceGroupLevelPolicyAssignmentComplete(ctx context.Context, policyStatesResource PolicyStatesResource, resourceGroupName string, policyAssignmentName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyStatesQueryResultsIterator, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/PolicyStatesClient.ListQueryResultsForResourceGroupLevelPolicyAssignment")
 		defer func() {
@@ -1019,7 +1029,7 @@ func (client PolicyStatesClient) ListQueryResultsForResourceGroupLevelPolicyAssi
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	result.page, err = client.ListQueryResultsForResourceGroupLevelPolicyAssignment(ctx, policyStatesResource, subscriptionID, resourceGroupName, policyAssignmentName, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
+	result.page, err = client.ListQueryResultsForResourceGroupLevelPolicyAssignment(ctx, policyStatesResource, resourceGroupName, policyAssignmentName, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
 	return
 }
 
@@ -1027,7 +1037,6 @@ func (client PolicyStatesClient) ListQueryResultsForResourceGroupLevelPolicyAssi
 // Parameters:
 // policyStatesResource - the virtual resource under PolicyStates resource type. In a given time range,
 // 'latest' represents the latest policy state(s), whereas 'default' represents all policy state(s).
-// subscriptionID - microsoft Azure subscription ID.
 // top - maximum number of records to return.
 // orderBy - ordering expression using OData notation. One or more comma-separated column names with an
 // optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
@@ -1041,7 +1050,7 @@ func (client PolicyStatesClient) ListQueryResultsForResourceGroupLevelPolicyAssi
 // apply - oData apply expression for aggregations.
 // skipToken - skiptoken is only provided if a previous response returned a partial result as a part of
 // nextLink element.
-func (client PolicyStatesClient) ListQueryResultsForSubscription(ctx context.Context, policyStatesResource PolicyStatesResource, subscriptionID string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyStatesQueryResultsPage, err error) {
+func (client PolicyStatesClient) ListQueryResultsForSubscription(ctx context.Context, policyStatesResource PolicyStatesResource, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyStatesQueryResultsPage, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/PolicyStatesClient.ListQueryResultsForSubscription")
 		defer func() {
@@ -1053,6 +1062,8 @@ func (client PolicyStatesClient) ListQueryResultsForSubscription(ctx context.Con
 		}()
 	}
 	if err := validation.Validate([]validation.Validation{
+		{TargetValue: client.SubscriptionID,
+			Constraints: []validation.Constraint{{Target: "client.SubscriptionID", Name: validation.MinLength, Rule: 1, Chain: nil}}},
 		{TargetValue: top,
 			Constraints: []validation.Constraint{{Target: "top", Name: validation.Null, Rule: false,
 				Chain: []validation.Constraint{{Target: "top", Name: validation.InclusiveMinimum, Rule: int64(0), Chain: nil}}}}}}); err != nil {
@@ -1060,7 +1071,7 @@ func (client PolicyStatesClient) ListQueryResultsForSubscription(ctx context.Con
 	}
 
 	result.fn = client.listQueryResultsForSubscriptionNextResults
-	req, err := client.ListQueryResultsForSubscriptionPreparer(ctx, policyStatesResource, subscriptionID, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
+	req, err := client.ListQueryResultsForSubscriptionPreparer(ctx, policyStatesResource, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "policyinsights.PolicyStatesClient", "ListQueryResultsForSubscription", nil, "Failure preparing request")
 		return
@@ -1087,10 +1098,10 @@ func (client PolicyStatesClient) ListQueryResultsForSubscription(ctx context.Con
 }
 
 // ListQueryResultsForSubscriptionPreparer prepares the ListQueryResultsForSubscription request.
-func (client PolicyStatesClient) ListQueryResultsForSubscriptionPreparer(ctx context.Context, policyStatesResource PolicyStatesResource, subscriptionID string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (*http.Request, error) {
+func (client PolicyStatesClient) ListQueryResultsForSubscriptionPreparer(ctx context.Context, policyStatesResource PolicyStatesResource, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"policyStatesResource": autorest.Encode("path", policyStatesResource),
-		"subscriptionId":       autorest.Encode("path", subscriptionID),
+		"subscriptionId":       autorest.Encode("path", client.SubscriptionID),
 	}
 
 	const APIVersion = "2019-10-01"
@@ -1170,7 +1181,7 @@ func (client PolicyStatesClient) listQueryResultsForSubscriptionNextResults(ctx 
 }
 
 // ListQueryResultsForSubscriptionComplete enumerates all values, automatically crossing page boundaries as required.
-func (client PolicyStatesClient) ListQueryResultsForSubscriptionComplete(ctx context.Context, policyStatesResource PolicyStatesResource, subscriptionID string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyStatesQueryResultsIterator, err error) {
+func (client PolicyStatesClient) ListQueryResultsForSubscriptionComplete(ctx context.Context, policyStatesResource PolicyStatesResource, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyStatesQueryResultsIterator, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/PolicyStatesClient.ListQueryResultsForSubscription")
 		defer func() {
@@ -1181,7 +1192,7 @@ func (client PolicyStatesClient) ListQueryResultsForSubscriptionComplete(ctx con
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	result.page, err = client.ListQueryResultsForSubscription(ctx, policyStatesResource, subscriptionID, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
+	result.page, err = client.ListQueryResultsForSubscription(ctx, policyStatesResource, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
 	return
 }
 
@@ -1190,7 +1201,6 @@ func (client PolicyStatesClient) ListQueryResultsForSubscriptionComplete(ctx con
 // Parameters:
 // policyStatesResource - the virtual resource under PolicyStates resource type. In a given time range,
 // 'latest' represents the latest policy state(s), whereas 'default' represents all policy state(s).
-// subscriptionID - microsoft Azure subscription ID.
 // policyAssignmentName - policy assignment name.
 // top - maximum number of records to return.
 // orderBy - ordering expression using OData notation. One or more comma-separated column names with an
@@ -1205,7 +1215,7 @@ func (client PolicyStatesClient) ListQueryResultsForSubscriptionComplete(ctx con
 // apply - oData apply expression for aggregations.
 // skipToken - skiptoken is only provided if a previous response returned a partial result as a part of
 // nextLink element.
-func (client PolicyStatesClient) ListQueryResultsForSubscriptionLevelPolicyAssignment(ctx context.Context, policyStatesResource PolicyStatesResource, subscriptionID string, policyAssignmentName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyStatesQueryResultsPage, err error) {
+func (client PolicyStatesClient) ListQueryResultsForSubscriptionLevelPolicyAssignment(ctx context.Context, policyStatesResource PolicyStatesResource, policyAssignmentName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyStatesQueryResultsPage, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/PolicyStatesClient.ListQueryResultsForSubscriptionLevelPolicyAssignment")
 		defer func() {
@@ -1217,6 +1227,8 @@ func (client PolicyStatesClient) ListQueryResultsForSubscriptionLevelPolicyAssig
 		}()
 	}
 	if err := validation.Validate([]validation.Validation{
+		{TargetValue: client.SubscriptionID,
+			Constraints: []validation.Constraint{{Target: "client.SubscriptionID", Name: validation.MinLength, Rule: 1, Chain: nil}}},
 		{TargetValue: top,
 			Constraints: []validation.Constraint{{Target: "top", Name: validation.Null, Rule: false,
 				Chain: []validation.Constraint{{Target: "top", Name: validation.InclusiveMinimum, Rule: int64(0), Chain: nil}}}}}}); err != nil {
@@ -1224,7 +1236,7 @@ func (client PolicyStatesClient) ListQueryResultsForSubscriptionLevelPolicyAssig
 	}
 
 	result.fn = client.listQueryResultsForSubscriptionLevelPolicyAssignmentNextResults
-	req, err := client.ListQueryResultsForSubscriptionLevelPolicyAssignmentPreparer(ctx, policyStatesResource, subscriptionID, policyAssignmentName, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
+	req, err := client.ListQueryResultsForSubscriptionLevelPolicyAssignmentPreparer(ctx, policyStatesResource, policyAssignmentName, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "policyinsights.PolicyStatesClient", "ListQueryResultsForSubscriptionLevelPolicyAssignment", nil, "Failure preparing request")
 		return
@@ -1251,12 +1263,12 @@ func (client PolicyStatesClient) ListQueryResultsForSubscriptionLevelPolicyAssig
 }
 
 // ListQueryResultsForSubscriptionLevelPolicyAssignmentPreparer prepares the ListQueryResultsForSubscriptionLevelPolicyAssignment request.
-func (client PolicyStatesClient) ListQueryResultsForSubscriptionLevelPolicyAssignmentPreparer(ctx context.Context, policyStatesResource PolicyStatesResource, subscriptionID string, policyAssignmentName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (*http.Request, error) {
+func (client PolicyStatesClient) ListQueryResultsForSubscriptionLevelPolicyAssignmentPreparer(ctx context.Context, policyStatesResource PolicyStatesResource, policyAssignmentName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"authorizationNamespace": autorest.Encode("path", "Microsoft.Authorization"),
 		"policyAssignmentName":   autorest.Encode("path", policyAssignmentName),
 		"policyStatesResource":   autorest.Encode("path", policyStatesResource),
-		"subscriptionId":         autorest.Encode("path", subscriptionID),
+		"subscriptionId":         autorest.Encode("path", client.SubscriptionID),
 	}
 
 	const APIVersion = "2019-10-01"
@@ -1336,7 +1348,7 @@ func (client PolicyStatesClient) listQueryResultsForSubscriptionLevelPolicyAssig
 }
 
 // ListQueryResultsForSubscriptionLevelPolicyAssignmentComplete enumerates all values, automatically crossing page boundaries as required.
-func (client PolicyStatesClient) ListQueryResultsForSubscriptionLevelPolicyAssignmentComplete(ctx context.Context, policyStatesResource PolicyStatesResource, subscriptionID string, policyAssignmentName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyStatesQueryResultsIterator, err error) {
+func (client PolicyStatesClient) ListQueryResultsForSubscriptionLevelPolicyAssignmentComplete(ctx context.Context, policyStatesResource PolicyStatesResource, policyAssignmentName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyStatesQueryResultsIterator, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/PolicyStatesClient.ListQueryResultsForSubscriptionLevelPolicyAssignment")
 		defer func() {
@@ -1347,7 +1359,7 @@ func (client PolicyStatesClient) ListQueryResultsForSubscriptionLevelPolicyAssig
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	result.page, err = client.ListQueryResultsForSubscriptionLevelPolicyAssignment(ctx, policyStatesResource, subscriptionID, policyAssignmentName, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
+	result.page, err = client.ListQueryResultsForSubscriptionLevelPolicyAssignment(ctx, policyStatesResource, policyAssignmentName, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
 	return
 }
 
@@ -1453,7 +1465,6 @@ func (client PolicyStatesClient) SummarizeForManagementGroupResponder(resp *http
 
 // SummarizeForPolicyDefinition summarizes policy states for the subscription level policy definition.
 // Parameters:
-// subscriptionID - microsoft Azure subscription ID.
 // policyDefinitionName - policy definition name.
 // top - maximum number of records to return.
 // from - ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified,
@@ -1461,7 +1472,7 @@ func (client PolicyStatesClient) SummarizeForManagementGroupResponder(resp *http
 // toParameter - ISO 8601 formatted timestamp specifying the end time of the interval to query. When not
 // specified, the service uses request time.
 // filter - oData filter expression.
-func (client PolicyStatesClient) SummarizeForPolicyDefinition(ctx context.Context, subscriptionID string, policyDefinitionName string, top *int32, from *date.Time, toParameter *date.Time, filter string) (result SummarizeResults, err error) {
+func (client PolicyStatesClient) SummarizeForPolicyDefinition(ctx context.Context, policyDefinitionName string, top *int32, from *date.Time, toParameter *date.Time, filter string) (result SummarizeResults, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/PolicyStatesClient.SummarizeForPolicyDefinition")
 		defer func() {
@@ -1473,13 +1484,15 @@ func (client PolicyStatesClient) SummarizeForPolicyDefinition(ctx context.Contex
 		}()
 	}
 	if err := validation.Validate([]validation.Validation{
+		{TargetValue: client.SubscriptionID,
+			Constraints: []validation.Constraint{{Target: "client.SubscriptionID", Name: validation.MinLength, Rule: 1, Chain: nil}}},
 		{TargetValue: top,
 			Constraints: []validation.Constraint{{Target: "top", Name: validation.Null, Rule: false,
 				Chain: []validation.Constraint{{Target: "top", Name: validation.InclusiveMinimum, Rule: int64(0), Chain: nil}}}}}}); err != nil {
 		return result, validation.NewError("policyinsights.PolicyStatesClient", "SummarizeForPolicyDefinition", err.Error())
 	}
 
-	req, err := client.SummarizeForPolicyDefinitionPreparer(ctx, subscriptionID, policyDefinitionName, top, from, toParameter, filter)
+	req, err := client.SummarizeForPolicyDefinitionPreparer(ctx, policyDefinitionName, top, from, toParameter, filter)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "policyinsights.PolicyStatesClient", "SummarizeForPolicyDefinition", nil, "Failure preparing request")
 		return
@@ -1502,12 +1515,12 @@ func (client PolicyStatesClient) SummarizeForPolicyDefinition(ctx context.Contex
 }
 
 // SummarizeForPolicyDefinitionPreparer prepares the SummarizeForPolicyDefinition request.
-func (client PolicyStatesClient) SummarizeForPolicyDefinitionPreparer(ctx context.Context, subscriptionID string, policyDefinitionName string, top *int32, from *date.Time, toParameter *date.Time, filter string) (*http.Request, error) {
+func (client PolicyStatesClient) SummarizeForPolicyDefinitionPreparer(ctx context.Context, policyDefinitionName string, top *int32, from *date.Time, toParameter *date.Time, filter string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"authorizationNamespace":      autorest.Encode("path", "Microsoft.Authorization"),
 		"policyDefinitionName":        autorest.Encode("path", policyDefinitionName),
 		"policyStatesSummaryResource": autorest.Encode("path", "latest"),
-		"subscriptionId":              autorest.Encode("path", subscriptionID),
+		"subscriptionId":              autorest.Encode("path", client.SubscriptionID),
 	}
 
 	const APIVersion = "2019-10-01"
@@ -1555,7 +1568,6 @@ func (client PolicyStatesClient) SummarizeForPolicyDefinitionResponder(resp *htt
 
 // SummarizeForPolicySetDefinition summarizes policy states for the subscription level policy set definition.
 // Parameters:
-// subscriptionID - microsoft Azure subscription ID.
 // policySetDefinitionName - policy set definition name.
 // top - maximum number of records to return.
 // from - ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified,
@@ -1563,7 +1575,7 @@ func (client PolicyStatesClient) SummarizeForPolicyDefinitionResponder(resp *htt
 // toParameter - ISO 8601 formatted timestamp specifying the end time of the interval to query. When not
 // specified, the service uses request time.
 // filter - oData filter expression.
-func (client PolicyStatesClient) SummarizeForPolicySetDefinition(ctx context.Context, subscriptionID string, policySetDefinitionName string, top *int32, from *date.Time, toParameter *date.Time, filter string) (result SummarizeResults, err error) {
+func (client PolicyStatesClient) SummarizeForPolicySetDefinition(ctx context.Context, policySetDefinitionName string, top *int32, from *date.Time, toParameter *date.Time, filter string) (result SummarizeResults, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/PolicyStatesClient.SummarizeForPolicySetDefinition")
 		defer func() {
@@ -1575,13 +1587,15 @@ func (client PolicyStatesClient) SummarizeForPolicySetDefinition(ctx context.Con
 		}()
 	}
 	if err := validation.Validate([]validation.Validation{
+		{TargetValue: client.SubscriptionID,
+			Constraints: []validation.Constraint{{Target: "client.SubscriptionID", Name: validation.MinLength, Rule: 1, Chain: nil}}},
 		{TargetValue: top,
 			Constraints: []validation.Constraint{{Target: "top", Name: validation.Null, Rule: false,
 				Chain: []validation.Constraint{{Target: "top", Name: validation.InclusiveMinimum, Rule: int64(0), Chain: nil}}}}}}); err != nil {
 		return result, validation.NewError("policyinsights.PolicyStatesClient", "SummarizeForPolicySetDefinition", err.Error())
 	}
 
-	req, err := client.SummarizeForPolicySetDefinitionPreparer(ctx, subscriptionID, policySetDefinitionName, top, from, toParameter, filter)
+	req, err := client.SummarizeForPolicySetDefinitionPreparer(ctx, policySetDefinitionName, top, from, toParameter, filter)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "policyinsights.PolicyStatesClient", "SummarizeForPolicySetDefinition", nil, "Failure preparing request")
 		return
@@ -1604,12 +1618,12 @@ func (client PolicyStatesClient) SummarizeForPolicySetDefinition(ctx context.Con
 }
 
 // SummarizeForPolicySetDefinitionPreparer prepares the SummarizeForPolicySetDefinition request.
-func (client PolicyStatesClient) SummarizeForPolicySetDefinitionPreparer(ctx context.Context, subscriptionID string, policySetDefinitionName string, top *int32, from *date.Time, toParameter *date.Time, filter string) (*http.Request, error) {
+func (client PolicyStatesClient) SummarizeForPolicySetDefinitionPreparer(ctx context.Context, policySetDefinitionName string, top *int32, from *date.Time, toParameter *date.Time, filter string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"authorizationNamespace":      autorest.Encode("path", "Microsoft.Authorization"),
 		"policySetDefinitionName":     autorest.Encode("path", policySetDefinitionName),
 		"policyStatesSummaryResource": autorest.Encode("path", "latest"),
-		"subscriptionId":              autorest.Encode("path", subscriptionID),
+		"subscriptionId":              autorest.Encode("path", client.SubscriptionID),
 	}
 
 	const APIVersion = "2019-10-01"
@@ -1756,15 +1770,14 @@ func (client PolicyStatesClient) SummarizeForResourceResponder(resp *http.Respon
 
 // SummarizeForResourceGroup summarizes policy states for the resources under the resource group.
 // Parameters:
-// subscriptionID - microsoft Azure subscription ID.
-// resourceGroupName - resource group name.
+// resourceGroupName - the name of the resource group. The name is case insensitive.
 // top - maximum number of records to return.
 // from - ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified,
 // the service uses ($to - 1-day).
 // toParameter - ISO 8601 formatted timestamp specifying the end time of the interval to query. When not
 // specified, the service uses request time.
 // filter - oData filter expression.
-func (client PolicyStatesClient) SummarizeForResourceGroup(ctx context.Context, subscriptionID string, resourceGroupName string, top *int32, from *date.Time, toParameter *date.Time, filter string) (result SummarizeResults, err error) {
+func (client PolicyStatesClient) SummarizeForResourceGroup(ctx context.Context, resourceGroupName string, top *int32, from *date.Time, toParameter *date.Time, filter string) (result SummarizeResults, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/PolicyStatesClient.SummarizeForResourceGroup")
 		defer func() {
@@ -1776,13 +1789,18 @@ func (client PolicyStatesClient) SummarizeForResourceGroup(ctx context.Context, 
 		}()
 	}
 	if err := validation.Validate([]validation.Validation{
+		{TargetValue: client.SubscriptionID,
+			Constraints: []validation.Constraint{{Target: "client.SubscriptionID", Name: validation.MinLength, Rule: 1, Chain: nil}}},
+		{TargetValue: resourceGroupName,
+			Constraints: []validation.Constraint{{Target: "resourceGroupName", Name: validation.MaxLength, Rule: 90, Chain: nil},
+				{Target: "resourceGroupName", Name: validation.MinLength, Rule: 1, Chain: nil}}},
 		{TargetValue: top,
 			Constraints: []validation.Constraint{{Target: "top", Name: validation.Null, Rule: false,
 				Chain: []validation.Constraint{{Target: "top", Name: validation.InclusiveMinimum, Rule: int64(0), Chain: nil}}}}}}); err != nil {
 		return result, validation.NewError("policyinsights.PolicyStatesClient", "SummarizeForResourceGroup", err.Error())
 	}
 
-	req, err := client.SummarizeForResourceGroupPreparer(ctx, subscriptionID, resourceGroupName, top, from, toParameter, filter)
+	req, err := client.SummarizeForResourceGroupPreparer(ctx, resourceGroupName, top, from, toParameter, filter)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "policyinsights.PolicyStatesClient", "SummarizeForResourceGroup", nil, "Failure preparing request")
 		return
@@ -1805,11 +1823,11 @@ func (client PolicyStatesClient) SummarizeForResourceGroup(ctx context.Context, 
 }
 
 // SummarizeForResourceGroupPreparer prepares the SummarizeForResourceGroup request.
-func (client PolicyStatesClient) SummarizeForResourceGroupPreparer(ctx context.Context, subscriptionID string, resourceGroupName string, top *int32, from *date.Time, toParameter *date.Time, filter string) (*http.Request, error) {
+func (client PolicyStatesClient) SummarizeForResourceGroupPreparer(ctx context.Context, resourceGroupName string, top *int32, from *date.Time, toParameter *date.Time, filter string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"policyStatesSummaryResource": autorest.Encode("path", "latest"),
 		"resourceGroupName":           autorest.Encode("path", resourceGroupName),
-		"subscriptionId":              autorest.Encode("path", subscriptionID),
+		"subscriptionId":              autorest.Encode("path", client.SubscriptionID),
 	}
 
 	const APIVersion = "2019-10-01"
@@ -1858,8 +1876,7 @@ func (client PolicyStatesClient) SummarizeForResourceGroupResponder(resp *http.R
 // SummarizeForResourceGroupLevelPolicyAssignment summarizes policy states for the resource group level policy
 // assignment.
 // Parameters:
-// subscriptionID - microsoft Azure subscription ID.
-// resourceGroupName - resource group name.
+// resourceGroupName - the name of the resource group. The name is case insensitive.
 // policyAssignmentName - policy assignment name.
 // top - maximum number of records to return.
 // from - ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified,
@@ -1867,7 +1884,7 @@ func (client PolicyStatesClient) SummarizeForResourceGroupResponder(resp *http.R
 // toParameter - ISO 8601 formatted timestamp specifying the end time of the interval to query. When not
 // specified, the service uses request time.
 // filter - oData filter expression.
-func (client PolicyStatesClient) SummarizeForResourceGroupLevelPolicyAssignment(ctx context.Context, subscriptionID string, resourceGroupName string, policyAssignmentName string, top *int32, from *date.Time, toParameter *date.Time, filter string) (result SummarizeResults, err error) {
+func (client PolicyStatesClient) SummarizeForResourceGroupLevelPolicyAssignment(ctx context.Context, resourceGroupName string, policyAssignmentName string, top *int32, from *date.Time, toParameter *date.Time, filter string) (result SummarizeResults, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/PolicyStatesClient.SummarizeForResourceGroupLevelPolicyAssignment")
 		defer func() {
@@ -1879,13 +1896,18 @@ func (client PolicyStatesClient) SummarizeForResourceGroupLevelPolicyAssignment(
 		}()
 	}
 	if err := validation.Validate([]validation.Validation{
+		{TargetValue: client.SubscriptionID,
+			Constraints: []validation.Constraint{{Target: "client.SubscriptionID", Name: validation.MinLength, Rule: 1, Chain: nil}}},
+		{TargetValue: resourceGroupName,
+			Constraints: []validation.Constraint{{Target: "resourceGroupName", Name: validation.MaxLength, Rule: 90, Chain: nil},
+				{Target: "resourceGroupName", Name: validation.MinLength, Rule: 1, Chain: nil}}},
 		{TargetValue: top,
 			Constraints: []validation.Constraint{{Target: "top", Name: validation.Null, Rule: false,
 				Chain: []validation.Constraint{{Target: "top", Name: validation.InclusiveMinimum, Rule: int64(0), Chain: nil}}}}}}); err != nil {
 		return result, validation.NewError("policyinsights.PolicyStatesClient", "SummarizeForResourceGroupLevelPolicyAssignment", err.Error())
 	}
 
-	req, err := client.SummarizeForResourceGroupLevelPolicyAssignmentPreparer(ctx, subscriptionID, resourceGroupName, policyAssignmentName, top, from, toParameter, filter)
+	req, err := client.SummarizeForResourceGroupLevelPolicyAssignmentPreparer(ctx, resourceGroupName, policyAssignmentName, top, from, toParameter, filter)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "policyinsights.PolicyStatesClient", "SummarizeForResourceGroupLevelPolicyAssignment", nil, "Failure preparing request")
 		return
@@ -1908,13 +1930,13 @@ func (client PolicyStatesClient) SummarizeForResourceGroupLevelPolicyAssignment(
 }
 
 // SummarizeForResourceGroupLevelPolicyAssignmentPreparer prepares the SummarizeForResourceGroupLevelPolicyAssignment request.
-func (client PolicyStatesClient) SummarizeForResourceGroupLevelPolicyAssignmentPreparer(ctx context.Context, subscriptionID string, resourceGroupName string, policyAssignmentName string, top *int32, from *date.Time, toParameter *date.Time, filter string) (*http.Request, error) {
+func (client PolicyStatesClient) SummarizeForResourceGroupLevelPolicyAssignmentPreparer(ctx context.Context, resourceGroupName string, policyAssignmentName string, top *int32, from *date.Time, toParameter *date.Time, filter string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"authorizationNamespace":      autorest.Encode("path", "Microsoft.Authorization"),
 		"policyAssignmentName":        autorest.Encode("path", policyAssignmentName),
 		"policyStatesSummaryResource": autorest.Encode("path", "latest"),
 		"resourceGroupName":           autorest.Encode("path", resourceGroupName),
-		"subscriptionId":              autorest.Encode("path", subscriptionID),
+		"subscriptionId":              autorest.Encode("path", client.SubscriptionID),
 	}
 
 	const APIVersion = "2019-10-01"
@@ -1962,14 +1984,13 @@ func (client PolicyStatesClient) SummarizeForResourceGroupLevelPolicyAssignmentR
 
 // SummarizeForSubscription summarizes policy states for the resources under the subscription.
 // Parameters:
-// subscriptionID - microsoft Azure subscription ID.
 // top - maximum number of records to return.
 // from - ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified,
 // the service uses ($to - 1-day).
 // toParameter - ISO 8601 formatted timestamp specifying the end time of the interval to query. When not
 // specified, the service uses request time.
 // filter - oData filter expression.
-func (client PolicyStatesClient) SummarizeForSubscription(ctx context.Context, subscriptionID string, top *int32, from *date.Time, toParameter *date.Time, filter string) (result SummarizeResults, err error) {
+func (client PolicyStatesClient) SummarizeForSubscription(ctx context.Context, top *int32, from *date.Time, toParameter *date.Time, filter string) (result SummarizeResults, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/PolicyStatesClient.SummarizeForSubscription")
 		defer func() {
@@ -1981,13 +2002,15 @@ func (client PolicyStatesClient) SummarizeForSubscription(ctx context.Context, s
 		}()
 	}
 	if err := validation.Validate([]validation.Validation{
+		{TargetValue: client.SubscriptionID,
+			Constraints: []validation.Constraint{{Target: "client.SubscriptionID", Name: validation.MinLength, Rule: 1, Chain: nil}}},
 		{TargetValue: top,
 			Constraints: []validation.Constraint{{Target: "top", Name: validation.Null, Rule: false,
 				Chain: []validation.Constraint{{Target: "top", Name: validation.InclusiveMinimum, Rule: int64(0), Chain: nil}}}}}}); err != nil {
 		return result, validation.NewError("policyinsights.PolicyStatesClient", "SummarizeForSubscription", err.Error())
 	}
 
-	req, err := client.SummarizeForSubscriptionPreparer(ctx, subscriptionID, top, from, toParameter, filter)
+	req, err := client.SummarizeForSubscriptionPreparer(ctx, top, from, toParameter, filter)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "policyinsights.PolicyStatesClient", "SummarizeForSubscription", nil, "Failure preparing request")
 		return
@@ -2010,10 +2033,10 @@ func (client PolicyStatesClient) SummarizeForSubscription(ctx context.Context, s
 }
 
 // SummarizeForSubscriptionPreparer prepares the SummarizeForSubscription request.
-func (client PolicyStatesClient) SummarizeForSubscriptionPreparer(ctx context.Context, subscriptionID string, top *int32, from *date.Time, toParameter *date.Time, filter string) (*http.Request, error) {
+func (client PolicyStatesClient) SummarizeForSubscriptionPreparer(ctx context.Context, top *int32, from *date.Time, toParameter *date.Time, filter string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"policyStatesSummaryResource": autorest.Encode("path", "latest"),
-		"subscriptionId":              autorest.Encode("path", subscriptionID),
+		"subscriptionId":              autorest.Encode("path", client.SubscriptionID),
 	}
 
 	const APIVersion = "2019-10-01"
@@ -2061,7 +2084,6 @@ func (client PolicyStatesClient) SummarizeForSubscriptionResponder(resp *http.Re
 
 // SummarizeForSubscriptionLevelPolicyAssignment summarizes policy states for the subscription level policy assignment.
 // Parameters:
-// subscriptionID - microsoft Azure subscription ID.
 // policyAssignmentName - policy assignment name.
 // top - maximum number of records to return.
 // from - ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified,
@@ -2069,7 +2091,7 @@ func (client PolicyStatesClient) SummarizeForSubscriptionResponder(resp *http.Re
 // toParameter - ISO 8601 formatted timestamp specifying the end time of the interval to query. When not
 // specified, the service uses request time.
 // filter - oData filter expression.
-func (client PolicyStatesClient) SummarizeForSubscriptionLevelPolicyAssignment(ctx context.Context, subscriptionID string, policyAssignmentName string, top *int32, from *date.Time, toParameter *date.Time, filter string) (result SummarizeResults, err error) {
+func (client PolicyStatesClient) SummarizeForSubscriptionLevelPolicyAssignment(ctx context.Context, policyAssignmentName string, top *int32, from *date.Time, toParameter *date.Time, filter string) (result SummarizeResults, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/PolicyStatesClient.SummarizeForSubscriptionLevelPolicyAssignment")
 		defer func() {
@@ -2081,13 +2103,15 @@ func (client PolicyStatesClient) SummarizeForSubscriptionLevelPolicyAssignment(c
 		}()
 	}
 	if err := validation.Validate([]validation.Validation{
+		{TargetValue: client.SubscriptionID,
+			Constraints: []validation.Constraint{{Target: "client.SubscriptionID", Name: validation.MinLength, Rule: 1, Chain: nil}}},
 		{TargetValue: top,
 			Constraints: []validation.Constraint{{Target: "top", Name: validation.Null, Rule: false,
 				Chain: []validation.Constraint{{Target: "top", Name: validation.InclusiveMinimum, Rule: int64(0), Chain: nil}}}}}}); err != nil {
 		return result, validation.NewError("policyinsights.PolicyStatesClient", "SummarizeForSubscriptionLevelPolicyAssignment", err.Error())
 	}
 
-	req, err := client.SummarizeForSubscriptionLevelPolicyAssignmentPreparer(ctx, subscriptionID, policyAssignmentName, top, from, toParameter, filter)
+	req, err := client.SummarizeForSubscriptionLevelPolicyAssignmentPreparer(ctx, policyAssignmentName, top, from, toParameter, filter)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "policyinsights.PolicyStatesClient", "SummarizeForSubscriptionLevelPolicyAssignment", nil, "Failure preparing request")
 		return
@@ -2110,12 +2134,12 @@ func (client PolicyStatesClient) SummarizeForSubscriptionLevelPolicyAssignment(c
 }
 
 // SummarizeForSubscriptionLevelPolicyAssignmentPreparer prepares the SummarizeForSubscriptionLevelPolicyAssignment request.
-func (client PolicyStatesClient) SummarizeForSubscriptionLevelPolicyAssignmentPreparer(ctx context.Context, subscriptionID string, policyAssignmentName string, top *int32, from *date.Time, toParameter *date.Time, filter string) (*http.Request, error) {
+func (client PolicyStatesClient) SummarizeForSubscriptionLevelPolicyAssignmentPreparer(ctx context.Context, policyAssignmentName string, top *int32, from *date.Time, toParameter *date.Time, filter string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"authorizationNamespace":      autorest.Encode("path", "Microsoft.Authorization"),
 		"policyAssignmentName":        autorest.Encode("path", policyAssignmentName),
 		"policyStatesSummaryResource": autorest.Encode("path", "latest"),
-		"subscriptionId":              autorest.Encode("path", subscriptionID),
+		"subscriptionId":              autorest.Encode("path", client.SubscriptionID),
 	}
 
 	const APIVersion = "2019-10-01"
@@ -2163,9 +2187,8 @@ func (client PolicyStatesClient) SummarizeForSubscriptionLevelPolicyAssignmentRe
 
 // TriggerResourceGroupEvaluation triggers a policy evaluation scan for all the resources under the resource group.
 // Parameters:
-// subscriptionID - microsoft Azure subscription ID.
-// resourceGroupName - resource group name.
-func (client PolicyStatesClient) TriggerResourceGroupEvaluation(ctx context.Context, subscriptionID string, resourceGroupName string) (result PolicyStatesTriggerResourceGroupEvaluationFuture, err error) {
+// resourceGroupName - the name of the resource group. The name is case insensitive.
+func (client PolicyStatesClient) TriggerResourceGroupEvaluation(ctx context.Context, resourceGroupName string) (result PolicyStatesTriggerResourceGroupEvaluationFuture, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/PolicyStatesClient.TriggerResourceGroupEvaluation")
 		defer func() {
@@ -2176,7 +2199,16 @@ func (client PolicyStatesClient) TriggerResourceGroupEvaluation(ctx context.Cont
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	req, err := client.TriggerResourceGroupEvaluationPreparer(ctx, subscriptionID, resourceGroupName)
+	if err := validation.Validate([]validation.Validation{
+		{TargetValue: client.SubscriptionID,
+			Constraints: []validation.Constraint{{Target: "client.SubscriptionID", Name: validation.MinLength, Rule: 1, Chain: nil}}},
+		{TargetValue: resourceGroupName,
+			Constraints: []validation.Constraint{{Target: "resourceGroupName", Name: validation.MaxLength, Rule: 90, Chain: nil},
+				{Target: "resourceGroupName", Name: validation.MinLength, Rule: 1, Chain: nil}}}}); err != nil {
+		return result, validation.NewError("policyinsights.PolicyStatesClient", "TriggerResourceGroupEvaluation", err.Error())
+	}
+
+	req, err := client.TriggerResourceGroupEvaluationPreparer(ctx, resourceGroupName)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "policyinsights.PolicyStatesClient", "TriggerResourceGroupEvaluation", nil, "Failure preparing request")
 		return
@@ -2192,10 +2224,10 @@ func (client PolicyStatesClient) TriggerResourceGroupEvaluation(ctx context.Cont
 }
 
 // TriggerResourceGroupEvaluationPreparer prepares the TriggerResourceGroupEvaluation request.
-func (client PolicyStatesClient) TriggerResourceGroupEvaluationPreparer(ctx context.Context, subscriptionID string, resourceGroupName string) (*http.Request, error) {
+func (client PolicyStatesClient) TriggerResourceGroupEvaluationPreparer(ctx context.Context, resourceGroupName string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"resourceGroupName": autorest.Encode("path", resourceGroupName),
-		"subscriptionId":    autorest.Encode("path", subscriptionID),
+		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
 	}
 
 	const APIVersion = "2019-10-01"
@@ -2239,9 +2271,7 @@ func (client PolicyStatesClient) TriggerResourceGroupEvaluationResponder(resp *h
 }
 
 // TriggerSubscriptionEvaluation triggers a policy evaluation scan for all the resources under the subscription
-// Parameters:
-// subscriptionID - microsoft Azure subscription ID.
-func (client PolicyStatesClient) TriggerSubscriptionEvaluation(ctx context.Context, subscriptionID string) (result PolicyStatesTriggerSubscriptionEvaluationFuture, err error) {
+func (client PolicyStatesClient) TriggerSubscriptionEvaluation(ctx context.Context) (result PolicyStatesTriggerSubscriptionEvaluationFuture, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/PolicyStatesClient.TriggerSubscriptionEvaluation")
 		defer func() {
@@ -2252,7 +2282,13 @@ func (client PolicyStatesClient) TriggerSubscriptionEvaluation(ctx context.Conte
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	req, err := client.TriggerSubscriptionEvaluationPreparer(ctx, subscriptionID)
+	if err := validation.Validate([]validation.Validation{
+		{TargetValue: client.SubscriptionID,
+			Constraints: []validation.Constraint{{Target: "client.SubscriptionID", Name: validation.MinLength, Rule: 1, Chain: nil}}}}); err != nil {
+		return result, validation.NewError("policyinsights.PolicyStatesClient", "TriggerSubscriptionEvaluation", err.Error())
+	}
+
+	req, err := client.TriggerSubscriptionEvaluationPreparer(ctx)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "policyinsights.PolicyStatesClient", "TriggerSubscriptionEvaluation", nil, "Failure preparing request")
 		return
@@ -2268,9 +2304,9 @@ func (client PolicyStatesClient) TriggerSubscriptionEvaluation(ctx context.Conte
 }
 
 // TriggerSubscriptionEvaluationPreparer prepares the TriggerSubscriptionEvaluation request.
-func (client PolicyStatesClient) TriggerSubscriptionEvaluationPreparer(ctx context.Context, subscriptionID string) (*http.Request, error) {
+func (client PolicyStatesClient) TriggerSubscriptionEvaluationPreparer(ctx context.Context) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
-		"subscriptionId": autorest.Encode("path", subscriptionID),
+		"subscriptionId": autorest.Encode("path", client.SubscriptionID),
 	}
 
 	const APIVersion = "2019-10-01"
