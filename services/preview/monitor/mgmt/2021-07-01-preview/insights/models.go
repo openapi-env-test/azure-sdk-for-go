@@ -1150,7 +1150,7 @@ type AutoscaleSetting struct {
 	Profiles *[]AutoscaleProfile `json:"profiles,omitempty"`
 	// Notifications - the collection of notifications.
 	Notifications *[]AutoscaleNotification `json:"notifications,omitempty"`
-	// Enabled - the enabled flag. Specifies whether automatic scaling is enabled for the resource. The default value is 'true'.
+	// Enabled - the enabled flag. Specifies whether automatic scaling is enabled for the resource. The default value is 'false'.
 	Enabled *bool `json:"enabled,omitempty"`
 	// Name - the name of the autoscale setting.
 	Name *string `json:"name,omitempty"`
@@ -5812,7 +5812,7 @@ type MetricBaselinesResponse struct {
 
 // MetricCriteria criterion to filter metrics.
 type MetricCriteria struct {
-	// Operator - the criteria operator. Possible values include: 'OperatorEquals', 'OperatorNotEquals', 'OperatorGreaterThan', 'OperatorGreaterThanOrEqual', 'OperatorLessThan', 'OperatorLessThanOrEqual'
+	// Operator - the criteria operator. Possible values include: 'OperatorEquals', 'OperatorGreaterThan', 'OperatorGreaterThanOrEqual', 'OperatorLessThan', 'OperatorLessThanOrEqual'
 	Operator Operator `json:"operator,omitempty"`
 	// Threshold - the criteria threshold value that activates the alert.
 	Threshold *float64 `json:"threshold,omitempty"`
