@@ -1,5 +1,5 @@
 {
-  "commit": "3c764635e7d442b3e74caf593029fcd440b3ef82",
+  "commit": "eb1347fafb9d00717a82c59f08b40e805e01a537",
   "readme": "/_/azure-rest-api-specs/specification/mediaservices/resource-manager/readme.md",
   "tag": "package-2018-06-preview",
   "use": "@microsoft.azure/autorest.go@2.1.187",
