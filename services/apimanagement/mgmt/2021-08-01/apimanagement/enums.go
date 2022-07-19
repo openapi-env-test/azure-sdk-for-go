@@ -927,6 +927,21 @@ func PossibleSamplingTypeValues() []SamplingType {
 	return []SamplingType{SamplingTypeFixed}
 }
 
+// SchemaType enumerates the values for schema type.
+type SchemaType string
+
+const (
+	// SchemaTypeJSON Json schema type.
+	SchemaTypeJSON SchemaType = "json"
+	// SchemaTypeXML Xml schema type.
+	SchemaTypeXML SchemaType = "xml"
+)
+
+// PossibleSchemaTypeValues returns an array of possible values for the SchemaType const type.
+func PossibleSchemaTypeValues() []SchemaType {
+	return []SchemaType{SchemaTypeJSON, SchemaTypeXML}
+}
+
 // Severity enumerates the values for severity.
 type Severity string
 
@@ -1016,7 +1031,7 @@ func PossibleSkuTypeValues() []SkuType {
 type SoapAPIType string
 
 const (
-	// SoapAPITypeGraphQL Imports the API having a GraphQL front end.
+	// SoapAPITypeGraphQL Imports the API having a GraphQL front end. A GraphQL schema is required.
 	SoapAPITypeGraphQL SoapAPIType = "graphql"
 	// SoapAPITypeSoapPassThrough Imports the SOAP API having a SOAP front end.
 	SoapAPITypeSoapPassThrough SoapAPIType = "soap"
