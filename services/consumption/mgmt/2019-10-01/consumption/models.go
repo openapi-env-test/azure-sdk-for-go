@@ -1539,8 +1539,8 @@ type LegacyReservationRecommendation struct {
 	Name *string `json:"name,omitempty"`
 	// Type - READ-ONLY; Resource type.
 	Type *string `json:"type,omitempty"`
-	// Etag - READ-ONLY; Resource etag.
-	Etag *string `json:"etag,omitempty"`
+	// ETag - READ-ONLY; Resource eTag.
+	ETag *string `json:"eTag,omitempty"`
 	// Tags - READ-ONLY; Resource tags.
 	Tags map[string]*string `json:"tags"`
 	// Location - READ-ONLY; Resource location
@@ -1629,14 +1629,14 @@ func (lrr *LegacyReservationRecommendation) UnmarshalJSON(body []byte) error {
 				}
 				lrr.Type = &typeVar
 			}
-		case "etag":
+		case "eTag":
 			if v != nil {
-				var etag string
-				err = json.Unmarshal(*v, &etag)
+				var eTag string
+				err = json.Unmarshal(*v, &eTag)
 				if err != nil {
 					return err
 				}
-				lrr.Etag = &etag
+				lrr.ETag = &eTag
 			}
 		case "tags":
 			if v != nil {
@@ -3032,16 +3032,14 @@ func (mcsp ModernChargeSummaryProperties) MarshalJSON() ([]byte, error) {
 type ModernReservationRecommendation struct {
 	// ModernReservationRecommendationProperties - Properties for modern reservation recommendation
 	*ModernReservationRecommendationProperties `json:"properties,omitempty"`
-	// ETag - READ-ONLY; Resource eTag.
-	ETag *string `json:"eTag,omitempty"`
 	// ID - READ-ONLY; Resource Id.
 	ID *string `json:"id,omitempty"`
 	// Name - READ-ONLY; Resource name.
 	Name *string `json:"name,omitempty"`
 	// Type - READ-ONLY; Resource type.
 	Type *string `json:"type,omitempty"`
-	// Etag - READ-ONLY; Resource etag.
-	Etag *string `json:"etag,omitempty"`
+	// ETag - READ-ONLY; Resource eTag.
+	ETag *string `json:"eTag,omitempty"`
 	// Tags - READ-ONLY; Resource tags.
 	Tags map[string]*string `json:"tags"`
 	// Location - READ-ONLY; Resource location
@@ -3103,15 +3101,6 @@ func (mrr *ModernReservationRecommendation) UnmarshalJSON(body []byte) error {
 				}
 				mrr.ModernReservationRecommendationProperties = &modernReservationRecommendationProperties
 			}
-		case "eTag":
-			if v != nil {
-				var eTag string
-				err = json.Unmarshal(*v, &eTag)
-				if err != nil {
-					return err
-				}
-				mrr.ETag = &eTag
-			}
 		case "id":
 			if v != nil {
 				var ID string
@@ -3139,14 +3128,14 @@ func (mrr *ModernReservationRecommendation) UnmarshalJSON(body []byte) error {
 				}
 				mrr.Type = &typeVar
 			}
-		case "etag":
+		case "eTag":
 			if v != nil {
-				var etag string
-				err = json.Unmarshal(*v, &etag)
+				var eTag string
+				err = json.Unmarshal(*v, &eTag)
 				if err != nil {
 					return err
 				}
-				mrr.Etag = &etag
+				mrr.ETag = &eTag
 			}
 		case "tags":
 			if v != nil {
@@ -3218,8 +3207,8 @@ type ModernReservationRecommendationProperties struct {
 	NetSavings *Amount `json:"netSavings,omitempty"`
 	// FirstUsageDate - READ-ONLY; The usage date for looking back.
 	FirstUsageDate *date.Time `json:"firstUsageDate,omitempty"`
-	// Scope - READ-ONLY; Shared or single recommendation.
-	Scope *string `json:"scope,omitempty"`
+	// Scope - READ-ONLY; Shared (corresponds to integer 2) or single (corresponds to integer 1) recommendation.
+	Scope *int32 `json:"scope,omitempty"`
 	// SkuProperties - READ-ONLY; List of sku properties
 	SkuProperties *[]SkuProperty `json:"skuProperties,omitempty"`
 	// SkuName - READ-ONLY; This is the ARM Sku name.
@@ -4210,8 +4199,8 @@ type ReservationDetail struct {
 	Name *string `json:"name,omitempty"`
 	// Type - READ-ONLY; Resource type.
 	Type *string `json:"type,omitempty"`
-	// Etag - READ-ONLY; Resource etag.
-	Etag *string `json:"etag,omitempty"`
+	// ETag - READ-ONLY; Resource eTag.
+	ETag *string `json:"eTag,omitempty"`
 	// Tags - READ-ONLY; Resource tags.
 	Tags map[string]*string `json:"tags"`
 }
@@ -4270,14 +4259,14 @@ func (rd *ReservationDetail) UnmarshalJSON(body []byte) error {
 				}
 				rd.Type = &typeVar
 			}
-		case "etag":
+		case "eTag":
 			if v != nil {
-				var etag string
-				err = json.Unmarshal(*v, &etag)
+				var eTag string
+				err = json.Unmarshal(*v, &eTag)
 				if err != nil {
 					return err
 				}
-				rd.Etag = &etag
+				rd.ETag = &eTag
 			}
 		case "tags":
 			if v != nil {
@@ -4506,8 +4495,8 @@ type ReservationRecommendation struct {
 	Name *string `json:"name,omitempty"`
 	// Type - READ-ONLY; Resource type.
 	Type *string `json:"type,omitempty"`
-	// Etag - READ-ONLY; Resource etag.
-	Etag *string `json:"etag,omitempty"`
+	// ETag - READ-ONLY; Resource eTag.
+	ETag *string `json:"eTag,omitempty"`
 	// Tags - READ-ONLY; Resource tags.
 	Tags map[string]*string `json:"tags"`
 	// Location - READ-ONLY; Resource location
@@ -4622,9 +4611,7 @@ type ReservationRecommendationDetailsModel struct {
 	// Location - Resource Location.
 	Location *string `json:"location,omitempty"`
 	// Sku - Resource sku
-	Sku *string `json:"sku,omitempty"`
-	// ETag - Resource eTag.
-	ETag                                        *string `json:"eTag,omitempty"`
+	Sku                                         *string `json:"sku,omitempty"`
 	*ReservationRecommendationDetailsProperties `json:"properties,omitempty"`
 	// ID - READ-ONLY; Resource Id.
 	ID *string `json:"id,omitempty"`
@@ -4646,9 +4633,6 @@ func (rrdm ReservationRecommendationDetailsModel) MarshalJSON() ([]byte, error) 
 	}
 	if rrdm.Sku != nil {
 		objectMap["sku"] = rrdm.Sku
-	}
-	if rrdm.ETag != nil {
-		objectMap["eTag"] = rrdm.ETag
 	}
 	if rrdm.ReservationRecommendationDetailsProperties != nil {
 		objectMap["properties"] = rrdm.ReservationRecommendationDetailsProperties
@@ -4682,15 +4666,6 @@ func (rrdm *ReservationRecommendationDetailsModel) UnmarshalJSON(body []byte) er
 					return err
 				}
 				rrdm.Sku = &sku
-			}
-		case "eTag":
-			if v != nil {
-				var eTag string
-				err = json.Unmarshal(*v, &eTag)
-				if err != nil {
-					return err
-				}
-				rrdm.ETag = &eTag
 			}
 		case "properties":
 			if v != nil {
@@ -5237,8 +5212,8 @@ type ReservationSummary struct {
 	Name *string `json:"name,omitempty"`
 	// Type - READ-ONLY; Resource type.
 	Type *string `json:"type,omitempty"`
-	// Etag - READ-ONLY; Resource etag.
-	Etag *string `json:"etag,omitempty"`
+	// ETag - READ-ONLY; Resource eTag.
+	ETag *string `json:"eTag,omitempty"`
 	// Tags - READ-ONLY; Resource tags.
 	Tags map[string]*string `json:"tags"`
 }
@@ -5297,14 +5272,14 @@ func (rs *ReservationSummary) UnmarshalJSON(body []byte) error {
 				}
 				rs.Type = &typeVar
 			}
-		case "etag":
+		case "eTag":
 			if v != nil {
-				var etag string
-				err = json.Unmarshal(*v, &etag)
+				var eTag string
+				err = json.Unmarshal(*v, &eTag)
 				if err != nil {
 					return err
 				}
-				rs.Etag = &etag
+				rs.ETag = &eTag
 			}
 		case "tags":
 			if v != nil {
@@ -5657,6 +5632,26 @@ type ResourceAttributes struct {
 
 // MarshalJSON is the custom marshaler for ResourceAttributes.
 func (ra ResourceAttributes) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	return json.Marshal(objectMap)
+}
+
+// RevisedResource the Resource model definition.
+type RevisedResource struct {
+	// ID - READ-ONLY; Resource Id.
+	ID *string `json:"id,omitempty"`
+	// Name - READ-ONLY; Resource name.
+	Name *string `json:"name,omitempty"`
+	// Type - READ-ONLY; Resource type.
+	Type *string `json:"type,omitempty"`
+	// ETag - READ-ONLY; Resource eTag.
+	ETag *string `json:"eTag,omitempty"`
+	// Tags - READ-ONLY; Resource tags.
+	Tags map[string]*string `json:"tags"`
+}
+
+// MarshalJSON is the custom marshaler for RevisedResource.
+func (rr RevisedResource) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
 	return json.Marshal(objectMap)
 }
