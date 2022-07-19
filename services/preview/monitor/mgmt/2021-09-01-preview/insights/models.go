@@ -104,22 +104,6 @@ func (a Action) AsBasicAction() (BasicAction, bool) {
 	return &a, true
 }
 
-// ActionDetail the action detail
-type ActionDetail struct {
-	// MechanismType - The mechanism type
-	MechanismType *string `json:"MechanismType,omitempty"`
-	// Name - The name of the action
-	Name *string `json:"Name,omitempty"`
-	// Status - The status of the action
-	Status *string `json:"Status,omitempty"`
-	// SubState - The substatus of the action
-	SubState *string `json:"SubState,omitempty"`
-	// SendTime - The send time
-	SendTime *string `json:"SendTime,omitempty"`
-	// Detail - The detail of the friendly error message
-	Detail *string `json:"Detail,omitempty"`
-}
-
 // ActionGroup an Azure action group.
 type ActionGroup struct {
 	// GroupShortName - The short name of the action group. This will be used in SMS messages.
@@ -231,8 +215,6 @@ type ActionGroupResource struct {
 	Type *string `json:"type,omitempty"`
 	// Kind - READ-ONLY; Azure resource kind
 	Kind *string `json:"kind,omitempty"`
-	// Identity - READ-ONLY; Azure resource identity
-	Identity *string `json:"identity,omitempty"`
 	// Location - Resource location
 	Location *string `json:"location,omitempty"`
 	// Tags - Resource tags
@@ -308,15 +290,6 @@ func (agr *ActionGroupResource) UnmarshalJSON(body []byte) error {
 				}
 				agr.Kind = &kind
 			}
-		case "identity":
-			if v != nil {
-				var identity string
-				err = json.Unmarshal(*v, &identity)
-				if err != nil {
-					return err
-				}
-				agr.Identity = &identity
-			}
 		case "location":
 			if v != nil {
 				var location string
@@ -341,49 +314,6 @@ func (agr *ActionGroupResource) UnmarshalJSON(body []byte) error {
 	return nil
 }
 
-// ActionGroupsPostTestNotificationsFuture an abstraction for monitoring and retrieving the results of a
-// long-running operation.
-type ActionGroupsPostTestNotificationsFuture struct {
-	azure.FutureAPI
-	// Result returns the result of the asynchronous operation.
-	// If the operation has not completed it will return an error.
-	Result func(ActionGroupsClient) (TestNotificationResponse, error)
-}
-
-// UnmarshalJSON is the custom unmarshaller for CreateFuture.
-func (future *ActionGroupsPostTestNotificationsFuture) UnmarshalJSON(body []byte) error {
-	var azFuture azure.Future
-	if err := json.Unmarshal(body, &azFuture); err != nil {
-		return err
-	}
-	future.FutureAPI = &azFuture
-	future.Result = future.result
-	return nil
-}
-
-// result is the default implementation for ActionGroupsPostTestNotificationsFuture.Result.
-func (future *ActionGroupsPostTestNotificationsFuture) result(client ActionGroupsClient) (tnr TestNotificationResponse, err error) {
-	var done bool
-	done, err = future.DoneWithContext(context.Background(), client)
-	if err != nil {
-		err = autorest.NewErrorWithError(err, "insights.ActionGroupsPostTestNotificationsFuture", "Result", future.Response(), "Polling failure")
-		return
-	}
-	if !done {
-		tnr.Response.Response = future.Response()
-		err = azure.NewAsyncOpIncompleteError("insights.ActionGroupsPostTestNotificationsFuture")
-		return
-	}
-	sender := autorest.DecorateSender(client, autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
-	if tnr.Response.Response, err = future.GetResult(sender); err == nil && tnr.Response.Response.StatusCode != http.StatusNoContent {
-		tnr, err = client.PostTestNotificationsResponder(tnr.Response.Response)
-		if err != nil {
-			err = autorest.NewErrorWithError(err, "insights.ActionGroupsPostTestNotificationsFuture", "Result", tnr.Response.Response, "Failure responding to request")
-		}
-	}
-	return
-}
-
 // ActionList a list of Activity Log Alert rule actions.
 type ActionList struct {
 	// ActionGroups - The list of the Action Groups.
@@ -403,8 +333,6 @@ type ActivityLogAlertResource struct {
 	Type *string `json:"type,omitempty"`
 	// Kind - READ-ONLY; Azure resource kind
 	Kind *string `json:"kind,omitempty"`
-	// Identity - READ-ONLY; Azure resource identity
-	Identity *string `json:"identity,omitempty"`
 	// Location - Resource location
 	Location *string `json:"location,omitempty"`
 	// Tags - Resource tags
@@ -479,15 +407,6 @@ func (alar *ActivityLogAlertResource) UnmarshalJSON(body []byte) error {
 					return err
 				}
 				alar.Kind = &kind
-			}
-		case "identity":
-			if v != nil {
-				var identity string
-				err = json.Unmarshal(*v, &identity)
-				if err != nil {
-					return err
-				}
-				alar.Identity = &identity
 			}
 		case "location":
 			if v != nil {
@@ -1881,8 +1800,6 @@ type AzureResource struct {
 	Type *string `json:"type,omitempty"`
 	// Kind - READ-ONLY; Azure resource kind
 	Kind *string `json:"kind,omitempty"`
-	// Identity - READ-ONLY; Azure resource identity
-	Identity *string `json:"identity,omitempty"`
 	// Location - Resource location
 	Location *string `json:"location,omitempty"`
 	// Tags - Resource tags
@@ -1919,14 +1836,6 @@ type ConfigurationAccessEndpointSpec struct {
 func (caes ConfigurationAccessEndpointSpec) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
 	return json.Marshal(objectMap)
-}
-
-// Context the context info
-type Context struct {
-	// NotificationSource - The source of the notification request
-	NotificationSource *string `json:"NotificationSource,omitempty"`
-	// ContextType - The context id type
-	ContextType *string `json:"ContextType,omitempty"`
 }
 
 // Criteria specifies the criteria for converting log to metric.
@@ -8495,31 +8404,6 @@ func (tr TagsResource) MarshalJSON() ([]byte, error) {
 		objectMap["tags"] = tr.Tags
 	}
 	return json.Marshal(objectMap)
-}
-
-// TestNotificationDetailsResponse the details of the test notification results.
-type TestNotificationDetailsResponse struct {
-	autorest.Response `json:"-"`
-	Context           *Context `json:"Context,omitempty"`
-	// State - The overall state
-	State *string `json:"State,omitempty"`
-	// CompletedTime - The completed time
-	CompletedTime *string `json:"CompletedTime,omitempty"`
-	// CreatedTime - The created time
-	CreatedTime *string `json:"CreatedTime,omitempty"`
-	// ActionDetails - The list of action detail
-	ActionDetails *[]ActionDetail `json:"ActionDetails,omitempty"`
-}
-
-// TestNotificationResponse the response when test notification succeeded
-type TestNotificationResponse struct {
-	autorest.Response `json:"-"`
-	// NotificationID - The notification id
-	NotificationID *string `json:"notificationId,omitempty"`
-	// CorrelationID - The correlation id
-	CorrelationID *string `json:"correlationId,omitempty"`
-	// CreatedTime - The created time
-	CreatedTime *string `json:"createdTime,omitempty"`
 }
 
 // ThresholdRuleCondition a rule condition based on a metric crossing a threshold.
