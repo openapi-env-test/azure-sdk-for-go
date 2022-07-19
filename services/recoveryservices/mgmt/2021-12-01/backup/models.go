@@ -18285,6 +18285,86 @@ func NewProtectedItemResourceListPage(cur ProtectedItemResourceList, getNextPage
 	}
 }
 
+// ProtectedItemsCreateOrUpdateFuture an abstraction for monitoring and retrieving the results of a
+// long-running operation.
+type ProtectedItemsCreateOrUpdateFuture struct {
+	azure.FutureAPI
+	// Result returns the result of the asynchronous operation.
+	// If the operation has not completed it will return an error.
+	Result func(ProtectedItemsClient) (ProtectedItemResource, error)
+}
+
+// UnmarshalJSON is the custom unmarshaller for CreateFuture.
+func (future *ProtectedItemsCreateOrUpdateFuture) UnmarshalJSON(body []byte) error {
+	var azFuture azure.Future
+	if err := json.Unmarshal(body, &azFuture); err != nil {
+		return err
+	}
+	future.FutureAPI = &azFuture
+	future.Result = future.result
+	return nil
+}
+
+// result is the default implementation for ProtectedItemsCreateOrUpdateFuture.Result.
+func (future *ProtectedItemsCreateOrUpdateFuture) result(client ProtectedItemsClient) (pir ProtectedItemResource, err error) {
+	var done bool
+	done, err = future.DoneWithContext(context.Background(), client)
+	if err != nil {
+		err = autorest.NewErrorWithError(err, "backup.ProtectedItemsCreateOrUpdateFuture", "Result", future.Response(), "Polling failure")
+		return
+	}
+	if !done {
+		pir.Response.Response = future.Response()
+		err = azure.NewAsyncOpIncompleteError("backup.ProtectedItemsCreateOrUpdateFuture")
+		return
+	}
+	sender := autorest.DecorateSender(client, autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
+	if pir.Response.Response, err = future.GetResult(sender); err == nil && pir.Response.Response.StatusCode != http.StatusNoContent {
+		pir, err = client.CreateOrUpdateResponder(pir.Response.Response)
+		if err != nil {
+			err = autorest.NewErrorWithError(err, "backup.ProtectedItemsCreateOrUpdateFuture", "Result", pir.Response.Response, "Failure responding to request")
+		}
+	}
+	return
+}
+
+// ProtectedItemsDeleteFuture an abstraction for monitoring and retrieving the results of a long-running
+// operation.
+type ProtectedItemsDeleteFuture struct {
+	azure.FutureAPI
+	// Result returns the result of the asynchronous operation.
+	// If the operation has not completed it will return an error.
+	Result func(ProtectedItemsClient) (autorest.Response, error)
+}
+
+// UnmarshalJSON is the custom unmarshaller for CreateFuture.
+func (future *ProtectedItemsDeleteFuture) UnmarshalJSON(body []byte) error {
+	var azFuture azure.Future
+	if err := json.Unmarshal(body, &azFuture); err != nil {
+		return err
+	}
+	future.FutureAPI = &azFuture
+	future.Result = future.result
+	return nil
+}
+
+// result is the default implementation for ProtectedItemsDeleteFuture.Result.
+func (future *ProtectedItemsDeleteFuture) result(client ProtectedItemsClient) (ar autorest.Response, err error) {
+	var done bool
+	done, err = future.DoneWithContext(context.Background(), client)
+	if err != nil {
+		err = autorest.NewErrorWithError(err, "backup.ProtectedItemsDeleteFuture", "Result", future.Response(), "Polling failure")
+		return
+	}
+	if !done {
+		ar.Response = future.Response()
+		err = azure.NewAsyncOpIncompleteError("backup.ProtectedItemsDeleteFuture")
+		return
+	}
+	ar.Response = future.Response()
+	return
+}
+
 // BasicProtectionContainer base class for container with backup items. Containers with specific workloads are derived
 // from this class.
 type BasicProtectionContainer interface {

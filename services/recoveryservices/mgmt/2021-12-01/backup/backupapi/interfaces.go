@@ -120,8 +120,8 @@ var _ BMSPrepareDataMoveOperationResultClientAPI = (*backup.BMSPrepareDataMoveOp
 
 // ProtectedItemsClientAPI contains the set of methods on the ProtectedItemsClient type.
 type ProtectedItemsClientAPI interface {
-	CreateOrUpdate(ctx context.Context, vaultName string, resourceGroupName string, fabricName string, containerName string, protectedItemName string, parameters backup.ProtectedItemResource) (result backup.ProtectedItemResource, err error)
-	Delete(ctx context.Context, vaultName string, resourceGroupName string, fabricName string, containerName string, protectedItemName string) (result autorest.Response, err error)
+	CreateOrUpdate(ctx context.Context, vaultName string, resourceGroupName string, fabricName string, containerName string, protectedItemName string, parameters backup.ProtectedItemResource) (result backup.ProtectedItemsCreateOrUpdateFuture, err error)
+	Delete(ctx context.Context, vaultName string, resourceGroupName string, fabricName string, containerName string, protectedItemName string) (result backup.ProtectedItemsDeleteFuture, err error)
 	Get(ctx context.Context, vaultName string, resourceGroupName string, fabricName string, containerName string, protectedItemName string, filter string) (result backup.ProtectedItemResource, err error)
 }
 
