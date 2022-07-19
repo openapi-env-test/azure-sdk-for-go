@@ -103,7 +103,7 @@ func (client *CommunityGalleryImageVersionsClient) getCreateRequest(ctx context.
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-07-01")
+	reqQP.Set("api-version", "2022-01-03")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -114,6 +114,64 @@ func (client *CommunityGalleryImageVersionsClient) getHandleResponse(resp *http.
 	result := CommunityGalleryImageVersionsClientGetResponse{RawResponse: resp}
 	if err := runtime.UnmarshalAsJSON(resp, &result.CommunityGalleryImageVersion); err != nil {
 		return CommunityGalleryImageVersionsClientGetResponse{}, err
+	}
+	return result, nil
+}
+
+// List - List community gallery image versions inside an image.
+// If the operation fails it returns an *azcore.ResponseError type.
+// location - Resource location.
+// publicGalleryName - The public name of the community gallery.
+// galleryImageName - The name of the community gallery image definition.
+// options - CommunityGalleryImageVersionsClientListOptions contains the optional parameters for the CommunityGalleryImageVersionsClient.List
+// method.
+func (client *CommunityGalleryImageVersionsClient) List(location string, publicGalleryName string, galleryImageName string, options *CommunityGalleryImageVersionsClientListOptions) *CommunityGalleryImageVersionsClientListPager {
+	return &CommunityGalleryImageVersionsClientListPager{
+		client: client,
+		requester: func(ctx context.Context) (*policy.Request, error) {
+			return client.listCreateRequest(ctx, location, publicGalleryName, galleryImageName, options)
+		},
+		advancer: func(ctx context.Context, resp CommunityGalleryImageVersionsClientListResponse) (*policy.Request, error) {
+			return runtime.NewRequest(ctx, http.MethodGet, *resp.CommunityGalleryImageVersionList.NextLink)
+		},
+	}
+}
+
+// listCreateRequest creates the List request.
+func (client *CommunityGalleryImageVersionsClient) listCreateRequest(ctx context.Context, location string, publicGalleryName string, galleryImageName string, options *CommunityGalleryImageVersionsClientListOptions) (*policy.Request, error) {
+	urlPath := "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/communityGalleries/{publicGalleryName}/images/{galleryImageName}/versions"
+	if client.subscriptionID == "" {
+		return nil, errors.New("parameter client.subscriptionID cannot be empty")
+	}
+	urlPath = strings.ReplaceAll(urlPath, "{subscriptionId}", url.PathEscape(client.subscriptionID))
+	if location == "" {
+		return nil, errors.New("parameter location cannot be empty")
+	}
+	urlPath = strings.ReplaceAll(urlPath, "{location}", url.PathEscape(location))
+	if publicGalleryName == "" {
+		return nil, errors.New("parameter publicGalleryName cannot be empty")
+	}
+	urlPath = strings.ReplaceAll(urlPath, "{publicGalleryName}", url.PathEscape(publicGalleryName))
+	if galleryImageName == "" {
+		return nil, errors.New("parameter galleryImageName cannot be empty")
+	}
+	urlPath = strings.ReplaceAll(urlPath, "{galleryImageName}", url.PathEscape(galleryImageName))
+	req, err := runtime.NewRequest(ctx, http.MethodGet, runtime.JoinPaths(client.host, urlPath))
+	if err != nil {
+		return nil, err
+	}
+	reqQP := req.Raw().URL.Query()
+	reqQP.Set("api-version", "2022-01-03")
+	req.Raw().URL.RawQuery = reqQP.Encode()
+	req.Raw().Header.Set("Accept", "application/json")
+	return req, nil
+}
+
+// listHandleResponse handles the List response.
+func (client *CommunityGalleryImageVersionsClient) listHandleResponse(resp *http.Response) (CommunityGalleryImageVersionsClientListResponse, error) {
+	result := CommunityGalleryImageVersionsClientListResponse{RawResponse: resp}
+	if err := runtime.UnmarshalAsJSON(resp, &result.CommunityGalleryImageVersionList); err != nil {
+		return CommunityGalleryImageVersionsClientListResponse{}, err
 	}
 	return result, nil
 }
