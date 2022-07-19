@@ -142,9 +142,7 @@ func (client ServicesClient) CreateOrUpdate(ctx context.Context, resourceGroupNa
 			Constraints: []validation.Constraint{{Target: "serviceDescription.Properties", Name: validation.Null, Rule: false,
 				Chain: []validation.Constraint{{Target: "serviceDescription.Properties.CosmosDbConfiguration", Name: validation.Null, Rule: false,
 					Chain: []validation.Constraint{{Target: "serviceDescription.Properties.CosmosDbConfiguration.OfferThroughput", Name: validation.Null, Rule: false,
-						Chain: []validation.Constraint{{Target: "serviceDescription.Properties.CosmosDbConfiguration.OfferThroughput", Name: validation.InclusiveMaximum, Rule: int64(10000), Chain: nil},
-							{Target: "serviceDescription.Properties.CosmosDbConfiguration.OfferThroughput", Name: validation.InclusiveMinimum, Rule: int64(400), Chain: nil},
-						}},
+						Chain: []validation.Constraint{{Target: "serviceDescription.Properties.CosmosDbConfiguration.OfferThroughput", Name: validation.InclusiveMinimum, Rule: int64(400), Chain: nil}}},
 					}},
 					{Target: "serviceDescription.Properties.CorsConfiguration", Name: validation.Null, Rule: false,
 						Chain: []validation.Constraint{{Target: "serviceDescription.Properties.CorsConfiguration.MaxAge", Name: validation.Null, Rule: false,
@@ -721,7 +719,7 @@ func (client ServicesClient) UpdateSender(req *http.Request) (future ServicesUpd
 func (client ServicesClient) UpdateResponder(resp *http.Response) (result ServicesDescription, err error) {
 	err = autorest.Respond(
 		resp,
-		azure.WithErrorUnlessStatusCode(http.StatusOK),
+		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusAccepted),
 		autorest.ByUnmarshallingJSON(&result),
 		autorest.ByClosing())
 	result.Response = autorest.Response{Response: resp}
