@@ -66,7 +66,9 @@ func (client APISchemaClient) CreateOrUpdate(ctx context.Context, resourceGroupN
 				{Target: "schemaID", Name: validation.Pattern, Rule: `^[^*#&+:<>?]+$`, Chain: nil}}},
 		{TargetValue: parameters,
 			Constraints: []validation.Constraint{{Target: "parameters.SchemaCreateOrUpdateProperties", Name: validation.Null, Rule: false,
-				Chain: []validation.Constraint{{Target: "parameters.SchemaCreateOrUpdateProperties.ContentType", Name: validation.Null, Rule: true, Chain: nil}}}}}}); err != nil {
+				Chain: []validation.Constraint{{Target: "parameters.SchemaCreateOrUpdateProperties.ContentType", Name: validation.Null, Rule: true, Chain: nil},
+					{Target: "parameters.SchemaCreateOrUpdateProperties.SchemaDocumentProperties", Name: validation.Null, Rule: true, Chain: nil},
+				}}}}}); err != nil {
 		return result, validation.NewError("apimanagement.APISchemaClient", "CreateOrUpdate", err.Error())
 	}
 
