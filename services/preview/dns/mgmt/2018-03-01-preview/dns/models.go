@@ -403,6 +403,8 @@ type RecordSetProperties struct {
 	SoaRecord *SoaRecord `json:"SOARecord,omitempty"`
 	// CaaRecords - The list of CAA records in the record set.
 	CaaRecords *[]CaaRecord `json:"caaRecords,omitempty"`
+	// TargetResource - The target resource for alias record.
+	TargetResource *TargetResource `json:"targetResource,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for RecordSetProperties.
@@ -443,6 +445,9 @@ func (rsp RecordSetProperties) MarshalJSON() ([]byte, error) {
 	}
 	if rsp.CaaRecords != nil {
 		objectMap["caaRecords"] = rsp.CaaRecords
+	}
+	if rsp.TargetResource != nil {
+		objectMap["targetResource"] = rsp.TargetResource
 	}
 	return json.Marshal(objectMap)
 }
@@ -502,6 +507,12 @@ type SrvRecord struct {
 // SubResource a reference to a another resource
 type SubResource struct {
 	// ID - Resource Id.
+	ID *string `json:"id,omitempty"`
+}
+
+// TargetResource a target resource of an alias record.
+type TargetResource struct {
+	// ID - The id of the target resource of alias record.
 	ID *string `json:"id,omitempty"`
 }
 
