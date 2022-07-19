@@ -1211,7 +1211,7 @@ type AutoscaleSetting struct {
 	Profiles *[]AutoscaleProfile `json:"profiles,omitempty"`
 	// Notifications - the collection of notifications.
 	Notifications *[]AutoscaleNotification `json:"notifications,omitempty"`
-	// Enabled - the enabled flag. Specifies whether automatic scaling is enabled for the resource. The default value is 'true'.
+	// Enabled - the enabled flag. Specifies whether automatic scaling is enabled for the resource. The default value is 'false'.
 	Enabled *bool `json:"enabled,omitempty"`
 	// Name - the name of the autoscale setting.
 	Name *string `json:"name,omitempty"`
