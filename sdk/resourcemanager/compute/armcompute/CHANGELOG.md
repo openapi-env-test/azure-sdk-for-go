@@ -1,5 +1,273 @@
 # Release History
 
+## 0.4.0 (2022-07-19)
+### Breaking Changes
+
+- Type of `CloudServiceExtensionProperties.Settings` has been changed from `*string` to `map[string]interface{}`
+- Type of `CloudServiceExtensionProperties.ProtectedSettings` has been changed from `*string` to `map[string]interface{}`
+- Type of `GalleryImageProperties.ProvisioningState` has been changed from `*GalleryImagePropertiesProvisioningState` to `*GalleryProvisioningState`
+- Type of `VirtualMachineScaleSetIdentity.UserAssignedIdentities` has been changed from `map[string]*VirtualMachineScaleSetIdentityUserAssignedIdentitiesValue` to `map[string]*UserAssignedIdentitiesValue`
+- Type of `GalleryApplicationVersionProperties.ProvisioningState` has been changed from `*GalleryApplicationVersionPropertiesProvisioningState` to `*GalleryProvisioningState`
+- Type of `GalleryProperties.ProvisioningState` has been changed from `*GalleryPropertiesProvisioningState` to `*GalleryProvisioningState`
+- Type of `GalleryImageVersionProperties.ProvisioningState` has been changed from `*GalleryImageVersionPropertiesProvisioningState` to `*GalleryProvisioningState`
+- Const `GalleryImagePropertiesProvisioningStateSucceeded` has been removed
+- Const `GalleryImageVersionPropertiesProvisioningStateCreating` has been removed
+- Const `GalleryImagePropertiesProvisioningStateFailed` has been removed
+- Const `GalleryApplicationVersionPropertiesProvisioningStateUpdating` has been removed
+- Const `GalleryApplicationVersionPropertiesProvisioningStateCreating` has been removed
+- Const `GalleryApplicationVersionPropertiesProvisioningStateMigrating` has been removed
+- Const `GalleryPropertiesProvisioningStateCreating` has been removed
+- Const `GalleryImageVersionPropertiesProvisioningStateUpdating` has been removed
+- Const `GalleryImageVersionPropertiesProvisioningStateMigrating` has been removed
+- Const `GalleryImagePropertiesProvisioningStateCreating` has been removed
+- Const `GalleryPropertiesProvisioningStateFailed` has been removed
+- Const `GalleryImagePropertiesProvisioningStateDeleting` has been removed
+- Const `GalleryPropertiesProvisioningStateSucceeded` has been removed
+- Const `GalleryImagePropertiesProvisioningStateUpdating` has been removed
+- Const `GalleryImageVersionPropertiesProvisioningStateSucceeded` has been removed
+- Const `GalleryImageVersionPropertiesProvisioningStateDeleting` has been removed
+- Const `GalleryPropertiesProvisioningStateMigrating` has been removed
+- Const `GalleryApplicationVersionPropertiesProvisioningStateDeleting` has been removed
+- Const `GalleryApplicationVersionPropertiesProvisioningStateFailed` has been removed
+- Const `GalleryImagePropertiesProvisioningStateMigrating` has been removed
+- Const `GalleryImageVersionPropertiesProvisioningStateFailed` has been removed
+- Const `GalleryApplicationVersionPropertiesProvisioningStateSucceeded` has been removed
+- Const `GalleryPropertiesProvisioningStateUpdating` has been removed
+- Const `GalleryPropertiesProvisioningStateDeleting` has been removed
+- Function `GalleryImagePropertiesProvisioningState.ToPtr` has been removed
+- Function `PossibleGalleryPropertiesProvisioningStateValues` has been removed
+- Function `GalleryImageVersionPropertiesProvisioningState.ToPtr` has been removed
+- Function `PossibleGalleryApplicationVersionPropertiesProvisioningStateValues` has been removed
+- Function `PossibleGalleryImagePropertiesProvisioningStateValues` has been removed
+- Function `GalleryPropertiesProvisioningState.ToPtr` has been removed
+- Function `PossibleGalleryImageVersionPropertiesProvisioningStateValues` has been removed
+- Function `GalleryApplicationVersionPropertiesProvisioningState.ToPtr` has been removed
+- Struct `VirtualMachineScaleSetIdentityUserAssignedIdentitiesValue` has been removed
+
+### Features Added
+
+- New const `CopyCompletionErrorReasonCopySourceNotFound`
+- New const `GallerySharingPermissionTypesCommunity`
+- New const `GalleryProvisioningStateDeleting`
+- New const `SharingStateInProgress`
+- New const `SecurityEncryptionTypesDiskWithVMGuestState`
+- New const `SharingUpdateOperationTypesEnableCommunity`
+- New const `GalleryExtendedLocationTypeUnknown`
+- New const `GalleryProvisioningStateUpdating`
+- New const `RepairActionRestart`
+- New const `SharedGalleryHostCachingReadOnly`
+- New const `GalleryExpandParamsSharingProfileGroups`
+- New const `GalleryProvisioningStateCreating`
+- New const `RestorePointExpandOptionsInstanceView`
+- New const `DataAccessAuthModeNone`
+- New const `RepairActionReimage`
+- New const `GalleryProvisioningStateSucceeded`
+- New const `ConfidentialVMEncryptionTypeEncryptedWithCmk`
+- New const `WindowsVMGuestPatchAutomaticByPlatformRebootSettingIfRequired`
+- New const `ArchitectureTypesX64`
+- New const `StorageAccountTypesPremiumV2LRS`
+- New const `WindowsVMGuestPatchAutomaticByPlatformRebootSettingAlways`
+- New const `LinuxVMGuestPatchAutomaticByPlatformRebootSettingIfRequired`
+- New const `SharedGalleryHostCachingNone`
+- New const `DiskStorageAccountTypesPremiumV2LRS`
+- New const `DataAccessAuthModeAzureActiveDirectory`
+- New const `SharedGalleryHostCachingReadWrite`
+- New const `SecurityEncryptionTypesVMGuestStateOnly`
+- New const `CloudServiceSlotTypeStaging`
+- New const `SharingStateFailed`
+- New const `DiskEncryptionSetIdentityTypeSystemAssignedUserAssigned`
+- New const `LinuxVMGuestPatchAutomaticByPlatformRebootSettingAlways`
+- New const `GalleryProvisioningStateFailed`
+- New const `LinuxVMGuestPatchAutomaticByPlatformRebootSettingNever`
+- New const `DiskEncryptionSetIdentityTypeUserAssigned`
+- New const `SecurityTypesConfidentialVM`
+- New const `GalleryProvisioningStateMigrating`
+- New const `WindowsVMGuestPatchAutomaticByPlatformRebootSettingUnknown`
+- New const `ArchitectureTypesArm64`
+- New const `GalleryExtendedLocationTypeEdgeZone`
+- New const `SharingStateSucceeded`
+- New const `ConfidentialVMEncryptionTypeEncryptedWithPmk`
+- New const `WindowsVMGuestPatchAutomaticByPlatformRebootSettingNever`
+- New const `CloudServiceSlotTypeProduction`
+- New const `RepairActionReplace`
+- New const `LinuxVMGuestPatchAutomaticByPlatformRebootSettingUnknown`
+- New const `SharingStateUnknown`
+- New const `ArchitectureArm64`
+- New const `ConfidentialVMEncryptionTypeEncryptedVMGuestStateOnlyWithPmk`
+- New const `ArchitectureX64`
+- New function `*DedicatedHostsClientRestartPoller.Done() bool`
+- New function `GalleryExpandParams.ToPtr() *GalleryExpandParams`
+- New function `*CommunityGalleryImagesClient.List(string, string, *CommunityGalleryImagesClientListOptions) *CommunityGalleryImagesClientListPager`
+- New function `*DedicatedHostsClient.BeginRestart(context.Context, string, string, string, *DedicatedHostsClientBeginRestartOptions) (DedicatedHostsClientRestartPollerResponse, error)`
+- New function `VMImagesInEdgeZoneListResult.MarshalJSON() ([]byte, error)`
+- New function `DataAccessAuthMode.ToPtr() *DataAccessAuthMode`
+- New function `SharedGalleryHostCaching.ToPtr() *SharedGalleryHostCaching`
+- New function `*CommunityGalleryImagesClientListPager.PageResponse() CommunityGalleryImagesClientListResponse`
+- New function `RepairAction.ToPtr() *RepairAction`
+- New function `SharingState.ToPtr() *SharingState`
+- New function `PossibleSharedGalleryHostCachingValues() []SharedGalleryHostCaching`
+- New function `SharingStatus.MarshalJSON() ([]byte, error)`
+- New function `WindowsVMGuestPatchAutomaticByPlatformRebootSetting.ToPtr() *WindowsVMGuestPatchAutomaticByPlatformRebootSetting`
+- New function `GalleryExtendedLocationType.ToPtr() *GalleryExtendedLocationType`
+- New function `*CommunityGalleryImageVersionsClientListPager.PageResponse() CommunityGalleryImageVersionsClientListResponse`
+- New function `RestorePointExpandOptions.ToPtr() *RestorePointExpandOptions`
+- New function `*DedicatedHostsClientRestartPollerResponse.Resume(context.Context, *DedicatedHostsClient, string) error`
+- New function `PossibleArchitectureTypesValues() []ArchitectureTypes`
+- New function `*DedicatedHostsClientRestartPoller.ResumeToken() (string, error)`
+- New function `*CommunityGalleryImagesClientListPager.NextPage(context.Context) bool`
+- New function `RestorePointInstanceView.MarshalJSON() ([]byte, error)`
+- New function `SystemData.MarshalJSON() ([]byte, error)`
+- New function `ResourceWithOptionalLocation.MarshalJSON() ([]byte, error)`
+- New function `SharedGalleryImageVersionStorageProfile.MarshalJSON() ([]byte, error)`
+- New function `DedicatedHostsClientRestartPollerResponse.PollUntilDone(context.Context, time.Duration) (DedicatedHostsClientRestartResponse, error)`
+- New function `PossibleDataAccessAuthModeValues() []DataAccessAuthMode`
+- New function `*VirtualMachineScaleSetProperties.UnmarshalJSON([]byte) error`
+- New function `CommunityGalleryImageList.MarshalJSON() ([]byte, error)`
+- New function `PossibleWindowsVMGuestPatchAutomaticByPlatformRebootSettingValues() []WindowsVMGuestPatchAutomaticByPlatformRebootSetting`
+- New function `*DedicatedHostsClientRestartPoller.Poll(context.Context) (*http.Response, error)`
+- New function `*CommunityGalleryImageVersionsClientListPager.Err() error`
+- New function `GalleryProvisioningState.ToPtr() *GalleryProvisioningState`
+- New function `*DedicatedHostsClientRestartPoller.FinalResponse(context.Context) (DedicatedHostsClientRestartResponse, error)`
+- New function `*VirtualMachineProperties.UnmarshalJSON([]byte) error`
+- New function `ArchitectureTypes.ToPtr() *ArchitectureTypes`
+- New function `*CommunityGalleryImageVersionsClient.List(string, string, string, *CommunityGalleryImageVersionsClientListOptions) *CommunityGalleryImageVersionsClientListPager`
+- New function `PossibleGalleryExtendedLocationTypeValues() []GalleryExtendedLocationType`
+- New function `PossibleConfidentialVMEncryptionTypeValues() []ConfidentialVMEncryptionType`
+- New function `PossibleArchitectureValues() []Architecture`
+- New function `LinuxVMGuestPatchAutomaticByPlatformRebootSetting.ToPtr() *LinuxVMGuestPatchAutomaticByPlatformRebootSetting`
+- New function `CommunityGalleryImageVersionList.MarshalJSON() ([]byte, error)`
+- New function `CloudServiceSlotType.ToPtr() *CloudServiceSlotType`
+- New function `PossibleGalleryProvisioningStateValues() []GalleryProvisioningState`
+- New function `PossibleRestorePointExpandOptionsValues() []RestorePointExpandOptions`
+- New function `VirtualMachineScaleSetProperties.MarshalJSON() ([]byte, error)`
+- New function `PossibleRepairActionValues() []RepairAction`
+- New function `CopyCompletionErrorReason.ToPtr() *CopyCompletionErrorReason`
+- New function `*VirtualMachineImagesClient.ListByEdgeZone(context.Context, string, string, *VirtualMachineImagesClientListByEdgeZoneOptions) (VirtualMachineImagesClientListByEdgeZoneResponse, error)`
+- New function `VirtualMachineProperties.MarshalJSON() ([]byte, error)`
+- New function `PossibleLinuxVMGuestPatchAutomaticByPlatformRebootSettingValues() []LinuxVMGuestPatchAutomaticByPlatformRebootSetting`
+- New function `*CommunityGalleryImagesClientListPager.Err() error`
+- New function `CommunityGalleryInfo.MarshalJSON() ([]byte, error)`
+- New function `PossibleCloudServiceSlotTypeValues() []CloudServiceSlotType`
+- New function `PossibleCopyCompletionErrorReasonValues() []CopyCompletionErrorReason`
+- New function `*SystemData.UnmarshalJSON([]byte) error`
+- New function `PossibleSecurityEncryptionTypesValues() []SecurityEncryptionTypes`
+- New function `ProximityPlacementGroupPropertiesIntent.MarshalJSON() ([]byte, error)`
+- New function `SecurityEncryptionTypes.ToPtr() *SecurityEncryptionTypes`
+- New function `Architecture.ToPtr() *Architecture`
+- New function `*CommunityGalleryImageVersionsClientListPager.NextPage(context.Context) bool`
+- New function `EncryptionSetIdentity.MarshalJSON() ([]byte, error)`
+- New function `PossibleSharingStateValues() []SharingState`
+- New function `ConfidentialVMEncryptionType.ToPtr() *ConfidentialVMEncryptionType`
+- New function `PossibleGalleryExpandParamsValues() []GalleryExpandParams`
+- New struct `CommunityGalleryImageList`
+- New struct `CommunityGalleryImageVersionList`
+- New struct `CommunityGalleryImageVersionsClientListOptions`
+- New struct `CommunityGalleryImageVersionsClientListPager`
+- New struct `CommunityGalleryImageVersionsClientListResponse`
+- New struct `CommunityGalleryImageVersionsClientListResult`
+- New struct `CommunityGalleryImagesClientListOptions`
+- New struct `CommunityGalleryImagesClientListPager`
+- New struct `CommunityGalleryImagesClientListResponse`
+- New struct `CommunityGalleryImagesClientListResult`
+- New struct `CommunityGalleryInfo`
+- New struct `CopyCompletionError`
+- New struct `DedicatedHostGroupPropertiesAdditionalCapabilities`
+- New struct `DedicatedHostsClientBeginRestartOptions`
+- New struct `DedicatedHostsClientRestartPoller`
+- New struct `DedicatedHostsClientRestartPollerResponse`
+- New struct `DedicatedHostsClientRestartResponse`
+- New struct `DiskRestorePointInstanceView`
+- New struct `DiskRestorePointReplicationStatus`
+- New struct `GalleryExtendedLocation`
+- New struct `GalleryTargetExtendedLocation`
+- New struct `LinuxVMGuestPatchAutomaticByPlatformSettings`
+- New struct `OSDiskImageSecurityProfile`
+- New struct `ProximityPlacementGroupPropertiesIntent`
+- New struct `RegionalSharingStatus`
+- New struct `ResourceWithOptionalLocation`
+- New struct `RestorePointInstanceView`
+- New struct `SharedGalleryDataDiskImage`
+- New struct `SharedGalleryDiskImage`
+- New struct `SharedGalleryImageVersionStorageProfile`
+- New struct `SharedGalleryOSDiskImage`
+- New struct `SharingStatus`
+- New struct `SystemData`
+- New struct `UserArtifactSettings`
+- New struct `VMDiskSecurityProfile`
+- New struct `VMImagesInEdgeZoneListResult`
+- New struct `VirtualMachineImagesClientListByEdgeZoneOptions`
+- New struct `VirtualMachineImagesClientListByEdgeZoneResponse`
+- New struct `VirtualMachineImagesClientListByEdgeZoneResult`
+- New struct `VirtualMachineScaleSetHardwareProfile`
+- New struct `WindowsVMGuestPatchAutomaticByPlatformSettings`
+- New field `TimeCreated` in struct `VirtualMachineScaleSetProperties`
+- New field `ProtectedSettingsFromKeyVault` in struct `VirtualMachineExtensionUpdateProperties`
+- New field `Architecture` in struct `SupportedCapabilities`
+- New field `TimeCreated` in struct `DedicatedHostProperties`
+- New field `DataAccessAuthMode` in struct `DiskProperties`
+- New field `AllowExtensionOperations` in struct `VirtualMachineScaleSetOSProfile`
+- New field `DataAccessAuthMode` in struct `SnapshotUpdateProperties`
+- New field `SecurityProfile` in struct `ManagedDiskParameters`
+- New field `SourceRestorePoint` in struct `RestorePointProperties`
+- New field `InstanceView` in struct `RestorePointProperties`
+- New field `SystemData` in struct `CloudService`
+- New field `Architecture` in struct `VirtualMachineImageProperties`
+- New field `AutomaticByPlatformSettings` in struct `PatchSettings`
+- New field `Filter` in struct `VirtualMachinesClientListOptions`
+- New field `TimeCreated` in struct `CapacityReservationProperties`
+- New field `PlacementGroupID` in struct `VirtualMachineScaleSetsClientForceRecoveryServiceFabricPlatformUpdateDomainWalkOptions`
+- New field `Zone` in struct `VirtualMachineScaleSetsClientForceRecoveryServiceFabricPlatformUpdateDomainWalkOptions`
+- New field `Filter` in struct `VirtualMachinesClientListAllOptions`
+- New field `SharedGalleryImageID` in struct `ImageDiskReference`
+- New field `CommunityGalleryImageID` in struct `ImageDiskReference`
+- New field `CommunityGalleryInfo` in struct `SharingProfile`
+- New field `HardwareProfile` in struct `VirtualMachineScaleSetVMProfile`
+- New field `SecurityProfile` in struct `DiskRestorePointProperties`
+- New field `SecurityProfile` in struct `OSDiskImageEncryption`
+- New field `CommunityGalleryImageID` in struct `ImageReference`
+- New field `UserAssignedIdentities` in struct `EncryptionSetIdentity`
+- New field `PublicIPPrefix` in struct `VirtualMachineScaleSetUpdatePublicIPAddressConfigurationProperties`
+- New field `Expand` in struct `GalleriesClientGetOptions`
+- New field `Identity` in struct `VirtualMachineScaleSetVM`
+- New field `Expand` in struct `RestorePointsClientGetOptions`
+- New field `SlotType` in struct `CloudServiceNetworkProfile`
+- New field `Architecture` in struct `GalleryImageProperties`
+- New field `AdvancedSettings` in struct `GalleryApplicationVersionPublishingProfile`
+- New field `TargetExtendedLocations` in struct `GalleryApplicationVersionPublishingProfile`
+- New field `Settings` in struct `GalleryApplicationVersionPublishingProfile`
+- New field `TargetExtendedLocations` in struct `GalleryImageVersionPublishingProfile`
+- New field `RepairAction` in struct `AutomaticRepairsPolicy`
+- New field `CopyCompletionError` in struct `SnapshotProperties`
+- New field `DataAccessAuthMode` in struct `SnapshotProperties`
+- New field `DeleteOption` in struct `VirtualMachineScaleSetOSDisk`
+- New field `Eula` in struct `CommunityGalleryImageProperties`
+- New field `Architecture` in struct `CommunityGalleryImageProperties`
+- New field `PrivacyStatementURI` in struct `CommunityGalleryImageProperties`
+- New field `FederatedClientID` in struct `DiskEncryptionSetUpdateProperties`
+- New field `SharingStatus` in struct `GalleryProperties`
+- New field `TimeCreated` in struct `VirtualMachineProperties`
+- New field `ProtectedSettingsFromKeyVault` in struct `VirtualMachineScaleSetExtensionProperties`
+- New field `UseRollingUpgradePolicy` in struct `AutomaticOSUpgradePolicy`
+- New field `FederatedClientID` in struct `EncryptionSetProperties`
+- New field `TargetExtendedLocations` in struct `GalleryArtifactPublishingProfileBase`
+- New field `AutomaticByPlatformSettings` in struct `LinuxPatchSettings`
+- New field `ExcludeFromLatest` in struct `CommunityGalleryImageVersionProperties`
+- New field `StorageProfile` in struct `CommunityGalleryImageVersionProperties`
+- New field `ExcludeFromLatest` in struct `SharedGalleryImageVersionProperties`
+- New field `StorageProfile` in struct `SharedGalleryImageVersionProperties`
+- New field `Intent` in struct `ProximityPlacementGroupProperties`
+- New field `Zones` in struct `ProximityPlacementGroup`
+- New field `AdditionalCapabilities` in struct `DedicatedHostGroupProperties`
+- New field `DeleteOption` in struct `VirtualMachineScaleSetDataDisk`
+- New field `DataAccessAuthMode` in struct `DiskUpdateProperties`
+- New field `DeleteOption` in struct `VirtualMachineScaleSetUpdateOSDisk`
+- New field `ProtectedSettingsFromKeyVault` in struct `VirtualMachineExtensionProperties`
+- New field `Architecture` in struct `SharedGalleryImageProperties`
+- New field `EnableAutomaticUpgrade` in struct `VMGalleryApplication`
+- New field `TreatFailureAsDeploymentFailure` in struct `VMGalleryApplication`
+- New field `SecurityProfile` in struct `VirtualMachineScaleSetManagedDiskParameters`
+
+
 ## 0.3.0 (2022-01-13)
 ### Breaking Changes
 

@@ -664,6 +664,114 @@ func (p *CloudServicesUpdateDomainClientListUpdateDomainsPager) PageResponse() C
 	return p.current
 }
 
+// CommunityGalleryImageVersionsClientListPager provides operations for iterating over paged responses.
+type CommunityGalleryImageVersionsClientListPager struct {
+	client    *CommunityGalleryImageVersionsClient
+	current   CommunityGalleryImageVersionsClientListResponse
+	err       error
+	requester func(context.Context) (*policy.Request, error)
+	advancer  func(context.Context, CommunityGalleryImageVersionsClientListResponse) (*policy.Request, error)
+}
+
+// Err returns the last error encountered while paging.
+func (p *CommunityGalleryImageVersionsClientListPager) Err() error {
+	return p.err
+}
+
+// NextPage returns true if the pager advanced to the next page.
+// Returns false if there are no more pages or an error occurred.
+func (p *CommunityGalleryImageVersionsClientListPager) NextPage(ctx context.Context) bool {
+	var req *policy.Request
+	var err error
+	if !reflect.ValueOf(p.current).IsZero() {
+		if p.current.CommunityGalleryImageVersionList.NextLink == nil || len(*p.current.CommunityGalleryImageVersionList.NextLink) == 0 {
+			return false
+		}
+		req, err = p.advancer(ctx, p.current)
+	} else {
+		req, err = p.requester(ctx)
+	}
+	if err != nil {
+		p.err = err
+		return false
+	}
+	resp, err := p.client.pl.Do(req)
+	if err != nil {
+		p.err = err
+		return false
+	}
+	if !runtime.HasStatusCode(resp, http.StatusOK) {
+		p.err = runtime.NewResponseError(resp)
+		return false
+	}
+	result, err := p.client.listHandleResponse(resp)
+	if err != nil {
+		p.err = err
+		return false
+	}
+	p.current = result
+	return true
+}
+
+// PageResponse returns the current CommunityGalleryImageVersionsClientListResponse page.
+func (p *CommunityGalleryImageVersionsClientListPager) PageResponse() CommunityGalleryImageVersionsClientListResponse {
+	return p.current
+}
+
+// CommunityGalleryImagesClientListPager provides operations for iterating over paged responses.
+type CommunityGalleryImagesClientListPager struct {
+	client    *CommunityGalleryImagesClient
+	current   CommunityGalleryImagesClientListResponse
+	err       error
+	requester func(context.Context) (*policy.Request, error)
+	advancer  func(context.Context, CommunityGalleryImagesClientListResponse) (*policy.Request, error)
+}
+
+// Err returns the last error encountered while paging.
+func (p *CommunityGalleryImagesClientListPager) Err() error {
+	return p.err
+}
+
+// NextPage returns true if the pager advanced to the next page.
+// Returns false if there are no more pages or an error occurred.
+func (p *CommunityGalleryImagesClientListPager) NextPage(ctx context.Context) bool {
+	var req *policy.Request
+	var err error
+	if !reflect.ValueOf(p.current).IsZero() {
+		if p.current.CommunityGalleryImageList.NextLink == nil || len(*p.current.CommunityGalleryImageList.NextLink) == 0 {
+			return false
+		}
+		req, err = p.advancer(ctx, p.current)
+	} else {
+		req, err = p.requester(ctx)
+	}
+	if err != nil {
+		p.err = err
+		return false
+	}
+	resp, err := p.client.pl.Do(req)
+	if err != nil {
+		p.err = err
+		return false
+	}
+	if !runtime.HasStatusCode(resp, http.StatusOK) {
+		p.err = runtime.NewResponseError(resp)
+		return false
+	}
+	result, err := p.client.listHandleResponse(resp)
+	if err != nil {
+		p.err = err
+		return false
+	}
+	p.current = result
+	return true
+}
+
+// PageResponse returns the current CommunityGalleryImagesClientListResponse page.
+func (p *CommunityGalleryImagesClientListPager) PageResponse() CommunityGalleryImagesClientListResponse {
+	return p.current
+}
+
 // DedicatedHostGroupsClientListByResourceGroupPager provides operations for iterating over paged responses.
 type DedicatedHostGroupsClientListByResourceGroupPager struct {
 	client    *DedicatedHostGroupsClient
