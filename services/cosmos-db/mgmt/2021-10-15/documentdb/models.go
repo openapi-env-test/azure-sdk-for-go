@@ -7687,12 +7687,38 @@ func (rmdlr RestorableMongodbDatabasesListResult) MarshalJSON() ([]byte, error) 
 	return json.Marshal(objectMap)
 }
 
+// RestorableMongodbResourcesGetResult specific Databases to restore.
+type RestorableMongodbResourcesGetResult struct {
+	// ID - READ-ONLY; The unique resource identifier of the ARM resource.
+	ID *string `json:"id,omitempty"`
+	// Name - READ-ONLY; The name of the ARM resource.
+	Name *string `json:"name,omitempty"`
+	// Type - READ-ONLY; The type of Azure resource.
+	Type *string `json:"type,omitempty"`
+	// DatabaseName - The name of the database available for restore.
+	DatabaseName *string `json:"databaseName,omitempty"`
+	// CollectionNames - The names of the collections available for restore.
+	CollectionNames *[]string `json:"collectionNames,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for RestorableMongodbResourcesGetResult.
+func (rmrgr RestorableMongodbResourcesGetResult) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if rmrgr.DatabaseName != nil {
+		objectMap["databaseName"] = rmrgr.DatabaseName
+	}
+	if rmrgr.CollectionNames != nil {
+		objectMap["collectionNames"] = rmrgr.CollectionNames
+	}
+	return json.Marshal(objectMap)
+}
+
 // RestorableMongodbResourcesListResult the List operation response, that contains the restorable MongoDB
 // resources.
 type RestorableMongodbResourcesListResult struct {
 	autorest.Response `json:"-"`
 	// Value - READ-ONLY; List of restorable MongoDB resources, including the database and collection names.
-	Value *[]DatabaseRestoreResource `json:"value,omitempty"`
+	Value *[]RestorableMongodbResourcesGetResult `json:"value,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for RestorableMongodbResourcesListResult.
@@ -8015,12 +8041,38 @@ func (rsdlr RestorableSQLDatabasesListResult) MarshalJSON() ([]byte, error) {
 	return json.Marshal(objectMap)
 }
 
+// RestorableSQLResourcesGetResult specific Databases to restore.
+type RestorableSQLResourcesGetResult struct {
+	// ID - READ-ONLY; The unique resource identifier of the ARM resource.
+	ID *string `json:"id,omitempty"`
+	// Name - READ-ONLY; The name of the ARM resource.
+	Name *string `json:"name,omitempty"`
+	// Type - READ-ONLY; The type of Azure resource.
+	Type *string `json:"type,omitempty"`
+	// DatabaseName - The name of the database available for restore.
+	DatabaseName *string `json:"databaseName,omitempty"`
+	// CollectionNames - The names of the collections available for restore.
+	CollectionNames *[]string `json:"collectionNames,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for RestorableSQLResourcesGetResult.
+func (rsrgr RestorableSQLResourcesGetResult) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if rsrgr.DatabaseName != nil {
+		objectMap["databaseName"] = rsrgr.DatabaseName
+	}
+	if rsrgr.CollectionNames != nil {
+		objectMap["collectionNames"] = rsrgr.CollectionNames
+	}
+	return json.Marshal(objectMap)
+}
+
 // RestorableSQLResourcesListResult the List operation response, that contains the restorable SQL
 // resources.
 type RestorableSQLResourcesListResult struct {
 	autorest.Response `json:"-"`
 	// Value - READ-ONLY; List of restorable SQL resources, including the database and collection names.
-	Value *[]DatabaseRestoreResource `json:"value,omitempty"`
+	Value *[]RestorableSQLResourcesGetResult `json:"value,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for RestorableSQLResourcesListResult.
