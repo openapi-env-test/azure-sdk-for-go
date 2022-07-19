@@ -1565,6 +1565,10 @@ func (mpec *MHSMPrivateEndpointConnection) UnmarshalJSON(body []byte) error {
 
 // MHSMPrivateEndpointConnectionItem private endpoint connection item.
 type MHSMPrivateEndpointConnectionItem struct {
+	// ID - Id of private endpoint connection.
+	ID *string `json:"id,omitempty"`
+	// Etag - Modified whenever there is a change in the state of private endpoint connection.
+	Etag *string `json:"etag,omitempty"`
 	// MHSMPrivateEndpointConnectionProperties - Private endpoint connection properties.
 	*MHSMPrivateEndpointConnectionProperties `json:"properties,omitempty"`
 }
@@ -1572,6 +1576,12 @@ type MHSMPrivateEndpointConnectionItem struct {
 // MarshalJSON is the custom marshaler for MHSMPrivateEndpointConnectionItem.
 func (mpeci MHSMPrivateEndpointConnectionItem) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
+	if mpeci.ID != nil {
+		objectMap["id"] = mpeci.ID
+	}
+	if mpeci.Etag != nil {
+		objectMap["etag"] = mpeci.Etag
+	}
 	if mpeci.MHSMPrivateEndpointConnectionProperties != nil {
 		objectMap["properties"] = mpeci.MHSMPrivateEndpointConnectionProperties
 	}
@@ -1587,6 +1597,24 @@ func (mpeci *MHSMPrivateEndpointConnectionItem) UnmarshalJSON(body []byte) error
 	}
 	for k, v := range m {
 		switch k {
+		case "id":
+			if v != nil {
+				var ID string
+				err = json.Unmarshal(*v, &ID)
+				if err != nil {
+					return err
+				}
+				mpeci.ID = &ID
+			}
+		case "etag":
+			if v != nil {
+				var etag string
+				err = json.Unmarshal(*v, &etag)
+				if err != nil {
+					return err
+				}
+				mpeci.Etag = &etag
+			}
 		case "properties":
 			if v != nil {
 				var mHSMPrivateEndpointConnectionProperties MHSMPrivateEndpointConnectionProperties
