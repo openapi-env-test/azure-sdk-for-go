@@ -4955,6 +4955,8 @@ type DiagnosticContractProperties struct {
 	Verbosity Verbosity `json:"verbosity,omitempty"`
 	// OperationNameFormat - The format of the Operation Name for Application Insights telemetries. Default is Name. Possible values include: 'OperationNameFormatName', 'OperationNameFormatURL'
 	OperationNameFormat OperationNameFormat `json:"operationNameFormat,omitempty"`
+	// Metrics - Emit custom metrics via emit-metric policy. Applicable only to Application Insights diagnostic settings.
+	Metrics *bool `json:"metrics,omitempty"`
 }
 
 // EmailTemplateCollection paged email template list representation.
@@ -7819,7 +7821,7 @@ type IssueUpdateContractProperties struct {
 type KeyVaultContractCreateProperties struct {
 	// SecretIdentifier - Key vault secret identifier for fetching secret. Providing a versioned secret will prevent auto-refresh. This requires API Management service to be configured with aka.ms/apimmsi
 	SecretIdentifier *string `json:"secretIdentifier,omitempty"`
-	// IdentityClientID - SystemAssignedIdentity or UserAssignedIdentity Client Id which will be used to access key vault secret.
+	// IdentityClientID - Null for SystemAssignedIdentity or Client Id for UserAssignedIdentity , which will be used to access key vault secret.
 	IdentityClientID *string `json:"identityClientId,omitempty"`
 }
 
@@ -7829,7 +7831,7 @@ type KeyVaultContractProperties struct {
 	LastStatus *KeyVaultLastAccessStatusContractProperties `json:"lastStatus,omitempty"`
 	// SecretIdentifier - Key vault secret identifier for fetching secret. Providing a versioned secret will prevent auto-refresh. This requires API Management service to be configured with aka.ms/apimmsi
 	SecretIdentifier *string `json:"secretIdentifier,omitempty"`
-	// IdentityClientID - SystemAssignedIdentity or UserAssignedIdentity Client Id which will be used to access key vault secret.
+	// IdentityClientID - Null for SystemAssignedIdentity or Client Id for UserAssignedIdentity , which will be used to access key vault secret.
 	IdentityClientID *string `json:"identityClientId,omitempty"`
 }
 
