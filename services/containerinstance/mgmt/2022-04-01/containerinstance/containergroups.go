@@ -93,14 +93,11 @@ func (client ContainerGroupsClient) CreateOrUpdatePreparer(ctx context.Context, 
 		"subscriptionId":     autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2021-10-01"
+	const APIVersion = "2022-04-01"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
 
-	containerGroup.ID = nil
-	containerGroup.Name = nil
-	containerGroup.Type = nil
 	preparer := autorest.CreatePreparer(
 		autorest.AsContentType("application/json; charset=utf-8"),
 		autorest.AsPut(),
@@ -178,7 +175,7 @@ func (client ContainerGroupsClient) DeletePreparer(ctx context.Context, resource
 		"subscriptionId":     autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2021-10-01"
+	const APIVersion = "2022-04-01"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -221,7 +218,7 @@ func (client ContainerGroupsClient) DeleteResponder(resp *http.Response) (result
 
 // Get gets the properties of the specified container group in the specified subscription and resource group. The
 // operation returns the properties of each container group including containers, image registry credentials, restart
-// policy, IP address type, OS type, state, and volumes.
+// policy, IP address type, OS type, state, volumes and priority.
 // Parameters:
 // resourceGroupName - the name of the resource group.
 // containerGroupName - the name of the container group.
@@ -266,7 +263,7 @@ func (client ContainerGroupsClient) GetPreparer(ctx context.Context, resourceGro
 		"subscriptionId":     autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2021-10-01"
+	const APIVersion = "2022-04-01"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -343,7 +340,7 @@ func (client ContainerGroupsClient) GetOutboundNetworkDependenciesEndpointsPrepa
 		"subscriptionId":     autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2021-10-01"
+	const APIVersion = "2022-04-01"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -376,7 +373,7 @@ func (client ContainerGroupsClient) GetOutboundNetworkDependenciesEndpointsRespo
 
 // List get a list of container groups in the specified subscription. This operation returns properties of each
 // container group including containers, image registry credentials, restart policy, IP address type, OS type, state,
-// and volumes.
+// volumes and priority.
 func (client ContainerGroupsClient) List(ctx context.Context) (result ContainerGroupListResultPage, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/ContainerGroupsClient.List")
@@ -421,7 +418,7 @@ func (client ContainerGroupsClient) ListPreparer(ctx context.Context) (*http.Req
 		"subscriptionId": autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2021-10-01"
+	const APIVersion = "2022-04-01"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -491,7 +488,7 @@ func (client ContainerGroupsClient) ListComplete(ctx context.Context) (result Co
 
 // ListByResourceGroup get a list of container groups in a specified subscription and resource group. This operation
 // returns properties of each container group including containers, image registry credentials, restart policy, IP
-// address type, OS type, state, and volumes.
+// address type, OS type, state, volumes and priority.
 // Parameters:
 // resourceGroupName - the name of the resource group.
 func (client ContainerGroupsClient) ListByResourceGroup(ctx context.Context, resourceGroupName string) (result ContainerGroupListResultPage, err error) {
@@ -539,7 +536,7 @@ func (client ContainerGroupsClient) ListByResourceGroupPreparer(ctx context.Cont
 		"subscriptionId":    autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2021-10-01"
+	const APIVersion = "2022-04-01"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -646,7 +643,7 @@ func (client ContainerGroupsClient) RestartPreparer(ctx context.Context, resourc
 		"subscriptionId":     autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2021-10-01"
+	const APIVersion = "2022-04-01"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -724,7 +721,7 @@ func (client ContainerGroupsClient) StartPreparer(ctx context.Context, resourceG
 		"subscriptionId":     autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2021-10-01"
+	const APIVersion = "2022-04-01"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -758,7 +755,7 @@ func (client ContainerGroupsClient) StartSender(req *http.Request) (future Conta
 func (client ContainerGroupsClient) StartResponder(resp *http.Response) (result autorest.Response, err error) {
 	err = autorest.Respond(
 		resp,
-		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusAccepted, http.StatusNoContent),
+		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusAccepted),
 		autorest.ByClosing())
 	result.Response = resp
 	return
@@ -809,7 +806,7 @@ func (client ContainerGroupsClient) StopPreparer(ctx context.Context, resourceGr
 		"subscriptionId":     autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2021-10-01"
+	const APIVersion = "2022-04-01"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -885,7 +882,7 @@ func (client ContainerGroupsClient) UpdatePreparer(ctx context.Context, resource
 		"subscriptionId":     autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2021-10-01"
+	const APIVersion = "2022-04-01"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}

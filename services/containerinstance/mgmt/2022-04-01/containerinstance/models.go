@@ -18,7 +18,7 @@ import (
 )
 
 // The package's fully qualified name.
-const fqdn = "github.com/Azure/azure-sdk-for-go/services/containerinstance/mgmt/2021-10-01/containerinstance"
+const fqdn = "github.com/Azure/azure-sdk-for-go/services/containerinstance/mgmt/2022-04-01/containerinstance"
 
 // AzureFileVolume the properties of the Azure File volume. Azure File shares are mounted as volumes.
 type AzureFileVolume struct {
@@ -509,6 +509,10 @@ type ContainerExecResponse struct {
 // ContainerGroup a container group.
 type ContainerGroup struct {
 	autorest.Response `json:"-"`
+	// Identity - The identity of the container group, if configured.
+	Identity *ContainerGroupIdentity `json:"identity,omitempty"`
+	// ContainerGroupProperties - The container group properties
+	*ContainerGroupProperties `json:"properties,omitempty"`
 	// ID - READ-ONLY; The resource id.
 	ID *string `json:"id,omitempty"`
 	// Name - READ-ONLY; The resource name.
@@ -521,15 +525,17 @@ type ContainerGroup struct {
 	Tags map[string]*string `json:"tags"`
 	// Zones - The zones for the container group.
 	Zones *[]string `json:"zones,omitempty"`
-	// Identity - The identity of the container group, if configured.
-	Identity *ContainerGroupIdentity `json:"identity,omitempty"`
-	// ContainerGroupProperties - The container group properties
-	*ContainerGroupProperties `json:"properties,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for ContainerGroup.
 func (cg ContainerGroup) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
+	if cg.Identity != nil {
+		objectMap["identity"] = cg.Identity
+	}
+	if cg.ContainerGroupProperties != nil {
+		objectMap["properties"] = cg.ContainerGroupProperties
+	}
 	if cg.Location != nil {
 		objectMap["location"] = cg.Location
 	}
@@ -538,12 +544,6 @@ func (cg ContainerGroup) MarshalJSON() ([]byte, error) {
 	}
 	if cg.Zones != nil {
 		objectMap["zones"] = cg.Zones
-	}
-	if cg.Identity != nil {
-		objectMap["identity"] = cg.Identity
-	}
-	if cg.ContainerGroupProperties != nil {
-		objectMap["properties"] = cg.ContainerGroupProperties
 	}
 	return json.Marshal(objectMap)
 }
@@ -557,6 +557,24 @@ func (cg *ContainerGroup) UnmarshalJSON(body []byte) error {
 	}
 	for k, v := range m {
 		switch k {
+		case "identity":
+			if v != nil {
+				var identity ContainerGroupIdentity
+				err = json.Unmarshal(*v, &identity)
+				if err != nil {
+					return err
+				}
+				cg.Identity = &identity
+			}
+		case "properties":
+			if v != nil {
+				var containerGroupProperties ContainerGroupProperties
+				err = json.Unmarshal(*v, &containerGroupProperties)
+				if err != nil {
+					return err
+				}
+				cg.ContainerGroupProperties = &containerGroupProperties
+			}
 		case "id":
 			if v != nil {
 				var ID string
@@ -611,24 +629,6 @@ func (cg *ContainerGroup) UnmarshalJSON(body []byte) error {
 				}
 				cg.Zones = &zones
 			}
-		case "identity":
-			if v != nil {
-				var identity ContainerGroupIdentity
-				err = json.Unmarshal(*v, &identity)
-				if err != nil {
-					return err
-				}
-				cg.Identity = &identity
-			}
-		case "properties":
-			if v != nil {
-				var containerGroupProperties ContainerGroupProperties
-				err = json.Unmarshal(*v, &containerGroupProperties)
-				if err != nil {
-					return err
-				}
-				cg.ContainerGroupProperties = &containerGroupProperties
-			}
 		}
 	}
 
@@ -647,10 +647,10 @@ type ContainerGroupIdentity struct {
 	PrincipalID *string `json:"principalId,omitempty"`
 	// TenantID - READ-ONLY; The tenant id associated with the container group. This property will only be provided for a system assigned identity.
 	TenantID *string `json:"tenantId,omitempty"`
-	// Type - The type of identity used for the container group. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the container group. Possible values include: 'ResourceIdentityTypeSystemAssigned', 'ResourceIdentityTypeUserAssigned', 'ResourceIdentityTypeSystemAssignedUserAssigned', 'ResourceIdentityTypeNone'
+	// Type - The type of identity used for the container group. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the container group. Possible values include: 'SystemAssigned', 'UserAssigned', 'SystemAssignedUserAssigned', 'None'
 	Type ResourceIdentityType `json:"type,omitempty"`
-	// UserAssignedIdentities - The list of user identities associated with the container group.
-	UserAssignedIdentities map[string]*UserAssignedIdentities `json:"userAssignedIdentities"`
+	// UserAssignedIdentities - The list of user identities associated with the container group. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
+	UserAssignedIdentities map[string]*ContainerGroupIdentityUserAssignedIdentitiesValue `json:"userAssignedIdentities"`
 }
 
 // MarshalJSON is the custom marshaler for ContainerGroupIdentity.
@@ -662,6 +662,20 @@ func (cgiVar ContainerGroupIdentity) MarshalJSON() ([]byte, error) {
 	if cgiVar.UserAssignedIdentities != nil {
 		objectMap["userAssignedIdentities"] = cgiVar.UserAssignedIdentities
 	}
+	return json.Marshal(objectMap)
+}
+
+// ContainerGroupIdentityUserAssignedIdentitiesValue ...
+type ContainerGroupIdentityUserAssignedIdentitiesValue struct {
+	// PrincipalID - READ-ONLY; The principal id of user assigned identity.
+	PrincipalID *string `json:"principalId,omitempty"`
+	// ClientID - READ-ONLY; The client id of user assigned identity.
+	ClientID *string `json:"clientId,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for ContainerGroupIdentityUserAssignedIdentitiesValue.
+func (cgiAiv ContainerGroupIdentityUserAssignedIdentitiesValue) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
 	return json.Marshal(objectMap)
 }
 
@@ -836,12 +850,14 @@ type ContainerGroupProperties struct {
 	// - `Always` Always restart
 	// - `OnFailure` Restart on failure
 	// - `Never` Never restart
-	// . Possible values include: 'ContainerGroupRestartPolicyAlways', 'ContainerGroupRestartPolicyOnFailure', 'ContainerGroupRestartPolicyNever'
+	// . Possible values include: 'Always', 'OnFailure', 'Never'
 	RestartPolicy ContainerGroupRestartPolicy `json:"restartPolicy,omitempty"`
 	// IPAddress - The IP address type of the container group.
 	IPAddress *IPAddress `json:"ipAddress,omitempty"`
-	// OsType - The operating system type required by the containers in the container group. Possible values include: 'OperatingSystemTypesWindows', 'OperatingSystemTypesLinux'
+	// OsType - The operating system type required by the containers in the container group. Possible values include: 'Windows', 'Linux'
 	OsType OperatingSystemTypes `json:"osType,omitempty"`
+	// Priority - The container group priority for provisioning containers. Possible values include: 'Regular', 'Spot'
+	Priority ContainerGroupPriority `json:"priority,omitempty"`
 	// Volumes - The list of volumes that can be mounted by containers in this container group.
 	Volumes *[]Volume `json:"volumes,omitempty"`
 	// InstanceView - READ-ONLY; The instance view of the container group. Only valid in response.
@@ -852,7 +868,7 @@ type ContainerGroupProperties struct {
 	SubnetIds *[]ContainerGroupSubnetID `json:"subnetIds,omitempty"`
 	// DNSConfig - The DNS config information for a container group.
 	DNSConfig *DNSConfiguration `json:"dnsConfig,omitempty"`
-	// Sku - The SKU for a container group. Possible values include: 'ContainerGroupSkuStandard', 'ContainerGroupSkuDedicated'
+	// Sku - The SKU for a container group. Possible values include: 'Standard', 'Dedicated'
 	Sku ContainerGroupSku `json:"sku,omitempty"`
 	// EncryptionProperties - The encryption properties for a container group.
 	EncryptionProperties *EncryptionProperties `json:"encryptionProperties,omitempty"`
@@ -877,6 +893,9 @@ func (cg ContainerGroupProperties) MarshalJSON() ([]byte, error) {
 	}
 	if cg.OsType != "" {
 		objectMap["osType"] = cg.OsType
+	}
+	if cg.Priority != "" {
+		objectMap["priority"] = cg.Priority
 	}
 	if cg.Volumes != nil {
 		objectMap["volumes"] = cg.Volumes
@@ -914,59 +933,6 @@ type ContainerGroupPropertiesInstanceView struct {
 func (cgV ContainerGroupPropertiesInstanceView) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
 	return json.Marshal(objectMap)
-}
-
-// ContainerGroupPropertiesModel the container group properties
-type ContainerGroupPropertiesModel struct {
-	// Identity - The identity of the container group, if configured.
-	Identity *ContainerGroupIdentity `json:"identity,omitempty"`
-	// ContainerGroupProperties - The container group properties
-	*ContainerGroupProperties `json:"properties,omitempty"`
-}
-
-// MarshalJSON is the custom marshaler for ContainerGroupPropertiesModel.
-func (cgpm ContainerGroupPropertiesModel) MarshalJSON() ([]byte, error) {
-	objectMap := make(map[string]interface{})
-	if cgpm.Identity != nil {
-		objectMap["identity"] = cgpm.Identity
-	}
-	if cgpm.ContainerGroupProperties != nil {
-		objectMap["properties"] = cgpm.ContainerGroupProperties
-	}
-	return json.Marshal(objectMap)
-}
-
-// UnmarshalJSON is the custom unmarshaler for ContainerGroupPropertiesModel struct.
-func (cgpm *ContainerGroupPropertiesModel) UnmarshalJSON(body []byte) error {
-	var m map[string]*json.RawMessage
-	err := json.Unmarshal(body, &m)
-	if err != nil {
-		return err
-	}
-	for k, v := range m {
-		switch k {
-		case "identity":
-			if v != nil {
-				var identity ContainerGroupIdentity
-				err = json.Unmarshal(*v, &identity)
-				if err != nil {
-					return err
-				}
-				cgpm.Identity = &identity
-			}
-		case "properties":
-			if v != nil {
-				var containerGroupProperties ContainerGroupProperties
-				err = json.Unmarshal(*v, &containerGroupProperties)
-				if err != nil {
-					return err
-				}
-				cgpm.ContainerGroupProperties = &containerGroupProperties
-			}
-		}
-	}
-
-	return nil
 }
 
 // ContainerGroupsCreateOrUpdateFuture an abstraction for monitoring and retrieving the results of a
@@ -1143,7 +1109,7 @@ type ContainerHTTPGet struct {
 	Path *string `json:"path,omitempty"`
 	// Port - The port number to probe.
 	Port *int32 `json:"port,omitempty"`
-	// Scheme - The scheme. Possible values include: 'SchemeHTTP', 'SchemeHTTPS'
+	// Scheme - The scheme. Possible values include: 'HTTP', 'HTTPS'
 	Scheme Scheme `json:"scheme,omitempty"`
 	// HTTPHeaders - The HTTP headers.
 	HTTPHeaders *[]HTTPHeader `json:"httpHeaders,omitempty"`
@@ -1331,7 +1297,7 @@ type GitRepoVolume struct {
 type GpuResource struct {
 	// Count - The count of the GPU resource.
 	Count *int32 `json:"count,omitempty"`
-	// Sku - The SKU of the GPU resource. Possible values include: 'GpuSkuK80', 'GpuSkuP100', 'GpuSkuV100'
+	// Sku - The SKU of the GPU resource. Possible values include: 'K80', 'P100', 'V100'
 	Sku GpuSku `json:"sku,omitempty"`
 }
 
@@ -1465,14 +1431,14 @@ func (icpdV InitContainerPropertiesDefinitionInstanceView) MarshalJSON() ([]byte
 type IPAddress struct {
 	// Ports - The list of ports exposed on the container group.
 	Ports *[]Port `json:"ports,omitempty"`
-	// Type - Specifies if the IP is exposed to the public internet or private VNET. Possible values include: 'ContainerGroupIPAddressTypePublic', 'ContainerGroupIPAddressTypePrivate'
+	// Type - Specifies if the IP is exposed to the public internet or private VNET. Possible values include: 'Public', 'Private'
 	Type ContainerGroupIPAddressType `json:"type,omitempty"`
 	// IP - The IP exposed to the public internet.
 	IP *string `json:"ip,omitempty"`
 	// DNSNameLabel - The Dns name label for the IP.
 	DNSNameLabel *string `json:"dnsNameLabel,omitempty"`
-	// AutoGeneratedDomainNameLabelScope - The value representing the security enum. Possible values include: 'DNSNameLabelReusePolicyUnsecure', 'DNSNameLabelReusePolicyTenantReuse', 'DNSNameLabelReusePolicySubscriptionReuse', 'DNSNameLabelReusePolicyResourceGroupReuse', 'DNSNameLabelReusePolicyNoreuse'
-	AutoGeneratedDomainNameLabelScope DNSNameLabelReusePolicy `json:"autoGeneratedDomainNameLabelScope,omitempty"`
+	// DNSNameLabelReusePolicy - The value representing the security enum. Possible values include: 'Unsecure', 'TenantReuse', 'SubscriptionReuse', 'ResourceGroupReuse', 'Noreuse'
+	DNSNameLabelReusePolicy DNSNameLabelReusePolicy `json:"dnsNameLabelReusePolicy,omitempty"`
 	// Fqdn - READ-ONLY; The FQDN for the IP.
 	Fqdn *string `json:"fqdn,omitempty"`
 }
@@ -1492,8 +1458,8 @@ func (ia IPAddress) MarshalJSON() ([]byte, error) {
 	if ia.DNSNameLabel != nil {
 		objectMap["dnsNameLabel"] = ia.DNSNameLabel
 	}
-	if ia.AutoGeneratedDomainNameLabelScope != "" {
-		objectMap["autoGeneratedDomainNameLabelScope"] = ia.AutoGeneratedDomainNameLabelScope
+	if ia.DNSNameLabelReusePolicy != "" {
+		objectMap["dnsNameLabelReusePolicy"] = ia.DNSNameLabelReusePolicy
 	}
 	return json.Marshal(objectMap)
 }
@@ -1510,7 +1476,7 @@ type LogAnalytics struct {
 	WorkspaceID *string `json:"workspaceId,omitempty"`
 	// WorkspaceKey - The workspace key for log analytics
 	WorkspaceKey *string `json:"workspaceKey,omitempty"`
-	// LogType - The log type to be used. Possible values include: 'LogAnalyticsLogTypeContainerInsights', 'LogAnalyticsLogTypeContainerInstanceLogs'
+	// LogType - The log type to be used. Possible values include: 'ContainerInsights', 'ContainerInstanceLogs'
 	LogType LogAnalyticsLogType `json:"logType,omitempty"`
 	// Metadata - Metadata for log analytics.
 	Metadata map[string]*string `json:"metadata"`
@@ -1554,7 +1520,7 @@ type Operation struct {
 	Display *OperationDisplay `json:"display,omitempty"`
 	// Properties - The additional properties.
 	Properties interface{} `json:"properties,omitempty"`
-	// Origin - The intended executor of the operation. Possible values include: 'OperationsOriginUser', 'OperationsOriginSystem'
+	// Origin - The intended executor of the operation. Possible values include: 'User', 'System'
 	Origin OperationsOrigin `json:"origin,omitempty"`
 }
 
@@ -1732,7 +1698,7 @@ func NewOperationListResultPage(cur OperationListResult, getNextPage func(contex
 
 // Port the port exposed on the container group.
 type Port struct {
-	// Protocol - The protocol associated with the port. Possible values include: 'ContainerGroupNetworkProtocolTCP', 'ContainerGroupNetworkProtocolUDP'
+	// Protocol - The protocol associated with the port. Possible values include: 'TCP', 'UDP'
 	Protocol ContainerGroupNetworkProtocol `json:"protocol,omitempty"`
 	// Port - The port number.
 	Port *int32 `json:"port,omitempty"`
@@ -1797,47 +1763,8 @@ type ResourceRequirements struct {
 	Limits *ResourceLimits `json:"limits,omitempty"`
 }
 
-// SubnetServiceAssociationLinkDeleteFuture an abstraction for monitoring and retrieving the results of a
-// long-running operation.
-type SubnetServiceAssociationLinkDeleteFuture struct {
-	azure.FutureAPI
-	// Result returns the result of the asynchronous operation.
-	// If the operation has not completed it will return an error.
-	Result func(SubnetServiceAssociationLinkClient) (autorest.Response, error)
-}
-
-// UnmarshalJSON is the custom unmarshaller for CreateFuture.
-func (future *SubnetServiceAssociationLinkDeleteFuture) UnmarshalJSON(body []byte) error {
-	var azFuture azure.Future
-	if err := json.Unmarshal(body, &azFuture); err != nil {
-		return err
-	}
-	future.FutureAPI = &azFuture
-	future.Result = future.result
-	return nil
-}
-
-// result is the default implementation for SubnetServiceAssociationLinkDeleteFuture.Result.
-func (future *SubnetServiceAssociationLinkDeleteFuture) result(client SubnetServiceAssociationLinkClient) (ar autorest.Response, err error) {
-	var done bool
-	done, err = future.DoneWithContext(context.Background(), client)
-	if err != nil {
-		err = autorest.NewErrorWithError(err, "containerinstance.SubnetServiceAssociationLinkDeleteFuture", "Result", future.Response(), "Polling failure")
-		return
-	}
-	if !done {
-		ar.Response = future.Response()
-		err = azure.NewAsyncOpIncompleteError("containerinstance.SubnetServiceAssociationLinkDeleteFuture")
-		return
-	}
-	ar.Response = future.Response()
-	return
-}
-
 // Usage a single usage result
 type Usage struct {
-	// ID - READ-ONLY; Id of the usage result
-	ID *string `json:"id,omitempty"`
 	// Unit - READ-ONLY; Unit of the usage result
 	Unit *string `json:"unit,omitempty"`
 	// CurrentValue - READ-ONLY; The current usage of the resource
@@ -1877,22 +1804,6 @@ type UsageName struct {
 
 // MarshalJSON is the custom marshaler for UsageName.
 func (u UsageName) MarshalJSON() ([]byte, error) {
-	objectMap := make(map[string]interface{})
-	return json.Marshal(objectMap)
-}
-
-// UserAssignedIdentities the list of user identities associated with the container group. The user
-// identity dictionary key references will be ARM resource ids in the form:
-// '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
-type UserAssignedIdentities struct {
-	// PrincipalID - READ-ONLY; The principal id of user assigned identity.
-	PrincipalID *string `json:"principalId,omitempty"`
-	// ClientID - READ-ONLY; The client id of user assigned identity.
-	ClientID *string `json:"clientId,omitempty"`
-}
-
-// MarshalJSON is the custom marshaler for UserAssignedIdentities.
-func (uai UserAssignedIdentities) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
 	return json.Marshal(objectMap)
 }
