@@ -1257,6 +1257,8 @@ type ClusterPrincipalProperties struct {
 	PrincipalName *string `json:"principalName,omitempty"`
 	// ProvisioningState - The provisioned state of the resource. Possible values include: 'ResourceProvisioningStateRunning', 'ResourceProvisioningStateCreating', 'ResourceProvisioningStateDeleting', 'ResourceProvisioningStateSucceeded', 'ResourceProvisioningStateFailed', 'ResourceProvisioningStateMoving', 'ResourceProvisioningStateCanceled'
 	ProvisioningState ResourceProvisioningState `json:"provisioningState,omitempty"`
+	// AadObjectID - READ-ONLY; The service principal object id in AAD (Azure active directory)
+	AadObjectID *string `json:"aadObjectId,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for ClusterPrincipalProperties.
@@ -1886,6 +1888,8 @@ type DatabasePrincipalProperties struct {
 	PrincipalName *string `json:"principalName,omitempty"`
 	// ProvisioningState - The provisioned state of the resource. Possible values include: 'ResourceProvisioningStateRunning', 'ResourceProvisioningStateCreating', 'ResourceProvisioningStateDeleting', 'ResourceProvisioningStateSucceeded', 'ResourceProvisioningStateFailed', 'ResourceProvisioningStateMoving', 'ResourceProvisioningStateCanceled'
 	ProvisioningState ResourceProvisioningState `json:"provisioningState,omitempty"`
+	// AadObjectID - READ-ONLY; The service principal object id in AAD (Azure active directory)
+	AadObjectID *string `json:"aadObjectId,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for DatabasePrincipalProperties.
