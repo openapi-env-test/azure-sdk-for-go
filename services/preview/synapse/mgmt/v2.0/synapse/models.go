@@ -966,6 +966,7 @@ type BigDataPoolResourceProperties struct {
 	NodeSizeFamily NodeSizeFamily `json:"nodeSizeFamily,omitempty"`
 	// LastSucceededTimestamp - READ-ONLY; The time when the Big Data pool was updated successfully.
 	LastSucceededTimestamp *date.Time `json:"lastSucceededTimestamp,omitempty"`
+	IsAutotuneEnabled      *bool      `json:"isAutotuneEnabled,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for BigDataPoolResourceProperties.
@@ -1018,6 +1019,9 @@ func (bdprp BigDataPoolResourceProperties) MarshalJSON() ([]byte, error) {
 	}
 	if bdprp.NodeSizeFamily != "" {
 		objectMap["nodeSizeFamily"] = bdprp.NodeSizeFamily
+	}
+	if bdprp.IsAutotuneEnabled != nil {
+		objectMap["isAutotuneEnabled"] = bdprp.IsAutotuneEnabled
 	}
 	return json.Marshal(objectMap)
 }
