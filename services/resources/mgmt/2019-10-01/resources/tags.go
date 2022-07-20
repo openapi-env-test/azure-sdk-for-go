@@ -185,7 +185,7 @@ func (client TagsClient) CreateOrUpdateAtScopeSender(req *http.Request) (*http.R
 func (client TagsClient) CreateOrUpdateAtScopeResponder(resp *http.Response) (result TagsResource, err error) {
 	err = autorest.Respond(
 		resp,
-		azure.WithErrorUnlessStatusCode(http.StatusOK),
+		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusAccepted),
 		autorest.ByUnmarshallingJSON(&result),
 		autorest.ByClosing())
 	result.Response = autorest.Response{Response: resp}
@@ -410,7 +410,7 @@ func (client TagsClient) DeleteAtScopeSender(req *http.Request) (*http.Response,
 func (client TagsClient) DeleteAtScopeResponder(resp *http.Response) (result autorest.Response, err error) {
 	err = autorest.Respond(
 		resp,
-		azure.WithErrorUnlessStatusCode(http.StatusOK),
+		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusAccepted),
 		autorest.ByClosing())
 	result.Response = resp
 	return
@@ -752,7 +752,7 @@ func (client TagsClient) UpdateAtScopeSender(req *http.Request) (*http.Response,
 func (client TagsClient) UpdateAtScopeResponder(resp *http.Response) (result TagsResource, err error) {
 	err = autorest.Respond(
 		resp,
-		azure.WithErrorUnlessStatusCode(http.StatusOK),
+		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusAccepted),
 		autorest.ByUnmarshallingJSON(&result),
 		autorest.ByClosing())
 	result.Response = autorest.Response{Response: resp}
