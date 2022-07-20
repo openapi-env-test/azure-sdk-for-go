@@ -144,6 +144,21 @@ func PossibleOperationOriginValues() []OperationOrigin {
 	return []OperationOrigin{OperationOriginNotSpecified, OperationOriginSystem, OperationOriginUser}
 }
 
+// Reason enumerates the values for reason.
+type Reason string
+
+const (
+	// ReasonAlreadyExists ...
+	ReasonAlreadyExists Reason = "AlreadyExists"
+	// ReasonInvalid ...
+	ReasonInvalid Reason = "Invalid"
+)
+
+// PossibleReasonValues returns an array of possible values for the Reason const type.
+func PossibleReasonValues() []Reason {
+	return []Reason{ReasonAlreadyExists, ReasonInvalid}
+}
+
 // ServerHAState enumerates the values for server ha state.
 type ServerHAState string
 
@@ -211,6 +226,8 @@ func PossibleServerStateValues() []ServerState {
 type ServerVersion string
 
 const (
+	// ServerVersionOneFour ...
+	ServerVersionOneFour ServerVersion = "14"
 	// ServerVersionOneOne ...
 	ServerVersionOneOne ServerVersion = "11"
 	// ServerVersionOneThree ...
@@ -221,7 +238,7 @@ const (
 
 // PossibleServerVersionValues returns an array of possible values for the ServerVersion const type.
 func PossibleServerVersionValues() []ServerVersion {
-	return []ServerVersion{ServerVersionOneOne, ServerVersionOneThree, ServerVersionOneTwo}
+	return []ServerVersion{ServerVersionOneFour, ServerVersionOneOne, ServerVersionOneThree, ServerVersionOneTwo}
 }
 
 // SkuTier enumerates the values for sku tier.
