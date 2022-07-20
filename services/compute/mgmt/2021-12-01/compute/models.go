@@ -7408,7 +7408,10 @@ type GalleryApplicationVersionPublishingProfile struct {
 	Source        *UserArtifactSource `json:"source,omitempty"`
 	ManageActions *UserArtifactManage `json:"manageActions,omitempty"`
 	// EnableHealthCheck - Optional. Whether or not this application reports health.
-	EnableHealthCheck *bool `json:"enableHealthCheck,omitempty"`
+	EnableHealthCheck *bool                 `json:"enableHealthCheck,omitempty"`
+	Settings          *UserArtifactSettings `json:"settings,omitempty"`
+	// AdvancedSettings - Optional. Additional settings to pass to the VMApp extension. For advanced used only.
+	AdvancedSettings map[string]*string `json:"advancedSettings"`
 	// TargetRegions - The target regions where the Image Version is going to be replicated to. This property is updatable.
 	TargetRegions *[]TargetRegion `json:"targetRegions,omitempty"`
 	// ReplicaCount - The number of replicas of the Image Version to be created per region. This property would take effect for a region when regionalReplicaCount is not specified. This property is updatable.
@@ -7438,6 +7441,12 @@ func (gavpp GalleryApplicationVersionPublishingProfile) MarshalJSON() ([]byte, e
 	}
 	if gavpp.EnableHealthCheck != nil {
 		objectMap["enableHealthCheck"] = gavpp.EnableHealthCheck
+	}
+	if gavpp.Settings != nil {
+		objectMap["settings"] = gavpp.Settings
+	}
+	if gavpp.AdvancedSettings != nil {
+		objectMap["advancedSettings"] = gavpp.AdvancedSettings
 	}
 	if gavpp.TargetRegions != nil {
 		objectMap["targetRegions"] = gavpp.TargetRegions
@@ -10580,15 +10589,15 @@ func (ovd OperationValueDisplay) MarshalJSON() ([]byte, error) {
 
 // OrchestrationServiceStateInput the input for OrchestrationServiceState
 type OrchestrationServiceStateInput struct {
-	// ServiceName - The name of the service. Possible values include: 'OrchestrationServiceNamesAutomaticRepairs'
-	ServiceName OrchestrationServiceNames `json:"serviceName,omitempty"`
+	// ServiceName - The name of the service.
+	ServiceName *string `json:"serviceName,omitempty"`
 	// Action - The action to be performed. Possible values include: 'OrchestrationServiceStateActionResume', 'OrchestrationServiceStateActionSuspend'
 	Action OrchestrationServiceStateAction `json:"action,omitempty"`
 }
 
 // OrchestrationServiceSummary summary for an orchestration service of a virtual machine scale set.
 type OrchestrationServiceSummary struct {
-	// ServiceName - READ-ONLY; The name of the service. Possible values include: 'OrchestrationServiceNamesAutomaticRepairs', 'OrchestrationServiceNamesDummyOrchestrationServiceName'
+	// ServiceName - READ-ONLY; The name of the service. Possible values include: 'OrchestrationServiceNamesAutomaticRepairs'
 	ServiceName OrchestrationServiceNames `json:"serviceName,omitempty"`
 	// ServiceState - READ-ONLY; The current state of the service. Possible values include: 'OrchestrationServiceStateNotRunning', 'OrchestrationServiceStateRunning', 'OrchestrationServiceStateSuspended'
 	ServiceState OrchestrationServiceState `json:"serviceState,omitempty"`
@@ -10867,7 +10876,7 @@ type OSProfile struct {
 	Secrets *[]VaultSecretGroup `json:"secrets,omitempty"`
 	// AllowExtensionOperations - Specifies whether extension operations should be allowed on the virtual machine. <br><br>This may only be set to False when no extensions are present on the virtual machine.
 	AllowExtensionOperations *bool `json:"allowExtensionOperations,omitempty"`
-	// RequireGuestProvisionSignal - Specifies whether the guest provision signal is required to infer provision success of the virtual machine.  **Note: This property is for private testing only, and all customers must not set the property to false.**
+	// RequireGuestProvisionSignal - Optional property which must either be set to True or omitted.
 	RequireGuestProvisionSignal *bool `json:"requireGuestProvisionSignal,omitempty"`
 }
 
@@ -14708,7 +14717,7 @@ type SharingProfile struct {
 	// Groups - READ-ONLY; A list of sharing profile groups.
 	Groups *[]SharingProfileGroup `json:"groups,omitempty"`
 	// CommunityGalleryInfo - Information of community gallery if current gallery is shared to community.
-	CommunityGalleryInfo interface{} `json:"communityGalleryInfo,omitempty"`
+	CommunityGalleryInfo *CommunityGalleryInfo `json:"communityGalleryInfo,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for SharingProfile.
@@ -16247,6 +16256,14 @@ type UserArtifactManage struct {
 	Remove *string `json:"remove,omitempty"`
 	// Update - Optional. The path and arguments to update the gallery application. If not present, then update operation will invoke remove command on the previous version and install command on the current version of the gallery application. This is limited to 4096 characters.
 	Update *string `json:"update,omitempty"`
+}
+
+// UserArtifactSettings ...
+type UserArtifactSettings struct {
+	// PackageFileName - Optional. The file to rename the downloaded package to on the VM. If not present, then the file will be called <appname>. This is limited to 4096 characters.
+	PackageFileName *string `json:"packageFileName,omitempty"`
+	// ConfigFileName - Optional. The file to rename the downloaded config to on the VM. If not present, then the file will be called <appname>_config. This is limited to 4096 characters.
+	ConfigFileName *string `json:"configFileName,omitempty"`
 }
 
 // UserArtifactSource the source image from which the Image Version is going to be created.
