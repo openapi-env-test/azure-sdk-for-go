@@ -22,14 +22,14 @@ type PolicyEventsClient struct {
 }
 
 // NewPolicyEventsClient creates an instance of the PolicyEventsClient client.
-func NewPolicyEventsClient(subscriptionID2 string) PolicyEventsClient {
-	return NewPolicyEventsClientWithBaseURI(DefaultBaseURI, subscriptionID2)
+func NewPolicyEventsClient(subscriptionID string, subscriptionID1 string) PolicyEventsClient {
+	return NewPolicyEventsClientWithBaseURI(DefaultBaseURI, subscriptionID, subscriptionID1)
 }
 
 // NewPolicyEventsClientWithBaseURI creates an instance of the PolicyEventsClient client using a custom endpoint.  Use
 // this when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure stack).
-func NewPolicyEventsClientWithBaseURI(baseURI string, subscriptionID2 string) PolicyEventsClient {
-	return PolicyEventsClient{NewWithBaseURI(baseURI, subscriptionID2)}
+func NewPolicyEventsClientWithBaseURI(baseURI string, subscriptionID string, subscriptionID1 string) PolicyEventsClient {
+	return PolicyEventsClient{NewWithBaseURI(baseURI, subscriptionID, subscriptionID1)}
 }
 
 // ListQueryResultsForManagementGroup queries policy events for the resources under the management group.
@@ -195,7 +195,6 @@ func (client PolicyEventsClient) ListQueryResultsForManagementGroupComplete(ctx 
 
 // ListQueryResultsForPolicyDefinition queries policy events for the subscription level policy definition.
 // Parameters:
-// subscriptionID - microsoft Azure subscription ID.
 // policyDefinitionName - policy definition name.
 // top - maximum number of records to return.
 // orderBy - ordering expression using OData notation. One or more comma-separated column names with an
@@ -210,7 +209,7 @@ func (client PolicyEventsClient) ListQueryResultsForManagementGroupComplete(ctx 
 // apply - oData apply expression for aggregations.
 // skipToken - skiptoken is only provided if a previous response returned a partial result as a part of
 // nextLink element.
-func (client PolicyEventsClient) ListQueryResultsForPolicyDefinition(ctx context.Context, subscriptionID string, policyDefinitionName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyEventsQueryResultsPage, err error) {
+func (client PolicyEventsClient) ListQueryResultsForPolicyDefinition(ctx context.Context, policyDefinitionName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyEventsQueryResultsPage, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/PolicyEventsClient.ListQueryResultsForPolicyDefinition")
 		defer func() {
@@ -222,6 +221,8 @@ func (client PolicyEventsClient) ListQueryResultsForPolicyDefinition(ctx context
 		}()
 	}
 	if err := validation.Validate([]validation.Validation{
+		{TargetValue: client.SubscriptionID,
+			Constraints: []validation.Constraint{{Target: "client.SubscriptionID", Name: validation.MinLength, Rule: 1, Chain: nil}}},
 		{TargetValue: top,
 			Constraints: []validation.Constraint{{Target: "top", Name: validation.Null, Rule: false,
 				Chain: []validation.Constraint{{Target: "top", Name: validation.InclusiveMinimum, Rule: int64(0), Chain: nil}}}}}}); err != nil {
@@ -229,7 +230,7 @@ func (client PolicyEventsClient) ListQueryResultsForPolicyDefinition(ctx context
 	}
 
 	result.fn = client.listQueryResultsForPolicyDefinitionNextResults
-	req, err := client.ListQueryResultsForPolicyDefinitionPreparer(ctx, subscriptionID, policyDefinitionName, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
+	req, err := client.ListQueryResultsForPolicyDefinitionPreparer(ctx, policyDefinitionName, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "policyinsights.PolicyEventsClient", "ListQueryResultsForPolicyDefinition", nil, "Failure preparing request")
 		return
@@ -256,12 +257,12 @@ func (client PolicyEventsClient) ListQueryResultsForPolicyDefinition(ctx context
 }
 
 // ListQueryResultsForPolicyDefinitionPreparer prepares the ListQueryResultsForPolicyDefinition request.
-func (client PolicyEventsClient) ListQueryResultsForPolicyDefinitionPreparer(ctx context.Context, subscriptionID string, policyDefinitionName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (*http.Request, error) {
+func (client PolicyEventsClient) ListQueryResultsForPolicyDefinitionPreparer(ctx context.Context, policyDefinitionName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"authorizationNamespace": autorest.Encode("path", "Microsoft.Authorization"),
 		"policyDefinitionName":   autorest.Encode("path", policyDefinitionName),
 		"policyEventsResource":   autorest.Encode("path", "default"),
-		"subscriptionId":         autorest.Encode("path", subscriptionID),
+		"subscriptionId":         autorest.Encode("path", client.SubscriptionID),
 	}
 
 	const APIVersion = "2019-10-01"
@@ -341,7 +342,7 @@ func (client PolicyEventsClient) listQueryResultsForPolicyDefinitionNextResults(
 }
 
 // ListQueryResultsForPolicyDefinitionComplete enumerates all values, automatically crossing page boundaries as required.
-func (client PolicyEventsClient) ListQueryResultsForPolicyDefinitionComplete(ctx context.Context, subscriptionID string, policyDefinitionName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyEventsQueryResultsIterator, err error) {
+func (client PolicyEventsClient) ListQueryResultsForPolicyDefinitionComplete(ctx context.Context, policyDefinitionName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyEventsQueryResultsIterator, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/PolicyEventsClient.ListQueryResultsForPolicyDefinition")
 		defer func() {
@@ -352,13 +353,12 @@ func (client PolicyEventsClient) ListQueryResultsForPolicyDefinitionComplete(ctx
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	result.page, err = client.ListQueryResultsForPolicyDefinition(ctx, subscriptionID, policyDefinitionName, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
+	result.page, err = client.ListQueryResultsForPolicyDefinition(ctx, policyDefinitionName, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
 	return
 }
 
 // ListQueryResultsForPolicySetDefinition queries policy events for the subscription level policy set definition.
 // Parameters:
-// subscriptionID - microsoft Azure subscription ID.
 // policySetDefinitionName - policy set definition name.
 // top - maximum number of records to return.
 // orderBy - ordering expression using OData notation. One or more comma-separated column names with an
@@ -373,7 +373,7 @@ func (client PolicyEventsClient) ListQueryResultsForPolicyDefinitionComplete(ctx
 // apply - oData apply expression for aggregations.
 // skipToken - skiptoken is only provided if a previous response returned a partial result as a part of
 // nextLink element.
-func (client PolicyEventsClient) ListQueryResultsForPolicySetDefinition(ctx context.Context, subscriptionID string, policySetDefinitionName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyEventsQueryResultsPage, err error) {
+func (client PolicyEventsClient) ListQueryResultsForPolicySetDefinition(ctx context.Context, policySetDefinitionName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyEventsQueryResultsPage, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/PolicyEventsClient.ListQueryResultsForPolicySetDefinition")
 		defer func() {
@@ -385,6 +385,8 @@ func (client PolicyEventsClient) ListQueryResultsForPolicySetDefinition(ctx cont
 		}()
 	}
 	if err := validation.Validate([]validation.Validation{
+		{TargetValue: client.SubscriptionID,
+			Constraints: []validation.Constraint{{Target: "client.SubscriptionID", Name: validation.MinLength, Rule: 1, Chain: nil}}},
 		{TargetValue: top,
 			Constraints: []validation.Constraint{{Target: "top", Name: validation.Null, Rule: false,
 				Chain: []validation.Constraint{{Target: "top", Name: validation.InclusiveMinimum, Rule: int64(0), Chain: nil}}}}}}); err != nil {
@@ -392,7 +394,7 @@ func (client PolicyEventsClient) ListQueryResultsForPolicySetDefinition(ctx cont
 	}
 
 	result.fn = client.listQueryResultsForPolicySetDefinitionNextResults
-	req, err := client.ListQueryResultsForPolicySetDefinitionPreparer(ctx, subscriptionID, policySetDefinitionName, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
+	req, err := client.ListQueryResultsForPolicySetDefinitionPreparer(ctx, policySetDefinitionName, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "policyinsights.PolicyEventsClient", "ListQueryResultsForPolicySetDefinition", nil, "Failure preparing request")
 		return
@@ -419,12 +421,12 @@ func (client PolicyEventsClient) ListQueryResultsForPolicySetDefinition(ctx cont
 }
 
 // ListQueryResultsForPolicySetDefinitionPreparer prepares the ListQueryResultsForPolicySetDefinition request.
-func (client PolicyEventsClient) ListQueryResultsForPolicySetDefinitionPreparer(ctx context.Context, subscriptionID string, policySetDefinitionName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (*http.Request, error) {
+func (client PolicyEventsClient) ListQueryResultsForPolicySetDefinitionPreparer(ctx context.Context, policySetDefinitionName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"authorizationNamespace":  autorest.Encode("path", "Microsoft.Authorization"),
 		"policyEventsResource":    autorest.Encode("path", "default"),
 		"policySetDefinitionName": autorest.Encode("path", policySetDefinitionName),
-		"subscriptionId":          autorest.Encode("path", subscriptionID),
+		"subscriptionId":          autorest.Encode("path", client.SubscriptionID),
 	}
 
 	const APIVersion = "2019-10-01"
@@ -504,7 +506,7 @@ func (client PolicyEventsClient) listQueryResultsForPolicySetDefinitionNextResul
 }
 
 // ListQueryResultsForPolicySetDefinitionComplete enumerates all values, automatically crossing page boundaries as required.
-func (client PolicyEventsClient) ListQueryResultsForPolicySetDefinitionComplete(ctx context.Context, subscriptionID string, policySetDefinitionName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyEventsQueryResultsIterator, err error) {
+func (client PolicyEventsClient) ListQueryResultsForPolicySetDefinitionComplete(ctx context.Context, policySetDefinitionName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyEventsQueryResultsIterator, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/PolicyEventsClient.ListQueryResultsForPolicySetDefinition")
 		defer func() {
@@ -515,7 +517,7 @@ func (client PolicyEventsClient) ListQueryResultsForPolicySetDefinitionComplete(
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	result.page, err = client.ListQueryResultsForPolicySetDefinition(ctx, subscriptionID, policySetDefinitionName, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
+	result.page, err = client.ListQueryResultsForPolicySetDefinition(ctx, policySetDefinitionName, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
 	return
 }
 
@@ -685,8 +687,7 @@ func (client PolicyEventsClient) ListQueryResultsForResourceComplete(ctx context
 
 // ListQueryResultsForResourceGroup queries policy events for the resources under the resource group.
 // Parameters:
-// subscriptionID - microsoft Azure subscription ID.
-// resourceGroupName - resource group name.
+// resourceGroupName - the name of the resource group. The name is case insensitive.
 // top - maximum number of records to return.
 // orderBy - ordering expression using OData notation. One or more comma-separated column names with an
 // optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
@@ -700,7 +701,7 @@ func (client PolicyEventsClient) ListQueryResultsForResourceComplete(ctx context
 // apply - oData apply expression for aggregations.
 // skipToken - skiptoken is only provided if a previous response returned a partial result as a part of
 // nextLink element.
-func (client PolicyEventsClient) ListQueryResultsForResourceGroup(ctx context.Context, subscriptionID string, resourceGroupName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyEventsQueryResultsPage, err error) {
+func (client PolicyEventsClient) ListQueryResultsForResourceGroup(ctx context.Context, resourceGroupName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyEventsQueryResultsPage, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/PolicyEventsClient.ListQueryResultsForResourceGroup")
 		defer func() {
@@ -712,6 +713,11 @@ func (client PolicyEventsClient) ListQueryResultsForResourceGroup(ctx context.Co
 		}()
 	}
 	if err := validation.Validate([]validation.Validation{
+		{TargetValue: client.SubscriptionID,
+			Constraints: []validation.Constraint{{Target: "client.SubscriptionID", Name: validation.MinLength, Rule: 1, Chain: nil}}},
+		{TargetValue: resourceGroupName,
+			Constraints: []validation.Constraint{{Target: "resourceGroupName", Name: validation.MaxLength, Rule: 90, Chain: nil},
+				{Target: "resourceGroupName", Name: validation.MinLength, Rule: 1, Chain: nil}}},
 		{TargetValue: top,
 			Constraints: []validation.Constraint{{Target: "top", Name: validation.Null, Rule: false,
 				Chain: []validation.Constraint{{Target: "top", Name: validation.InclusiveMinimum, Rule: int64(0), Chain: nil}}}}}}); err != nil {
@@ -719,7 +725,7 @@ func (client PolicyEventsClient) ListQueryResultsForResourceGroup(ctx context.Co
 	}
 
 	result.fn = client.listQueryResultsForResourceGroupNextResults
-	req, err := client.ListQueryResultsForResourceGroupPreparer(ctx, subscriptionID, resourceGroupName, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
+	req, err := client.ListQueryResultsForResourceGroupPreparer(ctx, resourceGroupName, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "policyinsights.PolicyEventsClient", "ListQueryResultsForResourceGroup", nil, "Failure preparing request")
 		return
@@ -746,11 +752,11 @@ func (client PolicyEventsClient) ListQueryResultsForResourceGroup(ctx context.Co
 }
 
 // ListQueryResultsForResourceGroupPreparer prepares the ListQueryResultsForResourceGroup request.
-func (client PolicyEventsClient) ListQueryResultsForResourceGroupPreparer(ctx context.Context, subscriptionID string, resourceGroupName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (*http.Request, error) {
+func (client PolicyEventsClient) ListQueryResultsForResourceGroupPreparer(ctx context.Context, resourceGroupName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"policyEventsResource": autorest.Encode("path", "default"),
 		"resourceGroupName":    autorest.Encode("path", resourceGroupName),
-		"subscriptionId":       autorest.Encode("path", subscriptionID),
+		"subscriptionId":       autorest.Encode("path", client.SubscriptionID),
 	}
 
 	const APIVersion = "2019-10-01"
@@ -830,7 +836,7 @@ func (client PolicyEventsClient) listQueryResultsForResourceGroupNextResults(ctx
 }
 
 // ListQueryResultsForResourceGroupComplete enumerates all values, automatically crossing page boundaries as required.
-func (client PolicyEventsClient) ListQueryResultsForResourceGroupComplete(ctx context.Context, subscriptionID string, resourceGroupName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyEventsQueryResultsIterator, err error) {
+func (client PolicyEventsClient) ListQueryResultsForResourceGroupComplete(ctx context.Context, resourceGroupName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyEventsQueryResultsIterator, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/PolicyEventsClient.ListQueryResultsForResourceGroup")
 		defer func() {
@@ -841,15 +847,14 @@ func (client PolicyEventsClient) ListQueryResultsForResourceGroupComplete(ctx co
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	result.page, err = client.ListQueryResultsForResourceGroup(ctx, subscriptionID, resourceGroupName, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
+	result.page, err = client.ListQueryResultsForResourceGroup(ctx, resourceGroupName, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
 	return
 }
 
 // ListQueryResultsForResourceGroupLevelPolicyAssignment queries policy events for the resource group level policy
 // assignment.
 // Parameters:
-// subscriptionID - microsoft Azure subscription ID.
-// resourceGroupName - resource group name.
+// resourceGroupName - the name of the resource group. The name is case insensitive.
 // policyAssignmentName - policy assignment name.
 // top - maximum number of records to return.
 // orderBy - ordering expression using OData notation. One or more comma-separated column names with an
@@ -864,7 +869,7 @@ func (client PolicyEventsClient) ListQueryResultsForResourceGroupComplete(ctx co
 // apply - oData apply expression for aggregations.
 // skipToken - skiptoken is only provided if a previous response returned a partial result as a part of
 // nextLink element.
-func (client PolicyEventsClient) ListQueryResultsForResourceGroupLevelPolicyAssignment(ctx context.Context, subscriptionID string, resourceGroupName string, policyAssignmentName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyEventsQueryResultsPage, err error) {
+func (client PolicyEventsClient) ListQueryResultsForResourceGroupLevelPolicyAssignment(ctx context.Context, resourceGroupName string, policyAssignmentName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyEventsQueryResultsPage, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/PolicyEventsClient.ListQueryResultsForResourceGroupLevelPolicyAssignment")
 		defer func() {
@@ -876,6 +881,11 @@ func (client PolicyEventsClient) ListQueryResultsForResourceGroupLevelPolicyAssi
 		}()
 	}
 	if err := validation.Validate([]validation.Validation{
+		{TargetValue: client.SubscriptionID,
+			Constraints: []validation.Constraint{{Target: "client.SubscriptionID", Name: validation.MinLength, Rule: 1, Chain: nil}}},
+		{TargetValue: resourceGroupName,
+			Constraints: []validation.Constraint{{Target: "resourceGroupName", Name: validation.MaxLength, Rule: 90, Chain: nil},
+				{Target: "resourceGroupName", Name: validation.MinLength, Rule: 1, Chain: nil}}},
 		{TargetValue: top,
 			Constraints: []validation.Constraint{{Target: "top", Name: validation.Null, Rule: false,
 				Chain: []validation.Constraint{{Target: "top", Name: validation.InclusiveMinimum, Rule: int64(0), Chain: nil}}}}}}); err != nil {
@@ -883,7 +893,7 @@ func (client PolicyEventsClient) ListQueryResultsForResourceGroupLevelPolicyAssi
 	}
 
 	result.fn = client.listQueryResultsForResourceGroupLevelPolicyAssignmentNextResults
-	req, err := client.ListQueryResultsForResourceGroupLevelPolicyAssignmentPreparer(ctx, subscriptionID, resourceGroupName, policyAssignmentName, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
+	req, err := client.ListQueryResultsForResourceGroupLevelPolicyAssignmentPreparer(ctx, resourceGroupName, policyAssignmentName, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "policyinsights.PolicyEventsClient", "ListQueryResultsForResourceGroupLevelPolicyAssignment", nil, "Failure preparing request")
 		return
@@ -910,13 +920,13 @@ func (client PolicyEventsClient) ListQueryResultsForResourceGroupLevelPolicyAssi
 }
 
 // ListQueryResultsForResourceGroupLevelPolicyAssignmentPreparer prepares the ListQueryResultsForResourceGroupLevelPolicyAssignment request.
-func (client PolicyEventsClient) ListQueryResultsForResourceGroupLevelPolicyAssignmentPreparer(ctx context.Context, subscriptionID string, resourceGroupName string, policyAssignmentName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (*http.Request, error) {
+func (client PolicyEventsClient) ListQueryResultsForResourceGroupLevelPolicyAssignmentPreparer(ctx context.Context, resourceGroupName string, policyAssignmentName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"authorizationNamespace": autorest.Encode("path", "Microsoft.Authorization"),
 		"policyAssignmentName":   autorest.Encode("path", policyAssignmentName),
 		"policyEventsResource":   autorest.Encode("path", "default"),
 		"resourceGroupName":      autorest.Encode("path", resourceGroupName),
-		"subscriptionId":         autorest.Encode("path", subscriptionID),
+		"subscriptionId":         autorest.Encode("path", client.SubscriptionID),
 	}
 
 	const APIVersion = "2019-10-01"
@@ -996,7 +1006,7 @@ func (client PolicyEventsClient) listQueryResultsForResourceGroupLevelPolicyAssi
 }
 
 // ListQueryResultsForResourceGroupLevelPolicyAssignmentComplete enumerates all values, automatically crossing page boundaries as required.
-func (client PolicyEventsClient) ListQueryResultsForResourceGroupLevelPolicyAssignmentComplete(ctx context.Context, subscriptionID string, resourceGroupName string, policyAssignmentName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyEventsQueryResultsIterator, err error) {
+func (client PolicyEventsClient) ListQueryResultsForResourceGroupLevelPolicyAssignmentComplete(ctx context.Context, resourceGroupName string, policyAssignmentName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyEventsQueryResultsIterator, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/PolicyEventsClient.ListQueryResultsForResourceGroupLevelPolicyAssignment")
 		defer func() {
@@ -1007,13 +1017,12 @@ func (client PolicyEventsClient) ListQueryResultsForResourceGroupLevelPolicyAssi
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	result.page, err = client.ListQueryResultsForResourceGroupLevelPolicyAssignment(ctx, subscriptionID, resourceGroupName, policyAssignmentName, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
+	result.page, err = client.ListQueryResultsForResourceGroupLevelPolicyAssignment(ctx, resourceGroupName, policyAssignmentName, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
 	return
 }
 
 // ListQueryResultsForSubscription queries policy events for the resources under the subscription.
 // Parameters:
-// subscriptionID - microsoft Azure subscription ID.
 // top - maximum number of records to return.
 // orderBy - ordering expression using OData notation. One or more comma-separated column names with an
 // optional "desc" (the default) or "asc", e.g. "$orderby=PolicyAssignmentId, ResourceId asc".
@@ -1027,7 +1036,7 @@ func (client PolicyEventsClient) ListQueryResultsForResourceGroupLevelPolicyAssi
 // apply - oData apply expression for aggregations.
 // skipToken - skiptoken is only provided if a previous response returned a partial result as a part of
 // nextLink element.
-func (client PolicyEventsClient) ListQueryResultsForSubscription(ctx context.Context, subscriptionID string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyEventsQueryResultsPage, err error) {
+func (client PolicyEventsClient) ListQueryResultsForSubscription(ctx context.Context, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyEventsQueryResultsPage, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/PolicyEventsClient.ListQueryResultsForSubscription")
 		defer func() {
@@ -1039,6 +1048,8 @@ func (client PolicyEventsClient) ListQueryResultsForSubscription(ctx context.Con
 		}()
 	}
 	if err := validation.Validate([]validation.Validation{
+		{TargetValue: client.SubscriptionID,
+			Constraints: []validation.Constraint{{Target: "client.SubscriptionID", Name: validation.MinLength, Rule: 1, Chain: nil}}},
 		{TargetValue: top,
 			Constraints: []validation.Constraint{{Target: "top", Name: validation.Null, Rule: false,
 				Chain: []validation.Constraint{{Target: "top", Name: validation.InclusiveMinimum, Rule: int64(0), Chain: nil}}}}}}); err != nil {
@@ -1046,7 +1057,7 @@ func (client PolicyEventsClient) ListQueryResultsForSubscription(ctx context.Con
 	}
 
 	result.fn = client.listQueryResultsForSubscriptionNextResults
-	req, err := client.ListQueryResultsForSubscriptionPreparer(ctx, subscriptionID, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
+	req, err := client.ListQueryResultsForSubscriptionPreparer(ctx, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "policyinsights.PolicyEventsClient", "ListQueryResultsForSubscription", nil, "Failure preparing request")
 		return
@@ -1073,10 +1084,10 @@ func (client PolicyEventsClient) ListQueryResultsForSubscription(ctx context.Con
 }
 
 // ListQueryResultsForSubscriptionPreparer prepares the ListQueryResultsForSubscription request.
-func (client PolicyEventsClient) ListQueryResultsForSubscriptionPreparer(ctx context.Context, subscriptionID string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (*http.Request, error) {
+func (client PolicyEventsClient) ListQueryResultsForSubscriptionPreparer(ctx context.Context, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"policyEventsResource": autorest.Encode("path", "default"),
-		"subscriptionId":       autorest.Encode("path", subscriptionID),
+		"subscriptionId":       autorest.Encode("path", client.SubscriptionID),
 	}
 
 	const APIVersion = "2019-10-01"
@@ -1156,7 +1167,7 @@ func (client PolicyEventsClient) listQueryResultsForSubscriptionNextResults(ctx 
 }
 
 // ListQueryResultsForSubscriptionComplete enumerates all values, automatically crossing page boundaries as required.
-func (client PolicyEventsClient) ListQueryResultsForSubscriptionComplete(ctx context.Context, subscriptionID string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyEventsQueryResultsIterator, err error) {
+func (client PolicyEventsClient) ListQueryResultsForSubscriptionComplete(ctx context.Context, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyEventsQueryResultsIterator, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/PolicyEventsClient.ListQueryResultsForSubscription")
 		defer func() {
@@ -1167,14 +1178,13 @@ func (client PolicyEventsClient) ListQueryResultsForSubscriptionComplete(ctx con
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	result.page, err = client.ListQueryResultsForSubscription(ctx, subscriptionID, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
+	result.page, err = client.ListQueryResultsForSubscription(ctx, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
 	return
 }
 
 // ListQueryResultsForSubscriptionLevelPolicyAssignment queries policy events for the subscription level policy
 // assignment.
 // Parameters:
-// subscriptionID - microsoft Azure subscription ID.
 // policyAssignmentName - policy assignment name.
 // top - maximum number of records to return.
 // orderBy - ordering expression using OData notation. One or more comma-separated column names with an
@@ -1189,7 +1199,7 @@ func (client PolicyEventsClient) ListQueryResultsForSubscriptionComplete(ctx con
 // apply - oData apply expression for aggregations.
 // skipToken - skiptoken is only provided if a previous response returned a partial result as a part of
 // nextLink element.
-func (client PolicyEventsClient) ListQueryResultsForSubscriptionLevelPolicyAssignment(ctx context.Context, subscriptionID string, policyAssignmentName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyEventsQueryResultsPage, err error) {
+func (client PolicyEventsClient) ListQueryResultsForSubscriptionLevelPolicyAssignment(ctx context.Context, policyAssignmentName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyEventsQueryResultsPage, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/PolicyEventsClient.ListQueryResultsForSubscriptionLevelPolicyAssignment")
 		defer func() {
@@ -1201,6 +1211,8 @@ func (client PolicyEventsClient) ListQueryResultsForSubscriptionLevelPolicyAssig
 		}()
 	}
 	if err := validation.Validate([]validation.Validation{
+		{TargetValue: client.SubscriptionID,
+			Constraints: []validation.Constraint{{Target: "client.SubscriptionID", Name: validation.MinLength, Rule: 1, Chain: nil}}},
 		{TargetValue: top,
 			Constraints: []validation.Constraint{{Target: "top", Name: validation.Null, Rule: false,
 				Chain: []validation.Constraint{{Target: "top", Name: validation.InclusiveMinimum, Rule: int64(0), Chain: nil}}}}}}); err != nil {
@@ -1208,7 +1220,7 @@ func (client PolicyEventsClient) ListQueryResultsForSubscriptionLevelPolicyAssig
 	}
 
 	result.fn = client.listQueryResultsForSubscriptionLevelPolicyAssignmentNextResults
-	req, err := client.ListQueryResultsForSubscriptionLevelPolicyAssignmentPreparer(ctx, subscriptionID, policyAssignmentName, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
+	req, err := client.ListQueryResultsForSubscriptionLevelPolicyAssignmentPreparer(ctx, policyAssignmentName, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "policyinsights.PolicyEventsClient", "ListQueryResultsForSubscriptionLevelPolicyAssignment", nil, "Failure preparing request")
 		return
@@ -1235,12 +1247,12 @@ func (client PolicyEventsClient) ListQueryResultsForSubscriptionLevelPolicyAssig
 }
 
 // ListQueryResultsForSubscriptionLevelPolicyAssignmentPreparer prepares the ListQueryResultsForSubscriptionLevelPolicyAssignment request.
-func (client PolicyEventsClient) ListQueryResultsForSubscriptionLevelPolicyAssignmentPreparer(ctx context.Context, subscriptionID string, policyAssignmentName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (*http.Request, error) {
+func (client PolicyEventsClient) ListQueryResultsForSubscriptionLevelPolicyAssignmentPreparer(ctx context.Context, policyAssignmentName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"authorizationNamespace": autorest.Encode("path", "Microsoft.Authorization"),
 		"policyAssignmentName":   autorest.Encode("path", policyAssignmentName),
 		"policyEventsResource":   autorest.Encode("path", "default"),
-		"subscriptionId":         autorest.Encode("path", subscriptionID),
+		"subscriptionId":         autorest.Encode("path", client.SubscriptionID),
 	}
 
 	const APIVersion = "2019-10-01"
@@ -1320,7 +1332,7 @@ func (client PolicyEventsClient) listQueryResultsForSubscriptionLevelPolicyAssig
 }
 
 // ListQueryResultsForSubscriptionLevelPolicyAssignmentComplete enumerates all values, automatically crossing page boundaries as required.
-func (client PolicyEventsClient) ListQueryResultsForSubscriptionLevelPolicyAssignmentComplete(ctx context.Context, subscriptionID string, policyAssignmentName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyEventsQueryResultsIterator, err error) {
+func (client PolicyEventsClient) ListQueryResultsForSubscriptionLevelPolicyAssignmentComplete(ctx context.Context, policyAssignmentName string, top *int32, orderBy string, selectParameter string, from *date.Time, toParameter *date.Time, filter string, apply string, skipToken string) (result PolicyEventsQueryResultsIterator, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/PolicyEventsClient.ListQueryResultsForSubscriptionLevelPolicyAssignment")
 		defer func() {
@@ -1331,6 +1343,6 @@ func (client PolicyEventsClient) ListQueryResultsForSubscriptionLevelPolicyAssig
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	result.page, err = client.ListQueryResultsForSubscriptionLevelPolicyAssignment(ctx, subscriptionID, policyAssignmentName, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
+	result.page, err = client.ListQueryResultsForSubscriptionLevelPolicyAssignment(ctx, policyAssignmentName, top, orderBy, selectParameter, from, toParameter, filter, apply, skipToken)
 	return
 }

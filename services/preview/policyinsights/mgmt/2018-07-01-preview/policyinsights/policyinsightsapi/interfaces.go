@@ -18,10 +18,10 @@ type PolicyTrackedResourcesClientAPI interface {
 	ListQueryResultsForManagementGroupComplete(ctx context.Context, managementGroupName string, top *int32, filter string) (result policyinsights.PolicyTrackedResourcesQueryResultsIterator, err error)
 	ListQueryResultsForResource(ctx context.Context, resourceID string, top *int32, filter string) (result policyinsights.PolicyTrackedResourcesQueryResultsPage, err error)
 	ListQueryResultsForResourceComplete(ctx context.Context, resourceID string, top *int32, filter string) (result policyinsights.PolicyTrackedResourcesQueryResultsIterator, err error)
-	ListQueryResultsForResourceGroup(ctx context.Context, resourceGroupName string, subscriptionID string, top *int32, filter string) (result policyinsights.PolicyTrackedResourcesQueryResultsPage, err error)
-	ListQueryResultsForResourceGroupComplete(ctx context.Context, resourceGroupName string, subscriptionID string, top *int32, filter string) (result policyinsights.PolicyTrackedResourcesQueryResultsIterator, err error)
-	ListQueryResultsForSubscription(ctx context.Context, subscriptionID string, top *int32, filter string) (result policyinsights.PolicyTrackedResourcesQueryResultsPage, err error)
-	ListQueryResultsForSubscriptionComplete(ctx context.Context, subscriptionID string, top *int32, filter string) (result policyinsights.PolicyTrackedResourcesQueryResultsIterator, err error)
+	ListQueryResultsForResourceGroup(ctx context.Context, resourceGroupName string, top *int32, filter string) (result policyinsights.PolicyTrackedResourcesQueryResultsPage, err error)
+	ListQueryResultsForResourceGroupComplete(ctx context.Context, resourceGroupName string, top *int32, filter string) (result policyinsights.PolicyTrackedResourcesQueryResultsIterator, err error)
+	ListQueryResultsForSubscription(ctx context.Context, top *int32, filter string) (result policyinsights.PolicyTrackedResourcesQueryResultsPage, err error)
+	ListQueryResultsForSubscriptionComplete(ctx context.Context, top *int32, filter string) (result policyinsights.PolicyTrackedResourcesQueryResultsIterator, err error)
 }
 
 var _ PolicyTrackedResourcesClientAPI = (*policyinsights.PolicyTrackedResourcesClient)(nil)
