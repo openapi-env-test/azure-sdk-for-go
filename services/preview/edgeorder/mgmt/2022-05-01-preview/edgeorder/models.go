@@ -18,13 +18,21 @@ import (
 )
 
 // The package's fully qualified name.
-const fqdn = "github.com/Azure/azure-sdk-for-go/services/preview/edgeorder/mgmt/2020-12-01-preview/edgeorder"
+const fqdn = "github.com/Azure/azure-sdk-for-go/services/preview/edgeorder/mgmt/2022-05-01-preview/edgeorder"
+
+// AdditionalConfiguration additional Configuration details.
+type AdditionalConfiguration struct {
+	// HierarchyInformation - Hierarchy of the product which uniquely identifies the configuration.
+	HierarchyInformation *HierarchyInformation `json:"hierarchyInformation,omitempty"`
+	// Quantity - Quantity of the product.
+	Quantity *int32 `json:"quantity,omitempty"`
+}
 
 // AddressDetails address details for an order item.
 type AddressDetails struct {
-	// ForwardAddress - Customer address and contact details. It should be address resource
+	// ForwardAddress - Customer address and contact details.
 	ForwardAddress *AddressProperties `json:"forwardAddress,omitempty"`
-	// ReturnAddress - READ-ONLY; Return shipping address
+	// ReturnAddress - READ-ONLY; Return shipping address.
 	ReturnAddress *AddressProperties `json:"returnAddress,omitempty"`
 }
 
@@ -37,12 +45,149 @@ func (ad AddressDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(objectMap)
 }
 
-// AddressProperties address Properties
+// AddressesCreateFuture an abstraction for monitoring and retrieving the results of a long-running
+// operation.
+type AddressesCreateFuture struct {
+	azure.FutureAPI
+	// Result returns the result of the asynchronous operation.
+	// If the operation has not completed it will return an error.
+	Result func(AddressesClient) (AddressResource, error)
+}
+
+// UnmarshalJSON is the custom unmarshaller for CreateFuture.
+func (future *AddressesCreateFuture) UnmarshalJSON(body []byte) error {
+	var azFuture azure.Future
+	if err := json.Unmarshal(body, &azFuture); err != nil {
+		return err
+	}
+	future.FutureAPI = &azFuture
+	future.Result = future.result
+	return nil
+}
+
+// result is the default implementation for AddressesCreateFuture.Result.
+func (future *AddressesCreateFuture) result(client AddressesClient) (ar AddressResource, err error) {
+	var done bool
+	done, err = future.DoneWithContext(context.Background(), client)
+	if err != nil {
+		err = autorest.NewErrorWithError(err, "edgeorder.AddressesCreateFuture", "Result", future.Response(), "Polling failure")
+		return
+	}
+	if !done {
+		ar.Response.Response = future.Response()
+		err = azure.NewAsyncOpIncompleteError("edgeorder.AddressesCreateFuture")
+		return
+	}
+	sender := autorest.DecorateSender(client, autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
+	if ar.Response.Response, err = future.GetResult(sender); err == nil && ar.Response.Response.StatusCode != http.StatusNoContent {
+		ar, err = client.CreateResponder(ar.Response.Response)
+		if err != nil {
+			err = autorest.NewErrorWithError(err, "edgeorder.AddressesCreateFuture", "Result", ar.Response.Response, "Failure responding to request")
+		}
+	}
+	return
+}
+
+// AddressesDeleteFuture an abstraction for monitoring and retrieving the results of a long-running
+// operation.
+type AddressesDeleteFuture struct {
+	azure.FutureAPI
+	// Result returns the result of the asynchronous operation.
+	// If the operation has not completed it will return an error.
+	Result func(AddressesClient) (autorest.Response, error)
+}
+
+// UnmarshalJSON is the custom unmarshaller for CreateFuture.
+func (future *AddressesDeleteFuture) UnmarshalJSON(body []byte) error {
+	var azFuture azure.Future
+	if err := json.Unmarshal(body, &azFuture); err != nil {
+		return err
+	}
+	future.FutureAPI = &azFuture
+	future.Result = future.result
+	return nil
+}
+
+// result is the default implementation for AddressesDeleteFuture.Result.
+func (future *AddressesDeleteFuture) result(client AddressesClient) (ar autorest.Response, err error) {
+	var done bool
+	done, err = future.DoneWithContext(context.Background(), client)
+	if err != nil {
+		err = autorest.NewErrorWithError(err, "edgeorder.AddressesDeleteFuture", "Result", future.Response(), "Polling failure")
+		return
+	}
+	if !done {
+		ar.Response = future.Response()
+		err = azure.NewAsyncOpIncompleteError("edgeorder.AddressesDeleteFuture")
+		return
+	}
+	ar.Response = future.Response()
+	return
+}
+
+// AddressesUpdateFuture an abstraction for monitoring and retrieving the results of a long-running
+// operation.
+type AddressesUpdateFuture struct {
+	azure.FutureAPI
+	// Result returns the result of the asynchronous operation.
+	// If the operation has not completed it will return an error.
+	Result func(AddressesClient) (AddressResource, error)
+}
+
+// UnmarshalJSON is the custom unmarshaller for CreateFuture.
+func (future *AddressesUpdateFuture) UnmarshalJSON(body []byte) error {
+	var azFuture azure.Future
+	if err := json.Unmarshal(body, &azFuture); err != nil {
+		return err
+	}
+	future.FutureAPI = &azFuture
+	future.Result = future.result
+	return nil
+}
+
+// result is the default implementation for AddressesUpdateFuture.Result.
+func (future *AddressesUpdateFuture) result(client AddressesClient) (ar AddressResource, err error) {
+	var done bool
+	done, err = future.DoneWithContext(context.Background(), client)
+	if err != nil {
+		err = autorest.NewErrorWithError(err, "edgeorder.AddressesUpdateFuture", "Result", future.Response(), "Polling failure")
+		return
+	}
+	if !done {
+		ar.Response.Response = future.Response()
+		err = azure.NewAsyncOpIncompleteError("edgeorder.AddressesUpdateFuture")
+		return
+	}
+	sender := autorest.DecorateSender(client, autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
+	if ar.Response.Response, err = future.GetResult(sender); err == nil && ar.Response.Response.StatusCode != http.StatusNoContent {
+		ar, err = client.UpdateResponder(ar.Response.Response)
+		if err != nil {
+			err = autorest.NewErrorWithError(err, "edgeorder.AddressesUpdateFuture", "Result", ar.Response.Response, "Failure responding to request")
+		}
+	}
+	return
+}
+
+// AddressProperties address Properties.
 type AddressProperties struct {
-	// ShippingAddress - Shipping details for the address
+	// ShippingAddress - Shipping details for the address.
 	ShippingAddress *ShippingAddress `json:"shippingAddress,omitempty"`
-	// ContactDetails - Contact details for the address
+	// ContactDetails - Contact details for the address.
 	ContactDetails *ContactDetails `json:"contactDetails,omitempty"`
+	// AddressValidationStatus - READ-ONLY; Status of address validation. Possible values include: 'Valid', 'Invalid', 'Ambiguous'
+	AddressValidationStatus AddressValidationStatus `json:"addressValidationStatus,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for AddressProperties.
+func (ap AddressProperties) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if ap.ShippingAddress != nil {
+		objectMap["shippingAddress"] = ap.ShippingAddress
+	}
+	if ap.ContactDetails != nil {
+		objectMap["contactDetails"] = ap.ContactDetails
+	}
+	return json.Marshal(objectMap)
 }
 
 // AddressResource address Resource.
@@ -50,7 +195,7 @@ type AddressResource struct {
 	autorest.Response `json:"-"`
 	// AddressProperties - Properties of an address.
 	*AddressProperties `json:"properties,omitempty"`
-	// SystemData - READ-ONLY; Represents resource creation and update time
+	// SystemData - READ-ONLY; Represents resource creation and update time.
 	SystemData *SystemData `json:"systemData,omitempty"`
 	// Tags - Resource tags.
 	Tags map[string]*string `json:"tags"`
@@ -157,7 +302,7 @@ func (ar *AddressResource) UnmarshalJSON(body []byte) error {
 	return nil
 }
 
-// AddressResourceList address Resource Collection
+// AddressResourceList address Resource Collection.
 type AddressResourceList struct {
 	autorest.Response `json:"-"`
 	// Value - READ-ONLY; List of address resources.
@@ -325,9 +470,9 @@ func NewAddressResourceListPage(cur AddressResourceList, getNextPage func(contex
 	}
 }
 
-// AddressUpdateParameter the Address update parameters
+// AddressUpdateParameter the Address update parameters.
 type AddressUpdateParameter struct {
-	// AddressUpdateProperties - Properties of a address to be updated.
+	// AddressUpdateProperties - Properties of an address to be updated.
 	*AddressUpdateProperties `json:"properties,omitempty"`
 	// Tags - The list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups).
 	Tags map[string]*string `json:"tags"`
@@ -378,17 +523,17 @@ func (aup *AddressUpdateParameter) UnmarshalJSON(body []byte) error {
 	return nil
 }
 
-// AddressUpdateProperties address Properties
+// AddressUpdateProperties address Update Properties.
 type AddressUpdateProperties struct {
-	// ShippingAddress - Shipping details for the address
+	// ShippingAddress - Shipping details for the address.
 	ShippingAddress *ShippingAddress `json:"shippingAddress,omitempty"`
-	// ContactDetails - Contact details for the address
+	// ContactDetails - Contact details for the address.
 	ContactDetails *ContactDetails `json:"contactDetails,omitempty"`
 }
 
 // AvailabilityInformation availability information of a product system.
 type AvailabilityInformation struct {
-	// AvailabilityStage - READ-ONLY; Current availability stage of the product. Availability stage. Possible values include: 'AvailabilityStageAvailable', 'AvailabilityStageComingSoon', 'AvailabilityStagePreview', 'AvailabilityStageDeprecated', 'AvailabilityStageSignup', 'AvailabilityStageUnavailable'
+	// AvailabilityStage - READ-ONLY; Current availability stage of the product. Possible values include: 'Available', 'Preview', 'Signup', 'Discoverable', 'ComingSoon', 'Unavailable', 'Deprecated'
 	AvailabilityStage AvailabilityStage `json:"availabilityStage,omitempty"`
 	// DisabledReason - READ-ONLY; Reason why the product is disabled. Possible values include: 'DisabledReasonNone', 'DisabledReasonCountry', 'DisabledReasonRegion', 'DisabledReasonFeature', 'DisabledReasonOfferType', 'DisabledReasonNoSubscriptionInfo', 'DisabledReasonNotAvailable', 'DisabledReasonOutOfStock'
 	DisabledReason DisabledReason `json:"disabledReason,omitempty"`
@@ -420,7 +565,7 @@ func (aer AzureEntityResource) MarshalJSON() ([]byte, error) {
 	return json.Marshal(objectMap)
 }
 
-// BasicInformation basic information for any product system
+// BasicInformation basic information for any product system.
 type BasicInformation struct {
 	// DisplayName - READ-ONLY; Display Name for the product system.
 	DisplayName *string `json:"displayName,omitempty"`
@@ -434,6 +579,8 @@ type BasicInformation struct {
 	AvailabilityInformation *AvailabilityInformation `json:"availabilityInformation,omitempty"`
 	// HierarchyInformation - READ-ONLY; Hierarchy information of a product.
 	HierarchyInformation *HierarchyInformation `json:"hierarchyInformation,omitempty"`
+	// FulfilledBy - READ-ONLY; The entity responsible for fulfillment of the item at the given hierarchy level. Possible values include: 'Microsoft', 'External'
+	FulfilledBy FulfillmentType `json:"fulfilledBy,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for BasicInformation.
@@ -442,15 +589,15 @@ func (bi BasicInformation) MarshalJSON() ([]byte, error) {
 	return json.Marshal(objectMap)
 }
 
-// BillingMeterDetails holds billing meter details for each type of billing
+// BillingMeterDetails holds billing meter details for each type of billing.
 type BillingMeterDetails struct {
-	// Name - READ-ONLY; Represents Billing type name
+	// Name - READ-ONLY; Represents Billing type name.
 	Name *string `json:"name,omitempty"`
-	// MeterDetails - READ-ONLY; Represents MeterDetails
+	// MeterDetails - READ-ONLY; Represents MeterDetails.
 	MeterDetails BasicMeterDetails `json:"meterDetails,omitempty"`
-	// MeteringType - READ-ONLY; Represents Metering type (eg one-time or recurrent). Possible values include: 'MeteringTypeOneTime', 'MeteringTypeRecurring', 'MeteringTypeAdhoc'
+	// MeteringType - READ-ONLY; Represents Metering type (eg one-time or recurrent). Possible values include: 'OneTime', 'Recurring', 'Adhoc'
 	MeteringType MeteringType `json:"meteringType,omitempty"`
-	// Frequency - READ-ONLY; Frequency of recurrence
+	// Frequency - READ-ONLY; Frequency of recurrence.
 	Frequency *string `json:"frequency,omitempty"`
 }
 
@@ -516,9 +663,81 @@ type CancellationReason struct {
 	Reason *string `json:"reason,omitempty"`
 }
 
-// CommonProperties represents common properties across product hierarchy
-type CommonProperties struct {
-	// FilterableProperties - READ-ONLY; list of filters supported for a product
+// CategoryInformation category related properties of a child configuration.
+type CategoryInformation struct {
+	// CategoryName - Category name of the child configuration.
+	CategoryName *string `json:"categoryName,omitempty"`
+	// CategoryDisplayName - Category display name of the child configuration.
+	CategoryDisplayName *string `json:"categoryDisplayName,omitempty"`
+	// Description - Description text for the category.
+	Description *string `json:"description,omitempty"`
+	// Links - Links for the category.
+	Links *[]Link `json:"links,omitempty"`
+}
+
+// ChildConfiguration child configuration object.
+type ChildConfiguration struct {
+	// ChildConfigurationProperties - READ-ONLY; Properties of child configuration.
+	*ChildConfigurationProperties `json:"properties,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for ChildConfiguration.
+func (cc ChildConfiguration) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	return json.Marshal(objectMap)
+}
+
+// UnmarshalJSON is the custom unmarshaler for ChildConfiguration struct.
+func (cc *ChildConfiguration) UnmarshalJSON(body []byte) error {
+	var m map[string]*json.RawMessage
+	err := json.Unmarshal(body, &m)
+	if err != nil {
+		return err
+	}
+	for k, v := range m {
+		switch k {
+		case "properties":
+			if v != nil {
+				var childConfigurationProperties ChildConfigurationProperties
+				err = json.Unmarshal(*v, &childConfigurationProperties)
+				if err != nil {
+					return err
+				}
+				cc.ChildConfigurationProperties = &childConfigurationProperties
+			}
+		}
+	}
+
+	return nil
+}
+
+// ChildConfigurationFilter child configuration filter.
+type ChildConfigurationFilter struct {
+	// HierarchyInformations - The list of child configuration hierarchy customer wants to filter for the given configuration.
+	HierarchyInformations *[]HierarchyInformation `json:"hierarchyInformations,omitempty"`
+	// ChildConfigurationTypes - Filter to fetch all child configurations belonging to the given list of configuration types.
+	ChildConfigurationTypes *[]ChildConfigurationType `json:"childConfigurationTypes,omitempty"`
+}
+
+// ChildConfigurationProperties properties of child configuration.
+type ChildConfigurationProperties struct {
+	// ChildConfigurationType - READ-ONLY; Child configuration type. Possible values include: 'ChildConfigurationTypeDeviceConfiguration', 'ChildConfigurationTypeAdditionalConfiguration'
+	ChildConfigurationType ChildConfigurationType `json:"childConfigurationType,omitempty"`
+	// IsPartOfBaseConfiguration - READ-ONLY; Flag to indicate if the child configuration is part of the base configuration, which means the customer need not pass this configuration in OptInAdditionalConfigurations while placing an order, it will be shipped by default.
+	IsPartOfBaseConfiguration *bool `json:"isPartOfBaseConfiguration,omitempty"`
+	// MinimumQuantity - READ-ONLY; Minimum quantity a customer can order while choosing this configuration.
+	MinimumQuantity *int32 `json:"minimumQuantity,omitempty"`
+	// MaximumQuantity - READ-ONLY; Maximum quantity a customer can order while choosing this configuration.
+	MaximumQuantity *int32 `json:"maximumQuantity,omitempty"`
+	// Specifications - READ-ONLY; Specifications of the configuration.
+	Specifications *[]Specification `json:"specifications,omitempty"`
+	// Dimensions - READ-ONLY; Dimensions of the configuration.
+	Dimensions *Dimensions `json:"dimensions,omitempty"`
+	// ChildConfigurationTypes - READ-ONLY; Different types of child configurations which exist for this configuration, these can be used to populate the child configuration filter.
+	ChildConfigurationTypes *[]ChildConfigurationType `json:"childConfigurationTypes,omitempty"`
+	// GroupedChildConfigurations - READ-ONLY; Child configurations present for the configuration after applying child configuration filter, grouped by the category name of the child configuration.
+	GroupedChildConfigurations *[]GroupedChildConfigurations `json:"groupedChildConfigurations,omitempty"`
+	// FilterableProperties - READ-ONLY; List of filters supported for a product.
 	FilterableProperties *[]FilterableProperty `json:"filterableProperties,omitempty"`
 	// DisplayName - READ-ONLY; Display Name for the product system.
 	DisplayName *string `json:"displayName,omitempty"`
@@ -532,6 +751,34 @@ type CommonProperties struct {
 	AvailabilityInformation *AvailabilityInformation `json:"availabilityInformation,omitempty"`
 	// HierarchyInformation - READ-ONLY; Hierarchy information of a product.
 	HierarchyInformation *HierarchyInformation `json:"hierarchyInformation,omitempty"`
+	// FulfilledBy - READ-ONLY; The entity responsible for fulfillment of the item at the given hierarchy level. Possible values include: 'Microsoft', 'External'
+	FulfilledBy FulfillmentType `json:"fulfilledBy,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for ChildConfigurationProperties.
+func (ccp ChildConfigurationProperties) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	return json.Marshal(objectMap)
+}
+
+// CommonProperties represents common properties across product hierarchy.
+type CommonProperties struct {
+	// FilterableProperties - READ-ONLY; List of filters supported for a product.
+	FilterableProperties *[]FilterableProperty `json:"filterableProperties,omitempty"`
+	// DisplayName - READ-ONLY; Display Name for the product system.
+	DisplayName *string `json:"displayName,omitempty"`
+	// Description - READ-ONLY; Description related to the product system.
+	Description *Description `json:"description,omitempty"`
+	// ImageInformation - READ-ONLY; Image information for the product system.
+	ImageInformation *[]ImageInformation `json:"imageInformation,omitempty"`
+	// CostInformation - READ-ONLY; Cost information for the product system.
+	CostInformation *CostInformation `json:"costInformation,omitempty"`
+	// AvailabilityInformation - READ-ONLY; Availability information of the product system.
+	AvailabilityInformation *AvailabilityInformation `json:"availabilityInformation,omitempty"`
+	// HierarchyInformation - READ-ONLY; Hierarchy information of a product.
+	HierarchyInformation *HierarchyInformation `json:"hierarchyInformation,omitempty"`
+	// FulfilledBy - READ-ONLY; The entity responsible for fulfillment of the item at the given hierarchy level. Possible values include: 'Microsoft', 'External'
+	FulfilledBy FulfillmentType `json:"fulfilledBy,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for CommonProperties.
@@ -542,7 +789,7 @@ func (cp CommonProperties) MarshalJSON() ([]byte, error) {
 
 // Configuration configuration object.
 type Configuration struct {
-	// ConfigurationProperties - READ-ONLY; Properties of configuration
+	// ConfigurationProperties - READ-ONLY; Properties of configuration.
 	*ConfigurationProperties `json:"properties,omitempty"`
 }
 
@@ -576,21 +823,50 @@ func (c *Configuration) UnmarshalJSON(body []byte) error {
 	return nil
 }
 
-// ConfigurationFilters configuration filters
-type ConfigurationFilters struct {
-	// HierarchyInformation - Product hierarchy information
+// ConfigurationDeviceDetails device details for configuration.
+type ConfigurationDeviceDetails struct {
+	// DisplayInfo - Display details of the product.
+	DisplayInfo *DisplayInfo `json:"displayInfo,omitempty"`
+	// HierarchyInformation - READ-ONLY; Hierarchy of the product which uniquely identifies the configuration.
 	HierarchyInformation *HierarchyInformation `json:"hierarchyInformation,omitempty"`
-	// FilterableProperty - Filters specific to product
-	FilterableProperty *[]FilterableProperty `json:"filterableProperty,omitempty"`
+	// Quantity - READ-ONLY; Quantity of the product.
+	Quantity *int32 `json:"quantity,omitempty"`
+	// IdentificationType - READ-ONLY; Identification type of the configuration. Possible values include: 'NotSupported', 'SerialNumber'
+	IdentificationType IdentificationType `json:"identificationType,omitempty"`
+	// DeviceDetails - READ-ONLY; List of device details.
+	DeviceDetails *[]DeviceDetails `json:"deviceDetails,omitempty"`
 }
 
-// ConfigurationProperties properties of configuration
+// MarshalJSON is the custom marshaler for ConfigurationDeviceDetails.
+func (cdd ConfigurationDeviceDetails) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	if cdd.DisplayInfo != nil {
+		objectMap["displayInfo"] = cdd.DisplayInfo
+	}
+	return json.Marshal(objectMap)
+}
+
+// ConfigurationFilter configuration filters.
+type ConfigurationFilter struct {
+	// HierarchyInformation - Product hierarchy information.
+	HierarchyInformation *HierarchyInformation `json:"hierarchyInformation,omitempty"`
+	// FilterableProperty - Filters specific to product.
+	FilterableProperty *[]FilterableProperty `json:"filterableProperty,omitempty"`
+	// ChildConfigurationFilter - Filter to fetch specific child configurations that exist in the configuration. This must be passed to either fetch a list of specific child configurations, or all child configurations of specific types of child configurations.
+	ChildConfigurationFilter *ChildConfigurationFilter `json:"childConfigurationFilter,omitempty"`
+}
+
+// ConfigurationProperties properties of configuration.
 type ConfigurationProperties struct {
-	// Specifications - READ-ONLY; Specifications of the configuration
+	// Specifications - READ-ONLY; Specifications of the configuration.
 	Specifications *[]Specification `json:"specifications,omitempty"`
-	// Dimensions - READ-ONLY; Dimensions of the configuration
+	// Dimensions - READ-ONLY; Dimensions of the configuration.
 	Dimensions *Dimensions `json:"dimensions,omitempty"`
-	// FilterableProperties - READ-ONLY; list of filters supported for a product
+	// ChildConfigurationTypes - READ-ONLY; Different types of child configurations which exist for this configuration, these can be used to populate the child configuration filter.
+	ChildConfigurationTypes *[]ChildConfigurationType `json:"childConfigurationTypes,omitempty"`
+	// GroupedChildConfigurations - READ-ONLY; Child configurations present for the configuration after applying child configuration filter, grouped by the category name of the child configuration.
+	GroupedChildConfigurations *[]GroupedChildConfigurations `json:"groupedChildConfigurations,omitempty"`
+	// FilterableProperties - READ-ONLY; List of filters supported for a product.
 	FilterableProperties *[]FilterableProperty `json:"filterableProperties,omitempty"`
 	// DisplayName - READ-ONLY; Display Name for the product system.
 	DisplayName *string `json:"displayName,omitempty"`
@@ -604,6 +880,8 @@ type ConfigurationProperties struct {
 	AvailabilityInformation *AvailabilityInformation `json:"availabilityInformation,omitempty"`
 	// HierarchyInformation - READ-ONLY; Hierarchy information of a product.
 	HierarchyInformation *HierarchyInformation `json:"hierarchyInformation,omitempty"`
+	// FulfilledBy - READ-ONLY; The entity responsible for fulfillment of the item at the given hierarchy level. Possible values include: 'Microsoft', 'External'
+	FulfilledBy FulfillmentType `json:"fulfilledBy,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for ConfigurationProperties.
@@ -782,9 +1060,9 @@ func NewConfigurationsPage(cur Configurations, getNextPage func(context.Context,
 
 // ConfigurationsRequest configuration request object.
 type ConfigurationsRequest struct {
-	// ConfigurationFilters - Holds details about product hierarchy information and filterable property.
-	ConfigurationFilters *[]ConfigurationFilters `json:"configurationFilters,omitempty"`
-	// CustomerSubscriptionDetails - Customer subscription properties. Clients can display available products to unregistered customers by explicitly passing subscription details
+	// ConfigurationFilter - Holds details about product hierarchy information and filterable property.
+	ConfigurationFilter *ConfigurationFilter `json:"configurationFilter,omitempty"`
+	// CustomerSubscriptionDetails - Customer subscription properties. Clients can display available products to unregistered customers by explicitly passing subscription details.
 	CustomerSubscriptionDetails *CustomerSubscriptionDetails `json:"customerSubscriptionDetails,omitempty"`
 }
 
@@ -802,11 +1080,11 @@ type ContactDetails struct {
 	EmailList *[]string `json:"emailList,omitempty"`
 }
 
-// CostInformation cost information for the product system
+// CostInformation cost information for the product system.
 type CostInformation struct {
 	// BillingMeterDetails - READ-ONLY; Details on the various billing aspects for the product system.
 	BillingMeterDetails *[]BillingMeterDetails `json:"billingMeterDetails,omitempty"`
-	// BillingInfoURL - READ-ONLY; Default url to display billing information
+	// BillingInfoURL - READ-ONLY; Default url to display billing information.
 	BillingInfoURL *string `json:"billingInfoUrl,omitempty"`
 }
 
@@ -816,188 +1094,28 @@ func (ci CostInformation) MarshalJSON() ([]byte, error) {
 	return json.Marshal(objectMap)
 }
 
-// CreateAddressFuture an abstraction for monitoring and retrieving the results of a long-running
-// operation.
-type CreateAddressFuture struct {
-	azure.FutureAPI
-	// Result returns the result of the asynchronous operation.
-	// If the operation has not completed it will return an error.
-	Result func(BaseClient) (AddressResource, error)
-}
-
-// UnmarshalJSON is the custom unmarshaller for CreateFuture.
-func (future *CreateAddressFuture) UnmarshalJSON(body []byte) error {
-	var azFuture azure.Future
-	if err := json.Unmarshal(body, &azFuture); err != nil {
-		return err
-	}
-	future.FutureAPI = &azFuture
-	future.Result = future.result
-	return nil
-}
-
-// result is the default implementation for CreateAddressFuture.Result.
-func (future *CreateAddressFuture) result(client BaseClient) (ar AddressResource, err error) {
-	var done bool
-	done, err = future.DoneWithContext(context.Background(), client)
-	if err != nil {
-		err = autorest.NewErrorWithError(err, "edgeorder.CreateAddressFuture", "Result", future.Response(), "Polling failure")
-		return
-	}
-	if !done {
-		ar.Response.Response = future.Response()
-		err = azure.NewAsyncOpIncompleteError("edgeorder.CreateAddressFuture")
-		return
-	}
-	sender := autorest.DecorateSender(client, autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
-	if ar.Response.Response, err = future.GetResult(sender); err == nil && ar.Response.Response.StatusCode != http.StatusNoContent {
-		ar, err = client.CreateAddressResponder(ar.Response.Response)
-		if err != nil {
-			err = autorest.NewErrorWithError(err, "edgeorder.CreateAddressFuture", "Result", ar.Response.Response, "Failure responding to request")
-		}
-	}
-	return
-}
-
-// CreateOrderItemFuture an abstraction for monitoring and retrieving the results of a long-running
-// operation.
-type CreateOrderItemFuture struct {
-	azure.FutureAPI
-	// Result returns the result of the asynchronous operation.
-	// If the operation has not completed it will return an error.
-	Result func(BaseClient) (OrderItemResource, error)
-}
-
-// UnmarshalJSON is the custom unmarshaller for CreateFuture.
-func (future *CreateOrderItemFuture) UnmarshalJSON(body []byte) error {
-	var azFuture azure.Future
-	if err := json.Unmarshal(body, &azFuture); err != nil {
-		return err
-	}
-	future.FutureAPI = &azFuture
-	future.Result = future.result
-	return nil
-}
-
-// result is the default implementation for CreateOrderItemFuture.Result.
-func (future *CreateOrderItemFuture) result(client BaseClient) (oir OrderItemResource, err error) {
-	var done bool
-	done, err = future.DoneWithContext(context.Background(), client)
-	if err != nil {
-		err = autorest.NewErrorWithError(err, "edgeorder.CreateOrderItemFuture", "Result", future.Response(), "Polling failure")
-		return
-	}
-	if !done {
-		oir.Response.Response = future.Response()
-		err = azure.NewAsyncOpIncompleteError("edgeorder.CreateOrderItemFuture")
-		return
-	}
-	sender := autorest.DecorateSender(client, autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
-	if oir.Response.Response, err = future.GetResult(sender); err == nil && oir.Response.Response.StatusCode != http.StatusNoContent {
-		oir, err = client.CreateOrderItemResponder(oir.Response.Response)
-		if err != nil {
-			err = autorest.NewErrorWithError(err, "edgeorder.CreateOrderItemFuture", "Result", oir.Response.Response, "Failure responding to request")
-		}
-	}
-	return
-}
-
 // CustomerSubscriptionDetails holds Customer subscription details. Clients can display available products
-// to unregistered customers by explicitly passing subscription details
+// to unregistered customers by explicitly passing subscription details.
 type CustomerSubscriptionDetails struct {
-	// RegisteredFeatures - List of registered feature flags for subscription
+	// RegisteredFeatures - List of registered feature flags for subscription.
 	RegisteredFeatures *[]CustomerSubscriptionRegisteredFeatures `json:"registeredFeatures,omitempty"`
-	// LocationPlacementID - Location placement Id of a subscription
+	// LocationPlacementID - Location placement Id of a subscription.
 	LocationPlacementID *string `json:"locationPlacementId,omitempty"`
-	// QuotaID - Quota ID of a subscription
+	// QuotaID - Quota ID of a subscription.
 	QuotaID *string `json:"quotaId,omitempty"`
 }
 
-// CustomerSubscriptionRegisteredFeatures represents subscription registered features
+// CustomerSubscriptionRegisteredFeatures represents subscription registered features.
 type CustomerSubscriptionRegisteredFeatures struct {
-	// Name - Name of subscription registered feature
+	// Name - Name of subscription registered feature.
 	Name *string `json:"name,omitempty"`
-	// State - State of subscription registered feature
+	// State - State of subscription registered feature.
 	State *string `json:"state,omitempty"`
-}
-
-// DeleteAddressByNameFuture an abstraction for monitoring and retrieving the results of a long-running
-// operation.
-type DeleteAddressByNameFuture struct {
-	azure.FutureAPI
-	// Result returns the result of the asynchronous operation.
-	// If the operation has not completed it will return an error.
-	Result func(BaseClient) (autorest.Response, error)
-}
-
-// UnmarshalJSON is the custom unmarshaller for CreateFuture.
-func (future *DeleteAddressByNameFuture) UnmarshalJSON(body []byte) error {
-	var azFuture azure.Future
-	if err := json.Unmarshal(body, &azFuture); err != nil {
-		return err
-	}
-	future.FutureAPI = &azFuture
-	future.Result = future.result
-	return nil
-}
-
-// result is the default implementation for DeleteAddressByNameFuture.Result.
-func (future *DeleteAddressByNameFuture) result(client BaseClient) (ar autorest.Response, err error) {
-	var done bool
-	done, err = future.DoneWithContext(context.Background(), client)
-	if err != nil {
-		err = autorest.NewErrorWithError(err, "edgeorder.DeleteAddressByNameFuture", "Result", future.Response(), "Polling failure")
-		return
-	}
-	if !done {
-		ar.Response = future.Response()
-		err = azure.NewAsyncOpIncompleteError("edgeorder.DeleteAddressByNameFuture")
-		return
-	}
-	ar.Response = future.Response()
-	return
-}
-
-// DeleteOrderItemByNameFuture an abstraction for monitoring and retrieving the results of a long-running
-// operation.
-type DeleteOrderItemByNameFuture struct {
-	azure.FutureAPI
-	// Result returns the result of the asynchronous operation.
-	// If the operation has not completed it will return an error.
-	Result func(BaseClient) (autorest.Response, error)
-}
-
-// UnmarshalJSON is the custom unmarshaller for CreateFuture.
-func (future *DeleteOrderItemByNameFuture) UnmarshalJSON(body []byte) error {
-	var azFuture azure.Future
-	if err := json.Unmarshal(body, &azFuture); err != nil {
-		return err
-	}
-	future.FutureAPI = &azFuture
-	future.Result = future.result
-	return nil
-}
-
-// result is the default implementation for DeleteOrderItemByNameFuture.Result.
-func (future *DeleteOrderItemByNameFuture) result(client BaseClient) (ar autorest.Response, err error) {
-	var done bool
-	done, err = future.DoneWithContext(context.Background(), client)
-	if err != nil {
-		err = autorest.NewErrorWithError(err, "edgeorder.DeleteOrderItemByNameFuture", "Result", future.Response(), "Polling failure")
-		return
-	}
-	if !done {
-		ar.Response = future.Response()
-		err = azure.NewAsyncOpIncompleteError("edgeorder.DeleteOrderItemByNameFuture")
-		return
-	}
-	ar.Response = future.Response()
-	return
 }
 
 // Description description related properties of a product system.
 type Description struct {
-	// DescriptionType - READ-ONLY; Type of description. Possible values include: 'DescriptionTypeBase'
+	// DescriptionType - READ-ONLY; Type of description. Possible values include: 'Base'
 	DescriptionType DescriptionType `json:"descriptionType,omitempty"`
 	// ShortDescription - READ-ONLY; Short description of the product system.
 	ShortDescription *string `json:"shortDescription,omitempty"`
@@ -1019,11 +1137,11 @@ func (d Description) MarshalJSON() ([]byte, error) {
 
 // DeviceDetails device details.
 type DeviceDetails struct {
-	// SerialNumber - READ-ONLY; device serial number
+	// SerialNumber - READ-ONLY; Device serial number.
 	SerialNumber *string `json:"serialNumber,omitempty"`
-	// ManagementResourceID - READ-ONLY; Management Resource Id
+	// ManagementResourceID - READ-ONLY; Management Resource Id.
 	ManagementResourceID *string `json:"managementResourceId,omitempty"`
-	// ManagementResourceTenantID - READ-ONLY; Management Resource Tenant ID
+	// ManagementResourceTenantID - READ-ONLY; Management Resource Tenant ID.
 	ManagementResourceTenantID *string `json:"managementResourceTenantId,omitempty"`
 }
 
@@ -1041,13 +1159,13 @@ type Dimensions struct {
 	Height *float64 `json:"height,omitempty"`
 	// Width - READ-ONLY; Width of the device.
 	Width *float64 `json:"width,omitempty"`
-	// LengthHeightUnit - READ-ONLY; Unit for the dimensions of length, height and width. Possible values include: 'LengthHeightUnitIN', 'LengthHeightUnitCM'
+	// LengthHeightUnit - READ-ONLY; Unit for the dimensions of length, height and width. Possible values include: 'IN', 'CM'
 	LengthHeightUnit LengthHeightUnit `json:"lengthHeightUnit,omitempty"`
 	// Weight - READ-ONLY; Weight of the device.
 	Weight *float64 `json:"weight,omitempty"`
 	// Depth - READ-ONLY; Depth of the device.
 	Depth *float64 `json:"depth,omitempty"`
-	// WeightUnit - READ-ONLY; Unit for the dimensions of weight. Possible values include: 'WeightMeasurementUnitLBS', 'WeightMeasurementUnitKGS'
+	// WeightUnit - READ-ONLY; Unit for the dimensions of weight. Possible values include: 'LBS', 'KGS'
 	WeightUnit WeightMeasurementUnit `json:"weightUnit,omitempty"`
 }
 
@@ -1057,11 +1175,11 @@ func (d Dimensions) MarshalJSON() ([]byte, error) {
 	return json.Marshal(objectMap)
 }
 
-// DisplayInfo describes product display information
+// DisplayInfo describes product display information.
 type DisplayInfo struct {
-	// ProductFamilyDisplayName - READ-ONLY; Product family display name
+	// ProductFamilyDisplayName - READ-ONLY; Product family display name.
 	ProductFamilyDisplayName *string `json:"productFamilyDisplayName,omitempty"`
-	// ConfigurationDisplayName - READ-ONLY; Configuration display name
+	// ConfigurationDisplayName - READ-ONLY; Configuration display name.
 	ConfigurationDisplayName *string `json:"configurationDisplayName,omitempty"`
 }
 
@@ -1071,9 +1189,9 @@ func (di DisplayInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(objectMap)
 }
 
-// EncryptionPreferences preferences related to the double encryption
+// EncryptionPreferences preferences related to the double encryption.
 type EncryptionPreferences struct {
-	// DoubleEncryptionStatus - Double encryption status as entered by the customer. It is compulsory to give this parameter if the 'Deny' or 'Disabled' policy is configured. Possible values include: 'DoubleEncryptionStatusDisabled', 'DoubleEncryptionStatusEnabled'
+	// DoubleEncryptionStatus - Double encryption status as entered by the customer. It is compulsory to give this parameter if the 'Deny' or 'Disabled' policy is configured. Possible values include: 'Disabled', 'Enabled'
 	DoubleEncryptionStatus DoubleEncryptionStatus `json:"doubleEncryptionStatus,omitempty"`
 }
 
@@ -1132,7 +1250,7 @@ type ForwardShippingDetails struct {
 	CarrierName *string `json:"carrierName,omitempty"`
 	// CarrierDisplayName - READ-ONLY; Carrier Name for display purpose. Not to be used for any processing.
 	CarrierDisplayName *string `json:"carrierDisplayName,omitempty"`
-	// TrackingID - READ-ONLY; TrackingId of the package
+	// TrackingID - READ-ONLY; TrackingId of the package.
 	TrackingID *string `json:"trackingId,omitempty"`
 	// TrackingURL - READ-ONLY; TrackingUrl of the package.
 	TrackingURL *string `json:"trackingUrl,omitempty"`
@@ -1144,23 +1262,37 @@ func (fsd ForwardShippingDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(objectMap)
 }
 
-// HierarchyInformation holds details about product hierarchy information
+// GroupedChildConfigurations grouped child configuration object.
+type GroupedChildConfigurations struct {
+	// CategoryInformation - READ-ONLY; Category information.
+	CategoryInformation *CategoryInformation `json:"categoryInformation,omitempty"`
+	// ChildConfigurations - READ-ONLY; List of child configurations.
+	ChildConfigurations *[]ChildConfiguration `json:"childConfigurations,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for GroupedChildConfigurations.
+func (gcc GroupedChildConfigurations) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]interface{})
+	return json.Marshal(objectMap)
+}
+
+// HierarchyInformation holds details about product hierarchy information.
 type HierarchyInformation struct {
-	// ProductFamilyName - Represents product family name that uniquely identifies product family
+	// ProductFamilyName - Represents product family name that uniquely identifies product family.
 	ProductFamilyName *string `json:"productFamilyName,omitempty"`
-	// ProductLineName - Represents product line name that uniquely identifies product line
+	// ProductLineName - Represents product line name that uniquely identifies product line.
 	ProductLineName *string `json:"productLineName,omitempty"`
-	// ProductName - Represents product name that uniquely identifies product
+	// ProductName - Represents product name that uniquely identifies product.
 	ProductName *string `json:"productName,omitempty"`
-	// ConfigurationName - Represents configuration name that uniquely identifies configuration
+	// ConfigurationName - Represents configuration name that uniquely identifies configuration.
 	ConfigurationName *string `json:"configurationName,omitempty"`
 }
 
-// ImageInformation image for the product
+// ImageInformation image for the product.
 type ImageInformation struct {
-	// ImageType - READ-ONLY; Type of the image. Possible values include: 'ImageTypeMainImage', 'ImageTypeBulletImage', 'ImageTypeGenericImage'
+	// ImageType - READ-ONLY; Type of the image. Possible values include: 'MainImage', 'BulletImage', 'GenericImage'
 	ImageType ImageType `json:"imageType,omitempty"`
-	// ImageURL - READ-ONLY; Url of the image
+	// ImageURL - READ-ONLY; Url of the image.
 	ImageURL *string `json:"imageUrl,omitempty"`
 }
 
@@ -1170,11 +1302,11 @@ func (ii ImageInformation) MarshalJSON() ([]byte, error) {
 	return json.Marshal(objectMap)
 }
 
-// Link returns link related to the product
+// Link returns link related to the product.
 type Link struct {
-	// LinkType - READ-ONLY; Type of link. Possible values include: 'LinkTypeGeneric', 'LinkTypeTermsAndConditions', 'LinkTypeSpecification', 'LinkTypeDocumentation', 'LinkTypeKnowMore', 'LinkTypeSignUp'
+	// LinkType - READ-ONLY; Type of link. Possible values include: 'LinkTypeGeneric', 'LinkTypeTermsAndConditions', 'LinkTypeSpecification', 'LinkTypeDocumentation', 'LinkTypeKnowMore', 'LinkTypeSignUp', 'LinkTypeDiscoverable'
 	LinkType LinkType `json:"linkType,omitempty"`
-	// LinkURL - READ-ONLY; Url of the link
+	// LinkURL - READ-ONLY; Url of the link.
 	LinkURL *string `json:"linkUrl,omitempty"`
 }
 
@@ -1184,24 +1316,24 @@ func (l Link) MarshalJSON() ([]byte, error) {
 	return json.Marshal(objectMap)
 }
 
-// ManagementResourcePreferences management resource preference to link device
+// ManagementResourcePreferences management resource preference to link device.
 type ManagementResourcePreferences struct {
-	// PreferredManagementResourceID - Customer preferred Management resource ARM ID
+	// PreferredManagementResourceID - Customer preferred Management resource ARM ID.
 	PreferredManagementResourceID *string `json:"preferredManagementResourceId,omitempty"`
 }
 
-// BasicMeterDetails holds details about billing type and its meter guids
+// BasicMeterDetails holds details about billing type and its meter guids.
 type BasicMeterDetails interface {
 	AsPav2MeterDetails() (*Pav2MeterDetails, bool)
 	AsPurchaseMeterDetails() (*PurchaseMeterDetails, bool)
 	AsMeterDetails() (*MeterDetails, bool)
 }
 
-// MeterDetails holds details about billing type and its meter guids
+// MeterDetails holds details about billing type and its meter guids.
 type MeterDetails struct {
-	// Multiplier - READ-ONLY; Billing unit applicable for Pav2 billing
+	// Multiplier - READ-ONLY; Billing unit applicable for Pav2 billing.
 	Multiplier *float64 `json:"multiplier,omitempty"`
-	// ChargingType - READ-ONLY; Charging type. Possible values include: 'ChargingTypePerOrder', 'ChargingTypePerDevice'
+	// ChargingType - READ-ONLY; Charging type. Possible values include: 'PerOrder', 'PerDevice'
 	ChargingType ChargingType `json:"chargingType,omitempty"`
 	// BillingType - Possible values include: 'BillingTypeMeterDetails', 'BillingTypePav2', 'BillingTypePurchase'
 	BillingType BillingType `json:"billingType,omitempty"`
@@ -1280,7 +1412,7 @@ func (md MeterDetails) AsBasicMeterDetails() (BasicMeterDetails, bool) {
 
 // NotificationPreference notification preference for a job stage.
 type NotificationPreference struct {
-	// StageName - Name of the stage. Possible values include: 'NotificationStageNameShipped', 'NotificationStageNameDelivered'
+	// StageName - Name of the stage. Possible values include: 'Shipped', 'Delivered'
 	StageName NotificationStageName `json:"stageName,omitempty"`
 	// SendNotification - Notification is required or not.
 	SendNotification *bool `json:"sendNotification,omitempty"`
@@ -1296,7 +1428,7 @@ type Operation struct {
 	Display *OperationDisplay `json:"display,omitempty"`
 	// Origin - READ-ONLY; The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is "user,system". Possible values include: 'OriginUser', 'OriginSystem', 'OriginUsersystem'
 	Origin Origin `json:"origin,omitempty"`
-	// ActionType - READ-ONLY; Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs. Possible values include: 'ActionTypeInternal'
+	// ActionType - READ-ONLY; Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs. Possible values include: 'Internal'
 	ActionType ActionType `json:"actionType,omitempty"`
 }
 
@@ -1493,36 +1625,36 @@ func NewOperationListResultPage(cur OperationListResult, getNextPage func(contex
 	}
 }
 
-// OrderItemDetails order item details
+// OrderItemDetails order item details.
 type OrderItemDetails struct {
 	// ProductDetails - Unique identifier for configuration.
 	ProductDetails *ProductDetails `json:"productDetails,omitempty"`
-	// OrderItemType - Order item type. Possible values include: 'OrderItemTypePurchase', 'OrderItemTypeRental'
+	// OrderItemType - Order item type. Possible values include: 'Purchase', 'Rental'
 	OrderItemType OrderItemType `json:"orderItemType,omitempty"`
-	// CurrentStage - READ-ONLY; Current Order item Status
+	// OrderItemMode - Defines the mode of the Order item. Possible values include: 'Default', 'DoNotFulfill'
+	OrderItemMode OrderMode `json:"orderItemMode,omitempty"`
+	// CurrentStage - READ-ONLY; Current Order item Status.
 	CurrentStage *StageDetails `json:"currentStage,omitempty"`
-	// OrderItemStageHistory - READ-ONLY; Order item status history
+	// OrderItemStageHistory - READ-ONLY; Order item status history.
 	OrderItemStageHistory *[]StageDetails `json:"orderItemStageHistory,omitempty"`
-	// Preferences - Customer notification Preferences
+	// Preferences - Customer notification Preferences.
 	Preferences *Preferences `json:"preferences,omitempty"`
-	// ForwardShippingDetails - READ-ONLY; Forward Package Shipping details
+	// ForwardShippingDetails - READ-ONLY; Forward Package Shipping details.
 	ForwardShippingDetails *ForwardShippingDetails `json:"forwardShippingDetails,omitempty"`
-	// ReverseShippingDetails - READ-ONLY; Reverse Package Shipping details
+	// ReverseShippingDetails - READ-ONLY; Reverse Package Shipping details.
 	ReverseShippingDetails *ReverseShippingDetails `json:"reverseShippingDetails,omitempty"`
-	// NotificationEmailList - Additional notification email list
+	// NotificationEmailList - Additional notification email list.
 	NotificationEmailList *[]string `json:"notificationEmailList,omitempty"`
 	// CancellationReason - READ-ONLY; Cancellation reason.
 	CancellationReason *string `json:"cancellationReason,omitempty"`
-	// CancellationStatus - READ-ONLY; Describes whether the order item is cancellable or not. Possible values include: 'OrderItemCancellationEnumCancellable', 'OrderItemCancellationEnumCancellableWithFee', 'OrderItemCancellationEnumNotCancellable'
+	// CancellationStatus - READ-ONLY; Describes whether the order item is cancellable or not. Possible values include: 'Cancellable', 'CancellableWithFee', 'NotCancellable'
 	CancellationStatus OrderItemCancellationEnum `json:"cancellationStatus,omitempty"`
-	// DeletionStatus - READ-ONLY; Describes whether the order item is deletable or not. Possible values include: 'ActionStatusEnumAllowed', 'ActionStatusEnumNotAllowed'
+	// DeletionStatus - READ-ONLY; Describes whether the order item is deletable or not. Possible values include: 'Allowed', 'NotAllowed'
 	DeletionStatus ActionStatusEnum `json:"deletionStatus,omitempty"`
 	// ReturnReason - READ-ONLY; Return reason.
 	ReturnReason *string `json:"returnReason,omitempty"`
-	// ReturnStatus - READ-ONLY; Describes whether the order item is returnable or not. Possible values include: 'OrderItemReturnEnumReturnable', 'OrderItemReturnEnumReturnableWithFee', 'OrderItemReturnEnumNotReturnable'
+	// ReturnStatus - READ-ONLY; Describes whether the order item is returnable or not. Possible values include: 'Returnable', 'ReturnableWithFee', 'NotReturnable'
 	ReturnStatus OrderItemReturnEnum `json:"returnStatus,omitempty"`
-	// ManagementRpDetails - READ-ONLY; Parent RP details - this returns only the first or default parent RP from the entire list
-	ManagementRpDetails *ResourceProviderDetails `json:"managementRpDetails,omitempty"`
 	// ManagementRpDetailsList - READ-ONLY; List of parent RP details supported for configuration.
 	ManagementRpDetailsList *[]ResourceProviderDetails `json:"managementRpDetailsList,omitempty"`
 	// Error - READ-ONLY; Top level error for the job.
@@ -1538,6 +1670,9 @@ func (oid OrderItemDetails) MarshalJSON() ([]byte, error) {
 	if oid.OrderItemType != "" {
 		objectMap["orderItemType"] = oid.OrderItemType
 	}
+	if oid.OrderItemMode != "" {
+		objectMap["orderItemMode"] = oid.OrderItemMode
+	}
 	if oid.Preferences != nil {
 		objectMap["preferences"] = oid.Preferences
 	}
@@ -1547,15 +1682,15 @@ func (oid OrderItemDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(objectMap)
 }
 
-// OrderItemProperties represents order item details.
+// OrderItemProperties represents order item properties.
 type OrderItemProperties struct {
 	// OrderItemDetails - Represents order item details.
 	OrderItemDetails *OrderItemDetails `json:"orderItemDetails,omitempty"`
-	// AddressDetails - Represents shipping and return address for order item
+	// AddressDetails - Represents shipping and return address for order item.
 	AddressDetails *AddressDetails `json:"addressDetails,omitempty"`
-	// StartTime - READ-ONLY; Start time of order item
+	// StartTime - READ-ONLY; Start time of order item.
 	StartTime *date.Time `json:"startTime,omitempty"`
-	// OrderID - Id of the order to which order item belongs to
+	// OrderID - Id of the order to which order item belongs to.
 	OrderID *string `json:"orderId,omitempty"`
 }
 
@@ -1574,12 +1709,12 @@ func (oip OrderItemProperties) MarshalJSON() ([]byte, error) {
 	return json.Marshal(objectMap)
 }
 
-// OrderItemResource represents order item contract
+// OrderItemResource represents order item resource.
 type OrderItemResource struct {
 	autorest.Response `json:"-"`
-	// OrderItemProperties - Order item properties
+	// OrderItemProperties - Order item properties.
 	*OrderItemProperties `json:"properties,omitempty"`
-	// SystemData - READ-ONLY; Represents resource creation and update time
+	// SystemData - READ-ONLY; Represents resource creation and update time.
 	SystemData *SystemData `json:"systemData,omitempty"`
 	// Tags - Resource tags.
 	Tags map[string]*string `json:"tags"`
@@ -1686,7 +1821,7 @@ func (oir *OrderItemResource) UnmarshalJSON(body []byte) error {
 	return nil
 }
 
-// OrderItemResourceList list of orderItems.
+// OrderItemResourceList list of order items.
 type OrderItemResourceList struct {
 	autorest.Response `json:"-"`
 	// Value - READ-ONLY; List of order item resources.
@@ -1854,9 +1989,169 @@ func NewOrderItemResourceListPage(cur OrderItemResourceList, getNextPage func(co
 	}
 }
 
+// OrderItemsCreateFuture an abstraction for monitoring and retrieving the results of a long-running
+// operation.
+type OrderItemsCreateFuture struct {
+	azure.FutureAPI
+	// Result returns the result of the asynchronous operation.
+	// If the operation has not completed it will return an error.
+	Result func(OrderItemsClient) (OrderItemResource, error)
+}
+
+// UnmarshalJSON is the custom unmarshaller for CreateFuture.
+func (future *OrderItemsCreateFuture) UnmarshalJSON(body []byte) error {
+	var azFuture azure.Future
+	if err := json.Unmarshal(body, &azFuture); err != nil {
+		return err
+	}
+	future.FutureAPI = &azFuture
+	future.Result = future.result
+	return nil
+}
+
+// result is the default implementation for OrderItemsCreateFuture.Result.
+func (future *OrderItemsCreateFuture) result(client OrderItemsClient) (oir OrderItemResource, err error) {
+	var done bool
+	done, err = future.DoneWithContext(context.Background(), client)
+	if err != nil {
+		err = autorest.NewErrorWithError(err, "edgeorder.OrderItemsCreateFuture", "Result", future.Response(), "Polling failure")
+		return
+	}
+	if !done {
+		oir.Response.Response = future.Response()
+		err = azure.NewAsyncOpIncompleteError("edgeorder.OrderItemsCreateFuture")
+		return
+	}
+	sender := autorest.DecorateSender(client, autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
+	if oir.Response.Response, err = future.GetResult(sender); err == nil && oir.Response.Response.StatusCode != http.StatusNoContent {
+		oir, err = client.CreateResponder(oir.Response.Response)
+		if err != nil {
+			err = autorest.NewErrorWithError(err, "edgeorder.OrderItemsCreateFuture", "Result", oir.Response.Response, "Failure responding to request")
+		}
+	}
+	return
+}
+
+// OrderItemsDeleteFuture an abstraction for monitoring and retrieving the results of a long-running
+// operation.
+type OrderItemsDeleteFuture struct {
+	azure.FutureAPI
+	// Result returns the result of the asynchronous operation.
+	// If the operation has not completed it will return an error.
+	Result func(OrderItemsClient) (autorest.Response, error)
+}
+
+// UnmarshalJSON is the custom unmarshaller for CreateFuture.
+func (future *OrderItemsDeleteFuture) UnmarshalJSON(body []byte) error {
+	var azFuture azure.Future
+	if err := json.Unmarshal(body, &azFuture); err != nil {
+		return err
+	}
+	future.FutureAPI = &azFuture
+	future.Result = future.result
+	return nil
+}
+
+// result is the default implementation for OrderItemsDeleteFuture.Result.
+func (future *OrderItemsDeleteFuture) result(client OrderItemsClient) (ar autorest.Response, err error) {
+	var done bool
+	done, err = future.DoneWithContext(context.Background(), client)
+	if err != nil {
+		err = autorest.NewErrorWithError(err, "edgeorder.OrderItemsDeleteFuture", "Result", future.Response(), "Polling failure")
+		return
+	}
+	if !done {
+		ar.Response = future.Response()
+		err = azure.NewAsyncOpIncompleteError("edgeorder.OrderItemsDeleteFuture")
+		return
+	}
+	ar.Response = future.Response()
+	return
+}
+
+// OrderItemsReturnFuture an abstraction for monitoring and retrieving the results of a long-running
+// operation.
+type OrderItemsReturnFuture struct {
+	azure.FutureAPI
+	// Result returns the result of the asynchronous operation.
+	// If the operation has not completed it will return an error.
+	Result func(OrderItemsClient) (autorest.Response, error)
+}
+
+// UnmarshalJSON is the custom unmarshaller for CreateFuture.
+func (future *OrderItemsReturnFuture) UnmarshalJSON(body []byte) error {
+	var azFuture azure.Future
+	if err := json.Unmarshal(body, &azFuture); err != nil {
+		return err
+	}
+	future.FutureAPI = &azFuture
+	future.Result = future.result
+	return nil
+}
+
+// result is the default implementation for OrderItemsReturnFuture.Result.
+func (future *OrderItemsReturnFuture) result(client OrderItemsClient) (ar autorest.Response, err error) {
+	var done bool
+	done, err = future.DoneWithContext(context.Background(), client)
+	if err != nil {
+		err = autorest.NewErrorWithError(err, "edgeorder.OrderItemsReturnFuture", "Result", future.Response(), "Polling failure")
+		return
+	}
+	if !done {
+		ar.Response = future.Response()
+		err = azure.NewAsyncOpIncompleteError("edgeorder.OrderItemsReturnFuture")
+		return
+	}
+	ar.Response = future.Response()
+	return
+}
+
+// OrderItemsUpdateFuture an abstraction for monitoring and retrieving the results of a long-running
+// operation.
+type OrderItemsUpdateFuture struct {
+	azure.FutureAPI
+	// Result returns the result of the asynchronous operation.
+	// If the operation has not completed it will return an error.
+	Result func(OrderItemsClient) (OrderItemResource, error)
+}
+
+// UnmarshalJSON is the custom unmarshaller for CreateFuture.
+func (future *OrderItemsUpdateFuture) UnmarshalJSON(body []byte) error {
+	var azFuture azure.Future
+	if err := json.Unmarshal(body, &azFuture); err != nil {
+		return err
+	}
+	future.FutureAPI = &azFuture
+	future.Result = future.result
+	return nil
+}
+
+// result is the default implementation for OrderItemsUpdateFuture.Result.
+func (future *OrderItemsUpdateFuture) result(client OrderItemsClient) (oir OrderItemResource, err error) {
+	var done bool
+	done, err = future.DoneWithContext(context.Background(), client)
+	if err != nil {
+		err = autorest.NewErrorWithError(err, "edgeorder.OrderItemsUpdateFuture", "Result", future.Response(), "Polling failure")
+		return
+	}
+	if !done {
+		oir.Response.Response = future.Response()
+		err = azure.NewAsyncOpIncompleteError("edgeorder.OrderItemsUpdateFuture")
+		return
+	}
+	sender := autorest.DecorateSender(client, autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
+	if oir.Response.Response, err = future.GetResult(sender); err == nil && oir.Response.Response.StatusCode != http.StatusNoContent {
+		oir, err = client.UpdateResponder(oir.Response.Response)
+		if err != nil {
+			err = autorest.NewErrorWithError(err, "edgeorder.OrderItemsUpdateFuture", "Result", oir.Response.Response, "Failure responding to request")
+		}
+	}
+	return
+}
+
 // OrderItemUpdateParameter updates order item parameters.
 type OrderItemUpdateParameter struct {
-	// OrderItemUpdateProperties - Order item update properties
+	// OrderItemUpdateProperties - Order item update properties.
 	*OrderItemUpdateProperties `json:"properties,omitempty"`
 	// Tags - The list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups).
 	Tags map[string]*string `json:"tags"`
@@ -1925,6 +2220,8 @@ type OrderProperties struct {
 	CurrentStage *StageDetails `json:"currentStage,omitempty"`
 	// OrderStageHistory - READ-ONLY; Order status history.
 	OrderStageHistory *[]StageDetails `json:"orderStageHistory,omitempty"`
+	// OrderMode - READ-ONLY; Order mode. Possible values include: 'Default', 'DoNotFulfill'
+	OrderMode OrderMode `json:"orderMode,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for OrderProperties.
@@ -1937,9 +2234,9 @@ func (op OrderProperties) MarshalJSON() ([]byte, error) {
 // order items.
 type OrderResource struct {
 	autorest.Response `json:"-"`
-	// OrderProperties - Order properties
+	// OrderProperties - Order properties.
 	*OrderProperties `json:"properties,omitempty"`
-	// SystemData - READ-ONLY; Represents resource creation and update time
+	// SystemData - READ-ONLY; Represents resource creation and update time.
 	SystemData *SystemData `json:"systemData,omitempty"`
 	// ID - READ-ONLY; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string `json:"id,omitempty"`
@@ -2186,13 +2483,13 @@ func NewOrderResourceListPage(cur OrderResourceList, getNextPage func(context.Co
 	}
 }
 
-// Pav2MeterDetails billing type PAV2 meter details
+// Pav2MeterDetails billing type PAV2 meter details.
 type Pav2MeterDetails struct {
 	// MeterGUID - READ-ONLY; Validation status of requested data center and transport.
 	MeterGUID *string `json:"meterGuid,omitempty"`
-	// Multiplier - READ-ONLY; Billing unit applicable for Pav2 billing
+	// Multiplier - READ-ONLY; Billing unit applicable for Pav2 billing.
 	Multiplier *float64 `json:"multiplier,omitempty"`
-	// ChargingType - READ-ONLY; Charging type. Possible values include: 'ChargingTypePerOrder', 'ChargingTypePerDevice'
+	// ChargingType - READ-ONLY; Charging type. Possible values include: 'PerOrder', 'PerDevice'
 	ChargingType ChargingType `json:"chargingType,omitempty"`
 	// BillingType - Possible values include: 'BillingTypeMeterDetails', 'BillingTypePav2', 'BillingTypePurchase'
 	BillingType BillingType `json:"billingType,omitempty"`
@@ -2228,7 +2525,7 @@ func (p2md Pav2MeterDetails) AsBasicMeterDetails() (BasicMeterDetails, bool) {
 	return &p2md, true
 }
 
-// Preferences preferences related to the order
+// Preferences preferences related to the order.
 type Preferences struct {
 	// NotificationPreferences - Notification preferences.
 	NotificationPreferences *[]NotificationPreference `json:"notificationPreferences,omitempty"`
@@ -2240,9 +2537,9 @@ type Preferences struct {
 	ManagementResourcePreferences *ManagementResourcePreferences `json:"managementResourcePreferences,omitempty"`
 }
 
-// Product list of Products
+// Product represents a product.
 type Product struct {
-	// ProductProperties - READ-ONLY; Properties of product
+	// ProductProperties - READ-ONLY; Properties of product.
 	*ProductProperties `json:"properties,omitempty"`
 }
 
@@ -2276,18 +2573,22 @@ func (p *Product) UnmarshalJSON(body []byte) error {
 	return nil
 }
 
-// ProductDetails represents product details
+// ProductDetails represents product details.
 type ProductDetails struct {
-	// DisplayInfo - Display details of the product
+	// DisplayInfo - Display details of the product.
 	DisplayInfo *DisplayInfo `json:"displayInfo,omitempty"`
-	// HierarchyInformation - Hierarchy of the product which uniquely identifies the product
+	// HierarchyInformation - Hierarchy of the product which uniquely identifies the product.
 	HierarchyInformation *HierarchyInformation `json:"hierarchyInformation,omitempty"`
-	// Count - READ-ONLY; Quantity of the product
-	Count *int32 `json:"count,omitempty"`
-	// ProductDoubleEncryptionStatus - READ-ONLY; Double encryption status of the configuration. Read-only field. Possible values include: 'DoubleEncryptionStatusDisabled', 'DoubleEncryptionStatusEnabled'
+	// ProductDoubleEncryptionStatus - READ-ONLY; Double encryption status of the configuration. Read-only field. Possible values include: 'Disabled', 'Enabled'
 	ProductDoubleEncryptionStatus DoubleEncryptionStatus `json:"productDoubleEncryptionStatus,omitempty"`
-	// DeviceDetails - READ-ONLY; list of device details
-	DeviceDetails *[]DeviceDetails `json:"deviceDetails,omitempty"`
+	// IdentificationType - READ-ONLY; Identification type of the configuration. Possible values include: 'NotSupported', 'SerialNumber'
+	IdentificationType IdentificationType `json:"identificationType,omitempty"`
+	// ParentDeviceDetails - READ-ONLY; Device details of the parent configuration.
+	ParentDeviceDetails *DeviceDetails `json:"parentDeviceDetails,omitempty"`
+	// OptInAdditionalConfigurations - List of additional configurations customer wants in the order item apart from the ones included in the base configuration.
+	OptInAdditionalConfigurations *[]AdditionalConfiguration `json:"optInAdditionalConfigurations,omitempty"`
+	// ChildConfigurationDeviceDetails - READ-ONLY; Details of all child configurations that are part of the order item.
+	ChildConfigurationDeviceDetails *[]ConfigurationDeviceDetails `json:"childConfigurationDeviceDetails,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for ProductDetails.
@@ -2298,6 +2599,9 @@ func (pd ProductDetails) MarshalJSON() ([]byte, error) {
 	}
 	if pd.HierarchyInformation != nil {
 		objectMap["hierarchyInformation"] = pd.HierarchyInformation
+	}
+	if pd.OptInAdditionalConfigurations != nil {
+		objectMap["optInAdditionalConfigurations"] = pd.OptInAdditionalConfigurations
 	}
 	return json.Marshal(objectMap)
 }
@@ -2383,7 +2687,7 @@ func NewProductFamiliesIterator(page ProductFamiliesPage) ProductFamiliesIterato
 	return ProductFamiliesIterator{page: page}
 }
 
-// ProductFamiliesMetadata holds details about product family metadata
+// ProductFamiliesMetadata holds details about product family metadata.
 type ProductFamiliesMetadata struct {
 	autorest.Response `json:"-"`
 	// Value - READ-ONLY; List of product family metadata details.
@@ -2400,7 +2704,7 @@ func (pfm ProductFamiliesMetadata) MarshalJSON() ([]byte, error) {
 
 // ProductFamiliesMetadataDetails product families metadata details.
 type ProductFamiliesMetadataDetails struct {
-	// ProductFamilyProperties - READ-ONLY; Product family properties
+	// ProductFamilyProperties - READ-ONLY; Product family properties.
 	*ProductFamilyProperties `json:"properties,omitempty"`
 }
 
@@ -2676,7 +2980,7 @@ func NewProductFamiliesPage(cur ProductFamilies, getNextPage func(context.Contex
 type ProductFamiliesRequest struct {
 	// FilterableProperties - Dictionary of filterable properties on product family.
 	FilterableProperties map[string][]FilterableProperty `json:"filterableProperties"`
-	// CustomerSubscriptionDetails - Customer subscription properties. Clients can display available products to unregistered customers by explicitly passing subscription details
+	// CustomerSubscriptionDetails - Customer subscription properties. Clients can display available products to unregistered customers by explicitly passing subscription details.
 	CustomerSubscriptionDetails *CustomerSubscriptionDetails `json:"customerSubscriptionDetails,omitempty"`
 }
 
@@ -2692,9 +2996,9 @@ func (pfr ProductFamiliesRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(objectMap)
 }
 
-// ProductFamily product Family
+// ProductFamily product Family.
 type ProductFamily struct {
-	// ProductFamilyProperties - READ-ONLY; Properties of product family
+	// ProductFamilyProperties - READ-ONLY; Properties of product family.
 	*ProductFamilyProperties `json:"properties,omitempty"`
 }
 
@@ -2728,13 +3032,13 @@ func (pf *ProductFamily) UnmarshalJSON(body []byte) error {
 	return nil
 }
 
-// ProductFamilyProperties properties of product family
+// ProductFamilyProperties properties of product family.
 type ProductFamilyProperties struct {
-	// ProductLines - READ-ONLY; List of product lines supported in the product family
+	// ProductLines - READ-ONLY; List of product lines supported in the product family.
 	ProductLines *[]ProductLine `json:"productLines,omitempty"`
-	// ResourceProviderDetails - Contains details related to resource provider
+	// ResourceProviderDetails - Contains details related to resource provider.
 	ResourceProviderDetails *[]ResourceProviderDetails `json:"resourceProviderDetails,omitempty"`
-	// FilterableProperties - READ-ONLY; list of filters supported for a product
+	// FilterableProperties - READ-ONLY; List of filters supported for a product.
 	FilterableProperties *[]FilterableProperty `json:"filterableProperties,omitempty"`
 	// DisplayName - READ-ONLY; Display Name for the product system.
 	DisplayName *string `json:"displayName,omitempty"`
@@ -2748,6 +3052,8 @@ type ProductFamilyProperties struct {
 	AvailabilityInformation *AvailabilityInformation `json:"availabilityInformation,omitempty"`
 	// HierarchyInformation - READ-ONLY; Hierarchy information of a product.
 	HierarchyInformation *HierarchyInformation `json:"hierarchyInformation,omitempty"`
+	// FulfilledBy - READ-ONLY; The entity responsible for fulfillment of the item at the given hierarchy level. Possible values include: 'Microsoft', 'External'
+	FulfilledBy FulfillmentType `json:"fulfilledBy,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for ProductFamilyProperties.
@@ -2759,9 +3065,9 @@ func (pfp ProductFamilyProperties) MarshalJSON() ([]byte, error) {
 	return json.Marshal(objectMap)
 }
 
-// ProductLine product line
+// ProductLine product line.
 type ProductLine struct {
-	// ProductLineProperties - READ-ONLY; Properties of product line
+	// ProductLineProperties - READ-ONLY; Properties of product line.
 	*ProductLineProperties `json:"properties,omitempty"`
 }
 
@@ -2795,11 +3101,11 @@ func (pl *ProductLine) UnmarshalJSON(body []byte) error {
 	return nil
 }
 
-// ProductLineProperties properties of product line
+// ProductLineProperties properties of product line.
 type ProductLineProperties struct {
-	// Products - READ-ONLY; List of products in the product line
+	// Products - READ-ONLY; List of products in the product line.
 	Products *[]Product `json:"products,omitempty"`
-	// FilterableProperties - READ-ONLY; list of filters supported for a product
+	// FilterableProperties - READ-ONLY; List of filters supported for a product.
 	FilterableProperties *[]FilterableProperty `json:"filterableProperties,omitempty"`
 	// DisplayName - READ-ONLY; Display Name for the product system.
 	DisplayName *string `json:"displayName,omitempty"`
@@ -2813,6 +3119,8 @@ type ProductLineProperties struct {
 	AvailabilityInformation *AvailabilityInformation `json:"availabilityInformation,omitempty"`
 	// HierarchyInformation - READ-ONLY; Hierarchy information of a product.
 	HierarchyInformation *HierarchyInformation `json:"hierarchyInformation,omitempty"`
+	// FulfilledBy - READ-ONLY; The entity responsible for fulfillment of the item at the given hierarchy level. Possible values include: 'Microsoft', 'External'
+	FulfilledBy FulfillmentType `json:"fulfilledBy,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for ProductLineProperties.
@@ -2821,11 +3129,11 @@ func (plp ProductLineProperties) MarshalJSON() ([]byte, error) {
 	return json.Marshal(objectMap)
 }
 
-// ProductProperties properties of products
+// ProductProperties properties of product.
 type ProductProperties struct {
-	// Configurations - READ-ONLY; List of configurations for the product
+	// Configurations - READ-ONLY; List of configurations for the product.
 	Configurations *[]Configuration `json:"configurations,omitempty"`
-	// FilterableProperties - READ-ONLY; list of filters supported for a product
+	// FilterableProperties - READ-ONLY; List of filters supported for a product.
 	FilterableProperties *[]FilterableProperty `json:"filterableProperties,omitempty"`
 	// DisplayName - READ-ONLY; Display Name for the product system.
 	DisplayName *string `json:"displayName,omitempty"`
@@ -2839,6 +3147,8 @@ type ProductProperties struct {
 	AvailabilityInformation *AvailabilityInformation `json:"availabilityInformation,omitempty"`
 	// HierarchyInformation - READ-ONLY; Hierarchy information of a product.
 	HierarchyInformation *HierarchyInformation `json:"hierarchyInformation,omitempty"`
+	// FulfilledBy - READ-ONLY; The entity responsible for fulfillment of the item at the given hierarchy level. Possible values include: 'Microsoft', 'External'
+	FulfilledBy FulfillmentType `json:"fulfilledBy,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for ProductProperties.
@@ -2864,17 +3174,17 @@ func (pr ProxyResource) MarshalJSON() ([]byte, error) {
 	return json.Marshal(objectMap)
 }
 
-// PurchaseMeterDetails billing type Purchase meter details
+// PurchaseMeterDetails billing type Purchase meter details.
 type PurchaseMeterDetails struct {
-	// ProductID - READ-ONLY; Product Id
+	// ProductID - READ-ONLY; Product Id.
 	ProductID *string `json:"productId,omitempty"`
-	// SkuID - READ-ONLY; Sku Id
+	// SkuID - READ-ONLY; Sku Id.
 	SkuID *string `json:"skuId,omitempty"`
-	// TermID - READ-ONLY; Term Id
+	// TermID - READ-ONLY; Term Id.
 	TermID *string `json:"termId,omitempty"`
-	// Multiplier - READ-ONLY; Billing unit applicable for Pav2 billing
+	// Multiplier - READ-ONLY; Billing unit applicable for Pav2 billing.
 	Multiplier *float64 `json:"multiplier,omitempty"`
-	// ChargingType - READ-ONLY; Charging type. Possible values include: 'ChargingTypePerOrder', 'ChargingTypePerDevice'
+	// ChargingType - READ-ONLY; Charging type. Possible values include: 'PerOrder', 'PerDevice'
 	ChargingType ChargingType `json:"chargingType,omitempty"`
 	// BillingType - Possible values include: 'BillingTypeMeterDetails', 'BillingTypePav2', 'BillingTypePurchase'
 	BillingType BillingType `json:"billingType,omitempty"`
@@ -2926,28 +3236,15 @@ func (r Resource) MarshalJSON() ([]byte, error) {
 	return json.Marshal(objectMap)
 }
 
-// ResourceIdentity msi identity details of the resource
-type ResourceIdentity struct {
-	// Type - Identity type
-	Type *string `json:"type,omitempty"`
-	// PrincipalID - READ-ONLY; Service Principal Id backing the Msi
-	PrincipalID *string `json:"principalId,omitempty"`
-	// TenantID - READ-ONLY; Home Tenant Id
-	TenantID *string `json:"tenantId,omitempty"`
+// ResourceMoveRequest ...
+type ResourceMoveRequest struct {
+	TargetResourceGroup *string   `json:"targetResourceGroup,omitempty"`
+	Resources           *[]string `json:"resources,omitempty"`
 }
 
-// MarshalJSON is the custom marshaler for ResourceIdentity.
-func (ri ResourceIdentity) MarshalJSON() ([]byte, error) {
-	objectMap := make(map[string]interface{})
-	if ri.Type != nil {
-		objectMap["type"] = ri.Type
-	}
-	return json.Marshal(objectMap)
-}
-
-// ResourceProviderDetails management RP details
+// ResourceProviderDetails management RP details.
 type ResourceProviderDetails struct {
-	// ResourceProviderNamespace - READ-ONLY; Resource provider namespace
+	// ResourceProviderNamespace - READ-ONLY; Resource provider namespace.
 	ResourceProviderNamespace *string `json:"resourceProviderNamespace,omitempty"`
 }
 
@@ -2957,53 +3254,16 @@ func (rpd ResourceProviderDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(objectMap)
 }
 
-// ReturnOrderItemDetails return order item request body
+// ReturnOrderItemDetails return order item request body.
 type ReturnOrderItemDetails struct {
-	// ReturnAddress - customer return address.
+	// ReturnAddress - Customer return address.
 	ReturnAddress *AddressProperties `json:"returnAddress,omitempty"`
 	// ReturnReason - Return Reason.
 	ReturnReason *string `json:"returnReason,omitempty"`
-	// ServiceTag - Service tag (located on the bottom-right corner of the device)
+	// ServiceTag - Service tag (located on the bottom-right corner of the device).
 	ServiceTag *string `json:"serviceTag,omitempty"`
-	// ShippingBoxRequired - Shipping Box required
+	// ShippingBoxRequired - Shipping Box required.
 	ShippingBoxRequired *bool `json:"shippingBoxRequired,omitempty"`
-}
-
-// ReturnOrderItemFuture an abstraction for monitoring and retrieving the results of a long-running
-// operation.
-type ReturnOrderItemFuture struct {
-	azure.FutureAPI
-	// Result returns the result of the asynchronous operation.
-	// If the operation has not completed it will return an error.
-	Result func(BaseClient) (autorest.Response, error)
-}
-
-// UnmarshalJSON is the custom unmarshaller for CreateFuture.
-func (future *ReturnOrderItemFuture) UnmarshalJSON(body []byte) error {
-	var azFuture azure.Future
-	if err := json.Unmarshal(body, &azFuture); err != nil {
-		return err
-	}
-	future.FutureAPI = &azFuture
-	future.Result = future.result
-	return nil
-}
-
-// result is the default implementation for ReturnOrderItemFuture.Result.
-func (future *ReturnOrderItemFuture) result(client BaseClient) (ar autorest.Response, err error) {
-	var done bool
-	done, err = future.DoneWithContext(context.Background(), client)
-	if err != nil {
-		err = autorest.NewErrorWithError(err, "edgeorder.ReturnOrderItemFuture", "Result", future.Response(), "Polling failure")
-		return
-	}
-	if !done {
-		ar.Response = future.Response()
-		err = azure.NewAsyncOpIncompleteError("edgeorder.ReturnOrderItemFuture")
-		return
-	}
-	ar.Response = future.Response()
-	return
 }
 
 // ReverseShippingDetails reverse shipment details.
@@ -3014,7 +3274,7 @@ type ReverseShippingDetails struct {
 	CarrierName *string `json:"carrierName,omitempty"`
 	// CarrierDisplayName - READ-ONLY; Carrier Name for display purpose. Not to be used for any processing.
 	CarrierDisplayName *string `json:"carrierDisplayName,omitempty"`
-	// TrackingID - READ-ONLY; TrackingId of the package
+	// TrackingID - READ-ONLY; TrackingId of the package.
 	TrackingID *string `json:"trackingId,omitempty"`
 	// TrackingURL - READ-ONLY; TrackingUrl of the package.
 	TrackingURL *string `json:"trackingUrl,omitempty"`
@@ -3046,33 +3306,15 @@ type ShippingAddress struct {
 	ZipExtendedCode *string `json:"zipExtendedCode,omitempty"`
 	// CompanyName - Name of the company.
 	CompanyName *string `json:"companyName,omitempty"`
-	// AddressType - Type of address. Possible values include: 'AddressTypeNone', 'AddressTypeResidential', 'AddressTypeCommercial'
+	// AddressType - Type of address. Possible values include: 'None', 'Residential', 'Commercial'
 	AddressType AddressType `json:"addressType,omitempty"`
 }
 
-// ShippingDetails package shipping details
-type ShippingDetails struct {
-	// CarrierName - READ-ONLY; Name of the carrier.
-	CarrierName *string `json:"carrierName,omitempty"`
-	// CarrierDisplayName - READ-ONLY; Carrier Name for display purpose. Not to be used for any processing.
-	CarrierDisplayName *string `json:"carrierDisplayName,omitempty"`
-	// TrackingID - READ-ONLY; TrackingId of the package
-	TrackingID *string `json:"trackingId,omitempty"`
-	// TrackingURL - READ-ONLY; TrackingUrl of the package.
-	TrackingURL *string `json:"trackingUrl,omitempty"`
-}
-
-// MarshalJSON is the custom marshaler for ShippingDetails.
-func (sd ShippingDetails) MarshalJSON() ([]byte, error) {
-	objectMap := make(map[string]interface{})
-	return json.Marshal(objectMap)
-}
-
-// Specification specifications of the configurations
+// Specification specification of the configurations.
 type Specification struct {
-	// Name - READ-ONLY; Name of the specification
+	// Name - READ-ONLY; Name of the specification.
 	Name *string `json:"name,omitempty"`
-	// Value - READ-ONLY; Value of the specification
+	// Value - READ-ONLY; Value of the specification.
 	Value *string `json:"value,omitempty"`
 }
 
@@ -3090,7 +3332,7 @@ type StageDetails struct {
 	StageName StageName `json:"stageName,omitempty"`
 	// DisplayName - READ-ONLY; Display name of the resource stage.
 	DisplayName *string `json:"displayName,omitempty"`
-	// StartTime - READ-ONLY; Stage start time
+	// StartTime - READ-ONLY; Stage start time.
 	StartTime *date.Time `json:"startTime,omitempty"`
 }
 
@@ -3104,13 +3346,13 @@ func (sd StageDetails) MarshalJSON() ([]byte, error) {
 type SystemData struct {
 	// CreatedBy - The identity that created the resource.
 	CreatedBy *string `json:"createdBy,omitempty"`
-	// CreatedByType - The type of identity that created the resource. Possible values include: 'CreatedByTypeUser', 'CreatedByTypeApplication', 'CreatedByTypeManagedIdentity', 'CreatedByTypeKey'
+	// CreatedByType - The type of identity that created the resource. Possible values include: 'User', 'Application', 'ManagedIdentity', 'Key'
 	CreatedByType CreatedByType `json:"createdByType,omitempty"`
 	// CreatedAt - The timestamp of resource creation (UTC).
 	CreatedAt *date.Time `json:"createdAt,omitempty"`
 	// LastModifiedBy - The identity that last modified the resource.
 	LastModifiedBy *string `json:"lastModifiedBy,omitempty"`
-	// LastModifiedByType - The type of identity that last modified the resource. Possible values include: 'CreatedByTypeUser', 'CreatedByTypeApplication', 'CreatedByTypeManagedIdentity', 'CreatedByTypeKey'
+	// LastModifiedByType - The type of identity that last modified the resource. Possible values include: 'User', 'Application', 'ManagedIdentity', 'Key'
 	LastModifiedByType CreatedByType `json:"lastModifiedByType,omitempty"`
 	// LastModifiedAt - The timestamp of resource last modification (UTC)
 	LastModifiedAt *date.Time `json:"lastModifiedAt,omitempty"`
@@ -3143,94 +3385,8 @@ func (tr TrackedResource) MarshalJSON() ([]byte, error) {
 	return json.Marshal(objectMap)
 }
 
-// TransportPreferences preferences related to the shipment logistics of the sku
+// TransportPreferences preferences related to the shipment logistics of the sku.
 type TransportPreferences struct {
-	// PreferredShipmentType - Indicates Shipment Logistics type that the customer preferred. Possible values include: 'TransportShipmentTypesCustomerManaged', 'TransportShipmentTypesMicrosoftManaged'
+	// PreferredShipmentType - Indicates Shipment Logistics type that the customer preferred. Possible values include: 'CustomerManaged', 'MicrosoftManaged'
 	PreferredShipmentType TransportShipmentTypes `json:"preferredShipmentType,omitempty"`
-}
-
-// UpdateAddressFuture an abstraction for monitoring and retrieving the results of a long-running
-// operation.
-type UpdateAddressFuture struct {
-	azure.FutureAPI
-	// Result returns the result of the asynchronous operation.
-	// If the operation has not completed it will return an error.
-	Result func(BaseClient) (AddressResource, error)
-}
-
-// UnmarshalJSON is the custom unmarshaller for CreateFuture.
-func (future *UpdateAddressFuture) UnmarshalJSON(body []byte) error {
-	var azFuture azure.Future
-	if err := json.Unmarshal(body, &azFuture); err != nil {
-		return err
-	}
-	future.FutureAPI = &azFuture
-	future.Result = future.result
-	return nil
-}
-
-// result is the default implementation for UpdateAddressFuture.Result.
-func (future *UpdateAddressFuture) result(client BaseClient) (ar AddressResource, err error) {
-	var done bool
-	done, err = future.DoneWithContext(context.Background(), client)
-	if err != nil {
-		err = autorest.NewErrorWithError(err, "edgeorder.UpdateAddressFuture", "Result", future.Response(), "Polling failure")
-		return
-	}
-	if !done {
-		ar.Response.Response = future.Response()
-		err = azure.NewAsyncOpIncompleteError("edgeorder.UpdateAddressFuture")
-		return
-	}
-	sender := autorest.DecorateSender(client, autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
-	if ar.Response.Response, err = future.GetResult(sender); err == nil && ar.Response.Response.StatusCode != http.StatusNoContent {
-		ar, err = client.UpdateAddressResponder(ar.Response.Response)
-		if err != nil {
-			err = autorest.NewErrorWithError(err, "edgeorder.UpdateAddressFuture", "Result", ar.Response.Response, "Failure responding to request")
-		}
-	}
-	return
-}
-
-// UpdateOrderItemFuture an abstraction for monitoring and retrieving the results of a long-running
-// operation.
-type UpdateOrderItemFuture struct {
-	azure.FutureAPI
-	// Result returns the result of the asynchronous operation.
-	// If the operation has not completed it will return an error.
-	Result func(BaseClient) (OrderItemResource, error)
-}
-
-// UnmarshalJSON is the custom unmarshaller for CreateFuture.
-func (future *UpdateOrderItemFuture) UnmarshalJSON(body []byte) error {
-	var azFuture azure.Future
-	if err := json.Unmarshal(body, &azFuture); err != nil {
-		return err
-	}
-	future.FutureAPI = &azFuture
-	future.Result = future.result
-	return nil
-}
-
-// result is the default implementation for UpdateOrderItemFuture.Result.
-func (future *UpdateOrderItemFuture) result(client BaseClient) (oir OrderItemResource, err error) {
-	var done bool
-	done, err = future.DoneWithContext(context.Background(), client)
-	if err != nil {
-		err = autorest.NewErrorWithError(err, "edgeorder.UpdateOrderItemFuture", "Result", future.Response(), "Polling failure")
-		return
-	}
-	if !done {
-		oir.Response.Response = future.Response()
-		err = azure.NewAsyncOpIncompleteError("edgeorder.UpdateOrderItemFuture")
-		return
-	}
-	sender := autorest.DecorateSender(client, autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
-	if oir.Response.Response, err = future.GetResult(sender); err == nil && oir.Response.Response.StatusCode != http.StatusNoContent {
-		oir, err = client.UpdateOrderItemResponder(oir.Response.Response)
-		if err != nil {
-			err = autorest.NewErrorWithError(err, "edgeorder.UpdateOrderItemFuture", "Result", oir.Response.Response, "Failure responding to request")
-		}
-	}
-	return
 }
