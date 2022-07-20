@@ -42,124 +42,14 @@ type AutomaticResolutionProperties struct {
 	MoveResourceID *string `json:"moveResourceId,omitempty"`
 }
 
-// AvailabilitySetResourceSettings gets or sets the availability set resource settings.
-type AvailabilitySetResourceSettings struct {
-	// FaultDomain - Gets or sets the target fault domain.
-	FaultDomain *int32 `json:"faultDomain,omitempty"`
-	// UpdateDomain - Gets or sets the target update domain.
-	UpdateDomain *int32 `json:"updateDomain,omitempty"`
-	// TargetResourceName - Gets or sets the target Resource name.
-	TargetResourceName *string `json:"targetResourceName,omitempty"`
-	// ResourceType - Possible values include: 'ResourceTypeResourceSettings', 'ResourceTypeMicrosoftComputevirtualMachines', 'ResourceTypeMicrosoftComputeavailabilitySets', 'ResourceTypeMicrosoftNetworkvirtualNetworks', 'ResourceTypeMicrosoftNetworknetworkInterfaces', 'ResourceTypeMicrosoftNetworknetworkSecurityGroups', 'ResourceTypeMicrosoftNetworkloadBalancers', 'ResourceTypeMicrosoftSqlservers', 'ResourceTypeMicrosoftSqlserverselasticPools', 'ResourceTypeMicrosoftSqlserversdatabases', 'ResourceTypeResourceGroups', 'ResourceTypeMicrosoftNetworkpublicIPAddresses', 'ResourceTypeMicrosoftKeyVaultvaults', 'ResourceTypeMicrosoftComputediskEncryptionSets'
-	ResourceType ResourceType `json:"resourceType,omitempty"`
-}
-
-// MarshalJSON is the custom marshaler for AvailabilitySetResourceSettings.
-func (asrs AvailabilitySetResourceSettings) MarshalJSON() ([]byte, error) {
-	asrs.ResourceType = ResourceTypeMicrosoftComputeavailabilitySets
-	objectMap := make(map[string]interface{})
-	if asrs.FaultDomain != nil {
-		objectMap["faultDomain"] = asrs.FaultDomain
-	}
-	if asrs.UpdateDomain != nil {
-		objectMap["updateDomain"] = asrs.UpdateDomain
-	}
-	if asrs.TargetResourceName != nil {
-		objectMap["targetResourceName"] = asrs.TargetResourceName
-	}
-	if asrs.ResourceType != "" {
-		objectMap["resourceType"] = asrs.ResourceType
-	}
-	return json.Marshal(objectMap)
-}
-
-// AsVirtualMachineResourceSettings is the BasicResourceSettings implementation for AvailabilitySetResourceSettings.
-func (asrs AvailabilitySetResourceSettings) AsVirtualMachineResourceSettings() (*VirtualMachineResourceSettings, bool) {
-	return nil, false
-}
-
-// AsAvailabilitySetResourceSettings is the BasicResourceSettings implementation for AvailabilitySetResourceSettings.
-func (asrs AvailabilitySetResourceSettings) AsAvailabilitySetResourceSettings() (*AvailabilitySetResourceSettings, bool) {
-	return &asrs, true
-}
-
-// AsVirtualNetworkResourceSettings is the BasicResourceSettings implementation for AvailabilitySetResourceSettings.
-func (asrs AvailabilitySetResourceSettings) AsVirtualNetworkResourceSettings() (*VirtualNetworkResourceSettings, bool) {
-	return nil, false
-}
-
-// AsNetworkInterfaceResourceSettings is the BasicResourceSettings implementation for AvailabilitySetResourceSettings.
-func (asrs AvailabilitySetResourceSettings) AsNetworkInterfaceResourceSettings() (*NetworkInterfaceResourceSettings, bool) {
-	return nil, false
-}
-
-// AsNetworkSecurityGroupResourceSettings is the BasicResourceSettings implementation for AvailabilitySetResourceSettings.
-func (asrs AvailabilitySetResourceSettings) AsNetworkSecurityGroupResourceSettings() (*NetworkSecurityGroupResourceSettings, bool) {
-	return nil, false
-}
-
-// AsLoadBalancerResourceSettings is the BasicResourceSettings implementation for AvailabilitySetResourceSettings.
-func (asrs AvailabilitySetResourceSettings) AsLoadBalancerResourceSettings() (*LoadBalancerResourceSettings, bool) {
-	return nil, false
-}
-
-// AsSQLServerResourceSettings is the BasicResourceSettings implementation for AvailabilitySetResourceSettings.
-func (asrs AvailabilitySetResourceSettings) AsSQLServerResourceSettings() (*SQLServerResourceSettings, bool) {
-	return nil, false
-}
-
-// AsSQLElasticPoolResourceSettings is the BasicResourceSettings implementation for AvailabilitySetResourceSettings.
-func (asrs AvailabilitySetResourceSettings) AsSQLElasticPoolResourceSettings() (*SQLElasticPoolResourceSettings, bool) {
-	return nil, false
-}
-
-// AsSQLDatabaseResourceSettings is the BasicResourceSettings implementation for AvailabilitySetResourceSettings.
-func (asrs AvailabilitySetResourceSettings) AsSQLDatabaseResourceSettings() (*SQLDatabaseResourceSettings, bool) {
-	return nil, false
-}
-
-// AsResourceGroupResourceSettings is the BasicResourceSettings implementation for AvailabilitySetResourceSettings.
-func (asrs AvailabilitySetResourceSettings) AsResourceGroupResourceSettings() (*ResourceGroupResourceSettings, bool) {
-	return nil, false
-}
-
-// AsPublicIPAddressResourceSettings is the BasicResourceSettings implementation for AvailabilitySetResourceSettings.
-func (asrs AvailabilitySetResourceSettings) AsPublicIPAddressResourceSettings() (*PublicIPAddressResourceSettings, bool) {
-	return nil, false
-}
-
-// AsKeyVaultResourceSettings is the BasicResourceSettings implementation for AvailabilitySetResourceSettings.
-func (asrs AvailabilitySetResourceSettings) AsKeyVaultResourceSettings() (*KeyVaultResourceSettings, bool) {
-	return nil, false
-}
-
-// AsDiskEncryptionSetResourceSettings is the BasicResourceSettings implementation for AvailabilitySetResourceSettings.
-func (asrs AvailabilitySetResourceSettings) AsDiskEncryptionSetResourceSettings() (*DiskEncryptionSetResourceSettings, bool) {
-	return nil, false
-}
-
-// AsResourceSettings is the BasicResourceSettings implementation for AvailabilitySetResourceSettings.
-func (asrs AvailabilitySetResourceSettings) AsResourceSettings() (*ResourceSettings, bool) {
-	return nil, false
-}
-
-// AsBasicResourceSettings is the BasicResourceSettings implementation for AvailabilitySetResourceSettings.
-func (asrs AvailabilitySetResourceSettings) AsBasicResourceSettings() (BasicResourceSettings, bool) {
-	return &asrs, true
-}
-
-// AzureResourceReference defines reference to an Azure resource.
-type AzureResourceReference struct {
-	// SourceArmResourceID - Gets the ARM resource ID of the tracked resource being referenced.
-	SourceArmResourceID *string `json:"sourceArmResourceId,omitempty"`
-}
-
 // BulkRemoveRequest defines the request body for bulk remove of move resources operation.
 type BulkRemoveRequest struct {
 	// ValidateOnly - Gets or sets a value indicating whether the operation needs to only run pre-requisite.
 	ValidateOnly *bool `json:"validateOnly,omitempty"`
 	// MoveResources - Gets or sets the list of resource Id's, by default it accepts move resource id's unless the input type is switched via moveResourceInputType property.
 	MoveResources *[]string `json:"moveResources,omitempty"`
+	// AddDependencyAutomatically - Gets or sets a value indicating whether the operation needs to add dependency automatically.
+	AddDependencyAutomatically *bool `json:"addDependencyAutomatically,omitempty"`
 	// MoveResourceInputType - Possible values include: 'MoveResourceID', 'MoveResourceSourceID'
 	MoveResourceInputType MoveResourceInputType `json:"moveResourceInputType,omitempty"`
 }
@@ -188,6 +78,8 @@ type CommitRequest struct {
 	ValidateOnly *bool `json:"validateOnly,omitempty"`
 	// MoveResources - Gets or sets the list of resource Id's, by default it accepts move resource id's unless the input type is switched via moveResourceInputType property.
 	MoveResources *[]string `json:"moveResources,omitempty"`
+	// AddDependencyAutomatically - Gets or sets a value indicating whether the operation needs to add dependency automatically.
+	AddDependencyAutomatically *bool `json:"addDependencyAutomatically,omitempty"`
 	// MoveResourceInputType - Possible values include: 'MoveResourceID', 'MoveResourceSourceID'
 	MoveResourceInputType MoveResourceInputType `json:"moveResourceInputType,omitempty"`
 }
@@ -198,104 +90,10 @@ type DiscardRequest struct {
 	ValidateOnly *bool `json:"validateOnly,omitempty"`
 	// MoveResources - Gets or sets the list of resource Id's, by default it accepts move resource id's unless the input type is switched via moveResourceInputType property.
 	MoveResources *[]string `json:"moveResources,omitempty"`
+	// AddDependencyAutomatically - Gets or sets a value indicating whether the operation needs to add dependency automatically.
+	AddDependencyAutomatically *bool `json:"addDependencyAutomatically,omitempty"`
 	// MoveResourceInputType - Possible values include: 'MoveResourceID', 'MoveResourceSourceID'
 	MoveResourceInputType MoveResourceInputType `json:"moveResourceInputType,omitempty"`
-}
-
-// DiskEncryptionSetResourceSettings defines the disk encryption set resource settings.
-type DiskEncryptionSetResourceSettings struct {
-	// TargetResourceName - Gets or sets the target Resource name.
-	TargetResourceName *string `json:"targetResourceName,omitempty"`
-	// ResourceType - Possible values include: 'ResourceTypeResourceSettings', 'ResourceTypeMicrosoftComputevirtualMachines', 'ResourceTypeMicrosoftComputeavailabilitySets', 'ResourceTypeMicrosoftNetworkvirtualNetworks', 'ResourceTypeMicrosoftNetworknetworkInterfaces', 'ResourceTypeMicrosoftNetworknetworkSecurityGroups', 'ResourceTypeMicrosoftNetworkloadBalancers', 'ResourceTypeMicrosoftSqlservers', 'ResourceTypeMicrosoftSqlserverselasticPools', 'ResourceTypeMicrosoftSqlserversdatabases', 'ResourceTypeResourceGroups', 'ResourceTypeMicrosoftNetworkpublicIPAddresses', 'ResourceTypeMicrosoftKeyVaultvaults', 'ResourceTypeMicrosoftComputediskEncryptionSets'
-	ResourceType ResourceType `json:"resourceType,omitempty"`
-}
-
-// MarshalJSON is the custom marshaler for DiskEncryptionSetResourceSettings.
-func (desrs DiskEncryptionSetResourceSettings) MarshalJSON() ([]byte, error) {
-	desrs.ResourceType = ResourceTypeMicrosoftComputediskEncryptionSets
-	objectMap := make(map[string]interface{})
-	if desrs.TargetResourceName != nil {
-		objectMap["targetResourceName"] = desrs.TargetResourceName
-	}
-	if desrs.ResourceType != "" {
-		objectMap["resourceType"] = desrs.ResourceType
-	}
-	return json.Marshal(objectMap)
-}
-
-// AsVirtualMachineResourceSettings is the BasicResourceSettings implementation for DiskEncryptionSetResourceSettings.
-func (desrs DiskEncryptionSetResourceSettings) AsVirtualMachineResourceSettings() (*VirtualMachineResourceSettings, bool) {
-	return nil, false
-}
-
-// AsAvailabilitySetResourceSettings is the BasicResourceSettings implementation for DiskEncryptionSetResourceSettings.
-func (desrs DiskEncryptionSetResourceSettings) AsAvailabilitySetResourceSettings() (*AvailabilitySetResourceSettings, bool) {
-	return nil, false
-}
-
-// AsVirtualNetworkResourceSettings is the BasicResourceSettings implementation for DiskEncryptionSetResourceSettings.
-func (desrs DiskEncryptionSetResourceSettings) AsVirtualNetworkResourceSettings() (*VirtualNetworkResourceSettings, bool) {
-	return nil, false
-}
-
-// AsNetworkInterfaceResourceSettings is the BasicResourceSettings implementation for DiskEncryptionSetResourceSettings.
-func (desrs DiskEncryptionSetResourceSettings) AsNetworkInterfaceResourceSettings() (*NetworkInterfaceResourceSettings, bool) {
-	return nil, false
-}
-
-// AsNetworkSecurityGroupResourceSettings is the BasicResourceSettings implementation for DiskEncryptionSetResourceSettings.
-func (desrs DiskEncryptionSetResourceSettings) AsNetworkSecurityGroupResourceSettings() (*NetworkSecurityGroupResourceSettings, bool) {
-	return nil, false
-}
-
-// AsLoadBalancerResourceSettings is the BasicResourceSettings implementation for DiskEncryptionSetResourceSettings.
-func (desrs DiskEncryptionSetResourceSettings) AsLoadBalancerResourceSettings() (*LoadBalancerResourceSettings, bool) {
-	return nil, false
-}
-
-// AsSQLServerResourceSettings is the BasicResourceSettings implementation for DiskEncryptionSetResourceSettings.
-func (desrs DiskEncryptionSetResourceSettings) AsSQLServerResourceSettings() (*SQLServerResourceSettings, bool) {
-	return nil, false
-}
-
-// AsSQLElasticPoolResourceSettings is the BasicResourceSettings implementation for DiskEncryptionSetResourceSettings.
-func (desrs DiskEncryptionSetResourceSettings) AsSQLElasticPoolResourceSettings() (*SQLElasticPoolResourceSettings, bool) {
-	return nil, false
-}
-
-// AsSQLDatabaseResourceSettings is the BasicResourceSettings implementation for DiskEncryptionSetResourceSettings.
-func (desrs DiskEncryptionSetResourceSettings) AsSQLDatabaseResourceSettings() (*SQLDatabaseResourceSettings, bool) {
-	return nil, false
-}
-
-// AsResourceGroupResourceSettings is the BasicResourceSettings implementation for DiskEncryptionSetResourceSettings.
-func (desrs DiskEncryptionSetResourceSettings) AsResourceGroupResourceSettings() (*ResourceGroupResourceSettings, bool) {
-	return nil, false
-}
-
-// AsPublicIPAddressResourceSettings is the BasicResourceSettings implementation for DiskEncryptionSetResourceSettings.
-func (desrs DiskEncryptionSetResourceSettings) AsPublicIPAddressResourceSettings() (*PublicIPAddressResourceSettings, bool) {
-	return nil, false
-}
-
-// AsKeyVaultResourceSettings is the BasicResourceSettings implementation for DiskEncryptionSetResourceSettings.
-func (desrs DiskEncryptionSetResourceSettings) AsKeyVaultResourceSettings() (*KeyVaultResourceSettings, bool) {
-	return nil, false
-}
-
-// AsDiskEncryptionSetResourceSettings is the BasicResourceSettings implementation for DiskEncryptionSetResourceSettings.
-func (desrs DiskEncryptionSetResourceSettings) AsDiskEncryptionSetResourceSettings() (*DiskEncryptionSetResourceSettings, bool) {
-	return &desrs, true
-}
-
-// AsResourceSettings is the BasicResourceSettings implementation for DiskEncryptionSetResourceSettings.
-func (desrs DiskEncryptionSetResourceSettings) AsResourceSettings() (*ResourceSettings, bool) {
-	return nil, false
-}
-
-// AsBasicResourceSettings is the BasicResourceSettings implementation for DiskEncryptionSetResourceSettings.
-func (desrs DiskEncryptionSetResourceSettings) AsBasicResourceSettings() (BasicResourceSettings, bool) {
-	return &desrs, true
 }
 
 // Display contains the localized display information for this particular operation / action. These
@@ -365,255 +163,6 @@ func (js JobStatus) MarshalJSON() ([]byte, error) {
 		objectMap["jobName"] = js.JobName
 	}
 	return json.Marshal(objectMap)
-}
-
-// KeyVaultResourceSettings defines the key vault resource settings.
-type KeyVaultResourceSettings struct {
-	// TargetResourceName - Gets or sets the target Resource name.
-	TargetResourceName *string `json:"targetResourceName,omitempty"`
-	// ResourceType - Possible values include: 'ResourceTypeResourceSettings', 'ResourceTypeMicrosoftComputevirtualMachines', 'ResourceTypeMicrosoftComputeavailabilitySets', 'ResourceTypeMicrosoftNetworkvirtualNetworks', 'ResourceTypeMicrosoftNetworknetworkInterfaces', 'ResourceTypeMicrosoftNetworknetworkSecurityGroups', 'ResourceTypeMicrosoftNetworkloadBalancers', 'ResourceTypeMicrosoftSqlservers', 'ResourceTypeMicrosoftSqlserverselasticPools', 'ResourceTypeMicrosoftSqlserversdatabases', 'ResourceTypeResourceGroups', 'ResourceTypeMicrosoftNetworkpublicIPAddresses', 'ResourceTypeMicrosoftKeyVaultvaults', 'ResourceTypeMicrosoftComputediskEncryptionSets'
-	ResourceType ResourceType `json:"resourceType,omitempty"`
-}
-
-// MarshalJSON is the custom marshaler for KeyVaultResourceSettings.
-func (kvrs KeyVaultResourceSettings) MarshalJSON() ([]byte, error) {
-	kvrs.ResourceType = ResourceTypeMicrosoftKeyVaultvaults
-	objectMap := make(map[string]interface{})
-	if kvrs.TargetResourceName != nil {
-		objectMap["targetResourceName"] = kvrs.TargetResourceName
-	}
-	if kvrs.ResourceType != "" {
-		objectMap["resourceType"] = kvrs.ResourceType
-	}
-	return json.Marshal(objectMap)
-}
-
-// AsVirtualMachineResourceSettings is the BasicResourceSettings implementation for KeyVaultResourceSettings.
-func (kvrs KeyVaultResourceSettings) AsVirtualMachineResourceSettings() (*VirtualMachineResourceSettings, bool) {
-	return nil, false
-}
-
-// AsAvailabilitySetResourceSettings is the BasicResourceSettings implementation for KeyVaultResourceSettings.
-func (kvrs KeyVaultResourceSettings) AsAvailabilitySetResourceSettings() (*AvailabilitySetResourceSettings, bool) {
-	return nil, false
-}
-
-// AsVirtualNetworkResourceSettings is the BasicResourceSettings implementation for KeyVaultResourceSettings.
-func (kvrs KeyVaultResourceSettings) AsVirtualNetworkResourceSettings() (*VirtualNetworkResourceSettings, bool) {
-	return nil, false
-}
-
-// AsNetworkInterfaceResourceSettings is the BasicResourceSettings implementation for KeyVaultResourceSettings.
-func (kvrs KeyVaultResourceSettings) AsNetworkInterfaceResourceSettings() (*NetworkInterfaceResourceSettings, bool) {
-	return nil, false
-}
-
-// AsNetworkSecurityGroupResourceSettings is the BasicResourceSettings implementation for KeyVaultResourceSettings.
-func (kvrs KeyVaultResourceSettings) AsNetworkSecurityGroupResourceSettings() (*NetworkSecurityGroupResourceSettings, bool) {
-	return nil, false
-}
-
-// AsLoadBalancerResourceSettings is the BasicResourceSettings implementation for KeyVaultResourceSettings.
-func (kvrs KeyVaultResourceSettings) AsLoadBalancerResourceSettings() (*LoadBalancerResourceSettings, bool) {
-	return nil, false
-}
-
-// AsSQLServerResourceSettings is the BasicResourceSettings implementation for KeyVaultResourceSettings.
-func (kvrs KeyVaultResourceSettings) AsSQLServerResourceSettings() (*SQLServerResourceSettings, bool) {
-	return nil, false
-}
-
-// AsSQLElasticPoolResourceSettings is the BasicResourceSettings implementation for KeyVaultResourceSettings.
-func (kvrs KeyVaultResourceSettings) AsSQLElasticPoolResourceSettings() (*SQLElasticPoolResourceSettings, bool) {
-	return nil, false
-}
-
-// AsSQLDatabaseResourceSettings is the BasicResourceSettings implementation for KeyVaultResourceSettings.
-func (kvrs KeyVaultResourceSettings) AsSQLDatabaseResourceSettings() (*SQLDatabaseResourceSettings, bool) {
-	return nil, false
-}
-
-// AsResourceGroupResourceSettings is the BasicResourceSettings implementation for KeyVaultResourceSettings.
-func (kvrs KeyVaultResourceSettings) AsResourceGroupResourceSettings() (*ResourceGroupResourceSettings, bool) {
-	return nil, false
-}
-
-// AsPublicIPAddressResourceSettings is the BasicResourceSettings implementation for KeyVaultResourceSettings.
-func (kvrs KeyVaultResourceSettings) AsPublicIPAddressResourceSettings() (*PublicIPAddressResourceSettings, bool) {
-	return nil, false
-}
-
-// AsKeyVaultResourceSettings is the BasicResourceSettings implementation for KeyVaultResourceSettings.
-func (kvrs KeyVaultResourceSettings) AsKeyVaultResourceSettings() (*KeyVaultResourceSettings, bool) {
-	return &kvrs, true
-}
-
-// AsDiskEncryptionSetResourceSettings is the BasicResourceSettings implementation for KeyVaultResourceSettings.
-func (kvrs KeyVaultResourceSettings) AsDiskEncryptionSetResourceSettings() (*DiskEncryptionSetResourceSettings, bool) {
-	return nil, false
-}
-
-// AsResourceSettings is the BasicResourceSettings implementation for KeyVaultResourceSettings.
-func (kvrs KeyVaultResourceSettings) AsResourceSettings() (*ResourceSettings, bool) {
-	return nil, false
-}
-
-// AsBasicResourceSettings is the BasicResourceSettings implementation for KeyVaultResourceSettings.
-func (kvrs KeyVaultResourceSettings) AsBasicResourceSettings() (BasicResourceSettings, bool) {
-	return &kvrs, true
-}
-
-// LBBackendAddressPoolResourceSettings defines load balancer backend address pool properties.
-type LBBackendAddressPoolResourceSettings struct {
-	// Name - Gets or sets the backend address pool name.
-	Name *string `json:"name,omitempty"`
-}
-
-// LBFrontendIPConfigurationResourceSettings defines load balancer frontend IP configuration properties.
-type LBFrontendIPConfigurationResourceSettings struct {
-	// Name - Gets or sets the frontend IP configuration name.
-	Name *string `json:"name,omitempty"`
-	// PrivateIPAddress - Gets or sets the IP address of the Load Balancer.This is only specified if a specific
-	// private IP address shall be allocated from the subnet specified in subnetRef.
-	PrivateIPAddress *string `json:"privateIpAddress,omitempty"`
-	// PrivateIPAllocationMethod - Gets or sets PrivateIP allocation method (Static/Dynamic).
-	PrivateIPAllocationMethod *string          `json:"privateIpAllocationMethod,omitempty"`
-	Subnet                    *SubnetReference `json:"subnet,omitempty"`
-	// Zones - Gets or sets the csv list of zones.
-	Zones *string `json:"zones,omitempty"`
-}
-
-// LoadBalancerBackendAddressPoolReference defines reference to load balancer backend address pools.
-type LoadBalancerBackendAddressPoolReference struct {
-	// Name - Gets the name of the proxy resource on the target side.
-	Name *string `json:"name,omitempty"`
-	// SourceArmResourceID - Gets the ARM resource ID of the tracked resource being referenced.
-	SourceArmResourceID *string `json:"sourceArmResourceId,omitempty"`
-}
-
-// LoadBalancerNatRuleReference defines reference to load balancer NAT rules.
-type LoadBalancerNatRuleReference struct {
-	// Name - Gets the name of the proxy resource on the target side.
-	Name *string `json:"name,omitempty"`
-	// SourceArmResourceID - Gets the ARM resource ID of the tracked resource being referenced.
-	SourceArmResourceID *string `json:"sourceArmResourceId,omitempty"`
-}
-
-// LoadBalancerResourceSettings defines the load balancer resource settings.
-type LoadBalancerResourceSettings struct {
-	// Sku - Gets or sets load balancer sku (Basic/Standard).
-	Sku *string `json:"sku,omitempty"`
-	// FrontendIPConfigurations - Gets or sets the frontend IP configurations of the load balancer.
-	FrontendIPConfigurations *[]LBFrontendIPConfigurationResourceSettings `json:"frontendIPConfigurations,omitempty"`
-	// BackendAddressPools - Gets or sets the backend address pools of the load balancer.
-	BackendAddressPools *[]LBBackendAddressPoolResourceSettings `json:"backendAddressPools,omitempty"`
-	// Zones - Gets or sets the csv list of zones common for all frontend IP configurations. Note this is given
-	//  precedence only if frontend IP configurations settings are not present.
-	Zones *string `json:"zones,omitempty"`
-	// TargetResourceName - Gets or sets the target Resource name.
-	TargetResourceName *string `json:"targetResourceName,omitempty"`
-	// ResourceType - Possible values include: 'ResourceTypeResourceSettings', 'ResourceTypeMicrosoftComputevirtualMachines', 'ResourceTypeMicrosoftComputeavailabilitySets', 'ResourceTypeMicrosoftNetworkvirtualNetworks', 'ResourceTypeMicrosoftNetworknetworkInterfaces', 'ResourceTypeMicrosoftNetworknetworkSecurityGroups', 'ResourceTypeMicrosoftNetworkloadBalancers', 'ResourceTypeMicrosoftSqlservers', 'ResourceTypeMicrosoftSqlserverselasticPools', 'ResourceTypeMicrosoftSqlserversdatabases', 'ResourceTypeResourceGroups', 'ResourceTypeMicrosoftNetworkpublicIPAddresses', 'ResourceTypeMicrosoftKeyVaultvaults', 'ResourceTypeMicrosoftComputediskEncryptionSets'
-	ResourceType ResourceType `json:"resourceType,omitempty"`
-}
-
-// MarshalJSON is the custom marshaler for LoadBalancerResourceSettings.
-func (lbrs LoadBalancerResourceSettings) MarshalJSON() ([]byte, error) {
-	lbrs.ResourceType = ResourceTypeMicrosoftNetworkloadBalancers
-	objectMap := make(map[string]interface{})
-	if lbrs.Sku != nil {
-		objectMap["sku"] = lbrs.Sku
-	}
-	if lbrs.FrontendIPConfigurations != nil {
-		objectMap["frontendIPConfigurations"] = lbrs.FrontendIPConfigurations
-	}
-	if lbrs.BackendAddressPools != nil {
-		objectMap["backendAddressPools"] = lbrs.BackendAddressPools
-	}
-	if lbrs.Zones != nil {
-		objectMap["zones"] = lbrs.Zones
-	}
-	if lbrs.TargetResourceName != nil {
-		objectMap["targetResourceName"] = lbrs.TargetResourceName
-	}
-	if lbrs.ResourceType != "" {
-		objectMap["resourceType"] = lbrs.ResourceType
-	}
-	return json.Marshal(objectMap)
-}
-
-// AsVirtualMachineResourceSettings is the BasicResourceSettings implementation for LoadBalancerResourceSettings.
-func (lbrs LoadBalancerResourceSettings) AsVirtualMachineResourceSettings() (*VirtualMachineResourceSettings, bool) {
-	return nil, false
-}
-
-// AsAvailabilitySetResourceSettings is the BasicResourceSettings implementation for LoadBalancerResourceSettings.
-func (lbrs LoadBalancerResourceSettings) AsAvailabilitySetResourceSettings() (*AvailabilitySetResourceSettings, bool) {
-	return nil, false
-}
-
-// AsVirtualNetworkResourceSettings is the BasicResourceSettings implementation for LoadBalancerResourceSettings.
-func (lbrs LoadBalancerResourceSettings) AsVirtualNetworkResourceSettings() (*VirtualNetworkResourceSettings, bool) {
-	return nil, false
-}
-
-// AsNetworkInterfaceResourceSettings is the BasicResourceSettings implementation for LoadBalancerResourceSettings.
-func (lbrs LoadBalancerResourceSettings) AsNetworkInterfaceResourceSettings() (*NetworkInterfaceResourceSettings, bool) {
-	return nil, false
-}
-
-// AsNetworkSecurityGroupResourceSettings is the BasicResourceSettings implementation for LoadBalancerResourceSettings.
-func (lbrs LoadBalancerResourceSettings) AsNetworkSecurityGroupResourceSettings() (*NetworkSecurityGroupResourceSettings, bool) {
-	return nil, false
-}
-
-// AsLoadBalancerResourceSettings is the BasicResourceSettings implementation for LoadBalancerResourceSettings.
-func (lbrs LoadBalancerResourceSettings) AsLoadBalancerResourceSettings() (*LoadBalancerResourceSettings, bool) {
-	return &lbrs, true
-}
-
-// AsSQLServerResourceSettings is the BasicResourceSettings implementation for LoadBalancerResourceSettings.
-func (lbrs LoadBalancerResourceSettings) AsSQLServerResourceSettings() (*SQLServerResourceSettings, bool) {
-	return nil, false
-}
-
-// AsSQLElasticPoolResourceSettings is the BasicResourceSettings implementation for LoadBalancerResourceSettings.
-func (lbrs LoadBalancerResourceSettings) AsSQLElasticPoolResourceSettings() (*SQLElasticPoolResourceSettings, bool) {
-	return nil, false
-}
-
-// AsSQLDatabaseResourceSettings is the BasicResourceSettings implementation for LoadBalancerResourceSettings.
-func (lbrs LoadBalancerResourceSettings) AsSQLDatabaseResourceSettings() (*SQLDatabaseResourceSettings, bool) {
-	return nil, false
-}
-
-// AsResourceGroupResourceSettings is the BasicResourceSettings implementation for LoadBalancerResourceSettings.
-func (lbrs LoadBalancerResourceSettings) AsResourceGroupResourceSettings() (*ResourceGroupResourceSettings, bool) {
-	return nil, false
-}
-
-// AsPublicIPAddressResourceSettings is the BasicResourceSettings implementation for LoadBalancerResourceSettings.
-func (lbrs LoadBalancerResourceSettings) AsPublicIPAddressResourceSettings() (*PublicIPAddressResourceSettings, bool) {
-	return nil, false
-}
-
-// AsKeyVaultResourceSettings is the BasicResourceSettings implementation for LoadBalancerResourceSettings.
-func (lbrs LoadBalancerResourceSettings) AsKeyVaultResourceSettings() (*KeyVaultResourceSettings, bool) {
-	return nil, false
-}
-
-// AsDiskEncryptionSetResourceSettings is the BasicResourceSettings implementation for LoadBalancerResourceSettings.
-func (lbrs LoadBalancerResourceSettings) AsDiskEncryptionSetResourceSettings() (*DiskEncryptionSetResourceSettings, bool) {
-	return nil, false
-}
-
-// AsResourceSettings is the BasicResourceSettings implementation for LoadBalancerResourceSettings.
-func (lbrs LoadBalancerResourceSettings) AsResourceSettings() (*ResourceSettings, bool) {
-	return nil, false
-}
-
-// AsBasicResourceSettings is the BasicResourceSettings implementation for LoadBalancerResourceSettings.
-func (lbrs LoadBalancerResourceSettings) AsBasicResourceSettings() (BasicResourceSettings, bool) {
-	return &lbrs, true
 }
 
 // ManualResolutionProperties defines the properties for manual resolution.
@@ -1435,8 +984,8 @@ type MoveResourceProperties struct {
 	ExistingTargetID *string `json:"existingTargetId,omitempty"`
 	// ResourceSettings - Gets or sets the resource settings.
 	ResourceSettings BasicResourceSettings `json:"resourceSettings,omitempty"`
-	// SourceResourceSettings - READ-ONLY; Gets or sets the source resource settings.
-	SourceResourceSettings BasicResourceSettings `json:"sourceResourceSettings,omitempty"`
+	// TargetResourceName - Gets or sets the target Resource name.
+	TargetResourceName *string `json:"targetResourceName,omitempty"`
 	// MoveStatus - READ-ONLY; Defines the move resource status.
 	MoveStatus *MoveResourcePropertiesMoveStatus `json:"moveStatus,omitempty"`
 	// DependsOn - READ-ONLY; Gets or sets the move resource dependencies.
@@ -1462,6 +1011,9 @@ func (mrp MoveResourceProperties) MarshalJSON() ([]byte, error) {
 		objectMap["existingTargetId"] = mrp.ExistingTargetID
 	}
 	objectMap["resourceSettings"] = mrp.ResourceSettings
+	if mrp.TargetResourceName != nil {
+		objectMap["targetResourceName"] = mrp.TargetResourceName
+	}
 	if mrp.DependsOnOverrides != nil {
 		objectMap["dependsOnOverrides"] = mrp.DependsOnOverrides
 	}
@@ -1521,13 +1073,14 @@ func (mrp *MoveResourceProperties) UnmarshalJSON(body []byte) error {
 				}
 				mrp.ResourceSettings = resourceSettings
 			}
-		case "sourceResourceSettings":
+		case "targetResourceName":
 			if v != nil {
-				sourceResourceSettings, err := unmarshalBasicResourceSettings(*v)
+				var targetResourceName string
+				err = json.Unmarshal(*v, &targetResourceName)
 				if err != nil {
 					return err
 				}
-				mrp.SourceResourceSettings = sourceResourceSettings
+				mrp.TargetResourceName = &targetResourceName
 			}
 		case "moveStatus":
 			if v != nil {
@@ -1688,272 +1241,6 @@ type MoveResourceStatus struct {
 	Errors    *MoveResourceError `json:"errors,omitempty"`
 }
 
-// NetworkInterfaceResourceSettings defines the network interface resource settings.
-type NetworkInterfaceResourceSettings struct {
-	// IPConfigurations - Gets or sets the IP configurations of the NIC.
-	IPConfigurations *[]NicIPConfigurationResourceSettings `json:"ipConfigurations,omitempty"`
-	// EnableAcceleratedNetworking - Gets or sets a value indicating whether accelerated networking is enabled.
-	EnableAcceleratedNetworking *bool `json:"enableAcceleratedNetworking,omitempty"`
-	// TargetResourceName - Gets or sets the target Resource name.
-	TargetResourceName *string `json:"targetResourceName,omitempty"`
-	// ResourceType - Possible values include: 'ResourceTypeResourceSettings', 'ResourceTypeMicrosoftComputevirtualMachines', 'ResourceTypeMicrosoftComputeavailabilitySets', 'ResourceTypeMicrosoftNetworkvirtualNetworks', 'ResourceTypeMicrosoftNetworknetworkInterfaces', 'ResourceTypeMicrosoftNetworknetworkSecurityGroups', 'ResourceTypeMicrosoftNetworkloadBalancers', 'ResourceTypeMicrosoftSqlservers', 'ResourceTypeMicrosoftSqlserverselasticPools', 'ResourceTypeMicrosoftSqlserversdatabases', 'ResourceTypeResourceGroups', 'ResourceTypeMicrosoftNetworkpublicIPAddresses', 'ResourceTypeMicrosoftKeyVaultvaults', 'ResourceTypeMicrosoftComputediskEncryptionSets'
-	ResourceType ResourceType `json:"resourceType,omitempty"`
-}
-
-// MarshalJSON is the custom marshaler for NetworkInterfaceResourceSettings.
-func (nirs NetworkInterfaceResourceSettings) MarshalJSON() ([]byte, error) {
-	nirs.ResourceType = ResourceTypeMicrosoftNetworknetworkInterfaces
-	objectMap := make(map[string]interface{})
-	if nirs.IPConfigurations != nil {
-		objectMap["ipConfigurations"] = nirs.IPConfigurations
-	}
-	if nirs.EnableAcceleratedNetworking != nil {
-		objectMap["enableAcceleratedNetworking"] = nirs.EnableAcceleratedNetworking
-	}
-	if nirs.TargetResourceName != nil {
-		objectMap["targetResourceName"] = nirs.TargetResourceName
-	}
-	if nirs.ResourceType != "" {
-		objectMap["resourceType"] = nirs.ResourceType
-	}
-	return json.Marshal(objectMap)
-}
-
-// AsVirtualMachineResourceSettings is the BasicResourceSettings implementation for NetworkInterfaceResourceSettings.
-func (nirs NetworkInterfaceResourceSettings) AsVirtualMachineResourceSettings() (*VirtualMachineResourceSettings, bool) {
-	return nil, false
-}
-
-// AsAvailabilitySetResourceSettings is the BasicResourceSettings implementation for NetworkInterfaceResourceSettings.
-func (nirs NetworkInterfaceResourceSettings) AsAvailabilitySetResourceSettings() (*AvailabilitySetResourceSettings, bool) {
-	return nil, false
-}
-
-// AsVirtualNetworkResourceSettings is the BasicResourceSettings implementation for NetworkInterfaceResourceSettings.
-func (nirs NetworkInterfaceResourceSettings) AsVirtualNetworkResourceSettings() (*VirtualNetworkResourceSettings, bool) {
-	return nil, false
-}
-
-// AsNetworkInterfaceResourceSettings is the BasicResourceSettings implementation for NetworkInterfaceResourceSettings.
-func (nirs NetworkInterfaceResourceSettings) AsNetworkInterfaceResourceSettings() (*NetworkInterfaceResourceSettings, bool) {
-	return &nirs, true
-}
-
-// AsNetworkSecurityGroupResourceSettings is the BasicResourceSettings implementation for NetworkInterfaceResourceSettings.
-func (nirs NetworkInterfaceResourceSettings) AsNetworkSecurityGroupResourceSettings() (*NetworkSecurityGroupResourceSettings, bool) {
-	return nil, false
-}
-
-// AsLoadBalancerResourceSettings is the BasicResourceSettings implementation for NetworkInterfaceResourceSettings.
-func (nirs NetworkInterfaceResourceSettings) AsLoadBalancerResourceSettings() (*LoadBalancerResourceSettings, bool) {
-	return nil, false
-}
-
-// AsSQLServerResourceSettings is the BasicResourceSettings implementation for NetworkInterfaceResourceSettings.
-func (nirs NetworkInterfaceResourceSettings) AsSQLServerResourceSettings() (*SQLServerResourceSettings, bool) {
-	return nil, false
-}
-
-// AsSQLElasticPoolResourceSettings is the BasicResourceSettings implementation for NetworkInterfaceResourceSettings.
-func (nirs NetworkInterfaceResourceSettings) AsSQLElasticPoolResourceSettings() (*SQLElasticPoolResourceSettings, bool) {
-	return nil, false
-}
-
-// AsSQLDatabaseResourceSettings is the BasicResourceSettings implementation for NetworkInterfaceResourceSettings.
-func (nirs NetworkInterfaceResourceSettings) AsSQLDatabaseResourceSettings() (*SQLDatabaseResourceSettings, bool) {
-	return nil, false
-}
-
-// AsResourceGroupResourceSettings is the BasicResourceSettings implementation for NetworkInterfaceResourceSettings.
-func (nirs NetworkInterfaceResourceSettings) AsResourceGroupResourceSettings() (*ResourceGroupResourceSettings, bool) {
-	return nil, false
-}
-
-// AsPublicIPAddressResourceSettings is the BasicResourceSettings implementation for NetworkInterfaceResourceSettings.
-func (nirs NetworkInterfaceResourceSettings) AsPublicIPAddressResourceSettings() (*PublicIPAddressResourceSettings, bool) {
-	return nil, false
-}
-
-// AsKeyVaultResourceSettings is the BasicResourceSettings implementation for NetworkInterfaceResourceSettings.
-func (nirs NetworkInterfaceResourceSettings) AsKeyVaultResourceSettings() (*KeyVaultResourceSettings, bool) {
-	return nil, false
-}
-
-// AsDiskEncryptionSetResourceSettings is the BasicResourceSettings implementation for NetworkInterfaceResourceSettings.
-func (nirs NetworkInterfaceResourceSettings) AsDiskEncryptionSetResourceSettings() (*DiskEncryptionSetResourceSettings, bool) {
-	return nil, false
-}
-
-// AsResourceSettings is the BasicResourceSettings implementation for NetworkInterfaceResourceSettings.
-func (nirs NetworkInterfaceResourceSettings) AsResourceSettings() (*ResourceSettings, bool) {
-	return nil, false
-}
-
-// AsBasicResourceSettings is the BasicResourceSettings implementation for NetworkInterfaceResourceSettings.
-func (nirs NetworkInterfaceResourceSettings) AsBasicResourceSettings() (BasicResourceSettings, bool) {
-	return &nirs, true
-}
-
-// NetworkSecurityGroupResourceSettings defines the NSG resource settings.
-type NetworkSecurityGroupResourceSettings struct {
-	// SecurityRules - Gets or sets Security rules of network security group.
-	SecurityRules *[]NsgSecurityRule `json:"securityRules,omitempty"`
-	// TargetResourceName - Gets or sets the target Resource name.
-	TargetResourceName *string `json:"targetResourceName,omitempty"`
-	// ResourceType - Possible values include: 'ResourceTypeResourceSettings', 'ResourceTypeMicrosoftComputevirtualMachines', 'ResourceTypeMicrosoftComputeavailabilitySets', 'ResourceTypeMicrosoftNetworkvirtualNetworks', 'ResourceTypeMicrosoftNetworknetworkInterfaces', 'ResourceTypeMicrosoftNetworknetworkSecurityGroups', 'ResourceTypeMicrosoftNetworkloadBalancers', 'ResourceTypeMicrosoftSqlservers', 'ResourceTypeMicrosoftSqlserverselasticPools', 'ResourceTypeMicrosoftSqlserversdatabases', 'ResourceTypeResourceGroups', 'ResourceTypeMicrosoftNetworkpublicIPAddresses', 'ResourceTypeMicrosoftKeyVaultvaults', 'ResourceTypeMicrosoftComputediskEncryptionSets'
-	ResourceType ResourceType `json:"resourceType,omitempty"`
-}
-
-// MarshalJSON is the custom marshaler for NetworkSecurityGroupResourceSettings.
-func (nsgrs NetworkSecurityGroupResourceSettings) MarshalJSON() ([]byte, error) {
-	nsgrs.ResourceType = ResourceTypeMicrosoftNetworknetworkSecurityGroups
-	objectMap := make(map[string]interface{})
-	if nsgrs.SecurityRules != nil {
-		objectMap["securityRules"] = nsgrs.SecurityRules
-	}
-	if nsgrs.TargetResourceName != nil {
-		objectMap["targetResourceName"] = nsgrs.TargetResourceName
-	}
-	if nsgrs.ResourceType != "" {
-		objectMap["resourceType"] = nsgrs.ResourceType
-	}
-	return json.Marshal(objectMap)
-}
-
-// AsVirtualMachineResourceSettings is the BasicResourceSettings implementation for NetworkSecurityGroupResourceSettings.
-func (nsgrs NetworkSecurityGroupResourceSettings) AsVirtualMachineResourceSettings() (*VirtualMachineResourceSettings, bool) {
-	return nil, false
-}
-
-// AsAvailabilitySetResourceSettings is the BasicResourceSettings implementation for NetworkSecurityGroupResourceSettings.
-func (nsgrs NetworkSecurityGroupResourceSettings) AsAvailabilitySetResourceSettings() (*AvailabilitySetResourceSettings, bool) {
-	return nil, false
-}
-
-// AsVirtualNetworkResourceSettings is the BasicResourceSettings implementation for NetworkSecurityGroupResourceSettings.
-func (nsgrs NetworkSecurityGroupResourceSettings) AsVirtualNetworkResourceSettings() (*VirtualNetworkResourceSettings, bool) {
-	return nil, false
-}
-
-// AsNetworkInterfaceResourceSettings is the BasicResourceSettings implementation for NetworkSecurityGroupResourceSettings.
-func (nsgrs NetworkSecurityGroupResourceSettings) AsNetworkInterfaceResourceSettings() (*NetworkInterfaceResourceSettings, bool) {
-	return nil, false
-}
-
-// AsNetworkSecurityGroupResourceSettings is the BasicResourceSettings implementation for NetworkSecurityGroupResourceSettings.
-func (nsgrs NetworkSecurityGroupResourceSettings) AsNetworkSecurityGroupResourceSettings() (*NetworkSecurityGroupResourceSettings, bool) {
-	return &nsgrs, true
-}
-
-// AsLoadBalancerResourceSettings is the BasicResourceSettings implementation for NetworkSecurityGroupResourceSettings.
-func (nsgrs NetworkSecurityGroupResourceSettings) AsLoadBalancerResourceSettings() (*LoadBalancerResourceSettings, bool) {
-	return nil, false
-}
-
-// AsSQLServerResourceSettings is the BasicResourceSettings implementation for NetworkSecurityGroupResourceSettings.
-func (nsgrs NetworkSecurityGroupResourceSettings) AsSQLServerResourceSettings() (*SQLServerResourceSettings, bool) {
-	return nil, false
-}
-
-// AsSQLElasticPoolResourceSettings is the BasicResourceSettings implementation for NetworkSecurityGroupResourceSettings.
-func (nsgrs NetworkSecurityGroupResourceSettings) AsSQLElasticPoolResourceSettings() (*SQLElasticPoolResourceSettings, bool) {
-	return nil, false
-}
-
-// AsSQLDatabaseResourceSettings is the BasicResourceSettings implementation for NetworkSecurityGroupResourceSettings.
-func (nsgrs NetworkSecurityGroupResourceSettings) AsSQLDatabaseResourceSettings() (*SQLDatabaseResourceSettings, bool) {
-	return nil, false
-}
-
-// AsResourceGroupResourceSettings is the BasicResourceSettings implementation for NetworkSecurityGroupResourceSettings.
-func (nsgrs NetworkSecurityGroupResourceSettings) AsResourceGroupResourceSettings() (*ResourceGroupResourceSettings, bool) {
-	return nil, false
-}
-
-// AsPublicIPAddressResourceSettings is the BasicResourceSettings implementation for NetworkSecurityGroupResourceSettings.
-func (nsgrs NetworkSecurityGroupResourceSettings) AsPublicIPAddressResourceSettings() (*PublicIPAddressResourceSettings, bool) {
-	return nil, false
-}
-
-// AsKeyVaultResourceSettings is the BasicResourceSettings implementation for NetworkSecurityGroupResourceSettings.
-func (nsgrs NetworkSecurityGroupResourceSettings) AsKeyVaultResourceSettings() (*KeyVaultResourceSettings, bool) {
-	return nil, false
-}
-
-// AsDiskEncryptionSetResourceSettings is the BasicResourceSettings implementation for NetworkSecurityGroupResourceSettings.
-func (nsgrs NetworkSecurityGroupResourceSettings) AsDiskEncryptionSetResourceSettings() (*DiskEncryptionSetResourceSettings, bool) {
-	return nil, false
-}
-
-// AsResourceSettings is the BasicResourceSettings implementation for NetworkSecurityGroupResourceSettings.
-func (nsgrs NetworkSecurityGroupResourceSettings) AsResourceSettings() (*ResourceSettings, bool) {
-	return nil, false
-}
-
-// AsBasicResourceSettings is the BasicResourceSettings implementation for NetworkSecurityGroupResourceSettings.
-func (nsgrs NetworkSecurityGroupResourceSettings) AsBasicResourceSettings() (BasicResourceSettings, bool) {
-	return &nsgrs, true
-}
-
-// NicIPConfigurationResourceSettings defines NIC IP configuration properties.
-type NicIPConfigurationResourceSettings struct {
-	// Name - Gets or sets the IP configuration name.
-	Name *string `json:"name,omitempty"`
-	// PrivateIPAddress - Gets or sets the private IP address of the network interface IP Configuration.
-	PrivateIPAddress *string `json:"privateIpAddress,omitempty"`
-	// PrivateIPAllocationMethod - Gets or sets the private IP address allocation method.
-	PrivateIPAllocationMethod *string          `json:"privateIpAllocationMethod,omitempty"`
-	Subnet                    *SubnetReference `json:"subnet,omitempty"`
-	// Primary - Gets or sets a value indicating whether this IP configuration is the primary.
-	Primary *bool `json:"primary,omitempty"`
-	// LoadBalancerBackendAddressPools - Gets or sets the references of the load balancer backend address pools.
-	LoadBalancerBackendAddressPools *[]LoadBalancerBackendAddressPoolReference `json:"loadBalancerBackendAddressPools,omitempty"`
-	// LoadBalancerNatRules - Gets or sets the references of the load balancer NAT rules.
-	LoadBalancerNatRules *[]LoadBalancerNatRuleReference `json:"loadBalancerNatRules,omitempty"`
-	PublicIP             *PublicIPReference              `json:"publicIp,omitempty"`
-}
-
-// NsgReference defines reference to NSG.
-type NsgReference struct {
-	// SourceArmResourceID - Gets the ARM resource ID of the tracked resource being referenced.
-	SourceArmResourceID *string `json:"sourceArmResourceId,omitempty"`
-}
-
-// NsgSecurityRule security Rule data model for Network Security Groups.
-type NsgSecurityRule struct {
-	// Name - Gets or sets the Security rule name.
-	Name *string `json:"name,omitempty"`
-	// Access - Gets or sets whether network traffic is allowed or denied.
-	// Possible values are “Allow” and “Deny”.
-	Access *string `json:"access,omitempty"`
-	// Description - Gets or sets a description for this rule. Restricted to 140 chars.
-	Description *string `json:"description,omitempty"`
-	// DestinationAddressPrefix - Gets or sets destination address prefix. CIDR or source IP range.
-	//  A “*” can also be used to match all source IPs. Default tags such
-	// as ‘VirtualNetwork’, ‘AzureLoadBalancer’ and ‘Internet’ can also be used.
-	DestinationAddressPrefix *string `json:"destinationAddressPrefix,omitempty"`
-	// DestinationPortRange - Gets or sets Destination Port or Range. Integer or range between
-	// 0 and 65535. A “*” can also be used to match all ports.
-	DestinationPortRange *string `json:"destinationPortRange,omitempty"`
-	// Direction - Gets or sets the direction of the rule.InBound or Outbound. The
-	// direction specifies if rule will be evaluated on incoming or outgoing traffic.
-	Direction *string `json:"direction,omitempty"`
-	// Priority - Gets or sets the priority of the rule. The value can be between
-	// 100 and 4096. The priority number must be unique for each rule in the collection.
-	// The lower the priority number, the higher the priority of the rule.
-	Priority *int32 `json:"priority,omitempty"`
-	// Protocol - Gets or sets Network protocol this rule applies to. Can be Tcp, Udp or All(*).
-	Protocol *string `json:"protocol,omitempty"`
-	// SourceAddressPrefix - Gets or sets source address prefix. CIDR or source IP range. A
-	// “*” can also be used to match all source IPs.  Default tags such as ‘VirtualNetwork’,
-	// ‘AzureLoadBalancer’ and ‘Internet’ can also be used. If this is an ingress
-	// rule, specifies where network traffic originates from.
-	SourceAddressPrefix *string `json:"sourceAddressPrefix,omitempty"`
-	// SourcePortRange - Gets or sets Source Port or Range. Integer or range between 0 and
-	// 65535. A “*” can also be used to match all ports.
-	SourcePortRange *string `json:"sourcePortRange,omitempty"`
-}
-
 // OperationErrorAdditionalInfo the operation error info.
 type OperationErrorAdditionalInfo struct {
 	// Type - READ-ONLY; The error type.
@@ -2062,143 +1349,10 @@ type PrepareRequest struct {
 	ValidateOnly *bool `json:"validateOnly,omitempty"`
 	// MoveResources - Gets or sets the list of resource Id's, by default it accepts move resource id's unless the input type is switched via moveResourceInputType property.
 	MoveResources *[]string `json:"moveResources,omitempty"`
+	// AddDependencyAutomatically - Gets or sets a value indicating whether the operation needs to add dependency automatically.
+	AddDependencyAutomatically *bool `json:"addDependencyAutomatically,omitempty"`
 	// MoveResourceInputType - Possible values include: 'MoveResourceID', 'MoveResourceSourceID'
 	MoveResourceInputType MoveResourceInputType `json:"moveResourceInputType,omitempty"`
-}
-
-// ProxyResourceReference defines reference to a proxy resource.
-type ProxyResourceReference struct {
-	// Name - Gets the name of the proxy resource on the target side.
-	Name *string `json:"name,omitempty"`
-	// SourceArmResourceID - Gets the ARM resource ID of the tracked resource being referenced.
-	SourceArmResourceID *string `json:"sourceArmResourceId,omitempty"`
-}
-
-// PublicIPAddressResourceSettings defines the public IP address resource settings.
-type PublicIPAddressResourceSettings struct {
-	// DomainNameLabel - Gets or sets the domain name label.
-	DomainNameLabel *string `json:"domainNameLabel,omitempty"`
-	// Fqdn - Gets or sets the fully qualified domain name.
-	Fqdn *string `json:"fqdn,omitempty"`
-	// PublicIPAllocationMethod - Gets or sets public IP allocation method.
-	PublicIPAllocationMethod *string `json:"publicIpAllocationMethod,omitempty"`
-	// Sku - Gets or sets public IP sku.
-	Sku *string `json:"sku,omitempty"`
-	// Zones - Gets or sets public IP zones.
-	Zones *string `json:"zones,omitempty"`
-	// TargetResourceName - Gets or sets the target Resource name.
-	TargetResourceName *string `json:"targetResourceName,omitempty"`
-	// ResourceType - Possible values include: 'ResourceTypeResourceSettings', 'ResourceTypeMicrosoftComputevirtualMachines', 'ResourceTypeMicrosoftComputeavailabilitySets', 'ResourceTypeMicrosoftNetworkvirtualNetworks', 'ResourceTypeMicrosoftNetworknetworkInterfaces', 'ResourceTypeMicrosoftNetworknetworkSecurityGroups', 'ResourceTypeMicrosoftNetworkloadBalancers', 'ResourceTypeMicrosoftSqlservers', 'ResourceTypeMicrosoftSqlserverselasticPools', 'ResourceTypeMicrosoftSqlserversdatabases', 'ResourceTypeResourceGroups', 'ResourceTypeMicrosoftNetworkpublicIPAddresses', 'ResourceTypeMicrosoftKeyVaultvaults', 'ResourceTypeMicrosoftComputediskEncryptionSets'
-	ResourceType ResourceType `json:"resourceType,omitempty"`
-}
-
-// MarshalJSON is the custom marshaler for PublicIPAddressResourceSettings.
-func (piars PublicIPAddressResourceSettings) MarshalJSON() ([]byte, error) {
-	piars.ResourceType = ResourceTypeMicrosoftNetworkpublicIPAddresses
-	objectMap := make(map[string]interface{})
-	if piars.DomainNameLabel != nil {
-		objectMap["domainNameLabel"] = piars.DomainNameLabel
-	}
-	if piars.Fqdn != nil {
-		objectMap["fqdn"] = piars.Fqdn
-	}
-	if piars.PublicIPAllocationMethod != nil {
-		objectMap["publicIpAllocationMethod"] = piars.PublicIPAllocationMethod
-	}
-	if piars.Sku != nil {
-		objectMap["sku"] = piars.Sku
-	}
-	if piars.Zones != nil {
-		objectMap["zones"] = piars.Zones
-	}
-	if piars.TargetResourceName != nil {
-		objectMap["targetResourceName"] = piars.TargetResourceName
-	}
-	if piars.ResourceType != "" {
-		objectMap["resourceType"] = piars.ResourceType
-	}
-	return json.Marshal(objectMap)
-}
-
-// AsVirtualMachineResourceSettings is the BasicResourceSettings implementation for PublicIPAddressResourceSettings.
-func (piars PublicIPAddressResourceSettings) AsVirtualMachineResourceSettings() (*VirtualMachineResourceSettings, bool) {
-	return nil, false
-}
-
-// AsAvailabilitySetResourceSettings is the BasicResourceSettings implementation for PublicIPAddressResourceSettings.
-func (piars PublicIPAddressResourceSettings) AsAvailabilitySetResourceSettings() (*AvailabilitySetResourceSettings, bool) {
-	return nil, false
-}
-
-// AsVirtualNetworkResourceSettings is the BasicResourceSettings implementation for PublicIPAddressResourceSettings.
-func (piars PublicIPAddressResourceSettings) AsVirtualNetworkResourceSettings() (*VirtualNetworkResourceSettings, bool) {
-	return nil, false
-}
-
-// AsNetworkInterfaceResourceSettings is the BasicResourceSettings implementation for PublicIPAddressResourceSettings.
-func (piars PublicIPAddressResourceSettings) AsNetworkInterfaceResourceSettings() (*NetworkInterfaceResourceSettings, bool) {
-	return nil, false
-}
-
-// AsNetworkSecurityGroupResourceSettings is the BasicResourceSettings implementation for PublicIPAddressResourceSettings.
-func (piars PublicIPAddressResourceSettings) AsNetworkSecurityGroupResourceSettings() (*NetworkSecurityGroupResourceSettings, bool) {
-	return nil, false
-}
-
-// AsLoadBalancerResourceSettings is the BasicResourceSettings implementation for PublicIPAddressResourceSettings.
-func (piars PublicIPAddressResourceSettings) AsLoadBalancerResourceSettings() (*LoadBalancerResourceSettings, bool) {
-	return nil, false
-}
-
-// AsSQLServerResourceSettings is the BasicResourceSettings implementation for PublicIPAddressResourceSettings.
-func (piars PublicIPAddressResourceSettings) AsSQLServerResourceSettings() (*SQLServerResourceSettings, bool) {
-	return nil, false
-}
-
-// AsSQLElasticPoolResourceSettings is the BasicResourceSettings implementation for PublicIPAddressResourceSettings.
-func (piars PublicIPAddressResourceSettings) AsSQLElasticPoolResourceSettings() (*SQLElasticPoolResourceSettings, bool) {
-	return nil, false
-}
-
-// AsSQLDatabaseResourceSettings is the BasicResourceSettings implementation for PublicIPAddressResourceSettings.
-func (piars PublicIPAddressResourceSettings) AsSQLDatabaseResourceSettings() (*SQLDatabaseResourceSettings, bool) {
-	return nil, false
-}
-
-// AsResourceGroupResourceSettings is the BasicResourceSettings implementation for PublicIPAddressResourceSettings.
-func (piars PublicIPAddressResourceSettings) AsResourceGroupResourceSettings() (*ResourceGroupResourceSettings, bool) {
-	return nil, false
-}
-
-// AsPublicIPAddressResourceSettings is the BasicResourceSettings implementation for PublicIPAddressResourceSettings.
-func (piars PublicIPAddressResourceSettings) AsPublicIPAddressResourceSettings() (*PublicIPAddressResourceSettings, bool) {
-	return &piars, true
-}
-
-// AsKeyVaultResourceSettings is the BasicResourceSettings implementation for PublicIPAddressResourceSettings.
-func (piars PublicIPAddressResourceSettings) AsKeyVaultResourceSettings() (*KeyVaultResourceSettings, bool) {
-	return nil, false
-}
-
-// AsDiskEncryptionSetResourceSettings is the BasicResourceSettings implementation for PublicIPAddressResourceSettings.
-func (piars PublicIPAddressResourceSettings) AsDiskEncryptionSetResourceSettings() (*DiskEncryptionSetResourceSettings, bool) {
-	return nil, false
-}
-
-// AsResourceSettings is the BasicResourceSettings implementation for PublicIPAddressResourceSettings.
-func (piars PublicIPAddressResourceSettings) AsResourceSettings() (*ResourceSettings, bool) {
-	return nil, false
-}
-
-// AsBasicResourceSettings is the BasicResourceSettings implementation for PublicIPAddressResourceSettings.
-func (piars PublicIPAddressResourceSettings) AsBasicResourceSettings() (BasicResourceSettings, bool) {
-	return &piars, true
-}
-
-// PublicIPReference defines reference to a public IP.
-type PublicIPReference struct {
-	// SourceArmResourceID - Gets the ARM resource ID of the tracked resource being referenced.
-	SourceArmResourceID *string `json:"sourceArmResourceId,omitempty"`
 }
 
 // RequiredForResourcesCollection required for resources collection.
@@ -2208,135 +1362,28 @@ type RequiredForResourcesCollection struct {
 	SourceIds *[]string `json:"sourceIds,omitempty"`
 }
 
-// ResourceGroupResourceSettings defines the resource group resource settings.
-type ResourceGroupResourceSettings struct {
-	// TargetResourceName - Gets or sets the target Resource name.
-	TargetResourceName *string `json:"targetResourceName,omitempty"`
-	// ResourceType - Possible values include: 'ResourceTypeResourceSettings', 'ResourceTypeMicrosoftComputevirtualMachines', 'ResourceTypeMicrosoftComputeavailabilitySets', 'ResourceTypeMicrosoftNetworkvirtualNetworks', 'ResourceTypeMicrosoftNetworknetworkInterfaces', 'ResourceTypeMicrosoftNetworknetworkSecurityGroups', 'ResourceTypeMicrosoftNetworkloadBalancers', 'ResourceTypeMicrosoftSqlservers', 'ResourceTypeMicrosoftSqlserverselasticPools', 'ResourceTypeMicrosoftSqlserversdatabases', 'ResourceTypeResourceGroups', 'ResourceTypeMicrosoftNetworkpublicIPAddresses', 'ResourceTypeMicrosoftKeyVaultvaults', 'ResourceTypeMicrosoftComputediskEncryptionSets'
-	ResourceType ResourceType `json:"resourceType,omitempty"`
-}
-
-// MarshalJSON is the custom marshaler for ResourceGroupResourceSettings.
-func (rgrs ResourceGroupResourceSettings) MarshalJSON() ([]byte, error) {
-	rgrs.ResourceType = ResourceTypeResourceGroups
-	objectMap := make(map[string]interface{})
-	if rgrs.TargetResourceName != nil {
-		objectMap["targetResourceName"] = rgrs.TargetResourceName
-	}
-	if rgrs.ResourceType != "" {
-		objectMap["resourceType"] = rgrs.ResourceType
-	}
-	return json.Marshal(objectMap)
-}
-
-// AsVirtualMachineResourceSettings is the BasicResourceSettings implementation for ResourceGroupResourceSettings.
-func (rgrs ResourceGroupResourceSettings) AsVirtualMachineResourceSettings() (*VirtualMachineResourceSettings, bool) {
-	return nil, false
-}
-
-// AsAvailabilitySetResourceSettings is the BasicResourceSettings implementation for ResourceGroupResourceSettings.
-func (rgrs ResourceGroupResourceSettings) AsAvailabilitySetResourceSettings() (*AvailabilitySetResourceSettings, bool) {
-	return nil, false
-}
-
-// AsVirtualNetworkResourceSettings is the BasicResourceSettings implementation for ResourceGroupResourceSettings.
-func (rgrs ResourceGroupResourceSettings) AsVirtualNetworkResourceSettings() (*VirtualNetworkResourceSettings, bool) {
-	return nil, false
-}
-
-// AsNetworkInterfaceResourceSettings is the BasicResourceSettings implementation for ResourceGroupResourceSettings.
-func (rgrs ResourceGroupResourceSettings) AsNetworkInterfaceResourceSettings() (*NetworkInterfaceResourceSettings, bool) {
-	return nil, false
-}
-
-// AsNetworkSecurityGroupResourceSettings is the BasicResourceSettings implementation for ResourceGroupResourceSettings.
-func (rgrs ResourceGroupResourceSettings) AsNetworkSecurityGroupResourceSettings() (*NetworkSecurityGroupResourceSettings, bool) {
-	return nil, false
-}
-
-// AsLoadBalancerResourceSettings is the BasicResourceSettings implementation for ResourceGroupResourceSettings.
-func (rgrs ResourceGroupResourceSettings) AsLoadBalancerResourceSettings() (*LoadBalancerResourceSettings, bool) {
-	return nil, false
-}
-
-// AsSQLServerResourceSettings is the BasicResourceSettings implementation for ResourceGroupResourceSettings.
-func (rgrs ResourceGroupResourceSettings) AsSQLServerResourceSettings() (*SQLServerResourceSettings, bool) {
-	return nil, false
-}
-
-// AsSQLElasticPoolResourceSettings is the BasicResourceSettings implementation for ResourceGroupResourceSettings.
-func (rgrs ResourceGroupResourceSettings) AsSQLElasticPoolResourceSettings() (*SQLElasticPoolResourceSettings, bool) {
-	return nil, false
-}
-
-// AsSQLDatabaseResourceSettings is the BasicResourceSettings implementation for ResourceGroupResourceSettings.
-func (rgrs ResourceGroupResourceSettings) AsSQLDatabaseResourceSettings() (*SQLDatabaseResourceSettings, bool) {
-	return nil, false
-}
-
-// AsResourceGroupResourceSettings is the BasicResourceSettings implementation for ResourceGroupResourceSettings.
-func (rgrs ResourceGroupResourceSettings) AsResourceGroupResourceSettings() (*ResourceGroupResourceSettings, bool) {
-	return &rgrs, true
-}
-
-// AsPublicIPAddressResourceSettings is the BasicResourceSettings implementation for ResourceGroupResourceSettings.
-func (rgrs ResourceGroupResourceSettings) AsPublicIPAddressResourceSettings() (*PublicIPAddressResourceSettings, bool) {
-	return nil, false
-}
-
-// AsKeyVaultResourceSettings is the BasicResourceSettings implementation for ResourceGroupResourceSettings.
-func (rgrs ResourceGroupResourceSettings) AsKeyVaultResourceSettings() (*KeyVaultResourceSettings, bool) {
-	return nil, false
-}
-
-// AsDiskEncryptionSetResourceSettings is the BasicResourceSettings implementation for ResourceGroupResourceSettings.
-func (rgrs ResourceGroupResourceSettings) AsDiskEncryptionSetResourceSettings() (*DiskEncryptionSetResourceSettings, bool) {
-	return nil, false
-}
-
-// AsResourceSettings is the BasicResourceSettings implementation for ResourceGroupResourceSettings.
-func (rgrs ResourceGroupResourceSettings) AsResourceSettings() (*ResourceSettings, bool) {
-	return nil, false
-}
-
-// AsBasicResourceSettings is the BasicResourceSettings implementation for ResourceGroupResourceSettings.
-func (rgrs ResourceGroupResourceSettings) AsBasicResourceSettings() (BasicResourceSettings, bool) {
-	return &rgrs, true
-}
-
 // ResourceMoveRequestType defines the request body for resource move operation.
 type ResourceMoveRequestType struct {
 	// ValidateOnly - Gets or sets a value indicating whether the operation needs to only run pre-requisite.
 	ValidateOnly *bool `json:"validateOnly,omitempty"`
 	// MoveResources - Gets or sets the list of resource Id's, by default it accepts move resource id's unless the input type is switched via moveResourceInputType property.
 	MoveResources *[]string `json:"moveResources,omitempty"`
+	// AddDependencyAutomatically - Gets or sets a value indicating whether the operation needs to add dependency automatically.
+	AddDependencyAutomatically *bool `json:"addDependencyAutomatically,omitempty"`
 	// MoveResourceInputType - Possible values include: 'MoveResourceID', 'MoveResourceSourceID'
 	MoveResourceInputType MoveResourceInputType `json:"moveResourceInputType,omitempty"`
 }
 
 // BasicResourceSettings gets or sets the resource settings.
 type BasicResourceSettings interface {
-	AsVirtualMachineResourceSettings() (*VirtualMachineResourceSettings, bool)
-	AsAvailabilitySetResourceSettings() (*AvailabilitySetResourceSettings, bool)
-	AsVirtualNetworkResourceSettings() (*VirtualNetworkResourceSettings, bool)
-	AsNetworkInterfaceResourceSettings() (*NetworkInterfaceResourceSettings, bool)
-	AsNetworkSecurityGroupResourceSettings() (*NetworkSecurityGroupResourceSettings, bool)
-	AsLoadBalancerResourceSettings() (*LoadBalancerResourceSettings, bool)
-	AsSQLServerResourceSettings() (*SQLServerResourceSettings, bool)
-	AsSQLElasticPoolResourceSettings() (*SQLElasticPoolResourceSettings, bool)
-	AsSQLDatabaseResourceSettings() (*SQLDatabaseResourceSettings, bool)
-	AsResourceGroupResourceSettings() (*ResourceGroupResourceSettings, bool)
-	AsPublicIPAddressResourceSettings() (*PublicIPAddressResourceSettings, bool)
-	AsKeyVaultResourceSettings() (*KeyVaultResourceSettings, bool)
-	AsDiskEncryptionSetResourceSettings() (*DiskEncryptionSetResourceSettings, bool)
 	AsResourceSettings() (*ResourceSettings, bool)
 }
 
 // ResourceSettings gets or sets the resource settings.
 type ResourceSettings struct {
-	// TargetResourceName - Gets or sets the target Resource name.
-	TargetResourceName *string `json:"targetResourceName,omitempty"`
-	// ResourceType - Possible values include: 'ResourceTypeResourceSettings', 'ResourceTypeMicrosoftComputevirtualMachines', 'ResourceTypeMicrosoftComputeavailabilitySets', 'ResourceTypeMicrosoftNetworkvirtualNetworks', 'ResourceTypeMicrosoftNetworknetworkInterfaces', 'ResourceTypeMicrosoftNetworknetworkSecurityGroups', 'ResourceTypeMicrosoftNetworkloadBalancers', 'ResourceTypeMicrosoftSqlservers', 'ResourceTypeMicrosoftSqlserverselasticPools', 'ResourceTypeMicrosoftSqlserversdatabases', 'ResourceTypeResourceGroups', 'ResourceTypeMicrosoftNetworkpublicIPAddresses', 'ResourceTypeMicrosoftKeyVaultvaults', 'ResourceTypeMicrosoftComputediskEncryptionSets'
+	// SerializedResourceSettings - Gets or sets the resource provider specific serialized resource settings. Resource providers need to document the settings.
+	SerializedResourceSettings *string `json:"serializedResourceSettings,omitempty"`
+	// ResourceType - Possible values include: 'ResourceTypeResourceSettings'
 	ResourceType ResourceType `json:"resourceType,omitempty"`
 }
 
@@ -2348,58 +1395,6 @@ func unmarshalBasicResourceSettings(body []byte) (BasicResourceSettings, error) 
 	}
 
 	switch m["resourceType"] {
-	case string(ResourceTypeMicrosoftComputevirtualMachines):
-		var vmrs VirtualMachineResourceSettings
-		err := json.Unmarshal(body, &vmrs)
-		return vmrs, err
-	case string(ResourceTypeMicrosoftComputeavailabilitySets):
-		var asrs AvailabilitySetResourceSettings
-		err := json.Unmarshal(body, &asrs)
-		return asrs, err
-	case string(ResourceTypeMicrosoftNetworkvirtualNetworks):
-		var vnrs VirtualNetworkResourceSettings
-		err := json.Unmarshal(body, &vnrs)
-		return vnrs, err
-	case string(ResourceTypeMicrosoftNetworknetworkInterfaces):
-		var nirs NetworkInterfaceResourceSettings
-		err := json.Unmarshal(body, &nirs)
-		return nirs, err
-	case string(ResourceTypeMicrosoftNetworknetworkSecurityGroups):
-		var nsgrs NetworkSecurityGroupResourceSettings
-		err := json.Unmarshal(body, &nsgrs)
-		return nsgrs, err
-	case string(ResourceTypeMicrosoftNetworkloadBalancers):
-		var lbrs LoadBalancerResourceSettings
-		err := json.Unmarshal(body, &lbrs)
-		return lbrs, err
-	case string(ResourceTypeMicrosoftSqlservers):
-		var ssrs SQLServerResourceSettings
-		err := json.Unmarshal(body, &ssrs)
-		return ssrs, err
-	case string(ResourceTypeMicrosoftSqlserverselasticPools):
-		var seprs SQLElasticPoolResourceSettings
-		err := json.Unmarshal(body, &seprs)
-		return seprs, err
-	case string(ResourceTypeMicrosoftSqlserversdatabases):
-		var sdrs SQLDatabaseResourceSettings
-		err := json.Unmarshal(body, &sdrs)
-		return sdrs, err
-	case string(ResourceTypeResourceGroups):
-		var rgrs ResourceGroupResourceSettings
-		err := json.Unmarshal(body, &rgrs)
-		return rgrs, err
-	case string(ResourceTypeMicrosoftNetworkpublicIPAddresses):
-		var piars PublicIPAddressResourceSettings
-		err := json.Unmarshal(body, &piars)
-		return piars, err
-	case string(ResourceTypeMicrosoftKeyVaultvaults):
-		var kvrs KeyVaultResourceSettings
-		err := json.Unmarshal(body, &kvrs)
-		return kvrs, err
-	case string(ResourceTypeMicrosoftComputediskEncryptionSets):
-		var desrs DiskEncryptionSetResourceSettings
-		err := json.Unmarshal(body, &desrs)
-		return desrs, err
 	default:
 		var rs ResourceSettings
 		err := json.Unmarshal(body, &rs)
@@ -2429,78 +1424,13 @@ func unmarshalBasicResourceSettingsArray(body []byte) ([]BasicResourceSettings, 
 func (rs ResourceSettings) MarshalJSON() ([]byte, error) {
 	rs.ResourceType = ResourceTypeResourceSettings
 	objectMap := make(map[string]interface{})
-	if rs.TargetResourceName != nil {
-		objectMap["targetResourceName"] = rs.TargetResourceName
+	if rs.SerializedResourceSettings != nil {
+		objectMap["serializedResourceSettings"] = rs.SerializedResourceSettings
 	}
 	if rs.ResourceType != "" {
 		objectMap["resourceType"] = rs.ResourceType
 	}
 	return json.Marshal(objectMap)
-}
-
-// AsVirtualMachineResourceSettings is the BasicResourceSettings implementation for ResourceSettings.
-func (rs ResourceSettings) AsVirtualMachineResourceSettings() (*VirtualMachineResourceSettings, bool) {
-	return nil, false
-}
-
-// AsAvailabilitySetResourceSettings is the BasicResourceSettings implementation for ResourceSettings.
-func (rs ResourceSettings) AsAvailabilitySetResourceSettings() (*AvailabilitySetResourceSettings, bool) {
-	return nil, false
-}
-
-// AsVirtualNetworkResourceSettings is the BasicResourceSettings implementation for ResourceSettings.
-func (rs ResourceSettings) AsVirtualNetworkResourceSettings() (*VirtualNetworkResourceSettings, bool) {
-	return nil, false
-}
-
-// AsNetworkInterfaceResourceSettings is the BasicResourceSettings implementation for ResourceSettings.
-func (rs ResourceSettings) AsNetworkInterfaceResourceSettings() (*NetworkInterfaceResourceSettings, bool) {
-	return nil, false
-}
-
-// AsNetworkSecurityGroupResourceSettings is the BasicResourceSettings implementation for ResourceSettings.
-func (rs ResourceSettings) AsNetworkSecurityGroupResourceSettings() (*NetworkSecurityGroupResourceSettings, bool) {
-	return nil, false
-}
-
-// AsLoadBalancerResourceSettings is the BasicResourceSettings implementation for ResourceSettings.
-func (rs ResourceSettings) AsLoadBalancerResourceSettings() (*LoadBalancerResourceSettings, bool) {
-	return nil, false
-}
-
-// AsSQLServerResourceSettings is the BasicResourceSettings implementation for ResourceSettings.
-func (rs ResourceSettings) AsSQLServerResourceSettings() (*SQLServerResourceSettings, bool) {
-	return nil, false
-}
-
-// AsSQLElasticPoolResourceSettings is the BasicResourceSettings implementation for ResourceSettings.
-func (rs ResourceSettings) AsSQLElasticPoolResourceSettings() (*SQLElasticPoolResourceSettings, bool) {
-	return nil, false
-}
-
-// AsSQLDatabaseResourceSettings is the BasicResourceSettings implementation for ResourceSettings.
-func (rs ResourceSettings) AsSQLDatabaseResourceSettings() (*SQLDatabaseResourceSettings, bool) {
-	return nil, false
-}
-
-// AsResourceGroupResourceSettings is the BasicResourceSettings implementation for ResourceSettings.
-func (rs ResourceSettings) AsResourceGroupResourceSettings() (*ResourceGroupResourceSettings, bool) {
-	return nil, false
-}
-
-// AsPublicIPAddressResourceSettings is the BasicResourceSettings implementation for ResourceSettings.
-func (rs ResourceSettings) AsPublicIPAddressResourceSettings() (*PublicIPAddressResourceSettings, bool) {
-	return nil, false
-}
-
-// AsKeyVaultResourceSettings is the BasicResourceSettings implementation for ResourceSettings.
-func (rs ResourceSettings) AsKeyVaultResourceSettings() (*KeyVaultResourceSettings, bool) {
-	return nil, false
-}
-
-// AsDiskEncryptionSetResourceSettings is the BasicResourceSettings implementation for ResourceSettings.
-func (rs ResourceSettings) AsDiskEncryptionSetResourceSettings() (*DiskEncryptionSetResourceSettings, bool) {
-	return nil, false
 }
 
 // AsResourceSettings is the BasicResourceSettings implementation for ResourceSettings.
@@ -2513,319 +1443,23 @@ func (rs ResourceSettings) AsBasicResourceSettings() (BasicResourceSettings, boo
 	return &rs, true
 }
 
-// SQLDatabaseResourceSettings defines the Sql Database resource settings.
-type SQLDatabaseResourceSettings struct {
-	// ZoneRedundant - Possible values include: 'Enable', 'Disable'
-	ZoneRedundant ZoneRedundant `json:"zoneRedundant,omitempty"`
-	// TargetResourceName - Gets or sets the target Resource name.
-	TargetResourceName *string `json:"targetResourceName,omitempty"`
-	// ResourceType - Possible values include: 'ResourceTypeResourceSettings', 'ResourceTypeMicrosoftComputevirtualMachines', 'ResourceTypeMicrosoftComputeavailabilitySets', 'ResourceTypeMicrosoftNetworkvirtualNetworks', 'ResourceTypeMicrosoftNetworknetworkInterfaces', 'ResourceTypeMicrosoftNetworknetworkSecurityGroups', 'ResourceTypeMicrosoftNetworkloadBalancers', 'ResourceTypeMicrosoftSqlservers', 'ResourceTypeMicrosoftSqlserverselasticPools', 'ResourceTypeMicrosoftSqlserversdatabases', 'ResourceTypeResourceGroups', 'ResourceTypeMicrosoftNetworkpublicIPAddresses', 'ResourceTypeMicrosoftKeyVaultvaults', 'ResourceTypeMicrosoftComputediskEncryptionSets'
-	ResourceType ResourceType `json:"resourceType,omitempty"`
+// ResourceTypeDefinitionForResourceMover defines the resource type definition for resource mover.
+type ResourceTypeDefinitionForResourceMover struct {
+	// ResourceTypeName - READ-ONLY; Defines the resource type.
+	ResourceTypeName *string `json:"resourceTypeName,omitempty"`
+	// IsDataSyncRequiredForResourceType - READ-ONLY; Gets or sets a value whether data sync is required for the resource type.
+	IsDataSyncRequiredForResourceType *bool `json:"isDataSyncRequiredForResourceType,omitempty"`
+	// MoveParadigmForResourceType - Possible values include: 'CopyType', 'MigrateType'
+	MoveParadigmForResourceType MoveParadigm `json:"moveParadigmForResourceType,omitempty"`
 }
 
-// MarshalJSON is the custom marshaler for SQLDatabaseResourceSettings.
-func (sdrs SQLDatabaseResourceSettings) MarshalJSON() ([]byte, error) {
-	sdrs.ResourceType = ResourceTypeMicrosoftSqlserversdatabases
+// MarshalJSON is the custom marshaler for ResourceTypeDefinitionForResourceMover.
+func (rtdfrm ResourceTypeDefinitionForResourceMover) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
-	if sdrs.ZoneRedundant != "" {
-		objectMap["zoneRedundant"] = sdrs.ZoneRedundant
-	}
-	if sdrs.TargetResourceName != nil {
-		objectMap["targetResourceName"] = sdrs.TargetResourceName
-	}
-	if sdrs.ResourceType != "" {
-		objectMap["resourceType"] = sdrs.ResourceType
+	if rtdfrm.MoveParadigmForResourceType != "" {
+		objectMap["moveParadigmForResourceType"] = rtdfrm.MoveParadigmForResourceType
 	}
 	return json.Marshal(objectMap)
-}
-
-// AsVirtualMachineResourceSettings is the BasicResourceSettings implementation for SQLDatabaseResourceSettings.
-func (sdrs SQLDatabaseResourceSettings) AsVirtualMachineResourceSettings() (*VirtualMachineResourceSettings, bool) {
-	return nil, false
-}
-
-// AsAvailabilitySetResourceSettings is the BasicResourceSettings implementation for SQLDatabaseResourceSettings.
-func (sdrs SQLDatabaseResourceSettings) AsAvailabilitySetResourceSettings() (*AvailabilitySetResourceSettings, bool) {
-	return nil, false
-}
-
-// AsVirtualNetworkResourceSettings is the BasicResourceSettings implementation for SQLDatabaseResourceSettings.
-func (sdrs SQLDatabaseResourceSettings) AsVirtualNetworkResourceSettings() (*VirtualNetworkResourceSettings, bool) {
-	return nil, false
-}
-
-// AsNetworkInterfaceResourceSettings is the BasicResourceSettings implementation for SQLDatabaseResourceSettings.
-func (sdrs SQLDatabaseResourceSettings) AsNetworkInterfaceResourceSettings() (*NetworkInterfaceResourceSettings, bool) {
-	return nil, false
-}
-
-// AsNetworkSecurityGroupResourceSettings is the BasicResourceSettings implementation for SQLDatabaseResourceSettings.
-func (sdrs SQLDatabaseResourceSettings) AsNetworkSecurityGroupResourceSettings() (*NetworkSecurityGroupResourceSettings, bool) {
-	return nil, false
-}
-
-// AsLoadBalancerResourceSettings is the BasicResourceSettings implementation for SQLDatabaseResourceSettings.
-func (sdrs SQLDatabaseResourceSettings) AsLoadBalancerResourceSettings() (*LoadBalancerResourceSettings, bool) {
-	return nil, false
-}
-
-// AsSQLServerResourceSettings is the BasicResourceSettings implementation for SQLDatabaseResourceSettings.
-func (sdrs SQLDatabaseResourceSettings) AsSQLServerResourceSettings() (*SQLServerResourceSettings, bool) {
-	return nil, false
-}
-
-// AsSQLElasticPoolResourceSettings is the BasicResourceSettings implementation for SQLDatabaseResourceSettings.
-func (sdrs SQLDatabaseResourceSettings) AsSQLElasticPoolResourceSettings() (*SQLElasticPoolResourceSettings, bool) {
-	return nil, false
-}
-
-// AsSQLDatabaseResourceSettings is the BasicResourceSettings implementation for SQLDatabaseResourceSettings.
-func (sdrs SQLDatabaseResourceSettings) AsSQLDatabaseResourceSettings() (*SQLDatabaseResourceSettings, bool) {
-	return &sdrs, true
-}
-
-// AsResourceGroupResourceSettings is the BasicResourceSettings implementation for SQLDatabaseResourceSettings.
-func (sdrs SQLDatabaseResourceSettings) AsResourceGroupResourceSettings() (*ResourceGroupResourceSettings, bool) {
-	return nil, false
-}
-
-// AsPublicIPAddressResourceSettings is the BasicResourceSettings implementation for SQLDatabaseResourceSettings.
-func (sdrs SQLDatabaseResourceSettings) AsPublicIPAddressResourceSettings() (*PublicIPAddressResourceSettings, bool) {
-	return nil, false
-}
-
-// AsKeyVaultResourceSettings is the BasicResourceSettings implementation for SQLDatabaseResourceSettings.
-func (sdrs SQLDatabaseResourceSettings) AsKeyVaultResourceSettings() (*KeyVaultResourceSettings, bool) {
-	return nil, false
-}
-
-// AsDiskEncryptionSetResourceSettings is the BasicResourceSettings implementation for SQLDatabaseResourceSettings.
-func (sdrs SQLDatabaseResourceSettings) AsDiskEncryptionSetResourceSettings() (*DiskEncryptionSetResourceSettings, bool) {
-	return nil, false
-}
-
-// AsResourceSettings is the BasicResourceSettings implementation for SQLDatabaseResourceSettings.
-func (sdrs SQLDatabaseResourceSettings) AsResourceSettings() (*ResourceSettings, bool) {
-	return nil, false
-}
-
-// AsBasicResourceSettings is the BasicResourceSettings implementation for SQLDatabaseResourceSettings.
-func (sdrs SQLDatabaseResourceSettings) AsBasicResourceSettings() (BasicResourceSettings, bool) {
-	return &sdrs, true
-}
-
-// SQLElasticPoolResourceSettings defines the Sql ElasticPool resource settings.
-type SQLElasticPoolResourceSettings struct {
-	// ZoneRedundant - Possible values include: 'Enable', 'Disable'
-	ZoneRedundant ZoneRedundant `json:"zoneRedundant,omitempty"`
-	// TargetResourceName - Gets or sets the target Resource name.
-	TargetResourceName *string `json:"targetResourceName,omitempty"`
-	// ResourceType - Possible values include: 'ResourceTypeResourceSettings', 'ResourceTypeMicrosoftComputevirtualMachines', 'ResourceTypeMicrosoftComputeavailabilitySets', 'ResourceTypeMicrosoftNetworkvirtualNetworks', 'ResourceTypeMicrosoftNetworknetworkInterfaces', 'ResourceTypeMicrosoftNetworknetworkSecurityGroups', 'ResourceTypeMicrosoftNetworkloadBalancers', 'ResourceTypeMicrosoftSqlservers', 'ResourceTypeMicrosoftSqlserverselasticPools', 'ResourceTypeMicrosoftSqlserversdatabases', 'ResourceTypeResourceGroups', 'ResourceTypeMicrosoftNetworkpublicIPAddresses', 'ResourceTypeMicrosoftKeyVaultvaults', 'ResourceTypeMicrosoftComputediskEncryptionSets'
-	ResourceType ResourceType `json:"resourceType,omitempty"`
-}
-
-// MarshalJSON is the custom marshaler for SQLElasticPoolResourceSettings.
-func (seprs SQLElasticPoolResourceSettings) MarshalJSON() ([]byte, error) {
-	seprs.ResourceType = ResourceTypeMicrosoftSqlserverselasticPools
-	objectMap := make(map[string]interface{})
-	if seprs.ZoneRedundant != "" {
-		objectMap["zoneRedundant"] = seprs.ZoneRedundant
-	}
-	if seprs.TargetResourceName != nil {
-		objectMap["targetResourceName"] = seprs.TargetResourceName
-	}
-	if seprs.ResourceType != "" {
-		objectMap["resourceType"] = seprs.ResourceType
-	}
-	return json.Marshal(objectMap)
-}
-
-// AsVirtualMachineResourceSettings is the BasicResourceSettings implementation for SQLElasticPoolResourceSettings.
-func (seprs SQLElasticPoolResourceSettings) AsVirtualMachineResourceSettings() (*VirtualMachineResourceSettings, bool) {
-	return nil, false
-}
-
-// AsAvailabilitySetResourceSettings is the BasicResourceSettings implementation for SQLElasticPoolResourceSettings.
-func (seprs SQLElasticPoolResourceSettings) AsAvailabilitySetResourceSettings() (*AvailabilitySetResourceSettings, bool) {
-	return nil, false
-}
-
-// AsVirtualNetworkResourceSettings is the BasicResourceSettings implementation for SQLElasticPoolResourceSettings.
-func (seprs SQLElasticPoolResourceSettings) AsVirtualNetworkResourceSettings() (*VirtualNetworkResourceSettings, bool) {
-	return nil, false
-}
-
-// AsNetworkInterfaceResourceSettings is the BasicResourceSettings implementation for SQLElasticPoolResourceSettings.
-func (seprs SQLElasticPoolResourceSettings) AsNetworkInterfaceResourceSettings() (*NetworkInterfaceResourceSettings, bool) {
-	return nil, false
-}
-
-// AsNetworkSecurityGroupResourceSettings is the BasicResourceSettings implementation for SQLElasticPoolResourceSettings.
-func (seprs SQLElasticPoolResourceSettings) AsNetworkSecurityGroupResourceSettings() (*NetworkSecurityGroupResourceSettings, bool) {
-	return nil, false
-}
-
-// AsLoadBalancerResourceSettings is the BasicResourceSettings implementation for SQLElasticPoolResourceSettings.
-func (seprs SQLElasticPoolResourceSettings) AsLoadBalancerResourceSettings() (*LoadBalancerResourceSettings, bool) {
-	return nil, false
-}
-
-// AsSQLServerResourceSettings is the BasicResourceSettings implementation for SQLElasticPoolResourceSettings.
-func (seprs SQLElasticPoolResourceSettings) AsSQLServerResourceSettings() (*SQLServerResourceSettings, bool) {
-	return nil, false
-}
-
-// AsSQLElasticPoolResourceSettings is the BasicResourceSettings implementation for SQLElasticPoolResourceSettings.
-func (seprs SQLElasticPoolResourceSettings) AsSQLElasticPoolResourceSettings() (*SQLElasticPoolResourceSettings, bool) {
-	return &seprs, true
-}
-
-// AsSQLDatabaseResourceSettings is the BasicResourceSettings implementation for SQLElasticPoolResourceSettings.
-func (seprs SQLElasticPoolResourceSettings) AsSQLDatabaseResourceSettings() (*SQLDatabaseResourceSettings, bool) {
-	return nil, false
-}
-
-// AsResourceGroupResourceSettings is the BasicResourceSettings implementation for SQLElasticPoolResourceSettings.
-func (seprs SQLElasticPoolResourceSettings) AsResourceGroupResourceSettings() (*ResourceGroupResourceSettings, bool) {
-	return nil, false
-}
-
-// AsPublicIPAddressResourceSettings is the BasicResourceSettings implementation for SQLElasticPoolResourceSettings.
-func (seprs SQLElasticPoolResourceSettings) AsPublicIPAddressResourceSettings() (*PublicIPAddressResourceSettings, bool) {
-	return nil, false
-}
-
-// AsKeyVaultResourceSettings is the BasicResourceSettings implementation for SQLElasticPoolResourceSettings.
-func (seprs SQLElasticPoolResourceSettings) AsKeyVaultResourceSettings() (*KeyVaultResourceSettings, bool) {
-	return nil, false
-}
-
-// AsDiskEncryptionSetResourceSettings is the BasicResourceSettings implementation for SQLElasticPoolResourceSettings.
-func (seprs SQLElasticPoolResourceSettings) AsDiskEncryptionSetResourceSettings() (*DiskEncryptionSetResourceSettings, bool) {
-	return nil, false
-}
-
-// AsResourceSettings is the BasicResourceSettings implementation for SQLElasticPoolResourceSettings.
-func (seprs SQLElasticPoolResourceSettings) AsResourceSettings() (*ResourceSettings, bool) {
-	return nil, false
-}
-
-// AsBasicResourceSettings is the BasicResourceSettings implementation for SQLElasticPoolResourceSettings.
-func (seprs SQLElasticPoolResourceSettings) AsBasicResourceSettings() (BasicResourceSettings, bool) {
-	return &seprs, true
-}
-
-// SQLServerResourceSettings defines the SQL Server resource settings.
-type SQLServerResourceSettings struct {
-	// TargetResourceName - Gets or sets the target Resource name.
-	TargetResourceName *string `json:"targetResourceName,omitempty"`
-	// ResourceType - Possible values include: 'ResourceTypeResourceSettings', 'ResourceTypeMicrosoftComputevirtualMachines', 'ResourceTypeMicrosoftComputeavailabilitySets', 'ResourceTypeMicrosoftNetworkvirtualNetworks', 'ResourceTypeMicrosoftNetworknetworkInterfaces', 'ResourceTypeMicrosoftNetworknetworkSecurityGroups', 'ResourceTypeMicrosoftNetworkloadBalancers', 'ResourceTypeMicrosoftSqlservers', 'ResourceTypeMicrosoftSqlserverselasticPools', 'ResourceTypeMicrosoftSqlserversdatabases', 'ResourceTypeResourceGroups', 'ResourceTypeMicrosoftNetworkpublicIPAddresses', 'ResourceTypeMicrosoftKeyVaultvaults', 'ResourceTypeMicrosoftComputediskEncryptionSets'
-	ResourceType ResourceType `json:"resourceType,omitempty"`
-}
-
-// MarshalJSON is the custom marshaler for SQLServerResourceSettings.
-func (ssrs SQLServerResourceSettings) MarshalJSON() ([]byte, error) {
-	ssrs.ResourceType = ResourceTypeMicrosoftSqlservers
-	objectMap := make(map[string]interface{})
-	if ssrs.TargetResourceName != nil {
-		objectMap["targetResourceName"] = ssrs.TargetResourceName
-	}
-	if ssrs.ResourceType != "" {
-		objectMap["resourceType"] = ssrs.ResourceType
-	}
-	return json.Marshal(objectMap)
-}
-
-// AsVirtualMachineResourceSettings is the BasicResourceSettings implementation for SQLServerResourceSettings.
-func (ssrs SQLServerResourceSettings) AsVirtualMachineResourceSettings() (*VirtualMachineResourceSettings, bool) {
-	return nil, false
-}
-
-// AsAvailabilitySetResourceSettings is the BasicResourceSettings implementation for SQLServerResourceSettings.
-func (ssrs SQLServerResourceSettings) AsAvailabilitySetResourceSettings() (*AvailabilitySetResourceSettings, bool) {
-	return nil, false
-}
-
-// AsVirtualNetworkResourceSettings is the BasicResourceSettings implementation for SQLServerResourceSettings.
-func (ssrs SQLServerResourceSettings) AsVirtualNetworkResourceSettings() (*VirtualNetworkResourceSettings, bool) {
-	return nil, false
-}
-
-// AsNetworkInterfaceResourceSettings is the BasicResourceSettings implementation for SQLServerResourceSettings.
-func (ssrs SQLServerResourceSettings) AsNetworkInterfaceResourceSettings() (*NetworkInterfaceResourceSettings, bool) {
-	return nil, false
-}
-
-// AsNetworkSecurityGroupResourceSettings is the BasicResourceSettings implementation for SQLServerResourceSettings.
-func (ssrs SQLServerResourceSettings) AsNetworkSecurityGroupResourceSettings() (*NetworkSecurityGroupResourceSettings, bool) {
-	return nil, false
-}
-
-// AsLoadBalancerResourceSettings is the BasicResourceSettings implementation for SQLServerResourceSettings.
-func (ssrs SQLServerResourceSettings) AsLoadBalancerResourceSettings() (*LoadBalancerResourceSettings, bool) {
-	return nil, false
-}
-
-// AsSQLServerResourceSettings is the BasicResourceSettings implementation for SQLServerResourceSettings.
-func (ssrs SQLServerResourceSettings) AsSQLServerResourceSettings() (*SQLServerResourceSettings, bool) {
-	return &ssrs, true
-}
-
-// AsSQLElasticPoolResourceSettings is the BasicResourceSettings implementation for SQLServerResourceSettings.
-func (ssrs SQLServerResourceSettings) AsSQLElasticPoolResourceSettings() (*SQLElasticPoolResourceSettings, bool) {
-	return nil, false
-}
-
-// AsSQLDatabaseResourceSettings is the BasicResourceSettings implementation for SQLServerResourceSettings.
-func (ssrs SQLServerResourceSettings) AsSQLDatabaseResourceSettings() (*SQLDatabaseResourceSettings, bool) {
-	return nil, false
-}
-
-// AsResourceGroupResourceSettings is the BasicResourceSettings implementation for SQLServerResourceSettings.
-func (ssrs SQLServerResourceSettings) AsResourceGroupResourceSettings() (*ResourceGroupResourceSettings, bool) {
-	return nil, false
-}
-
-// AsPublicIPAddressResourceSettings is the BasicResourceSettings implementation for SQLServerResourceSettings.
-func (ssrs SQLServerResourceSettings) AsPublicIPAddressResourceSettings() (*PublicIPAddressResourceSettings, bool) {
-	return nil, false
-}
-
-// AsKeyVaultResourceSettings is the BasicResourceSettings implementation for SQLServerResourceSettings.
-func (ssrs SQLServerResourceSettings) AsKeyVaultResourceSettings() (*KeyVaultResourceSettings, bool) {
-	return nil, false
-}
-
-// AsDiskEncryptionSetResourceSettings is the BasicResourceSettings implementation for SQLServerResourceSettings.
-func (ssrs SQLServerResourceSettings) AsDiskEncryptionSetResourceSettings() (*DiskEncryptionSetResourceSettings, bool) {
-	return nil, false
-}
-
-// AsResourceSettings is the BasicResourceSettings implementation for SQLServerResourceSettings.
-func (ssrs SQLServerResourceSettings) AsResourceSettings() (*ResourceSettings, bool) {
-	return nil, false
-}
-
-// AsBasicResourceSettings is the BasicResourceSettings implementation for SQLServerResourceSettings.
-func (ssrs SQLServerResourceSettings) AsBasicResourceSettings() (BasicResourceSettings, bool) {
-	return &ssrs, true
-}
-
-// SubnetReference defines reference to subnet.
-type SubnetReference struct {
-	// Name - Gets the name of the proxy resource on the target side.
-	Name *string `json:"name,omitempty"`
-	// SourceArmResourceID - Gets the ARM resource ID of the tracked resource being referenced.
-	SourceArmResourceID *string `json:"sourceArmResourceId,omitempty"`
-}
-
-// SubnetResourceSettings defines the virtual network subnets resource settings.
-type SubnetResourceSettings struct {
-	// Name - Gets or sets the Subnet name.
-	Name *string `json:"name,omitempty"`
-	// AddressPrefix - Gets or sets address prefix for the subnet.
-	AddressPrefix        *string       `json:"addressPrefix,omitempty"`
-	NetworkSecurityGroup *NsgReference `json:"networkSecurityGroup,omitempty"`
 }
 
 // Summary summary item.
@@ -2842,6 +1476,13 @@ type SummaryCollection struct {
 	FieldName *string `json:"fieldName,omitempty"`
 	// Summary - Gets or sets the list of summary items.
 	Summary *[]Summary `json:"summary,omitempty"`
+}
+
+// SupportedResourceTypesForResourceMover defines the supported resource type for resource mover.
+type SupportedResourceTypesForResourceMover struct {
+	autorest.Response `json:"-"`
+	// Value - Gets the list of supported resource types.
+	Value *[]ResourceTypeDefinitionForResourceMover `json:"value,omitempty"`
 }
 
 // UnresolvedDependenciesFilter unresolved dependencies contract.
@@ -3056,233 +1697,4 @@ func (umcr UpdateMoveCollectionRequest) MarshalJSON() ([]byte, error) {
 		objectMap["identity"] = umcr.Identity
 	}
 	return json.Marshal(objectMap)
-}
-
-// VirtualMachineResourceSettings gets or sets the virtual machine resource settings.
-type VirtualMachineResourceSettings struct {
-	// TargetAvailabilityZone - Gets or sets the target availability zone. Possible values include: 'One', 'Two', 'Three', 'NA'
-	TargetAvailabilityZone TargetAvailabilityZone `json:"targetAvailabilityZone,omitempty"`
-	// TargetVMSize - Gets or sets the target virtual machine size.
-	TargetVMSize *string `json:"targetVmSize,omitempty"`
-	// TargetAvailabilitySetID - Gets or sets the target availability set id for virtual machines not in an availability set at source.
-	TargetAvailabilitySetID *string `json:"targetAvailabilitySetId,omitempty"`
-	// TargetResourceName - Gets or sets the target Resource name.
-	TargetResourceName *string `json:"targetResourceName,omitempty"`
-	// ResourceType - Possible values include: 'ResourceTypeResourceSettings', 'ResourceTypeMicrosoftComputevirtualMachines', 'ResourceTypeMicrosoftComputeavailabilitySets', 'ResourceTypeMicrosoftNetworkvirtualNetworks', 'ResourceTypeMicrosoftNetworknetworkInterfaces', 'ResourceTypeMicrosoftNetworknetworkSecurityGroups', 'ResourceTypeMicrosoftNetworkloadBalancers', 'ResourceTypeMicrosoftSqlservers', 'ResourceTypeMicrosoftSqlserverselasticPools', 'ResourceTypeMicrosoftSqlserversdatabases', 'ResourceTypeResourceGroups', 'ResourceTypeMicrosoftNetworkpublicIPAddresses', 'ResourceTypeMicrosoftKeyVaultvaults', 'ResourceTypeMicrosoftComputediskEncryptionSets'
-	ResourceType ResourceType `json:"resourceType,omitempty"`
-}
-
-// MarshalJSON is the custom marshaler for VirtualMachineResourceSettings.
-func (vmrs VirtualMachineResourceSettings) MarshalJSON() ([]byte, error) {
-	vmrs.ResourceType = ResourceTypeMicrosoftComputevirtualMachines
-	objectMap := make(map[string]interface{})
-	if vmrs.TargetAvailabilityZone != "" {
-		objectMap["targetAvailabilityZone"] = vmrs.TargetAvailabilityZone
-	}
-	if vmrs.TargetVMSize != nil {
-		objectMap["targetVmSize"] = vmrs.TargetVMSize
-	}
-	if vmrs.TargetAvailabilitySetID != nil {
-		objectMap["targetAvailabilitySetId"] = vmrs.TargetAvailabilitySetID
-	}
-	if vmrs.TargetResourceName != nil {
-		objectMap["targetResourceName"] = vmrs.TargetResourceName
-	}
-	if vmrs.ResourceType != "" {
-		objectMap["resourceType"] = vmrs.ResourceType
-	}
-	return json.Marshal(objectMap)
-}
-
-// AsVirtualMachineResourceSettings is the BasicResourceSettings implementation for VirtualMachineResourceSettings.
-func (vmrs VirtualMachineResourceSettings) AsVirtualMachineResourceSettings() (*VirtualMachineResourceSettings, bool) {
-	return &vmrs, true
-}
-
-// AsAvailabilitySetResourceSettings is the BasicResourceSettings implementation for VirtualMachineResourceSettings.
-func (vmrs VirtualMachineResourceSettings) AsAvailabilitySetResourceSettings() (*AvailabilitySetResourceSettings, bool) {
-	return nil, false
-}
-
-// AsVirtualNetworkResourceSettings is the BasicResourceSettings implementation for VirtualMachineResourceSettings.
-func (vmrs VirtualMachineResourceSettings) AsVirtualNetworkResourceSettings() (*VirtualNetworkResourceSettings, bool) {
-	return nil, false
-}
-
-// AsNetworkInterfaceResourceSettings is the BasicResourceSettings implementation for VirtualMachineResourceSettings.
-func (vmrs VirtualMachineResourceSettings) AsNetworkInterfaceResourceSettings() (*NetworkInterfaceResourceSettings, bool) {
-	return nil, false
-}
-
-// AsNetworkSecurityGroupResourceSettings is the BasicResourceSettings implementation for VirtualMachineResourceSettings.
-func (vmrs VirtualMachineResourceSettings) AsNetworkSecurityGroupResourceSettings() (*NetworkSecurityGroupResourceSettings, bool) {
-	return nil, false
-}
-
-// AsLoadBalancerResourceSettings is the BasicResourceSettings implementation for VirtualMachineResourceSettings.
-func (vmrs VirtualMachineResourceSettings) AsLoadBalancerResourceSettings() (*LoadBalancerResourceSettings, bool) {
-	return nil, false
-}
-
-// AsSQLServerResourceSettings is the BasicResourceSettings implementation for VirtualMachineResourceSettings.
-func (vmrs VirtualMachineResourceSettings) AsSQLServerResourceSettings() (*SQLServerResourceSettings, bool) {
-	return nil, false
-}
-
-// AsSQLElasticPoolResourceSettings is the BasicResourceSettings implementation for VirtualMachineResourceSettings.
-func (vmrs VirtualMachineResourceSettings) AsSQLElasticPoolResourceSettings() (*SQLElasticPoolResourceSettings, bool) {
-	return nil, false
-}
-
-// AsSQLDatabaseResourceSettings is the BasicResourceSettings implementation for VirtualMachineResourceSettings.
-func (vmrs VirtualMachineResourceSettings) AsSQLDatabaseResourceSettings() (*SQLDatabaseResourceSettings, bool) {
-	return nil, false
-}
-
-// AsResourceGroupResourceSettings is the BasicResourceSettings implementation for VirtualMachineResourceSettings.
-func (vmrs VirtualMachineResourceSettings) AsResourceGroupResourceSettings() (*ResourceGroupResourceSettings, bool) {
-	return nil, false
-}
-
-// AsPublicIPAddressResourceSettings is the BasicResourceSettings implementation for VirtualMachineResourceSettings.
-func (vmrs VirtualMachineResourceSettings) AsPublicIPAddressResourceSettings() (*PublicIPAddressResourceSettings, bool) {
-	return nil, false
-}
-
-// AsKeyVaultResourceSettings is the BasicResourceSettings implementation for VirtualMachineResourceSettings.
-func (vmrs VirtualMachineResourceSettings) AsKeyVaultResourceSettings() (*KeyVaultResourceSettings, bool) {
-	return nil, false
-}
-
-// AsDiskEncryptionSetResourceSettings is the BasicResourceSettings implementation for VirtualMachineResourceSettings.
-func (vmrs VirtualMachineResourceSettings) AsDiskEncryptionSetResourceSettings() (*DiskEncryptionSetResourceSettings, bool) {
-	return nil, false
-}
-
-// AsResourceSettings is the BasicResourceSettings implementation for VirtualMachineResourceSettings.
-func (vmrs VirtualMachineResourceSettings) AsResourceSettings() (*ResourceSettings, bool) {
-	return nil, false
-}
-
-// AsBasicResourceSettings is the BasicResourceSettings implementation for VirtualMachineResourceSettings.
-func (vmrs VirtualMachineResourceSettings) AsBasicResourceSettings() (BasicResourceSettings, bool) {
-	return &vmrs, true
-}
-
-// VirtualNetworkResourceSettings defines the virtual network resource settings.
-type VirtualNetworkResourceSettings struct {
-	// EnableDdosProtection - Gets or sets a value indicating whether gets or sets whether the
-	// DDOS protection should be switched on.
-	EnableDdosProtection *bool `json:"enableDdosProtection,omitempty"`
-	// AddressSpace - Gets or sets the address prefixes for the virtual network.
-	AddressSpace *[]string `json:"addressSpace,omitempty"`
-	// DNSServers - Gets or sets DHCPOptions that contains an array of DNS servers available to VMs
-	// deployed in the virtual network.
-	DNSServers *[]string `json:"dnsServers,omitempty"`
-	// Subnets - Gets or sets List of subnets in a VirtualNetwork.
-	Subnets *[]SubnetResourceSettings `json:"subnets,omitempty"`
-	// TargetResourceName - Gets or sets the target Resource name.
-	TargetResourceName *string `json:"targetResourceName,omitempty"`
-	// ResourceType - Possible values include: 'ResourceTypeResourceSettings', 'ResourceTypeMicrosoftComputevirtualMachines', 'ResourceTypeMicrosoftComputeavailabilitySets', 'ResourceTypeMicrosoftNetworkvirtualNetworks', 'ResourceTypeMicrosoftNetworknetworkInterfaces', 'ResourceTypeMicrosoftNetworknetworkSecurityGroups', 'ResourceTypeMicrosoftNetworkloadBalancers', 'ResourceTypeMicrosoftSqlservers', 'ResourceTypeMicrosoftSqlserverselasticPools', 'ResourceTypeMicrosoftSqlserversdatabases', 'ResourceTypeResourceGroups', 'ResourceTypeMicrosoftNetworkpublicIPAddresses', 'ResourceTypeMicrosoftKeyVaultvaults', 'ResourceTypeMicrosoftComputediskEncryptionSets'
-	ResourceType ResourceType `json:"resourceType,omitempty"`
-}
-
-// MarshalJSON is the custom marshaler for VirtualNetworkResourceSettings.
-func (vnrs VirtualNetworkResourceSettings) MarshalJSON() ([]byte, error) {
-	vnrs.ResourceType = ResourceTypeMicrosoftNetworkvirtualNetworks
-	objectMap := make(map[string]interface{})
-	if vnrs.EnableDdosProtection != nil {
-		objectMap["enableDdosProtection"] = vnrs.EnableDdosProtection
-	}
-	if vnrs.AddressSpace != nil {
-		objectMap["addressSpace"] = vnrs.AddressSpace
-	}
-	if vnrs.DNSServers != nil {
-		objectMap["dnsServers"] = vnrs.DNSServers
-	}
-	if vnrs.Subnets != nil {
-		objectMap["subnets"] = vnrs.Subnets
-	}
-	if vnrs.TargetResourceName != nil {
-		objectMap["targetResourceName"] = vnrs.TargetResourceName
-	}
-	if vnrs.ResourceType != "" {
-		objectMap["resourceType"] = vnrs.ResourceType
-	}
-	return json.Marshal(objectMap)
-}
-
-// AsVirtualMachineResourceSettings is the BasicResourceSettings implementation for VirtualNetworkResourceSettings.
-func (vnrs VirtualNetworkResourceSettings) AsVirtualMachineResourceSettings() (*VirtualMachineResourceSettings, bool) {
-	return nil, false
-}
-
-// AsAvailabilitySetResourceSettings is the BasicResourceSettings implementation for VirtualNetworkResourceSettings.
-func (vnrs VirtualNetworkResourceSettings) AsAvailabilitySetResourceSettings() (*AvailabilitySetResourceSettings, bool) {
-	return nil, false
-}
-
-// AsVirtualNetworkResourceSettings is the BasicResourceSettings implementation for VirtualNetworkResourceSettings.
-func (vnrs VirtualNetworkResourceSettings) AsVirtualNetworkResourceSettings() (*VirtualNetworkResourceSettings, bool) {
-	return &vnrs, true
-}
-
-// AsNetworkInterfaceResourceSettings is the BasicResourceSettings implementation for VirtualNetworkResourceSettings.
-func (vnrs VirtualNetworkResourceSettings) AsNetworkInterfaceResourceSettings() (*NetworkInterfaceResourceSettings, bool) {
-	return nil, false
-}
-
-// AsNetworkSecurityGroupResourceSettings is the BasicResourceSettings implementation for VirtualNetworkResourceSettings.
-func (vnrs VirtualNetworkResourceSettings) AsNetworkSecurityGroupResourceSettings() (*NetworkSecurityGroupResourceSettings, bool) {
-	return nil, false
-}
-
-// AsLoadBalancerResourceSettings is the BasicResourceSettings implementation for VirtualNetworkResourceSettings.
-func (vnrs VirtualNetworkResourceSettings) AsLoadBalancerResourceSettings() (*LoadBalancerResourceSettings, bool) {
-	return nil, false
-}
-
-// AsSQLServerResourceSettings is the BasicResourceSettings implementation for VirtualNetworkResourceSettings.
-func (vnrs VirtualNetworkResourceSettings) AsSQLServerResourceSettings() (*SQLServerResourceSettings, bool) {
-	return nil, false
-}
-
-// AsSQLElasticPoolResourceSettings is the BasicResourceSettings implementation for VirtualNetworkResourceSettings.
-func (vnrs VirtualNetworkResourceSettings) AsSQLElasticPoolResourceSettings() (*SQLElasticPoolResourceSettings, bool) {
-	return nil, false
-}
-
-// AsSQLDatabaseResourceSettings is the BasicResourceSettings implementation for VirtualNetworkResourceSettings.
-func (vnrs VirtualNetworkResourceSettings) AsSQLDatabaseResourceSettings() (*SQLDatabaseResourceSettings, bool) {
-	return nil, false
-}
-
-// AsResourceGroupResourceSettings is the BasicResourceSettings implementation for VirtualNetworkResourceSettings.
-func (vnrs VirtualNetworkResourceSettings) AsResourceGroupResourceSettings() (*ResourceGroupResourceSettings, bool) {
-	return nil, false
-}
-
-// AsPublicIPAddressResourceSettings is the BasicResourceSettings implementation for VirtualNetworkResourceSettings.
-func (vnrs VirtualNetworkResourceSettings) AsPublicIPAddressResourceSettings() (*PublicIPAddressResourceSettings, bool) {
-	return nil, false
-}
-
-// AsKeyVaultResourceSettings is the BasicResourceSettings implementation for VirtualNetworkResourceSettings.
-func (vnrs VirtualNetworkResourceSettings) AsKeyVaultResourceSettings() (*KeyVaultResourceSettings, bool) {
-	return nil, false
-}
-
-// AsDiskEncryptionSetResourceSettings is the BasicResourceSettings implementation for VirtualNetworkResourceSettings.
-func (vnrs VirtualNetworkResourceSettings) AsDiskEncryptionSetResourceSettings() (*DiskEncryptionSetResourceSettings, bool) {
-	return nil, false
-}
-
-// AsResourceSettings is the BasicResourceSettings implementation for VirtualNetworkResourceSettings.
-func (vnrs VirtualNetworkResourceSettings) AsResourceSettings() (*ResourceSettings, bool) {
-	return nil, false
-}
-
-// AsBasicResourceSettings is the BasicResourceSettings implementation for VirtualNetworkResourceSettings.
-func (vnrs VirtualNetworkResourceSettings) AsBasicResourceSettings() (BasicResourceSettings, bool) {
-	return &vnrs, true
 }

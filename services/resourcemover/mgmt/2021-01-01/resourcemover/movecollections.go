@@ -16,7 +16,7 @@ import (
 )
 
 // MoveCollectionsClient is the a first party Azure service orchestrating the move of Azure resources from one Azure
-// region to another or between zones within a region.
+// region to another.
 type MoveCollectionsClient struct {
 	BaseClient
 }

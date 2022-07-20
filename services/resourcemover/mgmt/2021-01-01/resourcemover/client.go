@@ -1,7 +1,6 @@
 // Package resourcemover implements the Azure ARM Resourcemover service API version 2021-01-01.
 //
-// A first party Azure service orchestrating the move of Azure resources from one Azure region to another or between
-// zones within a region.
+// A first party Azure service orchestrating the move of Azure resources from one Azure region to another.
 package resourcemover
 
 // Copyright (c) Microsoft Corporation. All rights reserved.

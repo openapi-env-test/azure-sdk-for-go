@@ -15,7 +15,7 @@ import (
 )
 
 // UnresolvedDependenciesClient is the a first party Azure service orchestrating the move of Azure resources from one
-// Azure region to another or between zones within a region.
+// Azure region to another.
 type UnresolvedDependenciesClient struct {
 	BaseClient
 }

@@ -11,6 +11,13 @@ import (
 	"github.com/Azure/azure-sdk-for-go/services/resourcemover/mgmt/2021-01-01/resourcemover"
 )
 
+// SupportedResourceTypesForResourceMoverClientAPI contains the set of methods on the SupportedResourceTypesForResourceMoverClient type.
+type SupportedResourceTypesForResourceMoverClientAPI interface {
+	Get(ctx context.Context) (result resourcemover.SupportedResourceTypesForResourceMover, err error)
+}
+
+var _ SupportedResourceTypesForResourceMoverClientAPI = (*resourcemover.SupportedResourceTypesForResourceMoverClient)(nil)
+
 // MoveCollectionsClientAPI contains the set of methods on the MoveCollectionsClient type.
 type MoveCollectionsClientAPI interface {
 	BulkRemove(ctx context.Context, resourceGroupName string, moveCollectionName string, body *resourcemover.BulkRemoveRequest) (result resourcemover.MoveCollectionsBulkRemoveFuture, err error)

@@ -49,6 +49,21 @@ func PossibleJobNameValues() []JobName {
 	return []JobName{InitialSync}
 }
 
+// MoveParadigm enumerates the values for move paradigm.
+type MoveParadigm string
+
+const (
+	// CopyType ...
+	CopyType MoveParadigm = "CopyType"
+	// MigrateType ...
+	MigrateType MoveParadigm = "MigrateType"
+)
+
+// PossibleMoveParadigmValues returns an array of possible values for the MoveParadigm const type.
+func PossibleMoveParadigmValues() []MoveParadigm {
+	return []MoveParadigm{CopyType, MigrateType}
+}
+
 // MoveResourceInputType enumerates the values for move resource input type.
 type MoveResourceInputType string
 
@@ -160,71 +175,11 @@ func PossibleResourceIdentityTypeValues() []ResourceIdentityType {
 type ResourceType string
 
 const (
-	// ResourceTypeMicrosoftComputeavailabilitySets ...
-	ResourceTypeMicrosoftComputeavailabilitySets ResourceType = "Microsoft.Compute/availabilitySets"
-	// ResourceTypeMicrosoftComputediskEncryptionSets ...
-	ResourceTypeMicrosoftComputediskEncryptionSets ResourceType = "Microsoft.Compute/diskEncryptionSets"
-	// ResourceTypeMicrosoftComputevirtualMachines ...
-	ResourceTypeMicrosoftComputevirtualMachines ResourceType = "Microsoft.Compute/virtualMachines"
-	// ResourceTypeMicrosoftKeyVaultvaults ...
-	ResourceTypeMicrosoftKeyVaultvaults ResourceType = "Microsoft.KeyVault/vaults"
-	// ResourceTypeMicrosoftNetworkloadBalancers ...
-	ResourceTypeMicrosoftNetworkloadBalancers ResourceType = "Microsoft.Network/loadBalancers"
-	// ResourceTypeMicrosoftNetworknetworkInterfaces ...
-	ResourceTypeMicrosoftNetworknetworkInterfaces ResourceType = "Microsoft.Network/networkInterfaces"
-	// ResourceTypeMicrosoftNetworknetworkSecurityGroups ...
-	ResourceTypeMicrosoftNetworknetworkSecurityGroups ResourceType = "Microsoft.Network/networkSecurityGroups"
-	// ResourceTypeMicrosoftNetworkpublicIPAddresses ...
-	ResourceTypeMicrosoftNetworkpublicIPAddresses ResourceType = "Microsoft.Network/publicIPAddresses"
-	// ResourceTypeMicrosoftNetworkvirtualNetworks ...
-	ResourceTypeMicrosoftNetworkvirtualNetworks ResourceType = "Microsoft.Network/virtualNetworks"
-	// ResourceTypeMicrosoftSqlservers ...
-	ResourceTypeMicrosoftSqlservers ResourceType = "Microsoft.Sql/servers"
-	// ResourceTypeMicrosoftSqlserversdatabases ...
-	ResourceTypeMicrosoftSqlserversdatabases ResourceType = "Microsoft.Sql/servers/databases"
-	// ResourceTypeMicrosoftSqlserverselasticPools ...
-	ResourceTypeMicrosoftSqlserverselasticPools ResourceType = "Microsoft.Sql/servers/elasticPools"
-	// ResourceTypeResourceGroups ...
-	ResourceTypeResourceGroups ResourceType = "resourceGroups"
 	// ResourceTypeResourceSettings ...
 	ResourceTypeResourceSettings ResourceType = "ResourceSettings"
 )
 
 // PossibleResourceTypeValues returns an array of possible values for the ResourceType const type.
 func PossibleResourceTypeValues() []ResourceType {
-	return []ResourceType{ResourceTypeMicrosoftComputeavailabilitySets, ResourceTypeMicrosoftComputediskEncryptionSets, ResourceTypeMicrosoftComputevirtualMachines, ResourceTypeMicrosoftKeyVaultvaults, ResourceTypeMicrosoftNetworkloadBalancers, ResourceTypeMicrosoftNetworknetworkInterfaces, ResourceTypeMicrosoftNetworknetworkSecurityGroups, ResourceTypeMicrosoftNetworkpublicIPAddresses, ResourceTypeMicrosoftNetworkvirtualNetworks, ResourceTypeMicrosoftSqlservers, ResourceTypeMicrosoftSqlserversdatabases, ResourceTypeMicrosoftSqlserverselasticPools, ResourceTypeResourceGroups, ResourceTypeResourceSettings}
-}
-
-// TargetAvailabilityZone enumerates the values for target availability zone.
-type TargetAvailabilityZone string
-
-const (
-	// NA ...
-	NA TargetAvailabilityZone = "NA"
-	// One ...
-	One TargetAvailabilityZone = "1"
-	// Three ...
-	Three TargetAvailabilityZone = "3"
-	// Two ...
-	Two TargetAvailabilityZone = "2"
-)
-
-// PossibleTargetAvailabilityZoneValues returns an array of possible values for the TargetAvailabilityZone const type.
-func PossibleTargetAvailabilityZoneValues() []TargetAvailabilityZone {
-	return []TargetAvailabilityZone{NA, One, Three, Two}
-}
-
-// ZoneRedundant enumerates the values for zone redundant.
-type ZoneRedundant string
-
-const (
-	// Disable ...
-	Disable ZoneRedundant = "Disable"
-	// Enable ...
-	Enable ZoneRedundant = "Enable"
-)
-
-// PossibleZoneRedundantValues returns an array of possible values for the ZoneRedundant const type.
-func PossibleZoneRedundantValues() []ZoneRedundant {
-	return []ZoneRedundant{Disable, Enable}
+	return []ResourceType{ResourceTypeResourceSettings}
 }
