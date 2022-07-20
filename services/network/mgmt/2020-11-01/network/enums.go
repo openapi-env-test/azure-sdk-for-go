@@ -492,6 +492,21 @@ func PossibleBastionConnectProtocolValues() []BastionConnectProtocol {
 	return []BastionConnectProtocol{BastionConnectProtocolRDP, BastionConnectProtocolSSH}
 }
 
+// BastionHostSkuName enumerates the values for bastion host sku name.
+type BastionHostSkuName string
+
+const (
+	// BastionHostSkuNameBasic ...
+	BastionHostSkuNameBasic BastionHostSkuName = "Basic"
+	// BastionHostSkuNameStandard ...
+	BastionHostSkuNameStandard BastionHostSkuName = "Standard"
+)
+
+// PossibleBastionHostSkuNameValues returns an array of possible values for the BastionHostSkuName const type.
+func PossibleBastionHostSkuNameValues() []BastionHostSkuName {
+	return []BastionHostSkuName{BastionHostSkuNameBasic, BastionHostSkuNameStandard}
+}
+
 // BgpPeerState enumerates the values for bgp peer state.
 type BgpPeerState string
 
