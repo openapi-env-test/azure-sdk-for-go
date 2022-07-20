@@ -8,7 +8,7 @@ package containerinstanceapi
 
 import (
 	"context"
-	"github.com/Azure/azure-sdk-for-go/services/containerinstance/mgmt/2021-10-01/containerinstance"
+	"github.com/Azure/azure-sdk-for-go/services/containerinstance/mgmt/2022-04-01/containerinstance"
 	"github.com/Azure/go-autorest/autorest"
 )
 
@@ -57,10 +57,3 @@ type ContainersClientAPI interface {
 }
 
 var _ ContainersClientAPI = (*containerinstance.ContainersClient)(nil)
-
-// SubnetServiceAssociationLinkClientAPI contains the set of methods on the SubnetServiceAssociationLinkClient type.
-type SubnetServiceAssociationLinkClientAPI interface {
-	Delete(ctx context.Context, resourceGroupName string, virtualNetworkName string, subnetName string) (result containerinstance.SubnetServiceAssociationLinkDeleteFuture, err error)
-}
-
-var _ SubnetServiceAssociationLinkClientAPI = (*containerinstance.SubnetServiceAssociationLinkClient)(nil)
