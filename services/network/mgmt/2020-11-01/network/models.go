@@ -7574,8 +7574,6 @@ func (bap *BackendAddressPool) UnmarshalJSON(body []byte) error {
 
 // BackendAddressPoolPropertiesFormat properties of the backend address pool.
 type BackendAddressPoolPropertiesFormat struct {
-	// Location - The location of the backend address pool.
-	Location *string `json:"location,omitempty"`
 	// LoadBalancerBackendAddresses - An array of backend addresses.
 	LoadBalancerBackendAddresses *[]LoadBalancerBackendAddress `json:"loadBalancerBackendAddresses,omitempty"`
 	// BackendIPConfigurations - READ-ONLY; An array of references to IP addresses defined in network interfaces.
@@ -7593,9 +7591,6 @@ type BackendAddressPoolPropertiesFormat struct {
 // MarshalJSON is the custom marshaler for BackendAddressPoolPropertiesFormat.
 func (bappf BackendAddressPoolPropertiesFormat) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
-	if bappf.Location != nil {
-		objectMap["location"] = bappf.Location
-	}
 	if bappf.LoadBalancerBackendAddresses != nil {
 		objectMap["loadBalancerBackendAddresses"] = bappf.LoadBalancerBackendAddresses
 	}
@@ -7801,6 +7796,8 @@ type BastionHost struct {
 	*BastionHostPropertiesFormat `json:"properties,omitempty"`
 	// Etag - READ-ONLY; A unique read-only string that changes whenever the resource is updated.
 	Etag *string `json:"etag,omitempty"`
+	// Sku - The sku of this Bastion Host.
+	Sku *Sku `json:"sku,omitempty"`
 	// ID - Resource ID.
 	ID *string `json:"id,omitempty"`
 	// Name - READ-ONLY; Resource name.
@@ -7818,6 +7815,9 @@ func (bh BastionHost) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
 	if bh.BastionHostPropertiesFormat != nil {
 		objectMap["properties"] = bh.BastionHostPropertiesFormat
+	}
+	if bh.Sku != nil {
+		objectMap["sku"] = bh.Sku
 	}
 	if bh.ID != nil {
 		objectMap["id"] = bh.ID
@@ -7857,6 +7857,15 @@ func (bh *BastionHost) UnmarshalJSON(body []byte) error {
 					return err
 				}
 				bh.Etag = &etag
+			}
+		case "sku":
+			if v != nil {
+				var sku Sku
+				err = json.Unmarshal(*v, &sku)
+				if err != nil {
+					return err
+				}
+				bh.Sku = &sku
 			}
 		case "id":
 			if v != nil {
@@ -37468,6 +37477,12 @@ func (stlr ServiceTagsListResult) MarshalJSON() ([]byte, error) {
 type SessionIds struct {
 	// SessionIds - List of session IDs.
 	SessionIds *[]string `json:"sessionIds,omitempty"`
+}
+
+// Sku the sku of this Bastion Host.
+type Sku struct {
+	// Name - The name of this Bastion Host. Possible values include: 'BastionHostSkuNameBasic', 'BastionHostSkuNameStandard'
+	Name BastionHostSkuName `json:"name,omitempty"`
 }
 
 // StaticRoute list of all Static Routes.
