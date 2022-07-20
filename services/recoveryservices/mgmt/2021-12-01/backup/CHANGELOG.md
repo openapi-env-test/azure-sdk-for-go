@@ -1,39 +1,38 @@
-# Change History
+# Unreleased
 
 ## Breaking Changes
 
-### Removed Constants
+### Signature Changes
 
-1. ContainerTypeBasicProtectionContainer.ContainerTypeBasicProtectionContainerContainerTypeIaaSVMContainer
+#### Funcs
+
+1. ProtectedItemsClient.CreateOrUpdate
+	- Returns
+		- From: ProtectedItemResource, error
+		- To: ProtectedItemsCreateOrUpdateFuture, error
+1. ProtectedItemsClient.CreateOrUpdateSender
+	- Returns
+		- From: *http.Response, error
+		- To: ProtectedItemsCreateOrUpdateFuture, error
+1. ProtectedItemsClient.Delete
+	- Returns
+		- From: autorest.Response, error
+		- To: ProtectedItemsDeleteFuture, error
+1. ProtectedItemsClient.DeleteSender
+	- Returns
+		- From: *http.Response, error
+		- To: ProtectedItemsDeleteFuture, error
 
 ## Additive Changes
 
-### New Constants
-
-1. ContainerTypeBasicProtectionContainer.ContainerTypeBasicProtectionContainerContainerTypeIaasVMContainer
-1. TieringMode.TieringModeDoNotTier
-1. TieringMode.TieringModeInvalid
-1. TieringMode.TieringModeTierAfter
-1. TieringMode.TieringModeTierRecommended
-
 ### New Funcs
 
-1. PossibleTieringModeValues() []TieringMode
-1. SubProtectionPolicy.MarshalJSON() ([]byte, error)
+1. *ProtectedItemsCreateOrUpdateFuture.UnmarshalJSON([]byte) error
+1. *ProtectedItemsDeleteFuture.UnmarshalJSON([]byte) error
 
 ### Struct Changes
 
 #### New Structs
 
-1. TieringPolicy
-
-#### New Struct Fields
-
-1. AzureIaaSVMProtectedItemExtendedInfo.NewestRecoveryPointInArchive
-1. AzureIaaSVMProtectedItemExtendedInfo.OldestRecoveryPointInArchive
-1. AzureIaaSVMProtectedItemExtendedInfo.OldestRecoveryPointInVault
-1. AzureIaaSVMProtectionPolicy.TieringPolicy
-1. AzureVMWorkloadProtectedItemExtendedInfo.NewestRecoveryPointInArchive
-1. AzureVMWorkloadProtectedItemExtendedInfo.OldestRecoveryPointInArchive
-1. AzureVMWorkloadProtectedItemExtendedInfo.OldestRecoveryPointInVault
-1. SubProtectionPolicy.TieringPolicy
+1. ProtectedItemsCreateOrUpdateFuture
+1. ProtectedItemsDeleteFuture
