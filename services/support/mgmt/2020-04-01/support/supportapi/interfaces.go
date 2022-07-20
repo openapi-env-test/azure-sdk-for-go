@@ -11,6 +11,13 @@ import (
 	"github.com/Azure/azure-sdk-for-go/services/support/mgmt/2020-04-01/support"
 )
 
+// BaseClientAPI contains the set of methods on the BaseClient type.
+type BaseClientAPI interface {
+	TicketResourceIDLookUp(ctx context.Context, supportTicketResourceIDLookupRequest support.TicketResourceIDLookupRequest) (result support.TicketResourceIDLookUpResponse, err error)
+}
+
+var _ BaseClientAPI = (*support.BaseClient)(nil)
+
 // OperationsClientAPI contains the set of methods on the OperationsClient type.
 type OperationsClientAPI interface {
 	List(ctx context.Context) (result support.OperationsListResult, err error)
