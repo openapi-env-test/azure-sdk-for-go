@@ -42,6 +42,7 @@ type BackupsClientAPI interface {
 	Get(ctx context.Context, resourceGroupName string, serverName string, backupName string) (result mysqlflexibleservers.ServerBackup, err error)
 	ListByServer(ctx context.Context, resourceGroupName string, serverName string) (result mysqlflexibleservers.ServerBackupListResultPage, err error)
 	ListByServerComplete(ctx context.Context, resourceGroupName string, serverName string) (result mysqlflexibleservers.ServerBackupListResultIterator, err error)
+	Put(ctx context.Context, resourceGroupName string, serverName string, backupName string) (result mysqlflexibleservers.ServerBackup, err error)
 }
 
 var _ BackupsClientAPI = (*mysqlflexibleservers.BackupsClient)(nil)
@@ -100,6 +101,13 @@ type CheckNameAvailabilityClientAPI interface {
 }
 
 var _ CheckNameAvailabilityClientAPI = (*mysqlflexibleservers.CheckNameAvailabilityClient)(nil)
+
+// CheckNameAvailabilityWithoutLocationClientAPI contains the set of methods on the CheckNameAvailabilityWithoutLocationClient type.
+type CheckNameAvailabilityWithoutLocationClientAPI interface {
+	Execute(ctx context.Context, nameAvailabilityRequest mysqlflexibleservers.NameAvailabilityRequest) (result mysqlflexibleservers.NameAvailability, err error)
+}
+
+var _ CheckNameAvailabilityWithoutLocationClientAPI = (*mysqlflexibleservers.CheckNameAvailabilityWithoutLocationClient)(nil)
 
 // GetPrivateDNSZoneSuffixClientAPI contains the set of methods on the GetPrivateDNSZoneSuffixClient type.
 type GetPrivateDNSZoneSuffixClientAPI interface {
