@@ -857,6 +857,19 @@ func (tdp TicketDetailsProperties) MarshalJSON() ([]byte, error) {
 	return json.Marshal(objectMap)
 }
 
+// TicketResourceIDLookupRequest the Support ticket resource Id look up request
+type TicketResourceIDLookupRequest struct {
+	// SupportTicketID - The Support Ticket Id
+	SupportTicketID *string `json:"supportTicketId,omitempty"`
+}
+
+// TicketResourceIDLookUpResponse the Support ticket resource id look up response
+type TicketResourceIDLookUpResponse struct {
+	autorest.Response `json:"-"`
+	// ResourceID - The ARM resource Id of support ticket
+	ResourceID *string `json:"resourceId,omitempty"`
+}
+
 // TicketsCreateFuture an abstraction for monitoring and retrieving the results of a long-running
 // operation.
 type TicketsCreateFuture struct {

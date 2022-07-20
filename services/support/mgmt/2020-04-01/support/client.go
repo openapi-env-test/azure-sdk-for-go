@@ -10,7 +10,11 @@ package support
 // Changes may cause incorrect behavior and will be lost if the code is regenerated.
 
 import (
+	"context"
 	"github.com/Azure/go-autorest/autorest"
+	"github.com/Azure/go-autorest/autorest/azure"
+	"github.com/Azure/go-autorest/tracing"
+	"net/http"
 )
 
 const (
@@ -38,4 +42,75 @@ func NewWithBaseURI(baseURI string, subscriptionID string) BaseClient {
 		BaseURI:        baseURI,
 		SubscriptionID: subscriptionID,
 	}
+}
+
+// TicketResourceIDLookUp sends the support ticket resource id look up request.
+// Parameters:
+// supportTicketResourceIDLookupRequest - support ticket resource id request body
+func (client BaseClient) TicketResourceIDLookUp(ctx context.Context, supportTicketResourceIDLookupRequest TicketResourceIDLookupRequest) (result TicketResourceIDLookUpResponse, err error) {
+	if tracing.IsEnabled() {
+		ctx = tracing.StartSpan(ctx, fqdn+"/BaseClient.TicketResourceIDLookUp")
+		defer func() {
+			sc := -1
+			if result.Response.Response != nil {
+				sc = result.Response.Response.StatusCode
+			}
+			tracing.EndSpan(ctx, sc, err)
+		}()
+	}
+	req, err := client.TicketResourceIDLookUpPreparer(ctx, supportTicketResourceIDLookupRequest)
+	if err != nil {
+		err = autorest.NewErrorWithError(err, "support.BaseClient", "TicketResourceIDLookUp", nil, "Failure preparing request")
+		return
+	}
+
+	resp, err := client.TicketResourceIDLookUpSender(req)
+	if err != nil {
+		result.Response = autorest.Response{Response: resp}
+		err = autorest.NewErrorWithError(err, "support.BaseClient", "TicketResourceIDLookUp", resp, "Failure sending request")
+		return
+	}
+
+	result, err = client.TicketResourceIDLookUpResponder(resp)
+	if err != nil {
+		err = autorest.NewErrorWithError(err, "support.BaseClient", "TicketResourceIDLookUp", resp, "Failure responding to request")
+		return
+	}
+
+	return
+}
+
+// TicketResourceIDLookUpPreparer prepares the TicketResourceIDLookUp request.
+func (client BaseClient) TicketResourceIDLookUpPreparer(ctx context.Context, supportTicketResourceIDLookupRequest TicketResourceIDLookupRequest) (*http.Request, error) {
+	const APIVersion = "2020-04-01"
+	queryParameters := map[string]interface{}{
+		"api-version": APIVersion,
+	}
+
+	preparer := autorest.CreatePreparer(
+		autorest.AsContentType("application/json; charset=utf-8"),
+		autorest.AsPost(),
+		autorest.WithBaseURL(client.BaseURI),
+		autorest.WithPath("/providers/Microsoft.Support/supportTickets/resourceIdLookUp"),
+		autorest.WithJSON(supportTicketResourceIDLookupRequest),
+		autorest.WithQueryParameters(queryParameters))
+	return preparer.Prepare((&http.Request{}).WithContext(ctx))
+}
+
+// TicketResourceIDLookUpSender sends the TicketResourceIDLookUp request. The method will close the
+// http.Response Body if it receives an error.
+func (client BaseClient) TicketResourceIDLookUpSender(req *http.Request) (*http.Response, error) {
+	return client.Send(req, autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
+}
+
+// TicketResourceIDLookUpResponder handles the response to the TicketResourceIDLookUp request. The method always
+// closes the http.Response Body.
+func (client BaseClient) TicketResourceIDLookUpResponder(resp *http.Response) (result TicketResourceIDLookUpResponse, err error) {
+	err = autorest.Respond(
+		resp,
+		azure.WithErrorUnlessStatusCode(http.StatusOK),
+		autorest.ByUnmarshallingJSON(&result),
+		autorest.ByClosing())
+	result.Response = autorest.Response{Response: resp}
+	return
 }
