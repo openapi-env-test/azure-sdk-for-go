@@ -2504,7 +2504,7 @@ type AppServiceCertificateOrderPatchResourceProperties struct {
 	// IsPrivateKeyExternal - READ-ONLY; <code>true</code> if private key is external; otherwise, <code>false</code>.
 	IsPrivateKeyExternal *bool `json:"isPrivateKeyExternal,omitempty"`
 	// AppServiceCertificateNotRenewableReasons - READ-ONLY; Reasons why App Service Certificate is not renewable at the current moment.
-	AppServiceCertificateNotRenewableReasons *[]string `json:"appServiceCertificateNotRenewableReasons,omitempty"`
+	AppServiceCertificateNotRenewableReasons *[]ResourceNotRenewableReason `json:"appServiceCertificateNotRenewableReasons,omitempty"`
 	// NextAutoRenewalTimeStamp - READ-ONLY; Time stamp when the certificate would be auto renewed next
 	NextAutoRenewalTimeStamp *date.Time `json:"nextAutoRenewalTimeStamp,omitempty"`
 	// Contact - READ-ONLY; Contact info
@@ -2575,7 +2575,7 @@ type AppServiceCertificateOrderProperties struct {
 	// IsPrivateKeyExternal - READ-ONLY; <code>true</code> if private key is external; otherwise, <code>false</code>.
 	IsPrivateKeyExternal *bool `json:"isPrivateKeyExternal,omitempty"`
 	// AppServiceCertificateNotRenewableReasons - READ-ONLY; Reasons why App Service Certificate is not renewable at the current moment.
-	AppServiceCertificateNotRenewableReasons *[]string `json:"appServiceCertificateNotRenewableReasons,omitempty"`
+	AppServiceCertificateNotRenewableReasons *[]ResourceNotRenewableReason `json:"appServiceCertificateNotRenewableReasons,omitempty"`
 	// NextAutoRenewalTimeStamp - READ-ONLY; Time stamp when the certificate would be auto renewed next
 	NextAutoRenewalTimeStamp *date.Time `json:"nextAutoRenewalTimeStamp,omitempty"`
 	// Contact - READ-ONLY; Contact info
@@ -4280,6 +4280,8 @@ type AppServicePlanPatchResourceProperties struct {
 	HostingEnvironmentProfile *HostingEnvironmentProfile `json:"hostingEnvironmentProfile,omitempty"`
 	// MaximumNumberOfWorkers - READ-ONLY; Maximum number of instances that can be assigned to this App Service plan.
 	MaximumNumberOfWorkers *int32 `json:"maximumNumberOfWorkers,omitempty"`
+	// NumberOfWorkers - READ-ONLY; The number of instances that are assigned to this App Service plan.
+	NumberOfWorkers *int32 `json:"numberOfWorkers,omitempty"`
 	// GeoRegion - READ-ONLY; Geographical location for the App Service plan.
 	GeoRegion *string `json:"geoRegion,omitempty"`
 	// PerSiteScaling - If <code>true</code>, apps assigned to this App Service plan can be scaled independently.
@@ -4381,6 +4383,8 @@ type AppServicePlanProperties struct {
 	HostingEnvironmentProfile *HostingEnvironmentProfile `json:"hostingEnvironmentProfile,omitempty"`
 	// MaximumNumberOfWorkers - READ-ONLY; Maximum number of instances that can be assigned to this App Service plan.
 	MaximumNumberOfWorkers *int32 `json:"maximumNumberOfWorkers,omitempty"`
+	// NumberOfWorkers - READ-ONLY; The number of instances that are assigned to this App Service plan.
+	NumberOfWorkers *int32 `json:"numberOfWorkers,omitempty"`
 	// GeoRegion - READ-ONLY; Geographical location for the App Service plan.
 	GeoRegion *string `json:"geoRegion,omitempty"`
 	// PerSiteScaling - If <code>true</code>, apps assigned to this App Service plan can be scaled independently.
