@@ -88,10 +88,8 @@ type ActionGroupsClientAPI interface {
 	Delete(ctx context.Context, resourceGroupName string, actionGroupName string) (result autorest.Response, err error)
 	EnableReceiver(ctx context.Context, resourceGroupName string, actionGroupName string, enableRequest insights.EnableRequest) (result autorest.Response, err error)
 	Get(ctx context.Context, resourceGroupName string, actionGroupName string) (result insights.ActionGroupResource, err error)
-	GetTestNotifications(ctx context.Context, notificationID string) (result insights.TestNotificationDetailsResponse, err error)
 	ListByResourceGroup(ctx context.Context, resourceGroupName string) (result insights.ActionGroupList, err error)
 	ListBySubscriptionID(ctx context.Context) (result insights.ActionGroupList, err error)
-	PostTestNotifications(ctx context.Context, notificationRequest insights.NotificationRequestBody) (result insights.ActionGroupsPostTestNotificationsFuture, err error)
 	Update(ctx context.Context, resourceGroupName string, actionGroupName string, actionGroupPatch insights.ActionGroupPatchBody) (result insights.ActionGroupResource, err error)
 }
 
