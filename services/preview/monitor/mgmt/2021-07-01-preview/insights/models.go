@@ -213,8 +213,6 @@ type ActionGroupResource struct {
 	Type *string `json:"type,omitempty"`
 	// Kind - READ-ONLY; Azure resource kind
 	Kind *string `json:"kind,omitempty"`
-	// Identity - READ-ONLY; Azure resource identity
-	Identity *string `json:"identity,omitempty"`
 	// Location - Resource location
 	Location *string `json:"location,omitempty"`
 	// Tags - Resource tags
@@ -290,15 +288,6 @@ func (agr *ActionGroupResource) UnmarshalJSON(body []byte) error {
 				}
 				agr.Kind = &kind
 			}
-		case "identity":
-			if v != nil {
-				var identity string
-				err = json.Unmarshal(*v, &identity)
-				if err != nil {
-					return err
-				}
-				agr.Identity = &identity
-			}
 		case "location":
 			if v != nil {
 				var location string
@@ -342,8 +331,6 @@ type ActivityLogAlertResource struct {
 	Type *string `json:"type,omitempty"`
 	// Kind - READ-ONLY; Azure resource kind
 	Kind *string `json:"kind,omitempty"`
-	// Identity - READ-ONLY; Azure resource identity
-	Identity *string `json:"identity,omitempty"`
 	// Location - Resource location
 	Location *string `json:"location,omitempty"`
 	// Tags - Resource tags
@@ -418,15 +405,6 @@ func (alar *ActivityLogAlertResource) UnmarshalJSON(body []byte) error {
 					return err
 				}
 				alar.Kind = &kind
-			}
-		case "identity":
-			if v != nil {
-				var identity string
-				err = json.Unmarshal(*v, &identity)
-				if err != nil {
-					return err
-				}
-				alar.Identity = &identity
 			}
 		case "location":
 			if v != nil {
@@ -1820,8 +1798,6 @@ type AzureResource struct {
 	Type *string `json:"type,omitempty"`
 	// Kind - READ-ONLY; Azure resource kind
 	Kind *string `json:"kind,omitempty"`
-	// Identity - READ-ONLY; Azure resource identity
-	Identity *string `json:"identity,omitempty"`
 	// Location - Resource location
 	Location *string `json:"location,omitempty"`
 	// Tags - Resource tags
@@ -5812,7 +5788,7 @@ type MetricBaselinesResponse struct {
 
 // MetricCriteria criterion to filter metrics.
 type MetricCriteria struct {
-	// Operator - the criteria operator. Possible values include: 'OperatorEquals', 'OperatorNotEquals', 'OperatorGreaterThan', 'OperatorGreaterThanOrEqual', 'OperatorLessThan', 'OperatorLessThanOrEqual'
+	// Operator - the criteria operator. Possible values include: 'OperatorEquals', 'OperatorGreaterThan', 'OperatorGreaterThanOrEqual', 'OperatorLessThan', 'OperatorLessThanOrEqual'
 	Operator Operator `json:"operator,omitempty"`
 	// Threshold - the criteria threshold value that activates the alert.
 	Threshold *float64 `json:"threshold,omitempty"`
