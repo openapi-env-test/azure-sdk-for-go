@@ -1,5 +1,5 @@
 {
-  "commit": "a95079cdd7a60c5af0417360b1ee56c8ae845cc4",
+  "commit": "226d358cccd0e9868ac6c08e18d56a6ecbe1ec18",
   "readme": "/_/azure-rest-api-specs/specification/azure-kusto/resource-manager/readme.md",
   "tag": "package-2021-08-27",
   "use": "@microsoft.azure/autorest.go@2.1.187",

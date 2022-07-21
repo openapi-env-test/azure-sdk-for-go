@@ -4035,21 +4035,21 @@ func (plrp PrivateLinkResourceProperties) MarshalJSON() ([]byte, error) {
 // PrivateLinkServiceConnectionStateProperty connection State of the Private Endpoint Connection.
 type PrivateLinkServiceConnectionStateProperty struct {
 	// Status - The private link service connection status.
-	Status *string `json:"status,omitempty"`
+	Status *string `json:"Status,omitempty"`
 	// Description - The private link service connection description.
-	Description *string `json:"description,omitempty"`
+	Description *string `json:"Description,omitempty"`
 	// ActionsRequired - READ-ONLY; Any action that is required beyond basic workflow (approve/ reject/ disconnect)
-	ActionsRequired *string `json:"actionsRequired,omitempty"`
+	ActionsRequired *string `json:"ActionsRequired,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for PrivateLinkServiceConnectionStateProperty.
 func (plscsp PrivateLinkServiceConnectionStateProperty) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
 	if plscsp.Status != nil {
-		objectMap["status"] = plscsp.Status
+		objectMap["Status"] = plscsp.Status
 	}
 	if plscsp.Description != nil {
-		objectMap["description"] = plscsp.Description
+		objectMap["Description"] = plscsp.Description
 	}
 	return json.Marshal(objectMap)
 }
@@ -4200,7 +4200,7 @@ type ReadOnlyFollowingDatabaseProperties struct {
 	SoftDeletePeriod *string `json:"softDeletePeriod,omitempty"`
 	// HotCachePeriod - The time the data should be kept in cache for fast queries in TimeSpan.
 	HotCachePeriod *string `json:"hotCachePeriod,omitempty"`
-	// Statistics - The statistics of the database.
+	// Statistics - READ-ONLY; The statistics of the database.
 	Statistics *DatabaseStatistics `json:"statistics,omitempty"`
 	// LeaderClusterResourceID - READ-ONLY; The name of the leader cluster
 	LeaderClusterResourceID *string `json:"leaderClusterResourceId,omitempty"`
@@ -4215,9 +4215,6 @@ func (rofdp ReadOnlyFollowingDatabaseProperties) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
 	if rofdp.HotCachePeriod != nil {
 		objectMap["hotCachePeriod"] = rofdp.HotCachePeriod
-	}
-	if rofdp.Statistics != nil {
-		objectMap["statistics"] = rofdp.Statistics
 	}
 	return json.Marshal(objectMap)
 }
@@ -4351,7 +4348,7 @@ type ReadWriteDatabaseProperties struct {
 	SoftDeletePeriod *string `json:"softDeletePeriod,omitempty"`
 	// HotCachePeriod - The time the data should be kept in cache for fast queries in TimeSpan.
 	HotCachePeriod *string `json:"hotCachePeriod,omitempty"`
-	// Statistics - The statistics of the database.
+	// Statistics - READ-ONLY; The statistics of the database.
 	Statistics *DatabaseStatistics `json:"statistics,omitempty"`
 	// IsFollowed - READ-ONLY; Indicates whether the database is followed.
 	IsFollowed *bool `json:"isFollowed,omitempty"`
@@ -4365,9 +4362,6 @@ func (rwdp ReadWriteDatabaseProperties) MarshalJSON() ([]byte, error) {
 	}
 	if rwdp.HotCachePeriod != nil {
 		objectMap["hotCachePeriod"] = rwdp.HotCachePeriod
-	}
-	if rwdp.Statistics != nil {
-		objectMap["statistics"] = rwdp.Statistics
 	}
 	return json.Marshal(objectMap)
 }
