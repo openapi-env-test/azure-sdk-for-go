@@ -1271,6 +1271,23 @@ func PossibleRollingUpgradeStatusCodeValues() []RollingUpgradeStatusCode {
 	return []RollingUpgradeStatusCode{RollingUpgradeStatusCodeCancelled, RollingUpgradeStatusCodeCompleted, RollingUpgradeStatusCodeFaulted, RollingUpgradeStatusCodeRollingForward}
 }
 
+// SecurityProfileType enumerates the values for security profile type.
+type SecurityProfileType string
+
+const (
+	// SecurityProfileTypeEncryptedVMGuestStateOnlyWithPmk ...
+	SecurityProfileTypeEncryptedVMGuestStateOnlyWithPmk SecurityProfileType = "EncryptedVMGuestStateOnlyWithPmk"
+	// SecurityProfileTypeEncryptedWithCmk ...
+	SecurityProfileTypeEncryptedWithCmk SecurityProfileType = "EncryptedWithCmk"
+	// SecurityProfileTypeEncryptedWithPmk ...
+	SecurityProfileTypeEncryptedWithPmk SecurityProfileType = "EncryptedWithPmk"
+)
+
+// PossibleSecurityProfileTypeValues returns an array of possible values for the SecurityProfileType const type.
+func PossibleSecurityProfileTypeValues() []SecurityProfileType {
+	return []SecurityProfileType{SecurityProfileTypeEncryptedVMGuestStateOnlyWithPmk, SecurityProfileTypeEncryptedWithCmk, SecurityProfileTypeEncryptedWithPmk}
+}
+
 // SecurityTypes enumerates the values for security types.
 type SecurityTypes string
 
