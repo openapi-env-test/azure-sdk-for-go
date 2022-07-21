@@ -66,7 +66,7 @@ type CheckNameAvailabilityParameters struct {
 type CommonProperties struct {
 	// RedisConfiguration - All Redis Settings. Few possible keys: rdb-backup-enabled,rdb-storage-connection-string,rdb-backup-frequency,maxmemory-delta,maxmemory-policy,notify-keyspace-events,maxmemory-samples,slowlog-log-slower-than,slowlog-max-len,list-max-ziplist-entries,list-max-ziplist-value,hash-max-ziplist-entries,hash-max-ziplist-value,set-max-intset-entries,zset-max-ziplist-entries,zset-max-ziplist-value etc.
 	RedisConfiguration *CommonPropertiesRedisConfiguration `json:"redisConfiguration,omitempty"`
-	// RedisVersion - Redis version. Only major version will be used in PUT/PATCH request with current valid values: (4, 6)
+	// RedisVersion - Redis version. This should be in the form 'major[.minor[.build]]' (only 'major' is required) or the value 'latest' which refers to the latest stable Redis version that is available. Only the major and minor version are used in a PUT/PATCH request. Supported versions: 4.0, 6.0.
 	RedisVersion *string `json:"redisVersion,omitempty"`
 	// EnableNonSslPort - Specifies whether the non-ssl Redis server port (6379) is enabled.
 	EnableNonSslPort *bool `json:"enableNonSslPort,omitempty"`
@@ -131,6 +131,8 @@ type CommonPropertiesRedisConfiguration struct {
 	RdbBackupMaxSnapshotCount *string `json:"rdb-backup-max-snapshot-count,omitempty"`
 	// RdbStorageConnectionString - The storage account connection string for storing rdb file
 	RdbStorageConnectionString *string `json:"rdb-storage-connection-string,omitempty"`
+	// AofBackupEnabled - Specifies whether the aof backup is enabled
+	AofBackupEnabled *string `json:"aof-backup-enabled,omitempty"`
 	// AofStorageConnectionString0 - First storage account connection string
 	AofStorageConnectionString0 *string `json:"aof-storage-connection-string-0,omitempty"`
 	// AofStorageConnectionString1 - Second storage account connection string
@@ -151,6 +153,8 @@ type CommonPropertiesRedisConfiguration struct {
 	PreferredDataPersistenceAuthMethod *string `json:"preferred-data-persistence-auth-method,omitempty"`
 	// ZonalConfiguration - READ-ONLY; Zonal Configuration
 	ZonalConfiguration *string `json:"zonal-configuration,omitempty"`
+	// Authnotrequired - Specifies whether the authentication is disabled. Setting this property is highly discouraged from security point of view.
+	Authnotrequired *string `json:"authnotrequired,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for CommonPropertiesRedisConfiguration.
@@ -167,6 +171,9 @@ func (cpC CommonPropertiesRedisConfiguration) MarshalJSON() ([]byte, error) {
 	}
 	if cpC.RdbStorageConnectionString != nil {
 		objectMap["rdb-storage-connection-string"] = cpC.RdbStorageConnectionString
+	}
+	if cpC.AofBackupEnabled != nil {
+		objectMap["aof-backup-enabled"] = cpC.AofBackupEnabled
 	}
 	if cpC.AofStorageConnectionString0 != nil {
 		objectMap["aof-storage-connection-string-0"] = cpC.AofStorageConnectionString0
@@ -185,6 +192,9 @@ func (cpC CommonPropertiesRedisConfiguration) MarshalJSON() ([]byte, error) {
 	}
 	if cpC.MaxmemoryDelta != nil {
 		objectMap["maxmemory-delta"] = cpC.MaxmemoryDelta
+	}
+	if cpC.Authnotrequired != nil {
+		objectMap["authnotrequired"] = cpC.Authnotrequired
 	}
 	for k, v := range cpC.AdditionalProperties {
 		objectMap[k] = v
@@ -248,6 +258,15 @@ func (cpC *CommonPropertiesRedisConfiguration) UnmarshalJSON(body []byte) error 
 					return err
 				}
 				cpC.RdbStorageConnectionString = &rdbStorageConnectionString
+			}
+		case "aof-backup-enabled":
+			if v != nil {
+				var aofBackupEnabled string
+				err = json.Unmarshal(*v, &aofBackupEnabled)
+				if err != nil {
+					return err
+				}
+				cpC.AofBackupEnabled = &aofBackupEnabled
 			}
 		case "aof-storage-connection-string-0":
 			if v != nil {
@@ -338,6 +357,15 @@ func (cpC *CommonPropertiesRedisConfiguration) UnmarshalJSON(body []byte) error 
 					return err
 				}
 				cpC.ZonalConfiguration = &zonalConfiguration
+			}
+		case "authnotrequired":
+			if v != nil {
+				var authnotrequired string
+				err = json.Unmarshal(*v, &authnotrequired)
+				if err != nil {
+					return err
+				}
+				cpC.Authnotrequired = &authnotrequired
 			}
 		}
 	}
@@ -492,7 +520,7 @@ type CreateProperties struct {
 	StaticIP *string `json:"staticIP,omitempty"`
 	// RedisConfiguration - All Redis Settings. Few possible keys: rdb-backup-enabled,rdb-storage-connection-string,rdb-backup-frequency,maxmemory-delta,maxmemory-policy,notify-keyspace-events,maxmemory-samples,slowlog-log-slower-than,slowlog-max-len,list-max-ziplist-entries,list-max-ziplist-value,hash-max-ziplist-entries,hash-max-ziplist-value,set-max-intset-entries,zset-max-ziplist-entries,zset-max-ziplist-value etc.
 	RedisConfiguration *CommonPropertiesRedisConfiguration `json:"redisConfiguration,omitempty"`
-	// RedisVersion - Redis version. Only major version will be used in PUT/PATCH request with current valid values: (4, 6)
+	// RedisVersion - Redis version. This should be in the form 'major[.minor[.build]]' (only 'major' is required) or the value 'latest' which refers to the latest stable Redis version that is available. Only the major and minor version are used in a PUT/PATCH request. Supported versions: 4.0, 6.0.
 	RedisVersion *string `json:"redisVersion,omitempty"`
 	// EnableNonSslPort - Specifies whether the non-ssl Redis server port (6379) is enabled.
 	EnableNonSslPort *bool `json:"enableNonSslPort,omitempty"`
@@ -2607,7 +2635,7 @@ type Properties struct {
 	StaticIP *string `json:"staticIP,omitempty"`
 	// RedisConfiguration - All Redis Settings. Few possible keys: rdb-backup-enabled,rdb-storage-connection-string,rdb-backup-frequency,maxmemory-delta,maxmemory-policy,notify-keyspace-events,maxmemory-samples,slowlog-log-slower-than,slowlog-max-len,list-max-ziplist-entries,list-max-ziplist-value,hash-max-ziplist-entries,hash-max-ziplist-value,set-max-intset-entries,zset-max-ziplist-entries,zset-max-ziplist-value etc.
 	RedisConfiguration *CommonPropertiesRedisConfiguration `json:"redisConfiguration,omitempty"`
-	// RedisVersion - Redis version. Only major version will be used in PUT/PATCH request with current valid values: (4, 6)
+	// RedisVersion - Redis version. This should be in the form 'major[.minor[.build]]' (only 'major' is required) or the value 'latest' which refers to the latest stable Redis version that is available. Only the major and minor version are used in a PUT/PATCH request. Supported versions: 4.0, 6.0.
 	RedisVersion *string `json:"redisVersion,omitempty"`
 	// EnableNonSslPort - Specifies whether the non-ssl Redis server port (6379) is enabled.
 	EnableNonSslPort *bool `json:"enableNonSslPort,omitempty"`
@@ -2971,7 +2999,7 @@ type UpdateProperties struct {
 	Sku *Sku `json:"sku,omitempty"`
 	// RedisConfiguration - All Redis Settings. Few possible keys: rdb-backup-enabled,rdb-storage-connection-string,rdb-backup-frequency,maxmemory-delta,maxmemory-policy,notify-keyspace-events,maxmemory-samples,slowlog-log-slower-than,slowlog-max-len,list-max-ziplist-entries,list-max-ziplist-value,hash-max-ziplist-entries,hash-max-ziplist-value,set-max-intset-entries,zset-max-ziplist-entries,zset-max-ziplist-value etc.
 	RedisConfiguration *CommonPropertiesRedisConfiguration `json:"redisConfiguration,omitempty"`
-	// RedisVersion - Redis version. Only major version will be used in PUT/PATCH request with current valid values: (4, 6)
+	// RedisVersion - Redis version. This should be in the form 'major[.minor[.build]]' (only 'major' is required) or the value 'latest' which refers to the latest stable Redis version that is available. Only the major and minor version are used in a PUT/PATCH request. Supported versions: 4.0, 6.0.
 	RedisVersion *string `json:"redisVersion,omitempty"`
 	// EnableNonSslPort - Specifies whether the non-ssl Redis server port (6379) is enabled.
 	EnableNonSslPort *bool `json:"enableNonSslPort,omitempty"`
