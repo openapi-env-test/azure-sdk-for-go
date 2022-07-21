@@ -10431,15 +10431,15 @@ func (ovd OperationValueDisplay) MarshalJSON() ([]byte, error) {
 
 // OrchestrationServiceStateInput the input for OrchestrationServiceState
 type OrchestrationServiceStateInput struct {
-	// ServiceName - The name of the service. Possible values include: 'OrchestrationServiceNamesAutomaticRepairs'
-	ServiceName OrchestrationServiceNames `json:"serviceName,omitempty"`
+	// ServiceName - The name of the service.
+	ServiceName *string `json:"serviceName,omitempty"`
 	// Action - The action to be performed. Possible values include: 'OrchestrationServiceStateActionResume', 'OrchestrationServiceStateActionSuspend'
 	Action OrchestrationServiceStateAction `json:"action,omitempty"`
 }
 
 // OrchestrationServiceSummary summary for an orchestration service of a virtual machine scale set.
 type OrchestrationServiceSummary struct {
-	// ServiceName - READ-ONLY; The name of the service. Possible values include: 'OrchestrationServiceNamesAutomaticRepairs', 'OrchestrationServiceNamesDummyOrchestrationServiceName'
+	// ServiceName - READ-ONLY; The name of the service. Possible values include: 'OrchestrationServiceNamesAutomaticRepairs'
 	ServiceName OrchestrationServiceNames `json:"serviceName,omitempty"`
 	// ServiceState - READ-ONLY; The current state of the service. Possible values include: 'OrchestrationServiceStateNotRunning', 'OrchestrationServiceStateRunning', 'OrchestrationServiceStateSuspended'
 	ServiceState OrchestrationServiceState `json:"serviceState,omitempty"`
@@ -10489,8 +10489,18 @@ type OSDiskImage struct {
 
 // OSDiskImageEncryption contains encryption settings for an OS disk image.
 type OSDiskImageEncryption struct {
+	// SecurityProfile - This property specifies the security profile of an OS disk image.
+	SecurityProfile *OSDiskImageSecurityProfile `json:"securityProfile,omitempty"`
 	// DiskEncryptionSetID - A relative URI containing the resource ID of the disk encryption set.
 	DiskEncryptionSetID *string `json:"diskEncryptionSetId,omitempty"`
+}
+
+// OSDiskImageSecurityProfile contains security profile for an OS disk image.
+type OSDiskImageSecurityProfile struct {
+	// Type - all types of security profile. Possible values include: 'SecurityProfileTypeEncryptedVMGuestStateOnlyWithPmk', 'SecurityProfileTypeEncryptedWithPmk', 'SecurityProfileTypeEncryptedWithCmk'
+	Type SecurityProfileType `json:"type,omitempty"`
+	// SecureVMdiskEncryptionSetID - secure VM disk encryption set id
+	SecureVMdiskEncryptionSetID *string `json:"secureVMdiskEncryptionSetId,omitempty"`
 }
 
 // OSFamily describes a cloud service OS family.
