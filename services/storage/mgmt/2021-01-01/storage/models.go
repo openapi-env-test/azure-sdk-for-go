@@ -4574,7 +4574,7 @@ type QueueServicePropertiesProperties struct {
 	Cors *CorsRules `json:"cors,omitempty"`
 }
 
-// Resource common fields that are returned in the response for all Azure Resource Manager resources
+// Resource common  fields that are returned in the response for all Azure Resource Manager resources
 type Resource struct {
 	// ID - READ-ONLY; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string `json:"id,omitempty"`
