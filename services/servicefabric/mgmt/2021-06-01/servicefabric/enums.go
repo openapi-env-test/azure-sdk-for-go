@@ -92,6 +92,21 @@ func PossibleClusterUpgradeCadenceValues() []ClusterUpgradeCadence {
 	return []ClusterUpgradeCadence{ClusterUpgradeCadenceWave0, ClusterUpgradeCadenceWave1, ClusterUpgradeCadenceWave2}
 }
 
+// ClusterVersionsEnvironment enumerates the values for cluster versions environment.
+type ClusterVersionsEnvironment string
+
+const (
+	// ClusterVersionsEnvironmentLinux ...
+	ClusterVersionsEnvironmentLinux ClusterVersionsEnvironment = "Linux"
+	// ClusterVersionsEnvironmentWindows ...
+	ClusterVersionsEnvironmentWindows ClusterVersionsEnvironment = "Windows"
+)
+
+// PossibleClusterVersionsEnvironmentValues returns an array of possible values for the ClusterVersionsEnvironment const type.
+func PossibleClusterVersionsEnvironmentValues() []ClusterVersionsEnvironment {
+	return []ClusterVersionsEnvironment{ClusterVersionsEnvironmentLinux, ClusterVersionsEnvironmentWindows}
+}
+
 // DurabilityLevel enumerates the values for durability level.
 type DurabilityLevel string
 
