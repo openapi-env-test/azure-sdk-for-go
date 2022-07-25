@@ -692,6 +692,8 @@ type Details struct {
 	// UpdatedBy - The identity of the principal or process that updated the object.
 	UpdatedBy *string          `json:"updatedBy,omitempty"`
 	Parent    *ParentGroupInfo `json:"parent,omitempty"`
+	// Path - The path from the root to the current group.
+	Path *[]PathElement `json:"path,omitempty"`
 }
 
 // EntityHierarchyItem the management group details for the hierarchy view.
@@ -2023,8 +2025,6 @@ type Properties struct {
 	Details     *Details `json:"details,omitempty"`
 	// Children - The list of children.
 	Children *[]ChildInfo `json:"children,omitempty"`
-	// Path - The path from the root to the current group.
-	Path *[]PathElement `json:"path,omitempty"`
 }
 
 // SetObject ...
