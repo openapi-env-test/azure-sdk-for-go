@@ -28,9 +28,9 @@ var _ ClustersClientAPI = (*servicefabric.ClustersClient)(nil)
 // ClusterVersionsClientAPI contains the set of methods on the ClusterVersionsClient type.
 type ClusterVersionsClientAPI interface {
 	Get(ctx context.Context, location string, clusterVersion string) (result servicefabric.ClusterCodeVersionsListResult, err error)
-	GetByEnvironment(ctx context.Context, location string, environment string, clusterVersion string) (result servicefabric.ClusterCodeVersionsListResult, err error)
+	GetByEnvironment(ctx context.Context, location string, environment servicefabric.ClusterVersionsEnvironment, clusterVersion string) (result servicefabric.ClusterCodeVersionsListResult, err error)
 	List(ctx context.Context, location string) (result servicefabric.ClusterCodeVersionsListResult, err error)
-	ListByEnvironment(ctx context.Context, location string, environment string) (result servicefabric.ClusterCodeVersionsListResult, err error)
+	ListByEnvironment(ctx context.Context, location string, environment servicefabric.ClusterVersionsEnvironment) (result servicefabric.ClusterCodeVersionsListResult, err error)
 }
 
 var _ ClusterVersionsClientAPI = (*servicefabric.ClusterVersionsClient)(nil)
