@@ -111,7 +111,7 @@ func (client ClusterVersionsClient) GetResponder(resp *http.Response) (result Cl
 // location - the location for the cluster code versions. This is different from cluster location.
 // environment - the operating system of the cluster. The default means all.
 // clusterVersion - the cluster code version.
-func (client ClusterVersionsClient) GetByEnvironment(ctx context.Context, location string, environment string, clusterVersion string) (result ClusterCodeVersionsListResult, err error) {
+func (client ClusterVersionsClient) GetByEnvironment(ctx context.Context, location string, environment ClusterVersionsEnvironment, clusterVersion string) (result ClusterCodeVersionsListResult, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/ClusterVersionsClient.GetByEnvironment")
 		defer func() {
@@ -145,7 +145,7 @@ func (client ClusterVersionsClient) GetByEnvironment(ctx context.Context, locati
 }
 
 // GetByEnvironmentPreparer prepares the GetByEnvironment request.
-func (client ClusterVersionsClient) GetByEnvironmentPreparer(ctx context.Context, location string, environment string, clusterVersion string) (*http.Request, error) {
+func (client ClusterVersionsClient) GetByEnvironmentPreparer(ctx context.Context, location string, environment ClusterVersionsEnvironment, clusterVersion string) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"clusterVersion": autorest.Encode("path", clusterVersion),
 		"environment":    autorest.Encode("path", environment),
@@ -262,7 +262,7 @@ func (client ClusterVersionsClient) ListResponder(resp *http.Response) (result C
 // Parameters:
 // location - the location for the cluster code versions. This is different from cluster location.
 // environment - the operating system of the cluster. The default means all.
-func (client ClusterVersionsClient) ListByEnvironment(ctx context.Context, location string, environment string) (result ClusterCodeVersionsListResult, err error) {
+func (client ClusterVersionsClient) ListByEnvironment(ctx context.Context, location string, environment ClusterVersionsEnvironment) (result ClusterCodeVersionsListResult, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/ClusterVersionsClient.ListByEnvironment")
 		defer func() {
@@ -296,7 +296,7 @@ func (client ClusterVersionsClient) ListByEnvironment(ctx context.Context, locat
 }
 
 // ListByEnvironmentPreparer prepares the ListByEnvironment request.
-func (client ClusterVersionsClient) ListByEnvironmentPreparer(ctx context.Context, location string, environment string) (*http.Request, error) {
+func (client ClusterVersionsClient) ListByEnvironmentPreparer(ctx context.Context, location string, environment ClusterVersionsEnvironment) (*http.Request, error) {
 	pathParameters := map[string]interface{}{
 		"environment":    autorest.Encode("path", environment),
 		"location":       autorest.Encode("path", location),
