@@ -628,6 +628,10 @@ func (client ComponentsClient) ListByResourceGroupComplete(ctx context.Context, 
 // execution of purge requests by sending a single command whose predicate includes all user identities that require
 // purging. Use the in operator to specify multiple identities. You should run the query prior to using for a purge
 // request to verify that the results are expected.
+// Note: this operation is intended for Classic resources, for  workspace-based Application Insights resource please
+// run purge operation (directly on the
+// workspace)(https://docs.microsoft.com/en-us/rest/api/loganalytics/workspace-purge/purge) , scoped to specific
+// resource id.
 // Parameters:
 // resourceGroupName - the name of the resource group. The name is case insensitive.
 // resourceName - the name of the Application Insights component resource.
