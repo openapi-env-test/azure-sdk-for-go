@@ -10,7 +10,7 @@ package armcompute
 
 const (
 	moduleName    = "armcompute"
-	moduleVersion = "v0.3.0"
+	moduleVersion = "v0.4.0"
 )
 
 type AccessLevel string
@@ -57,6 +57,48 @@ func PossibleAggregatedReplicationStateValues() []AggregatedReplicationState {
 
 // ToPtr returns a *AggregatedReplicationState pointing to the current value.
 func (c AggregatedReplicationState) ToPtr() *AggregatedReplicationState {
+	return &c
+}
+
+// Architecture - The architecture of the image. Applicable to OS disks only.
+type Architecture string
+
+const (
+	ArchitectureArm64 Architecture = "Arm64"
+	ArchitectureX64   Architecture = "x64"
+)
+
+// PossibleArchitectureValues returns the possible values for the Architecture const type.
+func PossibleArchitectureValues() []Architecture {
+	return []Architecture{
+		ArchitectureArm64,
+		ArchitectureX64,
+	}
+}
+
+// ToPtr returns a *Architecture pointing to the current value.
+func (c Architecture) ToPtr() *Architecture {
+	return &c
+}
+
+// ArchitectureTypes - Specifies the Architecture Type
+type ArchitectureTypes string
+
+const (
+	ArchitectureTypesArm64 ArchitectureTypes = "Arm64"
+	ArchitectureTypesX64   ArchitectureTypes = "x64"
+)
+
+// PossibleArchitectureTypesValues returns the possible values for the ArchitectureTypes const type.
+func PossibleArchitectureTypesValues() []ArchitectureTypes {
+	return []ArchitectureTypes{
+		ArchitectureTypesArm64,
+		ArchitectureTypesX64,
+	}
+}
+
+// ToPtr returns a *ArchitectureTypes pointing to the current value.
+func (c ArchitectureTypes) ToPtr() *ArchitectureTypes {
 	return &c
 }
 
@@ -146,6 +188,30 @@ func (c CapacityReservationInstanceViewTypes) ToPtr() *CapacityReservationInstan
 	return &c
 }
 
+// CloudServiceSlotType - Slot type for the cloud service. Possible values are
+// Production
+// Staging
+// If not specified, the default value is Production.
+type CloudServiceSlotType string
+
+const (
+	CloudServiceSlotTypeProduction CloudServiceSlotType = "Production"
+	CloudServiceSlotTypeStaging    CloudServiceSlotType = "Staging"
+)
+
+// PossibleCloudServiceSlotTypeValues returns the possible values for the CloudServiceSlotType const type.
+func PossibleCloudServiceSlotTypeValues() []CloudServiceSlotType {
+	return []CloudServiceSlotType{
+		CloudServiceSlotTypeProduction,
+		CloudServiceSlotTypeStaging,
+	}
+}
+
+// ToPtr returns a *CloudServiceSlotType pointing to the current value.
+func (c CloudServiceSlotType) ToPtr() *CloudServiceSlotType {
+	return &c
+}
+
 // CloudServiceUpgradeMode - Update mode for the cloud service. Role instances are allocated to update domains when the service
 // is deployed. Updates can be initiated manually in each update domain or initiated automatically in
 // all update domains. Possible Values are
@@ -177,8 +243,32 @@ func (c CloudServiceUpgradeMode) ToPtr() *CloudServiceUpgradeMode {
 	return &c
 }
 
-// ConsistencyModeTypes - Gets the consistency mode for the restore point. Please refer to https://aka.ms/RestorePoints for
-// more details.
+// ConfidentialVMEncryptionType - confidential VM encryption types
+type ConfidentialVMEncryptionType string
+
+const (
+	ConfidentialVMEncryptionTypeEncryptedVMGuestStateOnlyWithPmk ConfidentialVMEncryptionType = "EncryptedVMGuestStateOnlyWithPmk"
+	ConfidentialVMEncryptionTypeEncryptedWithCmk                 ConfidentialVMEncryptionType = "EncryptedWithCmk"
+	ConfidentialVMEncryptionTypeEncryptedWithPmk                 ConfidentialVMEncryptionType = "EncryptedWithPmk"
+)
+
+// PossibleConfidentialVMEncryptionTypeValues returns the possible values for the ConfidentialVMEncryptionType const type.
+func PossibleConfidentialVMEncryptionTypeValues() []ConfidentialVMEncryptionType {
+	return []ConfidentialVMEncryptionType{
+		ConfidentialVMEncryptionTypeEncryptedVMGuestStateOnlyWithPmk,
+		ConfidentialVMEncryptionTypeEncryptedWithCmk,
+		ConfidentialVMEncryptionTypeEncryptedWithPmk,
+	}
+}
+
+// ToPtr returns a *ConfidentialVMEncryptionType pointing to the current value.
+func (c ConfidentialVMEncryptionType) ToPtr() *ConfidentialVMEncryptionType {
+	return &c
+}
+
+// ConsistencyModeTypes - ConsistencyMode of the RestorePoint. Can be specified in the input while creating a restore point.
+// For now, only CrashConsistent is accepted as a valid input. Please refer to
+// https://aka.ms/RestorePoints for more details.
 type ConsistencyModeTypes string
 
 const (
@@ -198,6 +288,52 @@ func PossibleConsistencyModeTypesValues() []ConsistencyModeTypes {
 
 // ToPtr returns a *ConsistencyModeTypes pointing to the current value.
 func (c ConsistencyModeTypes) ToPtr() *ConsistencyModeTypes {
+	return &c
+}
+
+// CopyCompletionErrorReason - Indicates the error code if the background copy of a resource created via the CopyStart operation
+// fails.
+type CopyCompletionErrorReason string
+
+const (
+	// CopyCompletionErrorReasonCopySourceNotFound - Indicates that the source snapshot was deleted while the background copy
+	// of the resource created via CopyStart operation was in progress.
+	CopyCompletionErrorReasonCopySourceNotFound CopyCompletionErrorReason = "CopySourceNotFound"
+)
+
+// PossibleCopyCompletionErrorReasonValues returns the possible values for the CopyCompletionErrorReason const type.
+func PossibleCopyCompletionErrorReasonValues() []CopyCompletionErrorReason {
+	return []CopyCompletionErrorReason{
+		CopyCompletionErrorReasonCopySourceNotFound,
+	}
+}
+
+// ToPtr returns a *CopyCompletionErrorReason pointing to the current value.
+func (c CopyCompletionErrorReason) ToPtr() *CopyCompletionErrorReason {
+	return &c
+}
+
+// DataAccessAuthMode - Additional authentication requirements when exporting or uploading to a disk or snapshot.
+type DataAccessAuthMode string
+
+const (
+	// DataAccessAuthModeAzureActiveDirectory - When export/upload URL is used, the system checks if the user has an identity
+	// in Azure Active Directory and has necessary permissions to export/upload the data. Please refer to aka.ms/DisksAzureADAuth.
+	DataAccessAuthModeAzureActiveDirectory DataAccessAuthMode = "AzureActiveDirectory"
+	// DataAccessAuthModeNone - No additional authentication would be performed when accessing export/upload URL.
+	DataAccessAuthModeNone DataAccessAuthMode = "None"
+)
+
+// PossibleDataAccessAuthModeValues returns the possible values for the DataAccessAuthMode const type.
+func PossibleDataAccessAuthModeValues() []DataAccessAuthMode {
+	return []DataAccessAuthMode{
+		DataAccessAuthModeAzureActiveDirectory,
+		DataAccessAuthModeNone,
+	}
+}
+
+// ToPtr returns a *DataAccessAuthMode pointing to the current value.
+func (c DataAccessAuthMode) ToPtr() *DataAccessAuthMode {
 	return &c
 }
 
@@ -433,8 +569,10 @@ func (c DiskDetachOptionTypes) ToPtr() *DiskDetachOptionTypes {
 type DiskEncryptionSetIdentityType string
 
 const (
-	DiskEncryptionSetIdentityTypeNone           DiskEncryptionSetIdentityType = "None"
-	DiskEncryptionSetIdentityTypeSystemAssigned DiskEncryptionSetIdentityType = "SystemAssigned"
+	DiskEncryptionSetIdentityTypeNone                       DiskEncryptionSetIdentityType = "None"
+	DiskEncryptionSetIdentityTypeSystemAssigned             DiskEncryptionSetIdentityType = "SystemAssigned"
+	DiskEncryptionSetIdentityTypeSystemAssignedUserAssigned DiskEncryptionSetIdentityType = "SystemAssigned, UserAssigned"
+	DiskEncryptionSetIdentityTypeUserAssigned               DiskEncryptionSetIdentityType = "UserAssigned"
 )
 
 // PossibleDiskEncryptionSetIdentityTypeValues returns the possible values for the DiskEncryptionSetIdentityType const type.
@@ -442,6 +580,8 @@ func PossibleDiskEncryptionSetIdentityTypeValues() []DiskEncryptionSetIdentityTy
 	return []DiskEncryptionSetIdentityType{
 		DiskEncryptionSetIdentityTypeNone,
 		DiskEncryptionSetIdentityTypeSystemAssigned,
+		DiskEncryptionSetIdentityTypeSystemAssignedUserAssigned,
+		DiskEncryptionSetIdentityTypeUserAssigned,
 	}
 }
 
@@ -560,6 +700,9 @@ const (
 	// DiskStorageAccountTypesPremiumLRS - Premium SSD locally redundant storage. Best for production and performance sensitive
 	// workloads.
 	DiskStorageAccountTypesPremiumLRS DiskStorageAccountTypes = "Premium_LRS"
+	// DiskStorageAccountTypesPremiumV2LRS - Premium SSD v2 locally redundant storage. Best for production and performance-sensitive
+	// workloads that consistently require low latency and high IOPS and throughput.
+	DiskStorageAccountTypesPremiumV2LRS DiskStorageAccountTypes = "PremiumV2_LRS"
 	// DiskStorageAccountTypesPremiumZRS - Premium SSD zone redundant storage. Best for the production workloads that need storage
 	// resiliency against zone failures.
 	DiskStorageAccountTypesPremiumZRS DiskStorageAccountTypes = "Premium_ZRS"
@@ -581,6 +724,7 @@ const (
 func PossibleDiskStorageAccountTypesValues() []DiskStorageAccountTypes {
 	return []DiskStorageAccountTypes{
 		DiskStorageAccountTypesPremiumLRS,
+		DiskStorageAccountTypesPremiumV2LRS,
 		DiskStorageAccountTypesPremiumZRS,
 		DiskStorageAccountTypesStandardLRS,
 		DiskStorageAccountTypesStandardSSDLRS,
@@ -730,119 +874,71 @@ func (c ExtendedLocationTypes) ToPtr() *ExtendedLocationTypes {
 	return &c
 }
 
-// GalleryApplicationVersionPropertiesProvisioningState - The provisioning state, which only appears in the response.
-type GalleryApplicationVersionPropertiesProvisioningState string
+type GalleryExpandParams string
 
 const (
-	GalleryApplicationVersionPropertiesProvisioningStateCreating  GalleryApplicationVersionPropertiesProvisioningState = "Creating"
-	GalleryApplicationVersionPropertiesProvisioningStateDeleting  GalleryApplicationVersionPropertiesProvisioningState = "Deleting"
-	GalleryApplicationVersionPropertiesProvisioningStateFailed    GalleryApplicationVersionPropertiesProvisioningState = "Failed"
-	GalleryApplicationVersionPropertiesProvisioningStateMigrating GalleryApplicationVersionPropertiesProvisioningState = "Migrating"
-	GalleryApplicationVersionPropertiesProvisioningStateSucceeded GalleryApplicationVersionPropertiesProvisioningState = "Succeeded"
-	GalleryApplicationVersionPropertiesProvisioningStateUpdating  GalleryApplicationVersionPropertiesProvisioningState = "Updating"
+	GalleryExpandParamsSharingProfileGroups GalleryExpandParams = "SharingProfile/Groups"
 )
 
-// PossibleGalleryApplicationVersionPropertiesProvisioningStateValues returns the possible values for the GalleryApplicationVersionPropertiesProvisioningState const type.
-func PossibleGalleryApplicationVersionPropertiesProvisioningStateValues() []GalleryApplicationVersionPropertiesProvisioningState {
-	return []GalleryApplicationVersionPropertiesProvisioningState{
-		GalleryApplicationVersionPropertiesProvisioningStateCreating,
-		GalleryApplicationVersionPropertiesProvisioningStateDeleting,
-		GalleryApplicationVersionPropertiesProvisioningStateFailed,
-		GalleryApplicationVersionPropertiesProvisioningStateMigrating,
-		GalleryApplicationVersionPropertiesProvisioningStateSucceeded,
-		GalleryApplicationVersionPropertiesProvisioningStateUpdating,
+// PossibleGalleryExpandParamsValues returns the possible values for the GalleryExpandParams const type.
+func PossibleGalleryExpandParamsValues() []GalleryExpandParams {
+	return []GalleryExpandParams{
+		GalleryExpandParamsSharingProfileGroups,
 	}
 }
 
-// ToPtr returns a *GalleryApplicationVersionPropertiesProvisioningState pointing to the current value.
-func (c GalleryApplicationVersionPropertiesProvisioningState) ToPtr() *GalleryApplicationVersionPropertiesProvisioningState {
+// ToPtr returns a *GalleryExpandParams pointing to the current value.
+func (c GalleryExpandParams) ToPtr() *GalleryExpandParams {
 	return &c
 }
 
-// GalleryImagePropertiesProvisioningState - The provisioning state, which only appears in the response.
-type GalleryImagePropertiesProvisioningState string
+// GalleryExtendedLocationType - It is type of the extended location.
+type GalleryExtendedLocationType string
 
 const (
-	GalleryImagePropertiesProvisioningStateCreating  GalleryImagePropertiesProvisioningState = "Creating"
-	GalleryImagePropertiesProvisioningStateDeleting  GalleryImagePropertiesProvisioningState = "Deleting"
-	GalleryImagePropertiesProvisioningStateFailed    GalleryImagePropertiesProvisioningState = "Failed"
-	GalleryImagePropertiesProvisioningStateMigrating GalleryImagePropertiesProvisioningState = "Migrating"
-	GalleryImagePropertiesProvisioningStateSucceeded GalleryImagePropertiesProvisioningState = "Succeeded"
-	GalleryImagePropertiesProvisioningStateUpdating  GalleryImagePropertiesProvisioningState = "Updating"
+	GalleryExtendedLocationTypeEdgeZone GalleryExtendedLocationType = "EdgeZone"
+	GalleryExtendedLocationTypeUnknown  GalleryExtendedLocationType = "Unknown"
 )
 
-// PossibleGalleryImagePropertiesProvisioningStateValues returns the possible values for the GalleryImagePropertiesProvisioningState const type.
-func PossibleGalleryImagePropertiesProvisioningStateValues() []GalleryImagePropertiesProvisioningState {
-	return []GalleryImagePropertiesProvisioningState{
-		GalleryImagePropertiesProvisioningStateCreating,
-		GalleryImagePropertiesProvisioningStateDeleting,
-		GalleryImagePropertiesProvisioningStateFailed,
-		GalleryImagePropertiesProvisioningStateMigrating,
-		GalleryImagePropertiesProvisioningStateSucceeded,
-		GalleryImagePropertiesProvisioningStateUpdating,
+// PossibleGalleryExtendedLocationTypeValues returns the possible values for the GalleryExtendedLocationType const type.
+func PossibleGalleryExtendedLocationTypeValues() []GalleryExtendedLocationType {
+	return []GalleryExtendedLocationType{
+		GalleryExtendedLocationTypeEdgeZone,
+		GalleryExtendedLocationTypeUnknown,
 	}
 }
 
-// ToPtr returns a *GalleryImagePropertiesProvisioningState pointing to the current value.
-func (c GalleryImagePropertiesProvisioningState) ToPtr() *GalleryImagePropertiesProvisioningState {
+// ToPtr returns a *GalleryExtendedLocationType pointing to the current value.
+func (c GalleryExtendedLocationType) ToPtr() *GalleryExtendedLocationType {
 	return &c
 }
 
-// GalleryImageVersionPropertiesProvisioningState - The provisioning state, which only appears in the response.
-type GalleryImageVersionPropertiesProvisioningState string
+// GalleryProvisioningState - The provisioning state, which only appears in the response.
+type GalleryProvisioningState string
 
 const (
-	GalleryImageVersionPropertiesProvisioningStateCreating  GalleryImageVersionPropertiesProvisioningState = "Creating"
-	GalleryImageVersionPropertiesProvisioningStateDeleting  GalleryImageVersionPropertiesProvisioningState = "Deleting"
-	GalleryImageVersionPropertiesProvisioningStateFailed    GalleryImageVersionPropertiesProvisioningState = "Failed"
-	GalleryImageVersionPropertiesProvisioningStateMigrating GalleryImageVersionPropertiesProvisioningState = "Migrating"
-	GalleryImageVersionPropertiesProvisioningStateSucceeded GalleryImageVersionPropertiesProvisioningState = "Succeeded"
-	GalleryImageVersionPropertiesProvisioningStateUpdating  GalleryImageVersionPropertiesProvisioningState = "Updating"
+	GalleryProvisioningStateCreating  GalleryProvisioningState = "Creating"
+	GalleryProvisioningStateDeleting  GalleryProvisioningState = "Deleting"
+	GalleryProvisioningStateFailed    GalleryProvisioningState = "Failed"
+	GalleryProvisioningStateMigrating GalleryProvisioningState = "Migrating"
+	GalleryProvisioningStateSucceeded GalleryProvisioningState = "Succeeded"
+	GalleryProvisioningStateUpdating  GalleryProvisioningState = "Updating"
 )
 
-// PossibleGalleryImageVersionPropertiesProvisioningStateValues returns the possible values for the GalleryImageVersionPropertiesProvisioningState const type.
-func PossibleGalleryImageVersionPropertiesProvisioningStateValues() []GalleryImageVersionPropertiesProvisioningState {
-	return []GalleryImageVersionPropertiesProvisioningState{
-		GalleryImageVersionPropertiesProvisioningStateCreating,
-		GalleryImageVersionPropertiesProvisioningStateDeleting,
-		GalleryImageVersionPropertiesProvisioningStateFailed,
-		GalleryImageVersionPropertiesProvisioningStateMigrating,
-		GalleryImageVersionPropertiesProvisioningStateSucceeded,
-		GalleryImageVersionPropertiesProvisioningStateUpdating,
+// PossibleGalleryProvisioningStateValues returns the possible values for the GalleryProvisioningState const type.
+func PossibleGalleryProvisioningStateValues() []GalleryProvisioningState {
+	return []GalleryProvisioningState{
+		GalleryProvisioningStateCreating,
+		GalleryProvisioningStateDeleting,
+		GalleryProvisioningStateFailed,
+		GalleryProvisioningStateMigrating,
+		GalleryProvisioningStateSucceeded,
+		GalleryProvisioningStateUpdating,
 	}
 }
 
-// ToPtr returns a *GalleryImageVersionPropertiesProvisioningState pointing to the current value.
-func (c GalleryImageVersionPropertiesProvisioningState) ToPtr() *GalleryImageVersionPropertiesProvisioningState {
-	return &c
-}
-
-// GalleryPropertiesProvisioningState - The provisioning state, which only appears in the response.
-type GalleryPropertiesProvisioningState string
-
-const (
-	GalleryPropertiesProvisioningStateCreating  GalleryPropertiesProvisioningState = "Creating"
-	GalleryPropertiesProvisioningStateDeleting  GalleryPropertiesProvisioningState = "Deleting"
-	GalleryPropertiesProvisioningStateFailed    GalleryPropertiesProvisioningState = "Failed"
-	GalleryPropertiesProvisioningStateMigrating GalleryPropertiesProvisioningState = "Migrating"
-	GalleryPropertiesProvisioningStateSucceeded GalleryPropertiesProvisioningState = "Succeeded"
-	GalleryPropertiesProvisioningStateUpdating  GalleryPropertiesProvisioningState = "Updating"
-)
-
-// PossibleGalleryPropertiesProvisioningStateValues returns the possible values for the GalleryPropertiesProvisioningState const type.
-func PossibleGalleryPropertiesProvisioningStateValues() []GalleryPropertiesProvisioningState {
-	return []GalleryPropertiesProvisioningState{
-		GalleryPropertiesProvisioningStateCreating,
-		GalleryPropertiesProvisioningStateDeleting,
-		GalleryPropertiesProvisioningStateFailed,
-		GalleryPropertiesProvisioningStateMigrating,
-		GalleryPropertiesProvisioningStateSucceeded,
-		GalleryPropertiesProvisioningStateUpdating,
-	}
-}
-
-// ToPtr returns a *GalleryPropertiesProvisioningState pointing to the current value.
-func (c GalleryPropertiesProvisioningState) ToPtr() *GalleryPropertiesProvisioningState {
+// ToPtr returns a *GalleryProvisioningState pointing to the current value.
+func (c GalleryProvisioningState) ToPtr() *GalleryProvisioningState {
 	return &c
 }
 
@@ -850,16 +946,19 @@ func (c GalleryPropertiesProvisioningState) ToPtr() *GalleryPropertiesProvisioni
 // Possible values are:
 // Private
 // Groups
+// Community
 type GallerySharingPermissionTypes string
 
 const (
-	GallerySharingPermissionTypesGroups  GallerySharingPermissionTypes = "Groups"
-	GallerySharingPermissionTypesPrivate GallerySharingPermissionTypes = "Private"
+	GallerySharingPermissionTypesCommunity GallerySharingPermissionTypes = "Community"
+	GallerySharingPermissionTypesGroups    GallerySharingPermissionTypes = "Groups"
+	GallerySharingPermissionTypesPrivate   GallerySharingPermissionTypes = "Private"
 )
 
 // PossibleGallerySharingPermissionTypesValues returns the possible values for the GallerySharingPermissionTypes const type.
 func PossibleGallerySharingPermissionTypesValues() []GallerySharingPermissionTypes {
 	return []GallerySharingPermissionTypes{
+		GallerySharingPermissionTypesCommunity,
 		GallerySharingPermissionTypesGroups,
 		GallerySharingPermissionTypesPrivate,
 	}
@@ -1069,6 +1168,32 @@ func (c LinuxPatchAssessmentMode) ToPtr() *LinuxPatchAssessmentMode {
 	return &c
 }
 
+// LinuxVMGuestPatchAutomaticByPlatformRebootSetting - Specifies the reboot setting for all AutomaticByPlatform patch installation
+// operations.
+type LinuxVMGuestPatchAutomaticByPlatformRebootSetting string
+
+const (
+	LinuxVMGuestPatchAutomaticByPlatformRebootSettingAlways     LinuxVMGuestPatchAutomaticByPlatformRebootSetting = "Always"
+	LinuxVMGuestPatchAutomaticByPlatformRebootSettingIfRequired LinuxVMGuestPatchAutomaticByPlatformRebootSetting = "IfRequired"
+	LinuxVMGuestPatchAutomaticByPlatformRebootSettingNever      LinuxVMGuestPatchAutomaticByPlatformRebootSetting = "Never"
+	LinuxVMGuestPatchAutomaticByPlatformRebootSettingUnknown    LinuxVMGuestPatchAutomaticByPlatformRebootSetting = "Unknown"
+)
+
+// PossibleLinuxVMGuestPatchAutomaticByPlatformRebootSettingValues returns the possible values for the LinuxVMGuestPatchAutomaticByPlatformRebootSetting const type.
+func PossibleLinuxVMGuestPatchAutomaticByPlatformRebootSettingValues() []LinuxVMGuestPatchAutomaticByPlatformRebootSetting {
+	return []LinuxVMGuestPatchAutomaticByPlatformRebootSetting{
+		LinuxVMGuestPatchAutomaticByPlatformRebootSettingAlways,
+		LinuxVMGuestPatchAutomaticByPlatformRebootSettingIfRequired,
+		LinuxVMGuestPatchAutomaticByPlatformRebootSettingNever,
+		LinuxVMGuestPatchAutomaticByPlatformRebootSettingUnknown,
+	}
+}
+
+// ToPtr returns a *LinuxVMGuestPatchAutomaticByPlatformRebootSetting pointing to the current value.
+func (c LinuxVMGuestPatchAutomaticByPlatformRebootSetting) ToPtr() *LinuxVMGuestPatchAutomaticByPlatformRebootSetting {
+	return &c
+}
+
 // LinuxVMGuestPatchMode - Specifies the mode of VM Guest Patching to IaaS virtual machine or virtual machines associated
 // to virtual machine scale set with OrchestrationMode as Flexible.
 // Possible values are:
@@ -1166,13 +1291,12 @@ func (c NetworkAccessPolicy) ToPtr() *NetworkAccessPolicy {
 	return &c
 }
 
-// OperatingSystemStateTypes - The OS State.
+// OperatingSystemStateTypes - This property allows the user to specify whether the virtual machines created under this image
+// are 'Generalized' or 'Specialized'.
 type OperatingSystemStateTypes string
 
 const (
-	// OperatingSystemStateTypesGeneralized - Generalized image. Needs to be provisioned during deployment time.
 	OperatingSystemStateTypesGeneralized OperatingSystemStateTypes = "Generalized"
-	// OperatingSystemStateTypesSpecialized - Specialized image. Contains already provisioned OS Disk.
 	OperatingSystemStateTypesSpecialized OperatingSystemStateTypes = "Specialized"
 )
 
@@ -1210,7 +1334,10 @@ func (c OperatingSystemType) ToPtr() *OperatingSystemType {
 	return &c
 }
 
-// OperatingSystemTypes - The operating system of the osDiskImage.
+// OperatingSystemTypes - This property allows you to specify the supported type of the OS that application is built for.
+// Possible values are:
+// Windows
+// Linux
 type OperatingSystemTypes string
 
 const (
@@ -1580,6 +1707,30 @@ func (c PublicNetworkAccess) ToPtr() *PublicNetworkAccess {
 	return &c
 }
 
+// RepairAction - Type of repair action (replace, restart, reimage) that will be used for repairing unhealthy virtual machines
+// in the scale set. Default value is replace.
+type RepairAction string
+
+const (
+	RepairActionReimage RepairAction = "Reimage"
+	RepairActionReplace RepairAction = "Replace"
+	RepairActionRestart RepairAction = "Restart"
+)
+
+// PossibleRepairActionValues returns the possible values for the RepairAction const type.
+func PossibleRepairActionValues() []RepairAction {
+	return []RepairAction{
+		RepairActionReimage,
+		RepairActionReplace,
+		RepairActionRestart,
+	}
+}
+
+// ToPtr returns a *RepairAction pointing to the current value.
+func (c RepairAction) ToPtr() *RepairAction {
+	return &c
+}
+
 // ReplicationMode - Optional parameter which specifies the mode to be used for replication. This property is not updatable.
 type ReplicationMode string
 
@@ -1644,9 +1795,9 @@ func (c ReplicationStatusTypes) ToPtr() *ReplicationStatusTypes {
 	return &c
 }
 
-// ResourceIdentityType - The type of identity used for the virtual machine. The type 'SystemAssigned, UserAssigned' includes
-// both an implicitly created identity and a set of user assigned identities. The type 'None' will
-// remove any identities from the virtual machine.
+// ResourceIdentityType - The type of identity used for the virtual machine scale set. The type 'SystemAssigned, UserAssigned'
+// includes both an implicitly created identity and a set of user assigned identities. The type 'None'
+// will remove any identities from the virtual machine scale set.
 type ResourceIdentityType string
 
 const (
@@ -1754,6 +1905,24 @@ func (c RestorePointCollectionExpandOptions) ToPtr() *RestorePointCollectionExpa
 	return &c
 }
 
+type RestorePointExpandOptions string
+
+const (
+	RestorePointExpandOptionsInstanceView RestorePointExpandOptions = "instanceView"
+)
+
+// PossibleRestorePointExpandOptionsValues returns the possible values for the RestorePointExpandOptions const type.
+func PossibleRestorePointExpandOptionsValues() []RestorePointExpandOptions {
+	return []RestorePointExpandOptions{
+		RestorePointExpandOptionsInstanceView,
+	}
+}
+
+// ToPtr returns a *RestorePointExpandOptions pointing to the current value.
+func (c RestorePointExpandOptions) ToPtr() *RestorePointExpandOptions {
+	return &c
+}
+
 // RollingUpgradeActionType - The last action performed on the rolling upgrade.
 type RollingUpgradeActionType string
 
@@ -1800,17 +1969,43 @@ func (c RollingUpgradeStatusCode) ToPtr() *RollingUpgradeStatusCode {
 	return &c
 }
 
-// SecurityTypes - Specifies the SecurityType of the virtual machine. It is set as TrustedLaunch to enable UefiSettings.
-// Default: UefiSettings will not be enabled unless this property is set as TrustedLaunch.
+// SecurityEncryptionTypes - Specifies the EncryptionType of the managed disk.
+// It is set to DiskWithVMGuestState for encryption of the managed disk along with VMGuestState blob, and VMGuestStateOnly
+// for encryption of just the VMGuestState blob.
+// NOTE: It can be set for only Confidential VMs.
+type SecurityEncryptionTypes string
+
+const (
+	SecurityEncryptionTypesDiskWithVMGuestState SecurityEncryptionTypes = "DiskWithVMGuestState"
+	SecurityEncryptionTypesVMGuestStateOnly     SecurityEncryptionTypes = "VMGuestStateOnly"
+)
+
+// PossibleSecurityEncryptionTypesValues returns the possible values for the SecurityEncryptionTypes const type.
+func PossibleSecurityEncryptionTypesValues() []SecurityEncryptionTypes {
+	return []SecurityEncryptionTypes{
+		SecurityEncryptionTypesDiskWithVMGuestState,
+		SecurityEncryptionTypesVMGuestStateOnly,
+	}
+}
+
+// ToPtr returns a *SecurityEncryptionTypes pointing to the current value.
+func (c SecurityEncryptionTypes) ToPtr() *SecurityEncryptionTypes {
+	return &c
+}
+
+// SecurityTypes - Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings.
+// Default: UefiSettings will not be enabled unless this property is set.
 type SecurityTypes string
 
 const (
-	SecurityTypesTrustedLaunch SecurityTypes = "TrustedLaunch"
+	SecurityTypesConfidentialVM SecurityTypes = "ConfidentialVM"
+	SecurityTypesTrustedLaunch  SecurityTypes = "TrustedLaunch"
 )
 
 // PossibleSecurityTypesValues returns the possible values for the SecurityTypes const type.
 func PossibleSecurityTypesValues() []SecurityTypes {
 	return []SecurityTypes{
+		SecurityTypesConfidentialVM,
 		SecurityTypesTrustedLaunch,
 	}
 }
@@ -1860,6 +2055,29 @@ func (c SettingNames) ToPtr() *SettingNames {
 	return &c
 }
 
+// SharedGalleryHostCaching - The host caching of the disk. Valid values are 'None', 'ReadOnly', and 'ReadWrite'
+type SharedGalleryHostCaching string
+
+const (
+	SharedGalleryHostCachingNone      SharedGalleryHostCaching = "None"
+	SharedGalleryHostCachingReadOnly  SharedGalleryHostCaching = "ReadOnly"
+	SharedGalleryHostCachingReadWrite SharedGalleryHostCaching = "ReadWrite"
+)
+
+// PossibleSharedGalleryHostCachingValues returns the possible values for the SharedGalleryHostCaching const type.
+func PossibleSharedGalleryHostCachingValues() []SharedGalleryHostCaching {
+	return []SharedGalleryHostCaching{
+		SharedGalleryHostCachingNone,
+		SharedGalleryHostCachingReadOnly,
+		SharedGalleryHostCachingReadWrite,
+	}
+}
+
+// ToPtr returns a *SharedGalleryHostCaching pointing to the current value.
+func (c SharedGalleryHostCaching) ToPtr() *SharedGalleryHostCaching {
+	return &c
+}
+
 type SharedToValues string
 
 const (
@@ -1902,6 +2120,31 @@ func (c SharingProfileGroupTypes) ToPtr() *SharingProfileGroupTypes {
 	return &c
 }
 
+// SharingState - The sharing state of the gallery, which only appears in the response.
+type SharingState string
+
+const (
+	SharingStateFailed     SharingState = "Failed"
+	SharingStateInProgress SharingState = "InProgress"
+	SharingStateSucceeded  SharingState = "Succeeded"
+	SharingStateUnknown    SharingState = "Unknown"
+)
+
+// PossibleSharingStateValues returns the possible values for the SharingState const type.
+func PossibleSharingStateValues() []SharingState {
+	return []SharingState{
+		SharingStateFailed,
+		SharingStateInProgress,
+		SharingStateSucceeded,
+		SharingStateUnknown,
+	}
+}
+
+// ToPtr returns a *SharingState pointing to the current value.
+func (c SharingState) ToPtr() *SharingState {
+	return &c
+}
+
 // SharingUpdateOperationTypes - This property allows you to specify the operation type of gallery sharing update.
 // Possible values are:
 // Add
@@ -1910,15 +2153,17 @@ func (c SharingProfileGroupTypes) ToPtr() *SharingProfileGroupTypes {
 type SharingUpdateOperationTypes string
 
 const (
-	SharingUpdateOperationTypesAdd    SharingUpdateOperationTypes = "Add"
-	SharingUpdateOperationTypesRemove SharingUpdateOperationTypes = "Remove"
-	SharingUpdateOperationTypesReset  SharingUpdateOperationTypes = "Reset"
+	SharingUpdateOperationTypesAdd             SharingUpdateOperationTypes = "Add"
+	SharingUpdateOperationTypesEnableCommunity SharingUpdateOperationTypes = "EnableCommunity"
+	SharingUpdateOperationTypesRemove          SharingUpdateOperationTypes = "Remove"
+	SharingUpdateOperationTypesReset           SharingUpdateOperationTypes = "Reset"
 )
 
 // PossibleSharingUpdateOperationTypesValues returns the possible values for the SharingUpdateOperationTypes const type.
 func PossibleSharingUpdateOperationTypesValues() []SharingUpdateOperationTypes {
 	return []SharingUpdateOperationTypes{
 		SharingUpdateOperationTypesAdd,
+		SharingUpdateOperationTypesEnableCommunity,
 		SharingUpdateOperationTypesRemove,
 		SharingUpdateOperationTypesReset,
 	}
@@ -2012,6 +2257,7 @@ type StorageAccountTypes string
 
 const (
 	StorageAccountTypesPremiumLRS     StorageAccountTypes = "Premium_LRS"
+	StorageAccountTypesPremiumV2LRS   StorageAccountTypes = "PremiumV2_LRS"
 	StorageAccountTypesPremiumZRS     StorageAccountTypes = "Premium_ZRS"
 	StorageAccountTypesStandardLRS    StorageAccountTypes = "Standard_LRS"
 	StorageAccountTypesStandardSSDLRS StorageAccountTypes = "StandardSSD_LRS"
@@ -2023,6 +2269,7 @@ const (
 func PossibleStorageAccountTypesValues() []StorageAccountTypes {
 	return []StorageAccountTypes{
 		StorageAccountTypesPremiumLRS,
+		StorageAccountTypesPremiumV2LRS,
 		StorageAccountTypesPremiumZRS,
 		StorageAccountTypesStandardLRS,
 		StorageAccountTypesStandardSSDLRS,
@@ -2730,6 +2977,32 @@ func PossibleWindowsPatchAssessmentModeValues() []WindowsPatchAssessmentMode {
 
 // ToPtr returns a *WindowsPatchAssessmentMode pointing to the current value.
 func (c WindowsPatchAssessmentMode) ToPtr() *WindowsPatchAssessmentMode {
+	return &c
+}
+
+// WindowsVMGuestPatchAutomaticByPlatformRebootSetting - Specifies the reboot setting for all AutomaticByPlatform patch installation
+// operations.
+type WindowsVMGuestPatchAutomaticByPlatformRebootSetting string
+
+const (
+	WindowsVMGuestPatchAutomaticByPlatformRebootSettingAlways     WindowsVMGuestPatchAutomaticByPlatformRebootSetting = "Always"
+	WindowsVMGuestPatchAutomaticByPlatformRebootSettingIfRequired WindowsVMGuestPatchAutomaticByPlatformRebootSetting = "IfRequired"
+	WindowsVMGuestPatchAutomaticByPlatformRebootSettingNever      WindowsVMGuestPatchAutomaticByPlatformRebootSetting = "Never"
+	WindowsVMGuestPatchAutomaticByPlatformRebootSettingUnknown    WindowsVMGuestPatchAutomaticByPlatformRebootSetting = "Unknown"
+)
+
+// PossibleWindowsVMGuestPatchAutomaticByPlatformRebootSettingValues returns the possible values for the WindowsVMGuestPatchAutomaticByPlatformRebootSetting const type.
+func PossibleWindowsVMGuestPatchAutomaticByPlatformRebootSettingValues() []WindowsVMGuestPatchAutomaticByPlatformRebootSetting {
+	return []WindowsVMGuestPatchAutomaticByPlatformRebootSetting{
+		WindowsVMGuestPatchAutomaticByPlatformRebootSettingAlways,
+		WindowsVMGuestPatchAutomaticByPlatformRebootSettingIfRequired,
+		WindowsVMGuestPatchAutomaticByPlatformRebootSettingNever,
+		WindowsVMGuestPatchAutomaticByPlatformRebootSettingUnknown,
+	}
+}
+
+// ToPtr returns a *WindowsVMGuestPatchAutomaticByPlatformRebootSetting pointing to the current value.
+func (c WindowsVMGuestPatchAutomaticByPlatformRebootSetting) ToPtr() *WindowsVMGuestPatchAutomaticByPlatformRebootSetting {
 	return &c
 }
 
