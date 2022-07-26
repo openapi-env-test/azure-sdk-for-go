@@ -1,5 +1,45 @@
 # Release History
 
+## 0.3.0 (2022-07-26)
+### Breaking Changes
+
+- Function `*EndpointsClient.Get` parameter(s) have been changed from `(context.Context, string, string, string, string, *EndpointsClientGetOptions)` to `(context.Context, string, string, EndpointType, string, *EndpointsClientGetOptions)`
+- Function `*EndpointsClient.Delete` parameter(s) have been changed from `(context.Context, string, string, string, string, *EndpointsClientDeleteOptions)` to `(context.Context, string, string, EndpointType, string, *EndpointsClientDeleteOptions)`
+- Function `*HeatMapClient.Get` parameter(s) have been changed from `(context.Context, string, string, Enum8, *HeatMapClientGetOptions)` to `(context.Context, string, string, *HeatMapClientGetOptions)`
+- Function `*EndpointsClient.CreateOrUpdate` parameter(s) have been changed from `(context.Context, string, string, string, string, Endpoint, *EndpointsClientCreateOrUpdateOptions)` to `(context.Context, string, string, EndpointType, string, Endpoint, *EndpointsClientCreateOrUpdateOptions)`
+- Function `*EndpointsClient.Update` parameter(s) have been changed from `(context.Context, string, string, string, string, Endpoint, *EndpointsClientUpdateOptions)` to `(context.Context, string, string, EndpointType, string, Endpoint, *EndpointsClientUpdateOptions)`
+- Const `Enum8Default` has been removed
+- Function `Enum8.ToPtr` has been removed
+- Function `PossibleEnum8Values` has been removed
+
+### Features Added
+
+- New const `AlwaysServeDisabled`
+- New const `CreatedByTypeManagedIdentity`
+- New const `CreatedByTypeUser`
+- New const `EndpointTypeNestedEndpoints`
+- New const `EndpointTypeAzureEndpoints`
+- New const `CreatedByTypeKey`
+- New const `CreatedByTypeApplication`
+- New const `EndpointTypeExternalEndpoints`
+- New const `AlwaysServeEnabled`
+- New function `CreatedByType.ToPtr() *CreatedByType`
+- New function `PossibleAlwaysServeValues() []AlwaysServe`
+- New function `PossibleEndpointTypeValues() []EndpointType`
+- New function `*SystemData.UnmarshalJSON([]byte) error`
+- New function `EndpointType.ToPtr() *EndpointType`
+- New function `SystemData.MarshalJSON() ([]byte, error)`
+- New function `AlwaysServe.ToPtr() *AlwaysServe`
+- New function `PossibleCreatedByTypeValues() []CreatedByType`
+- New struct `SystemData`
+- New field `SystemData` in struct `Endpoint`
+- New field `AlwaysServe` in struct `EndpointProperties`
+- New field `SystemData` in struct `HeatMapModel`
+- New field `SystemData` in struct `UserMetricsModel`
+- New field `SystemData` in struct `GeographicHierarchy`
+- New field `SystemData` in struct `Profile`
+
+
 ## 0.2.0 (2022-01-13)
 ### Breaking Changes
 

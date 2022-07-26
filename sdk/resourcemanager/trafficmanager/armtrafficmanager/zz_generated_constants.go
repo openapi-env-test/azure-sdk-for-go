@@ -10,7 +10,7 @@ package armtrafficmanager
 
 const (
 	moduleName    = "armtrafficmanager"
-	moduleVersion = "v0.2.0"
+	moduleVersion = "v0.3.0"
 )
 
 // AllowedEndpointRecordType - The allowed type DNS record types for this profile.
@@ -35,6 +35,53 @@ func PossibleAllowedEndpointRecordTypeValues() []AllowedEndpointRecordType {
 
 // ToPtr returns a *AllowedEndpointRecordType pointing to the current value.
 func (c AllowedEndpointRecordType) ToPtr() *AllowedEndpointRecordType {
+	return &c
+}
+
+// AlwaysServe - If Always Serve is enabled, probing for endpoint health will be disabled and endpoints will be included in
+// the traffic routing method.
+type AlwaysServe string
+
+const (
+	AlwaysServeDisabled AlwaysServe = "Disabled"
+	AlwaysServeEnabled  AlwaysServe = "Enabled"
+)
+
+// PossibleAlwaysServeValues returns the possible values for the AlwaysServe const type.
+func PossibleAlwaysServeValues() []AlwaysServe {
+	return []AlwaysServe{
+		AlwaysServeDisabled,
+		AlwaysServeEnabled,
+	}
+}
+
+// ToPtr returns a *AlwaysServe pointing to the current value.
+func (c AlwaysServe) ToPtr() *AlwaysServe {
+	return &c
+}
+
+// CreatedByType - The type of identity that created the resource.
+type CreatedByType string
+
+const (
+	CreatedByTypeApplication     CreatedByType = "Application"
+	CreatedByTypeKey             CreatedByType = "Key"
+	CreatedByTypeManagedIdentity CreatedByType = "ManagedIdentity"
+	CreatedByTypeUser            CreatedByType = "User"
+)
+
+// PossibleCreatedByTypeValues returns the possible values for the CreatedByType const type.
+func PossibleCreatedByTypeValues() []CreatedByType {
+	return []CreatedByType{
+		CreatedByTypeApplication,
+		CreatedByTypeKey,
+		CreatedByTypeManagedIdentity,
+		CreatedByTypeUser,
+	}
+}
+
+// ToPtr returns a *CreatedByType pointing to the current value.
+func (c CreatedByType) ToPtr() *CreatedByType {
 	return &c
 }
 
@@ -89,21 +136,25 @@ func (c EndpointStatus) ToPtr() *EndpointStatus {
 	return &c
 }
 
-type Enum8 string
+type EndpointType string
 
 const (
-	Enum8Default Enum8 = "default"
+	EndpointTypeAzureEndpoints    EndpointType = "AzureEndpoints"
+	EndpointTypeExternalEndpoints EndpointType = "ExternalEndpoints"
+	EndpointTypeNestedEndpoints   EndpointType = "NestedEndpoints"
 )
 
-// PossibleEnum8Values returns the possible values for the Enum8 const type.
-func PossibleEnum8Values() []Enum8 {
-	return []Enum8{
-		Enum8Default,
+// PossibleEndpointTypeValues returns the possible values for the EndpointType const type.
+func PossibleEndpointTypeValues() []EndpointType {
+	return []EndpointType{
+		EndpointTypeAzureEndpoints,
+		EndpointTypeExternalEndpoints,
+		EndpointTypeNestedEndpoints,
 	}
 }
 
-// ToPtr returns a *Enum8 pointing to the current value.
-func (c Enum8) ToPtr() *Enum8 {
+// ToPtr returns a *EndpointType pointing to the current value.
+func (c EndpointType) ToPtr() *EndpointType {
 	return &c
 }
 

@@ -55,10 +55,9 @@ func NewHeatMapClient(subscriptionID string, credential azcore.TokenCredential, 
 // If the operation fails it returns an *azcore.ResponseError type.
 // resourceGroupName - The name of the resource group containing the Traffic Manager endpoint.
 // profileName - The name of the Traffic Manager profile.
-// heatMapType - The type of HeatMap for the Traffic Manager profile.
 // options - HeatMapClientGetOptions contains the optional parameters for the HeatMapClient.Get method.
-func (client *HeatMapClient) Get(ctx context.Context, resourceGroupName string, profileName string, heatMapType Enum8, options *HeatMapClientGetOptions) (HeatMapClientGetResponse, error) {
-	req, err := client.getCreateRequest(ctx, resourceGroupName, profileName, heatMapType, options)
+func (client *HeatMapClient) Get(ctx context.Context, resourceGroupName string, profileName string, options *HeatMapClientGetOptions) (HeatMapClientGetResponse, error) {
+	req, err := client.getCreateRequest(ctx, resourceGroupName, profileName, options)
 	if err != nil {
 		return HeatMapClientGetResponse{}, err
 	}
@@ -73,7 +72,7 @@ func (client *HeatMapClient) Get(ctx context.Context, resourceGroupName string, 
 }
 
 // getCreateRequest creates the Get request.
-func (client *HeatMapClient) getCreateRequest(ctx context.Context, resourceGroupName string, profileName string, heatMapType Enum8, options *HeatMapClientGetOptions) (*policy.Request, error) {
+func (client *HeatMapClient) getCreateRequest(ctx context.Context, resourceGroupName string, profileName string, options *HeatMapClientGetOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficmanagerprofiles/{profileName}/heatMaps/{heatMapType}"
 	if client.subscriptionID == "" {
 		return nil, errors.New("parameter client.subscriptionID cannot be empty")
@@ -87,10 +86,7 @@ func (client *HeatMapClient) getCreateRequest(ctx context.Context, resourceGroup
 		return nil, errors.New("parameter profileName cannot be empty")
 	}
 	urlPath = strings.ReplaceAll(urlPath, "{profileName}", url.PathEscape(profileName))
-	if heatMapType == "" {
-		return nil, errors.New("parameter heatMapType cannot be empty")
-	}
-	urlPath = strings.ReplaceAll(urlPath, "{heatMapType}", url.PathEscape(string(heatMapType)))
+	urlPath = strings.ReplaceAll(urlPath, "{heatMapType}", url.PathEscape("default"))
 	req, err := runtime.NewRequest(ctx, http.MethodGet, runtime.JoinPaths(client.host, urlPath))
 	if err != nil {
 		return nil, err
@@ -102,7 +98,7 @@ func (client *HeatMapClient) getCreateRequest(ctx context.Context, resourceGroup
 	if options != nil && options.BotRight != nil {
 		reqQP.Set("botRight", strings.Join(strings.Fields(strings.Trim(fmt.Sprint(options.BotRight), "[]")), ","))
 	}
-	reqQP.Set("api-version", "2018-08-01")
+	reqQP.Set("api-version", "2022-04-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
