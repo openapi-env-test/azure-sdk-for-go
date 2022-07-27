@@ -217,8 +217,8 @@ type AvailabilityStatusProperties struct {
 	HealthEventID *string `json:"healthEventId,omitempty"`
 	// ResolutionETA - When the resource's availabilityState is Unavailable and the reasonType is not User Initiated, it provides the date and time for when the issue is expected to be resolved.
 	ResolutionETA *date.Time `json:"resolutionETA,omitempty"`
-	// OccurredTime - Timestamp for when last change in health status occurred.
-	OccurredTime *date.Time `json:"occurredTime,omitempty"`
+	// OccuredTime - Timestamp for when last change in health status occurred.
+	OccuredTime *date.Time `json:"occuredTime,omitempty"`
 	// ReasonChronicity - Chronicity of the availability transition. Possible values include: 'ReasonChronicityTypesTransient', 'ReasonChronicityTypesPersistent'
 	ReasonChronicity ReasonChronicityTypes `json:"reasonChronicity,omitempty"`
 	// ReportedTime - Timestamp for when the health was last checked.
@@ -234,12 +234,12 @@ type AvailabilityStatusProperties struct {
 // AvailabilityStatusPropertiesRecentlyResolved an annotation describing a change in the availabilityState
 // to Available from Unavailable with a reasonType of type Unplanned
 type AvailabilityStatusPropertiesRecentlyResolved struct {
-	// UnavailableOccurredTime - Timestamp for when the availabilityState changed to Unavailable
-	UnavailableOccurredTime *date.Time `json:"unavailableOccurredTime,omitempty"`
+	// UnavailableOccuredTime - Timestamp for when the availabilityState changed to Unavailable
+	UnavailableOccuredTime *date.Time `json:"unavailableOccuredTime,omitempty"`
 	// ResolvedTime - Timestamp when the availabilityState changes to Available.
 	ResolvedTime *date.Time `json:"resolvedTime,omitempty"`
-	// UnavailabilitySummary - Brief description of cause of the resource becoming unavailable.
-	UnavailabilitySummary *string `json:"unavailabilitySummary,omitempty"`
+	// UnavailableSummary - Brief description of cause of the resource becoming unavailable.
+	UnavailableSummary *string `json:"unavailableSummary,omitempty"`
 }
 
 // AzureEntityResource the resource model definition for an Azure Resource Manager resource with an etag.
@@ -262,12 +262,6 @@ func (aer AzureEntityResource) MarshalJSON() ([]byte, error) {
 
 // ErrorResponse error details.
 type ErrorResponse struct {
-	// Error - The error object.
-	Error *ErrorResponseError `json:"error,omitempty"`
-}
-
-// ErrorResponseError the error object.
-type ErrorResponseError struct {
 	// Code - READ-ONLY; The error code.
 	Code *string `json:"code,omitempty"`
 	// Message - READ-ONLY; The error message.
@@ -276,8 +270,8 @@ type ErrorResponseError struct {
 	Details *string `json:"details,omitempty"`
 }
 
-// MarshalJSON is the custom marshaler for ErrorResponseError.
-func (er ErrorResponseError) MarshalJSON() ([]byte, error) {
+// MarshalJSON is the custom marshaler for ErrorResponse.
+func (er ErrorResponse) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
 	return json.Marshal(objectMap)
 }
@@ -431,7 +425,7 @@ type RecommendedAction struct {
 	ActionURLText *string `json:"actionUrlText,omitempty"`
 }
 
-// Resource common fields that are returned in the response for all Azure Resource Manager resources
+// Resource common  fields that are returned in the response for all Azure Resource Manager resources
 type Resource struct {
 	// ID - READ-ONLY; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string `json:"id,omitempty"`
