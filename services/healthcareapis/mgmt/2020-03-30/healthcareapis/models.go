@@ -71,17 +71,27 @@ func (edi ErrorDetailsInternal) MarshalJSON() ([]byte, error) {
 type Operation struct {
 	// Name - READ-ONLY; Operation name: {provider}/{resource}/{read | write | action | delete}
 	Name *string `json:"name,omitempty"`
+	// IsDataAction - Gets or sets a value indicating whether the operation is a data action or not
+	IsDataAction *bool `json:"isDataAction,omitempty"`
 	// Origin - READ-ONLY; Default value is 'user,system'.
 	Origin *string `json:"origin,omitempty"`
 	// Display - The information displayed about the operation.
 	Display *OperationDisplay `json:"display,omitempty"`
+	// Properties - Properties of the operation
+	Properties interface{} `json:"properties,omitempty"`
 }
 
 // MarshalJSON is the custom marshaler for Operation.
 func (o Operation) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
+	if o.IsDataAction != nil {
+		objectMap["isDataAction"] = o.IsDataAction
+	}
 	if o.Display != nil {
 		objectMap["display"] = o.Display
+	}
+	if o.Properties != nil {
+		objectMap["properties"] = o.Properties
 	}
 	return json.Marshal(objectMap)
 }
@@ -606,7 +616,7 @@ func (pr ProxyResource) MarshalJSON() ([]byte, error) {
 	return json.Marshal(objectMap)
 }
 
-// Resource common fields that are returned in the response for all Azure Resource Manager resources
+// Resource common  fields that are returned in the response for all Azure Resource Manager resources
 type Resource struct {
 	// ID - READ-ONLY; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string `json:"id,omitempty"`
