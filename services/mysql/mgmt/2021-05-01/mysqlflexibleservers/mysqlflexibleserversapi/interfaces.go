@@ -101,6 +101,13 @@ type CheckNameAvailabilityClientAPI interface {
 
 var _ CheckNameAvailabilityClientAPI = (*mysqlflexibleservers.CheckNameAvailabilityClient)(nil)
 
+// CheckNameAvailabilityWithoutLocationClientAPI contains the set of methods on the CheckNameAvailabilityWithoutLocationClient type.
+type CheckNameAvailabilityWithoutLocationClientAPI interface {
+	Execute(ctx context.Context, nameAvailabilityRequest mysqlflexibleservers.NameAvailabilityRequest) (result mysqlflexibleservers.NameAvailability, err error)
+}
+
+var _ CheckNameAvailabilityWithoutLocationClientAPI = (*mysqlflexibleservers.CheckNameAvailabilityWithoutLocationClient)(nil)
+
 // GetPrivateDNSZoneSuffixClientAPI contains the set of methods on the GetPrivateDNSZoneSuffixClient type.
 type GetPrivateDNSZoneSuffixClientAPI interface {
 	Execute(ctx context.Context) (result mysqlflexibleservers.GetPrivateDNSZoneSuffixResponse, err error)
