@@ -4535,7 +4535,7 @@ type QueueServicePropertiesProperties struct {
 	Cors *CorsRules `json:"cors,omitempty"`
 }
 
-// Resource common fields that are returned in the response for all Azure Resource Manager resources
+// Resource common  fields that are returned in the response for all Azure Resource Manager resources
 type Resource struct {
 	// ID - READ-ONLY; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string `json:"id,omitempty"`
@@ -4746,7 +4746,7 @@ type SystemData struct {
 	LastModifiedBy *string `json:"lastModifiedBy,omitempty"`
 	// LastModifiedByType - The type of identity that last modified the resource. Possible values include: 'User', 'Application', 'ManagedIdentity', 'Key'
 	LastModifiedByType CreatedByType `json:"lastModifiedByType,omitempty"`
-	// LastModifiedAt - The type of identity that last modified the resource.
+	// LastModifiedAt - The timestamp of resource last modification (UTC)
 	LastModifiedAt *date.Time `json:"lastModifiedAt,omitempty"`
 }
 

@@ -1749,7 +1749,7 @@ func (cp ContainerProperties) MarshalJSON() ([]byte, error) {
 
 // CorsRule specifies a CORS rule for the Blob service.
 type CorsRule struct {
-	// AllowedOrigins - Required if CorsRule element is present. A list of origin domains that will be allowed via CORS, or "*" to allow all domains
+	// AllowedOrigins - Required if CorsRule element is  present. A list of origin domains that will be allowed via CORS, or "*" to allow all domains
 	AllowedOrigins *[]string `json:"allowedOrigins,omitempty"`
 	// AllowedMethods - Required if CorsRule element is present. A list of HTTP methods that are allowed to be executed by the origin.
 	AllowedMethods *[]string `json:"allowedMethods,omitempty"`
@@ -5156,7 +5156,7 @@ type QueueServicePropertiesProperties struct {
 	Cors *CorsRules `json:"cors,omitempty"`
 }
 
-// Resource common fields that are returned in the response for all Azure Resource Manager resources
+// Resource common  fields that are returned in the response for all Azure Resource Manager resources
 type Resource struct {
 	// ID - READ-ONLY; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
 	ID *string `json:"id,omitempty"`
