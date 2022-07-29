@@ -10,13 +10,15 @@ package hybridnetwork
 type DeviceType string
 
 const (
+	// DeviceTypeAzureStackEdge ...
+	DeviceTypeAzureStackEdge DeviceType = "AzureStackEdge"
 	// DeviceTypeDevicePropertiesFormat ...
 	DeviceTypeDevicePropertiesFormat DeviceType = "DevicePropertiesFormat"
 )
 
 // PossibleDeviceTypeValues returns an array of possible values for the DeviceType const type.
 func PossibleDeviceTypeValues() []DeviceType {
-	return []DeviceType{DeviceTypeDevicePropertiesFormat}
+	return []DeviceType{DeviceTypeAzureStackEdge, DeviceTypeDevicePropertiesFormat}
 }
 
 // DiskCreateOptionTypes enumerates the values for disk create option types.

@@ -37,6 +37,48 @@ func (aer AzureEntityResource) MarshalJSON() ([]byte, error) {
 	return json.Marshal(objectMap)
 }
 
+// AzureStackEdgeFormat the reference to the Azure stack edge device.
+type AzureStackEdgeFormat struct {
+	// AzureStackEdge - The reference to the Azure stack edge device.
+	AzureStackEdge *SubResource `json:"azureStackEdge,omitempty"`
+	// Status - READ-ONLY; The current device status. Possible values include: 'StatusUnknown', 'StatusNotRegistered', 'StatusRegistered', 'StatusDeleted'
+	Status Status `json:"status,omitempty"`
+	// ProvisioningState - READ-ONLY; The provisioning state of the device resource. Possible values include: 'ProvisioningStateUnknown', 'ProvisioningStateSucceeded', 'ProvisioningStateAccepted', 'ProvisioningStateDeleting', 'ProvisioningStateFailed', 'ProvisioningStateCanceled', 'ProvisioningStateDeleted'
+	ProvisioningState ProvisioningState `json:"provisioningState,omitempty"`
+	// NetworkFunctions - READ-ONLY; The list of network functions deployed on the device.
+	NetworkFunctions *[]SubResource `json:"networkFunctions,omitempty"`
+	// DeviceType - Possible values include: 'DeviceTypeDevicePropertiesFormat', 'DeviceTypeAzureStackEdge'
+	DeviceType DeviceType `json:"deviceType,omitempty"`
+}
+
+// MarshalJSON is the custom marshaler for AzureStackEdgeFormat.
+func (asef AzureStackEdgeFormat) MarshalJSON() ([]byte, error) {
+	asef.DeviceType = DeviceTypeAzureStackEdge
+	objectMap := make(map[string]interface{})
+	if asef.AzureStackEdge != nil {
+		objectMap["azureStackEdge"] = asef.AzureStackEdge
+	}
+	if asef.DeviceType != "" {
+		objectMap["deviceType"] = asef.DeviceType
+	}
+	return json.Marshal(objectMap)
+}
+
+// AsAzureStackEdgeFormat is the BasicDevicePropertiesFormat implementation for AzureStackEdgeFormat.
+func (asef AzureStackEdgeFormat) AsAzureStackEdgeFormat() (*AzureStackEdgeFormat, bool) {
+	return &asef, true
+}
+
+// AsDevicePropertiesFormat is the BasicDevicePropertiesFormat implementation for AzureStackEdgeFormat.
+func (asef AzureStackEdgeFormat) AsDevicePropertiesFormat() (*DevicePropertiesFormat, bool) {
+	return nil, false
+}
+
+// AsBasicDevicePropertiesFormat is the BasicDevicePropertiesFormat implementation for AzureStackEdgeFormat.
+func (asef AzureStackEdgeFormat) AsBasicDevicePropertiesFormat() (BasicDevicePropertiesFormat, bool) {
+	return &asef, true
+}
+
 // CustomProfile specifies the custom settings for the virtual machine.
 type CustomProfile struct {
 	// MetadataConfigurationPath - Path for metadata configuration.
@@ -323,6 +365,7 @@ func NewDeviceListResultPage(cur DeviceListResult, getNextPage func(context.Cont
 
 // BasicDevicePropertiesFormat device properties.
 type BasicDevicePropertiesFormat interface {
+	AsAzureStackEdgeFormat() (*AzureStackEdgeFormat, bool)
 	AsDevicePropertiesFormat() (*DevicePropertiesFormat, bool)
 }
 
@@ -332,11 +375,9 @@ type DevicePropertiesFormat struct {
 	Status Status `json:"status,omitempty"`
 	// ProvisioningState - READ-ONLY; The provisioning state of the device resource. Possible values include: 'ProvisioningStateUnknown', 'ProvisioningStateSucceeded', 'ProvisioningStateAccepted', 'ProvisioningStateDeleting', 'ProvisioningStateFailed', 'ProvisioningStateCanceled', 'ProvisioningStateDeleted'
 	ProvisioningState ProvisioningState `json:"provisioningState,omitempty"`
-	// AzureStackEdge - The reference to the Azure stack edge device.
-	AzureStackEdge *SubResource `json:"azureStackEdge,omitempty"`
 	// NetworkFunctions - READ-ONLY; The list of network functions deployed on the device.
 	NetworkFunctions *[]SubResource `json:"networkFunctions,omitempty"`
-	// DeviceType - Possible values include: 'DeviceTypeDevicePropertiesFormat'
+	// DeviceType - Possible values include: 'DeviceTypeDevicePropertiesFormat', 'DeviceTypeAzureStackEdge'
 	DeviceType DeviceType `json:"deviceType,omitempty"`
 }
 
@@ -348,6 +389,10 @@ func unmarshalBasicDevicePropertiesFormat(body []byte) (BasicDevicePropertiesFor
 	}
 
 	switch m["deviceType"] {
+	case string(DeviceTypeAzureStackEdge):
+		var asef AzureStackEdgeFormat
+		err := json.Unmarshal(body, &asef)
+		return asef, err
 	default:
 		var dpf DevicePropertiesFormat
 		err := json.Unmarshal(body, &dpf)
@@ -377,13 +422,15 @@ func unmarshalBasicDevicePropertiesFormatArray(body []byte) ([]BasicDeviceProper
 func (dpf DevicePropertiesFormat) MarshalJSON() ([]byte, error) {
 	dpf.DeviceType = DeviceTypeDevicePropertiesFormat
 	objectMap := make(map[string]interface{})
-	if dpf.AzureStackEdge != nil {
-		objectMap["azureStackEdge"] = dpf.AzureStackEdge
-	}
 	if dpf.DeviceType != "" {
 		objectMap["deviceType"] = dpf.DeviceType
 	}
 	return json.Marshal(objectMap)
+}
+
+// AsAzureStackEdgeFormat is the BasicDevicePropertiesFormat implementation for DevicePropertiesFormat.
+func (dpf DevicePropertiesFormat) AsAzureStackEdgeFormat() (*AzureStackEdgeFormat, bool) {
+	return nil, false
 }
 
 // AsDevicePropertiesFormat is the BasicDevicePropertiesFormat implementation for DevicePropertiesFormat.
