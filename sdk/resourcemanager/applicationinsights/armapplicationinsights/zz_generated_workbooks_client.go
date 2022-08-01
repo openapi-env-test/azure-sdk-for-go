@@ -95,7 +95,7 @@ func (client *WorkbooksClient) createOrUpdateCreateRequest(ctx context.Context, 
 	if options != nil && options.SourceID != nil {
 		reqQP.Set("sourceId", *options.SourceID)
 	}
-	reqQP.Set("api-version", "2021-08-01")
+	reqQP.Set("api-version", "2022-02-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, runtime.MarshalAsJSON(req, workbookProperties)
@@ -150,7 +150,7 @@ func (client *WorkbooksClient) deleteCreateRequest(ctx context.Context, resource
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-08-01")
+	reqQP.Set("api-version", "2022-02-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -196,7 +196,10 @@ func (client *WorkbooksClient) getCreateRequest(ctx context.Context, resourceGro
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-08-01")
+	reqQP.Set("api-version", "2022-02-01")
+	if options != nil && options.CanFetchContent != nil {
+		reqQP.Set("canFetchContent", strconv.FormatBool(*options.CanFetchContent))
+	}
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -255,7 +258,7 @@ func (client *WorkbooksClient) listByResourceGroupCreateRequest(ctx context.Cont
 	if options != nil && options.CanFetchContent != nil {
 		reqQP.Set("canFetchContent", strconv.FormatBool(*options.CanFetchContent))
 	}
-	reqQP.Set("api-version", "2021-08-01")
+	reqQP.Set("api-version", "2022-02-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -270,7 +273,7 @@ func (client *WorkbooksClient) listByResourceGroupHandleResponse(resp *http.Resp
 	return result, nil
 }
 
-// ListBySubscription - Get all private workbooks defined within a specified subscription and category.
+// ListBySubscription - Get all Workbooks defined within a specified subscription and category.
 // If the operation fails it returns an *azcore.ResponseError type.
 // category - Category of workbook to return.
 // options - WorkbooksClientListBySubscriptionOptions contains the optional parameters for the WorkbooksClient.ListBySubscription
@@ -306,7 +309,7 @@ func (client *WorkbooksClient) listBySubscriptionCreateRequest(ctx context.Conte
 	if options != nil && options.CanFetchContent != nil {
 		reqQP.Set("canFetchContent", strconv.FormatBool(*options.CanFetchContent))
 	}
-	reqQP.Set("api-version", "2021-08-01")
+	reqQP.Set("api-version", "2022-02-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -366,7 +369,7 @@ func (client *WorkbooksClient) revisionGetCreateRequest(ctx context.Context, res
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-08-01")
+	reqQP.Set("api-version", "2022-02-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -418,7 +421,7 @@ func (client *WorkbooksClient) revisionsListCreateRequest(ctx context.Context, r
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2021-08-01")
+	reqQP.Set("api-version", "2022-02-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	return req, nil
@@ -476,7 +479,7 @@ func (client *WorkbooksClient) updateCreateRequest(ctx context.Context, resource
 	if options != nil && options.SourceID != nil {
 		reqQP.Set("sourceId", *options.SourceID)
 	}
-	reqQP.Set("api-version", "2021-08-01")
+	reqQP.Set("api-version", "2022-02-01")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header.Set("Accept", "application/json")
 	if options != nil && options.WorkbookUpdateParameters != nil {
