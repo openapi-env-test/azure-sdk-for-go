@@ -1,5 +1,195 @@
 # Release History
 
+## 0.3.0 (2022-08-01)
+### Breaking Changes
+
+- Type of `ConfigurationStoreUpdateParameters.Properties` has been changed from `*ConfigurationStorePropertiesUpdateParameters` to `map[string]interface{}`
+- Const `ConnectionStatusPending` has been removed
+- Const `ActionsRequiredRecreate` has been removed
+- Const `CreatedByTypeManagedIdentity` has been removed
+- Const `IdentityTypeSystemAssigned` has been removed
+- Const `IdentityTypeNone` has been removed
+- Const `CreatedByTypeApplication` has been removed
+- Const `CreatedByTypeUser` has been removed
+- Const `PublicNetworkAccessEnabled` has been removed
+- Const `IdentityTypeSystemAssignedUserAssigned` has been removed
+- Const `ActionsRequiredNone` has been removed
+- Const `ConnectionStatusRejected` has been removed
+- Const `ConnectionStatusDisconnected` has been removed
+- Const `PublicNetworkAccessDisabled` has been removed
+- Const `CreatedByTypeKey` has been removed
+- Const `IdentityTypeUserAssigned` has been removed
+- Const `ConnectionStatusApproved` has been removed
+- Function `PossibleActionsRequiredValues` has been removed
+- Function `PossibleIdentityTypeValues` has been removed
+- Function `*PrivateLinkResourcesClient.ListByConfigurationStore` has been removed
+- Function `*PrivateEndpointConnectionsClientListByConfigurationStorePager.Err` has been removed
+- Function `*KeyValuesClient.Get` has been removed
+- Function `ResourceIdentity.MarshalJSON` has been removed
+- Function `SystemData.MarshalJSON` has been removed
+- Function `*PrivateEndpointConnectionsClientListByConfigurationStorePager.PageResponse` has been removed
+- Function `*KeyValuesClientDeletePoller.Done` has been removed
+- Function `*KeyValuesClient.ListByConfigurationStore` has been removed
+- Function `KeyValueListResult.MarshalJSON` has been removed
+- Function `PossibleConnectionStatusValues` has been removed
+- Function `*KeyValueProperties.UnmarshalJSON` has been removed
+- Function `*PrivateEndpointConnectionsClient.Get` has been removed
+- Function `*PrivateLinkResourcesClient.Get` has been removed
+- Function `*PrivateEndpointConnectionsClient.ListByConfigurationStore` has been removed
+- Function `PrivateEndpointConnectionsClientDeletePollerResponse.PollUntilDone` has been removed
+- Function `*PrivateEndpointConnectionsClientDeletePoller.Done` has been removed
+- Function `ActionsRequired.ToPtr` has been removed
+- Function `NewKeyValuesClient` has been removed
+- Function `PrivateLinkResourceProperties.MarshalJSON` has been removed
+- Function `ServiceSpecification.MarshalJSON` has been removed
+- Function `*KeyValuesClient.BeginDelete` has been removed
+- Function `*PrivateEndpointConnectionsClient.BeginCreateOrUpdate` has been removed
+- Function `*KeyValuesClientListByConfigurationStorePager.PageResponse` has been removed
+- Function `*KeyValuesClient.CreateOrUpdate` has been removed
+- Function `*PrivateLinkResourcesClientListByConfigurationStorePager.Err` has been removed
+- Function `*KeyValuesClientDeletePoller.Poll` has been removed
+- Function `ConnectionStatus.ToPtr` has been removed
+- Function `NewPrivateEndpointConnectionsClient` has been removed
+- Function `*PrivateEndpointConnectionsClientCreateOrUpdatePoller.FinalResponse` has been removed
+- Function `*PrivateEndpointConnectionsClientDeletePoller.ResumeToken` has been removed
+- Function `KeyValuesClientDeletePollerResponse.PollUntilDone` has been removed
+- Function `*PrivateLinkResourcesClientListByConfigurationStorePager.PageResponse` has been removed
+- Function `*PrivateEndpointConnectionsClientDeletePoller.FinalResponse` has been removed
+- Function `NewPrivateLinkResourcesClient` has been removed
+- Function `MetricSpecification.MarshalJSON` has been removed
+- Function `*KeyValuesClientListByConfigurationStorePager.Err` has been removed
+- Function `*PrivateEndpointConnectionsClientCreateOrUpdatePoller.Poll` has been removed
+- Function `*PrivateEndpointConnectionsClientCreateOrUpdatePollerResponse.Resume` has been removed
+- Function `ErrorDetails.MarshalJSON` has been removed
+- Function `*PrivateEndpointConnectionsClientCreateOrUpdatePoller.ResumeToken` has been removed
+- Function `*PrivateEndpointConnectionsClient.BeginDelete` has been removed
+- Function `*PrivateEndpointConnectionsClientDeletePoller.Poll` has been removed
+- Function `KeyValueProperties.MarshalJSON` has been removed
+- Function `PossibleCreatedByTypeValues` has been removed
+- Function `PublicNetworkAccess.ToPtr` has been removed
+- Function `*PrivateEndpointConnectionsClientDeletePollerResponse.Resume` has been removed
+- Function `PrivateEndpointConnectionListResult.MarshalJSON` has been removed
+- Function `*SystemData.UnmarshalJSON` has been removed
+- Function `TrackedResource.MarshalJSON` has been removed
+- Function `*KeyValuesClientDeletePoller.FinalResponse` has been removed
+- Function `*PrivateEndpointConnectionsClientCreateOrUpdatePoller.Done` has been removed
+- Function `PrivateEndpointConnectionsClientCreateOrUpdatePollerResponse.PollUntilDone` has been removed
+- Function `IdentityType.ToPtr` has been removed
+- Function `CreatedByType.ToPtr` has been removed
+- Function `*PrivateLinkResourcesClientListByConfigurationStorePager.NextPage` has been removed
+- Function `*KeyValuesClientListByConfigurationStorePager.NextPage` has been removed
+- Function `*KeyValuesClientDeletePoller.ResumeToken` has been removed
+- Function `PossiblePublicNetworkAccessValues` has been removed
+- Function `PrivateLinkResourceListResult.MarshalJSON` has been removed
+- Function `*KeyValuesClientDeletePollerResponse.Resume` has been removed
+- Function `*PrivateEndpointConnectionsClientListByConfigurationStorePager.NextPage` has been removed
+- Struct `ConfigurationStorePropertiesUpdateParameters` has been removed
+- Struct `EncryptionProperties` has been removed
+- Struct `ErrorAdditionalInfo` has been removed
+- Struct `ErrorDetails` has been removed
+- Struct `ErrorResponse` has been removed
+- Struct `KeyValueListResult` has been removed
+- Struct `KeyValueProperties` has been removed
+- Struct `KeyValuesClient` has been removed
+- Struct `KeyValuesClientBeginDeleteOptions` has been removed
+- Struct `KeyValuesClientCreateOrUpdateOptions` has been removed
+- Struct `KeyValuesClientCreateOrUpdateResponse` has been removed
+- Struct `KeyValuesClientCreateOrUpdateResult` has been removed
+- Struct `KeyValuesClientDeletePoller` has been removed
+- Struct `KeyValuesClientDeletePollerResponse` has been removed
+- Struct `KeyValuesClientDeleteResponse` has been removed
+- Struct `KeyValuesClientGetOptions` has been removed
+- Struct `KeyValuesClientGetResponse` has been removed
+- Struct `KeyValuesClientGetResult` has been removed
+- Struct `KeyValuesClientListByConfigurationStoreOptions` has been removed
+- Struct `KeyValuesClientListByConfigurationStorePager` has been removed
+- Struct `KeyValuesClientListByConfigurationStoreResponse` has been removed
+- Struct `KeyValuesClientListByConfigurationStoreResult` has been removed
+- Struct `KeyVaultProperties` has been removed
+- Struct `LogSpecification` has been removed
+- Struct `MetricDimension` has been removed
+- Struct `MetricSpecification` has been removed
+- Struct `OperationProperties` has been removed
+- Struct `PrivateEndpoint` has been removed
+- Struct `PrivateEndpointConnection` has been removed
+- Struct `PrivateEndpointConnectionListResult` has been removed
+- Struct `PrivateEndpointConnectionProperties` has been removed
+- Struct `PrivateEndpointConnectionReference` has been removed
+- Struct `PrivateEndpointConnectionsClient` has been removed
+- Struct `PrivateEndpointConnectionsClientBeginCreateOrUpdateOptions` has been removed
+- Struct `PrivateEndpointConnectionsClientBeginDeleteOptions` has been removed
+- Struct `PrivateEndpointConnectionsClientCreateOrUpdatePoller` has been removed
+- Struct `PrivateEndpointConnectionsClientCreateOrUpdatePollerResponse` has been removed
+- Struct `PrivateEndpointConnectionsClientCreateOrUpdateResponse` has been removed
+- Struct `PrivateEndpointConnectionsClientCreateOrUpdateResult` has been removed
+- Struct `PrivateEndpointConnectionsClientDeletePoller` has been removed
+- Struct `PrivateEndpointConnectionsClientDeletePollerResponse` has been removed
+- Struct `PrivateEndpointConnectionsClientDeleteResponse` has been removed
+- Struct `PrivateEndpointConnectionsClientGetOptions` has been removed
+- Struct `PrivateEndpointConnectionsClientGetResponse` has been removed
+- Struct `PrivateEndpointConnectionsClientGetResult` has been removed
+- Struct `PrivateEndpointConnectionsClientListByConfigurationStoreOptions` has been removed
+- Struct `PrivateEndpointConnectionsClientListByConfigurationStorePager` has been removed
+- Struct `PrivateEndpointConnectionsClientListByConfigurationStoreResponse` has been removed
+- Struct `PrivateEndpointConnectionsClientListByConfigurationStoreResult` has been removed
+- Struct `PrivateLinkResource` has been removed
+- Struct `PrivateLinkResourceListResult` has been removed
+- Struct `PrivateLinkResourceProperties` has been removed
+- Struct `PrivateLinkResourcesClient` has been removed
+- Struct `PrivateLinkResourcesClientGetOptions` has been removed
+- Struct `PrivateLinkResourcesClientGetResponse` has been removed
+- Struct `PrivateLinkResourcesClientGetResult` has been removed
+- Struct `PrivateLinkResourcesClientListByConfigurationStoreOptions` has been removed
+- Struct `PrivateLinkResourcesClientListByConfigurationStorePager` has been removed
+- Struct `PrivateLinkResourcesClientListByConfigurationStoreResponse` has been removed
+- Struct `PrivateLinkResourcesClientListByConfigurationStoreResult` has been removed
+- Struct `PrivateLinkServiceConnectionState` has been removed
+- Struct `ResourceIdentity` has been removed
+- Struct `SKU` has been removed
+- Struct `ServiceSpecification` has been removed
+- Struct `SystemData` has been removed
+- Struct `TrackedResource` has been removed
+- Struct `UserIdentity` has been removed
+- Field `IsDataAction` of struct `OperationDefinition` has been removed
+- Field `Origin` of struct `OperationDefinition` has been removed
+- Field `Properties` of struct `OperationDefinition` has been removed
+- Field `Identity` of struct `ConfigurationStoreUpdateParameters` has been removed
+- Field `SKU` of struct `ConfigurationStoreUpdateParameters` has been removed
+- Field `Properties` of struct `KeyValue` has been removed
+- Field `ID` of struct `KeyValue` has been removed
+- Field `Name` of struct `KeyValue` has been removed
+- Field `Type` of struct `KeyValue` has been removed
+- Field `SystemData` of struct `ConfigurationStore` has been removed
+- Field `SKU` of struct `ConfigurationStore` has been removed
+- Field `Identity` of struct `ConfigurationStore` has been removed
+- Field `PrivateEndpointConnections` of struct `ConfigurationStoreProperties` has been removed
+- Field `DisableLocalAuth` of struct `ConfigurationStoreProperties` has been removed
+- Field `Encryption` of struct `ConfigurationStoreProperties` has been removed
+- Field `PublicNetworkAccess` of struct `ConfigurationStoreProperties` has been removed
+
+### Features Added
+
+- New function `*KeyValue.UnmarshalJSON([]byte) error`
+- New function `*ConfigurationStoresClient.ListKeyValue(context.Context, string, string, ListKeyValueParameters, *ConfigurationStoresClientListKeyValueOptions) (ConfigurationStoresClientListKeyValueResponse, error)`
+- New function `KeyValue.MarshalJSON() ([]byte, error)`
+- New function `Resource.MarshalJSON() ([]byte, error)`
+- New struct `ConfigurationStoresClientListKeyValueOptions`
+- New struct `ConfigurationStoresClientListKeyValueResponse`
+- New struct `ConfigurationStoresClientListKeyValueResult`
+- New struct `Error`
+- New struct `ListKeyValueParameters`
+- New field `LastModified` in struct `KeyValue`
+- New field `Locked` in struct `KeyValue`
+- New field `Tags` in struct `KeyValue`
+- New field `Value` in struct `KeyValue`
+- New field `ContentType` in struct `KeyValue`
+- New field `ETag` in struct `KeyValue`
+- New field `Key` in struct `KeyValue`
+- New field `Label` in struct `KeyValue`
+- New field `Location` in struct `Resource`
+- New field `Tags` in struct `Resource`
+
+
 ## 0.2.0 (2022-01-13)
 ### Breaking Changes
 
