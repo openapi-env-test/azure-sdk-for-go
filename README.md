@@ -9,6 +9,7 @@ This repository is for active development of the Azure SDK for Go. For consumers
 * [Code Samples for Azure Go SDK](https://github.com/azure-samples/azure-sdk-for-go-samples)
 * [Azure REST API Docs](https://docs.microsoft.com/rest/api/)
 * [General Azure Docs](https://docs.microsoft.com/azure)
+* [Share your feedback to our Azure SDK](https://www.surveymonkey.com/r/FWPGFGG)
 
 ## Getting Started
 
@@ -94,6 +95,8 @@ Slack](https://gophers.slack.com/). Sign up
 ## Contribute
 
 See [CONTRIBUTING.md](https://github.com/Azure/azure-sdk-for-go/blob/main/CONTRIBUTING.md).
+
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
 ## Trademarks
 
