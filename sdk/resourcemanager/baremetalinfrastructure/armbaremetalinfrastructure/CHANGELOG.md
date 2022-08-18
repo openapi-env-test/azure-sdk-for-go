@@ -1,5 +1,17 @@
 # Release History
 
+## 2.0.0 (2022-08-18)
+### Breaking Changes
+
+- Function `*AzureBareMetalInstancesClient.Update` has been removed
+- Struct `AzureBareMetalInstancesClientUpdateOptions` has been removed
+
+### Features Added
+
+- New function `*AzureBareMetalInstancesClient.BeginUpdate(context.Context, string, string, Tags, *AzureBareMetalInstancesClientBeginUpdateOptions) (*runtime.Poller[AzureBareMetalInstancesClientUpdateResponse], error)`
+- New struct `AzureBareMetalInstancesClientBeginUpdateOptions`
+
+
 ## 1.0.0 (2022-05-17)
 
 The package of `github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/baremetalinfrastructure/armbaremetalinfrastructure` is using our [next generation design principles](https://azure.github.io/azure-sdk/general_introduction.html) since version 1.0.0, which contains breaking changes.
