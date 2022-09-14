@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+	<testsuite tests="25" failures="4" time="0.228" name="github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/appconfiguration/armappconfiguration/v2">
+		<properties>
+			<property name="go.version" value="go1.19"></property>
+			<property name="coverage.statements.pct" value="56.2"></property>
+		</properties>
+		<testcase classname="v2" name="TestMockTest" time="0.190">
+			<failure message="Failed" type=""></failure>
+		</testcase>
+		<testcase classname="v2" name="TestMockTest/TestConfigurationStores_Create" time="0.040">
+			<failure message="Failed" type="">    mock_test.go:317: </failure>
+		</testcase>
+		<testcase classname="v2" name="TestMockTest/TestConfigurationStores_Delete" time="0.010"></testcase>
+		<testcase classname="v2" name="TestMockTest/TestConfigurationStores_Get" time="0.010"></testcase>
+		<testcase classname="v2" name="TestMockTest/TestConfigurationStores_GetDeleted" time="0.000"></testcase>
+		<testcase classname="v2" name="TestMockTest/TestConfigurationStores_List" time="0.000"></testcase>
+		<testcase classname="v2" name="TestMockTest/TestConfigurationStores_ListByResourceGroup" time="0.010"></testcase>
+		<testcase classname="v2" name="TestMockTest/TestConfigurationStores_ListDeleted" time="0.000"></testcase>
+		<testcase classname="v2" name="TestMockTest/TestConfigurationStores_ListKeys" time="0.000"></testcase>
+		<testcase classname="v2" name="TestMockTest/TestConfigurationStores_PurgeDeleted" time="0.010"></testcase>
+		<testcase classname="v2" name="TestMockTest/TestConfigurationStores_RegenerateKey" time="0.000"></testcase>
+		<testcase classname="v2" name="TestMockTest/TestConfigurationStores_Update" time="0.010">
+			<failure message="Failed" type="">    mock_test.go:515: </failure>
+		</testcase>
+		<testcase classname="v2" name="TestMockTest/TestKeyValues_CreateOrUpdate" time="0.010"></testcase>
+		<testcase classname="v2" name="TestMockTest/TestKeyValues_Delete" time="0.020"></testcase>
+		<testcase classname="v2" name="TestMockTest/TestKeyValues_Get" time="0.010"></testcase>
+		<testcase classname="v2" name="TestMockTest/TestKeyValues_ListByConfigurationStore" time="0.010"></testcase>
+		<testcase classname="v2" name="TestMockTest/TestOperations_CheckNameAvailability" time="0.010"></testcase>
+		<testcase classname="v2" name="TestMockTest/TestOperations_List" time="0.000">
+			<skipped message="    mock_test.go:895: Warning: No test steps for this operation!"></skipped>
+		</testcase>
+		<testcase classname="v2" name="TestMockTest/TestOperations_RegionalCheckNameAvailability" time="0.010"></testcase>
+		<testcase classname="v2" name="TestMockTest/TestPrivateEndpointConnections_CreateOrUpdate" time="0.010">
+			<failure message="Failed" type="">    mock_test.go:1038: </failure>
+		</testcase>
+		<testcase classname="v2" name="TestMockTest/TestPrivateEndpointConnections_Delete" time="0.010"></testcase>
+		<testcase classname="v2" name="TestMockTest/TestPrivateEndpointConnections_Get" time="0.010"></testcase>
+		<testcase classname="v2" name="TestMockTest/TestPrivateEndpointConnections_ListByConfigurationStore" time="0.000"></testcase>
+		<testcase classname="v2" name="TestMockTest/TestPrivateLinkResources_Get" time="0.000"></testcase>
+		<testcase classname="v2" name="TestMockTest/TestPrivateLinkResources_ListByConfigurationStore" time="0.000"></testcase>
+	</testsuite>
+</testsuites>

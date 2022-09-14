@@ -1,0 +1,78 @@
+2022/09/14 03:37:28 AZURE_RECORD_MODE was not set, defaulting to playback
+2022/09/14 03:37:28 could not read file set in PROXY_CERT variable at /sdk-repo
+/eng/common/testproxy/dotnet-devcert.crt.
+2022/09/14 03:37:28 no certs appended, using system certs only
+2022/09/14 03:37:28 could not set the default matcher
+=== RUN   TestMockTest
+=== RUN   TestMockTest/TestConfigurationStores_Create
+    mock_test.go:317: 
+        	Error Trace:	mock_test.go:317
+        	Error:      	Received unexpected error:
+        	            	the response did not contain a status
+        	Test:       	TestMockTest/TestConfigurationStores_Create
+        	Messages:   	Failed to get LRO result for example specification/appconfiguration/resource-manager/Microsoft.AppConfiguration/stable/2022-05-01/examples/ConfigurationStoresCreate.json
+=== RUN   TestMockTest/TestConfigurationStores_Delete
+=== RUN   TestMockTest/TestConfigurationStores_Get
+=== RUN   TestMockTest/TestConfigurationStores_GetDeleted
+=== RUN   TestMockTest/TestConfigurationStores_List
+=== RUN   TestMockTest/TestConfigurationStores_ListByResourceGroup
+=== RUN   TestMockTest/TestConfigurationStores_ListDeleted
+=== RUN   TestMockTest/TestConfigurationStores_ListKeys
+=== RUN   TestMockTest/TestConfigurationStores_PurgeDeleted
+=== RUN   TestMockTest/TestConfigurationStores_RegenerateKey
+=== RUN   TestMockTest/TestConfigurationStores_Update
+    mock_test.go:515: 
+        	Error Trace:	mock_test.go:515
+        	Error:      	Received unexpected error:
+        	            	the response did not contain a status
+        	Test:       	TestMockTest/TestConfigurationStores_Update
+        	Messages:   	Failed to get LRO result for example specification/appconfiguration/resource-manager/Microsoft.AppConfiguration/stable/2022-05-01/examples/ConfigurationStoresUpdate.json
+=== RUN   TestMockTest/TestKeyValues_CreateOrUpdate
+=== RUN   TestMockTest/TestKeyValues_Delete
+=== RUN   TestMockTest/TestKeyValues_Get
+=== RUN   TestMockTest/TestKeyValues_ListByConfigurationStore
+=== RUN   TestMockTest/TestOperations_CheckNameAvailability
+=== RUN   TestMockTest/TestOperations_List
+    mock_test.go:895: Warning: No test steps for this operation!
+=== RUN   TestMockTest/TestOperations_RegionalCheckNameAvailability
+=== RUN   TestMockTest/TestPrivateEndpointConnections_CreateOrUpdate
+    mock_test.go:1038: 
+        	Error Trace:	mock_test.go:1038
+        	Error:      	Received unexpected error:
+        	            	the response did not contain a status
+        	Test:       	TestMockTest/TestPrivateEndpointConnections_CreateOrUpdate
+        	Messages:   	Failed to get LRO result for example specification/appconfiguration/resource-manager/Microsoft.AppConfiguration/stable/2022-05-01/examples/ConfigurationStoresCreatePrivateEndpointConnection.json
+=== RUN   TestMockTest/TestPrivateEndpointConnections_Delete
+=== RUN   TestMockTest/TestPrivateEndpointConnections_Get
+=== RUN   TestMockTest/TestPrivateEndpointConnections_ListByConfigurationStore
+=== RUN   TestMockTest/TestPrivateLinkResources_Get
+=== RUN   TestMockTest/TestPrivateLinkResources_ListByConfigurationStore
+--- FAIL: TestMockTest (0.19s)
+    --- FAIL: TestMockTest/TestConfigurationStores_Create (0.04s)
+    --- PASS: TestMockTest/TestConfigurationStores_Delete (0.01s)
+    --- PASS: TestMockTest/TestConfigurationStores_Get (0.01s)
+    --- PASS: TestMockTest/TestConfigurationStores_GetDeleted (0.00s)
+    --- PASS: TestMockTest/TestConfigurationStores_List (0.00s)
+    --- PASS: TestMockTest/TestConfigurationStores_ListByResourceGroup (0.01s)
+    --- PASS: TestMockTest/TestConfigurationStores_ListDeleted (0.00s)
+    --- PASS: TestMockTest/TestConfigurationStores_ListKeys (0.00s)
+    --- PASS: TestMockTest/TestConfigurationStores_PurgeDeleted (0.01s)
+    --- PASS: TestMockTest/TestConfigurationStores_RegenerateKey (0.00s)
+    --- FAIL: TestMockTest/TestConfigurationStores_Update (0.01s)
+    --- PASS: TestMockTest/TestKeyValues_CreateOrUpdate (0.01s)
+    --- PASS: TestMockTest/TestKeyValues_Delete (0.02s)
+    --- PASS: TestMockTest/TestKeyValues_Get (0.01s)
+    --- PASS: TestMockTest/TestKeyValues_ListByConfigurationStore (0.01s)
+    --- PASS: TestMockTest/TestOperations_CheckNameAvailability (0.01s)
+    --- SKIP: TestMockTest/TestOperations_List (0.00s)
+    --- PASS: TestMockTest/TestOperations_RegionalCheckNameAvailability (0.01s)
+    --- FAIL: TestMockTest/TestPrivateEndpointConnections_CreateOrUpdate (0.01s)
+    --- PASS: TestMockTest/TestPrivateEndpointConnections_Delete (0.01s)
+    --- PASS: TestMockTest/TestPrivateEndpointConnections_Get (0.01s)
+    --- PASS: TestMockTest/TestPrivateEndpointConnections_ListByConfigurationStore (0.00s)
+    --- PASS: TestMockTest/TestPrivateLinkResources_Get (0.00s)
+    --- PASS: TestMockTest/TestPrivateLinkResources_ListByConfigurationStore (0.00s)
+FAIL
+coverage: 56.2% of statements
+exit status 1
+FAIL	github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/appconfiguration/armappconfiguration/v2	0.228s
