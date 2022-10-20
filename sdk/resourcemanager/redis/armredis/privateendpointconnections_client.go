@@ -172,7 +172,6 @@ func (client *PrivateEndpointConnectionsClient) getHandleResponse(resp *http.Res
 }
 
 // NewListPager - List all the private endpoint connections associated with the redis cache.
-// If the operation fails it returns an *azcore.ResponseError type.
 // Generated from API version 2022-05-01
 // resourceGroupName - The name of the resource group.
 // cacheName - The name of the Redis cache.
