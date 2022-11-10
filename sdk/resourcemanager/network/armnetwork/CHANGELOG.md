@@ -1,5 +1,234 @@
 # Release History
 
+## 3.0.0 (2022-11-10)
+### Breaking Changes
+
+- Const `GeoAPAC` has been removed
+- Const `ActionTypeAllow` has been removed
+- Const `RouteMapMatchConditionEquals` has been removed
+- Const `WebApplicationFirewallTransformUppercase` has been removed
+- Const `ApplicationGatewayWafRuleActionTypesAllow` has been removed
+- Const `IsWorkloadProtectedFalse` has been removed
+- Const `GeoEURO` has been removed
+- Const `RouteMapActionTypeRemove` has been removed
+- Const `SlotTypeStaging` has been removed
+- Const `CommissionedStateDeprovisioned` has been removed
+- Const `NextStepUnknown` has been removed
+- Const `ApplicationGatewayWafRuleActionTypesBlock` has been removed
+- Const `ApplicationGatewayWafRuleActionTypesAnomalyScoring` has been removed
+- Const `SlotTypeProduction` has been removed
+- Const `ApplicationGatewayRuleSetStatusOptionsGA` has been removed
+- Const `GeoOCEANIA` has been removed
+- Const `RouteMapMatchConditionNotEquals` has been removed
+- Const `ApplicationGatewayWafRuleActionTypesLog` has been removed
+- Const `RouteMapActionTypeReplace` has been removed
+- Const `ApplicationGatewayWafRuleActionTypesNone` has been removed
+- Const `RouteMapMatchConditionNotContains` has been removed
+- Const `ApplicationGatewayTierTypesStandardV2` has been removed
+- Const `VnetLocalRouteOverrideCriteriaContains` has been removed
+- Const `NextStepTerminate` has been removed
+- Const `GeoME` has been removed
+- Const `RouteMapMatchConditionUnknown` has been removed
+- Const `DdosSettingsProtectionModeVirtualNetworkInherited` has been removed
+- Const `DdosSettingsProtectionModeEnabled` has been removed
+- Const `ActionTypeLog` has been removed
+- Const `ApplicationGatewayWafRuleStateTypesEnabled` has been removed
+- Const `RouteMapActionTypeUnknown` has been removed
+- Const `ApplicationGatewayClientRevocationOptionsOCSP` has been removed
+- Const `ApplicationGatewayRuleSetStatusOptionsSupported` has been removed
+- Const `GeoGLOBAL` has been removed
+- Const `ExpressRoutePortsBillingTypeUnlimitedData` has been removed
+- Const `RouteMapActionTypeDrop` has been removed
+- Const `NetworkIntentPolicyBasedServiceAllowRulesOnly` has been removed
+- Const `CustomIPPrefixTypeSingular` has been removed
+- Const `GeoAQ` has been removed
+- Const `ActionTypeBlock` has been removed
+- Const `IsWorkloadProtectedTrue` has been removed
+- Const `GeoNAM` has been removed
+- Const `GeoAFRI` has been removed
+- Const `ApplicationGatewayTierTypesWAF` has been removed
+- Const `ApplicationGatewayRuleSetStatusOptionsDeprecated` has been removed
+- Const `DdosSettingsProtectionModeDisabled` has been removed
+- Const `ManagedRuleEnabledStateEnabled` has been removed
+- Const `RouteMapActionTypeAdd` has been removed
+- Const `CustomIPPrefixTypeChild` has been removed
+- Const `ApplicationGatewayRuleSetStatusOptionsPreview` has been removed
+- Const `ApplicationGatewayClientRevocationOptionsNone` has been removed
+- Const `ApplicationGatewayWafRuleStateTypesDisabled` has been removed
+- Const `VnetLocalRouteOverrideCriteriaEqual` has been removed
+- Const `ApplicationGatewayTierTypesWAFV2` has been removed
+- Const `NextStepContinue` has been removed
+- Const `GeoLATAM` has been removed
+- Const `ApplicationGatewayTierTypesStandard` has been removed
+- Const `RouteMapMatchConditionContains` has been removed
+- Const `ActionTypeAnomalyScoring` has been removed
+- Const `ExpressRoutePortsBillingTypeMeteredData` has been removed
+- Const `CustomIPPrefixTypeParent` has been removed
+- Type alias `ApplicationGatewayWafRuleStateTypes` has been removed
+- Type alias `RouteMapMatchCondition` has been removed
+- Type alias `ApplicationGatewayWafRuleActionTypes` has been removed
+- Type alias `DdosSettingsProtectionMode` has been removed
+- Type alias `ApplicationGatewayRuleSetStatusOptions` has been removed
+- Type alias `NextStep` has been removed
+- Type alias `ActionType` has been removed
+- Type alias `CustomIPPrefixType` has been removed
+- Type alias `SlotType` has been removed
+- Type alias `ApplicationGatewayTierTypes` has been removed
+- Type alias `Geo` has been removed
+- Type alias `ExpressRoutePortsBillingType` has been removed
+- Type alias `IsWorkloadProtected` has been removed
+- Type alias `ApplicationGatewayClientRevocationOptions` has been removed
+- Type alias `RouteMapActionType` has been removed
+- Type alias `VnetLocalRouteOverrideCriteria` has been removed
+- Function `PossibleExpressRoutePortsBillingTypeValues` has been removed
+- Function `NewVipSwapClient` has been removed
+- Function `*VirtualHubsClient.BeginGetInboundRoutes` has been removed
+- Function `PossibleApplicationGatewayRuleSetStatusOptionsValues` has been removed
+- Function `PossibleVnetLocalRouteOverrideCriteriaValues` has been removed
+- Function `*ApplicationGatewayWafDynamicManifestsClient.NewGetPager` has been removed
+- Function `*RouteMapsClient.NewListPager` has been removed
+- Function `PossibleSlotTypeValues` has been removed
+- Function `*VipSwapClient.List` has been removed
+- Function `NewApplicationGatewayWafDynamicManifestsClient` has been removed
+- Function `PossibleNextStepValues` has been removed
+- Function `*VirtualNetworksClient.BeginListDdosProtectionStatus` has been removed
+- Function `PossibleGeoValues` has been removed
+- Function `*VirtualHubsClient.BeginGetOutboundRoutes` has been removed
+- Function `PossibleActionTypeValues` has been removed
+- Function `NewRouteMapsClient` has been removed
+- Function `PossibleApplicationGatewayWafRuleStateTypesValues` has been removed
+- Function `PossibleCustomIPPrefixTypeValues` has been removed
+- Function `PossibleDdosSettingsProtectionModeValues` has been removed
+- Function `*VipSwapClient.BeginCreate` has been removed
+- Function `*RouteMapsClient.Get` has been removed
+- Function `PossibleApplicationGatewayClientRevocationOptionsValues` has been removed
+- Function `PossibleApplicationGatewayWafRuleActionTypesValues` has been removed
+- Function `PossibleApplicationGatewayTierTypesValues` has been removed
+- Function `*ApplicationGatewayWafDynamicManifestsDefaultClient.Get` has been removed
+- Function `*RouteMapsClient.BeginCreateOrUpdate` has been removed
+- Function `NewApplicationGatewayWafDynamicManifestsDefaultClient` has been removed
+- Function `*VipSwapClient.Get` has been removed
+- Function `PossibleIsWorkloadProtectedValues` has been removed
+- Function `PossibleRouteMapActionTypeValues` has been removed
+- Function `PossibleRouteMapMatchConditionValues` has been removed
+- Function `*RouteMapsClient.BeginDelete` has been removed
+- Function `*PublicIPAddressesClient.BeginDdosProtectionStatus` has been removed
+- Struct `Action` has been removed
+- Struct `ApplicationGatewayFirewallManifestRuleSet` has been removed
+- Struct `ApplicationGatewayWafDynamicManifestPropertiesResult` has been removed
+- Struct `ApplicationGatewayWafDynamicManifestResult` has been removed
+- Struct `ApplicationGatewayWafDynamicManifestResultList` has been removed
+- Struct `ApplicationGatewayWafDynamicManifestsClient` has been removed
+- Struct `ApplicationGatewayWafDynamicManifestsClientGetOptions` has been removed
+- Struct `ApplicationGatewayWafDynamicManifestsClientGetResponse` has been removed
+- Struct `ApplicationGatewayWafDynamicManifestsDefaultClient` has been removed
+- Struct `ApplicationGatewayWafDynamicManifestsDefaultClientGetOptions` has been removed
+- Struct `ApplicationGatewayWafDynamicManifestsDefaultClientGetResponse` has been removed
+- Struct `Criterion` has been removed
+- Struct `DefaultRuleSetPropertyFormat` has been removed
+- Struct `EffectiveRouteMapRoute` has been removed
+- Struct `GetInboundRoutesParameters` has been removed
+- Struct `GetOutboundRoutesParameters` has been removed
+- Struct `ListRouteMapsResult` has been removed
+- Struct `Parameter` has been removed
+- Struct `PublicIPAddressesClientBeginDdosProtectionStatusOptions` has been removed
+- Struct `PublicIPAddressesClientDdosProtectionStatusResponse` has been removed
+- Struct `PublicIPDdosProtectionStatusResult` has been removed
+- Struct `RouteMap` has been removed
+- Struct `RouteMapProperties` has been removed
+- Struct `RouteMapRule` has been removed
+- Struct `RouteMapsClient` has been removed
+- Struct `RouteMapsClientBeginCreateOrUpdateOptions` has been removed
+- Struct `RouteMapsClientBeginDeleteOptions` has been removed
+- Struct `RouteMapsClientCreateOrUpdateResponse` has been removed
+- Struct `RouteMapsClientDeleteResponse` has been removed
+- Struct `RouteMapsClientGetOptions` has been removed
+- Struct `RouteMapsClientGetResponse` has been removed
+- Struct `RouteMapsClientListOptions` has been removed
+- Struct `RouteMapsClientListResponse` has been removed
+- Struct `StaticRoutesConfig` has been removed
+- Struct `SwapResource` has been removed
+- Struct `SwapResourceListResult` has been removed
+- Struct `SwapResourceProperties` has been removed
+- Struct `VipSwapClient` has been removed
+- Struct `VipSwapClientBeginCreateOptions` has been removed
+- Struct `VipSwapClientCreateResponse` has been removed
+- Struct `VipSwapClientGetOptions` has been removed
+- Struct `VipSwapClientGetResponse` has been removed
+- Struct `VipSwapClientListOptions` has been removed
+- Struct `VipSwapClientListResponse` has been removed
+- Struct `VirtualHubsClientBeginGetInboundRoutesOptions` has been removed
+- Struct `VirtualHubsClientBeginGetOutboundRoutesOptions` has been removed
+- Struct `VirtualHubsClientGetInboundRoutesResponse` has been removed
+- Struct `VirtualHubsClientGetOutboundRoutesResponse` has been removed
+- Struct `VirtualNetworkDdosProtectionStatusResult` has been removed
+- Struct `VirtualNetworkGatewayPolicyGroup` has been removed
+- Struct `VirtualNetworkGatewayPolicyGroupMember` has been removed
+- Struct `VirtualNetworkGatewayPolicyGroupProperties` has been removed
+- Struct `VirtualNetworksClientBeginListDdosProtectionStatusOptions` has been removed
+- Struct `VirtualNetworksClientListDdosProtectionStatusResponse` has been removed
+- Struct `VngClientConnectionConfiguration` has been removed
+- Struct `VngClientConnectionConfigurationProperties` has been removed
+- Field `PublicIPAddresses` of struct `DdosProtectionPlanPropertiesFormat` has been removed
+- Field `ColoLocation` of struct `ExpressRouteLinkPropertiesFormat` has been removed
+- Field `Top` of struct `ManagementClientListNetworkManagerEffectiveSecurityAdminRulesOptions` has been removed
+- Field `Top` of struct `ManagementClientListActiveConnectivityConfigurationsOptions` has been removed
+- Field `AllowRemoteVnetTraffic` of struct `VirtualNetworkGatewayPropertiesFormat` has been removed
+- Field `AllowVirtualWanTraffic` of struct `VirtualNetworkGatewayPropertiesFormat` has been removed
+- Field `VirtualNetworkGatewayPolicyGroups` of struct `VirtualNetworkGatewayPropertiesFormat` has been removed
+- Field `BillingType` of struct `ExpressRoutePortPropertiesFormat` has been removed
+- Field `Top` of struct `ManagerDeploymentStatusClientListOptions` has been removed
+- Field `Action` of struct `ManagedRuleOverride` has been removed
+- Field `AllowNonVirtualWanTraffic` of struct `ExpressRouteGatewayProperties` has been removed
+- Field `PrefixType` of struct `CustomIPPrefixPropertiesFormat` has been removed
+- Field `Asn` of struct `CustomIPPrefixPropertiesFormat` has been removed
+- Field `ExpressRouteAdvertise` of struct `CustomIPPrefixPropertiesFormat` has been removed
+- Field `Geo` of struct `CustomIPPrefixPropertiesFormat` has been removed
+- Field `RouteMaps` of struct `VirtualHubProperties` has been removed
+- Field `EnablePrivateLinkFastPath` of struct `VirtualNetworkGatewayConnectionListEntityPropertiesFormat` has been removed
+- Field `EnablePrivateLinkFastPath` of struct `ExpressRouteConnectionProperties` has been removed
+- Field `Tiers` of struct `ApplicationGatewayFirewallRuleSetPropertiesFormat` has been removed
+- Field `ProbeThreshold` of struct `ProbePropertiesFormat` has been removed
+- Field `Action` of struct `ApplicationGatewayFirewallRule` has been removed
+- Field `RuleIDString` of struct `ApplicationGatewayFirewallRule` has been removed
+- Field `State` of struct `ApplicationGatewayFirewallRule` has been removed
+- Field `StaticRoutesConfig` of struct `VnetRoute` has been removed
+- Field `OutboundRouteMap` of struct `RoutingConfiguration` has been removed
+- Field `InboundRouteMap` of struct `RoutingConfiguration` has been removed
+- Field `VngClientConnectionConfigurations` of struct `VPNClientConfiguration` has been removed
+- Field `ProtectionMode` of struct `DdosSettings` has been removed
+- Field `DdosProtectionPlan` of struct `DdosSettings` has been removed
+- Field `EnablePrivateLinkFastPath` of struct `VirtualNetworkGatewayConnectionPropertiesFormat` has been removed
+- Field `Top` of struct `ManagementClientListActiveSecurityAdminRulesOptions` has been removed
+- Field `Top` of struct `ManagementClientListNetworkManagerEffectiveConnectivityConfigurationsOptions` has been removed
+- Field `DisableTCPStateTracking` of struct `InterfacePropertiesFormat` has been removed
+- Field `VerifyClientRevocation` of struct `ApplicationGatewayClientAuthConfiguration` has been removed
+
+### Features Added
+
+- New const `DdosCustomPolicyTriggerSensitivityOverrideDefault`
+- New const `DdosCustomPolicyTriggerSensitivityOverrideHigh`
+- New const `DdosCustomPolicyProtocolSyn`
+- New const `DdosSettingsProtectionCoverageBasic`
+- New const `DdosCustomPolicyProtocolTCP`
+- New const `DdosSettingsProtectionCoverageStandard`
+- New const `DdosCustomPolicyTriggerSensitivityOverrideLow`
+- New const `DdosCustomPolicyTriggerSensitivityOverrideRelaxed`
+- New const `DdosCustomPolicyProtocolUDP`
+- New type alias `DdosCustomPolicyProtocol`
+- New type alias `DdosCustomPolicyTriggerSensitivityOverride`
+- New type alias `DdosSettingsProtectionCoverage`
+- New function `PossibleDdosCustomPolicyTriggerSensitivityOverrideValues() []DdosCustomPolicyTriggerSensitivityOverride`
+- New function `PossibleDdosCustomPolicyProtocolValues() []DdosCustomPolicyProtocol`
+- New function `PossibleDdosSettingsProtectionCoverageValues() []DdosSettingsProtectionCoverage`
+- New struct `ProtocolCustomSettingsFormat`
+- New field `ProtocolCustomSettings` in struct `DdosCustomPolicyPropertiesFormat`
+- New field `PublicIPAddresses` in struct `DdosCustomPolicyPropertiesFormat`
+- New field `ProtectedIP` in struct `DdosSettings`
+- New field `ProtectionCoverage` in struct `DdosSettings`
+- New field `DdosCustomPolicy` in struct `DdosSettings`
+
+
 ## 1.1.0 (2022-08-05)
 ### Features Added
 
