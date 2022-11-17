@@ -625,7 +625,7 @@ type AmazonRdsForSQLServerSource struct {
 	SourceRetryWait interface{} `json:"sourceRetryWait,omitempty"`
 
 	// Value and type setting for stored procedure parameters. Example: "{Parameter1: {value: "1", type: "int"}}".
-	StoredProcedureParameters map[string]*StoredProcedureParameter `json:"storedProcedureParameters,omitempty"`
+	StoredProcedureParameters interface{} `json:"storedProcedureParameters,omitempty"`
 }
 
 // GetCopySource implements the CopySourceClassification interface for type AmazonRdsForSQLServerSource.
@@ -5134,7 +5134,7 @@ type AzureSQLSink struct {
 	SinkRetryWait interface{} `json:"sinkRetryWait,omitempty"`
 
 	// SQL stored procedure parameters.
-	StoredProcedureParameters map[string]*StoredProcedureParameter `json:"storedProcedureParameters,omitempty"`
+	StoredProcedureParameters interface{} `json:"storedProcedureParameters,omitempty"`
 
 	// The stored procedure parameter name of the table type. Type: string (or Expression with resultType string).
 	StoredProcedureTableTypeParameterName interface{} `json:"storedProcedureTableTypeParameterName,omitempty"`
@@ -5215,7 +5215,7 @@ type AzureSQLSource struct {
 	SourceRetryWait interface{} `json:"sourceRetryWait,omitempty"`
 
 	// Value and type setting for stored procedure parameters. Example: "{Parameter1: {value: "1", type: "int"}}".
-	StoredProcedureParameters map[string]*StoredProcedureParameter `json:"storedProcedureParameters,omitempty"`
+	StoredProcedureParameters interface{} `json:"storedProcedureParameters,omitempty"`
 }
 
 // GetCopySource implements the CopySourceClassification interface for type AzureSQLSource.
@@ -5554,6 +5554,11 @@ type AzureSynapseArtifactsLinkedServiceTypeProperties struct {
 	// Required to specify MSI, if using system assigned managed identity as authentication method. Type: string (or Expression
 	// with resultType string).
 	Authentication interface{} `json:"authentication,omitempty"`
+
+	// The resource ID of the Synapse workspace. The format should be: /subscriptions/{subscriptionID}/resourceGroups/{resourceGroup}/providers/Microsoft.Synapse/workspaces/{workspaceName}.
+	// Type: string (or
+	// Expression with resultType string).
+	WorkspaceResourceID interface{} `json:"workspaceResourceId,omitempty"`
 }
 
 // AzureTableDataset - The Azure Table storage dataset.
@@ -6388,27 +6393,6 @@ type ChainingTriggerTypeProperties struct {
 
 	// REQUIRED; Run Dimension property that needs to be emitted by upstream pipelines.
 	RunDimension *string `json:"runDimension,omitempty"`
-}
-
-// CloudError - The object that defines the structure of an Azure Data Factory error response.
-type CloudError struct {
-	// REQUIRED; Error data
-	Error *CloudErrorBody `json:"error,omitempty"`
-}
-
-// CloudErrorBody - The object that defines the structure of an Azure Data Factory error.
-type CloudErrorBody struct {
-	// REQUIRED; Error code.
-	Code *string `json:"code,omitempty"`
-
-	// REQUIRED; Error message.
-	Message *string `json:"message,omitempty"`
-
-	// Array with additional error details.
-	Details []*CloudError `json:"details,omitempty"`
-
-	// Property name/path in request associated with error.
-	Target *string `json:"target,omitempty"`
 }
 
 // CmdkeySetup - The custom setup of running cmdkey commands.
@@ -7843,6 +7827,41 @@ type Credential struct {
 
 // GetCredential implements the CredentialClassification interface for type Credential.
 func (c *Credential) GetCredential() *Credential { return c }
+
+// CredentialListResponse - A list of credential resources.
+type CredentialListResponse struct {
+	// REQUIRED; List of credentials.
+	Value []*ManagedIdentityCredentialResource `json:"value,omitempty"`
+
+	// The link to the next page of results, if any remaining results exist.
+	NextLink *string `json:"nextLink,omitempty"`
+}
+
+// CredentialOperationsClientCreateOrUpdateOptions contains the optional parameters for the CredentialOperationsClient.CreateOrUpdate
+// method.
+type CredentialOperationsClientCreateOrUpdateOptions struct {
+	// ETag of the credential entity. Should only be specified for update, for which it should match existing entity or can be
+	// * for unconditional update.
+	IfMatch *string
+}
+
+// CredentialOperationsClientDeleteOptions contains the optional parameters for the CredentialOperationsClient.Delete method.
+type CredentialOperationsClientDeleteOptions struct {
+	// placeholder for future optional parameters
+}
+
+// CredentialOperationsClientGetOptions contains the optional parameters for the CredentialOperationsClient.Get method.
+type CredentialOperationsClientGetOptions struct {
+	// ETag of the credential entity. Should only be specified for get. If the ETag matches the existing entity tag, or if * was
+	// provided, then no content will be returned.
+	IfNoneMatch *string
+}
+
+// CredentialOperationsClientListByFactoryOptions contains the optional parameters for the CredentialOperationsClient.ListByFactory
+// method.
+type CredentialOperationsClientListByFactoryOptions struct {
+	// placeholder for future optional parameters
+}
 
 // CredentialReference - Credential reference type.
 type CredentialReference struct {
@@ -11465,6 +11484,9 @@ type FactoryGitHubConfiguration struct {
 	// GitHub bring your own app client secret information.
 	ClientSecret *GitHubClientSecret `json:"clientSecret,omitempty"`
 
+	// Disable manual publish operation in ADF studio to favor automated publish.
+	DisablePublish *bool `json:"disablePublish,omitempty"`
+
 	// GitHub Enterprise host name. For example: https://github.mydomain.com
 	HostName *string `json:"hostName,omitempty"`
 
@@ -11481,6 +11503,7 @@ func (f *FactoryGitHubConfiguration) GetFactoryRepoConfiguration() *FactoryRepoC
 		CollaborationBranch: f.CollaborationBranch,
 		RootFolder:          f.RootFolder,
 		LastCommitID:        f.LastCommitID,
+		DisablePublish:      f.DisablePublish,
 	}
 }
 
@@ -11561,6 +11584,9 @@ type FactoryRepoConfiguration struct {
 	// REQUIRED; Type of repo configuration.
 	Type *string `json:"type,omitempty"`
 
+	// Disable manual publish operation in ADF studio to favor automated publish.
+	DisablePublish *bool `json:"disablePublish,omitempty"`
+
 	// Last commit id.
 	LastCommitID *string `json:"lastCommitId,omitempty"`
 }
@@ -11615,6 +11641,9 @@ type FactoryVSTSConfiguration struct {
 	// REQUIRED; Type of repo configuration.
 	Type *string `json:"type,omitempty"`
 
+	// Disable manual publish operation in ADF studio to favor automated publish.
+	DisablePublish *bool `json:"disablePublish,omitempty"`
+
 	// Last commit id.
 	LastCommitID *string `json:"lastCommitId,omitempty"`
 
@@ -11631,6 +11660,7 @@ func (f *FactoryVSTSConfiguration) GetFactoryRepoConfiguration() *FactoryRepoCon
 		CollaborationBranch: f.CollaborationBranch,
 		RootFolder:          f.RootFolder,
 		LastCommitID:        f.LastCommitID,
+		DisablePublish:      f.DisablePublish,
 	}
 }
 
@@ -16886,6 +16916,24 @@ func (m *ManagedIdentityCredential) GetCredential() *Credential {
 		Annotations:          m.Annotations,
 		AdditionalProperties: m.AdditionalProperties,
 	}
+}
+
+// ManagedIdentityCredentialResource - Credential resource type.
+type ManagedIdentityCredentialResource struct {
+	// REQUIRED; Managed Identity Credential properties.
+	Properties *ManagedIdentityCredential `json:"properties,omitempty"`
+
+	// READ-ONLY; Etag identifies change in the resource.
+	Etag *string `json:"etag,omitempty" azure:"ro"`
+
+	// READ-ONLY; The resource identifier.
+	ID *string `json:"id,omitempty" azure:"ro"`
+
+	// READ-ONLY; The resource name.
+	Name *string `json:"name,omitempty" azure:"ro"`
+
+	// READ-ONLY; The resource type.
+	Type *string `json:"type,omitempty" azure:"ro"`
 }
 
 // ManagedIdentityTypeProperties - Managed identity type properties.
@@ -22767,7 +22815,7 @@ type SQLMISink struct {
 	SinkRetryWait interface{} `json:"sinkRetryWait,omitempty"`
 
 	// SQL stored procedure parameters.
-	StoredProcedureParameters map[string]*StoredProcedureParameter `json:"storedProcedureParameters,omitempty"`
+	StoredProcedureParameters interface{} `json:"storedProcedureParameters,omitempty"`
 
 	// The stored procedure parameter name of the table type. Type: string (or Expression with resultType string).
 	StoredProcedureTableTypeParameterName interface{} `json:"storedProcedureTableTypeParameterName,omitempty"`
@@ -22848,7 +22896,7 @@ type SQLMISource struct {
 	SourceRetryWait interface{} `json:"sourceRetryWait,omitempty"`
 
 	// Value and type setting for stored procedure parameters. Example: "{Parameter1: {value: "1", type: "int"}}".
-	StoredProcedureParameters map[string]*StoredProcedureParameter `json:"storedProcedureParameters,omitempty"`
+	StoredProcedureParameters interface{} `json:"storedProcedureParameters,omitempty"`
 }
 
 // GetCopySource implements the CopySourceClassification interface for type SQLMISource.
@@ -22983,7 +23031,7 @@ type SQLServerSink struct {
 	SinkRetryWait interface{} `json:"sinkRetryWait,omitempty"`
 
 	// SQL stored procedure parameters.
-	StoredProcedureParameters map[string]*StoredProcedureParameter `json:"storedProcedureParameters,omitempty"`
+	StoredProcedureParameters interface{} `json:"storedProcedureParameters,omitempty"`
 
 	// The stored procedure parameter name of the table type. Type: string (or Expression with resultType string).
 	StoredProcedureTableTypeParameterName interface{} `json:"storedProcedureTableTypeParameterName,omitempty"`
@@ -23064,7 +23112,7 @@ type SQLServerSource struct {
 	SourceRetryWait interface{} `json:"sourceRetryWait,omitempty"`
 
 	// Value and type setting for stored procedure parameters. Example: "{Parameter1: {value: "1", type: "int"}}".
-	StoredProcedureParameters map[string]*StoredProcedureParameter `json:"storedProcedureParameters,omitempty"`
+	StoredProcedureParameters interface{} `json:"storedProcedureParameters,omitempty"`
 }
 
 // GetCopySource implements the CopySourceClassification interface for type SQLServerSource.
@@ -23252,7 +23300,7 @@ type SQLSink struct {
 	SinkRetryWait interface{} `json:"sinkRetryWait,omitempty"`
 
 	// SQL stored procedure parameters.
-	StoredProcedureParameters map[string]*StoredProcedureParameter `json:"storedProcedureParameters,omitempty"`
+	StoredProcedureParameters interface{} `json:"storedProcedureParameters,omitempty"`
 
 	// The stored procedure parameter name of the table type. Type: string (or Expression with resultType string).
 	StoredProcedureTableTypeParameterName interface{} `json:"storedProcedureTableTypeParameterName,omitempty"`
@@ -23335,7 +23383,7 @@ type SQLSource struct {
 	SourceRetryWait interface{} `json:"sourceRetryWait,omitempty"`
 
 	// Value and type setting for stored procedure parameters. Example: "{Parameter1: {value: "1", type: "int"}}".
-	StoredProcedureParameters map[string]*StoredProcedureParameter `json:"storedProcedureParameters,omitempty"`
+	StoredProcedureParameters interface{} `json:"storedProcedureParameters,omitempty"`
 }
 
 // GetCopySource implements the CopySourceClassification interface for type SQLSource.
@@ -25736,6 +25784,9 @@ type ScriptActivityTypeProperties struct {
 	// Log settings of script activity.
 	LogSettings *ScriptActivityTypePropertiesLogSettings `json:"logSettings,omitempty"`
 
+	// ScriptBlock execution timeout. Type: string (or Expression with resultType string), pattern: ((\d+).)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
+	ScriptBlockExecutionTimeout interface{} `json:"scriptBlockExecutionTimeout,omitempty"`
+
 	// Array of script blocks. Type: array.
 	Scripts []*ScriptActivityScriptBlock `json:"scripts,omitempty"`
 }
@@ -27035,6 +27086,9 @@ func (s *SnowflakeSink) GetCopySink() *CopySink {
 
 // SnowflakeSource - A copy activity snowflake source.
 type SnowflakeSource struct {
+	// REQUIRED; Snowflake export settings.
+	ExportSettings *SnowflakeExportCopyCommand `json:"exportSettings,omitempty"`
+
 	// REQUIRED; Copy source type.
 	Type *string `json:"type,omitempty"`
 
@@ -27043,9 +27097,6 @@ type SnowflakeSource struct {
 
 	// If true, disable data store metrics collection. Default is false. Type: boolean (or Expression with resultType boolean).
 	DisableMetricsCollection interface{} `json:"disableMetricsCollection,omitempty"`
-
-	// Snowflake export settings.
-	ExportSettings *SnowflakeExportCopyCommand `json:"exportSettings,omitempty"`
 
 	// The maximum concurrent connection count for the source data store. Type: integer (or Expression with resultType integer).
 	MaxConcurrentConnections interface{} `json:"maxConcurrentConnections,omitempty"`
@@ -28184,12 +28235,20 @@ type SynapseSparkJobActivityTypeProperties struct {
 	// Expression with resultType string).
 	File interface{} `json:"file,omitempty"`
 
-	// Additional files used for reference in the main definition file, which will override the 'files' of the spark job definition
-	// you provide.
+	// (Deprecated. Please use pythonCodeReference and filesV2) Additional files used for reference in the main definition file,
+	// which will override the 'files' of the spark job definition you provide.
 	Files []interface{} `json:"files,omitempty"`
+
+	// Additional files used for reference in the main definition file, which will override the 'jars' and 'files' of the spark
+	// job definition you provide.
+	FilesV2 []interface{} `json:"filesV2,omitempty"`
 
 	// Number of executors to launch for this job, which will override the 'numExecutors' of the spark job definition you provide.
 	NumExecutors *int32 `json:"numExecutors,omitempty"`
+
+	// Additional python code files used for reference in the main definition file, which will override the 'pyFiles' of the spark
+	// job definition you provide.
+	PythonCodeReference []interface{} `json:"pythonCodeReference,omitempty"`
 
 	// The name of the big data pool which will be used to execute the spark batch job, which will override the 'targetBigDataPool'
 	// of the spark job definition you provide.
@@ -28254,8 +28313,8 @@ func (s *SynapseSparkJobDefinitionActivity) GetExecutionActivity() *ExecutionAct
 
 // SynapseSparkJobReference - Synapse spark job reference type.
 type SynapseSparkJobReference struct {
-	// REQUIRED; Reference spark job name.
-	ReferenceName *string `json:"referenceName,omitempty"`
+	// REQUIRED; Reference spark job name. Expression with resultType string.
+	ReferenceName interface{} `json:"referenceName,omitempty"`
 
 	// REQUIRED; Synapse spark job reference type.
 	Type *SparkJobReferenceType `json:"type,omitempty"`
