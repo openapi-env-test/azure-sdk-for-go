@@ -23,19 +23,19 @@ import (
 	"strings"
 )
 
-// LinkedServicesClient contains the methods for the LinkedServices group.
-// Don't use this type directly, use NewLinkedServicesClient() instead.
-type LinkedServicesClient struct {
+// CredentialOperationsClient contains the methods for the CredentialOperations group.
+// Don't use this type directly, use NewCredentialOperationsClient() instead.
+type CredentialOperationsClient struct {
 	host           string
 	subscriptionID string
 	pl             runtime.Pipeline
 }
 
-// NewLinkedServicesClient creates a new instance of LinkedServicesClient with the specified values.
+// NewCredentialOperationsClient creates a new instance of CredentialOperationsClient with the specified values.
 // subscriptionID - The subscription identifier.
 // credential - used to authorize requests. Usually a credential from azidentity.
 // options - pass nil to accept the default values.
-func NewLinkedServicesClient(subscriptionID string, credential azcore.TokenCredential, options *arm.ClientOptions) (*LinkedServicesClient, error) {
+func NewCredentialOperationsClient(subscriptionID string, credential azcore.TokenCredential, options *arm.ClientOptions) (*CredentialOperationsClient, error) {
 	if options == nil {
 		options = &arm.ClientOptions{}
 	}
@@ -47,7 +47,7 @@ func NewLinkedServicesClient(subscriptionID string, credential azcore.TokenCrede
 	if err != nil {
 		return nil, err
 	}
-	client := &LinkedServicesClient{
+	client := &CredentialOperationsClient{
 		subscriptionID: subscriptionID,
 		host:           ep,
 		pl:             pl,
@@ -55,33 +55,33 @@ func NewLinkedServicesClient(subscriptionID string, credential azcore.TokenCrede
 	return client, nil
 }
 
-// CreateOrUpdate - Creates or updates a linked service.
+// CreateOrUpdate - Creates or updates a credential.
 // If the operation fails it returns an *azcore.ResponseError type.
 // Generated from API version 2018-06-01
 // resourceGroupName - The resource group name.
 // factoryName - The factory name.
-// linkedServiceName - The linked service name.
-// linkedService - Linked service resource definition.
-// options - LinkedServicesClientCreateOrUpdateOptions contains the optional parameters for the LinkedServicesClient.CreateOrUpdate
+// credentialName - Credential name
+// credential - Credential resource definition.
+// options - CredentialOperationsClientCreateOrUpdateOptions contains the optional parameters for the CredentialOperationsClient.CreateOrUpdate
 // method.
-func (client *LinkedServicesClient) CreateOrUpdate(ctx context.Context, resourceGroupName string, factoryName string, linkedServiceName string, linkedService LinkedServiceResource, options *LinkedServicesClientCreateOrUpdateOptions) (LinkedServicesClientCreateOrUpdateResponse, error) {
-	req, err := client.createOrUpdateCreateRequest(ctx, resourceGroupName, factoryName, linkedServiceName, linkedService, options)
+func (client *CredentialOperationsClient) CreateOrUpdate(ctx context.Context, resourceGroupName string, factoryName string, credentialName string, credential ManagedIdentityCredentialResource, options *CredentialOperationsClientCreateOrUpdateOptions) (CredentialOperationsClientCreateOrUpdateResponse, error) {
+	req, err := client.createOrUpdateCreateRequest(ctx, resourceGroupName, factoryName, credentialName, credential, options)
 	if err != nil {
-		return LinkedServicesClientCreateOrUpdateResponse{}, err
+		return CredentialOperationsClientCreateOrUpdateResponse{}, err
 	}
 	resp, err := client.pl.Do(req)
 	if err != nil {
-		return LinkedServicesClientCreateOrUpdateResponse{}, err
+		return CredentialOperationsClientCreateOrUpdateResponse{}, err
 	}
 	if !runtime.HasStatusCode(resp, http.StatusOK) {
-		return LinkedServicesClientCreateOrUpdateResponse{}, runtime.NewResponseError(resp)
+		return CredentialOperationsClientCreateOrUpdateResponse{}, runtime.NewResponseError(resp)
 	}
 	return client.createOrUpdateHandleResponse(resp)
 }
 
 // createOrUpdateCreateRequest creates the CreateOrUpdate request.
-func (client *LinkedServicesClient) createOrUpdateCreateRequest(ctx context.Context, resourceGroupName string, factoryName string, linkedServiceName string, linkedService LinkedServiceResource, options *LinkedServicesClientCreateOrUpdateOptions) (*policy.Request, error) {
-	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/linkedservices/{linkedServiceName}"
+func (client *CredentialOperationsClient) createOrUpdateCreateRequest(ctx context.Context, resourceGroupName string, factoryName string, credentialName string, credential ManagedIdentityCredentialResource, options *CredentialOperationsClientCreateOrUpdateOptions) (*policy.Request, error) {
+	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/credentials/{credentialName}"
 	if client.subscriptionID == "" {
 		return nil, errors.New("parameter client.subscriptionID cannot be empty")
 	}
@@ -94,10 +94,10 @@ func (client *LinkedServicesClient) createOrUpdateCreateRequest(ctx context.Cont
 		return nil, errors.New("parameter factoryName cannot be empty")
 	}
 	urlPath = strings.ReplaceAll(urlPath, "{factoryName}", url.PathEscape(factoryName))
-	if linkedServiceName == "" {
-		return nil, errors.New("parameter linkedServiceName cannot be empty")
+	if credentialName == "" {
+		return nil, errors.New("parameter credentialName cannot be empty")
 	}
-	urlPath = strings.ReplaceAll(urlPath, "{linkedServiceName}", url.PathEscape(linkedServiceName))
+	urlPath = strings.ReplaceAll(urlPath, "{credentialName}", url.PathEscape(credentialName))
 	req, err := runtime.NewRequest(ctx, http.MethodPut, runtime.JoinPaths(client.host, urlPath))
 	if err != nil {
 		return nil, err
@@ -109,43 +109,44 @@ func (client *LinkedServicesClient) createOrUpdateCreateRequest(ctx context.Cont
 		req.Raw().Header["If-Match"] = []string{*options.IfMatch}
 	}
 	req.Raw().Header["Accept"] = []string{"application/json"}
-	return req, runtime.MarshalAsJSON(req, linkedService)
+	return req, runtime.MarshalAsJSON(req, credential)
 }
 
 // createOrUpdateHandleResponse handles the CreateOrUpdate response.
-func (client *LinkedServicesClient) createOrUpdateHandleResponse(resp *http.Response) (LinkedServicesClientCreateOrUpdateResponse, error) {
-	result := LinkedServicesClientCreateOrUpdateResponse{}
-	if err := runtime.UnmarshalAsJSON(resp, &result.LinkedServiceResource); err != nil {
-		return LinkedServicesClientCreateOrUpdateResponse{}, err
+func (client *CredentialOperationsClient) createOrUpdateHandleResponse(resp *http.Response) (CredentialOperationsClientCreateOrUpdateResponse, error) {
+	result := CredentialOperationsClientCreateOrUpdateResponse{}
+	if err := runtime.UnmarshalAsJSON(resp, &result.ManagedIdentityCredentialResource); err != nil {
+		return CredentialOperationsClientCreateOrUpdateResponse{}, err
 	}
 	return result, nil
 }
 
-// Delete - Deletes a linked service.
+// Delete - Deletes a credential.
 // If the operation fails it returns an *azcore.ResponseError type.
 // Generated from API version 2018-06-01
 // resourceGroupName - The resource group name.
 // factoryName - The factory name.
-// linkedServiceName - The linked service name.
-// options - LinkedServicesClientDeleteOptions contains the optional parameters for the LinkedServicesClient.Delete method.
-func (client *LinkedServicesClient) Delete(ctx context.Context, resourceGroupName string, factoryName string, linkedServiceName string, options *LinkedServicesClientDeleteOptions) (LinkedServicesClientDeleteResponse, error) {
-	req, err := client.deleteCreateRequest(ctx, resourceGroupName, factoryName, linkedServiceName, options)
+// credentialName - Credential name
+// options - CredentialOperationsClientDeleteOptions contains the optional parameters for the CredentialOperationsClient.Delete
+// method.
+func (client *CredentialOperationsClient) Delete(ctx context.Context, resourceGroupName string, factoryName string, credentialName string, options *CredentialOperationsClientDeleteOptions) (CredentialOperationsClientDeleteResponse, error) {
+	req, err := client.deleteCreateRequest(ctx, resourceGroupName, factoryName, credentialName, options)
 	if err != nil {
-		return LinkedServicesClientDeleteResponse{}, err
+		return CredentialOperationsClientDeleteResponse{}, err
 	}
 	resp, err := client.pl.Do(req)
 	if err != nil {
-		return LinkedServicesClientDeleteResponse{}, err
+		return CredentialOperationsClientDeleteResponse{}, err
 	}
 	if !runtime.HasStatusCode(resp, http.StatusOK, http.StatusNoContent) {
-		return LinkedServicesClientDeleteResponse{}, runtime.NewResponseError(resp)
+		return CredentialOperationsClientDeleteResponse{}, runtime.NewResponseError(resp)
 	}
-	return LinkedServicesClientDeleteResponse{}, nil
+	return CredentialOperationsClientDeleteResponse{}, nil
 }
 
 // deleteCreateRequest creates the Delete request.
-func (client *LinkedServicesClient) deleteCreateRequest(ctx context.Context, resourceGroupName string, factoryName string, linkedServiceName string, options *LinkedServicesClientDeleteOptions) (*policy.Request, error) {
-	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/linkedservices/{linkedServiceName}"
+func (client *CredentialOperationsClient) deleteCreateRequest(ctx context.Context, resourceGroupName string, factoryName string, credentialName string, options *CredentialOperationsClientDeleteOptions) (*policy.Request, error) {
+	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/credentials/{credentialName}"
 	if client.subscriptionID == "" {
 		return nil, errors.New("parameter client.subscriptionID cannot be empty")
 	}
@@ -158,10 +159,10 @@ func (client *LinkedServicesClient) deleteCreateRequest(ctx context.Context, res
 		return nil, errors.New("parameter factoryName cannot be empty")
 	}
 	urlPath = strings.ReplaceAll(urlPath, "{factoryName}", url.PathEscape(factoryName))
-	if linkedServiceName == "" {
-		return nil, errors.New("parameter linkedServiceName cannot be empty")
+	if credentialName == "" {
+		return nil, errors.New("parameter credentialName cannot be empty")
 	}
-	urlPath = strings.ReplaceAll(urlPath, "{linkedServiceName}", url.PathEscape(linkedServiceName))
+	urlPath = strings.ReplaceAll(urlPath, "{credentialName}", url.PathEscape(credentialName))
 	req, err := runtime.NewRequest(ctx, http.MethodDelete, runtime.JoinPaths(client.host, urlPath))
 	if err != nil {
 		return nil, err
@@ -173,31 +174,32 @@ func (client *LinkedServicesClient) deleteCreateRequest(ctx context.Context, res
 	return req, nil
 }
 
-// Get - Gets a linked service.
+// Get - Gets a credential.
 // If the operation fails it returns an *azcore.ResponseError type.
 // Generated from API version 2018-06-01
 // resourceGroupName - The resource group name.
 // factoryName - The factory name.
-// linkedServiceName - The linked service name.
-// options - LinkedServicesClientGetOptions contains the optional parameters for the LinkedServicesClient.Get method.
-func (client *LinkedServicesClient) Get(ctx context.Context, resourceGroupName string, factoryName string, linkedServiceName string, options *LinkedServicesClientGetOptions) (LinkedServicesClientGetResponse, error) {
-	req, err := client.getCreateRequest(ctx, resourceGroupName, factoryName, linkedServiceName, options)
+// credentialName - Credential name
+// options - CredentialOperationsClientGetOptions contains the optional parameters for the CredentialOperationsClient.Get
+// method.
+func (client *CredentialOperationsClient) Get(ctx context.Context, resourceGroupName string, factoryName string, credentialName string, options *CredentialOperationsClientGetOptions) (CredentialOperationsClientGetResponse, error) {
+	req, err := client.getCreateRequest(ctx, resourceGroupName, factoryName, credentialName, options)
 	if err != nil {
-		return LinkedServicesClientGetResponse{}, err
+		return CredentialOperationsClientGetResponse{}, err
 	}
 	resp, err := client.pl.Do(req)
 	if err != nil {
-		return LinkedServicesClientGetResponse{}, err
+		return CredentialOperationsClientGetResponse{}, err
 	}
 	if !runtime.HasStatusCode(resp, http.StatusOK, http.StatusNotModified) {
-		return LinkedServicesClientGetResponse{}, runtime.NewResponseError(resp)
+		return CredentialOperationsClientGetResponse{}, runtime.NewResponseError(resp)
 	}
 	return client.getHandleResponse(resp)
 }
 
 // getCreateRequest creates the Get request.
-func (client *LinkedServicesClient) getCreateRequest(ctx context.Context, resourceGroupName string, factoryName string, linkedServiceName string, options *LinkedServicesClientGetOptions) (*policy.Request, error) {
-	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/linkedservices/{linkedServiceName}"
+func (client *CredentialOperationsClient) getCreateRequest(ctx context.Context, resourceGroupName string, factoryName string, credentialName string, options *CredentialOperationsClientGetOptions) (*policy.Request, error) {
+	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/credentials/{credentialName}"
 	if client.subscriptionID == "" {
 		return nil, errors.New("parameter client.subscriptionID cannot be empty")
 	}
@@ -210,10 +212,10 @@ func (client *LinkedServicesClient) getCreateRequest(ctx context.Context, resour
 		return nil, errors.New("parameter factoryName cannot be empty")
 	}
 	urlPath = strings.ReplaceAll(urlPath, "{factoryName}", url.PathEscape(factoryName))
-	if linkedServiceName == "" {
-		return nil, errors.New("parameter linkedServiceName cannot be empty")
+	if credentialName == "" {
+		return nil, errors.New("parameter credentialName cannot be empty")
 	}
-	urlPath = strings.ReplaceAll(urlPath, "{linkedServiceName}", url.PathEscape(linkedServiceName))
+	urlPath = strings.ReplaceAll(urlPath, "{credentialName}", url.PathEscape(credentialName))
 	req, err := runtime.NewRequest(ctx, http.MethodGet, runtime.JoinPaths(client.host, urlPath))
 	if err != nil {
 		return nil, err
@@ -229,26 +231,26 @@ func (client *LinkedServicesClient) getCreateRequest(ctx context.Context, resour
 }
 
 // getHandleResponse handles the Get response.
-func (client *LinkedServicesClient) getHandleResponse(resp *http.Response) (LinkedServicesClientGetResponse, error) {
-	result := LinkedServicesClientGetResponse{}
-	if err := runtime.UnmarshalAsJSON(resp, &result.LinkedServiceResource); err != nil {
-		return LinkedServicesClientGetResponse{}, err
+func (client *CredentialOperationsClient) getHandleResponse(resp *http.Response) (CredentialOperationsClientGetResponse, error) {
+	result := CredentialOperationsClientGetResponse{}
+	if err := runtime.UnmarshalAsJSON(resp, &result.ManagedIdentityCredentialResource); err != nil {
+		return CredentialOperationsClientGetResponse{}, err
 	}
 	return result, nil
 }
 
-// NewListByFactoryPager - Lists linked services.
+// NewListByFactoryPager - List credentials.
 // Generated from API version 2018-06-01
 // resourceGroupName - The resource group name.
 // factoryName - The factory name.
-// options - LinkedServicesClientListByFactoryOptions contains the optional parameters for the LinkedServicesClient.ListByFactory
+// options - CredentialOperationsClientListByFactoryOptions contains the optional parameters for the CredentialOperationsClient.ListByFactory
 // method.
-func (client *LinkedServicesClient) NewListByFactoryPager(resourceGroupName string, factoryName string, options *LinkedServicesClientListByFactoryOptions) *runtime.Pager[LinkedServicesClientListByFactoryResponse] {
-	return runtime.NewPager(runtime.PagingHandler[LinkedServicesClientListByFactoryResponse]{
-		More: func(page LinkedServicesClientListByFactoryResponse) bool {
+func (client *CredentialOperationsClient) NewListByFactoryPager(resourceGroupName string, factoryName string, options *CredentialOperationsClientListByFactoryOptions) *runtime.Pager[CredentialOperationsClientListByFactoryResponse] {
+	return runtime.NewPager(runtime.PagingHandler[CredentialOperationsClientListByFactoryResponse]{
+		More: func(page CredentialOperationsClientListByFactoryResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
-		Fetcher: func(ctx context.Context, page *LinkedServicesClientListByFactoryResponse) (LinkedServicesClientListByFactoryResponse, error) {
+		Fetcher: func(ctx context.Context, page *CredentialOperationsClientListByFactoryResponse) (CredentialOperationsClientListByFactoryResponse, error) {
 			var req *policy.Request
 			var err error
 			if page == nil {
@@ -257,14 +259,14 @@ func (client *LinkedServicesClient) NewListByFactoryPager(resourceGroupName stri
 				req, err = runtime.NewRequest(ctx, http.MethodGet, *page.NextLink)
 			}
 			if err != nil {
-				return LinkedServicesClientListByFactoryResponse{}, err
+				return CredentialOperationsClientListByFactoryResponse{}, err
 			}
 			resp, err := client.pl.Do(req)
 			if err != nil {
-				return LinkedServicesClientListByFactoryResponse{}, err
+				return CredentialOperationsClientListByFactoryResponse{}, err
 			}
 			if !runtime.HasStatusCode(resp, http.StatusOK) {
-				return LinkedServicesClientListByFactoryResponse{}, runtime.NewResponseError(resp)
+				return CredentialOperationsClientListByFactoryResponse{}, runtime.NewResponseError(resp)
 			}
 			return client.listByFactoryHandleResponse(resp)
 		},
@@ -272,8 +274,8 @@ func (client *LinkedServicesClient) NewListByFactoryPager(resourceGroupName stri
 }
 
 // listByFactoryCreateRequest creates the ListByFactory request.
-func (client *LinkedServicesClient) listByFactoryCreateRequest(ctx context.Context, resourceGroupName string, factoryName string, options *LinkedServicesClientListByFactoryOptions) (*policy.Request, error) {
-	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/linkedservices"
+func (client *CredentialOperationsClient) listByFactoryCreateRequest(ctx context.Context, resourceGroupName string, factoryName string, options *CredentialOperationsClientListByFactoryOptions) (*policy.Request, error) {
+	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/credentials"
 	if client.subscriptionID == "" {
 		return nil, errors.New("parameter client.subscriptionID cannot be empty")
 	}
@@ -298,10 +300,10 @@ func (client *LinkedServicesClient) listByFactoryCreateRequest(ctx context.Conte
 }
 
 // listByFactoryHandleResponse handles the ListByFactory response.
-func (client *LinkedServicesClient) listByFactoryHandleResponse(resp *http.Response) (LinkedServicesClientListByFactoryResponse, error) {
-	result := LinkedServicesClientListByFactoryResponse{}
-	if err := runtime.UnmarshalAsJSON(resp, &result.LinkedServiceListResponse); err != nil {
-		return LinkedServicesClientListByFactoryResponse{}, err
+func (client *CredentialOperationsClient) listByFactoryHandleResponse(resp *http.Response) (CredentialOperationsClientListByFactoryResponse, error) {
+	result := CredentialOperationsClientListByFactoryResponse{}
+	if err := runtime.UnmarshalAsJSON(resp, &result.CredentialListResponse); err != nil {
+		return CredentialOperationsClientListByFactoryResponse{}, err
 	}
 	return result, nil
 }
