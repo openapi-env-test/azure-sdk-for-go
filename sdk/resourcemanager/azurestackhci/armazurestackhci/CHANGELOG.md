@@ -1,5 +1,162 @@
 # Release History
 
+## 1.1.0 (2022-11-17)
+### Features Added
+
+- New const `ManagedServiceIdentityTypeSystemAssignedUserAssigned`
+- New const `StateRecalled`
+- New const `UpdateRunPropertiesStateSucceeded`
+- New const `StateHasPrerequisite`
+- New const `SoftwareAssuranceStatusDisabled`
+- New const `AvailabilityTypeLocal`
+- New const `StatePreparing`
+- New const `StateScanInProgress`
+- New const `UpdateRunPropertiesStateInProgress`
+- New const `SoftwareAssuranceIntentEnable`
+- New const `StateDownloadFailed`
+- New const `UpdateSummariesPropertiesStateAppliedSuccessfully`
+- New const `SoftwareAssuranceStatusEnabled`
+- New const `SoftwareAssuranceIntentDisable`
+- New const `UpdateSummariesPropertiesStateNeedsAttention`
+- New const `UpdateSummariesPropertiesStateUpdateInProgress`
+- New const `AvailabilityTypeNotify`
+- New const `AvailabilityTypeOnline`
+- New const `ClusterNodeTypeFirstParty`
+- New const `StateReadyToInstall`
+- New const `StateDownloading`
+- New const `ClusterNodeTypeThirdParty`
+- New const `UpdateSummariesPropertiesStateUpdateAvailable`
+- New const `StateNotApplicableBecauseAnotherUpdateIsInProgress`
+- New const `StateScanFailed`
+- New const `StateHealthChecking`
+- New const `StateHealthCheckFailed`
+- New const `ManagedServiceIdentityTypeSystemAssigned`
+- New const `StateObsolete`
+- New const `UpdateSummariesPropertiesStatePreparationFailed`
+- New const `ManagedServiceIdentityTypeNone`
+- New const `StateInstalled`
+- New const `StateInstalling`
+- New const `ManagedServiceIdentityTypeUserAssigned`
+- New const `StateInvalid`
+- New const `UpdateSummariesPropertiesStateUnknown`
+- New const `UpdateRunPropertiesStateUnknown`
+- New const `UpdateSummariesPropertiesStatePreparationInProgress`
+- New const `StateReady`
+- New const `UpdateRunPropertiesStateFailed`
+- New const `UpdateSummariesPropertiesStateUpdateFailed`
+- New const `StateInstallationFailed`
+- New const `StatePreparationFailed`
+- New type alias `UpdateSummariesPropertiesState`
+- New type alias `ClusterNodeType`
+- New type alias `State`
+- New type alias `ManagedServiceIdentityType`
+- New type alias `UpdateRunPropertiesState`
+- New type alias `AvailabilityType`
+- New type alias `SoftwareAssuranceIntent`
+- New type alias `SoftwareAssuranceStatus`
+- New function `NewUpdatesClient(string, azcore.TokenCredential, *arm.ClientOptions) (*UpdatesClient, error)`
+- New function `*OffersClient.NewListByClusterPager(string, string, *OffersClientListByClusterOptions) *runtime.Pager[OffersClientListByClusterResponse]`
+- New function `NewOffersClient(string, azcore.TokenCredential, *arm.ClientOptions) (*OffersClient, error)`
+- New function `NewUpdateSummariesClient(string, azcore.TokenCredential, *arm.ClientOptions) (*UpdateSummariesClient, error)`
+- New function `*UpdateRunsClient.Get(context.Context, string, string, string, string, *UpdateRunsClientGetOptions) (UpdateRunsClientGetResponse, error)`
+- New function `*OffersClient.Get(context.Context, string, string, string, string, *OffersClientGetOptions) (OffersClientGetResponse, error)`
+- New function `*PublishersClient.Get(context.Context, string, string, string, *PublishersClientGetOptions) (PublishersClientGetResponse, error)`
+- New function `PossibleAvailabilityTypeValues() []AvailabilityType`
+- New function `*PublishersClient.NewListByClusterPager(string, string, *PublishersClientListByClusterOptions) *runtime.Pager[PublishersClientListByClusterResponse]`
+- New function `*UpdateRunsClient.NewListPager(string, string, string, *UpdateRunsClientListOptions) *runtime.Pager[UpdateRunsClientListResponse]`
+- New function `*SKUsClient.NewListByOfferPager(string, string, string, string, *SKUsClientListByOfferOptions) *runtime.Pager[SKUsClientListByOfferResponse]`
+- New function `PossibleSoftwareAssuranceIntentValues() []SoftwareAssuranceIntent`
+- New function `NewSKUsClient(string, azcore.TokenCredential, *arm.ClientOptions) (*SKUsClient, error)`
+- New function `PossibleSoftwareAssuranceStatusValues() []SoftwareAssuranceStatus`
+- New function `*UpdatesClient.NewListPager(string, string, *UpdatesClientListOptions) *runtime.Pager[UpdatesClientListResponse]`
+- New function `*ClustersClient.BeginExtendSoftwareAssuranceBenefit(context.Context, string, string, SoftwareAssuranceChangeRequest, *ClustersClientBeginExtendSoftwareAssuranceBenefitOptions) (*runtime.Poller[ClustersClientExtendSoftwareAssuranceBenefitResponse], error)`
+- New function `NewUpdateRunsClient(string, azcore.TokenCredential, *arm.ClientOptions) (*UpdateRunsClient, error)`
+- New function `PossibleUpdateRunPropertiesStateValues() []UpdateRunPropertiesState`
+- New function `*UpdateSummariesClient.NewListPager(string, string, *UpdateSummariesClientListOptions) *runtime.Pager[UpdateSummariesClientListResponse]`
+- New function `NewPublishersClient(string, azcore.TokenCredential, *arm.ClientOptions) (*PublishersClient, error)`
+- New function `*UpdatesClient.BeginPost(context.Context, string, string, string, *UpdatesClientBeginPostOptions) (*runtime.Poller[UpdatesClientPostResponse], error)`
+- New function `*OffersClient.NewListByPublisherPager(string, string, string, *OffersClientListByPublisherOptions) *runtime.Pager[OffersClientListByPublisherResponse]`
+- New function `*UpdatesClient.Get(context.Context, string, string, string, *UpdatesClientGetOptions) (UpdatesClientGetResponse, error)`
+- New function `PossibleManagedServiceIdentityTypeValues() []ManagedServiceIdentityType`
+- New function `PossibleUpdateSummariesPropertiesStateValues() []UpdateSummariesPropertiesState`
+- New function `*SKUsClient.Get(context.Context, string, string, string, string, string, *SKUsClientGetOptions) (SKUsClientGetResponse, error)`
+- New function `PossibleStateValues() []State`
+- New function `*UpdateSummariesClient.Get(context.Context, string, string, *UpdateSummariesClientGetOptions) (UpdateSummariesClientGetResponse, error)`
+- New function `PossibleClusterNodeTypeValues() []ClusterNodeType`
+- New struct `ClustersClientBeginExtendSoftwareAssuranceBenefitOptions`
+- New struct `ClustersClientExtendSoftwareAssuranceBenefitResponse`
+- New struct `ManagedServiceIdentity`
+- New struct `Offer`
+- New struct `OfferList`
+- New struct `OfferProperties`
+- New struct `OffersClient`
+- New struct `OffersClientGetOptions`
+- New struct `OffersClientGetResponse`
+- New struct `OffersClientListByClusterOptions`
+- New struct `OffersClientListByClusterResponse`
+- New struct `OffersClientListByPublisherOptions`
+- New struct `OffersClientListByPublisherResponse`
+- New struct `PackageVersionInfo`
+- New struct `Publisher`
+- New struct `PublisherList`
+- New struct `PublisherProperties`
+- New struct `PublishersClient`
+- New struct `PublishersClientGetOptions`
+- New struct `PublishersClientGetResponse`
+- New struct `PublishersClientListByClusterOptions`
+- New struct `PublishersClientListByClusterResponse`
+- New struct `SKU`
+- New struct `SKUList`
+- New struct `SKUMappings`
+- New struct `SKUProperties`
+- New struct `SKUsClient`
+- New struct `SKUsClientGetOptions`
+- New struct `SKUsClientGetResponse`
+- New struct `SKUsClientListByOfferOptions`
+- New struct `SKUsClientListByOfferResponse`
+- New struct `SoftwareAssuranceChangeRequest`
+- New struct `SoftwareAssuranceChangeRequestProperties`
+- New struct `SoftwareAssuranceProperties`
+- New struct `Step`
+- New struct `Update`
+- New struct `UpdateList`
+- New struct `UpdatePrerequisite`
+- New struct `UpdateProperties`
+- New struct `UpdateRun`
+- New struct `UpdateRunList`
+- New struct `UpdateRunProperties`
+- New struct `UpdateRunsClient`
+- New struct `UpdateRunsClientGetOptions`
+- New struct `UpdateRunsClientGetResponse`
+- New struct `UpdateRunsClientListOptions`
+- New struct `UpdateRunsClientListResponse`
+- New struct `UpdateStateProperties`
+- New struct `UpdateSummaries`
+- New struct `UpdateSummariesClient`
+- New struct `UpdateSummariesClientGetOptions`
+- New struct `UpdateSummariesClientGetResponse`
+- New struct `UpdateSummariesClientListOptions`
+- New struct `UpdateSummariesClientListResponse`
+- New struct `UpdateSummariesList`
+- New struct `UpdateSummariesProperties`
+- New struct `UpdatesClient`
+- New struct `UpdatesClientBeginPostOptions`
+- New struct `UpdatesClientGetOptions`
+- New struct `UpdatesClientGetResponse`
+- New struct `UpdatesClientListOptions`
+- New struct `UpdatesClientListResponse`
+- New struct `UpdatesClientPostResponse`
+- New struct `UserAssignedIdentity`
+- New field `SystemData` in struct `TrackedResource`
+- New field `Identity` in struct `Cluster`
+- New field `SoftwareAssuranceProperties` in struct `ClusterProperties`
+- New field `SystemData` in struct `ProxyResource`
+- New field `SystemData` in struct `Resource`
+- New field `NodeType` in struct `ClusterNode`
+- New field `OSDisplayVersion` in struct `ClusterNode`
+- New field `Identity` in struct `ClusterPatch`
+
+
 ## 1.0.0 (2022-05-17)
 
 The package of `github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/azurestackhci/armazurestackhci` is using our [next generation design principles](https://azure.github.io/azure-sdk/general_introduction.html) since version 1.0.0, which contains breaking changes.
