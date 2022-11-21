@@ -1,5 +1,18 @@
 # Release History
 
+## 2.1.0 (2022-11-21)
+### Features Added
+
+- New struct `DelegationProperties`
+- New struct `PartnerManagedResourceProperties`
+- New field `DeploymentType` in struct `VirtualAppliancePropertiesFormat`
+- New field `PartnerManagedResource` in struct `VirtualAppliancePropertiesFormat`
+- New field `Delegation` in struct `VirtualAppliancePropertiesFormat`
+- New field `VirtualNetwork` in struct `BackendAddressPoolPropertiesFormat`
+- New field `CustomBlockResponseStatusCode` in struct `PolicySettings`
+- New field `CustomBlockResponseBody` in struct `PolicySettings`
+
+
 ## 1.1.0 (2022-08-05)
 ### Features Added
 
