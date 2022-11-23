@@ -1,5 +1,445 @@
 # Release History
 
+## 2.3.0-beta.1 (2022-11-23)
+### Features Added
+
+- New const `ContainerServiceVMSizeTypesStandardDS13`
+- New const `ContainerServiceVMSizeTypesStandardDS2V2Promo`
+- New const `ContainerServiceVMSizeTypesStandardL8S`
+- New const `ContainerServiceVMSizeTypesStandardA10`
+- New const `ContainerServiceVMSizeTypesStandardNC6SV3`
+- New const `LevelOff`
+- New const `ContainerServiceVMSizeTypesStandardF72SV2`
+- New const `PrivateEndpointConnectionProvisioningStateCanceled`
+- New const `TypeThird`
+- New const `ContainerServiceVMSizeTypesStandardF2SV2`
+- New const `ProtocolTCP`
+- New const `NodeOSUpgradeChannelNodeImage`
+- New const `ContainerServiceVMSizeTypesStandardDS1V2`
+- New const `ContainerServiceVMSizeTypesStandardDS11V2`
+- New const `ContainerServiceVMSizeTypesStandardE6416SV3`
+- New const `ContainerServiceVMSizeTypesStandardD16SV3`
+- New const `ProtocolUDP`
+- New const `ContainerServiceVMSizeTypesStandardND12S`
+- New const `ContainerServiceVMSizeTypesStandardD8SV3`
+- New const `ContainerServiceVMSizeTypesStandardA4V2`
+- New const `ContainerServiceVMSizeTypesStandardDS1`
+- New const `ContainerServiceVMSizeTypesStandardL32S`
+- New const `ContainerServiceVMSizeTypesStandardGS516`
+- New const `ContainerServiceVMSizeTypesStandardE64SV3`
+- New const `ContainerServiceVMSizeTypesStandardB2S`
+- New const `ContainerServiceVMSizeTypesStandardF16S`
+- New const `ContainerServiceStorageProfileTypesManagedDisks`
+- New const `ContainerServiceVMSizeTypesStandardDS134V2`
+- New const `NodeOSUpgradeChannelNone`
+- New const `ContainerServiceVMSizeTypesStandardDS2`
+- New const `ContainerServiceVMSizeTypesStandardD14V2`
+- New const `ContainerServiceVMSizeTypesStandardA7`
+- New const `ContainerServiceVMSizeTypesStandardE2SV3`
+- New const `FleetProvisioningStateDeleting`
+- New const `ContainerServiceVMSizeTypesStandardDS11V2Promo`
+- New const `ContainerServiceVMSizeTypesStandardNC24SV3`
+- New const `ContainerServiceVMSizeTypesStandardF2S`
+- New const `ContainerServiceVMSizeTypesStandardDS13V2Promo`
+- New const `IpvsSchedulerLeastConnection`
+- New const `ContainerServiceVMSizeTypesStandardGS3`
+- New const `TypeSecond`
+- New const `ContainerServiceVMSizeTypesStandardG5`
+- New const `ContainerServiceVMSizeTypesStandardF8SV2`
+- New const `ContainerServiceVMSizeTypesStandardM6432Ms`
+- New const `ContainerServiceVMSizeTypesStandardA2MV2`
+- New const `ContainerServiceVMSizeTypesStandardA8V2`
+- New const `ContainerServiceVMSizeTypesStandardB2Ms`
+- New const `ControlledValuesRequestsOnly`
+- New const `ContainerServiceVMSizeTypesStandardH8`
+- New const `ContainerServiceVMSizeTypesStandardD14`
+- New const `TrustedAccessRoleBindingProvisioningStateCanceled`
+- New const `FleetProvisioningStateCreating`
+- New const `ContainerServiceVMSizeTypesStandardND6S`
+- New const `ContainerServiceVMSizeTypesStandardD15V2`
+- New const `ContainerServiceVMSizeTypesStandardA3`
+- New const `ManagedClusterPodIdentityProvisioningStateCanceled`
+- New const `ContainerServiceVMSizeTypesStandardH16`
+- New const `FleetProvisioningStateFailed`
+- New const `ContainerServiceVMSizeTypesStandardE8V3`
+- New const `TypeLast`
+- New const `ModeIPTABLES`
+- New const `ContainerServiceVMSizeTypesStandardGS48`
+- New const `ContainerServiceVMSizeTypesStandardA1`
+- New const `ContainerServiceVMSizeTypesStandardA8`
+- New const `ContainerServiceVMSizeTypesStandardE328SV3`
+- New const `ContainerServiceVMSizeTypesStandardL4S`
+- New const `FleetMemberProvisioningStateFailed`
+- New const `ContainerServiceVMSizeTypesStandardD4SV3`
+- New const `ContainerServiceVMSizeTypesStandardA4MV2`
+- New const `UpdateModeOff`
+- New const `ContainerServiceVMSizeTypesStandardH16R`
+- New const `TypeFourth`
+- New const `OSSKUMariner`
+- New const `UpdateModeAuto`
+- New const `ContainerServiceVMSizeTypesStandardDS2V2`
+- New const `ContainerServiceVMSizeTypesStandardA2`
+- New const `ContainerServiceVMSizeTypesStandardND24S`
+- New const `ContainerServiceVMSizeTypesStandardB8Ms`
+- New const `TypeFirst`
+- New const `ContainerServiceVMSizeTypesStandardGS44`
+- New const `ContainerServiceVMSizeTypesStandardD32SV3`
+- New const `ContainerServiceVMSizeTypesStandardA9`
+- New const `ContainerServiceVMSizeTypesStandardD13V2`
+- New const `ContainerServiceVMSizeTypesStandardD2SV3`
+- New const `ContainerServiceVMSizeTypesStandardE16V3`
+- New const `ContainerServiceVMSizeTypesStandardNC24RsV2`
+- New const `ContainerServiceVMSizeTypesStandardH8M`
+- New const `BackendPoolTypeNodeIPConfiguration`
+- New const `ContainerServiceVMSizeTypesStandardD14V2Promo`
+- New const `ContainerServiceVMSizeTypesStandardE4SV3`
+- New const `ContainerServiceVMSizeTypesStandardDS3V2`
+- New const `ContainerServiceVMSizeTypesStandardD12`
+- New const `ContainerServiceVMSizeTypesStandardDS14`
+- New const `NodeOSUpgradeChannelUnmanaged`
+- New const `ContainerServiceVMSizeTypesStandardNC6SV2`
+- New const `ContainerServiceVMSizeTypesStandardNV6`
+- New const `ContainerServiceVMSizeTypesStandardD11`
+- New const `ContainerServiceVMSizeTypesStandardG2`
+- New const `ManagedClusterPodIdentityProvisioningStateSucceeded`
+- New const `ContainerServiceVMSizeTypesStandardDS3`
+- New const `ContainerServiceVMSizeTypesStandardE3216SV3`
+- New const `ContainerServiceVMSizeTypesStandardF8`
+- New const `ContainerServiceVMSizeTypesStandardE6432SV3`
+- New const `ContainerServiceVMSizeTypesStandardF4SV2`
+- New const `ContainerServiceVMSizeTypesStandardNC6`
+- New const `ContainerServiceVMSizeTypesStandardD1`
+- New const `ContainerServiceVMSizeTypesStandardDS148V2`
+- New const `ContainerServiceVMSizeTypesStandardM64S`
+- New const `ContainerServiceVMSizeTypesStandardNC24SV2`
+- New const `ContainerServiceVMSizeTypesStandardDS144V2`
+- New const `ContainerServiceVMSizeTypesStandardA6`
+- New const `ContainerServiceVMSizeTypesStandardDS15V2`
+- New const `SnapshotTypeManagedCluster`
+- New const `ControlledValuesRequestsAndLimits`
+- New const `ContainerServiceVMSizeTypesStandardF1`
+- New const `ContainerServiceVMSizeTypesStandardNV12`
+- New const `ContainerServiceVMSizeTypesStandardD3V2Promo`
+- New const `ContainerServiceVMSizeTypesStandardDS12`
+- New const `ContainerServiceVMSizeTypesStandardL16S`
+- New const `ContainerServiceVMSizeTypesStandardE32V3`
+- New const `NetworkPluginModeOverlay`
+- New const `ContainerServiceVMSizeTypesStandardA1V2`
+- New const `ContainerServiceVMSizeTypesStandardNC12SV3`
+- New const `ContainerServiceVMSizeTypesStandardD5V2`
+- New const `ContainerServiceVMSizeTypesStandardDS13V2`
+- New const `ContainerServiceVMSizeTypesStandardE4V3`
+- New const `CountThree`
+- New const `ContainerServiceVMSizeTypesStandardD64V3`
+- New const `ContainerServiceVMSizeTypesStandardGS5`
+- New const `ContainerServiceVMSizeTypesStandardM64Ms`
+- New const `FleetProvisioningStateCanceled`
+- New const `ContainerServiceVMSizeTypesStandardD4V2Promo`
+- New const `ContainerServiceVMSizeTypesStandardF4`
+- New const `ContainerServiceVMSizeTypesStandardDS3V2Promo`
+- New const `ContainerServiceVMSizeTypesStandardDS5V2`
+- New const `TrustedAccessRoleBindingProvisioningStateSucceeded`
+- New const `ContainerServiceVMSizeTypesStandardD8V3`
+- New const `ContainerServiceVMSizeTypesStandardG1`
+- New const `TrustedAccessRoleBindingProvisioningStateUpdating`
+- New const `ContainerServiceVMSizeTypesStandardD11V2Promo`
+- New const `ContainerServiceVMSizeTypesStandardDS14V2Promo`
+- New const `FleetMemberProvisioningStateSucceeded`
+- New const `ContainerServiceVMSizeTypesStandardDS5V2Promo`
+- New const `ContainerServiceVMSizeTypesStandardD3`
+- New const `ContainerServiceVMSizeTypesStandardF8S`
+- New const `ContainerServiceVMSizeTypesStandardA4`
+- New const `ContainerServiceVMSizeTypesStandardA8MV2`
+- New const `ContainerServiceVMSizeTypesStandardDS132V2`
+- New const `ContainerServiceVMSizeTypesStandardM128Ms`
+- New const `ContainerServiceVMSizeTypesStandardGS1`
+- New const `ContainerServiceVMSizeTypesStandardF16`
+- New const `ContainerServiceVMSizeTypesStandardF16SV2`
+- New const `ContainerServiceVMSizeTypesStandardDS4`
+- New const `ContainerServiceVMSizeTypesStandardE2V3`
+- New const `ContainerServiceVMSizeTypesStandardF64SV2`
+- New const `ContainerServiceVMSizeTypesStandardD13`
+- New const `ContainerServiceVMSizeTypesStandardD2`
+- New const `NodeOSUpgradeChannelSecurityPatch`
+- New const `ContainerServiceVMSizeTypesStandardGS2`
+- New const `ContainerServiceVMSizeTypesStandardG3`
+- New const `ContainerServiceVMSizeTypesStandardD1V2`
+- New const `ContainerServiceVMSizeTypesStandardD4V2`
+- New const `ContainerServiceVMSizeTypesStandardA5`
+- New const `FleetMemberProvisioningStateCanceled`
+- New const `ContainerServiceVMSizeTypesStandardG4`
+- New const `ContainerServiceVMSizeTypesStandardF32SV2`
+- New const `EbpfDataplaneCilium`
+- New const `ContainerServiceVMSizeTypesStandardF2`
+- New const `UpdateModeInitial`
+- New const `CountFive`
+- New const `ContainerServiceVMSizeTypesStandardDS12V2`
+- New const `ContainerServiceVMSizeTypesStandardNV24`
+- New const `ContainerServiceVMSizeTypesStandardDS11`
+- New const `LevelWarning`
+- New const `TrustedAccessRoleBindingProvisioningStateFailed`
+- New const `ContainerServiceVMSizeTypesStandardD32V3`
+- New const `ContainerServiceVMSizeTypesStandardND24Rs`
+- New const `ContainerServiceVMSizeTypesStandardH16M`
+- New const `ContainerServiceVMSizeTypesStandardNC24RsV3`
+- New const `ContainerServiceVMSizeTypesStandardM6416Ms`
+- New const `FleetMemberProvisioningStateLeaving`
+- New const `ContainerServiceVMSizeTypesStandardDS4V2`
+- New const `ContainerServiceStorageProfileTypesStorageAccount`
+- New const `ContainerServiceVMSizeTypesStandardD64SV3`
+- New const `ContainerServiceVMSizeTypesStandardNC24R`
+- New const `UpdateModeRecreate`
+- New const `BackendPoolTypeNodeIP`
+- New const `ContainerServiceVMSizeTypesStandardGS4`
+- New const `CountOne`
+- New const `ContainerServiceVMSizeTypesStandardD16V3`
+- New const `ContainerServiceVMSizeTypesStandardD12V2Promo`
+- New const `PublicNetworkAccessSecuredByPerimeter`
+- New const `TrustedAccessRoleBindingProvisioningStateDeleting`
+- New const `ContainerServiceVMSizeTypesStandardM12864Ms`
+- New const `ContainerServiceVMSizeTypesStandardM12832Ms`
+- New const `ContainerServiceVMSizeTypesStandardD5V2Promo`
+- New const `ContainerServiceVMSizeTypesStandardA2V2`
+- New const `ModeIPVS`
+- New const `ContainerServiceVMSizeTypesStandardD12V2`
+- New const `ContainerServiceVMSizeTypesStandardD11V2`
+- New const `ContainerServiceVMSizeTypesStandardGS58`
+- New const `ContainerServiceVMSizeTypesStandardNC12`
+- New const `IpvsSchedulerRoundRobin`
+- New const `ContainerServiceVMSizeTypesStandardDS14V2`
+- New const `ContainerServiceVMSizeTypesStandardE16SV3`
+- New const `LevelEnforcement`
+- New const `ContainerServiceVMSizeTypesStandardD13V2Promo`
+- New const `ContainerServiceVMSizeTypesStandardM128S`
+- New const `ContainerServiceVMSizeTypesStandardB4Ms`
+- New const `FleetProvisioningStateSucceeded`
+- New const `ContainerServiceVMSizeTypesStandardD4V3`
+- New const `FleetProvisioningStateUpdating`
+- New const `ContainerServiceVMSizeTypesStandardD2V3`
+- New const `ContainerServiceVMSizeTypesStandardNC12SV2`
+- New const `ContainerServiceVMSizeTypesStandardD3V2`
+- New const `ContainerServiceVMSizeTypesStandardF1S`
+- New const `ContainerServiceVMSizeTypesStandardE8SV3`
+- New const `FleetMemberProvisioningStateJoining`
+- New const `ContainerServiceVMSizeTypesStandardNC24`
+- New const `ContainerServiceVMSizeTypesStandardE32SV3`
+- New const `ContainerServiceVMSizeTypesStandardDS4V2Promo`
+- New const `FleetMemberProvisioningStateUpdating`
+- New const `ContainerServiceVMSizeTypesStandardH16Mr`
+- New const `ContainerServiceVMSizeTypesStandardA11`
+- New const `ContainerServiceVMSizeTypesStandardDS12V2Promo`
+- New const `ContainerServiceVMSizeTypesStandardD2V2`
+- New const `ContainerServiceVMSizeTypesStandardD4`
+- New const `ContainerServiceVMSizeTypesStandardF4S`
+- New const `ContainerServiceVMSizeTypesStandardE64V3`
+- New const `ContainerServiceVMSizeTypesStandardD2V2Promo`
+- New type alias `EbpfDataplane`
+- New type alias `UpdateMode`
+- New type alias `NodeOSUpgradeChannel`
+- New type alias `Type`
+- New type alias `NetworkPluginMode`
+- New type alias `Level`
+- New type alias `TrustedAccessRoleBindingProvisioningState`
+- New type alias `ContainerServiceStorageProfileTypes`
+- New type alias `FleetProvisioningState`
+- New type alias `Mode`
+- New type alias `ContainerServiceVMSizeTypes`
+- New type alias `Protocol`
+- New type alias `BackendPoolType`
+- New type alias `FleetMemberProvisioningState`
+- New type alias `Count`
+- New type alias `ControlledValues`
+- New type alias `IpvsScheduler`
+- New function `*TrustedAccessRoleBindingsClient.Get(context.Context, string, string, string, *TrustedAccessRoleBindingsClientGetOptions) (TrustedAccessRoleBindingsClientGetResponse, error)`
+- New function `PossibleProtocolValues() []Protocol`
+- New function `*FleetMembersClient.NewListByFleetPager(string, string, *FleetMembersClientListByFleetOptions) *runtime.Pager[FleetMembersClientListByFleetResponse]`
+- New function `*FleetsClient.BeginCreateOrUpdate(context.Context, string, string, Fleet, *FleetsClientBeginCreateOrUpdateOptions) (*runtime.Poller[FleetsClientCreateOrUpdateResponse], error)`
+- New function `*ManagedClustersClient.BeginAbortLatestOperation(context.Context, string, string, *ManagedClustersClientBeginAbortLatestOperationOptions) (*runtime.Poller[ManagedClustersClientAbortLatestOperationResponse], error)`
+- New function `*TrustedAccessRoleBindingsClient.NewListPager(string, string, *TrustedAccessRoleBindingsClientListOptions) *runtime.Pager[TrustedAccessRoleBindingsClientListResponse]`
+- New function `PossibleFleetMemberProvisioningStateValues() []FleetMemberProvisioningState`
+- New function `PossibleLevelValues() []Level`
+- New function `PossibleContainerServiceStorageProfileTypesValues() []ContainerServiceStorageProfileTypes`
+- New function `*FleetMembersClient.BeginDelete(context.Context, string, string, string, *FleetMembersClientBeginDeleteOptions) (*runtime.Poller[FleetMembersClientDeleteResponse], error)`
+- New function `*ManagedClusterSnapshotsClient.Delete(context.Context, string, string, *ManagedClusterSnapshotsClientDeleteOptions) (ManagedClusterSnapshotsClientDeleteResponse, error)`
+- New function `PossibleCountValues() []Count`
+- New function `PossibleNodeOSUpgradeChannelValues() []NodeOSUpgradeChannel`
+- New function `*FleetsClient.Update(context.Context, string, string, *FleetsClientUpdateOptions) (FleetsClientUpdateResponse, error)`
+- New function `*FleetMembersClient.Get(context.Context, string, string, string, *FleetMembersClientGetOptions) (FleetMembersClientGetResponse, error)`
+- New function `PossibleModeValues() []Mode`
+- New function `PossibleControlledValuesValues() []ControlledValues`
+- New function `*FleetsClient.ListCredentials(context.Context, string, string, *FleetsClientListCredentialsOptions) (FleetsClientListCredentialsResponse, error)`
+- New function `NewManagedClusterSnapshotsClient(string, azcore.TokenCredential, *arm.ClientOptions) (*ManagedClusterSnapshotsClient, error)`
+- New function `PossibleEbpfDataplaneValues() []EbpfDataplane`
+- New function `*TrustedAccessRolesClient.NewListPager(string, *TrustedAccessRolesClientListOptions) *runtime.Pager[TrustedAccessRolesClientListResponse]`
+- New function `PossibleContainerServiceVMSizeTypesValues() []ContainerServiceVMSizeTypes`
+- New function `NewTrustedAccessRolesClient(string, azcore.TokenCredential, *arm.ClientOptions) (*TrustedAccessRolesClient, error)`
+- New function `*FleetsClient.Get(context.Context, string, string, *FleetsClientGetOptions) (FleetsClientGetResponse, error)`
+- New function `*ManagedClusterSnapshotsClient.UpdateTags(context.Context, string, string, TagsObject, *ManagedClusterSnapshotsClientUpdateTagsOptions) (ManagedClusterSnapshotsClientUpdateTagsResponse, error)`
+- New function `*FleetsClient.NewListPager(*FleetsClientListOptions) *runtime.Pager[FleetsClientListResponse]`
+- New function `*FleetsClient.BeginDelete(context.Context, string, string, *FleetsClientBeginDeleteOptions) (*runtime.Poller[FleetsClientDeleteResponse], error)`
+- New function `PossibleNetworkPluginModeValues() []NetworkPluginMode`
+- New function `*ManagedClusterSnapshotsClient.NewListPager(*ManagedClusterSnapshotsClientListOptions) *runtime.Pager[ManagedClusterSnapshotsClientListResponse]`
+- New function `NewFleetsClient(string, azcore.TokenCredential, *arm.ClientOptions) (*FleetsClient, error)`
+- New function `*TrustedAccessRoleBindingsClient.CreateOrUpdate(context.Context, string, string, string, TrustedAccessRoleBinding, *TrustedAccessRoleBindingsClientCreateOrUpdateOptions) (TrustedAccessRoleBindingsClientCreateOrUpdateResponse, error)`
+- New function `*ManagedClusterSnapshotsClient.NewListByResourceGroupPager(string, *ManagedClusterSnapshotsClientListByResourceGroupOptions) *runtime.Pager[ManagedClusterSnapshotsClientListByResourceGroupResponse]`
+- New function `NewFleetMembersClient(string, azcore.TokenCredential, *arm.ClientOptions) (*FleetMembersClient, error)`
+- New function `*FleetsClient.NewListByResourceGroupPager(string, *FleetsClientListByResourceGroupOptions) *runtime.Pager[FleetsClientListByResourceGroupResponse]`
+- New function `*ManagedClusterSnapshotsClient.Get(context.Context, string, string, *ManagedClusterSnapshotsClientGetOptions) (ManagedClusterSnapshotsClientGetResponse, error)`
+- New function `NewTrustedAccessRoleBindingsClient(string, azcore.TokenCredential, *arm.ClientOptions) (*TrustedAccessRoleBindingsClient, error)`
+- New function `*ManagedClusterSnapshotsClient.CreateOrUpdate(context.Context, string, string, ManagedClusterSnapshot, *ManagedClusterSnapshotsClientCreateOrUpdateOptions) (ManagedClusterSnapshotsClientCreateOrUpdateResponse, error)`
+- New function `PossibleBackendPoolTypeValues() []BackendPoolType`
+- New function `*FleetMembersClient.BeginCreateOrUpdate(context.Context, string, string, string, FleetMember, *FleetMembersClientBeginCreateOrUpdateOptions) (*runtime.Poller[FleetMembersClientCreateOrUpdateResponse], error)`
+- New function `PossibleTypeValues() []Type`
+- New function `*AgentPoolsClient.BeginAbortLatestOperation(context.Context, string, string, string, *AgentPoolsClientBeginAbortLatestOperationOptions) (*runtime.Poller[AgentPoolsClientAbortLatestOperationResponse], error)`
+- New function `PossibleTrustedAccessRoleBindingProvisioningStateValues() []TrustedAccessRoleBindingProvisioningState`
+- New function `PossibleFleetProvisioningStateValues() []FleetProvisioningState`
+- New function `*TrustedAccessRoleBindingsClient.Delete(context.Context, string, string, string, *TrustedAccessRoleBindingsClientDeleteOptions) (TrustedAccessRoleBindingsClientDeleteResponse, error)`
+- New function `PossibleUpdateModeValues() []UpdateMode`
+- New function `PossibleIpvsSchedulerValues() []IpvsScheduler`
+- New struct `AbsoluteMonthlySchedule`
+- New struct `AgentPoolNetworkProfile`
+- New struct `AgentPoolWindowsProfile`
+- New struct `AgentPoolsClientAbortLatestOperationResponse`
+- New struct `AgentPoolsClientBeginAbortLatestOperationOptions`
+- New struct `AzureEntityResource`
+- New struct `DailySchedule`
+- New struct `DateSpan`
+- New struct `DiagnosticsProfile`
+- New struct `ErrorAdditionalInfo`
+- New struct `ErrorDetail`
+- New struct `ErrorResponse`
+- New struct `Fleet`
+- New struct `FleetCredentialResult`
+- New struct `FleetCredentialResults`
+- New struct `FleetHubProfile`
+- New struct `FleetListResult`
+- New struct `FleetMember`
+- New struct `FleetMemberProperties`
+- New struct `FleetMembersClient`
+- New struct `FleetMembersClientBeginCreateOrUpdateOptions`
+- New struct `FleetMembersClientBeginDeleteOptions`
+- New struct `FleetMembersClientCreateOrUpdateResponse`
+- New struct `FleetMembersClientDeleteResponse`
+- New struct `FleetMembersClientGetOptions`
+- New struct `FleetMembersClientGetResponse`
+- New struct `FleetMembersClientListByFleetOptions`
+- New struct `FleetMembersClientListByFleetResponse`
+- New struct `FleetMembersListResult`
+- New struct `FleetPatch`
+- New struct `FleetProperties`
+- New struct `FleetsClient`
+- New struct `FleetsClientBeginCreateOrUpdateOptions`
+- New struct `FleetsClientBeginDeleteOptions`
+- New struct `FleetsClientCreateOrUpdateResponse`
+- New struct `FleetsClientDeleteResponse`
+- New struct `FleetsClientGetOptions`
+- New struct `FleetsClientGetResponse`
+- New struct `FleetsClientListByResourceGroupOptions`
+- New struct `FleetsClientListByResourceGroupResponse`
+- New struct `FleetsClientListCredentialsOptions`
+- New struct `FleetsClientListCredentialsResponse`
+- New struct `FleetsClientListOptions`
+- New struct `FleetsClientListResponse`
+- New struct `FleetsClientUpdateOptions`
+- New struct `FleetsClientUpdateResponse`
+- New struct `GuardrailsProfile`
+- New struct `IPTag`
+- New struct `MaintenanceWindow`
+- New struct `ManagedClusterAzureMonitorProfile`
+- New struct `ManagedClusterAzureMonitorProfileKubeStateMetrics`
+- New struct `ManagedClusterAzureMonitorProfileMetrics`
+- New struct `ManagedClusterIngressProfile`
+- New struct `ManagedClusterIngressProfileWebAppRouting`
+- New struct `ManagedClusterPropertiesForSnapshot`
+- New struct `ManagedClusterSecurityProfileImageCleaner`
+- New struct `ManagedClusterSecurityProfileNodeRestriction`
+- New struct `ManagedClusterSecurityProfileWorkloadIdentity`
+- New struct `ManagedClusterSnapshot`
+- New struct `ManagedClusterSnapshotListResult`
+- New struct `ManagedClusterSnapshotProperties`
+- New struct `ManagedClusterSnapshotsClient`
+- New struct `ManagedClusterSnapshotsClientCreateOrUpdateOptions`
+- New struct `ManagedClusterSnapshotsClientCreateOrUpdateResponse`
+- New struct `ManagedClusterSnapshotsClientDeleteOptions`
+- New struct `ManagedClusterSnapshotsClientDeleteResponse`
+- New struct `ManagedClusterSnapshotsClientGetOptions`
+- New struct `ManagedClusterSnapshotsClientGetResponse`
+- New struct `ManagedClusterSnapshotsClientListByResourceGroupOptions`
+- New struct `ManagedClusterSnapshotsClientListByResourceGroupResponse`
+- New struct `ManagedClusterSnapshotsClientListOptions`
+- New struct `ManagedClusterSnapshotsClientListResponse`
+- New struct `ManagedClusterSnapshotsClientUpdateTagsOptions`
+- New struct `ManagedClusterSnapshotsClientUpdateTagsResponse`
+- New struct `ManagedClusterWorkloadAutoScalerProfile`
+- New struct `ManagedClusterWorkloadAutoScalerProfileKeda`
+- New struct `ManagedClusterWorkloadAutoScalerProfileVerticalPodAutoscaler`
+- New struct `ManagedClustersClientAbortLatestOperationResponse`
+- New struct `ManagedClustersClientBeginAbortLatestOperationOptions`
+- New struct `MasterProfile`
+- New struct `NetworkProfileForSnapshot`
+- New struct `NetworkProfileKubeProxyConfig`
+- New struct `NetworkProfileKubeProxyConfigIpvsConfig`
+- New struct `PortRange`
+- New struct `RelativeMonthlySchedule`
+- New struct `Resource`
+- New struct `Schedule`
+- New struct `SubResource`
+- New struct `TrackedResource`
+- New struct `TrustedAccessRole`
+- New struct `TrustedAccessRoleBinding`
+- New struct `TrustedAccessRoleBindingListResult`
+- New struct `TrustedAccessRoleBindingProperties`
+- New struct `TrustedAccessRoleBindingsClient`
+- New struct `TrustedAccessRoleBindingsClientCreateOrUpdateOptions`
+- New struct `TrustedAccessRoleBindingsClientCreateOrUpdateResponse`
+- New struct `TrustedAccessRoleBindingsClientDeleteOptions`
+- New struct `TrustedAccessRoleBindingsClientDeleteResponse`
+- New struct `TrustedAccessRoleBindingsClientGetOptions`
+- New struct `TrustedAccessRoleBindingsClientGetResponse`
+- New struct `TrustedAccessRoleBindingsClientListOptions`
+- New struct `TrustedAccessRoleBindingsClientListResponse`
+- New struct `TrustedAccessRoleListResult`
+- New struct `TrustedAccessRoleRule`
+- New struct `TrustedAccessRolesClient`
+- New struct `TrustedAccessRolesClientListOptions`
+- New struct `TrustedAccessRolesClientListResponse`
+- New struct `VMDiagnostics`
+- New struct `WeeklySchedule`
+- New field `SubnetID` in struct `ManagedClusterAPIServerAccessProfile`
+- New field `EnableVnetIntegration` in struct `ManagedClusterAPIServerAccessProfile`
+- New field `Version` in struct `ManagedClusterStorageProfileDiskCSIDriver`
+- New field `IgnorePodDisruptionBudget` in struct `ManagedClustersClientBeginDeleteOptions`
+- New field `Location` in struct `ManagedClustersClientGetCommandResultResponse`
+- New field `NodeOSUpgradeChannel` in struct `ManagedClusterAutoUpgradeProfile`
+- New field `WorkloadIdentity` in struct `ManagedClusterSecurityProfile`
+- New field `CustomCATrustCertificates` in struct `ManagedClusterSecurityProfile`
+- New field `ImageCleaner` in struct `ManagedClusterSecurityProfile`
+- New field `NodeRestriction` in struct `ManagedClusterSecurityProfile`
+- New field `MessageOfTheDay` in struct `ManagedClusterAgentPoolProfileProperties`
+- New field `NetworkProfile` in struct `ManagedClusterAgentPoolProfileProperties`
+- New field `WindowsProfile` in struct `ManagedClusterAgentPoolProfileProperties`
+- New field `CapacityReservationGroupID` in struct `ManagedClusterAgentPoolProfileProperties`
+- New field `EnableCustomCATrust` in struct `ManagedClusterAgentPoolProfileProperties`
+- New field `KubeProxyConfig` in struct `NetworkProfile`
+- New field `NetworkPluginMode` in struct `NetworkProfile`
+- New field `EbpfDataplane` in struct `NetworkProfile`
+- New field `MaintenanceWindow` in struct `MaintenanceConfigurationProperties`
+- New field `BackendPoolType` in struct `ManagedClusterLoadBalancerProfile`
+- New field `AzureMonitorProfile` in struct `ManagedClusterProperties`
+- New field `WorkloadAutoScalerProfile` in struct `ManagedClusterProperties`
+- New field `EnableNamespaceResources` in struct `ManagedClusterProperties`
+- New field `IngressProfile` in struct `ManagedClusterProperties`
+- New field `CreationData` in struct `ManagedClusterProperties`
+- New field `GuardrailsProfile` in struct `ManagedClusterProperties`
+- New field `EffectiveNoProxy` in struct `ManagedClusterHTTPProxyConfig`
+- New field `CapacityReservationGroupID` in struct `ManagedClusterAgentPoolProfile`
+- New field `WindowsProfile` in struct `ManagedClusterAgentPoolProfile`
+- New field `NetworkProfile` in struct `ManagedClusterAgentPoolProfile`
+- New field `EnableCustomCATrust` in struct `ManagedClusterAgentPoolProfile`
+- New field `MessageOfTheDay` in struct `ManagedClusterAgentPoolProfile`
+- New field `IgnorePodDisruptionBudget` in struct `AgentPoolsClientBeginDeleteOptions`
+
+
 ## 2.1.0 (2022-08-25)
 ### Features Added
 
