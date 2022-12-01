@@ -183,27 +183,6 @@ type AzureKeyVaultKms struct {
 	KeyVaultResourceID *string `json:"keyVaultResourceId,omitempty"`
 }
 
-// CloudError - An error response from the Container service.
-type CloudError struct {
-	// Details about the error.
-	Error *CloudErrorBody `json:"error,omitempty"`
-}
-
-// CloudErrorBody - An error response from the Container service.
-type CloudErrorBody struct {
-	// An identifier for the error. Codes are invariant and are intended to be consumed programmatically.
-	Code *string `json:"code,omitempty"`
-
-	// A list of additional details about the error.
-	Details []*CloudErrorBody `json:"details,omitempty"`
-
-	// A message describing the error, intended to be suitable for display in a user interface.
-	Message *string `json:"message,omitempty"`
-
-	// The target of the particular error. For example, the name of the property in error.
-	Target *string `json:"target,omitempty"`
-}
-
 // CommandResultProperties - The results of a run command
 type CommandResultProperties struct {
 	// READ-ONLY; The exit code of the command
@@ -627,8 +606,7 @@ type ManagedClusterAgentPoolProfile struct {
 	// see Ephemeral OS [https://docs.microsoft.com/azure/aks/cluster-configuration#ephemeral-os].
 	OSDiskType *OSDiskType `json:"osDiskType,omitempty"`
 
-	// Specifies the OS SKU used by the agent pool. The default is Ubuntu if OSType is Linux. The default is Windows2019 when
-	// Kubernetes = 1.25 if OSType is Windows.
+	// Specifies an OS SKU. This value must not be specified if OSType is Windows.
 	OSSKU *OSSKU `json:"osSKU,omitempty"`
 
 	// The operating system type. The default is Linux.
@@ -783,8 +761,7 @@ type ManagedClusterAgentPoolProfileProperties struct {
 	// see Ephemeral OS [https://docs.microsoft.com/azure/aks/cluster-configuration#ephemeral-os].
 	OSDiskType *OSDiskType `json:"osDiskType,omitempty"`
 
-	// Specifies the OS SKU used by the agent pool. The default is Ubuntu if OSType is Linux. The default is Windows2019 when
-	// Kubernetes = 1.25 if OSType is Windows.
+	// Specifies an OS SKU. This value must not be specified if OSType is Windows.
 	OSSKU *OSSKU `json:"osSKU,omitempty"`
 
 	// The operating system type. The default is Linux.
@@ -1908,8 +1885,7 @@ type SnapshotProperties struct {
 	// READ-ONLY; The version of node image.
 	NodeImageVersion *string `json:"nodeImageVersion,omitempty" azure:"ro"`
 
-	// READ-ONLY; Specifies the OS SKU used by the agent pool. The default is Ubuntu if OSType is Linux. The default is Windows2019
-	// when Kubernetes = 1.25 if OSType is Windows.
+	// READ-ONLY; Specifies an OS SKU. This value must not be specified if OSType is Windows.
 	OSSKU *OSSKU `json:"osSku,omitempty" azure:"ro"`
 
 	// READ-ONLY; The operating system type. The default is Linux.
