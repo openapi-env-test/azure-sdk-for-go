@@ -1,5 +1,14 @@
 # Release History
 
+## 0.8.0 (2022-12-01)
+### Features Added
+
+- New const `LeastPrivilegeModeNotSet`
+- New struct `ProxyResource`
+- New struct `Resource`
+- New struct `TrackedResource`
+
+
 ## 0.6.0 (2022-06-02)
 ### Breaking Changes
 
