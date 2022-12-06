@@ -1,5 +1,89 @@
 # Release History
 
+## 0.3.0 (2022-12-06)
+### Breaking Changes
+
+- Function `*SAPDatabaseInstancesClient.BeginUpdate` parameter(s) have been changed from `(context.Context, string, string, string, UpdateSAPDatabaseInstanceRequest, *SAPDatabaseInstancesClientBeginUpdateOptions)` to `(context.Context, string, string, string, *SAPDatabaseInstancesClientBeginUpdateOptions)`
+- Function `*SAPApplicationServerInstancesClient.BeginCreate` parameter(s) have been changed from `(context.Context, string, string, string, SAPApplicationServerInstance, *SAPApplicationServerInstancesClientBeginCreateOptions)` to `(context.Context, string, string, string, *SAPApplicationServerInstancesClientBeginCreateOptions)`
+- Function `*SAPVirtualInstancesClient.BeginCreate` parameter(s) have been changed from `(context.Context, string, string, SAPVirtualInstance, *SAPVirtualInstancesClientBeginCreateOptions)` to `(context.Context, string, string, *SAPVirtualInstancesClientBeginCreateOptions)`
+- Function `*SAPCentralInstancesClient.BeginCreate` parameter(s) have been changed from `(context.Context, string, string, string, SAPCentralServerInstance, *SAPCentralInstancesClientBeginCreateOptions)` to `(context.Context, string, string, string, *SAPCentralInstancesClientBeginCreateOptions)`
+- Function `*SAPApplicationServerInstancesClient.BeginUpdate` parameter(s) have been changed from `(context.Context, string, string, string, UpdateSAPApplicationInstanceRequest, *SAPApplicationServerInstancesClientBeginUpdateOptions)` to `(context.Context, string, string, string, *SAPApplicationServerInstancesClientBeginUpdateOptions)`
+- Function `*SAPDatabaseInstancesClient.BeginCreate` parameter(s) have been changed from `(context.Context, string, string, string, SAPDatabaseInstance, *SAPDatabaseInstancesClientBeginCreateOptions)` to `(context.Context, string, string, string, *SAPDatabaseInstancesClientBeginCreateOptions)`
+- Function `*SAPCentralInstancesClient.BeginUpdate` parameter(s) have been changed from `(context.Context, string, string, string, UpdateSAPCentralInstanceRequest, *SAPCentralInstancesClientBeginUpdateOptions)` to `(context.Context, string, string, string, *SAPCentralInstancesClientBeginUpdateOptions)`
+- Function `*SAPVirtualInstancesClient.Update` parameter(s) have been changed from `(context.Context, string, string, UpdateSAPVirtualInstanceRequest, *SAPVirtualInstancesClientUpdateOptions)` to `(context.Context, string, string, *SAPVirtualInstancesClientUpdateOptions)`
+
+### Features Added
+
+- New const `DiskSKUNamePremiumLRS`
+- New const `DiskSKUNameStandardLRS`
+- New const `DiskSKUNamePremiumV2LRS`
+- New const `DiskSKUNamePremiumZRS`
+- New const `ConfigurationTypeCreateAndMount`
+- New const `SSLPreferenceServerCertificate`
+- New const `DiskSKUNameStandardSSDLRS`
+- New const `SAPSoftwareInstallationTypeExternal`
+- New const `ConfigurationTypeSkip`
+- New const `ConfigurationTypeMount`
+- New const `DiskSKUNameStandardSSDZRS`
+- New const `DiskSKUNameUltraSSDLRS`
+- New const `SAPVirtualInstanceStateSoftwareDetectionFailed`
+- New const `SSLPreferenceDisabled`
+- New const `SAPVirtualInstanceStateSoftwareDetectionInProgress`
+- New const `SSLPreferenceRootCertificate`
+- New type alias `DiskSKUName`
+- New type alias `SSLPreference`
+- New type alias `ConfigurationType`
+- New function `PossibleDiskSKUNameValues() []DiskSKUName`
+- New function `*FileShareConfiguration.GetFileShareConfiguration() *FileShareConfiguration`
+- New function `*MountFileShareConfiguration.GetFileShareConfiguration() *FileShareConfiguration`
+- New function `*CreateAndMountFileShareConfiguration.GetFileShareConfiguration() *FileShareConfiguration`
+- New function `*SkipFileShareConfiguration.GetFileShareConfiguration() *FileShareConfiguration`
+- New function `PossibleConfigurationTypeValues() []ConfigurationType`
+- New function `PossibleSSLPreferenceValues() []SSLPreference`
+- New function `*ExternalInstallationSoftwareConfiguration.GetSoftwareConfiguration() *SoftwareConfiguration`
+- New struct `CreateAndMountFileShareConfiguration`
+- New struct `DiskConfiguration`
+- New struct `DiskSKU`
+- New struct `DiskVolumeConfiguration`
+- New struct `ExternalInstallationSoftwareConfiguration`
+- New struct `FileShareConfiguration`
+- New struct `LoadBalancerDetails`
+- New struct `MountFileShareConfiguration`
+- New struct `SkipFileShareConfiguration`
+- New struct `StorageConfiguration`
+- New struct `StorageInformation`
+- New field `SSLCertificateURI` in struct `MsSQLServerProviderInstanceProperties`
+- New field `SSLPreference` in struct `MsSQLServerProviderInstanceProperties`
+- New field `Body` in struct `SAPVirtualInstancesClientUpdateOptions`
+- New field `Body` in struct `SAPApplicationServerInstancesClientBeginCreateOptions`
+- New field `Body` in struct `SAPCentralInstancesClientBeginCreateOptions`
+- New field `StorageDetails` in struct `DatabaseVMDetails`
+- New field `StorageDetails` in struct `SAPApplicationServerProperties`
+- New field `SSLCertificateURI` in struct `HanaDbProviderInstanceProperties`
+- New field `SSLPreference` in struct `HanaDbProviderInstanceProperties`
+- New field `StorageConfiguration` in struct `ThreeTierConfiguration`
+- New field `LoadBalancerDetails` in struct `SAPDatabaseProperties`
+- New field `StorageDetails` in struct `CentralServerVMDetails`
+- New field `Body` in struct `SAPDatabaseInstancesClientBeginCreateOptions`
+- New field `Body` in struct `SAPCentralInstancesClientBeginUpdateOptions`
+- New field `Body` in struct `SAPDatabaseInstancesClientBeginUpdateOptions`
+- New field `DbDiskConfiguration` in struct `SingleServerConfiguration`
+- New field `SSLCertificateURI` in struct `PrometheusOSProviderInstanceProperties`
+- New field `SSLPreference` in struct `PrometheusOSProviderInstanceProperties`
+- New field `DiskConfiguration` in struct `DatabaseConfiguration`
+- New field `Body` in struct `SAPApplicationServerInstancesClientBeginUpdateOptions`
+- New field `SSLCertificateURI` in struct `PrometheusHaClusterProviderInstanceProperties`
+- New field `SSLPreference` in struct `PrometheusHaClusterProviderInstanceProperties`
+- New field `LoadBalancerDetails` in struct `SAPCentralServerProperties`
+- New field `Body` in struct `SAPVirtualInstancesClientBeginCreateOptions`
+- New field `StorageAccountArmID` in struct `MonitorProperties`
+- New field `ZoneRedundancyPreference` in struct `MonitorProperties`
+- New field `SSLCertificateURI` in struct `DB2ProviderInstanceProperties`
+- New field `SSLPreference` in struct `DB2ProviderInstanceProperties`
+- New field `SSLCertificateURI` in struct `SapNetWeaverProviderInstanceProperties`
+- New field `SSLPreference` in struct `SapNetWeaverProviderInstanceProperties`
+
+
 ## 0.2.0 (2022-06-30)
 ### Breaking Changes
 
