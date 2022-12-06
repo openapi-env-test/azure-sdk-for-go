@@ -1,5 +1,63 @@
 # Release History
 
+## 1.1.0-beta.2 (2022-12-06)
+### Features Added
+
+- New const `AnalyticsConnectorDataSourceTypeFhirservice`
+- New const `FhirServiceVersionSTU3`
+- New const `AnalyticsConnectorMappingTypeFhirToParquet`
+- New const `FhirServiceVersionR4`
+- New const `AnalyticsConnectorDataDestinationTypeDatalake`
+- New type alias `AnalyticsConnectorDataDestinationType`
+- New type alias `AnalyticsConnectorDataSourceType`
+- New type alias `AnalyticsConnectorMappingType`
+- New type alias `FhirServiceVersion`
+- New function `*AnalyticsConnectorsClient.BeginDelete(context.Context, string, string, string, *AnalyticsConnectorsClientBeginDeleteOptions) (*runtime.Poller[AnalyticsConnectorsClientDeleteResponse], error)`
+- New function `NewAnalyticsConnectorsClient(string, azcore.TokenCredential, *arm.ClientOptions) (*AnalyticsConnectorsClient, error)`
+- New function `PossibleFhirServiceVersionValues() []FhirServiceVersion`
+- New function `*AnalyticsConnectorDataSource.GetAnalyticsConnectorDataSource() *AnalyticsConnectorDataSource`
+- New function `*AnalyticsConnectorFhirServiceDataSource.GetAnalyticsConnectorDataSource() *AnalyticsConnectorDataSource`
+- New function `*AnalyticsConnectorMapping.GetAnalyticsConnectorMapping() *AnalyticsConnectorMapping`
+- New function `*AnalyticsConnectorDataDestination.GetAnalyticsConnectorDataDestination() *AnalyticsConnectorDataDestination`
+- New function `*AnalyticsConnectorsClient.NewListByWorkspacePager(string, string, *AnalyticsConnectorsClientListByWorkspaceOptions) *runtime.Pager[AnalyticsConnectorsClientListByWorkspaceResponse]`
+- New function `PossibleAnalyticsConnectorDataSourceTypeValues() []AnalyticsConnectorDataSourceType`
+- New function `*AnalyticsConnectorsClient.Get(context.Context, string, string, string, *AnalyticsConnectorsClientGetOptions) (AnalyticsConnectorsClientGetResponse, error)`
+- New function `*AnalyticsConnectorFhirToParquetMapping.GetAnalyticsConnectorMapping() *AnalyticsConnectorMapping`
+- New function `*AnalyticsConnectorDataLakeDataDestination.GetAnalyticsConnectorDataDestination() *AnalyticsConnectorDataDestination`
+- New function `*AnalyticsConnectorsClient.BeginUpdate(context.Context, string, string, string, AnalyticsConnectorPatchResource, *AnalyticsConnectorsClientBeginUpdateOptions) (*runtime.Poller[AnalyticsConnectorsClientUpdateResponse], error)`
+- New function `PossibleAnalyticsConnectorMappingTypeValues() []AnalyticsConnectorMappingType`
+- New function `PossibleAnalyticsConnectorDataDestinationTypeValues() []AnalyticsConnectorDataDestinationType`
+- New function `*AnalyticsConnectorsClient.BeginCreateOrUpdate(context.Context, string, string, string, AnalyticsConnector, *AnalyticsConnectorsClientBeginCreateOrUpdateOptions) (*runtime.Poller[AnalyticsConnectorsClientCreateOrUpdateResponse], error)`
+- New struct `AnalyticsConnector`
+- New struct `AnalyticsConnectorCollection`
+- New struct `AnalyticsConnectorDataDestination`
+- New struct `AnalyticsConnectorDataLakeDataDestination`
+- New struct `AnalyticsConnectorDataSource`
+- New struct `AnalyticsConnectorFhirServiceDataSource`
+- New struct `AnalyticsConnectorFhirToParquetMapping`
+- New struct `AnalyticsConnectorMapping`
+- New struct `AnalyticsConnectorPatchResource`
+- New struct `AnalyticsConnectorProperties`
+- New struct `AnalyticsConnectorsClient`
+- New struct `AnalyticsConnectorsClientBeginCreateOrUpdateOptions`
+- New struct `AnalyticsConnectorsClientBeginDeleteOptions`
+- New struct `AnalyticsConnectorsClientBeginUpdateOptions`
+- New struct `AnalyticsConnectorsClientCreateOrUpdateResponse`
+- New struct `AnalyticsConnectorsClientDeleteResponse`
+- New struct `AnalyticsConnectorsClientGetOptions`
+- New struct `AnalyticsConnectorsClientGetResponse`
+- New struct `AnalyticsConnectorsClientListByWorkspaceOptions`
+- New struct `AnalyticsConnectorsClientListByWorkspaceResponse`
+- New struct `AnalyticsConnectorsClientUpdateResponse`
+- New struct `CorsConfiguration`
+- New field `CorsConfiguration` in struct `DicomServiceProperties`
+- New field `SourceMdmAccount` in struct `MetricSpecification`
+- New field `IsInternal` in struct `MetricSpecification`
+- New field `MetricFilterPattern` in struct `MetricSpecification`
+- New field `EnableRegionalMdmAccount` in struct `MetricSpecification`
+- New field `ResourceIDDimensionNameOverride` in struct `MetricSpecification`
+
+
 ## 1.1.0-beta.1 (2022-05-19)
 ### Features Added
 
