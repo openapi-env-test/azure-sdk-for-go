@@ -1,88 +1,123 @@
 # Release History
 
-## 1.1.0-beta.1 (2022-05-19)
+## 2.0.0 (2022-12-06)
+### Breaking Changes
+
+- Struct `CloudError` has been removed
+- Struct `CloudErrorBody` has been removed
+
 ### Features Added
 
-- New const `ProbeActionTypeTCPSocketAction`
-- New const `APIPortalProvisioningStateSucceeded`
-- New const `CertificateResourceProvisioningStateFailed`
-- New const `CertificateResourceProvisioningStateDeleting`
-- New const `StorageTypeStorageAccount`
-- New const `APIPortalProvisioningStateCreating`
+- New const `PowerStateStopped`
 - New const `GatewayProvisioningStateSucceeded`
-- New const `CustomDomainResourceProvisioningStateFailed`
-- New const `CustomDomainResourceProvisioningStateSucceeded`
+- New const `GatewayProvisioningStateCreating`
 - New const `APIPortalProvisioningStateUpdating`
 - New const `CustomDomainResourceProvisioningStateCreating`
-- New const `PowerStateStopped`
+- New const `CustomDomainResourceProvisioningStateFailed`
+- New const `SessionAffinityNone`
+- New const `CustomDomainResourceProvisioningStateUpdating`
+- New const `GatewayProvisioningStateDeleting`
+- New const `CustomDomainResourceProvisioningStateDeleting`
+- New const `ProbeActionTypeHTTPGetAction`
+- New const `BackendProtocolDefault`
+- New const `CustomDomainResourceProvisioningStateSucceeded`
+- New const `APIPortalProvisioningStateFailed`
+- New const `CertificateResourceProvisioningStateUpdating`
+- New const `CertificateResourceProvisioningStateDeleting`
+- New const `GatewayRouteConfigProtocolHTTPS`
+- New const `GatewayProvisioningStateUpdating`
 - New const `PowerStateRunning`
-- New const `CertificateResourceProvisioningStateCreating`
 - New const `GatewayProvisioningStateFailed`
 - New const `TypeAzureFileVolume`
-- New const `ProbeActionTypeHTTPGetAction`
-- New const `CertificateResourceProvisioningStateSucceeded`
-- New const `GatewayProvisioningStateUpdating`
-- New const `CertificateResourceProvisioningStateUpdating`
-- New const `GatewayProvisioningStateDeleting`
-- New const `GatewayProvisioningStateCreating`
+- New const `APIPortalProvisioningStateDeleting`
+- New const `GatewayRouteConfigProtocolHTTP`
+- New const `APIPortalProvisioningStateCreating`
+- New const `BackendProtocolGRPC`
+- New const `SessionAffinityCookie`
+- New const `ProbeActionTypeTCPSocketAction`
 - New const `HTTPSchemeTypeHTTPS`
+- New const `StorageTypeStorageAccount`
+- New const `CertificateResourceProvisioningStateFailed`
+- New const `CertificateResourceProvisioningStateCreating`
 - New const `HTTPSchemeTypeHTTP`
 - New const `ProbeActionTypeExecAction`
-- New const `APIPortalProvisioningStateDeleting`
-- New const `APIPortalProvisioningStateFailed`
-- New const `CustomDomainResourceProvisioningStateDeleting`
-- New const `CustomDomainResourceProvisioningStateUpdating`
-- New function `*StorageAccount.GetStorageProperties() *StorageProperties`
-- New function `PossiblePowerStateValues() []PowerState`
+- New const `CertificateResourceProvisioningStateSucceeded`
+- New const `APIPortalProvisioningStateSucceeded`
+- New type alias `CertificateResourceProvisioningState`
+- New type alias `ProbeActionType`
+- New type alias `StorageType`
+- New type alias `Type`
+- New type alias `APIPortalProvisioningState`
+- New type alias `HTTPSchemeType`
+- New type alias `BackendProtocol`
+- New type alias `PowerState`
+- New type alias `GatewayProvisioningState`
+- New type alias `CustomDomainResourceProvisioningState`
+- New type alias `SessionAffinity`
+- New type alias `GatewayRouteConfigProtocol`
+- New function `NewGatewaysClient(string, azcore.TokenCredential, *arm.ClientOptions) (*GatewaysClient, error)`
 - New function `*TCPSocketAction.GetProbeAction() *ProbeAction`
-- New function `StorageAccount.MarshalJSON() ([]byte, error)`
-- New function `AzureFileVolume.MarshalJSON() ([]byte, error)`
-- New function `*StorageProperties.GetStorageProperties() *StorageProperties`
-- New function `GatewayAPIRoute.MarshalJSON() ([]byte, error)`
-- New function `ExecAction.MarshalJSON() ([]byte, error)`
-- New function `StorageResource.MarshalJSON() ([]byte, error)`
-- New function `*AzureFileVolume.GetCustomPersistentDiskProperties() *CustomPersistentDiskProperties`
-- New function `*ProbeAction.GetProbeAction() *ProbeAction`
-- New function `PossibleStorageTypeValues() []StorageType`
-- New function `PossibleCertificateResourceProvisioningStateValues() []CertificateResourceProvisioningState`
-- New function `PossibleGatewayProvisioningStateValues() []GatewayProvisioningState`
-- New function `Probe.MarshalJSON() ([]byte, error)`
-- New function `*ExecAction.UnmarshalJSON([]byte) error`
-- New function `TCPSocketAction.MarshalJSON() ([]byte, error)`
-- New function `*StorageAccount.UnmarshalJSON([]byte) error`
-- New function `GatewayCorsProperties.MarshalJSON() ([]byte, error)`
-- New function `PossibleTypeValues() []Type`
-- New function `ManagedIdentityProperties.MarshalJSON() ([]byte, error)`
-- New function `PossibleAPIPortalProvisioningStateValues() []APIPortalProvisioningState`
-- New function `*TCPSocketAction.UnmarshalJSON([]byte) error`
-- New function `PossibleProbeActionTypeValues() []ProbeActionType`
-- New function `*CustomContainerUserSourceInfo.GetUserSourceInfo() *UserSourceInfo`
+- New function `*StoragesClient.Get(context.Context, string, string, string, *StoragesClientGetOptions) (StoragesClientGetResponse, error)`
+- New function `*GatewayCustomDomainsClient.NewListPager(string, string, string, *GatewayCustomDomainsClientListOptions) *runtime.Pager[GatewayCustomDomainsClientListResponse]`
+- New function `*GatewaysClient.BeginDelete(context.Context, string, string, string, *GatewaysClientBeginDeleteOptions) (*runtime.Poller[GatewaysClientDeleteResponse], error)`
 - New function `*ServicesClient.BeginStart(context.Context, string, string, *ServicesClientBeginStartOptions) (*runtime.Poller[ServicesClientStartResponse], error)`
-- New function `SsoProperties.MarshalJSON() ([]byte, error)`
-- New function `*CustomContainerUserSourceInfo.UnmarshalJSON([]byte) error`
-- New function `CustomContainer.MarshalJSON() ([]byte, error)`
-- New function `*CustomPersistentDiskProperties.GetCustomPersistentDiskProperties() *CustomPersistentDiskProperties`
-- New function `GatewayRouteConfigProperties.MarshalJSON() ([]byte, error)`
-- New function `CustomPersistentDiskResource.MarshalJSON() ([]byte, error)`
-- New function `*StorageResource.UnmarshalJSON([]byte) error`
-- New function `CustomPersistentDiskProperties.MarshalJSON() ([]byte, error)`
-- New function `PossibleCustomDomainResourceProvisioningStateValues() []CustomDomainResourceProvisioningState`
-- New function `CustomContainerUserSourceInfo.MarshalJSON() ([]byte, error)`
 - New function `*HTTPGetAction.GetProbeAction() *ProbeAction`
-- New function `*Probe.UnmarshalJSON([]byte) error`
-- New function `*CustomPersistentDiskResource.UnmarshalJSON([]byte) error`
-- New function `*ExecAction.GetProbeAction() *ProbeAction`
-- New function `GatewayProperties.MarshalJSON() ([]byte, error)`
-- New function `*AzureFileVolume.UnmarshalJSON([]byte) error`
+- New function `PossibleStorageTypeValues() []StorageType`
+- New function `*BuildServiceBuilderClient.ListDeployments(context.Context, string, string, string, string, *BuildServiceBuilderClientListDeploymentsOptions) (BuildServiceBuilderClientListDeploymentsResponse, error)`
+- New function `*AzureFileVolume.GetCustomPersistentDiskProperties() *CustomPersistentDiskProperties`
+- New function `PossibleTypeValues() []Type`
+- New function `*APIPortalsClient.BeginDelete(context.Context, string, string, string, *APIPortalsClientBeginDeleteOptions) (*runtime.Poller[APIPortalsClientDeleteResponse], error)`
+- New function `*GatewayCustomDomainsClient.BeginCreateOrUpdate(context.Context, string, string, string, string, GatewayCustomDomainResource, *GatewayCustomDomainsClientBeginCreateOrUpdateOptions) (*runtime.Poller[GatewayCustomDomainsClientCreateOrUpdateResponse], error)`
+- New function `*GatewayCustomDomainsClient.Get(context.Context, string, string, string, string, *GatewayCustomDomainsClientGetOptions) (GatewayCustomDomainsClientGetResponse, error)`
+- New function `*APIPortalCustomDomainsClient.BeginDelete(context.Context, string, string, string, string, *APIPortalCustomDomainsClientBeginDeleteOptions) (*runtime.Poller[APIPortalCustomDomainsClientDeleteResponse], error)`
+- New function `PossibleBackendProtocolValues() []BackendProtocol`
+- New function `*GatewaysClient.BeginCreateOrUpdate(context.Context, string, string, string, GatewayResource, *GatewaysClientBeginCreateOrUpdateOptions) (*runtime.Poller[GatewaysClientCreateOrUpdateResponse], error)`
+- New function `PossibleSessionAffinityValues() []SessionAffinity`
+- New function `PossibleCertificateResourceProvisioningStateValues() []CertificateResourceProvisioningState`
+- New function `*GatewayRouteConfigsClient.Get(context.Context, string, string, string, string, *GatewayRouteConfigsClientGetOptions) (GatewayRouteConfigsClientGetResponse, error)`
+- New function `*GatewayRouteConfigsClient.NewListPager(string, string, string, *GatewayRouteConfigsClientListOptions) *runtime.Pager[GatewayRouteConfigsClientListResponse]`
+- New function `NewGatewayRouteConfigsClient(string, azcore.TokenCredential, *arm.ClientOptions) (*GatewayRouteConfigsClient, error)`
+- New function `*ProbeAction.GetProbeAction() *ProbeAction`
+- New function `*APIPortalsClient.ValidateDomain(context.Context, string, string, string, CustomDomainValidatePayload, *APIPortalsClientValidateDomainOptions) (APIPortalsClientValidateDomainResponse, error)`
+- New function `*APIPortalsClient.Get(context.Context, string, string, string, *APIPortalsClientGetOptions) (APIPortalsClientGetResponse, error)`
+- New function `PossibleGatewayProvisioningStateValues() []GatewayProvisioningState`
+- New function `PossibleProbeActionTypeValues() []ProbeActionType`
+- New function `*APIPortalsClient.BeginCreateOrUpdate(context.Context, string, string, string, APIPortalResource, *APIPortalsClientBeginCreateOrUpdateOptions) (*runtime.Poller[APIPortalsClientCreateOrUpdateResponse], error)`
+- New function `PossibleGatewayRouteConfigProtocolValues() []GatewayRouteConfigProtocol`
+- New function `*GatewaysClient.NewListPager(string, string, *GatewaysClientListOptions) *runtime.Pager[GatewaysClientListResponse]`
 - New function `*ServicesClient.BeginStop(context.Context, string, string, *ServicesClientBeginStopOptions) (*runtime.Poller[ServicesClientStopResponse], error)`
-- New function `GatewayOperatorProperties.MarshalJSON() ([]byte, error)`
-- New function `*HTTPGetAction.UnmarshalJSON([]byte) error`
-- New function `HTTPGetAction.MarshalJSON() ([]byte, error)`
+- New function `*APIPortalCustomDomainsClient.BeginCreateOrUpdate(context.Context, string, string, string, string, APIPortalCustomDomainResource, *APIPortalCustomDomainsClientBeginCreateOrUpdateOptions) (*runtime.Poller[APIPortalCustomDomainsClientCreateOrUpdateResponse], error)`
+- New function `*StoragesClient.NewListPager(string, string, *StoragesClientListOptions) *runtime.Pager[StoragesClientListResponse]`
+- New function `PossibleCustomDomainResourceProvisioningStateValues() []CustomDomainResourceProvisioningState`
+- New function `*GatewaysClient.Get(context.Context, string, string, string, *GatewaysClientGetOptions) (GatewaysClientGetResponse, error)`
+- New function `*StoragesClient.BeginCreateOrUpdate(context.Context, string, string, string, StorageResource, *StoragesClientBeginCreateOrUpdateOptions) (*runtime.Poller[StoragesClientCreateOrUpdateResponse], error)`
+- New function `*CustomContainerUserSourceInfo.GetUserSourceInfo() *UserSourceInfo`
+- New function `PossibleAPIPortalProvisioningStateValues() []APIPortalProvisioningState`
+- New function `*GatewayCustomDomainsClient.BeginDelete(context.Context, string, string, string, string, *GatewayCustomDomainsClientBeginDeleteOptions) (*runtime.Poller[GatewayCustomDomainsClientDeleteResponse], error)`
+- New function `*DeploymentsClient.BeginEnableRemoteDebugging(context.Context, string, string, string, string, *DeploymentsClientBeginEnableRemoteDebuggingOptions) (*runtime.Poller[DeploymentsClientEnableRemoteDebuggingResponse], error)`
+- New function `*APIPortalsClient.NewListPager(string, string, *APIPortalsClientListOptions) *runtime.Pager[APIPortalsClientListResponse]`
+- New function `*GatewayRouteConfigsClient.BeginCreateOrUpdate(context.Context, string, string, string, string, GatewayRouteConfigResource, *GatewayRouteConfigsClientBeginCreateOrUpdateOptions) (*runtime.Poller[GatewayRouteConfigsClientCreateOrUpdateResponse], error)`
+- New function `NewStoragesClient(string, azcore.TokenCredential, *arm.ClientOptions) (*StoragesClient, error)`
+- New function `*CustomPersistentDiskProperties.GetCustomPersistentDiskProperties() *CustomPersistentDiskProperties`
+- New function `NewGatewayCustomDomainsClient(string, azcore.TokenCredential, *arm.ClientOptions) (*GatewayCustomDomainsClient, error)`
+- New function `*DeploymentsClient.BeginDisableRemoteDebugging(context.Context, string, string, string, string, *DeploymentsClientBeginDisableRemoteDebuggingOptions) (*runtime.Poller[DeploymentsClientDisableRemoteDebuggingResponse], error)`
+- New function `NewAPIPortalCustomDomainsClient(string, azcore.TokenCredential, *arm.ClientOptions) (*APIPortalCustomDomainsClient, error)`
+- New function `*GatewaysClient.ValidateDomain(context.Context, string, string, string, CustomDomainValidatePayload, *GatewaysClientValidateDomainOptions) (GatewaysClientValidateDomainResponse, error)`
 - New function `PossibleHTTPSchemeTypeValues() []HTTPSchemeType`
-- New function `APIPortalProperties.MarshalJSON() ([]byte, error)`
+- New function `NewAPIPortalsClient(string, azcore.TokenCredential, *arm.ClientOptions) (*APIPortalsClient, error)`
+- New function `*APIPortalCustomDomainsClient.Get(context.Context, string, string, string, string, *APIPortalCustomDomainsClientGetOptions) (APIPortalCustomDomainsClientGetResponse, error)`
+- New function `*StorageProperties.GetStorageProperties() *StorageProperties`
+- New function `*StoragesClient.BeginDelete(context.Context, string, string, string, *StoragesClientBeginDeleteOptions) (*runtime.Poller[StoragesClientDeleteResponse], error)`
+- New function `*APIPortalCustomDomainsClient.NewListPager(string, string, string, *APIPortalCustomDomainsClientListOptions) *runtime.Pager[APIPortalCustomDomainsClientListResponse]`
+- New function `*DeploymentsClient.GetRemoteDebuggingConfig(context.Context, string, string, string, string, *DeploymentsClientGetRemoteDebuggingConfigOptions) (DeploymentsClientGetRemoteDebuggingConfigResponse, error)`
+- New function `*GatewayRouteConfigsClient.BeginDelete(context.Context, string, string, string, string, *GatewayRouteConfigsClientBeginDeleteOptions) (*runtime.Poller[GatewayRouteConfigsClientDeleteResponse], error)`
+- New function `*StorageAccount.GetStorageProperties() *StorageProperties`
+- New function `*ExecAction.GetProbeAction() *ProbeAction`
+- New function `PossiblePowerStateValues() []PowerState`
 - New struct `APIPortalCustomDomainProperties`
 - New struct `APIPortalCustomDomainResource`
 - New struct `APIPortalCustomDomainResourceCollection`
+- New struct `APIPortalCustomDomainsClient`
 - New struct `APIPortalCustomDomainsClientBeginCreateOrUpdateOptions`
 - New struct `APIPortalCustomDomainsClientBeginDeleteOptions`
 - New struct `APIPortalCustomDomainsClientCreateOrUpdateResponse`
@@ -96,6 +131,7 @@
 - New struct `APIPortalResource`
 - New struct `APIPortalResourceCollection`
 - New struct `APIPortalResourceRequests`
+- New struct `APIPortalsClient`
 - New struct `APIPortalsClientBeginCreateOrUpdateOptions`
 - New struct `APIPortalsClientBeginDeleteOptions`
 - New struct `APIPortalsClientCreateOrUpdateResponse`
@@ -109,11 +145,20 @@
 - New struct `AppVNetAddons`
 - New struct `AzureFileVolume`
 - New struct `BuildResourceRequests`
+- New struct `BuildServiceBuilderClientListDeploymentsOptions`
+- New struct `BuildServiceBuilderClientListDeploymentsResponse`
 - New struct `ContainerProbeSettings`
 - New struct `CustomContainer`
 - New struct `CustomContainerUserSourceInfo`
 - New struct `CustomPersistentDiskProperties`
 - New struct `CustomPersistentDiskResource`
+- New struct `DeploymentList`
+- New struct `DeploymentsClientBeginDisableRemoteDebuggingOptions`
+- New struct `DeploymentsClientBeginEnableRemoteDebuggingOptions`
+- New struct `DeploymentsClientDisableRemoteDebuggingResponse`
+- New struct `DeploymentsClientEnableRemoteDebuggingResponse`
+- New struct `DeploymentsClientGetRemoteDebuggingConfigOptions`
+- New struct `DeploymentsClientGetRemoteDebuggingConfigResponse`
 - New struct `ExecAction`
 - New struct `GatewayAPIMetadataProperties`
 - New struct `GatewayAPIRoute`
@@ -121,6 +166,7 @@
 - New struct `GatewayCustomDomainProperties`
 - New struct `GatewayCustomDomainResource`
 - New struct `GatewayCustomDomainResourceCollection`
+- New struct `GatewayCustomDomainsClient`
 - New struct `GatewayCustomDomainsClientBeginCreateOrUpdateOptions`
 - New struct `GatewayCustomDomainsClientBeginDeleteOptions`
 - New struct `GatewayCustomDomainsClientCreateOrUpdateResponse`
@@ -140,6 +186,7 @@
 - New struct `GatewayRouteConfigProperties`
 - New struct `GatewayRouteConfigResource`
 - New struct `GatewayRouteConfigResourceCollection`
+- New struct `GatewayRouteConfigsClient`
 - New struct `GatewayRouteConfigsClientBeginCreateOrUpdateOptions`
 - New struct `GatewayRouteConfigsClientBeginDeleteOptions`
 - New struct `GatewayRouteConfigsClientCreateOrUpdateResponse`
@@ -148,6 +195,7 @@
 - New struct `GatewayRouteConfigsClientGetResponse`
 - New struct `GatewayRouteConfigsClientListOptions`
 - New struct `GatewayRouteConfigsClientListResponse`
+- New struct `GatewaysClient`
 - New struct `GatewaysClientBeginCreateOrUpdateOptions`
 - New struct `GatewaysClientBeginDeleteOptions`
 - New struct `GatewaysClientCreateOrUpdateResponse`
@@ -161,9 +209,12 @@
 - New struct `HTTPGetAction`
 - New struct `ImageRegistryCredential`
 - New struct `IngressConfig`
-- New struct `MarketplaceResource`
+- New struct `IngressSettings`
+- New struct `IngressSettingsClientAuth`
 - New struct `Probe`
 - New struct `ProbeAction`
+- New struct `RemoteDebugging`
+- New struct `RemoteDebuggingPayload`
 - New struct `ServiceVNetAddons`
 - New struct `ServicesClientBeginStartOptions`
 - New struct `ServicesClientBeginStopOptions`
@@ -174,6 +225,7 @@
 - New struct `StorageProperties`
 - New struct `StorageResource`
 - New struct `StorageResourceCollection`
+- New struct `StoragesClient`
 - New struct `StoragesClientBeginCreateOrUpdateOptions`
 - New struct `StoragesClientBeginDeleteOptions`
 - New struct `StoragesClientCreateOrUpdateResponse`
@@ -184,23 +236,24 @@
 - New struct `StoragesClientListResponse`
 - New struct `TCPSocketAction`
 - New struct `UserAssignedManagedIdentity`
-- New field `ProvisioningState` in struct `KeyVaultCertificateProperties`
-- New field `ProvisioningState` in struct `CertificateProperties`
-- New field `IngressConfig` in struct `NetworkProfile`
 - New field `LivenessProbe` in struct `DeploymentSettings`
 - New field `ReadinessProbe` in struct `DeploymentSettings`
 - New field `StartupProbe` in struct `DeploymentSettings`
 - New field `TerminationGracePeriodSeconds` in struct `DeploymentSettings`
 - New field `ContainerProbeSettings` in struct `DeploymentSettings`
+- New field `UserAssignedIdentities` in struct `ManagedIdentityProperties`
+- New field `VnetAddons` in struct `AppResourceProperties`
+- New field `CustomPersistentDisks` in struct `AppResourceProperties`
+- New field `IngressSettings` in struct `AppResourceProperties`
+- New field `IngressConfig` in struct `NetworkProfile`
+- New field `OutboundType` in struct `NetworkProfile`
+- New field `ProvisioningState` in struct `ContentCertificateProperties`
 - New field `ResourceRequests` in struct `BuildProperties`
+- New field `ProvisioningState` in struct `CertificateProperties`
 - New field `ProvisioningState` in struct `CustomDomainProperties`
-- New field `MarketplaceResource` in struct `ClusterResourceProperties`
 - New field `VnetAddons` in struct `ClusterResourceProperties`
 - New field `PowerState` in struct `ClusterResourceProperties`
-- New field `UserAssignedIdentities` in struct `ManagedIdentityProperties`
-- New field `ProvisioningState` in struct `ContentCertificateProperties`
-- New field `CustomPersistentDisks` in struct `AppResourceProperties`
-- New field `VnetAddons` in struct `AppResourceProperties`
+- New field `ProvisioningState` in struct `KeyVaultCertificateProperties`
 
 
 ## 1.0.0 (2022-05-17)
