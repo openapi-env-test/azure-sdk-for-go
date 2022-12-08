@@ -1,5 +1,21 @@
 # Release History
 
+## 5.0.0 (2022-12-08)
+### Breaking Changes
+
+- Function `*CloudServicesClient.BeginUpdate` parameter(s) have been changed from `(context.Context, string, string, CloudServiceUpdate, *CloudServicesClientBeginUpdateOptions)` to `(context.Context, string, string, *CloudServicesClientBeginUpdateOptions)`
+- Function `*CloudServicesUpdateDomainClient.BeginWalkUpdateDomain` parameter(s) have been changed from `(context.Context, string, string, int32, UpdateDomain, *CloudServicesUpdateDomainClientBeginWalkUpdateDomainOptions)` to `(context.Context, string, string, int32, *CloudServicesUpdateDomainClientBeginWalkUpdateDomainOptions)`
+- Function `*CloudServicesClient.BeginCreateOrUpdate` parameter(s) have been changed from `(context.Context, string, string, CloudService, *CloudServicesClientBeginCreateOrUpdateOptions)` to `(context.Context, string, string, *CloudServicesClientBeginCreateOrUpdateOptions)`
+
+### Features Added
+
+- New field `RequireGuestProvisionSignal` in struct `VirtualMachineScaleSetOSProfile`
+- New field `Parameters` in struct `CloudServicesClientBeginCreateOrUpdateOptions`
+- New field `Parameters` in struct `CloudServicesClientBeginUpdateOptions`
+- New field `Parameters` in struct `CloudServicesUpdateDomainClientBeginWalkUpdateDomainOptions`
+- New field `ConstrainedMaximumCapacity` in struct `VirtualMachineScaleSetProperties`
+
+
 ## 3.0.1 (2022-07-29)
 ### Other Changes
 - Fix wrong module import for live test
