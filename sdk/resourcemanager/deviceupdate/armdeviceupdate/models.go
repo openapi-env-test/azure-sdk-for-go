@@ -59,7 +59,7 @@ type AccountProperties struct {
 	SKU *SKU `json:"sku,omitempty"`
 
 	// READ-ONLY; API host name.
-	HostName *string `json:"hostName,omitempty" azure:"ro"`
+	HostNameSZ *string `json:"hostNameSZ,omitempty" azure:"ro"`
 
 	// READ-ONLY; Device Update account primary and failover location details
 	Locations []*Location `json:"locations,omitempty" azure:"ro"`
