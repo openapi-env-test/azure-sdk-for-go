@@ -105,7 +105,7 @@ func (a *AccountList) UnmarshalJSON(data []byte) error {
 // MarshalJSON implements the json.Marshaller interface for type AccountProperties.
 func (a AccountProperties) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
-	populate(objectMap, "hostName", a.HostName)
+	populate(objectMap, "hostNameSZ", a.HostNameSZ)
 	populate(objectMap, "locations", a.Locations)
 	populate(objectMap, "privateEndpointConnections", a.PrivateEndpointConnections)
 	populate(objectMap, "provisioningState", a.ProvisioningState)
@@ -123,8 +123,8 @@ func (a *AccountProperties) UnmarshalJSON(data []byte) error {
 	for key, val := range rawMsg {
 		var err error
 		switch key {
-		case "hostName":
-			err = unpopulate(val, "HostName", &a.HostName)
+		case "hostNameSZ":
+			err = unpopulate(val, "HostNameSZ", &a.HostNameSZ)
 			delete(rawMsg, key)
 		case "locations":
 			err = unpopulate(val, "Locations", &a.Locations)
