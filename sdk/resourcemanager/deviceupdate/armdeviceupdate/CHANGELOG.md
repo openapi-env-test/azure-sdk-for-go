@@ -1,5 +1,15 @@
 # Release History
 
+## 2.0.0 (2023-01-03)
+### Breaking Changes
+
+- Field `HostName` of struct `AccountProperties` has been removed
+
+### Features Added
+
+- New field `HostNameSZ` in struct `AccountProperties`
+
+
 ## 1.0.0 (2022-08-11)
 ### Other Changes
 - Release stable version.
