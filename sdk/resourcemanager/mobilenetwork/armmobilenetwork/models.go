@@ -290,11 +290,9 @@ type DataNetworkConfiguration struct {
 	// The default PDU session type, which is used if the UE does not request a specific session type.
 	DefaultSessionType *PduSessionType `json:"defaultSessionType,omitempty"`
 
-	// Default QoS Flow 5G QoS Indicator value. The 5QI identifies a specific QoS forwarding treatment to be provided to a flow.
-	// This must not be a standardized 5QI value corresponding to a GBR (guaranteed
-	// bit rate) QoS Flow. The illegal GBR 5QI values are: 1, 2, 3, 4, 65, 66, 67, 71, 72, 73, 74, 75, 76, 82, 83, 84, and 85.
-	// See 3GPP TS23.501 section 5.7.2.1 for a full description of the 5QI parameter,
-	// and table 5.7.4-1 for the definition of which are the GBR 5QI values.
+	// Default 5G QoS Flow Indicator value. The 5QI identifies a specific QoS forwarding treatment to be provided to a flow. See
+	// 3GPP TS23.501 section 5.7.2.1 for a full description of the 5QI parameter, and
+	// table 5.7.4-1 for the definition the 5QI values.
 	FiveQi *int32 `json:"5qi,omitempty"`
 
 	// The maximum number of downlink packets to buffer at the user plane for High Latency Communication - Extended Buffering.
@@ -688,27 +686,6 @@ type PacketCoreControlPlane struct {
 	Type *string `json:"type,omitempty" azure:"ro"`
 }
 
-// PacketCoreControlPlaneClientBeginCollectDiagnosticsPackageOptions contains the optional parameters for the PacketCoreControlPlaneClient.BeginCollectDiagnosticsPackage
-// method.
-type PacketCoreControlPlaneClientBeginCollectDiagnosticsPackageOptions struct {
-	// Resumes the LRO from the provided token.
-	ResumeToken string
-}
-
-// PacketCoreControlPlaneClientBeginReinstallOptions contains the optional parameters for the PacketCoreControlPlaneClient.BeginReinstall
-// method.
-type PacketCoreControlPlaneClientBeginReinstallOptions struct {
-	// Resumes the LRO from the provided token.
-	ResumeToken string
-}
-
-// PacketCoreControlPlaneClientBeginRollbackOptions contains the optional parameters for the PacketCoreControlPlaneClient.BeginRollback
-// method.
-type PacketCoreControlPlaneClientBeginRollbackOptions struct {
-	// Resumes the LRO from the provided token.
-	ResumeToken string
-}
-
 // PacketCoreControlPlaneCollectDiagnosticsPackage - Packet core control plane collect diagnostics package options
 type PacketCoreControlPlaneCollectDiagnosticsPackage struct {
 	// REQUIRED; The Storage Account Blob URL to upload the diagnostics package to.
@@ -815,6 +792,13 @@ type PacketCoreControlPlaneVersionsClientListOptions struct {
 	// placeholder for future optional parameters
 }
 
+// PacketCoreControlPlanesClientBeginCollectDiagnosticsPackageOptions contains the optional parameters for the PacketCoreControlPlanesClient.BeginCollectDiagnosticsPackage
+// method.
+type PacketCoreControlPlanesClientBeginCollectDiagnosticsPackageOptions struct {
+	// Resumes the LRO from the provided token.
+	ResumeToken string
+}
+
 // PacketCoreControlPlanesClientBeginCreateOrUpdateOptions contains the optional parameters for the PacketCoreControlPlanesClient.BeginCreateOrUpdate
 // method.
 type PacketCoreControlPlanesClientBeginCreateOrUpdateOptions struct {
@@ -825,6 +809,20 @@ type PacketCoreControlPlanesClientBeginCreateOrUpdateOptions struct {
 // PacketCoreControlPlanesClientBeginDeleteOptions contains the optional parameters for the PacketCoreControlPlanesClient.BeginDelete
 // method.
 type PacketCoreControlPlanesClientBeginDeleteOptions struct {
+	// Resumes the LRO from the provided token.
+	ResumeToken string
+}
+
+// PacketCoreControlPlanesClientBeginReinstallOptions contains the optional parameters for the PacketCoreControlPlanesClient.BeginReinstall
+// method.
+type PacketCoreControlPlanesClientBeginReinstallOptions struct {
+	// Resumes the LRO from the provided token.
+	ResumeToken string
+}
+
+// PacketCoreControlPlanesClientBeginRollbackOptions contains the optional parameters for the PacketCoreControlPlanesClient.BeginRollback
+// method.
+type PacketCoreControlPlanesClientBeginRollbackOptions struct {
 	// Resumes the LRO from the provided token.
 	ResumeToken string
 }
@@ -960,11 +958,9 @@ type PccRuleQosPolicy struct {
 	// section 5.7.2.2 for a full description of the ARP parameters.
 	AllocationAndRetentionPriorityLevel *int32 `json:"allocationAndRetentionPriorityLevel,omitempty"`
 
-	// QoS Flow 5G QoS Indicator value. The 5QI identifies a specific QoS forwarding treatment to be provided to a flow. This
-	// must not be a standardized 5QI value corresponding to a GBR (guaranteed bit rate)
-	// QoS Flow. The illegal GBR 5QI values are: 1, 2, 3, 4, 65, 66, 67, 71, 72, 73, 74, 75, 76, 82, 83, 84, and 85. See 3GPP
+	// 5G QoS Flow Indicator value. The 5QI identifies a specific QoS forwarding treatment to be provided to a flow. See 3GPP
 	// TS23.501 section 5.7.2.1 for a full description of the 5QI parameter, and table
-	// 5.7.4-1 for the definition of which are the GBR 5QI values.
+	// 5.7.4-1 for the definition the 5QI values.
 	FiveQi *int32 `json:"5qi,omitempty"`
 
 	// The guaranteed bit rate (GBR) for all service data flows that use this data flow policy rule. This is an optional setting.
@@ -1112,11 +1108,9 @@ type QosPolicy struct {
 	// section 5.7.2.2 for a full description of the ARP parameters.
 	AllocationAndRetentionPriorityLevel *int32 `json:"allocationAndRetentionPriorityLevel,omitempty"`
 
-	// QoS Flow 5G QoS Indicator value. The 5QI identifies a specific QoS forwarding treatment to be provided to a flow. This
-	// must not be a standardized 5QI value corresponding to a GBR (guaranteed bit rate)
-	// QoS Flow. The illegal GBR 5QI values are: 1, 2, 3, 4, 65, 66, 67, 71, 72, 73, 74, 75, 76, 82, 83, 84, and 85. See 3GPP
+	// 5G QoS Flow Indicator value. The 5QI identifies a specific QoS forwarding treatment to be provided to a flow. See 3GPP
 	// TS23.501 section 5.7.2.1 for a full description of the 5QI parameter, and table
-	// 5.7.4-1 for the definition of which are the GBR 5QI values.
+	// 5.7.4-1 for the definition the 5QI values.
 	FiveQi *int32 `json:"5qi,omitempty"`
 
 	// QoS Flow preemption capability. The preemption capability of a QoS Flow controls whether it can preempt another QoS Flow
@@ -1281,24 +1275,6 @@ type Sim struct {
 
 	// READ-ONLY; The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
 	Type *string `json:"type,omitempty" azure:"ro"`
-}
-
-// SimClientBeginBulkDeleteOptions contains the optional parameters for the SimClient.BeginBulkDelete method.
-type SimClientBeginBulkDeleteOptions struct {
-	// Resumes the LRO from the provided token.
-	ResumeToken string
-}
-
-// SimClientBeginBulkUploadEncryptedOptions contains the optional parameters for the SimClient.BeginBulkUploadEncrypted method.
-type SimClientBeginBulkUploadEncryptedOptions struct {
-	// Resumes the LRO from the provided token.
-	ResumeToken string
-}
-
-// SimClientBeginBulkUploadOptions contains the optional parameters for the SimClient.BeginBulkUpload method.
-type SimClientBeginBulkUploadOptions struct {
-	// Resumes the LRO from the provided token.
-	ResumeToken string
 }
 
 // SimDeleteList - The SIMs to delete.
@@ -1586,6 +1562,25 @@ type SimStaticIPPropertiesStaticIP struct {
 type SimUploadList struct {
 	// REQUIRED; A list of SIMs to upload.
 	Sims []*SimNameAndProperties `json:"sims,omitempty"`
+}
+
+// SimsClientBeginBulkDeleteOptions contains the optional parameters for the SimsClient.BeginBulkDelete method.
+type SimsClientBeginBulkDeleteOptions struct {
+	// Resumes the LRO from the provided token.
+	ResumeToken string
+}
+
+// SimsClientBeginBulkUploadEncryptedOptions contains the optional parameters for the SimsClient.BeginBulkUploadEncrypted
+// method.
+type SimsClientBeginBulkUploadEncryptedOptions struct {
+	// Resumes the LRO from the provided token.
+	ResumeToken string
+}
+
+// SimsClientBeginBulkUploadOptions contains the optional parameters for the SimsClient.BeginBulkUpload method.
+type SimsClientBeginBulkUploadOptions struct {
+	// Resumes the LRO from the provided token.
+	ResumeToken string
 }
 
 // SimsClientBeginCreateOrUpdateOptions contains the optional parameters for the SimsClient.BeginCreateOrUpdate method.
