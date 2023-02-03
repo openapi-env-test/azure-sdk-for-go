@@ -1,5 +1,13 @@
 # Release History
 
+## 1.1.0 (2023-02-03)
+### Features Added
+
+- New struct `ProxyResource`
+- New struct `Resource`
+- New struct `TrackedResource`
+
+
 ## 0.7.0 (2022-06-27)
 ### Features Added
 

@@ -52,7 +52,7 @@ func NewSystemAssignedIdentitiesClient(credential azcore.TokenCredential, option
 
 // GetByScope - Gets the systemAssignedIdentity available under the specified RP scope.
 // If the operation fails it returns an *azcore.ResponseError type.
-// Generated from API version 2022-01-31-preview
+// Generated from API version 2023-01-31
 // scope - The resource provider scope of the resource. Parent resource being extended by Managed Identities.
 // options - SystemAssignedIdentitiesClientGetByScopeOptions contains the optional parameters for the SystemAssignedIdentitiesClient.GetByScope
 // method.
@@ -80,7 +80,7 @@ func (client *SystemAssignedIdentitiesClient) getByScopeCreateRequest(ctx contex
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2022-01-31-preview")
+	reqQP.Set("api-version", "2023-01-31")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	return req, nil
