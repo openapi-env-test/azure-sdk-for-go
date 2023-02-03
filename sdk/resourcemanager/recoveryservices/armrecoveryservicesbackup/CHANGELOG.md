@@ -1,5 +1,11 @@
 # Release History
 
+## 3.0.0 (2023-02-03)
+### Breaking Changes
+
+- Type of `ErrorAdditionalInfo.Info` has been changed from `any` to `interface{}`
+
+
 ## 1.0.0 (2022-05-17)
 
 The package of `github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/recoveryservices/armrecoveryservicesbackup` is using our [next generation design principles](https://azure.github.io/azure-sdk/general_introduction.html) since version 1.0.0, which contains breaking changes.
