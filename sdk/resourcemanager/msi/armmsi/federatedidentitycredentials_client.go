@@ -58,8 +58,8 @@ func NewFederatedIdentityCredentialsClient(subscriptionID string, credential azc
 
 // CreateOrUpdate - Create or update a federated identity credential under the specified user assigned identity.
 // If the operation fails it returns an *azcore.ResponseError type.
-// Generated from API version 2022-01-31-preview
-// resourceGroupName - The name of the Resource Group to which the identity belongs.
+// Generated from API version 2023-01-31
+// resourceGroupName - The name of the resource group. The name is case insensitive.
 // resourceName - The name of the identity resource.
 // federatedIdentityCredentialResourceName - The name of the federated identity credential resource.
 // parameters - Parameters to create or update the federated identity credential.
@@ -104,7 +104,7 @@ func (client *FederatedIdentityCredentialsClient) createOrUpdateCreateRequest(ct
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2022-01-31-preview")
+	reqQP.Set("api-version", "2023-01-31")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	return req, runtime.MarshalAsJSON(req, parameters)
@@ -121,8 +121,8 @@ func (client *FederatedIdentityCredentialsClient) createOrUpdateHandleResponse(r
 
 // Delete - Deletes the federated identity credential.
 // If the operation fails it returns an *azcore.ResponseError type.
-// Generated from API version 2022-01-31-preview
-// resourceGroupName - The name of the Resource Group to which the identity belongs.
+// Generated from API version 2023-01-31
+// resourceGroupName - The name of the resource group. The name is case insensitive.
 // resourceName - The name of the identity resource.
 // federatedIdentityCredentialResourceName - The name of the federated identity credential resource.
 // options - FederatedIdentityCredentialsClientDeleteOptions contains the optional parameters for the FederatedIdentityCredentialsClient.Delete
@@ -166,7 +166,7 @@ func (client *FederatedIdentityCredentialsClient) deleteCreateRequest(ctx contex
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2022-01-31-preview")
+	reqQP.Set("api-version", "2023-01-31")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	return req, nil
@@ -174,8 +174,8 @@ func (client *FederatedIdentityCredentialsClient) deleteCreateRequest(ctx contex
 
 // Get - Gets the federated identity credential.
 // If the operation fails it returns an *azcore.ResponseError type.
-// Generated from API version 2022-01-31-preview
-// resourceGroupName - The name of the Resource Group to which the identity belongs.
+// Generated from API version 2023-01-31
+// resourceGroupName - The name of the resource group. The name is case insensitive.
 // resourceName - The name of the identity resource.
 // federatedIdentityCredentialResourceName - The name of the federated identity credential resource.
 // options - FederatedIdentityCredentialsClientGetOptions contains the optional parameters for the FederatedIdentityCredentialsClient.Get
@@ -219,7 +219,7 @@ func (client *FederatedIdentityCredentialsClient) getCreateRequest(ctx context.C
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2022-01-31-preview")
+	reqQP.Set("api-version", "2023-01-31")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	return req, nil
@@ -235,9 +235,8 @@ func (client *FederatedIdentityCredentialsClient) getHandleResponse(resp *http.R
 }
 
 // NewListPager - Lists all the federated identity credentials under the specified user assigned identity.
-// If the operation fails it returns an *azcore.ResponseError type.
-// Generated from API version 2022-01-31-preview
-// resourceGroupName - The name of the Resource Group to which the identity belongs.
+// Generated from API version 2023-01-31
+// resourceGroupName - The name of the resource group. The name is case insensitive.
 // resourceName - The name of the identity resource.
 // options - FederatedIdentityCredentialsClientListOptions contains the optional parameters for the FederatedIdentityCredentialsClient.List
 // method.
@@ -295,7 +294,7 @@ func (client *FederatedIdentityCredentialsClient) listCreateRequest(ctx context.
 	if options != nil && options.Skiptoken != nil {
 		reqQP.Set("$skiptoken", *options.Skiptoken)
 	}
-	reqQP.Set("api-version", "2022-01-31-preview")
+	reqQP.Set("api-version", "2023-01-31")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	return req, nil

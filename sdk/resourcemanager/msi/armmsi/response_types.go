@@ -54,11 +54,6 @@ type UserAssignedIdentitiesClientGetResponse struct {
 	Identity
 }
 
-// UserAssignedIdentitiesClientListAssociatedResourcesResponse contains the response from method UserAssignedIdentitiesClient.ListAssociatedResources.
-type UserAssignedIdentitiesClientListAssociatedResourcesResponse struct {
-	AssociatedResourcesListResult
-}
-
 // UserAssignedIdentitiesClientListByResourceGroupResponse contains the response from method UserAssignedIdentitiesClient.ListByResourceGroup.
 type UserAssignedIdentitiesClientListByResourceGroupResponse struct {
 	UserAssignedIdentitiesListResult
