@@ -13837,7 +13837,7 @@ type SystemData struct {
 	// The type of identity that created the resource.
 	CreatedByType *CreatedByType `json:"createdByType,omitempty"`
 
-	// The type of identity that last modified the resource.
+	// The timestamp of resource last modification (UTC)
 	LastModifiedAt *time.Time `json:"lastModifiedAt,omitempty"`
 
 	// The identity that last modified the resource.
