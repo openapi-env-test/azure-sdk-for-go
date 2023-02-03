@@ -11,7 +11,7 @@ package armcompute
 
 const (
 	moduleName    = "armcompute"
-	moduleVersion = "v4.0.0"
+	moduleVersion = "v4.2.0"
 )
 
 type AccessLevel string
@@ -48,6 +48,24 @@ func PossibleAggregatedReplicationStateValues() []AggregatedReplicationState {
 		AggregatedReplicationStateFailed,
 		AggregatedReplicationStateInProgress,
 		AggregatedReplicationStateUnknown,
+	}
+}
+
+// AlternativeType - Describes the type of the alternative option.
+type AlternativeType string
+
+const (
+	AlternativeTypeNone  AlternativeType = "None"
+	AlternativeTypeOffer AlternativeType = "Offer"
+	AlternativeTypePlan  AlternativeType = "Plan"
+)
+
+// PossibleAlternativeTypeValues returns the possible values for the AlternativeType const type.
+func PossibleAlternativeTypeValues() []AlternativeType {
+	return []AlternativeType{
+		AlternativeTypeNone,
+		AlternativeTypeOffer,
+		AlternativeTypePlan,
 	}
 }
 
@@ -922,6 +940,24 @@ func PossibleIPVersionsValues() []IPVersions {
 	return []IPVersions{
 		IPVersionsIPv4,
 		IPVersionsIPv6,
+	}
+}
+
+// ImageState - Describes the state of the image.
+type ImageState string
+
+const (
+	ImageStateActive                  ImageState = "Active"
+	ImageStateDeprecated              ImageState = "Deprecated"
+	ImageStateScheduledForDeprecation ImageState = "ScheduledForDeprecation"
+)
+
+// PossibleImageStateValues returns the possible values for the ImageState const type.
+func PossibleImageStateValues() []ImageState {
+	return []ImageState{
+		ImageStateActive,
+		ImageStateDeprecated,
+		ImageStateScheduledForDeprecation,
 	}
 }
 
@@ -1828,9 +1864,10 @@ func PossibleStatusLevelTypesValues() []StatusLevelTypes {
 type StorageAccountType string
 
 const (
-	StorageAccountTypePremiumLRS  StorageAccountType = "Premium_LRS"
-	StorageAccountTypeStandardLRS StorageAccountType = "Standard_LRS"
-	StorageAccountTypeStandardZRS StorageAccountType = "Standard_ZRS"
+	StorageAccountTypePremiumLRS     StorageAccountType = "Premium_LRS"
+	StorageAccountTypeStandardLRS    StorageAccountType = "Standard_LRS"
+	StorageAccountTypeStandardSSDLRS StorageAccountType = "StandardSSD_LRS"
+	StorageAccountTypeStandardZRS    StorageAccountType = "Standard_ZRS"
 )
 
 // PossibleStorageAccountTypeValues returns the possible values for the StorageAccountType const type.
@@ -1838,6 +1875,7 @@ func PossibleStorageAccountTypeValues() []StorageAccountType {
 	return []StorageAccountType{
 		StorageAccountTypePremiumLRS,
 		StorageAccountTypeStandardLRS,
+		StorageAccountTypeStandardSSDLRS,
 		StorageAccountTypeStandardZRS,
 	}
 }
