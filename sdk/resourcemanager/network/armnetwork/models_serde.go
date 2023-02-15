@@ -12024,6 +12024,7 @@ func (e ExpressRouteCircuitPropertiesFormat) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
 	populate(objectMap, "allowClassicOperations", e.AllowClassicOperations)
 	populate(objectMap, "authorizationKey", e.AuthorizationKey)
+	populate(objectMap, "authorizationStatus", e.AuthorizationStatus)
 	populate(objectMap, "authorizations", e.Authorizations)
 	populate(objectMap, "bandwidthInGbps", e.BandwidthInGbps)
 	populate(objectMap, "circuitProvisioningState", e.CircuitProvisioningState)
@@ -12054,6 +12055,9 @@ func (e *ExpressRouteCircuitPropertiesFormat) UnmarshalJSON(data []byte) error {
 			delete(rawMsg, key)
 		case "authorizationKey":
 			err = unpopulate(val, "AuthorizationKey", &e.AuthorizationKey)
+			delete(rawMsg, key)
+		case "authorizationStatus":
+			err = unpopulate(val, "AuthorizationStatus", &e.AuthorizationStatus)
 			delete(rawMsg, key)
 		case "authorizations":
 			err = unpopulate(val, "Authorizations", &e.Authorizations)
@@ -32495,6 +32499,7 @@ func (v VirtualNetworkPropertiesFormat) MarshalJSON() ([]byte, error) {
 	populate(objectMap, "enableDdosProtection", v.EnableDdosProtection)
 	populate(objectMap, "enableVmProtection", v.EnableVMProtection)
 	populate(objectMap, "encryption", v.Encryption)
+	populate(objectMap, "flowLogs", v.FlowLogs)
 	populate(objectMap, "flowTimeoutInMinutes", v.FlowTimeoutInMinutes)
 	populate(objectMap, "ipAllocations", v.IPAllocations)
 	populate(objectMap, "provisioningState", v.ProvisioningState)
@@ -32533,6 +32538,9 @@ func (v *VirtualNetworkPropertiesFormat) UnmarshalJSON(data []byte) error {
 			delete(rawMsg, key)
 		case "encryption":
 			err = unpopulate(val, "Encryption", &v.Encryption)
+			delete(rawMsg, key)
+		case "flowLogs":
+			err = unpopulate(val, "FlowLogs", &v.FlowLogs)
 			delete(rawMsg, key)
 		case "flowTimeoutInMinutes":
 			err = unpopulate(val, "FlowTimeoutInMinutes", &v.FlowTimeoutInMinutes)
@@ -33450,6 +33458,7 @@ func (w WebApplicationFirewallCustomRule) MarshalJSON() ([]byte, error) {
 	populate(objectMap, "name", w.Name)
 	populate(objectMap, "priority", w.Priority)
 	populate(objectMap, "ruleType", w.RuleType)
+	populate(objectMap, "state", w.State)
 	return json.Marshal(objectMap)
 }
 
@@ -33479,6 +33488,9 @@ func (w *WebApplicationFirewallCustomRule) UnmarshalJSON(data []byte) error {
 			delete(rawMsg, key)
 		case "ruleType":
 			err = unpopulate(val, "RuleType", &w.RuleType)
+			delete(rawMsg, key)
+		case "state":
+			err = unpopulate(val, "State", &w.State)
 			delete(rawMsg, key)
 		}
 		if err != nil {
