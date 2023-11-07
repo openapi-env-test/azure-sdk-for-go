@@ -1,5 +1,245 @@
 # Release History
 
+## 5.0.0 (2023-11-07)
+### Breaking Changes
+
+- Type of `BastionActiveSession.StartTime` has been changed from `any` to `interface{}`
+- Type of `EffectiveRouteMapRoute.Prefix` has been changed from `*string` to `[]*string`
+- Const `ApplicationGatewaySKUNameBasic` from type alias `ApplicationGatewaySKUName` has been removed
+- Const `ApplicationGatewayTierBasic` from type alias `ApplicationGatewayTier` has been removed
+- Const `NetworkInterfaceAuxiliaryModeAcceleratedConnections` from type alias `NetworkInterfaceAuxiliaryMode` has been removed
+- Const `WebApplicationFirewallRuleTypeRateLimitRule` from type alias `WebApplicationFirewallRuleType` has been removed
+- Type alias `AdminState` has been removed
+- Type alias `ApplicationGatewayFirewallRateLimitDuration` has been removed
+- Type alias `ApplicationGatewayFirewallUserSessionVariable` has been removed
+- Type alias `AzureFirewallPacketCaptureFlagsType` has been removed
+- Type alias `NetworkInterfaceAuxiliarySKU` has been removed
+- Type alias `PublicIPAddressDNSSettingsDomainNameLabelScope` has been removed
+- Type alias `ScrubbingRuleEntryMatchOperator` has been removed
+- Type alias `ScrubbingRuleEntryMatchVariable` has been removed
+- Type alias `ScrubbingRuleEntryState` has been removed
+- Type alias `SyncMode` has been removed
+- Type alias `WebApplicationFirewallScrubbingState` has been removed
+- Function `*AzureFirewallsClient.BeginPacketCapture` has been removed
+- Function `NewClientFactory` has been removed
+- Function `*ClientFactory.NewAdminRuleCollectionsClient` has been removed
+- Function `*ClientFactory.NewAdminRulesClient` has been removed
+- Function `*ClientFactory.NewApplicationGatewayPrivateEndpointConnectionsClient` has been removed
+- Function `*ClientFactory.NewApplicationGatewayPrivateLinkResourcesClient` has been removed
+- Function `*ClientFactory.NewApplicationGatewayWafDynamicManifestsClient` has been removed
+- Function `*ClientFactory.NewApplicationGatewayWafDynamicManifestsDefaultClient` has been removed
+- Function `*ClientFactory.NewApplicationGatewaysClient` has been removed
+- Function `*ClientFactory.NewApplicationSecurityGroupsClient` has been removed
+- Function `*ClientFactory.NewAvailableDelegationsClient` has been removed
+- Function `*ClientFactory.NewAvailableEndpointServicesClient` has been removed
+- Function `*ClientFactory.NewAvailablePrivateEndpointTypesClient` has been removed
+- Function `*ClientFactory.NewAvailableResourceGroupDelegationsClient` has been removed
+- Function `*ClientFactory.NewAvailableServiceAliasesClient` has been removed
+- Function `*ClientFactory.NewAzureFirewallFqdnTagsClient` has been removed
+- Function `*ClientFactory.NewAzureFirewallsClient` has been removed
+- Function `*ClientFactory.NewBastionHostsClient` has been removed
+- Function `*ClientFactory.NewBgpServiceCommunitiesClient` has been removed
+- Function `*ClientFactory.NewConfigurationPolicyGroupsClient` has been removed
+- Function `*ClientFactory.NewConnectionMonitorsClient` has been removed
+- Function `*ClientFactory.NewConnectivityConfigurationsClient` has been removed
+- Function `*ClientFactory.NewCustomIPPrefixesClient` has been removed
+- Function `*ClientFactory.NewDdosCustomPoliciesClient` has been removed
+- Function `*ClientFactory.NewDdosProtectionPlansClient` has been removed
+- Function `*ClientFactory.NewDefaultSecurityRulesClient` has been removed
+- Function `*ClientFactory.NewDscpConfigurationClient` has been removed
+- Function `*ClientFactory.NewExpressRouteCircuitAuthorizationsClient` has been removed
+- Function `*ClientFactory.NewExpressRouteCircuitConnectionsClient` has been removed
+- Function `*ClientFactory.NewExpressRouteCircuitPeeringsClient` has been removed
+- Function `*ClientFactory.NewExpressRouteCircuitsClient` has been removed
+- Function `*ClientFactory.NewExpressRouteConnectionsClient` has been removed
+- Function `*ClientFactory.NewExpressRouteCrossConnectionPeeringsClient` has been removed
+- Function `*ClientFactory.NewExpressRouteCrossConnectionsClient` has been removed
+- Function `*ClientFactory.NewExpressRouteGatewaysClient` has been removed
+- Function `*ClientFactory.NewExpressRouteLinksClient` has been removed
+- Function `*ClientFactory.NewExpressRoutePortAuthorizationsClient` has been removed
+- Function `*ClientFactory.NewExpressRoutePortsClient` has been removed
+- Function `*ClientFactory.NewExpressRoutePortsLocationsClient` has been removed
+- Function `*ClientFactory.NewExpressRouteProviderPortsLocationClient` has been removed
+- Function `*ClientFactory.NewExpressRouteServiceProvidersClient` has been removed
+- Function `*ClientFactory.NewFirewallPoliciesClient` has been removed
+- Function `*ClientFactory.NewFirewallPolicyIdpsSignaturesClient` has been removed
+- Function `*ClientFactory.NewFirewallPolicyIdpsSignaturesFilterValuesClient` has been removed
+- Function `*ClientFactory.NewFirewallPolicyIdpsSignaturesOverridesClient` has been removed
+- Function `*ClientFactory.NewFirewallPolicyRuleCollectionGroupsClient` has been removed
+- Function `*ClientFactory.NewFlowLogsClient` has been removed
+- Function `*ClientFactory.NewGroupsClient` has been removed
+- Function `*ClientFactory.NewHubRouteTablesClient` has been removed
+- Function `*ClientFactory.NewHubVirtualNetworkConnectionsClient` has been removed
+- Function `*ClientFactory.NewIPAllocationsClient` has been removed
+- Function `*ClientFactory.NewIPGroupsClient` has been removed
+- Function `*ClientFactory.NewInboundNatRulesClient` has been removed
+- Function `*ClientFactory.NewInboundSecurityRuleClient` has been removed
+- Function `*ClientFactory.NewInterfaceIPConfigurationsClient` has been removed
+- Function `*ClientFactory.NewInterfaceLoadBalancersClient` has been removed
+- Function `*ClientFactory.NewInterfaceTapConfigurationsClient` has been removed
+- Function `*ClientFactory.NewInterfacesClient` has been removed
+- Function `*ClientFactory.NewLoadBalancerBackendAddressPoolsClient` has been removed
+- Function `*ClientFactory.NewLoadBalancerFrontendIPConfigurationsClient` has been removed
+- Function `*ClientFactory.NewLoadBalancerLoadBalancingRulesClient` has been removed
+- Function `*ClientFactory.NewLoadBalancerNetworkInterfacesClient` has been removed
+- Function `*ClientFactory.NewLoadBalancerOutboundRulesClient` has been removed
+- Function `*ClientFactory.NewLoadBalancerProbesClient` has been removed
+- Function `*ClientFactory.NewLoadBalancersClient` has been removed
+- Function `*ClientFactory.NewLocalNetworkGatewaysClient` has been removed
+- Function `*ClientFactory.NewManagementClient` has been removed
+- Function `*ClientFactory.NewManagementGroupNetworkManagerConnectionsClient` has been removed
+- Function `*ClientFactory.NewManagerCommitsClient` has been removed
+- Function `*ClientFactory.NewManagerDeploymentStatusClient` has been removed
+- Function `*ClientFactory.NewManagersClient` has been removed
+- Function `*ClientFactory.NewNatGatewaysClient` has been removed
+- Function `*ClientFactory.NewNatRulesClient` has been removed
+- Function `*ClientFactory.NewOperationsClient` has been removed
+- Function `*ClientFactory.NewP2SVPNGatewaysClient` has been removed
+- Function `*ClientFactory.NewPacketCapturesClient` has been removed
+- Function `*ClientFactory.NewPeerExpressRouteCircuitConnectionsClient` has been removed
+- Function `*ClientFactory.NewPrivateDNSZoneGroupsClient` has been removed
+- Function `*ClientFactory.NewPrivateEndpointsClient` has been removed
+- Function `*ClientFactory.NewPrivateLinkServicesClient` has been removed
+- Function `*ClientFactory.NewProfilesClient` has been removed
+- Function `*ClientFactory.NewPublicIPAddressesClient` has been removed
+- Function `*ClientFactory.NewPublicIPPrefixesClient` has been removed
+- Function `*ClientFactory.NewResourceNavigationLinksClient` has been removed
+- Function `*ClientFactory.NewRouteFilterRulesClient` has been removed
+- Function `*ClientFactory.NewRouteFiltersClient` has been removed
+- Function `*ClientFactory.NewRouteMapsClient` has been removed
+- Function `*ClientFactory.NewRouteTablesClient` has been removed
+- Function `*ClientFactory.NewRoutesClient` has been removed
+- Function `*ClientFactory.NewRoutingIntentClient` has been removed
+- Function `*ClientFactory.NewScopeConnectionsClient` has been removed
+- Function `*ClientFactory.NewSecurityAdminConfigurationsClient` has been removed
+- Function `*ClientFactory.NewSecurityGroupsClient` has been removed
+- Function `*ClientFactory.NewSecurityPartnerProvidersClient` has been removed
+- Function `*ClientFactory.NewSecurityRulesClient` has been removed
+- Function `*ClientFactory.NewServiceAssociationLinksClient` has been removed
+- Function `*ClientFactory.NewServiceEndpointPoliciesClient` has been removed
+- Function `*ClientFactory.NewServiceEndpointPolicyDefinitionsClient` has been removed
+- Function `*ClientFactory.NewServiceTagInformationClient` has been removed
+- Function `*ClientFactory.NewServiceTagsClient` has been removed
+- Function `*ClientFactory.NewStaticMembersClient` has been removed
+- Function `*ClientFactory.NewSubnetsClient` has been removed
+- Function `*ClientFactory.NewSubscriptionNetworkManagerConnectionsClient` has been removed
+- Function `*ClientFactory.NewUsagesClient` has been removed
+- Function `*ClientFactory.NewVPNConnectionsClient` has been removed
+- Function `*ClientFactory.NewVPNGatewaysClient` has been removed
+- Function `*ClientFactory.NewVPNLinkConnectionsClient` has been removed
+- Function `*ClientFactory.NewVPNServerConfigurationsAssociatedWithVirtualWanClient` has been removed
+- Function `*ClientFactory.NewVPNServerConfigurationsClient` has been removed
+- Function `*ClientFactory.NewVPNSiteLinkConnectionsClient` has been removed
+- Function `*ClientFactory.NewVPNSiteLinksClient` has been removed
+- Function `*ClientFactory.NewVPNSitesClient` has been removed
+- Function `*ClientFactory.NewVPNSitesConfigurationClient` has been removed
+- Function `*ClientFactory.NewVipSwapClient` has been removed
+- Function `*ClientFactory.NewVirtualApplianceConnectionsClient` has been removed
+- Function `*ClientFactory.NewVirtualApplianceSKUsClient` has been removed
+- Function `*ClientFactory.NewVirtualApplianceSitesClient` has been removed
+- Function `*ClientFactory.NewVirtualAppliancesClient` has been removed
+- Function `*ClientFactory.NewVirtualHubBgpConnectionClient` has been removed
+- Function `*ClientFactory.NewVirtualHubBgpConnectionsClient` has been removed
+- Function `*ClientFactory.NewVirtualHubIPConfigurationClient` has been removed
+- Function `*ClientFactory.NewVirtualHubRouteTableV2SClient` has been removed
+- Function `*ClientFactory.NewVirtualHubsClient` has been removed
+- Function `*ClientFactory.NewVirtualNetworkGatewayConnectionsClient` has been removed
+- Function `*ClientFactory.NewVirtualNetworkGatewayNatRulesClient` has been removed
+- Function `*ClientFactory.NewVirtualNetworkGatewaysClient` has been removed
+- Function `*ClientFactory.NewVirtualNetworkPeeringsClient` has been removed
+- Function `*ClientFactory.NewVirtualNetworkTapsClient` has been removed
+- Function `*ClientFactory.NewVirtualNetworksClient` has been removed
+- Function `*ClientFactory.NewVirtualRouterPeeringsClient` has been removed
+- Function `*ClientFactory.NewVirtualRoutersClient` has been removed
+- Function `*ClientFactory.NewVirtualWansClient` has been removed
+- Function `*ClientFactory.NewWatchersClient` has been removed
+- Function `*ClientFactory.NewWebApplicationFirewallPoliciesClient` has been removed
+- Function `*ClientFactory.NewWebCategoriesClient` has been removed
+- Function `*LoadBalancersClient.MigrateToIPBased` has been removed
+- Function `NewVirtualApplianceConnectionsClient` has been removed
+- Function `*VirtualApplianceConnectionsClient.BeginCreateOrUpdate` has been removed
+- Function `*VirtualApplianceConnectionsClient.BeginDelete` has been removed
+- Function `*VirtualApplianceConnectionsClient.Get` has been removed
+- Function `*VirtualApplianceConnectionsClient.NewListPager` has been removed
+- Struct `AzureFirewallPacketCaptureFlags` has been removed
+- Struct `AzureFirewallPacketCaptureRule` has been removed
+- Struct `AzureFirewallsClientPacketCaptureResponse` has been removed
+- Struct `BastionHostPropertiesFormatNetworkACLs` has been removed
+- Struct `ClientFactory` has been removed
+- Struct `EffectiveRouteMapRouteList` has been removed
+- Struct `FirewallPacketCaptureParameters` has been removed
+- Struct `FirewallPacketCaptureParametersFormat` has been removed
+- Struct `FirewallPolicyHTTPHeaderToInsert` has been removed
+- Struct `GroupByUserSession` has been removed
+- Struct `GroupByVariable` has been removed
+- Struct `IPRule` has been removed
+- Struct `MigrateLoadBalancerToIPBasedRequest` has been removed
+- Struct `MigratedPools` has been removed
+- Struct `PolicySettingsLogScrubbing` has been removed
+- Struct `PropagatedRouteTableNfv` has been removed
+- Struct `RoutingConfigurationNfv` has been removed
+- Struct `RoutingConfigurationNfvSubResource` has been removed
+- Struct `VirtualApplianceAdditionalNicProperties` has been removed
+- Struct `VirtualApplianceConnection` has been removed
+- Struct `VirtualApplianceConnectionList` has been removed
+- Struct `VirtualApplianceConnectionProperties` has been removed
+- Struct `VirtualApplianceConnectionsClientCreateOrUpdateResponse` has been removed
+- Struct `VirtualApplianceConnectionsClientDeleteResponse` has been removed
+- Struct `VirtualApplianceConnectionsClientListResponse` has been removed
+- Struct `VirtualNetworkGatewayAutoScaleBounds` has been removed
+- Struct `VirtualNetworkGatewayAutoScaleConfiguration` has been removed
+- Struct `WebApplicationFirewallScrubbingRules` has been removed
+- Field `ResourceGUID` of struct `AdminPropertiesFormat` has been removed
+- Field `ResourceGUID` of struct `AdminRuleCollectionPropertiesFormat` has been removed
+- Field `DefaultPredefinedSSLPolicy` of struct `ApplicationGatewayPropertiesFormat` has been removed
+- Field `HTTPHeadersToInsert` of struct `ApplicationRule` has been removed
+- Field `SyncMode` of struct `BackendAddressPoolPropertiesFormat` has been removed
+- Field `EnableKerberos` of struct `BastionHostPropertiesFormat` has been removed
+- Field `NetworkACLs` of struct `BastionHostPropertiesFormat` has been removed
+- Field `VirtualNetwork` of struct `BastionHostPropertiesFormat` has been removed
+- Field `ResourceGUID` of struct `ConnectivityConfigurationProperties` has been removed
+- Field `ResourceGUID` of struct `DefaultAdminPropertiesFormat` has been removed
+- Field `Size` of struct `FirewallPolicyPropertiesFormat` has been removed
+- Field `Size` of struct `FirewallPolicyRuleCollectionGroupProperties` has been removed
+- Field `ResourceGUID` of struct `GroupProperties` has been removed
+- Field `AuxiliarySKU` of struct `InterfacePropertiesFormat` has been removed
+- Field `ResourceGUID` of struct `ManagerProperties` has been removed
+- Field `FileUploadEnforcement` of struct `PolicySettings` has been removed
+- Field `LogScrubbing` of struct `PolicySettings` has been removed
+- Field `RequestBodyEnforcement` of struct `PolicySettings` has been removed
+- Field `RequestBodyInspectLimitInKB` of struct `PolicySettings` has been removed
+- Field `PrivateEndpointLocation` of struct `PrivateEndpointConnectionProperties` has been removed
+- Field `DomainNameLabelScope` of struct `PublicIPAddressDNSSettings` has been removed
+- Field `ResourceGUID` of struct `SecurityAdminConfigurationPropertiesFormat` has been removed
+- Field `DefaultOutboundAccess` of struct `SubnetPropertiesFormat` has been removed
+- Field `InstanceName` of struct `VirtualApplianceNicProperties` has been removed
+- Field `AdditionalNics` of struct `VirtualAppliancePropertiesFormat` has been removed
+- Field `VirtualApplianceConnections` of struct `VirtualAppliancePropertiesFormat` has been removed
+- Field `Value` of struct `VirtualHubBgpConnectionsClientListAdvertisedRoutesResponse` has been removed
+- Field `Value` of struct `VirtualHubBgpConnectionsClientListLearnedRoutesResponse` has been removed
+- Field `VirtualHubEffectiveRouteList` of struct `VirtualHubsClientGetEffectiveVirtualHubRoutesResponse` has been removed
+- Field `EffectiveRouteMapRouteList` of struct `VirtualHubsClientGetInboundRoutesResponse` has been removed
+- Field `EffectiveRouteMapRouteList` of struct `VirtualHubsClientGetOutboundRoutesResponse` has been removed
+- Field `AdminState` of struct `VirtualNetworkGatewayPropertiesFormat` has been removed
+- Field `AutoScaleConfiguration` of struct `VirtualNetworkGatewayPropertiesFormat` has been removed
+- Field `GroupByUserSession` of struct `WebApplicationFirewallCustomRule` has been removed
+- Field `RateLimitDuration` of struct `WebApplicationFirewallCustomRule` has been removed
+- Field `RateLimitThreshold` of struct `WebApplicationFirewallCustomRule` has been removed
+
+### Features Added
+
+- New value `ApplicationGatewayCustomErrorStatusCodeHTTPStatus499` added to type alias `ApplicationGatewayCustomErrorStatusCode`
+- New value `LoadBalancerBackendAddressAdminStateDrain` added to type alias `LoadBalancerBackendAddressAdminState`
+- New struct `PeerRouteList`
+- New anonymous field `PeerRouteList` in struct `VirtualHubBgpConnectionsClientListAdvertisedRoutesResponse`
+- New anonymous field `PeerRouteList` in struct `VirtualHubBgpConnectionsClientListLearnedRoutesResponse`
+- New field `LocalAddressSpace` in struct `VirtualNetworkPeeringPropertiesFormat`
+- New field `LocalSubnetNames` in struct `VirtualNetworkPeeringPropertiesFormat`
+- New field `LocalVirtualNetworkAddressSpace` in struct `VirtualNetworkPeeringPropertiesFormat`
+- New field `PeerCompleteVnets` in struct `VirtualNetworkPeeringPropertiesFormat`
+- New field `RemoteSubnetNames` in struct `VirtualNetworkPeeringPropertiesFormat`
+
+
 ## 2.1.0 (2022-12-23)
 ### Features Added
 
