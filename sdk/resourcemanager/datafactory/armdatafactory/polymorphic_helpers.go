@@ -757,6 +757,8 @@ func unmarshalDatasetLocationClassification(rawMsg json.RawMessage) (DatasetLoca
 		b = &HdfsLocation{}
 	case "HttpServerLocation":
 		b = &HTTPServerLocation{}
+	case "LakeHouseLocation":
+		b = &LakeHouseLocation{}
 	case "OracleCloudStorageLocation":
 		b = &OracleCloudStorageLocation{}
 	case "SftpLocation":
@@ -1048,8 +1050,6 @@ func unmarshalLinkedServiceClassification(rawMsg json.RawMessage) (LinkedService
 		b = &GoogleBigQueryLinkedService{}
 	case "GoogleCloudStorage":
 		b = &GoogleCloudStorageLinkedService{}
-	case "GoogleSheets":
-		b = &GoogleSheetsLinkedService{}
 	case "Greenplum":
 		b = &GreenplumLinkedService{}
 	case "HBase":
@@ -1072,6 +1072,8 @@ func unmarshalLinkedServiceClassification(rawMsg json.RawMessage) (LinkedService
 		b = &InformixLinkedService{}
 	case "Jira":
 		b = &JiraLinkedService{}
+	case "LakeHouse":
+		b = &LakeHouseLinkedService{}
 	case "Magento":
 		b = &MagentoLinkedService{}
 	case "MariaDB":
@@ -1275,6 +1277,8 @@ func unmarshalStoreReadSettingsClassification(rawMsg json.RawMessage) (StoreRead
 		b = &HdfsReadSettings{}
 	case "HttpReadSettings":
 		b = &HTTPReadSettings{}
+	case "LakeHouseReadSettings":
+		b = &LakeHouseReadSettings{}
 	case "OracleCloudStorageReadSettings":
 		b = &OracleCloudStorageReadSettings{}
 	case "SftpReadSettings":

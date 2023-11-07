@@ -616,7 +616,7 @@ type AmazonRdsForSQLServerSource struct {
 	SourceRetryWait interface{} `json:"sourceRetryWait,omitempty"`
 
 	// Value and type setting for stored procedure parameters. Example: "{Parameter1: {value: "1", type: "int"}}".
-	StoredProcedureParameters interface{} `json:"storedProcedureParameters,omitempty"`
+	StoredProcedureParameters map[string]*StoredProcedureParameter `json:"storedProcedureParameters,omitempty"`
 }
 
 // GetCopySource implements the CopySourceClassification interface for type AmazonRdsForSQLServerSource.
@@ -5125,7 +5125,7 @@ type AzureSQLSink struct {
 	SinkRetryWait interface{} `json:"sinkRetryWait,omitempty"`
 
 	// SQL stored procedure parameters.
-	StoredProcedureParameters interface{} `json:"storedProcedureParameters,omitempty"`
+	StoredProcedureParameters map[string]*StoredProcedureParameter `json:"storedProcedureParameters,omitempty"`
 
 	// The stored procedure parameter name of the table type. Type: string (or Expression with resultType string).
 	StoredProcedureTableTypeParameterName interface{} `json:"storedProcedureTableTypeParameterName,omitempty"`
@@ -5206,7 +5206,7 @@ type AzureSQLSource struct {
 	SourceRetryWait interface{} `json:"sourceRetryWait,omitempty"`
 
 	// Value and type setting for stored procedure parameters. Example: "{Parameter1: {value: "1", type: "int"}}".
-	StoredProcedureParameters interface{} `json:"storedProcedureParameters,omitempty"`
+	StoredProcedureParameters map[string]*StoredProcedureParameter `json:"storedProcedureParameters,omitempty"`
 }
 
 // GetCopySource implements the CopySourceClassification interface for type AzureSQLSource.
@@ -5545,11 +5545,6 @@ type AzureSynapseArtifactsLinkedServiceTypeProperties struct {
 	// Required to specify MSI, if using system assigned managed identity as authentication method. Type: string (or Expression
 	// with resultType string).
 	Authentication interface{} `json:"authentication,omitempty"`
-
-	// The resource ID of the Synapse workspace. The format should be: /subscriptions/{subscriptionID}/resourceGroups/{resourceGroup}/providers/Microsoft.Synapse/workspaces/{workspaceName}.
-	// Type: string (or
-	// Expression with resultType string).
-	WorkspaceResourceID interface{} `json:"workspaceResourceId,omitempty"`
 }
 
 // AzureTableDataset - The Azure Table storage dataset.
@@ -8772,7 +8767,7 @@ type DatasetListResponse struct {
 // Use a type switch to determine the concrete type.  The possible types are:
 // - *AmazonS3CompatibleLocation, *AmazonS3Location, *AzureBlobFSLocation, *AzureBlobStorageLocation, *AzureDataLakeStoreLocation,
 // - *AzureFileStorageLocation, *DatasetLocation, *FileServerLocation, *FtpServerLocation, *GoogleCloudStorageLocation, *HTTPServerLocation,
-// - *HdfsLocation, *OracleCloudStorageLocation, *SftpLocation
+// - *HdfsLocation, *LakeHouseLocation, *OracleCloudStorageLocation, *SftpLocation
 type DatasetLocationClassification interface {
 	// GetDatasetLocation returns the DatasetLocation content of the underlying type.
 	GetDatasetLocation() *DatasetLocation
@@ -11352,9 +11347,6 @@ type FactoryGitHubConfiguration struct {
 	// GitHub bring your own app client secret information.
 	ClientSecret *GitHubClientSecret `json:"clientSecret,omitempty"`
 
-	// Disable manual publish operation in ADF studio to favor automated publish.
-	DisablePublish *bool `json:"disablePublish,omitempty"`
-
 	// GitHub Enterprise host name. For example: https://github.mydomain.com
 	HostName *string `json:"hostName,omitempty"`
 
@@ -11371,7 +11363,6 @@ func (f *FactoryGitHubConfiguration) GetFactoryRepoConfiguration() *FactoryRepoC
 		CollaborationBranch: f.CollaborationBranch,
 		RootFolder:          f.RootFolder,
 		LastCommitID:        f.LastCommitID,
-		DisablePublish:      f.DisablePublish,
 	}
 }
 
@@ -11452,9 +11443,6 @@ type FactoryRepoConfiguration struct {
 	// REQUIRED; Type of repo configuration.
 	Type *string `json:"type,omitempty"`
 
-	// Disable manual publish operation in ADF studio to favor automated publish.
-	DisablePublish *bool `json:"disablePublish,omitempty"`
-
 	// Last commit id.
 	LastCommitID *string `json:"lastCommitId,omitempty"`
 }
@@ -11509,9 +11497,6 @@ type FactoryVSTSConfiguration struct {
 	// REQUIRED; Type of repo configuration.
 	Type *string `json:"type,omitempty"`
 
-	// Disable manual publish operation in ADF studio to favor automated publish.
-	DisablePublish *bool `json:"disablePublish,omitempty"`
-
 	// Last commit id.
 	LastCommitID *string `json:"lastCommitId,omitempty"`
 
@@ -11528,7 +11513,6 @@ func (f *FactoryVSTSConfiguration) GetFactoryRepoConfiguration() *FactoryRepoCon
 		CollaborationBranch: f.CollaborationBranch,
 		RootFolder:          f.RootFolder,
 		LastCommitID:        f.LastCommitID,
-		DisablePublish:      f.DisablePublish,
 	}
 }
 
@@ -12976,52 +12960,6 @@ func (g *GoogleCloudStorageReadSettings) GetStoreReadSettings() *StoreReadSettin
 		DisableMetricsCollection: g.DisableMetricsCollection,
 		AdditionalProperties:     g.AdditionalProperties,
 	}
-}
-
-// GoogleSheetsLinkedService - Linked service for GoogleSheets.
-type GoogleSheetsLinkedService struct {
-	// REQUIRED; Type of linked service.
-	Type *string `json:"type,omitempty"`
-
-	// REQUIRED; GoogleSheets linked service properties.
-	TypeProperties *GoogleSheetsLinkedServiceTypeProperties `json:"typeProperties,omitempty"`
-
-	// OPTIONAL; Contains additional key/value pairs not defined in the schema.
-	AdditionalProperties map[string]interface{}
-
-	// List of tags that can be used for describing the linked service.
-	Annotations []interface{} `json:"annotations,omitempty"`
-
-	// The integration runtime reference.
-	ConnectVia *IntegrationRuntimeReference `json:"connectVia,omitempty"`
-
-	// Linked service description.
-	Description *string `json:"description,omitempty"`
-
-	// Parameters for linked service.
-	Parameters map[string]*ParameterSpecification `json:"parameters,omitempty"`
-}
-
-// GetLinkedService implements the LinkedServiceClassification interface for type GoogleSheetsLinkedService.
-func (g *GoogleSheetsLinkedService) GetLinkedService() *LinkedService {
-	return &LinkedService{
-		Type:                 g.Type,
-		ConnectVia:           g.ConnectVia,
-		Description:          g.Description,
-		Parameters:           g.Parameters,
-		Annotations:          g.Annotations,
-		AdditionalProperties: g.AdditionalProperties,
-	}
-}
-
-// GoogleSheetsLinkedServiceTypeProperties - GoogleSheets linked service type properties.
-type GoogleSheetsLinkedServiceTypeProperties struct {
-	// REQUIRED; The api token for the GoogleSheets source.
-	APIToken SecretBaseClassification `json:"apiToken,omitempty"`
-
-	// The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager.
-	// Type: string (or Expression with resultType string).
-	EncryptedCredential interface{} `json:"encryptedCredential,omitempty"`
 }
 
 // GreenplumDatasetTypeProperties - Greenplum Dataset Properties
@@ -16250,6 +16188,156 @@ func (j *JiraSource) GetTabularSource() *TabularSource {
 	}
 }
 
+// LakeHouseLinkedService - Microsoft Fabric LakeHouse linked service.
+type LakeHouseLinkedService struct {
+	// REQUIRED; Type of linked service.
+	Type *string `json:"type,omitempty"`
+
+	// REQUIRED; Microsoft Fabric LakeHouse linked service properties.
+	TypeProperties *LakeHouseLinkedServiceTypeProperties `json:"typeProperties,omitempty"`
+
+	// OPTIONAL; Contains additional key/value pairs not defined in the schema.
+	AdditionalProperties map[string]interface{}
+
+	// List of tags that can be used for describing the linked service.
+	Annotations []interface{} `json:"annotations,omitempty"`
+
+	// The integration runtime reference.
+	ConnectVia *IntegrationRuntimeReference `json:"connectVia,omitempty"`
+
+	// Linked service description.
+	Description *string `json:"description,omitempty"`
+
+	// Parameters for linked service.
+	Parameters map[string]*ParameterSpecification `json:"parameters,omitempty"`
+}
+
+// GetLinkedService implements the LinkedServiceClassification interface for type LakeHouseLinkedService.
+func (l *LakeHouseLinkedService) GetLinkedService() *LinkedService {
+	return &LinkedService{
+		Type:                 l.Type,
+		ConnectVia:           l.ConnectVia,
+		Description:          l.Description,
+		Parameters:           l.Parameters,
+		Annotations:          l.Annotations,
+		AdditionalProperties: l.AdditionalProperties,
+	}
+}
+
+// LakeHouseLinkedServiceTypeProperties - Microsoft Fabric LakeHouse linked service properties.
+type LakeHouseLinkedServiceTypeProperties struct {
+	// The ID of Microsoft Fabric LakeHouse artifact. Type: string (or Expression with resultType string).
+	ArtifactID interface{} `json:"artifactId,omitempty"`
+
+	// The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager.
+	// Type: string.
+	EncryptedCredential *string `json:"encryptedCredential,omitempty"`
+
+	// The credential of the service principal object in Azure Active Directory. If servicePrincipalCredentialType is 'ServicePrincipalKey',
+	// servicePrincipalCredential can be SecureString or
+	// AzureKeyVaultSecretReference. If servicePrincipalCredentialType is 'ServicePrincipalCert', servicePrincipalCredential can
+	// only be AzureKeyVaultSecretReference.
+	ServicePrincipalCredential SecretBaseClassification `json:"servicePrincipalCredential,omitempty"`
+
+	// The service principal credential type to use in Server-To-Server authentication. 'ServicePrincipalKey' for key/secret,
+	// 'ServicePrincipalCert' for certificate. Type: string (or Expression with
+	// resultType string).
+	ServicePrincipalCredentialType interface{} `json:"servicePrincipalCredentialType,omitempty"`
+
+	// The ID of the application used to authenticate against Microsoft Fabric LakeHouse. Type: string (or Expression with resultType
+	// string).
+	ServicePrincipalID interface{} `json:"servicePrincipalId,omitempty"`
+
+	// The Key of the application used to authenticate against Microsoft Fabric LakeHouse.
+	ServicePrincipalKey SecretBaseClassification `json:"servicePrincipalKey,omitempty"`
+
+	// The name or ID of the tenant to which the service principal belongs. Type: string (or Expression with resultType string).
+	Tenant interface{} `json:"tenant,omitempty"`
+
+	// The ID of Microsoft Fabric workspace. Type: string (or Expression with resultType string).
+	WorkspaceID interface{} `json:"workspaceId,omitempty"`
+}
+
+// LakeHouseLocation - The location of Microsoft Fabric LakeHouse Files dataset.
+type LakeHouseLocation struct {
+	// REQUIRED; Type of dataset storage location.
+	Type *string `json:"type,omitempty"`
+
+	// OPTIONAL; Contains additional key/value pairs not defined in the schema.
+	AdditionalProperties map[string]interface{}
+
+	// Specify the file name of dataset. Type: string (or Expression with resultType string).
+	FileName interface{} `json:"fileName,omitempty"`
+
+	// Specify the folder path of dataset. Type: string (or Expression with resultType string)
+	FolderPath interface{} `json:"folderPath,omitempty"`
+}
+
+// GetDatasetLocation implements the DatasetLocationClassification interface for type LakeHouseLocation.
+func (l *LakeHouseLocation) GetDatasetLocation() *DatasetLocation {
+	return &DatasetLocation{
+		Type:                 l.Type,
+		FolderPath:           l.FolderPath,
+		FileName:             l.FileName,
+		AdditionalProperties: l.AdditionalProperties,
+	}
+}
+
+// LakeHouseReadSettings - Microsoft Fabric LakeHouse Files read settings.
+type LakeHouseReadSettings struct {
+	// REQUIRED; The read setting type.
+	Type *string `json:"type,omitempty"`
+
+	// OPTIONAL; Contains additional key/value pairs not defined in the schema.
+	AdditionalProperties map[string]interface{}
+
+	// Indicates whether the source files need to be deleted after copy completion. Default is false. Type: boolean (or Expression
+	// with resultType boolean).
+	DeleteFilesAfterCompletion interface{} `json:"deleteFilesAfterCompletion,omitempty"`
+
+	// If true, disable data store metrics collection. Default is false. Type: boolean (or Expression with resultType boolean).
+	DisableMetricsCollection interface{} `json:"disableMetricsCollection,omitempty"`
+
+	// Indicates whether to enable partition discovery. Type: boolean (or Expression with resultType boolean).
+	EnablePartitionDiscovery interface{} `json:"enablePartitionDiscovery,omitempty"`
+
+	// Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy.
+	// Type: string (or Expression with resultType string).
+	FileListPath interface{} `json:"fileListPath,omitempty"`
+
+	// The maximum concurrent connection count for the source data store. Type: integer (or Expression with resultType integer).
+	MaxConcurrentConnections interface{} `json:"maxConcurrentConnections,omitempty"`
+
+	// The end of file's modified datetime. Type: string (or Expression with resultType string).
+	ModifiedDatetimeEnd interface{} `json:"modifiedDatetimeEnd,omitempty"`
+
+	// The start of file's modified datetime. Type: string (or Expression with resultType string).
+	ModifiedDatetimeStart interface{} `json:"modifiedDatetimeStart,omitempty"`
+
+	// Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string).
+	PartitionRootPath interface{} `json:"partitionRootPath,omitempty"`
+
+	// If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType
+	// boolean).
+	Recursive interface{} `json:"recursive,omitempty"`
+
+	// Microsoft Fabric LakeHouse Files wildcardFileName. Type: string (or Expression with resultType string).
+	WildcardFileName interface{} `json:"wildcardFileName,omitempty"`
+
+	// Microsoft Fabric LakeHouse Files wildcardFolderPath. Type: string (or Expression with resultType string).
+	WildcardFolderPath interface{} `json:"wildcardFolderPath,omitempty"`
+}
+
+// GetStoreReadSettings implements the StoreReadSettingsClassification interface for type LakeHouseReadSettings.
+func (l *LakeHouseReadSettings) GetStoreReadSettings() *StoreReadSettings {
+	return &StoreReadSettings{
+		Type:                     l.Type,
+		MaxConcurrentConnections: l.MaxConcurrentConnections,
+		DisableMetricsCollection: l.DisableMetricsCollection,
+		AdditionalProperties:     l.AdditionalProperties,
+	}
+}
+
 // LicensedComponentSetupTypeProperties - Installation of licensed component setup type properties.
 type LicensedComponentSetupTypeProperties struct {
 	// REQUIRED; The name of the 3rd party component.
@@ -16352,9 +16440,9 @@ func (l *LinkedIntegrationRuntimeType) GetLinkedIntegrationRuntimeType() *Linked
 // - *CouchbaseLinkedService, *CustomDataSourceLinkedService, *DataworldLinkedService, *Db2LinkedService, *DrillLinkedService,
 // - *DynamicsAXLinkedService, *DynamicsCrmLinkedService, *DynamicsLinkedService, *EloquaLinkedService, *FileServerLinkedService,
 // - *FtpServerLinkedService, *GoogleAdWordsLinkedService, *GoogleBigQueryLinkedService, *GoogleCloudStorageLinkedService,
-// - *GoogleSheetsLinkedService, *GreenplumLinkedService, *HBaseLinkedService, *HDInsightLinkedService, *HDInsightOnDemandLinkedService,
-// - *HTTPLinkedService, *HdfsLinkedService, *HiveLinkedService, *HubspotLinkedService, *ImpalaLinkedService, *InformixLinkedService,
-// - *JiraLinkedService, *LinkedService, *MagentoLinkedService, *MariaDBLinkedService, *MarketoLinkedService, *MicrosoftAccessLinkedService,
+// - *GreenplumLinkedService, *HBaseLinkedService, *HDInsightLinkedService, *HDInsightOnDemandLinkedService, *HTTPLinkedService,
+// - *HdfsLinkedService, *HiveLinkedService, *HubspotLinkedService, *ImpalaLinkedService, *InformixLinkedService, *JiraLinkedService,
+// - *LakeHouseLinkedService, *LinkedService, *MagentoLinkedService, *MariaDBLinkedService, *MarketoLinkedService, *MicrosoftAccessLinkedService,
 // - *MongoDbAtlasLinkedService, *MongoDbLinkedService, *MongoDbV2LinkedService, *MySQLLinkedService, *NetezzaLinkedService,
 // - *ODataLinkedService, *OdbcLinkedService, *Office365LinkedService, *OracleCloudStorageLinkedService, *OracleLinkedService,
 // - *OracleServiceCloudLinkedService, *PaypalLinkedService, *PhoenixLinkedService, *PostgreSQLLinkedService, *PrestoLinkedService,
@@ -16419,7 +16507,7 @@ type LinkedServiceReference struct {
 	ReferenceName *string `json:"referenceName,omitempty"`
 
 	// REQUIRED; Linked service reference type.
-	Type *LinkedServiceReferenceType `json:"type,omitempty"`
+	Type *Type `json:"type,omitempty"`
 
 	// Arguments for LinkedService.
 	Parameters map[string]interface{} `json:"parameters,omitempty"`
@@ -22592,7 +22680,7 @@ type SQLMISink struct {
 	SinkRetryWait interface{} `json:"sinkRetryWait,omitempty"`
 
 	// SQL stored procedure parameters.
-	StoredProcedureParameters interface{} `json:"storedProcedureParameters,omitempty"`
+	StoredProcedureParameters map[string]*StoredProcedureParameter `json:"storedProcedureParameters,omitempty"`
 
 	// The stored procedure parameter name of the table type. Type: string (or Expression with resultType string).
 	StoredProcedureTableTypeParameterName interface{} `json:"storedProcedureTableTypeParameterName,omitempty"`
@@ -22673,7 +22761,7 @@ type SQLMISource struct {
 	SourceRetryWait interface{} `json:"sourceRetryWait,omitempty"`
 
 	// Value and type setting for stored procedure parameters. Example: "{Parameter1: {value: "1", type: "int"}}".
-	StoredProcedureParameters interface{} `json:"storedProcedureParameters,omitempty"`
+	StoredProcedureParameters map[string]*StoredProcedureParameter `json:"storedProcedureParameters,omitempty"`
 }
 
 // GetCopySource implements the CopySourceClassification interface for type SQLMISource.
@@ -22808,7 +22896,7 @@ type SQLServerSink struct {
 	SinkRetryWait interface{} `json:"sinkRetryWait,omitempty"`
 
 	// SQL stored procedure parameters.
-	StoredProcedureParameters interface{} `json:"storedProcedureParameters,omitempty"`
+	StoredProcedureParameters map[string]*StoredProcedureParameter `json:"storedProcedureParameters,omitempty"`
 
 	// The stored procedure parameter name of the table type. Type: string (or Expression with resultType string).
 	StoredProcedureTableTypeParameterName interface{} `json:"storedProcedureTableTypeParameterName,omitempty"`
@@ -22889,7 +22977,7 @@ type SQLServerSource struct {
 	SourceRetryWait interface{} `json:"sourceRetryWait,omitempty"`
 
 	// Value and type setting for stored procedure parameters. Example: "{Parameter1: {value: "1", type: "int"}}".
-	StoredProcedureParameters interface{} `json:"storedProcedureParameters,omitempty"`
+	StoredProcedureParameters map[string]*StoredProcedureParameter `json:"storedProcedureParameters,omitempty"`
 }
 
 // GetCopySource implements the CopySourceClassification interface for type SQLServerSource.
@@ -23077,7 +23165,7 @@ type SQLSink struct {
 	SinkRetryWait interface{} `json:"sinkRetryWait,omitempty"`
 
 	// SQL stored procedure parameters.
-	StoredProcedureParameters interface{} `json:"storedProcedureParameters,omitempty"`
+	StoredProcedureParameters map[string]*StoredProcedureParameter `json:"storedProcedureParameters,omitempty"`
 
 	// The stored procedure parameter name of the table type. Type: string (or Expression with resultType string).
 	StoredProcedureTableTypeParameterName interface{} `json:"storedProcedureTableTypeParameterName,omitempty"`
@@ -23160,7 +23248,7 @@ type SQLSource struct {
 	SourceRetryWait interface{} `json:"sourceRetryWait,omitempty"`
 
 	// Value and type setting for stored procedure parameters. Example: "{Parameter1: {value: "1", type: "int"}}".
-	StoredProcedureParameters interface{} `json:"storedProcedureParameters,omitempty"`
+	StoredProcedureParameters map[string]*StoredProcedureParameter `json:"storedProcedureParameters,omitempty"`
 }
 
 // GetCopySource implements the CopySourceClassification interface for type SQLSource.
@@ -25561,9 +25649,6 @@ type ScriptActivityTypeProperties struct {
 	// Log settings of script activity.
 	LogSettings *ScriptActivityTypePropertiesLogSettings `json:"logSettings,omitempty"`
 
-	// ScriptBlock execution timeout. Type: string (or Expression with resultType string), pattern: ((\d+).)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).
-	ScriptBlockExecutionTimeout interface{} `json:"scriptBlockExecutionTimeout,omitempty"`
-
 	// Array of script blocks. Type: array.
 	Scripts []*ScriptActivityScriptBlock `json:"scripts,omitempty"`
 }
@@ -27518,7 +27603,7 @@ type StagingSettings struct {
 // Use a type switch to determine the concrete type.  The possible types are:
 // - *AmazonS3CompatibleReadSettings, *AmazonS3ReadSettings, *AzureBlobFSReadSettings, *AzureBlobStorageReadSettings, *AzureDataLakeStoreReadSettings,
 // - *AzureFileStorageReadSettings, *FileServerReadSettings, *FtpReadSettings, *GoogleCloudStorageReadSettings, *HTTPReadSettings,
-// - *HdfsReadSettings, *OracleCloudStorageReadSettings, *SftpReadSettings, *StoreReadSettings
+// - *HdfsReadSettings, *LakeHouseReadSettings, *OracleCloudStorageReadSettings, *SftpReadSettings, *StoreReadSettings
 type StoreReadSettingsClassification interface {
 	// GetStoreReadSettings returns the StoreReadSettings content of the underlying type.
 	GetStoreReadSettings() *StoreReadSettings
@@ -27572,6 +27657,15 @@ type StoreWriteSettings struct {
 
 // GetStoreWriteSettings implements the StoreWriteSettingsClassification interface for type StoreWriteSettings.
 func (s *StoreWriteSettings) GetStoreWriteSettings() *StoreWriteSettings { return s }
+
+// StoredProcedureParameter - SQL stored procedure parameter.
+type StoredProcedureParameter struct {
+	// Stored procedure parameter type.
+	Type *StoredProcedureParameterType `json:"type,omitempty"`
+
+	// Stored procedure parameter value. Type: string (or Expression with resultType string).
+	Value interface{} `json:"value,omitempty"`
+}
 
 // SwitchActivity - This activity evaluates an expression and executes activities under the cases property that correspond
 // to the expression evaluation expected in the equals property.
@@ -27942,20 +28036,12 @@ type SynapseSparkJobActivityTypeProperties struct {
 	// Expression with resultType string).
 	File interface{} `json:"file,omitempty"`
 
-	// (Deprecated. Please use pythonCodeReference and filesV2) Additional files used for reference in the main definition file,
-	// which will override the 'files' of the spark job definition you provide.
+	// Additional files used for reference in the main definition file, which will override the 'files' of the spark job definition
+	// you provide.
 	Files []interface{} `json:"files,omitempty"`
-
-	// Additional files used for reference in the main definition file, which will override the 'jars' and 'files' of the spark
-	// job definition you provide.
-	FilesV2 []interface{} `json:"filesV2,omitempty"`
 
 	// Number of executors to launch for this job, which will override the 'numExecutors' of the spark job definition you provide.
 	NumExecutors *int32 `json:"numExecutors,omitempty"`
-
-	// Additional python code files used for reference in the main definition file, which will override the 'pyFiles' of the spark
-	// job definition you provide.
-	PythonCodeReference []interface{} `json:"pythonCodeReference,omitempty"`
 
 	// The name of the big data pool which will be used to execute the spark batch job, which will override the 'targetBigDataPool'
 	// of the spark job definition you provide.
@@ -28020,8 +28106,8 @@ func (s *SynapseSparkJobDefinitionActivity) GetExecutionActivity() *ExecutionAct
 
 // SynapseSparkJobReference - Synapse spark job reference type.
 type SynapseSparkJobReference struct {
-	// REQUIRED; Reference spark job name. Expression with resultType string.
-	ReferenceName interface{} `json:"referenceName,omitempty"`
+	// REQUIRED; Reference spark job name.
+	ReferenceName *string `json:"referenceName,omitempty"`
 
 	// REQUIRED; Synapse spark job reference type.
 	Type *SparkJobReferenceType `json:"type,omitempty"`

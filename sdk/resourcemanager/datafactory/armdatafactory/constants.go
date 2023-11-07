@@ -11,7 +11,7 @@ package armdatafactory
 
 const (
 	moduleName    = "armdatafactory"
-	moduleVersion = "v3.0.0"
+	moduleVersion = "v4.0.0"
 )
 
 // AzureFunctionActivityMethod - The list of HTTP methods supported by a AzureFunctionActivity.
@@ -789,20 +789,6 @@ func PossibleIntegrationRuntimeUpdateResultValues() []IntegrationRuntimeUpdateRe
 	}
 }
 
-// LinkedServiceReferenceType - Linked service reference type.
-type LinkedServiceReferenceType string
-
-const (
-	LinkedServiceReferenceTypeLinkedServiceReference LinkedServiceReferenceType = "LinkedServiceReference"
-)
-
-// PossibleLinkedServiceReferenceTypeValues returns the possible values for the LinkedServiceReferenceType const type.
-func PossibleLinkedServiceReferenceTypeValues() []LinkedServiceReferenceType {
-	return []LinkedServiceReferenceType{
-		LinkedServiceReferenceTypeLinkedServiceReference,
-	}
-}
-
 // ManagedIntegrationRuntimeNodeStatus - The managed integration runtime node status.
 type ManagedIntegrationRuntimeNodeStatus string
 
@@ -1538,6 +1524,32 @@ func PossibleSsisPackageLocationTypeValues() []SsisPackageLocationType {
 	}
 }
 
+// StoredProcedureParameterType - Stored procedure parameter type.
+type StoredProcedureParameterType string
+
+const (
+	StoredProcedureParameterTypeBoolean StoredProcedureParameterType = "Boolean"
+	StoredProcedureParameterTypeDate    StoredProcedureParameterType = "Date"
+	StoredProcedureParameterTypeDecimal StoredProcedureParameterType = "Decimal"
+	StoredProcedureParameterTypeGUID    StoredProcedureParameterType = "Guid"
+	StoredProcedureParameterTypeInt     StoredProcedureParameterType = "Int"
+	StoredProcedureParameterTypeInt64   StoredProcedureParameterType = "Int64"
+	StoredProcedureParameterTypeString  StoredProcedureParameterType = "String"
+)
+
+// PossibleStoredProcedureParameterTypeValues returns the possible values for the StoredProcedureParameterType const type.
+func PossibleStoredProcedureParameterTypeValues() []StoredProcedureParameterType {
+	return []StoredProcedureParameterType{
+		StoredProcedureParameterTypeBoolean,
+		StoredProcedureParameterTypeDate,
+		StoredProcedureParameterTypeDecimal,
+		StoredProcedureParameterTypeGUID,
+		StoredProcedureParameterTypeInt,
+		StoredProcedureParameterTypeInt64,
+		StoredProcedureParameterTypeString,
+	}
+}
+
 // SybaseAuthenticationType - AuthenticationType to be used for connection.
 type SybaseAuthenticationType string
 
@@ -1651,6 +1663,20 @@ func PossibleTumblingWindowFrequencyValues() []TumblingWindowFrequency {
 		TumblingWindowFrequencyHour,
 		TumblingWindowFrequencyMinute,
 		TumblingWindowFrequencyMonth,
+	}
+}
+
+// Type - Linked service reference type.
+type Type string
+
+const (
+	TypeLinkedServiceReference Type = "LinkedServiceReference"
+)
+
+// PossibleTypeValues returns the possible values for the Type const type.
+func PossibleTypeValues() []Type {
+	return []Type{
+		TypeLinkedServiceReference,
 	}
 }
 
