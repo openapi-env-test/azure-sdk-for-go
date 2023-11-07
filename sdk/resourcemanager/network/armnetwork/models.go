@@ -742,12 +742,12 @@ type ApplicationGatewayConnectionDraining struct {
 	Enabled *bool `json:"enabled,omitempty"`
 }
 
-// ApplicationGatewayCustomError - Customer error of an application gateway.
+// ApplicationGatewayCustomError - Custom error of an application gateway.
 type ApplicationGatewayCustomError struct {
-	// Error page URL of the application gateway customer error.
+	// Error page URL of the application gateway custom error.
 	CustomErrorPageURL *string `json:"customErrorPageUrl,omitempty"`
 
-	// Status code of the application gateway customer error.
+	// Status code of the application gateway custom error.
 	StatusCode *ApplicationGatewayCustomErrorStatusCode `json:"statusCode,omitempty"`
 }
 
@@ -5702,6 +5702,9 @@ type ExpressRouteCircuitPropertiesFormat struct {
 
 	// The ServiceProviderProvisioningState state of the resource.
 	ServiceProviderProvisioningState *ServiceProviderProvisioningState `json:"serviceProviderProvisioningState,omitempty"`
+
+	// READ-ONLY; The authorization status of the Circuit.
+	AuthorizationStatus *string `json:"authorizationStatus,omitempty" azure:"ro"`
 
 	// READ-ONLY; The provisioning state of the express route circuit resource.
 	ProvisioningState *ProvisioningState `json:"provisioningState,omitempty" azure:"ro"`
@@ -14571,6 +14574,8 @@ type VPNGatewaysClientBeginDeleteOptions struct {
 
 // VPNGatewaysClientBeginResetOptions contains the optional parameters for the VPNGatewaysClient.BeginReset method.
 type VPNGatewaysClientBeginResetOptions struct {
+	// VpnGateway ipConfigurationId to specify the gateway instance.
+	IPConfigurationID *string
 	// Resumes the LRO from the provided token.
 	ResumeToken string
 }
@@ -16622,6 +16627,18 @@ type VirtualNetworkPeeringPropertiesFormat struct {
 	// If we need to verify the provisioning state of the remote gateway.
 	DoNotVerifyRemoteGateways *bool `json:"doNotVerifyRemoteGateways,omitempty"`
 
+	// The local address space of the local virtual network that is peered.
+	LocalAddressSpace *AddressSpace `json:"localAddressSpace,omitempty"`
+
+	// List of local subnet names that are subnet peered with remote virtual network.
+	LocalSubnetNames []*string `json:"localSubnetNames,omitempty"`
+
+	// The current local address space of the local virtual network that is peered.
+	LocalVirtualNetworkAddressSpace *AddressSpace `json:"localVirtualNetworkAddressSpace,omitempty"`
+
+	// Whether complete virtual network address space is peered.
+	PeerCompleteVnets *bool `json:"peerCompleteVnets,omitempty"`
+
 	// The status of the virtual network peering.
 	PeeringState *VirtualNetworkPeeringState `json:"peeringState,omitempty"`
 
@@ -16633,6 +16650,9 @@ type VirtualNetworkPeeringPropertiesFormat struct {
 
 	// The reference to the remote virtual network's Bgp Communities.
 	RemoteBgpCommunities *VirtualNetworkBgpCommunities `json:"remoteBgpCommunities,omitempty"`
+
+	// List of remote subnet names from remote virtual network that are subnet peered.
+	RemoteSubnetNames []*string `json:"remoteSubnetNames,omitempty"`
 
 	// The reference to the remote virtual network. The remote virtual network can be in the same or different region (preview).
 	// See here to register for the preview and learn more
@@ -16719,6 +16739,9 @@ type VirtualNetworkPropertiesFormat struct {
 
 	// A list of peerings in a Virtual Network.
 	VirtualNetworkPeerings []*VirtualNetworkPeering `json:"virtualNetworkPeerings,omitempty"`
+
+	// READ-ONLY; A collection of references to flow log resources.
+	FlowLogs []*FlowLog `json:"flowLogs,omitempty" azure:"ro"`
 
 	// READ-ONLY; The provisioning state of the virtual network resource.
 	ProvisioningState *ProvisioningState `json:"provisioningState,omitempty" azure:"ro"`
@@ -17367,6 +17390,9 @@ type WebApplicationFirewallCustomRule struct {
 
 	// The name of the resource that is unique within a policy. This name can be used to access the resource.
 	Name *string `json:"name,omitempty"`
+
+	// Describes if the custom rule is in enabled or disabled state. Defaults to Enabled if not specified.
+	State *WebApplicationFirewallState `json:"state,omitempty"`
 
 	// READ-ONLY; A unique read-only string that changes whenever the resource is updated.
 	Etag *string `json:"etag,omitempty" azure:"ro"`

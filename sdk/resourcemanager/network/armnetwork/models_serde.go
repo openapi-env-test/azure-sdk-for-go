@@ -12024,6 +12024,7 @@ func (e ExpressRouteCircuitPropertiesFormat) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]interface{})
 	populate(objectMap, "allowClassicOperations", e.AllowClassicOperations)
 	populate(objectMap, "authorizationKey", e.AuthorizationKey)
+	populate(objectMap, "authorizationStatus", e.AuthorizationStatus)
 	populate(objectMap, "authorizations", e.Authorizations)
 	populate(objectMap, "bandwidthInGbps", e.BandwidthInGbps)
 	populate(objectMap, "circuitProvisioningState", e.CircuitProvisioningState)
@@ -12054,6 +12055,9 @@ func (e *ExpressRouteCircuitPropertiesFormat) UnmarshalJSON(data []byte) error {
 			delete(rawMsg, key)
 		case "authorizationKey":
 			err = unpopulate(val, "AuthorizationKey", &e.AuthorizationKey)
+			delete(rawMsg, key)
+		case "authorizationStatus":
+			err = unpopulate(val, "AuthorizationStatus", &e.AuthorizationStatus)
 			delete(rawMsg, key)
 		case "authorizations":
 			err = unpopulate(val, "Authorizations", &e.Authorizations)
@@ -32413,11 +32417,16 @@ func (v VirtualNetworkPeeringPropertiesFormat) MarshalJSON() ([]byte, error) {
 	populate(objectMap, "allowGatewayTransit", v.AllowGatewayTransit)
 	populate(objectMap, "allowVirtualNetworkAccess", v.AllowVirtualNetworkAccess)
 	populate(objectMap, "doNotVerifyRemoteGateways", v.DoNotVerifyRemoteGateways)
+	populate(objectMap, "localAddressSpace", v.LocalAddressSpace)
+	populate(objectMap, "localSubnetNames", v.LocalSubnetNames)
+	populate(objectMap, "localVirtualNetworkAddressSpace", v.LocalVirtualNetworkAddressSpace)
+	populate(objectMap, "peerCompleteVnets", v.PeerCompleteVnets)
 	populate(objectMap, "peeringState", v.PeeringState)
 	populate(objectMap, "peeringSyncLevel", v.PeeringSyncLevel)
 	populate(objectMap, "provisioningState", v.ProvisioningState)
 	populate(objectMap, "remoteAddressSpace", v.RemoteAddressSpace)
 	populate(objectMap, "remoteBgpCommunities", v.RemoteBgpCommunities)
+	populate(objectMap, "remoteSubnetNames", v.RemoteSubnetNames)
 	populate(objectMap, "remoteVirtualNetwork", v.RemoteVirtualNetwork)
 	populate(objectMap, "remoteVirtualNetworkAddressSpace", v.RemoteVirtualNetworkAddressSpace)
 	populate(objectMap, "remoteVirtualNetworkEncryption", v.RemoteVirtualNetworkEncryption)
@@ -32447,6 +32456,18 @@ func (v *VirtualNetworkPeeringPropertiesFormat) UnmarshalJSON(data []byte) error
 		case "doNotVerifyRemoteGateways":
 			err = unpopulate(val, "DoNotVerifyRemoteGateways", &v.DoNotVerifyRemoteGateways)
 			delete(rawMsg, key)
+		case "localAddressSpace":
+			err = unpopulate(val, "LocalAddressSpace", &v.LocalAddressSpace)
+			delete(rawMsg, key)
+		case "localSubnetNames":
+			err = unpopulate(val, "LocalSubnetNames", &v.LocalSubnetNames)
+			delete(rawMsg, key)
+		case "localVirtualNetworkAddressSpace":
+			err = unpopulate(val, "LocalVirtualNetworkAddressSpace", &v.LocalVirtualNetworkAddressSpace)
+			delete(rawMsg, key)
+		case "peerCompleteVnets":
+			err = unpopulate(val, "PeerCompleteVnets", &v.PeerCompleteVnets)
+			delete(rawMsg, key)
 		case "peeringState":
 			err = unpopulate(val, "PeeringState", &v.PeeringState)
 			delete(rawMsg, key)
@@ -32461,6 +32482,9 @@ func (v *VirtualNetworkPeeringPropertiesFormat) UnmarshalJSON(data []byte) error
 			delete(rawMsg, key)
 		case "remoteBgpCommunities":
 			err = unpopulate(val, "RemoteBgpCommunities", &v.RemoteBgpCommunities)
+			delete(rawMsg, key)
+		case "remoteSubnetNames":
+			err = unpopulate(val, "RemoteSubnetNames", &v.RemoteSubnetNames)
 			delete(rawMsg, key)
 		case "remoteVirtualNetwork":
 			err = unpopulate(val, "RemoteVirtualNetwork", &v.RemoteVirtualNetwork)
@@ -32495,6 +32519,7 @@ func (v VirtualNetworkPropertiesFormat) MarshalJSON() ([]byte, error) {
 	populate(objectMap, "enableDdosProtection", v.EnableDdosProtection)
 	populate(objectMap, "enableVmProtection", v.EnableVMProtection)
 	populate(objectMap, "encryption", v.Encryption)
+	populate(objectMap, "flowLogs", v.FlowLogs)
 	populate(objectMap, "flowTimeoutInMinutes", v.FlowTimeoutInMinutes)
 	populate(objectMap, "ipAllocations", v.IPAllocations)
 	populate(objectMap, "provisioningState", v.ProvisioningState)
@@ -32533,6 +32558,9 @@ func (v *VirtualNetworkPropertiesFormat) UnmarshalJSON(data []byte) error {
 			delete(rawMsg, key)
 		case "encryption":
 			err = unpopulate(val, "Encryption", &v.Encryption)
+			delete(rawMsg, key)
+		case "flowLogs":
+			err = unpopulate(val, "FlowLogs", &v.FlowLogs)
 			delete(rawMsg, key)
 		case "flowTimeoutInMinutes":
 			err = unpopulate(val, "FlowTimeoutInMinutes", &v.FlowTimeoutInMinutes)
@@ -33450,6 +33478,7 @@ func (w WebApplicationFirewallCustomRule) MarshalJSON() ([]byte, error) {
 	populate(objectMap, "name", w.Name)
 	populate(objectMap, "priority", w.Priority)
 	populate(objectMap, "ruleType", w.RuleType)
+	populate(objectMap, "state", w.State)
 	return json.Marshal(objectMap)
 }
 
@@ -33479,6 +33508,9 @@ func (w *WebApplicationFirewallCustomRule) UnmarshalJSON(data []byte) error {
 			delete(rawMsg, key)
 		case "ruleType":
 			err = unpopulate(val, "RuleType", &w.RuleType)
+			delete(rawMsg, key)
+		case "state":
+			err = unpopulate(val, "State", &w.State)
 			delete(rawMsg, key)
 		}
 		if err != nil {
