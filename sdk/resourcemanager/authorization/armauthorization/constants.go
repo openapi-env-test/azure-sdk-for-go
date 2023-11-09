@@ -11,112 +11,8 @@ package armauthorization
 
 const (
 	moduleName    = "armauthorization"
-	moduleVersion = "v2.0.0"
+	moduleVersion = "v3.0.0-beta.2"
 )
-
-// ApprovalMode - The type of rule
-type ApprovalMode string
-
-const (
-	ApprovalModeNoApproval  ApprovalMode = "NoApproval"
-	ApprovalModeParallel    ApprovalMode = "Parallel"
-	ApprovalModeSerial      ApprovalMode = "Serial"
-	ApprovalModeSingleStage ApprovalMode = "SingleStage"
-)
-
-// PossibleApprovalModeValues returns the possible values for the ApprovalMode const type.
-func PossibleApprovalModeValues() []ApprovalMode {
-	return []ApprovalMode{
-		ApprovalModeNoApproval,
-		ApprovalModeParallel,
-		ApprovalModeSerial,
-		ApprovalModeSingleStage,
-	}
-}
-
-// AssignmentType - Assignment type of the role assignment schedule
-type AssignmentType string
-
-const (
-	AssignmentTypeActivated AssignmentType = "Activated"
-	AssignmentTypeAssigned  AssignmentType = "Assigned"
-)
-
-// PossibleAssignmentTypeValues returns the possible values for the AssignmentType const type.
-func PossibleAssignmentTypeValues() []AssignmentType {
-	return []AssignmentType{
-		AssignmentTypeActivated,
-		AssignmentTypeAssigned,
-	}
-}
-
-// EnablementRules - The type of enablement rule
-type EnablementRules string
-
-const (
-	EnablementRulesJustification             EnablementRules = "Justification"
-	EnablementRulesMultiFactorAuthentication EnablementRules = "MultiFactorAuthentication"
-	EnablementRulesTicketing                 EnablementRules = "Ticketing"
-)
-
-// PossibleEnablementRulesValues returns the possible values for the EnablementRules const type.
-func PossibleEnablementRulesValues() []EnablementRules {
-	return []EnablementRules{
-		EnablementRulesJustification,
-		EnablementRulesMultiFactorAuthentication,
-		EnablementRulesTicketing,
-	}
-}
-
-// MemberType - Membership type of the role assignment schedule
-type MemberType string
-
-const (
-	MemberTypeDirect    MemberType = "Direct"
-	MemberTypeGroup     MemberType = "Group"
-	MemberTypeInherited MemberType = "Inherited"
-)
-
-// PossibleMemberTypeValues returns the possible values for the MemberType const type.
-func PossibleMemberTypeValues() []MemberType {
-	return []MemberType{
-		MemberTypeDirect,
-		MemberTypeGroup,
-		MemberTypeInherited,
-	}
-}
-
-// NotificationDeliveryMechanism - The type of notification.
-type NotificationDeliveryMechanism string
-
-const (
-	NotificationDeliveryMechanismEmail NotificationDeliveryMechanism = "Email"
-)
-
-// PossibleNotificationDeliveryMechanismValues returns the possible values for the NotificationDeliveryMechanism const type.
-func PossibleNotificationDeliveryMechanismValues() []NotificationDeliveryMechanism {
-	return []NotificationDeliveryMechanism{
-		NotificationDeliveryMechanismEmail,
-	}
-}
-
-// NotificationLevel - The notification level.
-type NotificationLevel string
-
-const (
-	NotificationLevelAll      NotificationLevel = "All"
-	NotificationLevelCritical NotificationLevel = "Critical"
-	NotificationLevelNone     NotificationLevel = "None"
-)
-
-// PossibleNotificationLevelValues returns the possible values for the NotificationLevel const type.
-func PossibleNotificationLevelValues() []NotificationLevel {
-	return []NotificationLevel{
-		NotificationLevelAll,
-		NotificationLevelCritical,
-		NotificationLevelNone,
-	}
-}
 
 // PrincipalType - The principal type of the assigned principal ID.
 type PrincipalType string
@@ -137,24 +33,6 @@ func PossiblePrincipalTypeValues() []PrincipalType {
 		PrincipalTypeGroup,
 		PrincipalTypeServicePrincipal,
 		PrincipalTypeUser,
-	}
-}
-
-// RecipientType - The recipient type.
-type RecipientType string
-
-const (
-	RecipientTypeAdmin     RecipientType = "Admin"
-	RecipientTypeApprover  RecipientType = "Approver"
-	RecipientTypeRequestor RecipientType = "Requestor"
-)
-
-// PossibleRecipientTypeValues returns the possible values for the RecipientType const type.
-func PossibleRecipientTypeValues() []RecipientType {
-	return []RecipientType{
-		RecipientTypeAdmin,
-		RecipientTypeApprover,
-		RecipientTypeRequestor,
 	}
 }
 
@@ -188,29 +66,7 @@ func PossibleRequestTypeValues() []RequestType {
 	}
 }
 
-// RoleManagementPolicyRuleType - The type of rule
-type RoleManagementPolicyRuleType string
-
-const (
-	RoleManagementPolicyRuleTypeRoleManagementPolicyApprovalRule              RoleManagementPolicyRuleType = "RoleManagementPolicyApprovalRule"
-	RoleManagementPolicyRuleTypeRoleManagementPolicyAuthenticationContextRule RoleManagementPolicyRuleType = "RoleManagementPolicyAuthenticationContextRule"
-	RoleManagementPolicyRuleTypeRoleManagementPolicyEnablementRule            RoleManagementPolicyRuleType = "RoleManagementPolicyEnablementRule"
-	RoleManagementPolicyRuleTypeRoleManagementPolicyExpirationRule            RoleManagementPolicyRuleType = "RoleManagementPolicyExpirationRule"
-	RoleManagementPolicyRuleTypeRoleManagementPolicyNotificationRule          RoleManagementPolicyRuleType = "RoleManagementPolicyNotificationRule"
-)
-
-// PossibleRoleManagementPolicyRuleTypeValues returns the possible values for the RoleManagementPolicyRuleType const type.
-func PossibleRoleManagementPolicyRuleTypeValues() []RoleManagementPolicyRuleType {
-	return []RoleManagementPolicyRuleType{
-		RoleManagementPolicyRuleTypeRoleManagementPolicyApprovalRule,
-		RoleManagementPolicyRuleTypeRoleManagementPolicyAuthenticationContextRule,
-		RoleManagementPolicyRuleTypeRoleManagementPolicyEnablementRule,
-		RoleManagementPolicyRuleTypeRoleManagementPolicyExpirationRule,
-		RoleManagementPolicyRuleTypeRoleManagementPolicyNotificationRule,
-	}
-}
-
-// Status - The status of the role assignment schedule.
+// Status - The status of the role assignment schedule request.
 type Status string
 
 const (
@@ -281,21 +137,5 @@ func PossibleTypeValues() []Type {
 		TypeAfterDateTime,
 		TypeAfterDuration,
 		TypeNoExpiration,
-	}
-}
-
-// UserType - The type of user.
-type UserType string
-
-const (
-	UserTypeGroup UserType = "Group"
-	UserTypeUser  UserType = "User"
-)
-
-// PossibleUserTypeValues returns the possible values for the UserType const type.
-func PossibleUserTypeValues() []UserType {
-	return []UserType{
-		UserTypeGroup,
-		UserTypeUser,
 	}
 }

@@ -54,7 +54,7 @@ func NewRoleAssignmentScheduleRequestsClient(credential azcore.TokenCredential, 
 
 // Cancel - Cancels a pending role assignment schedule request.
 // If the operation fails it returns an *azcore.ResponseError type.
-// Generated from API version 2020-10-01
+// Generated from API version 2023-04-01-preview
 // scope - The scope of the role assignment request to cancel.
 // roleAssignmentScheduleRequestName - The name of the role assignment request to cancel.
 // options - RoleAssignmentScheduleRequestsClientCancelOptions contains the optional parameters for the RoleAssignmentScheduleRequestsClient.Cancel
@@ -87,7 +87,7 @@ func (client *RoleAssignmentScheduleRequestsClient) cancelCreateRequest(ctx cont
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2020-10-01")
+	reqQP.Set("api-version", "2023-04-01-preview")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	return req, nil
@@ -95,11 +95,12 @@ func (client *RoleAssignmentScheduleRequestsClient) cancelCreateRequest(ctx cont
 
 // Create - Creates a role assignment schedule request.
 // If the operation fails it returns an *azcore.ResponseError type.
-// Generated from API version 2020-10-01
+// Generated from API version 2023-04-01-preview
 // scope - The scope of the role assignment schedule request to create. The scope can be any REST resource instance. For example,
-// use '/subscriptions/{subscription-id}/' for a subscription,
-// '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for a resource group, and
-// '/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider}/{resource-type}/{resource-name}'
+// use '/providers/Microsoft.Subscription/subscriptions/{subscription-id}/' for a
+// subscription, '/providers/Microsoft.Subscription/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}'
+// for a resource group, and
+// '/providers/Microsoft.Subscription/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider}/{resource-type}/{resource-name}'
 // for a resource.
 // roleAssignmentScheduleRequestName - A GUID for the role assignment to create. The name must be unique and different for
 // each role assignment.
@@ -134,7 +135,7 @@ func (client *RoleAssignmentScheduleRequestsClient) createCreateRequest(ctx cont
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2020-10-01")
+	reqQP.Set("api-version", "2023-04-01-preview")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	return req, runtime.MarshalAsJSON(req, parameters)
@@ -151,7 +152,7 @@ func (client *RoleAssignmentScheduleRequestsClient) createHandleResponse(resp *h
 
 // Get - Get the specified role assignment schedule request.
 // If the operation fails it returns an *azcore.ResponseError type.
-// Generated from API version 2020-10-01
+// Generated from API version 2023-04-01-preview
 // scope - The scope of the role assignment schedule request.
 // roleAssignmentScheduleRequestName - The name (guid) of the role assignment schedule request to get.
 // options - RoleAssignmentScheduleRequestsClientGetOptions contains the optional parameters for the RoleAssignmentScheduleRequestsClient.Get
@@ -184,7 +185,7 @@ func (client *RoleAssignmentScheduleRequestsClient) getCreateRequest(ctx context
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2020-10-01")
+	reqQP.Set("api-version", "2023-04-01-preview")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	return req, nil
@@ -200,8 +201,7 @@ func (client *RoleAssignmentScheduleRequestsClient) getHandleResponse(resp *http
 }
 
 // NewListForScopePager - Gets role assignment schedule requests for a scope.
-// If the operation fails it returns an *azcore.ResponseError type.
-// Generated from API version 2020-10-01
+// Generated from API version 2023-04-01-preview
 // scope - The scope of the role assignments schedule requests.
 // options - RoleAssignmentScheduleRequestsClientListForScopeOptions contains the optional parameters for the RoleAssignmentScheduleRequestsClient.ListForScope
 // method.
@@ -245,7 +245,7 @@ func (client *RoleAssignmentScheduleRequestsClient) listForScopeCreateRequest(ct
 	if options != nil && options.Filter != nil {
 		reqQP.Set("$filter", *options.Filter)
 	}
-	reqQP.Set("api-version", "2020-10-01")
+	reqQP.Set("api-version", "2023-04-01-preview")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	return req, nil
@@ -262,7 +262,7 @@ func (client *RoleAssignmentScheduleRequestsClient) listForScopeHandleResponse(r
 
 // Validate - Validates a new role assignment schedule request.
 // If the operation fails it returns an *azcore.ResponseError type.
-// Generated from API version 2020-10-01
+// Generated from API version 2023-04-01-preview
 // scope - The scope of the role assignment request to validate.
 // roleAssignmentScheduleRequestName - The name of the role assignment request to validate.
 // parameters - Parameters for the role assignment schedule request.
@@ -296,7 +296,7 @@ func (client *RoleAssignmentScheduleRequestsClient) validateCreateRequest(ctx co
 		return nil, err
 	}
 	reqQP := req.Raw().URL.Query()
-	reqQP.Set("api-version", "2020-10-01")
+	reqQP.Set("api-version", "2023-04-01-preview")
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	return req, runtime.MarshalAsJSON(req, parameters)
