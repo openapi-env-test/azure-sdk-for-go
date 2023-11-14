@@ -1,5 +1,18 @@
 # Release History
 
+## 2.0.0 (2023-11-14)
+### Breaking Changes
+
+- Function `NewClientFactory` has been removed
+- Function `*ClientFactory.NewAzureBareMetalInstancesClient` has been removed
+- Function `*ClientFactory.NewOperationsClient` has been removed
+- Struct `ClientFactory` has been removed
+
+### Features Added
+
+- New value `AzureBareMetalHardwareTypeNamesEnumSDFLEX` added to type alias `AzureBareMetalHardwareTypeNamesEnum`
+
+
 ## 1.0.0 (2022-05-17)
 
 The package of `github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/baremetalinfrastructure/armbaremetalinfrastructure` is using our [next generation design principles](https://azure.github.io/azure-sdk/general_introduction.html) since version 1.0.0, which contains breaking changes.
