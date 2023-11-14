@@ -1,5 +1,37 @@
 # Release History
 
+## 2.0.0 (2023-11-14)
+### Breaking Changes
+
+- Function `*DeploymentsClient.CalculateTemplateHash` parameter(s) have been changed from `(context.Context, any, *DeploymentsClientCalculateTemplateHashOptions)` to `(context.Context, interface{}, *DeploymentsClientCalculateTemplateHashOptions)`
+- Type of `DeploymentExportResult.Template` has been changed from `any` to `interface{}`
+- Type of `DeploymentProperties.Parameters` has been changed from `any` to `interface{}`
+- Type of `DeploymentProperties.Template` has been changed from `any` to `interface{}`
+- Type of `DeploymentPropertiesExtended.Outputs` has been changed from `any` to `interface{}`
+- Type of `DeploymentPropertiesExtended.Parameters` has been changed from `any` to `interface{}`
+- Type of `DeploymentWhatIfProperties.Parameters` has been changed from `any` to `interface{}`
+- Type of `DeploymentWhatIfProperties.Template` has been changed from `any` to `interface{}`
+- Type of `ErrorAdditionalInfo.Info` has been changed from `any` to `interface{}`
+- Type of `GenericResource.Properties` has been changed from `any` to `interface{}`
+- Type of `GenericResourceExpanded.Properties` has been changed from `any` to `interface{}`
+- Type of `HTTPMessage.Content` has been changed from `any` to `interface{}`
+- Type of `ResourceGroupExportResult.Template` has been changed from `any` to `interface{}`
+- Type of `WhatIfChange.Before` has been changed from `any` to `interface{}`
+- Type of `WhatIfChange.After` has been changed from `any` to `interface{}`
+- Type of `WhatIfPropertyChange.After` has been changed from `any` to `interface{}`
+- Type of `WhatIfPropertyChange.Before` has been changed from `any` to `interface{}`
+- Function `NewClientFactory` has been removed
+- Function `*ClientFactory.NewClient` has been removed
+- Function `*ClientFactory.NewDeploymentOperationsClient` has been removed
+- Function `*ClientFactory.NewDeploymentsClient` has been removed
+- Function `*ClientFactory.NewOperationsClient` has been removed
+- Function `*ClientFactory.NewProviderResourceTypesClient` has been removed
+- Function `*ClientFactory.NewProvidersClient` has been removed
+- Function `*ClientFactory.NewResourceGroupsClient` has been removed
+- Function `*ClientFactory.NewTagsClient` has been removed
+- Struct `ClientFactory` has been removed
+
+
 ## 1.0.0 (2022-05-16)
 
 The package of `github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/resources/armresources` is using our [next generation design principles](https://azure.github.io/azure-sdk/general_introduction.html) since version 1.0.0, which contains breaking changes.
