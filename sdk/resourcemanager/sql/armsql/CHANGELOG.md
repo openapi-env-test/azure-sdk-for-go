@@ -1,5 +1,176 @@
 # Release History
 
+## 2.0.0-beta.5 (2023-12-27)
+### Breaking Changes
+
+- Type of `ErrorAdditionalInfo.Info` has been changed from `any` to `interface{}`
+- Type of `Operation.Properties` has been changed from `map[string]any` to `map[string]interface{}`
+- Type of `RecommendedActionProperties.Details` has been changed from `map[string]any` to `map[string]interface{}`
+- Type of `ServerProperties.MinimalTLSVersion` has been changed from `*MinimalTLSVersion` to `*string`
+- Type alias `MinimalTLSVersion` has been removed
+- Function `NewClientFactory` has been removed
+- Function `*ClientFactory.NewAgentClient` has been removed
+- Function `*ClientFactory.NewBackupShortTermRetentionPoliciesClient` has been removed
+- Function `*ClientFactory.NewCapabilitiesClient` has been removed
+- Function `*ClientFactory.NewDataMaskingPoliciesClient` has been removed
+- Function `*ClientFactory.NewDataMaskingRulesClient` has been removed
+- Function `*ClientFactory.NewDataWarehouseUserActivitiesClient` has been removed
+- Function `*ClientFactory.NewDatabaseAdvancedThreatProtectionSettingsClient` has been removed
+- Function `*ClientFactory.NewDatabaseAdvisorsClient` has been removed
+- Function `*ClientFactory.NewDatabaseAutomaticTuningClient` has been removed
+- Function `*ClientFactory.NewDatabaseBlobAuditingPoliciesClient` has been removed
+- Function `*ClientFactory.NewDatabaseColumnsClient` has been removed
+- Function `*ClientFactory.NewDatabaseEncryptionProtectorsClient` has been removed
+- Function `*ClientFactory.NewDatabaseExtensionsClient` has been removed
+- Function `*ClientFactory.NewDatabaseOperationsClient` has been removed
+- Function `*ClientFactory.NewDatabaseRecommendedActionsClient` has been removed
+- Function `*ClientFactory.NewDatabaseSQLVulnerabilityAssessmentBaselinesClient` has been removed
+- Function `*ClientFactory.NewDatabaseSQLVulnerabilityAssessmentExecuteScanClient` has been removed
+- Function `*ClientFactory.NewDatabaseSQLVulnerabilityAssessmentRuleBaselinesClient` has been removed
+- Function `*ClientFactory.NewDatabaseSQLVulnerabilityAssessmentScanResultClient` has been removed
+- Function `*ClientFactory.NewDatabaseSQLVulnerabilityAssessmentScansClient` has been removed
+- Function `*ClientFactory.NewDatabaseSQLVulnerabilityAssessmentsSettingsClient` has been removed
+- Function `*ClientFactory.NewDatabaseSchemasClient` has been removed
+- Function `*ClientFactory.NewDatabaseSecurityAlertPoliciesClient` has been removed
+- Function `*ClientFactory.NewDatabaseTablesClient` has been removed
+- Function `*ClientFactory.NewDatabaseUsagesClient` has been removed
+- Function `*ClientFactory.NewDatabaseVulnerabilityAssessmentRuleBaselinesClient` has been removed
+- Function `*ClientFactory.NewDatabaseVulnerabilityAssessmentScansClient` has been removed
+- Function `*ClientFactory.NewDatabaseVulnerabilityAssessmentsClient` has been removed
+- Function `*ClientFactory.NewDatabasesClient` has been removed
+- Function `*ClientFactory.NewDeletedServersClient` has been removed
+- Function `*ClientFactory.NewDistributedAvailabilityGroupsClient` has been removed
+- Function `*ClientFactory.NewElasticPoolActivitiesClient` has been removed
+- Function `*ClientFactory.NewElasticPoolDatabaseActivitiesClient` has been removed
+- Function `*ClientFactory.NewElasticPoolOperationsClient` has been removed
+- Function `*ClientFactory.NewElasticPoolsClient` has been removed
+- Function `*ClientFactory.NewEncryptionProtectorsClient` has been removed
+- Function `*ClientFactory.NewEndpointCertificatesClient` has been removed
+- Function `*ClientFactory.NewExtendedDatabaseBlobAuditingPoliciesClient` has been removed
+- Function `*ClientFactory.NewExtendedServerBlobAuditingPoliciesClient` has been removed
+- Function `*ClientFactory.NewFailoverGroupsClient` has been removed
+- Function `*ClientFactory.NewFirewallRulesClient` has been removed
+- Function `*ClientFactory.NewGeoBackupPoliciesClient` has been removed
+- Function `*ClientFactory.NewIPv6FirewallRulesClient` has been removed
+- Function `*ClientFactory.NewInstanceFailoverGroupsClient` has been removed
+- Function `*ClientFactory.NewInstancePoolsClient` has been removed
+- Function `*ClientFactory.NewJobAgentsClient` has been removed
+- Function `*ClientFactory.NewJobCredentialsClient` has been removed
+- Function `*ClientFactory.NewJobExecutionsClient` has been removed
+- Function `*ClientFactory.NewJobPrivateEndpointsClient` has been removed
+- Function `*ClientFactory.NewJobStepExecutionsClient` has been removed
+- Function `*ClientFactory.NewJobStepsClient` has been removed
+- Function `*ClientFactory.NewJobTargetExecutionsClient` has been removed
+- Function `*ClientFactory.NewJobTargetGroupsClient` has been removed
+- Function `*ClientFactory.NewJobVersionsClient` has been removed
+- Function `*ClientFactory.NewJobsClient` has been removed
+- Function `*ClientFactory.NewLedgerDigestUploadsClient` has been removed
+- Function `*ClientFactory.NewLongTermRetentionBackupsClient` has been removed
+- Function `*ClientFactory.NewLongTermRetentionManagedInstanceBackupsClient` has been removed
+- Function `*ClientFactory.NewLongTermRetentionPoliciesClient` has been removed
+- Function `*ClientFactory.NewMaintenanceWindowOptionsClient` has been removed
+- Function `*ClientFactory.NewMaintenanceWindowsClient` has been removed
+- Function `*ClientFactory.NewManagedBackupShortTermRetentionPoliciesClient` has been removed
+- Function `*ClientFactory.NewManagedDatabaseAdvancedThreatProtectionSettingsClient` has been removed
+- Function `*ClientFactory.NewManagedDatabaseColumnsClient` has been removed
+- Function `*ClientFactory.NewManagedDatabaseMoveOperationsClient` has been removed
+- Function `*ClientFactory.NewManagedDatabaseQueriesClient` has been removed
+- Function `*ClientFactory.NewManagedDatabaseRecommendedSensitivityLabelsClient` has been removed
+- Function `*ClientFactory.NewManagedDatabaseRestoreDetailsClient` has been removed
+- Function `*ClientFactory.NewManagedDatabaseSchemasClient` has been removed
+- Function `*ClientFactory.NewManagedDatabaseSecurityAlertPoliciesClient` has been removed
+- Function `*ClientFactory.NewManagedDatabaseSecurityEventsClient` has been removed
+- Function `*ClientFactory.NewManagedDatabaseSensitivityLabelsClient` has been removed
+- Function `*ClientFactory.NewManagedDatabaseTablesClient` has been removed
+- Function `*ClientFactory.NewManagedDatabaseTransparentDataEncryptionClient` has been removed
+- Function `*ClientFactory.NewManagedDatabaseVulnerabilityAssessmentRuleBaselinesClient` has been removed
+- Function `*ClientFactory.NewManagedDatabaseVulnerabilityAssessmentScansClient` has been removed
+- Function `*ClientFactory.NewManagedDatabaseVulnerabilityAssessmentsClient` has been removed
+- Function `*ClientFactory.NewManagedDatabasesClient` has been removed
+- Function `*ClientFactory.NewManagedInstanceAdministratorsClient` has been removed
+- Function `*ClientFactory.NewManagedInstanceAdvancedThreatProtectionSettingsClient` has been removed
+- Function `*ClientFactory.NewManagedInstanceAzureADOnlyAuthenticationsClient` has been removed
+- Function `*ClientFactory.NewManagedInstanceDtcsClient` has been removed
+- Function `*ClientFactory.NewManagedInstanceEncryptionProtectorsClient` has been removed
+- Function `*ClientFactory.NewManagedInstanceKeysClient` has been removed
+- Function `*ClientFactory.NewManagedInstanceLongTermRetentionPoliciesClient` has been removed
+- Function `*ClientFactory.NewManagedInstanceOperationsClient` has been removed
+- Function `*ClientFactory.NewManagedInstancePrivateEndpointConnectionsClient` has been removed
+- Function `*ClientFactory.NewManagedInstancePrivateLinkResourcesClient` has been removed
+- Function `*ClientFactory.NewManagedInstanceTdeCertificatesClient` has been removed
+- Function `*ClientFactory.NewManagedInstanceVulnerabilityAssessmentsClient` has been removed
+- Function `*ClientFactory.NewManagedInstancesClient` has been removed
+- Function `*ClientFactory.NewManagedLedgerDigestUploadsClient` has been removed
+- Function `*ClientFactory.NewManagedRestorableDroppedDatabaseBackupShortTermRetentionPoliciesClient` has been removed
+- Function `*ClientFactory.NewManagedServerDNSAliasesClient` has been removed
+- Function `*ClientFactory.NewManagedServerSecurityAlertPoliciesClient` has been removed
+- Function `*ClientFactory.NewOperationsClient` has been removed
+- Function `*ClientFactory.NewOutboundFirewallRulesClient` has been removed
+- Function `*ClientFactory.NewPrivateEndpointConnectionsClient` has been removed
+- Function `*ClientFactory.NewPrivateLinkResourcesClient` has been removed
+- Function `*ClientFactory.NewRecommendedSensitivityLabelsClient` has been removed
+- Function `*ClientFactory.NewRecoverableDatabasesClient` has been removed
+- Function `*ClientFactory.NewRecoverableManagedDatabasesClient` has been removed
+- Function `*ClientFactory.NewReplicationLinksClient` has been removed
+- Function `*ClientFactory.NewRestorableDroppedDatabasesClient` has been removed
+- Function `*ClientFactory.NewRestorableDroppedManagedDatabasesClient` has been removed
+- Function `*ClientFactory.NewRestorePointsClient` has been removed
+- Function `*ClientFactory.NewSensitivityLabelsClient` has been removed
+- Function `*ClientFactory.NewServerAdvancedThreatProtectionSettingsClient` has been removed
+- Function `*ClientFactory.NewServerAdvisorsClient` has been removed
+- Function `*ClientFactory.NewServerAutomaticTuningClient` has been removed
+- Function `*ClientFactory.NewServerAzureADAdministratorsClient` has been removed
+- Function `*ClientFactory.NewServerAzureADOnlyAuthenticationsClient` has been removed
+- Function `*ClientFactory.NewServerBlobAuditingPoliciesClient` has been removed
+- Function `*ClientFactory.NewServerCommunicationLinksClient` has been removed
+- Function `*ClientFactory.NewServerConfigurationOptionsClient` has been removed
+- Function `*ClientFactory.NewServerConnectionPoliciesClient` has been removed
+- Function `*ClientFactory.NewServerDNSAliasesClient` has been removed
+- Function `*ClientFactory.NewServerDevOpsAuditSettingsClient` has been removed
+- Function `*ClientFactory.NewServerKeysClient` has been removed
+- Function `*ClientFactory.NewServerOperationsClient` has been removed
+- Function `*ClientFactory.NewServerSecurityAlertPoliciesClient` has been removed
+- Function `*ClientFactory.NewServerTrustCertificatesClient` has been removed
+- Function `*ClientFactory.NewServerTrustGroupsClient` has been removed
+- Function `*ClientFactory.NewServerUsagesClient` has been removed
+- Function `*ClientFactory.NewServerVulnerabilityAssessmentsClient` has been removed
+- Function `*ClientFactory.NewServersClient` has been removed
+- Function `*ClientFactory.NewServiceObjectivesClient` has been removed
+- Function `*ClientFactory.NewStartStopManagedInstanceSchedulesClient` has been removed
+- Function `*ClientFactory.NewSubscriptionUsagesClient` has been removed
+- Function `*ClientFactory.NewSynapseLinkWorkspacesClient` has been removed
+- Function `*ClientFactory.NewSyncAgentsClient` has been removed
+- Function `*ClientFactory.NewSyncGroupsClient` has been removed
+- Function `*ClientFactory.NewSyncMembersClient` has been removed
+- Function `*ClientFactory.NewTdeCertificatesClient` has been removed
+- Function `*ClientFactory.NewTimeZonesClient` has been removed
+- Function `*ClientFactory.NewTransparentDataEncryptionsClient` has been removed
+- Function `*ClientFactory.NewUsagesClient` has been removed
+- Function `*ClientFactory.NewVirtualClustersClient` has been removed
+- Function `*ClientFactory.NewVirtualNetworkRulesClient` has been removed
+- Function `*ClientFactory.NewVulnerabilityAssessmentBaselineClient` has been removed
+- Function `*ClientFactory.NewVulnerabilityAssessmentBaselinesClient` has been removed
+- Function `*ClientFactory.NewVulnerabilityAssessmentExecuteScanClient` has been removed
+- Function `*ClientFactory.NewVulnerabilityAssessmentRuleBaselineClient` has been removed
+- Function `*ClientFactory.NewVulnerabilityAssessmentRuleBaselinesClient` has been removed
+- Function `*ClientFactory.NewVulnerabilityAssessmentScanResultClient` has been removed
+- Function `*ClientFactory.NewVulnerabilityAssessmentScansClient` has been removed
+- Function `*ClientFactory.NewVulnerabilityAssessmentsClient` has been removed
+- Function `*ClientFactory.NewVulnerabilityAssessmentsSettingsClient` has been removed
+- Function `*ClientFactory.NewWorkloadClassifiersClient` has been removed
+- Function `*ClientFactory.NewWorkloadGroupsClient` has been removed
+- Function `dateTimeRFC3339.MarshalText` has been removed
+- Function `*dateTimeRFC3339.Parse` has been removed
+- Function `*dateTimeRFC3339.UnmarshalText` has been removed
+- Struct `ClientFactory` has been removed
+
+### Features Added
+
+- New function `timeRFC3339.MarshalText() ([]byte, error)`
+- New function `*timeRFC3339.Parse(string) error`
+- New function `*timeRFC3339.UnmarshalText([]byte) error`
+
+
 ## 1.0.0 (2022-06-02)
 
 The package of `github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/sql/armsql` is using our [next generation design principles](https://azure.github.io/azure-sdk/general_introduction.html) since version 1.0.0, which contains breaking changes.
