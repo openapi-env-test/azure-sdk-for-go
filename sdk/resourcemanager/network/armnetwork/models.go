@@ -259,6 +259,9 @@ type AdminPropertiesFormat struct {
 
 	// READ-ONLY; The provisioning state of the resource.
 	ProvisioningState *ProvisioningState `json:"provisioningState,omitempty" azure:"ro"`
+
+	// READ-ONLY; Unique identifier for this resource.
+	ResourceGUID *string `json:"resourceGuid,omitempty" azure:"ro"`
 }
 
 // AdminRule - Network admin rule.
@@ -337,6 +340,9 @@ type AdminRuleCollectionPropertiesFormat struct {
 
 	// READ-ONLY; The provisioning state of the resource.
 	ProvisioningState *ProvisioningState `json:"provisioningState,omitempty" azure:"ro"`
+
+	// READ-ONLY; Unique identifier for this resource.
+	ResourceGUID *string `json:"resourceGuid,omitempty" azure:"ro"`
 }
 
 // AdminRuleCollectionsClientBeginDeleteOptions contains the optional parameters for the AdminRuleCollectionsClient.BeginDelete
@@ -742,12 +748,12 @@ type ApplicationGatewayConnectionDraining struct {
 	Enabled *bool `json:"enabled,omitempty"`
 }
 
-// ApplicationGatewayCustomError - Customer error of an application gateway.
+// ApplicationGatewayCustomError - Custom error of an application gateway.
 type ApplicationGatewayCustomError struct {
-	// Error page URL of the application gateway customer error.
+	// Error page URL of the application gateway custom error.
 	CustomErrorPageURL *string `json:"customErrorPageUrl,omitempty"`
 
-	// Status code of the application gateway customer error.
+	// Status code of the application gateway custom error.
 	StatusCode *ApplicationGatewayCustomErrorStatusCode `json:"statusCode,omitempty"`
 }
 
@@ -1061,6 +1067,9 @@ type ApplicationGatewayListenerPropertiesFormat struct {
 
 	// Frontend port resource of an application gateway.
 	FrontendPort *SubResource `json:"frontendPort,omitempty"`
+
+	// List of Server Name Indications(SNI) for TLS Multi-site Listener that allows special wildcard characters as well.
+	HostNames []*string `json:"hostNames,omitempty"`
 
 	// Protocol of the listener.
 	Protocol *ApplicationGatewayProtocol `json:"protocol,omitempty"`
@@ -1434,8 +1443,8 @@ type ApplicationGatewayProbePropertiesFormat struct {
 	PickHostNameFromBackendSettings *bool `json:"pickHostNameFromBackendSettings,omitempty"`
 
 	// Custom port which will be used for probing the backend servers. The valid value ranges from 1 to 65535. In case not set,
-	// port from http settings will be used. This property is valid for Standardv2 and
-	// WAFv2 only.
+	// port from http settings will be used. This property is valid for Basic,
+	// Standardv2 and WAFv2 only.
 	Port *int32 `json:"port,omitempty"`
 
 	// The protocol used for the probe.
@@ -1556,6 +1565,9 @@ type ApplicationGatewayPropertiesFormat struct {
 
 	// Web application firewall configuration.
 	WebApplicationFirewallConfiguration *ApplicationGatewayWebApplicationFirewallConfiguration `json:"webApplicationFirewallConfiguration,omitempty"`
+
+	// READ-ONLY; The default predefined SSL Policy applied on the application gateway resource.
+	DefaultPredefinedSSLPolicy *ApplicationGatewaySSLPolicyName `json:"defaultPredefinedSslPolicy,omitempty" azure:"ro"`
 
 	// READ-ONLY; Operational state of the application gateway resource.
 	OperationalState *ApplicationGatewayOperationalState `json:"operationalState,omitempty" azure:"ro"`
@@ -2209,6 +2221,9 @@ type ApplicationRule struct {
 
 	// List of FQDN Tags for this rule.
 	FqdnTags []*string `json:"fqdnTags,omitempty"`
+
+	// List of HTTP/S headers to insert.
+	HTTPHeadersToInsert []*FirewallPolicyHTTPHeaderToInsert `json:"httpHeadersToInsert,omitempty"`
 
 	// Name of the rule.
 	Name *string `json:"name,omitempty"`
@@ -2880,6 +2895,24 @@ type AzureFirewallNetworkRuleCollectionPropertiesFormat struct {
 	ProvisioningState *ProvisioningState `json:"provisioningState,omitempty" azure:"ro"`
 }
 
+// AzureFirewallPacketCaptureFlags - Properties of the AzureFirewallRCAction.
+type AzureFirewallPacketCaptureFlags struct {
+	// Flags to capture
+	Type *AzureFirewallPacketCaptureFlagsType `json:"type,omitempty"`
+}
+
+// AzureFirewallPacketCaptureRule - Group of src/dest ips and ports to be captured.
+type AzureFirewallPacketCaptureRule struct {
+	// List of ports to be captured.
+	DestinationPorts []*string `json:"destinationPorts,omitempty"`
+
+	// List of destination IP addresses/subnets to be captured.
+	Destinations []*string `json:"destinations,omitempty"`
+
+	// List of source IP addresses/subnets to be captured.
+	Sources []*string `json:"sources,omitempty"`
+}
+
 // AzureFirewallPropertiesFormat - Properties of the Azure Firewall.
 type AzureFirewallPropertiesFormat struct {
 	// The additional properties used to further config this azure firewall.
@@ -2959,6 +2992,13 @@ type AzureFirewallsClientBeginDeleteOptions struct {
 // AzureFirewallsClientBeginListLearnedPrefixesOptions contains the optional parameters for the AzureFirewallsClient.BeginListLearnedPrefixes
 // method.
 type AzureFirewallsClientBeginListLearnedPrefixesOptions struct {
+	// Resumes the LRO from the provided token.
+	ResumeToken string
+}
+
+// AzureFirewallsClientBeginPacketCaptureOptions contains the optional parameters for the AzureFirewallsClient.BeginPacketCapture
+// method.
+type AzureFirewallsClientBeginPacketCaptureOptions struct {
 	// Resumes the LRO from the provided token.
 	ResumeToken string
 }
@@ -3137,6 +3177,9 @@ type BackendAddressPoolPropertiesFormat struct {
 
 	// The location of the backend address pool.
 	Location *string `json:"location,omitempty"`
+
+	// Backend address synchronous mode for the backend pool
+	SyncMode *SyncMode `json:"syncMode,omitempty"`
 
 	// An array of gateway load balancer tunnel interfaces.
 	TunnelInterfaces []*GatewayLoadBalancerTunnelInterface `json:"tunnelInterfaces,omitempty"`
@@ -3324,6 +3367,9 @@ type BastionHostPropertiesFormat struct {
 	// Enable/Disable IP Connect feature of the Bastion Host resource.
 	EnableIPConnect *bool `json:"enableIpConnect,omitempty"`
 
+	// Enable/Disable Kerberos feature of the Bastion Host resource.
+	EnableKerberos *bool `json:"enableKerberos,omitempty"`
+
 	// Enable/Disable Shareable Link of the Bastion Host resource.
 	EnableShareableLink *bool `json:"enableShareableLink,omitempty"`
 
@@ -3331,13 +3377,22 @@ type BastionHostPropertiesFormat struct {
 	EnableTunneling *bool `json:"enableTunneling,omitempty"`
 
 	// IP configuration of the Bastion Host resource.
-	IPConfigurations []*BastionHostIPConfiguration `json:"ipConfigurations,omitempty"`
+	IPConfigurations []*BastionHostIPConfiguration           `json:"ipConfigurations,omitempty"`
+	NetworkACLs      *BastionHostPropertiesFormatNetworkACLs `json:"networkAcls,omitempty"`
 
 	// The scale units for the Bastion Host resource.
 	ScaleUnits *int32 `json:"scaleUnits,omitempty"`
 
+	// Reference to an existing virtual network required for Developer Bastion Host only.
+	VirtualNetwork *SubResource `json:"virtualNetwork,omitempty"`
+
 	// READ-ONLY; The provisioning state of the bastion host resource.
 	ProvisioningState *ProvisioningState `json:"provisioningState,omitempty" azure:"ro"`
+}
+
+type BastionHostPropertiesFormatNetworkACLs struct {
+	// Sets the IP ACL rules for Developer Bastion Host.
+	IPRules []*IPRule `json:"ipRules,omitempty"`
 }
 
 // BastionHostsClientBeginCreateOrUpdateOptions contains the optional parameters for the BastionHostsClient.BeginCreateOrUpdate
@@ -3411,7 +3466,7 @@ type BastionShareableLink struct {
 	Message *string `json:"message,omitempty" azure:"ro"`
 }
 
-// BastionShareableLinkListRequest - Post request for all the Bastion Shareable Link endpoints.
+// BastionShareableLinkListRequest - Post request for Create/Delete/Get Bastion Shareable Link endpoints.
 type BastionShareableLinkListRequest struct {
 	// List of VM references.
 	VMs []*BastionShareableLink `json:"vms,omitempty"`
@@ -3424,6 +3479,12 @@ type BastionShareableLinkListResult struct {
 
 	// List of Bastion Shareable Links for the request.
 	Value []*BastionShareableLink `json:"value,omitempty"`
+}
+
+// BastionShareableLinkTokenListRequest - Post request for Delete Bastion Shareable Link By Token endpoint.
+type BastionShareableLinkTokenListRequest struct {
+	// List of Bastion Shareable Link Token.
+	Tokens []*string `json:"tokens,omitempty"`
 }
 
 // BgpConnection - Virtual Appliance Site resource.
@@ -4139,6 +4200,9 @@ type ConnectivityConfigurationProperties struct {
 
 	// READ-ONLY; The provisioning state of the connectivity configuration resource.
 	ProvisioningState *ProvisioningState `json:"provisioningState,omitempty" azure:"ro"`
+
+	// READ-ONLY; Unique identifier for this resource.
+	ResourceGUID *string `json:"resourceGuid,omitempty" azure:"ro"`
 }
 
 // ConnectivityConfigurationsClientBeginDeleteOptions contains the optional parameters for the ConnectivityConfigurationsClient.BeginDelete
@@ -4745,6 +4809,9 @@ type DefaultAdminPropertiesFormat struct {
 	// READ-ONLY; The provisioning state of the resource.
 	ProvisioningState *ProvisioningState `json:"provisioningState,omitempty" azure:"ro"`
 
+	// READ-ONLY; Unique identifier for this resource.
+	ResourceGUID *string `json:"resourceGuid,omitempty" azure:"ro"`
+
 	// READ-ONLY; The source port ranges.
 	SourcePortRanges []*string `json:"sourcePortRanges,omitempty" azure:"ro"`
 
@@ -5176,7 +5243,13 @@ type EffectiveRouteMapRoute struct {
 	BgpCommunities *string `json:"bgpCommunities,omitempty"`
 
 	// The address prefix of the route.
-	Prefix []*string `json:"prefix,omitempty"`
+	Prefix *string `json:"prefix,omitempty"`
+}
+
+// EffectiveRouteMapRouteList - EffectiveRouteMapRoute List.
+type EffectiveRouteMapRouteList struct {
+	// The list of Effective RouteMap Routes configured on the connection resource.
+	Value []*EffectiveRouteMapRoute `json:"value,omitempty"`
 }
 
 // EffectiveRoutesParameters - The parameters specifying the resource whose effective routes are being requested.
@@ -5702,6 +5775,9 @@ type ExpressRouteCircuitPropertiesFormat struct {
 
 	// The ServiceProviderProvisioningState state of the resource.
 	ServiceProviderProvisioningState *ServiceProviderProvisioningState `json:"serviceProviderProvisioningState,omitempty"`
+
+	// READ-ONLY; The authorization status of the Circuit.
+	AuthorizationStatus *string `json:"authorizationStatus,omitempty" azure:"ro"`
 
 	// READ-ONLY; The provisioning state of the express route circuit resource.
 	ProvisioningState *ProvisioningState `json:"provisioningState,omitempty" azure:"ro"`
@@ -6779,6 +6855,39 @@ type FilterItems struct {
 	Values []*string `json:"values,omitempty"`
 }
 
+// FirewallPacketCaptureParameters - Azure Firewall Packet Capture Parameters resource.
+type FirewallPacketCaptureParameters struct {
+	// Resource ID.
+	ID *string `json:"id,omitempty"`
+
+	// Properties of the azure firewall.
+	Properties *FirewallPacketCaptureParametersFormat `json:"properties,omitempty"`
+}
+
+// FirewallPacketCaptureParametersFormat - Packet capture parameters on azure firewall.
+type FirewallPacketCaptureParametersFormat struct {
+	// Duration of packet capture in seconds.
+	DurationInSeconds *int32 `json:"durationInSeconds,omitempty"`
+
+	// Name of file to be uploaded to sasURL
+	FileName *string `json:"fileName,omitempty"`
+
+	// Rules to filter packet captures.
+	Filters []*AzureFirewallPacketCaptureRule `json:"filters,omitempty"`
+
+	// The tcp-flag type to be captured. Used with protocol TCP
+	Flags []*AzureFirewallPacketCaptureFlags `json:"flags,omitempty"`
+
+	// Number of packets to be captured.
+	NumberOfPacketsToCapture *int32 `json:"numberOfPacketsToCapture,omitempty"`
+
+	// The protocol of packets to capture
+	Protocol *AzureFirewallNetworkRuleProtocol `json:"protocol,omitempty"`
+
+	// Upload capture location
+	SasURL *string `json:"sasUrl,omitempty"`
+}
+
 // FirewallPoliciesClientBeginCreateOrUpdateOptions contains the optional parameters for the FirewallPoliciesClient.BeginCreateOrUpdate
 // method.
 type FirewallPoliciesClientBeginCreateOrUpdateOptions struct {
@@ -6882,6 +6991,15 @@ type FirewallPolicyFilterRuleCollectionAction struct {
 	Type *FirewallPolicyFilterRuleCollectionActionType `json:"type,omitempty"`
 }
 
+// FirewallPolicyHTTPHeaderToInsert - name and value of HTTP/S header to insert
+type FirewallPolicyHTTPHeaderToInsert struct {
+	// Contains the name of the header
+	HeaderName *string `json:"headerName,omitempty"`
+
+	// Contains the value of the header
+	HeaderValue *string `json:"headerValue,omitempty"`
+}
+
 // FirewallPolicyIdpsSignaturesClientListOptions contains the optional parameters for the FirewallPolicyIdpsSignaturesClient.List
 // method.
 type FirewallPolicyIdpsSignaturesClientListOptions struct {
@@ -6935,8 +7053,13 @@ type FirewallPolicyIntrusionDetection struct {
 	// Intrusion detection configuration properties.
 	Configuration *FirewallPolicyIntrusionDetectionConfiguration `json:"configuration,omitempty"`
 
-	// Intrusion detection general state.
+	// Intrusion detection general state. When attached to a parent policy, the firewall's effective IDPS mode is the stricter
+	// mode of the two.
 	Mode *FirewallPolicyIntrusionDetectionStateType `json:"mode,omitempty"`
+
+	// IDPS profile name. When attached to a parent policy, the firewall's effective profile is the profile name of the parent
+	// policy.
+	Profile *FirewallPolicyIntrusionDetectionProfileType `json:"profile,omitempty"`
 }
 
 // FirewallPolicyIntrusionDetectionBypassTrafficSpecifications - Intrusion detection bypass traffic specification.
@@ -7095,6 +7218,9 @@ type FirewallPolicyPropertiesFormat struct {
 
 	// READ-ONLY; List of references to FirewallPolicyRuleCollectionGroups.
 	RuleCollectionGroups []*SubResource `json:"ruleCollectionGroups,omitempty" azure:"ro"`
+
+	// READ-ONLY; A read-only string that represents the size of the FirewallPolicyPropertiesFormat in MB. (ex 0.5MB)
+	Size *string `json:"size,omitempty" azure:"ro"`
 }
 
 // FirewallPolicyRuleClassification provides polymorphic access to related types.
@@ -7193,6 +7319,9 @@ type FirewallPolicyRuleCollectionGroupProperties struct {
 
 	// READ-ONLY; The provisioning state of the firewall policy rule collection group resource.
 	ProvisioningState *ProvisioningState `json:"provisioningState,omitempty" azure:"ro"`
+
+	// READ-ONLY; A read-only string that represents the size of the FirewallPolicyRuleCollectionGroupProperties in MB. (ex 1.2MB)
+	Size *string `json:"size,omitempty" azure:"ro"`
 }
 
 // FirewallPolicyRuleCollectionGroupsClientBeginCreateOrUpdateOptions contains the optional parameters for the FirewallPolicyRuleCollectionGroupsClient.BeginCreateOrUpdate
@@ -7563,6 +7692,18 @@ type Group struct {
 	Type *string `json:"type,omitempty" azure:"ro"`
 }
 
+// GroupByUserSession - Define user session identifier group by clauses.
+type GroupByUserSession struct {
+	// REQUIRED; List of group by clause variables.
+	GroupByVariables []*GroupByVariable `json:"groupByVariables,omitempty"`
+}
+
+// GroupByVariable - Define user session group by clause variables.
+type GroupByVariable struct {
+	// REQUIRED; User Session clause variable.
+	VariableName *ApplicationGatewayFirewallUserSessionVariable `json:"variableName,omitempty"`
+}
+
 // GroupListResult - Result of the request to list NetworkGroup. It contains a list of groups and a URL link to get the next
 // set of results.
 type GroupListResult struct {
@@ -7580,6 +7721,9 @@ type GroupProperties struct {
 
 	// READ-ONLY; The provisioning state of the scope assignment resource.
 	ProvisioningState *ProvisioningState `json:"provisioningState,omitempty" azure:"ro"`
+
+	// READ-ONLY; Unique identifier for this resource.
+	ResourceGUID *string `json:"resourceGuid,omitempty" azure:"ro"`
 }
 
 // GroupsClientBeginDeleteOptions contains the optional parameters for the GroupsClient.BeginDelete method.
@@ -8156,6 +8300,11 @@ type IPPrefixesList struct {
 	IPPrefixes []*string `json:"ipPrefixes,omitempty"`
 }
 
+type IPRule struct {
+	// Specifies the IP or IP range in CIDR format. Only IPV4 address is allowed.
+	AddressPrefix *string `json:"addressPrefix,omitempty"`
+}
+
 // IPSecPolicy - An IPSec Policy configuration for a virtual network gateway connection.
 type IPSecPolicy struct {
 	// REQUIRED; The DH Group used in IKE Phase 1 for initial SA.
@@ -8652,6 +8801,9 @@ type InterfacePropertiesFormat struct {
 	// Auxiliary mode of Network Interface resource.
 	AuxiliaryMode *NetworkInterfaceAuxiliaryMode `json:"auxiliaryMode,omitempty"`
 
+	// Auxiliary sku of Network Interface resource.
+	AuxiliarySKU *NetworkInterfaceAuxiliarySKU `json:"auxiliarySku,omitempty"`
+
 	// The DNS settings in network interface.
 	DNSSettings *InterfaceDNSSettings `json:"dnsSettings,omitempty"`
 
@@ -8874,6 +9026,12 @@ type InterfacesClientListVirtualMachineScaleSetVMNetworkInterfacesOptions struct
 // InterfacesClientUpdateTagsOptions contains the optional parameters for the InterfacesClient.UpdateTags method.
 type InterfacesClientUpdateTagsOptions struct {
 	// placeholder for future optional parameters
+}
+
+// InternetIngressPublicIPsProperties - Resource Uri of Public Ip for Standard Load Balancer Frontend End.
+type InternetIngressPublicIPsProperties struct {
+	// Resource Uri of Public Ip
+	ID *string `json:"id,omitempty"`
 }
 
 // ListHubRouteTablesResult - List of RouteTables and a URL nextLink to get the next set of results.
@@ -9368,6 +9526,13 @@ type LoadBalancersClientListOptions struct {
 	// placeholder for future optional parameters
 }
 
+// LoadBalancersClientMigrateToIPBasedOptions contains the optional parameters for the LoadBalancersClient.MigrateToIPBased
+// method.
+type LoadBalancersClientMigrateToIPBasedOptions struct {
+	// Parameters supplied to the migrateToIpBased Api.
+	Parameters *MigrateLoadBalancerToIPBasedRequest
+}
+
 // LoadBalancersClientUpdateTagsOptions contains the optional parameters for the LoadBalancersClient.UpdateTags method.
 type LoadBalancersClientUpdateTagsOptions struct {
 	// placeholder for future optional parameters
@@ -9597,6 +9762,13 @@ type ManagedServiceIdentity struct {
 
 	// READ-ONLY; The tenant id of the system assigned identity. This property will only be provided for a system assigned identity.
 	TenantID *string `json:"tenantId,omitempty" azure:"ro"`
+}
+
+// ManagementClientBeginDeleteBastionShareableLinkByTokenOptions contains the optional parameters for the ManagementClient.BeginDeleteBastionShareableLinkByToken
+// method.
+type ManagementClientBeginDeleteBastionShareableLinkByTokenOptions struct {
+	// Resumes the LRO from the provided token.
+	ResumeToken string
 }
 
 // ManagementClientBeginDeleteBastionShareableLinkOptions contains the optional parameters for the ManagementClient.BeginDeleteBastionShareableLink
@@ -9898,6 +10070,9 @@ type ManagerProperties struct {
 
 	// READ-ONLY; The provisioning state of the network manager resource.
 	ProvisioningState *ProvisioningState `json:"provisioningState,omitempty" azure:"ro"`
+
+	// READ-ONLY; Unique identifier for this resource.
+	ResourceGUID *string `json:"resourceGuid,omitempty" azure:"ro"`
 }
 
 // ManagerPropertiesNetworkManagerScopes - Scope of Network Manager.
@@ -10041,6 +10216,18 @@ type MetricSpecification struct {
 
 	// Units the metric to be displayed in.
 	Unit *string `json:"unit,omitempty"`
+}
+
+// MigrateLoadBalancerToIPBasedRequest - The request for a migrateToIpBased API.
+type MigrateLoadBalancerToIPBasedRequest struct {
+	// A list of pool names that should be migrated from Nic based to IP based pool
+	Pools []*string `json:"pools,omitempty"`
+}
+
+// MigratedPools - The response for a migrateToIpBased API.
+type MigratedPools struct {
+	// A list of pools migrated from Nic based to IP based pool
+	MigratedPools []*string `json:"migratedPools,omitempty"`
 }
 
 // NatGateway - Nat Gateway resource.
@@ -10937,12 +11124,6 @@ type PeerRoute struct {
 	Weight *int32 `json:"weight,omitempty" azure:"ro"`
 }
 
-// PeerRouteList - List of virtual router peer routes.
-type PeerRouteList struct {
-	// List of peer routes.
-	Value []*PeerRoute `json:"value,omitempty"`
-}
-
 // PolicySettings - Defines contents of a web application firewall global configuration.
 type PolicySettings struct {
 	// If the action type is block, customer can override the response body. The body must be specified in base64 encoding.
@@ -10951,8 +11132,14 @@ type PolicySettings struct {
 	// If the action type is block, customer can override the response status code.
 	CustomBlockResponseStatusCode *int32 `json:"customBlockResponseStatusCode,omitempty"`
 
+	// Whether allow WAF to enforce file upload limits.
+	FileUploadEnforcement *bool `json:"fileUploadEnforcement,omitempty"`
+
 	// Maximum file upload size in Mb for WAF.
 	FileUploadLimitInMb *int32 `json:"fileUploadLimitInMb,omitempty"`
+
+	// To scrub sensitive log fields
+	LogScrubbing *PolicySettingsLogScrubbing `json:"logScrubbing,omitempty"`
 
 	// Maximum request body size in Kb for WAF.
 	MaxRequestBodySizeInKb *int32 `json:"maxRequestBodySizeInKb,omitempty"`
@@ -10963,8 +11150,23 @@ type PolicySettings struct {
 	// Whether to allow WAF to check request Body.
 	RequestBodyCheck *bool `json:"requestBodyCheck,omitempty"`
 
+	// Whether allow WAF to enforce request body limits.
+	RequestBodyEnforcement *bool `json:"requestBodyEnforcement,omitempty"`
+
+	// Max inspection limit in KB for request body inspection for WAF.
+	RequestBodyInspectLimitInKB *int32 `json:"requestBodyInspectLimitInKB,omitempty"`
+
 	// The state of the policy.
 	State *WebApplicationFirewallEnabledState `json:"state,omitempty"`
+}
+
+// PolicySettingsLogScrubbing - To scrub sensitive log fields
+type PolicySettingsLogScrubbing struct {
+	// The rules that are applied to the logs for scrubbing.
+	ScrubbingRules []*WebApplicationFirewallScrubbingRules `json:"scrubbingRules,omitempty"`
+
+	// State of the log scrubbing config. Default value is Enabled.
+	State *WebApplicationFirewallScrubbingState `json:"state,omitempty"`
 }
 
 // PrepareNetworkPoliciesRequest - Details of PrepareNetworkPolicies for Subnet.
@@ -11115,6 +11317,9 @@ type PrivateEndpointConnectionProperties struct {
 
 	// READ-ONLY; The resource of private end point.
 	PrivateEndpoint *PrivateEndpoint `json:"privateEndpoint,omitempty" azure:"ro"`
+
+	// READ-ONLY; The location of the private endpoint.
+	PrivateEndpointLocation *string `json:"privateEndpointLocation,omitempty" azure:"ro"`
 
 	// READ-ONLY; The provisioning state of the private endpoint connection resource.
 	ProvisioningState *ProvisioningState `json:"provisioningState,omitempty" azure:"ro"`
@@ -11665,6 +11870,11 @@ type PublicIPAddressDNSSettings struct {
 	// domain name associated with the public IP address. If a domain name label is
 	// specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system.
 	DomainNameLabel *string `json:"domainNameLabel,omitempty"`
+
+	// The domain name label scope. If a domain name label and a domain name label scope are specified, an A DNS record is created
+	// for the public IP in the Microsoft Azure DNS system with a hashed value
+	// includes in FQDN.
+	DomainNameLabelScope *PublicIPAddressDNSSettingsDomainNameLabelScope `json:"domainNameLabelScope,omitempty"`
 
 	// The Fully Qualified Domain Name of the A DNS record associated with the public IP. This is the concatenation of the domainNameLabel
 	// and the regionalized DNS zone.
@@ -12756,6 +12966,9 @@ type SecurityAdminConfigurationPropertiesFormat struct {
 
 	// READ-ONLY; The provisioning state of the resource.
 	ProvisioningState *ProvisioningState `json:"provisioningState,omitempty" azure:"ro"`
+
+	// READ-ONLY; Unique identifier for this resource.
+	ResourceGUID *string `json:"resourceGuid,omitempty" azure:"ro"`
 }
 
 // SecurityAdminConfigurationsClientBeginDeleteOptions contains the optional parameters for the SecurityAdminConfigurationsClient.BeginDelete
@@ -13052,6 +13265,10 @@ type SecurityRulePropertiesFormat struct {
 	// REQUIRED; The direction of the rule. The direction specifies if rule will be evaluated on incoming or outgoing traffic.
 	Direction *SecurityRuleDirection `json:"direction,omitempty"`
 
+	// REQUIRED; The priority of the rule. The value can be between 100 and 4096. The priority number must be unique for each
+	// rule in the collection. The lower the priority number, the higher the priority of the rule.
+	Priority *int32 `json:"priority,omitempty"`
+
 	// REQUIRED; Network protocol this rule applies to.
 	Protocol *SecurityRuleProtocol `json:"protocol,omitempty"`
 
@@ -13074,10 +13291,6 @@ type SecurityRulePropertiesFormat struct {
 
 	// The destination port ranges.
 	DestinationPortRanges []*string `json:"destinationPortRanges,omitempty"`
-
-	// The priority of the rule. The value can be between 100 and 4096. The priority number must be unique for each rule in the
-	// collection. The lower the priority number, the higher the priority of the rule.
-	Priority *int32 `json:"priority,omitempty"`
 
 	// The CIDR or source IP range. Asterisk '*' can also be used to match all source IPs. Default tags such as 'VirtualNetwork',
 	// 'AzureLoadBalancer' and 'Internet' can also be used. If this is an ingress
@@ -13513,7 +13726,7 @@ type SingleQueryResult struct {
 	// Describes the list of destination ports related to this signature
 	DestinationPorts []*string `json:"destinationPorts,omitempty"`
 
-	// Describes in which direction signature is being enforced: 0 - Inbound, 1 - OutBound, 2 - Bidirectional
+	// Describes in which direction signature is being enforced: 0 - OutBound, 1 - InBound, 2 - Any, 3 - Internal, 4 - InternalOutbound
 	Direction *FirewallPolicyIDPSSignatureDirection `json:"direction,omitempty"`
 
 	// Describes the groups the signature belongs to
@@ -13531,7 +13744,7 @@ type SingleQueryResult struct {
 	// Describes the protocol the signatures is being enforced in
 	Protocol *string `json:"protocol,omitempty"`
 
-	// Describes the severity of signature: 1 - Low, 2 - Medium, 3 - High
+	// Describes the severity of signature: 1 - High, 2 - Medium, 3 - Low
 	Severity *FirewallPolicyIDPSSignatureSeverity `json:"severity,omitempty"`
 
 	// The ID of the signature
@@ -13682,7 +13895,12 @@ type SubnetPropertiesFormat struct {
 	AddressPrefixes []*string `json:"addressPrefixes,omitempty"`
 
 	// Application gateway IP configurations of virtual network resource.
-	ApplicationGatewayIPConfigurations []*ApplicationGatewayIPConfiguration `json:"applicationGatewayIpConfigurations,omitempty"`
+	ApplicationGatewayIPConfigurations []*ApplicationGatewayIPConfiguration `json:"applicationGatewayIPConfigurations,omitempty"`
+
+	// Set this property to false to disable default outbound connectivity for all VMs in the subnet. This property can only be
+	// set at the time of subnet creation and cannot be updated for an existing
+	// subnet.
+	DefaultOutboundAccess *bool `json:"defaultOutboundAccess,omitempty"`
 
 	// An array of references to the delegations on the subnet.
 	Delegations []*Delegation `json:"delegations,omitempty"`
@@ -14571,6 +14789,8 @@ type VPNGatewaysClientBeginDeleteOptions struct {
 
 // VPNGatewaysClientBeginResetOptions contains the optional parameters for the VPNGatewaysClient.BeginReset method.
 type VPNGatewaysClientBeginResetOptions struct {
+	// VpnGateway ipConfigurationId to specify the gateway instance.
+	IPConfigurationID *string
 	// Resumes the LRO from the provided token.
 	ResumeToken string
 }
@@ -15199,6 +15419,86 @@ type VirtualAppliance struct {
 	Type *string `json:"type,omitempty" azure:"ro"`
 }
 
+// VirtualApplianceAdditionalNicProperties - Network Virtual Appliance Additional NIC properties.
+type VirtualApplianceAdditionalNicProperties struct {
+	// Flag (true or false) for Intent for Public Ip on additional nic
+	HasPublicIP *bool `json:"hasPublicIp,omitempty"`
+
+	// Name of additional nic
+	Name *string `json:"name,omitempty"`
+}
+
+// VirtualApplianceConnection - NetworkVirtualApplianceConnection resource.
+type VirtualApplianceConnection struct {
+	// Resource ID.
+	ID *string `json:"id,omitempty"`
+
+	// The name of the resource.
+	Name *string `json:"name,omitempty"`
+
+	// Properties of the express route connection.
+	Properties *VirtualApplianceConnectionProperties `json:"properties,omitempty"`
+}
+
+// VirtualApplianceConnectionList - NetworkVirtualApplianceConnection list.
+type VirtualApplianceConnectionList struct {
+	// URL to get the next set of results.
+	NextLink *string `json:"nextLink,omitempty"`
+
+	// The list of NetworkVirtualAppliance connections.
+	Value []*VirtualApplianceConnection `json:"value,omitempty"`
+}
+
+// VirtualApplianceConnectionProperties - Properties of the NetworkVirtualApplianceConnection subresource.
+type VirtualApplianceConnectionProperties struct {
+	// Network Virtual Appliance ASN.
+	Asn *int64 `json:"asn,omitempty"`
+
+	// List of bgpPeerAddresses for the NVA instances
+	BgpPeerAddress []*string `json:"bgpPeerAddress,omitempty"`
+
+	// Enable internet security.
+	EnableInternetSecurity *bool `json:"enableInternetSecurity,omitempty"`
+
+	// The name of the resource.
+	Name *string `json:"name,omitempty"`
+
+	// The Routing Configuration indicating the associated and propagated route tables on this connection.
+	RoutingConfiguration *RoutingConfiguration `json:"routingConfiguration,omitempty"`
+
+	// Unique identifier for the connection.
+	TunnelIdentifier *int64 `json:"tunnelIdentifier,omitempty"`
+
+	// READ-ONLY; The provisioning state of the NetworkVirtualApplianceConnection resource.
+	ProvisioningState *ProvisioningState `json:"provisioningState,omitempty" azure:"ro"`
+}
+
+// VirtualApplianceConnectionsClientBeginCreateOrUpdateOptions contains the optional parameters for the VirtualApplianceConnectionsClient.BeginCreateOrUpdate
+// method.
+type VirtualApplianceConnectionsClientBeginCreateOrUpdateOptions struct {
+	// Resumes the LRO from the provided token.
+	ResumeToken string
+}
+
+// VirtualApplianceConnectionsClientBeginDeleteOptions contains the optional parameters for the VirtualApplianceConnectionsClient.BeginDelete
+// method.
+type VirtualApplianceConnectionsClientBeginDeleteOptions struct {
+	// Resumes the LRO from the provided token.
+	ResumeToken string
+}
+
+// VirtualApplianceConnectionsClientGetOptions contains the optional parameters for the VirtualApplianceConnectionsClient.Get
+// method.
+type VirtualApplianceConnectionsClientGetOptions struct {
+	// placeholder for future optional parameters
+}
+
+// VirtualApplianceConnectionsClientListOptions contains the optional parameters for the VirtualApplianceConnectionsClient.List
+// method.
+type VirtualApplianceConnectionsClientListOptions struct {
+	// placeholder for future optional parameters
+}
+
 // VirtualApplianceListResult - Response for ListNetworkVirtualAppliances API service call.
 type VirtualApplianceListResult struct {
 	// URL to get the next set of results.
@@ -15210,6 +15510,9 @@ type VirtualApplianceListResult struct {
 
 // VirtualApplianceNicProperties - Network Virtual Appliance NIC properties.
 type VirtualApplianceNicProperties struct {
+	// READ-ONLY; Instance on which nic is attached.
+	InstanceName *string `json:"instanceName,omitempty" azure:"ro"`
+
 	// READ-ONLY; NIC name.
 	Name *string `json:"name,omitempty" azure:"ro"`
 
@@ -15222,6 +15525,9 @@ type VirtualApplianceNicProperties struct {
 
 // VirtualAppliancePropertiesFormat - Network Virtual Appliance definition.
 type VirtualAppliancePropertiesFormat struct {
+	// Details required for Additional Network Interface.
+	AdditionalNics []*VirtualApplianceAdditionalNicProperties `json:"additionalNics,omitempty"`
+
 	// BootStrapConfigurationBlobs storage URLs.
 	BootStrapConfigurationBlobs []*string `json:"bootStrapConfigurationBlobs,omitempty"`
 
@@ -15233,6 +15539,9 @@ type VirtualAppliancePropertiesFormat struct {
 
 	// The delegation for the Virtual Appliance
 	Delegation *DelegationProperties `json:"delegation,omitempty"`
+
+	// List of Resource Uri of Public IPs for Internet Ingress Scenario.
+	InternetIngressPublicIPs []*InternetIngressPublicIPsProperties `json:"internetIngressPublicIps,omitempty"`
 
 	// Network Virtual Appliance SKU.
 	NvaSKU *VirtualApplianceSKUProperties `json:"nvaSku,omitempty"`
@@ -15260,6 +15569,9 @@ type VirtualAppliancePropertiesFormat struct {
 
 	// READ-ONLY; The provisioning state of the resource.
 	ProvisioningState *ProvisioningState `json:"provisioningState,omitempty" azure:"ro"`
+
+	// READ-ONLY; List of references to VirtualApplianceConnections.
+	VirtualApplianceConnections []*SubResource `json:"virtualApplianceConnections,omitempty" azure:"ro"`
 
 	// READ-ONLY; List of Virtual Appliance Network Interfaces.
 	VirtualApplianceNics []*VirtualApplianceNicProperties `json:"virtualApplianceNics,omitempty" azure:"ro"`
@@ -15862,6 +16174,20 @@ type VirtualNetworkGateway struct {
 	Type *string `json:"type,omitempty" azure:"ro"`
 }
 
+type VirtualNetworkGatewayAutoScaleBounds struct {
+	// Maximum Scale Units for Autoscale configuration
+	Max *int32 `json:"max,omitempty"`
+
+	// Minimum scale Units for Autoscale configuration
+	Min *int32 `json:"min,omitempty"`
+}
+
+// VirtualNetworkGatewayAutoScaleConfiguration - Virtual Network Gateway Autoscale Configuration details
+type VirtualNetworkGatewayAutoScaleConfiguration struct {
+	// The bounds of the autoscale configuration
+	Bounds *VirtualNetworkGatewayAutoScaleBounds `json:"bounds,omitempty"`
+}
+
 // VirtualNetworkGatewayConnection - A common class for general resource information.
 type VirtualNetworkGatewayConnection struct {
 	// REQUIRED; Properties of the virtual network gateway connection.
@@ -16326,12 +16652,19 @@ type VirtualNetworkGatewayPropertiesFormat struct {
 	// ActiveActive flag.
 	Active *bool `json:"activeActive,omitempty"`
 
+	// Property to indicate if the Express Route Gateway serves traffic when there are multiple Express Route Gateways in the
+	// vnet
+	AdminState *AdminState `json:"adminState,omitempty"`
+
 	// Configure this gateway to accept traffic from other Azure Virtual Networks. This configuration does not support connectivity
 	// to Azure Virtual WAN.
 	AllowRemoteVnetTraffic *bool `json:"allowRemoteVnetTraffic,omitempty"`
 
 	// Configures this gateway to accept traffic from remote Virtual WAN networks.
 	AllowVirtualWanTraffic *bool `json:"allowVirtualWanTraffic,omitempty"`
+
+	// Autoscale configuration for virutal network gateway
+	AutoScaleConfiguration *VirtualNetworkGatewayAutoScaleConfiguration `json:"autoScaleConfiguration,omitempty"`
 
 	// Virtual network gateway's BGP speaker settings.
 	BgpSettings *BgpSettings `json:"bgpSettings,omitempty"`
@@ -16719,6 +17052,9 @@ type VirtualNetworkPropertiesFormat struct {
 
 	// A list of peerings in a Virtual Network.
 	VirtualNetworkPeerings []*VirtualNetworkPeering `json:"virtualNetworkPeerings,omitempty"`
+
+	// READ-ONLY; A collection of references to flow log resources.
+	FlowLogs []*FlowLog `json:"flowLogs,omitempty" azure:"ro"`
 
 	// READ-ONLY; The provisioning state of the virtual network resource.
 	ProvisioningState *ProvisioningState `json:"provisioningState,omitempty" azure:"ro"`
@@ -17365,8 +17701,20 @@ type WebApplicationFirewallCustomRule struct {
 	// REQUIRED; The rule type.
 	RuleType *WebApplicationFirewallRuleType `json:"ruleType,omitempty"`
 
+	// List of user session identifier group by clauses.
+	GroupByUserSession []*GroupByUserSession `json:"groupByUserSession,omitempty"`
+
 	// The name of the resource that is unique within a policy. This name can be used to access the resource.
 	Name *string `json:"name,omitempty"`
+
+	// Duration over which Rate Limit policy will be applied. Applies only when ruleType is RateLimitRule.
+	RateLimitDuration *ApplicationGatewayFirewallRateLimitDuration `json:"rateLimitDuration,omitempty"`
+
+	// Rate Limit threshold to apply in case ruleType is RateLimitRule. Must be greater than or equal to 1
+	RateLimitThreshold *int32 `json:"rateLimitThreshold,omitempty"`
+
+	// Describes if the custom rule is in enabled or disabled state. Defaults to Enabled if not specified.
+	State *WebApplicationFirewallState `json:"state,omitempty"`
 
 	// READ-ONLY; A unique read-only string that changes whenever the resource is updated.
 	Etag *string `json:"etag,omitempty" azure:"ro"`
@@ -17462,6 +17810,22 @@ type WebApplicationFirewallPolicyPropertiesFormat struct {
 
 	// READ-ONLY; Resource status of the policy.
 	ResourceState *WebApplicationFirewallPolicyResourceState `json:"resourceState,omitempty" azure:"ro"`
+}
+
+// WebApplicationFirewallScrubbingRules - Allow certain variables to be scrubbed on WAF logs
+type WebApplicationFirewallScrubbingRules struct {
+	// REQUIRED; The variable to be scrubbed from the logs.
+	MatchVariable *ScrubbingRuleEntryMatchVariable `json:"matchVariable,omitempty"`
+
+	// REQUIRED; When matchVariable is a collection, operate on the selector to specify which elements in the collection this
+	// rule applies to.
+	SelectorMatchOperator *ScrubbingRuleEntryMatchOperator `json:"selectorMatchOperator,omitempty"`
+
+	// When matchVariable is a collection, operator used to specify which elements in the collection this rule applies to.
+	Selector *string `json:"selector,omitempty"`
+
+	// Defines the state of log scrubbing rule. Default value is Enabled.
+	State *ScrubbingRuleEntryState `json:"state,omitempty"`
 }
 
 // WebCategoriesClientGetOptions contains the optional parameters for the WebCategoriesClient.Get method.
