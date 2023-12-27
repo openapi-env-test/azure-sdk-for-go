@@ -294,6 +294,11 @@ type AzureFirewallsClientListResponse struct {
 	AzureFirewallListResult
 }
 
+// AzureFirewallsClientPacketCaptureResponse contains the response from method AzureFirewallsClient.PacketCapture.
+type AzureFirewallsClientPacketCaptureResponse struct {
+	// placeholder for future response values
+}
+
 // AzureFirewallsClientUpdateTagsResponse contains the response from method AzureFirewallsClient.UpdateTags.
 type AzureFirewallsClientUpdateTagsResponse struct {
 	AzureFirewall
@@ -1301,6 +1306,11 @@ type LoadBalancersClientListResponse struct {
 	LoadBalancerListResult
 }
 
+// LoadBalancersClientMigrateToIPBasedResponse contains the response from method LoadBalancersClient.MigrateToIPBased.
+type LoadBalancersClientMigrateToIPBasedResponse struct {
+	MigratedPools
+}
+
 // LoadBalancersClientSwapPublicIPAddressesResponse contains the response from method LoadBalancersClient.SwapPublicIPAddresses.
 type LoadBalancersClientSwapPublicIPAddressesResponse struct {
 	// placeholder for future response values
@@ -1339,6 +1349,11 @@ type LocalNetworkGatewaysClientUpdateTagsResponse struct {
 // ManagementClientCheckDNSNameAvailabilityResponse contains the response from method ManagementClient.CheckDNSNameAvailability.
 type ManagementClientCheckDNSNameAvailabilityResponse struct {
 	DNSNameAvailabilityResult
+}
+
+// ManagementClientDeleteBastionShareableLinkByTokenResponse contains the response from method ManagementClient.DeleteBastionShareableLinkByToken.
+type ManagementClientDeleteBastionShareableLinkByTokenResponse struct {
+	// placeholder for future response values
 }
 
 // ManagementClientDeleteBastionShareableLinkResponse contains the response from method ManagementClient.DeleteBastionShareableLink.
@@ -2466,6 +2481,26 @@ type VipSwapClientListResponse struct {
 	SwapResourceListResult
 }
 
+// VirtualApplianceConnectionsClientCreateOrUpdateResponse contains the response from method VirtualApplianceConnectionsClient.CreateOrUpdate.
+type VirtualApplianceConnectionsClientCreateOrUpdateResponse struct {
+	VirtualApplianceConnection
+}
+
+// VirtualApplianceConnectionsClientDeleteResponse contains the response from method VirtualApplianceConnectionsClient.Delete.
+type VirtualApplianceConnectionsClientDeleteResponse struct {
+	// placeholder for future response values
+}
+
+// VirtualApplianceConnectionsClientGetResponse contains the response from method VirtualApplianceConnectionsClient.Get.
+type VirtualApplianceConnectionsClientGetResponse struct {
+	VirtualApplianceConnection
+}
+
+// VirtualApplianceConnectionsClientListResponse contains the response from method VirtualApplianceConnectionsClient.List.
+type VirtualApplianceConnectionsClientListResponse struct {
+	VirtualApplianceConnectionList
+}
+
 // VirtualApplianceSKUsClientGetResponse contains the response from method VirtualApplianceSKUsClient.Get.
 type VirtualApplianceSKUsClientGetResponse struct {
 	VirtualApplianceSKU
@@ -2543,12 +2578,24 @@ type VirtualHubBgpConnectionClientGetResponse struct {
 
 // VirtualHubBgpConnectionsClientListAdvertisedRoutesResponse contains the response from method VirtualHubBgpConnectionsClient.ListAdvertisedRoutes.
 type VirtualHubBgpConnectionsClientListAdvertisedRoutesResponse struct {
-	PeerRouteList
+	// Map from virtual router instance to list of peer routes.
+	Value map[string][]*PeerRoute
+}
+
+// UnmarshalJSON implements the json.Unmarshaller interface for type VirtualHubBgpConnectionsClientListAdvertisedRoutesResponse.
+func (v *VirtualHubBgpConnectionsClientListAdvertisedRoutesResponse) UnmarshalJSON(data []byte) error {
+	return json.Unmarshal(data, &v.Value)
 }
 
 // VirtualHubBgpConnectionsClientListLearnedRoutesResponse contains the response from method VirtualHubBgpConnectionsClient.ListLearnedRoutes.
 type VirtualHubBgpConnectionsClientListLearnedRoutesResponse struct {
-	PeerRouteList
+	// Map from virtual router instance to list of peer routes.
+	Value map[string][]*PeerRoute
+}
+
+// UnmarshalJSON implements the json.Unmarshaller interface for type VirtualHubBgpConnectionsClientListLearnedRoutesResponse.
+func (v *VirtualHubBgpConnectionsClientListLearnedRoutesResponse) UnmarshalJSON(data []byte) error {
+	return json.Unmarshal(data, &v.Value)
 }
 
 // VirtualHubBgpConnectionsClientListResponse contains the response from method VirtualHubBgpConnectionsClient.List.
@@ -2608,17 +2655,17 @@ type VirtualHubsClientDeleteResponse struct {
 
 // VirtualHubsClientGetEffectiveVirtualHubRoutesResponse contains the response from method VirtualHubsClient.GetEffectiveVirtualHubRoutes.
 type VirtualHubsClientGetEffectiveVirtualHubRoutesResponse struct {
-	// placeholder for future response values
+	VirtualHubEffectiveRouteList
 }
 
 // VirtualHubsClientGetInboundRoutesResponse contains the response from method VirtualHubsClient.GetInboundRoutes.
 type VirtualHubsClientGetInboundRoutesResponse struct {
-	// placeholder for future response values
+	EffectiveRouteMapRouteList
 }
 
 // VirtualHubsClientGetOutboundRoutesResponse contains the response from method VirtualHubsClient.GetOutboundRoutes.
 type VirtualHubsClientGetOutboundRoutesResponse struct {
-	// placeholder for future response values
+	EffectiveRouteMapRouteList
 }
 
 // VirtualHubsClientGetResponse contains the response from method VirtualHubsClient.Get.
