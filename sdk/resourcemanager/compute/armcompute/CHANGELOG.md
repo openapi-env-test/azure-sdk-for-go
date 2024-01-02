@@ -1,5 +1,80 @@
 # Release History
 
+## 6.0.0 (2024-01-02)
+### Breaking Changes
+
+- Type of `CloudServiceExtensionProperties.ProtectedSettings` has been changed from `any` to `interface{}`
+- Type of `CloudServiceExtensionProperties.Settings` has been changed from `any` to `interface{}`
+- Type of `VirtualMachineCaptureResult.Parameters` has been changed from `any` to `interface{}`
+- Type of `VirtualMachineCaptureResult.Resources` has been changed from `[]any` to `[]interface{}`
+- Type of `VirtualMachineExtensionProperties.Settings` has been changed from `any` to `interface{}`
+- Type of `VirtualMachineExtensionProperties.ProtectedSettings` has been changed from `any` to `interface{}`
+- Type of `VirtualMachineExtensionUpdateProperties.Settings` has been changed from `any` to `interface{}`
+- Type of `VirtualMachineExtensionUpdateProperties.ProtectedSettings` has been changed from `any` to `interface{}`
+- Type of `VirtualMachineScaleSetExtensionProperties.ProtectedSettings` has been changed from `any` to `interface{}`
+- Type of `VirtualMachineScaleSetExtensionProperties.Settings` has been changed from `any` to `interface{}`
+- Function `NewClientFactory` has been removed
+- Function `*ClientFactory.NewAvailabilitySetsClient` has been removed
+- Function `*ClientFactory.NewCapacityReservationGroupsClient` has been removed
+- Function `*ClientFactory.NewCapacityReservationsClient` has been removed
+- Function `*ClientFactory.NewCloudServiceOperatingSystemsClient` has been removed
+- Function `*ClientFactory.NewCloudServiceRoleInstancesClient` has been removed
+- Function `*ClientFactory.NewCloudServiceRolesClient` has been removed
+- Function `*ClientFactory.NewCloudServicesClient` has been removed
+- Function `*ClientFactory.NewCloudServicesUpdateDomainClient` has been removed
+- Function `*ClientFactory.NewCommunityGalleriesClient` has been removed
+- Function `*ClientFactory.NewCommunityGalleryImageVersionsClient` has been removed
+- Function `*ClientFactory.NewCommunityGalleryImagesClient` has been removed
+- Function `*ClientFactory.NewDedicatedHostGroupsClient` has been removed
+- Function `*ClientFactory.NewDedicatedHostsClient` has been removed
+- Function `*ClientFactory.NewDiskAccessesClient` has been removed
+- Function `*ClientFactory.NewDiskEncryptionSetsClient` has been removed
+- Function `*ClientFactory.NewDiskRestorePointClient` has been removed
+- Function `*ClientFactory.NewDisksClient` has been removed
+- Function `*ClientFactory.NewGalleriesClient` has been removed
+- Function `*ClientFactory.NewGalleryApplicationVersionsClient` has been removed
+- Function `*ClientFactory.NewGalleryApplicationsClient` has been removed
+- Function `*ClientFactory.NewGalleryImageVersionsClient` has been removed
+- Function `*ClientFactory.NewGalleryImagesClient` has been removed
+- Function `*ClientFactory.NewGallerySharingProfileClient` has been removed
+- Function `*ClientFactory.NewImagesClient` has been removed
+- Function `*ClientFactory.NewLogAnalyticsClient` has been removed
+- Function `*ClientFactory.NewOperationsClient` has been removed
+- Function `*ClientFactory.NewProximityPlacementGroupsClient` has been removed
+- Function `*ClientFactory.NewResourceSKUsClient` has been removed
+- Function `*ClientFactory.NewRestorePointCollectionsClient` has been removed
+- Function `*ClientFactory.NewRestorePointsClient` has been removed
+- Function `*ClientFactory.NewSSHPublicKeysClient` has been removed
+- Function `*ClientFactory.NewSharedGalleriesClient` has been removed
+- Function `*ClientFactory.NewSharedGalleryImageVersionsClient` has been removed
+- Function `*ClientFactory.NewSharedGalleryImagesClient` has been removed
+- Function `*ClientFactory.NewSnapshotsClient` has been removed
+- Function `*ClientFactory.NewUsageClient` has been removed
+- Function `*ClientFactory.NewVirtualMachineExtensionImagesClient` has been removed
+- Function `*ClientFactory.NewVirtualMachineExtensionsClient` has been removed
+- Function `*ClientFactory.NewVirtualMachineImagesClient` has been removed
+- Function `*ClientFactory.NewVirtualMachineImagesEdgeZoneClient` has been removed
+- Function `*ClientFactory.NewVirtualMachineRunCommandsClient` has been removed
+- Function `*ClientFactory.NewVirtualMachineScaleSetExtensionsClient` has been removed
+- Function `*ClientFactory.NewVirtualMachineScaleSetRollingUpgradesClient` has been removed
+- Function `*ClientFactory.NewVirtualMachineScaleSetVMExtensionsClient` has been removed
+- Function `*ClientFactory.NewVirtualMachineScaleSetVMRunCommandsClient` has been removed
+- Function `*ClientFactory.NewVirtualMachineScaleSetVMsClient` has been removed
+- Function `*ClientFactory.NewVirtualMachineScaleSetsClient` has been removed
+- Function `*ClientFactory.NewVirtualMachineSizesClient` has been removed
+- Function `*ClientFactory.NewVirtualMachinesClient` has been removed
+- Function `dateTimeRFC3339.MarshalText` has been removed
+- Function `*dateTimeRFC3339.Parse` has been removed
+- Function `*dateTimeRFC3339.UnmarshalText` has been removed
+- Struct `ClientFactory` has been removed
+
+### Features Added
+
+- New function `timeRFC3339.MarshalText() ([]byte, error)`
+- New function `*timeRFC3339.Parse(string) error`
+- New function `*timeRFC3339.UnmarshalText([]byte) error`
+
+
 ## 4.0.0 (2022-10-04)
 ### Breaking Changes
 
