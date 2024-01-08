@@ -322,9 +322,19 @@ type DedicatedHostsClientGetResponse struct {
 	DedicatedHost
 }
 
+// DedicatedHostsClientListAvailableSizesResponse contains the response from method DedicatedHostsClient.ListAvailableSizes.
+type DedicatedHostsClientListAvailableSizesResponse struct {
+	DedicatedHostSizeListResult
+}
+
 // DedicatedHostsClientListByHostGroupResponse contains the response from method DedicatedHostsClient.ListByHostGroup.
 type DedicatedHostsClientListByHostGroupResponse struct {
 	DedicatedHostListResult
+}
+
+// DedicatedHostsClientRedeployResponse contains the response from method DedicatedHostsClient.Redeploy.
+type DedicatedHostsClientRedeployResponse struct {
+	// placeholder for future response values
 }
 
 // DedicatedHostsClientRestartResponse contains the response from method DedicatedHostsClient.Restart.
@@ -812,46 +822,6 @@ type SharedGalleryImagesClientListResponse struct {
 	SharedGalleryImageList
 }
 
-// SnapshotsClientCreateOrUpdateResponse contains the response from method SnapshotsClient.CreateOrUpdate.
-type SnapshotsClientCreateOrUpdateResponse struct {
-	Snapshot
-}
-
-// SnapshotsClientDeleteResponse contains the response from method SnapshotsClient.Delete.
-type SnapshotsClientDeleteResponse struct {
-	// placeholder for future response values
-}
-
-// SnapshotsClientGetResponse contains the response from method SnapshotsClient.Get.
-type SnapshotsClientGetResponse struct {
-	Snapshot
-}
-
-// SnapshotsClientGrantAccessResponse contains the response from method SnapshotsClient.GrantAccess.
-type SnapshotsClientGrantAccessResponse struct {
-	AccessURI
-}
-
-// SnapshotsClientListByResourceGroupResponse contains the response from method SnapshotsClient.ListByResourceGroup.
-type SnapshotsClientListByResourceGroupResponse struct {
-	SnapshotList
-}
-
-// SnapshotsClientListResponse contains the response from method SnapshotsClient.List.
-type SnapshotsClientListResponse struct {
-	SnapshotList
-}
-
-// SnapshotsClientRevokeAccessResponse contains the response from method SnapshotsClient.RevokeAccess.
-type SnapshotsClientRevokeAccessResponse struct {
-	// placeholder for future response values
-}
-
-// SnapshotsClientUpdateResponse contains the response from method SnapshotsClient.Update.
-type SnapshotsClientUpdateResponse struct {
-	Snapshot
-}
-
 // UsageClientListResponse contains the response from method UsageClient.List.
 type UsageClientListResponse struct {
 	ListUsagesResult
@@ -1092,6 +1062,16 @@ type VirtualMachineScaleSetVMRunCommandsClientUpdateResponse struct {
 	VirtualMachineRunCommand
 }
 
+// VirtualMachineScaleSetVMsClientApproveRollingUpgradeResponse contains the response from method VirtualMachineScaleSetVMsClient.ApproveRollingUpgrade.
+type VirtualMachineScaleSetVMsClientApproveRollingUpgradeResponse struct {
+	// placeholder for future response values
+}
+
+// VirtualMachineScaleSetVMsClientAttachDetachDataDisksResponse contains the response from method VirtualMachineScaleSetVMsClient.AttachDetachDataDisks.
+type VirtualMachineScaleSetVMsClientAttachDetachDataDisksResponse struct {
+	StorageProfile
+}
+
 // VirtualMachineScaleSetVMsClientDeallocateResponse contains the response from method VirtualMachineScaleSetVMsClient.Deallocate.
 type VirtualMachineScaleSetVMsClientDeallocateResponse struct {
 	// placeholder for future response values
@@ -1172,6 +1152,11 @@ type VirtualMachineScaleSetVMsClientUpdateResponse struct {
 	VirtualMachineScaleSetVM
 }
 
+// VirtualMachineScaleSetsClientApproveRollingUpgradeResponse contains the response from method VirtualMachineScaleSetsClient.ApproveRollingUpgrade.
+type VirtualMachineScaleSetsClientApproveRollingUpgradeResponse struct {
+	// placeholder for future response values
+}
+
 // VirtualMachineScaleSetsClientConvertToSinglePlacementGroupResponse contains the response from method VirtualMachineScaleSetsClient.ConvertToSinglePlacementGroup.
 type VirtualMachineScaleSetsClientConvertToSinglePlacementGroupResponse struct {
 	// placeholder for future response values
@@ -1248,6 +1233,11 @@ type VirtualMachineScaleSetsClientPowerOffResponse struct {
 	// placeholder for future response values
 }
 
+// VirtualMachineScaleSetsClientReapplyResponse contains the response from method VirtualMachineScaleSetsClient.Reapply.
+type VirtualMachineScaleSetsClientReapplyResponse struct {
+	// placeholder for future response values
+}
+
 // VirtualMachineScaleSetsClientRedeployResponse contains the response from method VirtualMachineScaleSetsClient.Redeploy.
 type VirtualMachineScaleSetsClientRedeployResponse struct {
 	// placeholder for future response values
@@ -1296,6 +1286,11 @@ type VirtualMachineSizesClientListResponse struct {
 // VirtualMachinesClientAssessPatchesResponse contains the response from method VirtualMachinesClient.AssessPatches.
 type VirtualMachinesClientAssessPatchesResponse struct {
 	VirtualMachineAssessPatchesResult
+}
+
+// VirtualMachinesClientAttachDetachDataDisksResponse contains the response from method VirtualMachinesClient.AttachDetachDataDisks.
+type VirtualMachinesClientAttachDetachDataDisksResponse struct {
+	StorageProfile
 }
 
 // VirtualMachinesClientCaptureResponse contains the response from method VirtualMachinesClient.Capture.
