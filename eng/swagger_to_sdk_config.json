@@ -24,6 +24,7 @@
   },
   "packageOptions": {
     "breakingChangeLabel": "CI-BreakingChange-Go",
+    "breakingChangesLabel": "BreakingChange-Go-Sdk",
     "breakingChangeSuppressionLabel": "BreakingChange-Go-Suppression"
   }
 }
