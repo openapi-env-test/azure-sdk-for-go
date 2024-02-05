@@ -1,5 +1,73 @@
 # Release History
 
+## 2.0.0-beta.3 (2024-02-05)
+### Breaking Changes
+
+- Type of `ComponentPurgeBodyFilters.Value` has been changed from `any` to `interface{}`
+- Type of `OperationLive.Properties` has been changed from `any` to `interface{}`
+- Type of `WorkbookTemplateLocalizedGallery.TemplateData` has been changed from `any` to `interface{}`
+- Type of `WorkbookTemplateProperties.TemplateData` has been changed from `any` to `interface{}`
+- Type alias `Kind` has been removed
+- Type alias `MyWorkbookManagedIdentityType` has been removed
+- Function `NewClientFactory` has been removed
+- Function `*ClientFactory.NewAPIKeysClient` has been removed
+- Function `*ClientFactory.NewAnalyticsItemsClient` has been removed
+- Function `*ClientFactory.NewAnnotationsClient` has been removed
+- Function `*ClientFactory.NewComponentAvailableFeaturesClient` has been removed
+- Function `*ClientFactory.NewComponentCurrentBillingFeaturesClient` has been removed
+- Function `*ClientFactory.NewComponentFeatureCapabilitiesClient` has been removed
+- Function `*ClientFactory.NewComponentLinkedStorageAccountsClient` has been removed
+- Function `*ClientFactory.NewComponentQuotaStatusClient` has been removed
+- Function `*ClientFactory.NewComponentsClient` has been removed
+- Function `*ClientFactory.NewExportConfigurationsClient` has been removed
+- Function `*ClientFactory.NewFavoritesClient` has been removed
+- Function `*ClientFactory.NewLiveTokenClient` has been removed
+- Function `*ClientFactory.NewMyWorkbooksClient` has been removed
+- Function `*ClientFactory.NewProactiveDetectionConfigurationsClient` has been removed
+- Function `*ClientFactory.NewWebTestLocationsClient` has been removed
+- Function `*ClientFactory.NewWebTestsClient` has been removed
+- Function `*ClientFactory.NewWorkItemConfigurationsClient` has been removed
+- Function `*ClientFactory.NewWorkbookTemplatesClient` has been removed
+- Function `*ClientFactory.NewWorkbooksClient` has been removed
+- Function `NewMyWorkbooksClient` has been removed
+- Function `*MyWorkbooksClient.CreateOrUpdate` has been removed
+- Function `*MyWorkbooksClient.Delete` has been removed
+- Function `*MyWorkbooksClient.Get` has been removed
+- Function `*MyWorkbooksClient.NewListByResourceGroupPager` has been removed
+- Function `*MyWorkbooksClient.NewListBySubscriptionPager` has been removed
+- Function `*MyWorkbooksClient.Update` has been removed
+- Struct `ClientFactory` has been removed
+- Struct `ErrorDefinition` has been removed
+- Struct `InnerErrorTrace` has been removed
+- Struct `MyWorkbook` has been removed
+- Struct `MyWorkbookError` has been removed
+- Struct `MyWorkbookManagedIdentity` has been removed
+- Struct `MyWorkbookProperties` has been removed
+- Struct `MyWorkbookResource` has been removed
+- Struct `MyWorkbookUserAssignedIdentities` has been removed
+- Struct `MyWorkbooksClientListByResourceGroupResponse` has been removed
+- Struct `MyWorkbooksClientListBySubscriptionResponse` has been removed
+- Struct `MyWorkbooksListResult` has been removed
+- Field `InnerError` of struct `WorkbookErrorDefinition` has been removed
+
+### Features Added
+
+- New value `WebTestKindStandard` added to type alias `WebTestKind`
+- New function `NewOperationsClient(azcore.TokenCredential, *arm.ClientOptions) (*OperationsClient, error)`
+- New function `*OperationsClient.NewListPager(*OperationsClientListOptions) *runtime.Pager[OperationsClientListResponse]`
+- New struct `ErrorFieldContract`
+- New struct `HeaderField`
+- New struct `OperationsClient`
+- New struct `OperationsClientListResponse`
+- New struct `WebTestPropertiesRequest`
+- New struct `WebTestPropertiesValidationRules`
+- New struct `WebTestPropertiesValidationRulesContentValidation`
+- New field `Details` in struct `ErrorResponse`
+- New field `Request` in struct `WebTestProperties`
+- New field `ValidationRules` in struct `WebTestProperties`
+- New field `Innererror` in struct `WorkbookErrorDefinition`
+
+
 ## 2.0.0-beta.1 (2022-06-02)
 ### Breaking Changes
 
