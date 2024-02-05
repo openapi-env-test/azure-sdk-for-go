@@ -29,9 +29,19 @@ type CassandraClustersClientGetBackupResponse struct {
 	BackupResource
 }
 
+// CassandraClustersClientGetCommandAsyncResponse contains the response from method CassandraClustersClient.GetCommandAsync.
+type CassandraClustersClientGetCommandAsyncResponse struct {
+	ListCommands
+}
+
 // CassandraClustersClientGetResponse contains the response from method CassandraClustersClient.Get.
 type CassandraClustersClientGetResponse struct {
 	ClusterResource
+}
+
+// CassandraClustersClientInvokeCommandAsyncResponse contains the response from method CassandraClustersClient.InvokeCommandAsync.
+type CassandraClustersClientInvokeCommandAsyncResponse struct {
+	CommandPublicResource
 }
 
 // CassandraClustersClientInvokeCommandResponse contains the response from method CassandraClustersClient.InvokeCommand.
@@ -52,6 +62,11 @@ type CassandraClustersClientListByResourceGroupResponse struct {
 // CassandraClustersClientListBySubscriptionResponse contains the response from method CassandraClustersClient.ListBySubscription.
 type CassandraClustersClientListBySubscriptionResponse struct {
 	ListClusters
+}
+
+// CassandraClustersClientListCommandResponse contains the response from method CassandraClustersClient.ListCommand.
+type CassandraClustersClientListCommandResponse struct {
+	ListCommands
 }
 
 // CassandraClustersClientStartResponse contains the response from method CassandraClustersClient.Start.
@@ -505,6 +520,66 @@ type LocationsClientListResponse struct {
 	LocationListResult
 }
 
+// MongoClustersClientCheckNameAvailabilityResponse contains the response from method MongoClustersClient.CheckNameAvailability.
+type MongoClustersClientCheckNameAvailabilityResponse struct {
+	CheckNameAvailabilityResponse
+}
+
+// MongoClustersClientCreateOrUpdateFirewallRuleResponse contains the response from method MongoClustersClient.CreateOrUpdateFirewallRule.
+type MongoClustersClientCreateOrUpdateFirewallRuleResponse struct {
+	FirewallRule
+}
+
+// MongoClustersClientCreateOrUpdateResponse contains the response from method MongoClustersClient.CreateOrUpdate.
+type MongoClustersClientCreateOrUpdateResponse struct {
+	MongoCluster
+}
+
+// MongoClustersClientDeleteFirewallRuleResponse contains the response from method MongoClustersClient.DeleteFirewallRule.
+type MongoClustersClientDeleteFirewallRuleResponse struct {
+	// placeholder for future response values
+}
+
+// MongoClustersClientDeleteResponse contains the response from method MongoClustersClient.Delete.
+type MongoClustersClientDeleteResponse struct {
+	// placeholder for future response values
+}
+
+// MongoClustersClientGetFirewallRuleResponse contains the response from method MongoClustersClient.GetFirewallRule.
+type MongoClustersClientGetFirewallRuleResponse struct {
+	FirewallRule
+}
+
+// MongoClustersClientGetResponse contains the response from method MongoClustersClient.Get.
+type MongoClustersClientGetResponse struct {
+	MongoCluster
+}
+
+// MongoClustersClientListByResourceGroupResponse contains the response from method MongoClustersClient.ListByResourceGroup.
+type MongoClustersClientListByResourceGroupResponse struct {
+	MongoClusterListResult
+}
+
+// MongoClustersClientListConnectionStringsResponse contains the response from method MongoClustersClient.ListConnectionStrings.
+type MongoClustersClientListConnectionStringsResponse struct {
+	ListConnectionStringsResult
+}
+
+// MongoClustersClientListFirewallRulesResponse contains the response from method MongoClustersClient.ListFirewallRules.
+type MongoClustersClientListFirewallRulesResponse struct {
+	FirewallRuleListResult
+}
+
+// MongoClustersClientListResponse contains the response from method MongoClustersClient.List.
+type MongoClustersClientListResponse struct {
+	MongoClusterListResult
+}
+
+// MongoClustersClientUpdateResponse contains the response from method MongoClustersClient.Update.
+type MongoClustersClientUpdateResponse struct {
+	MongoCluster
+}
+
 // MongoDBResourcesClientCreateUpdateMongoDBCollectionResponse contains the response from method MongoDBResourcesClient.CreateUpdateMongoDBCollection.
 type MongoDBResourcesClientCreateUpdateMongoDBCollectionResponse struct {
 	MongoDBCollectionGetResults
@@ -628,6 +703,11 @@ type MongoDBResourcesClientMongoDBContainerRedistributeThroughputResponse struct
 // MongoDBResourcesClientMongoDBContainerRetrieveThroughputDistributionResponse contains the response from method MongoDBResourcesClient.MongoDBContainerRetrieveThroughputDistribution.
 type MongoDBResourcesClientMongoDBContainerRetrieveThroughputDistributionResponse struct {
 	PhysicalPartitionThroughputInfoResult
+}
+
+// MongoDBResourcesClientMongoDBDatabasePartitionMergeResponse contains the response from method MongoDBResourcesClient.MongoDBDatabasePartitionMerge.
+type MongoDBResourcesClientMongoDBDatabasePartitionMergeResponse struct {
+	PhysicalPartitionStorageInfoCollection
 }
 
 // MongoDBResourcesClientMongoDBDatabaseRedistributeThroughputResponse contains the response from method MongoDBResourcesClient.MongoDBDatabaseRedistributeThroughput.
@@ -1025,6 +1105,11 @@ type SQLResourcesClientSQLContainerRetrieveThroughputDistributionResponse struct
 	PhysicalPartitionThroughputInfoResult
 }
 
+// SQLResourcesClientSQLDatabasePartitionMergeResponse contains the response from method SQLResourcesClient.SQLDatabasePartitionMerge.
+type SQLResourcesClientSQLDatabasePartitionMergeResponse struct {
+	PhysicalPartitionStorageInfoCollection
+}
+
 // SQLResourcesClientSQLDatabaseRedistributeThroughputResponse contains the response from method SQLResourcesClient.SQLDatabaseRedistributeThroughput.
 type SQLResourcesClientSQLDatabaseRedistributeThroughputResponse struct {
 	PhysicalPartitionThroughputInfoResult
@@ -1108,4 +1193,54 @@ type TableResourcesClientRetrieveContinuousBackupInformationResponse struct {
 // TableResourcesClientUpdateTableThroughputResponse contains the response from method TableResourcesClient.UpdateTableThroughput.
 type TableResourcesClientUpdateTableThroughputResponse struct {
 	ThroughputSettingsGetResults
+}
+
+// ThroughputPoolAccountClientCreateResponse contains the response from method ThroughputPoolAccountClient.Create.
+type ThroughputPoolAccountClientCreateResponse struct {
+	ThroughputPoolAccountResource
+}
+
+// ThroughputPoolAccountClientDeleteResponse contains the response from method ThroughputPoolAccountClient.Delete.
+type ThroughputPoolAccountClientDeleteResponse struct {
+	// placeholder for future response values
+}
+
+// ThroughputPoolAccountClientGetResponse contains the response from method ThroughputPoolAccountClient.Get.
+type ThroughputPoolAccountClientGetResponse struct {
+	ThroughputPoolAccountResource
+}
+
+// ThroughputPoolAccountsClientListResponse contains the response from method ThroughputPoolAccountsClient.List.
+type ThroughputPoolAccountsClientListResponse struct {
+	ThroughputPoolAccountsListResult
+}
+
+// ThroughputPoolClientCreateOrUpdateResponse contains the response from method ThroughputPoolClient.CreateOrUpdate.
+type ThroughputPoolClientCreateOrUpdateResponse struct {
+	ThroughputPoolResource
+}
+
+// ThroughputPoolClientDeleteResponse contains the response from method ThroughputPoolClient.Delete.
+type ThroughputPoolClientDeleteResponse struct {
+	// placeholder for future response values
+}
+
+// ThroughputPoolClientGetResponse contains the response from method ThroughputPoolClient.Get.
+type ThroughputPoolClientGetResponse struct {
+	ThroughputPoolResource
+}
+
+// ThroughputPoolClientUpdateResponse contains the response from method ThroughputPoolClient.Update.
+type ThroughputPoolClientUpdateResponse struct {
+	ThroughputPoolResource
+}
+
+// ThroughputPoolsClientListByResourceGroupResponse contains the response from method ThroughputPoolsClient.ListByResourceGroup.
+type ThroughputPoolsClientListByResourceGroupResponse struct {
+	ThroughputPoolsListResult
+}
+
+// ThroughputPoolsClientListResponse contains the response from method ThroughputPoolsClient.List.
+type ThroughputPoolsClientListResponse struct {
+	ThroughputPoolsListResult
 }

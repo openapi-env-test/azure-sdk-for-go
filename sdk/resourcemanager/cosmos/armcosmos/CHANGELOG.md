@@ -1,5 +1,73 @@
 # Release History
 
+## 3.0.0-beta.4 (2024-02-05)
+### Breaking Changes
+
+- Type of `CommandPostBody.Arguments` has been changed from `any` to `interface{}`
+- Type of `CommandPublicResource.Arguments` has been changed from `any` to `interface{}`
+- Type of `DataTransferServiceResourceProperties.AdditionalProperties` has been changed from `map[string]any` to `map[string]interface{}`
+- Type of `ErrorAdditionalInfo.Info` has been changed from `any` to `interface{}`
+- Type of `GraphAPIComputeServiceResourceProperties.AdditionalProperties` has been changed from `map[string]any` to `map[string]interface{}`
+- Type of `MaterializedViewsBuilderServiceResourceProperties.AdditionalProperties` has been changed from `map[string]any` to `map[string]interface{}`
+- Type of `SQLDedicatedGatewayServiceResourceProperties.AdditionalProperties` has been changed from `map[string]any` to `map[string]interface{}`
+- Type of `ServiceResourceProperties.AdditionalProperties` has been changed from `map[string]any` to `map[string]interface{}`
+- Function `NewClientFactory` has been removed
+- Function `*ClientFactory.NewCassandraClustersClient` has been removed
+- Function `*ClientFactory.NewCassandraDataCentersClient` has been removed
+- Function `*ClientFactory.NewCassandraResourcesClient` has been removed
+- Function `*ClientFactory.NewCollectionClient` has been removed
+- Function `*ClientFactory.NewCollectionPartitionClient` has been removed
+- Function `*ClientFactory.NewCollectionPartitionRegionClient` has been removed
+- Function `*ClientFactory.NewCollectionRegionClient` has been removed
+- Function `*ClientFactory.NewDataTransferJobsClient` has been removed
+- Function `*ClientFactory.NewDatabaseAccountRegionClient` has been removed
+- Function `*ClientFactory.NewDatabaseAccountsClient` has been removed
+- Function `*ClientFactory.NewDatabaseClient` has been removed
+- Function `*ClientFactory.NewGraphResourcesClient` has been removed
+- Function `*ClientFactory.NewGremlinResourcesClient` has been removed
+- Function `*ClientFactory.NewLocationsClient` has been removed
+- Function `*ClientFactory.NewMongoClustersClient` has been removed
+- Function `*ClientFactory.NewMongoDBResourcesClient` has been removed
+- Function `*ClientFactory.NewNotebookWorkspacesClient` has been removed
+- Function `*ClientFactory.NewOperationsClient` has been removed
+- Function `*ClientFactory.NewPartitionKeyRangeIDClient` has been removed
+- Function `*ClientFactory.NewPartitionKeyRangeIDRegionClient` has been removed
+- Function `*ClientFactory.NewPercentileClient` has been removed
+- Function `*ClientFactory.NewPercentileSourceTargetClient` has been removed
+- Function `*ClientFactory.NewPercentileTargetClient` has been removed
+- Function `*ClientFactory.NewPrivateEndpointConnectionsClient` has been removed
+- Function `*ClientFactory.NewPrivateLinkResourcesClient` has been removed
+- Function `*ClientFactory.NewRestorableDatabaseAccountsClient` has been removed
+- Function `*ClientFactory.NewRestorableGremlinDatabasesClient` has been removed
+- Function `*ClientFactory.NewRestorableGremlinGraphsClient` has been removed
+- Function `*ClientFactory.NewRestorableGremlinResourcesClient` has been removed
+- Function `*ClientFactory.NewRestorableMongodbCollectionsClient` has been removed
+- Function `*ClientFactory.NewRestorableMongodbDatabasesClient` has been removed
+- Function `*ClientFactory.NewRestorableMongodbResourcesClient` has been removed
+- Function `*ClientFactory.NewRestorableSQLContainersClient` has been removed
+- Function `*ClientFactory.NewRestorableSQLDatabasesClient` has been removed
+- Function `*ClientFactory.NewRestorableSQLResourcesClient` has been removed
+- Function `*ClientFactory.NewRestorableTableResourcesClient` has been removed
+- Function `*ClientFactory.NewRestorableTablesClient` has been removed
+- Function `*ClientFactory.NewSQLResourcesClient` has been removed
+- Function `*ClientFactory.NewServiceClient` has been removed
+- Function `*ClientFactory.NewTableResourcesClient` has been removed
+- Function `*ClientFactory.NewThroughputPoolAccountClient` has been removed
+- Function `*ClientFactory.NewThroughputPoolAccountsClient` has been removed
+- Function `*ClientFactory.NewThroughputPoolClient` has been removed
+- Function `*ClientFactory.NewThroughputPoolsClient` has been removed
+- Function `dateTimeRFC3339.MarshalText` has been removed
+- Function `*dateTimeRFC3339.Parse` has been removed
+- Function `*dateTimeRFC3339.UnmarshalText` has been removed
+- Struct `ClientFactory` has been removed
+
+### Features Added
+
+- New function `timeRFC3339.MarshalText() ([]byte, error)`
+- New function `*timeRFC3339.Parse(string) error`
+- New function `*timeRFC3339.UnmarshalText([]byte) error`
+
+
 ## 2.2.0-beta.1 (2022-10-09)
 ### Features Added
 
