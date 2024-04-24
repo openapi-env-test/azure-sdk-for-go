@@ -4,9 +4,10 @@
     "generateScript": {
       "path": "generator automation-v2",
       "stderr": {
-        "showInComment": "^\\[AUTOREST\\]",
-        "scriptError": "^\\[ERROR\\]",
-        "scriptWarning": "^\\[WARNING\\]"
+        "showInComment": "autorest"
+      },
+      "stdout": {
+        "showInComment": true
       }
     }
   },
@@ -18,7 +19,10 @@
     "initScript": {
       "path": "sh ./eng/scripts/automation_init.sh",
       "stderr": {
-        "scriptWarning": false
+        "showInComment": "go: downloading"
+      },
+      "stdout": {
+        "showInComment": "gofolder"
       }
     }
   },
