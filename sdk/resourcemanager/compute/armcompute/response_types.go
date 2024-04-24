@@ -322,9 +322,19 @@ type DedicatedHostsClientGetResponse struct {
 	DedicatedHost
 }
 
+// DedicatedHostsClientListAvailableSizesResponse contains the response from method DedicatedHostsClient.ListAvailableSizes.
+type DedicatedHostsClientListAvailableSizesResponse struct {
+	DedicatedHostSizeListResult
+}
+
 // DedicatedHostsClientListByHostGroupResponse contains the response from method DedicatedHostsClient.ListByHostGroup.
 type DedicatedHostsClientListByHostGroupResponse struct {
 	DedicatedHostListResult
+}
+
+// DedicatedHostsClientRedeployResponse contains the response from method DedicatedHostsClient.Redeploy.
+type DedicatedHostsClientRedeployResponse struct {
+	// placeholder for future response values
 }
 
 // DedicatedHostsClientRestartResponse contains the response from method DedicatedHostsClient.Restart.
@@ -660,11 +670,6 @@ type LogAnalyticsClientExportRequestRateByIntervalResponse struct {
 // LogAnalyticsClientExportThrottledRequestsResponse contains the response from method LogAnalyticsClient.ExportThrottledRequests.
 type LogAnalyticsClientExportThrottledRequestsResponse struct {
 	LogAnalyticsOperationResult
-}
-
-// OperationsClientListResponse contains the response from method OperationsClient.List.
-type OperationsClientListResponse struct {
-	OperationListResult
 }
 
 // ProximityPlacementGroupsClientCreateOrUpdateResponse contains the response from method ProximityPlacementGroupsClient.CreateOrUpdate.
@@ -1092,6 +1097,16 @@ type VirtualMachineScaleSetVMRunCommandsClientUpdateResponse struct {
 	VirtualMachineRunCommand
 }
 
+// VirtualMachineScaleSetVMsClientApproveRollingUpgradeResponse contains the response from method VirtualMachineScaleSetVMsClient.ApproveRollingUpgrade.
+type VirtualMachineScaleSetVMsClientApproveRollingUpgradeResponse struct {
+	// placeholder for future response values
+}
+
+// VirtualMachineScaleSetVMsClientAttachDetachDataDisksResponse contains the response from method VirtualMachineScaleSetVMsClient.AttachDetachDataDisks.
+type VirtualMachineScaleSetVMsClientAttachDetachDataDisksResponse struct {
+	StorageProfile
+}
+
 // VirtualMachineScaleSetVMsClientDeallocateResponse contains the response from method VirtualMachineScaleSetVMsClient.Deallocate.
 type VirtualMachineScaleSetVMsClientDeallocateResponse struct {
 	// placeholder for future response values
@@ -1172,6 +1187,11 @@ type VirtualMachineScaleSetVMsClientUpdateResponse struct {
 	VirtualMachineScaleSetVM
 }
 
+// VirtualMachineScaleSetsClientApproveRollingUpgradeResponse contains the response from method VirtualMachineScaleSetsClient.ApproveRollingUpgrade.
+type VirtualMachineScaleSetsClientApproveRollingUpgradeResponse struct {
+	// placeholder for future response values
+}
+
 // VirtualMachineScaleSetsClientConvertToSinglePlacementGroupResponse contains the response from method VirtualMachineScaleSetsClient.ConvertToSinglePlacementGroup.
 type VirtualMachineScaleSetsClientConvertToSinglePlacementGroupResponse struct {
 	// placeholder for future response values
@@ -1248,6 +1268,11 @@ type VirtualMachineScaleSetsClientPowerOffResponse struct {
 	// placeholder for future response values
 }
 
+// VirtualMachineScaleSetsClientReapplyResponse contains the response from method VirtualMachineScaleSetsClient.Reapply.
+type VirtualMachineScaleSetsClientReapplyResponse struct {
+	// placeholder for future response values
+}
+
 // VirtualMachineScaleSetsClientRedeployResponse contains the response from method VirtualMachineScaleSetsClient.Redeploy.
 type VirtualMachineScaleSetsClientRedeployResponse struct {
 	// placeholder for future response values
@@ -1296,6 +1321,11 @@ type VirtualMachineSizesClientListResponse struct {
 // VirtualMachinesClientAssessPatchesResponse contains the response from method VirtualMachinesClient.AssessPatches.
 type VirtualMachinesClientAssessPatchesResponse struct {
 	VirtualMachineAssessPatchesResult
+}
+
+// VirtualMachinesClientAttachDetachDataDisksResponse contains the response from method VirtualMachinesClient.AttachDetachDataDisks.
+type VirtualMachinesClientAttachDetachDataDisksResponse struct {
+	StorageProfile
 }
 
 // VirtualMachinesClientCaptureResponse contains the response from method VirtualMachinesClient.Capture.
