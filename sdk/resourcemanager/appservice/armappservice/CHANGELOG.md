@@ -1,5 +1,143 @@
 # Release History
 
+## 3.0.0 (2024-04-24)
+### Breaking Changes
+
+- Function `*EnvironmentsClient.BeginApproveOrRejectPrivateEndpointConnection` parameter(s) have been changed from `(context.Context, string, string, string, PrivateLinkConnectionApprovalRequestResource, *EnvironmentsClientBeginApproveOrRejectPrivateEndpointConnectionOptions)` to `(context.Context, string, string, string, RemotePrivateEndpointConnectionARMResource, *EnvironmentsClientBeginApproveOrRejectPrivateEndpointConnectionOptions)`
+- Function `*StaticSitesClient.BeginApproveOrRejectPrivateEndpointConnection` parameter(s) have been changed from `(context.Context, string, string, string, PrivateLinkConnectionApprovalRequestResource, *StaticSitesClientBeginApproveOrRejectPrivateEndpointConnectionOptions)` to `(context.Context, string, string, string, RemotePrivateEndpointConnectionARMResource, *StaticSitesClientBeginApproveOrRejectPrivateEndpointConnectionOptions)`
+- Function `*WebAppsClient.BeginApproveOrRejectPrivateEndpointConnection` parameter(s) have been changed from `(context.Context, string, string, string, PrivateLinkConnectionApprovalRequestResource, *WebAppsClientBeginApproveOrRejectPrivateEndpointConnectionOptions)` to `(context.Context, string, string, string, RemotePrivateEndpointConnectionARMResource, *WebAppsClientBeginApproveOrRejectPrivateEndpointConnectionOptions)`
+- Function `*WebAppsClient.BeginApproveOrRejectPrivateEndpointConnectionSlot` parameter(s) have been changed from `(context.Context, string, string, string, string, PrivateLinkConnectionApprovalRequestResource, *WebAppsClientBeginApproveOrRejectPrivateEndpointConnectionSlotOptions)` to `(context.Context, string, string, string, string, RemotePrivateEndpointConnectionARMResource, *WebAppsClientBeginApproveOrRejectPrivateEndpointConnectionSlotOptions)`
+- Type of `ContentLink.Metadata` has been changed from `any` to `interface{}`
+- Type of `ContinuousWebJobProperties.Settings` has been changed from `map[string]any` to `map[string]interface{}`
+- Type of `EnvironmentsClientDeleteAseCustomDNSSuffixConfigurationResponse.Interface` has been changed from `any` to `interface{}`
+- Type of `EnvironmentsClientDeletePrivateEndpointConnectionResponse.Interface` has been changed from `any` to `interface{}`
+- Type of `Expression.Value` has been changed from `any` to `interface{}`
+- Type of `ExpressionRoot.Value` has been changed from `any` to `interface{}`
+- Type of `ExpressionTraces.Value` has been changed from `any` to `interface{}`
+- Type of `FunctionEnvelopeProperties.Config` has been changed from `any` to `interface{}`
+- Type of `KeyValuePairStringObject.Value` has been changed from `any` to `interface{}`
+- Type of `OperationResult.Error` has been changed from `any` to `interface{}`
+- Type of `OperationResult.Inputs` has been changed from `any` to `interface{}`
+- Type of `OperationResult.TrackedProperties` has been changed from `any` to `interface{}`
+- Type of `OperationResult.Outputs` has been changed from `any` to `interface{}`
+- Type of `OperationResultProperties.Error` has been changed from `any` to `interface{}`
+- Type of `PlansClientGetServerFarmSKUsResponse.Interface` has been changed from `any` to `interface{}`
+- Type of `Request.Headers` has been changed from `any` to `interface{}`
+- Type of `Response.Headers` has been changed from `any` to `interface{}`
+- Type of `StackMajorVersion.SiteConfigPropertiesDictionary` has been changed from `map[string]any` to `map[string]interface{}`
+- Type of `StackMajorVersion.AppSettingsDictionary` has been changed from `map[string]any` to `map[string]interface{}`
+- Type of `StaticSitesClientDeletePrivateEndpointConnectionResponse.Interface` has been changed from `any` to `interface{}`
+- Type of `TriggeredWebJobProperties.Settings` has been changed from `map[string]any` to `map[string]interface{}`
+- Type of `WebAppsClientCreateOneDeployOperationResponse.Interface` has been changed from `any` to `interface{}`
+- Type of `WebAppsClientDeletePrivateEndpointConnectionResponse.Interface` has been changed from `any` to `interface{}`
+- Type of `WebAppsClientDeletePrivateEndpointConnectionSlotResponse.Interface` has been changed from `any` to `interface{}`
+- Type of `WebAppsClientGetOneDeployStatusResponse.Interface` has been changed from `any` to `interface{}`
+- Type of `WebJobProperties.Settings` has been changed from `map[string]any` to `map[string]interface{}`
+- Type of `WorkflowArtifacts.AppSettings` has been changed from `any` to `interface{}`
+- Type of `WorkflowArtifacts.Files` has been changed from `map[string]any` to `map[string]interface{}`
+- Type of `WorkflowEnvelopeProperties.Files` has been changed from `map[string]any` to `map[string]interface{}`
+- Type of `WorkflowOutputParameter.Value` has been changed from `any` to `interface{}`
+- Type of `WorkflowOutputParameter.Error` has been changed from `any` to `interface{}`
+- Type of `WorkflowOutputParameter.Metadata` has been changed from `any` to `interface{}`
+- Type of `WorkflowParameter.Metadata` has been changed from `any` to `interface{}`
+- Type of `WorkflowParameter.Value` has been changed from `any` to `interface{}`
+- Type of `WorkflowProperties.Definition` has been changed from `any` to `interface{}`
+- Type of `WorkflowRunActionProperties.Error` has been changed from `any` to `interface{}`
+- Type of `WorkflowRunActionProperties.TrackedProperties` has been changed from `any` to `interface{}`
+- Type of `WorkflowRunActionRepetitionProperties.Outputs` has been changed from `any` to `interface{}`
+- Type of `WorkflowRunActionRepetitionProperties.Inputs` has been changed from `any` to `interface{}`
+- Type of `WorkflowRunActionRepetitionProperties.TrackedProperties` has been changed from `any` to `interface{}`
+- Type of `WorkflowRunActionRepetitionProperties.Error` has been changed from `any` to `interface{}`
+- Type of `WorkflowRunProperties.Error` has been changed from `any` to `interface{}`
+- Type of `WorkflowRunTrigger.Inputs` has been changed from `any` to `interface{}`
+- Type of `WorkflowRunTrigger.Error` has been changed from `any` to `interface{}`
+- Type of `WorkflowRunTrigger.Outputs` has been changed from `any` to `interface{}`
+- Type of `WorkflowRunTrigger.TrackedProperties` has been changed from `any` to `interface{}`
+- Type of `WorkflowTriggerHistoryProperties.Error` has been changed from `any` to `interface{}`
+- Type of `WorkflowVersionProperties.Definition` has been changed from `any` to `interface{}`
+- Function `NewClientFactory` has been removed
+- Function `*ClientFactory.NewCertificateOrdersClient` has been removed
+- Function `*ClientFactory.NewCertificateOrdersDiagnosticsClient` has been removed
+- Function `*ClientFactory.NewCertificateRegistrationProviderClient` has been removed
+- Function `*ClientFactory.NewCertificatesClient` has been removed
+- Function `*ClientFactory.NewContainerAppsClient` has been removed
+- Function `*ClientFactory.NewContainerAppsRevisionsClient` has been removed
+- Function `*ClientFactory.NewDeletedWebAppsClient` has been removed
+- Function `*ClientFactory.NewDiagnosticsClient` has been removed
+- Function `*ClientFactory.NewDomainRegistrationProviderClient` has been removed
+- Function `*ClientFactory.NewDomainsClient` has been removed
+- Function `*ClientFactory.NewEnvironmentsClient` has been removed
+- Function `*ClientFactory.NewGetUsagesInLocationClient` has been removed
+- Function `*ClientFactory.NewGlobalClient` has been removed
+- Function `*ClientFactory.NewKubeEnvironmentsClient` has been removed
+- Function `*ClientFactory.NewPlansClient` has been removed
+- Function `*ClientFactory.NewProviderClient` has been removed
+- Function `*ClientFactory.NewRecommendationsClient` has been removed
+- Function `*ClientFactory.NewResourceHealthMetadataClient` has been removed
+- Function `*ClientFactory.NewStaticSitesClient` has been removed
+- Function `*ClientFactory.NewTopLevelDomainsClient` has been removed
+- Function `*ClientFactory.NewWebAppsClient` has been removed
+- Function `*ClientFactory.NewWebSiteManagementClient` has been removed
+- Function `*ClientFactory.NewWorkflowRunActionRepetitionsClient` has been removed
+- Function `*ClientFactory.NewWorkflowRunActionRepetitionsRequestHistoriesClient` has been removed
+- Function `*ClientFactory.NewWorkflowRunActionScopeRepetitionsClient` has been removed
+- Function `*ClientFactory.NewWorkflowRunActionsClient` has been removed
+- Function `*ClientFactory.NewWorkflowRunsClient` has been removed
+- Function `*ClientFactory.NewWorkflowTriggerHistoriesClient` has been removed
+- Function `*ClientFactory.NewWorkflowTriggersClient` has been removed
+- Function `*ClientFactory.NewWorkflowVersionsClient` has been removed
+- Function `*ClientFactory.NewWorkflowsClient` has been removed
+- Function `*EnvironmentsClient.NewListByResourceGroupPager` has been removed
+- Function `dateTimeRFC3339.MarshalText` has been removed
+- Function `*dateTimeRFC3339.Parse` has been removed
+- Function `*dateTimeRFC3339.UnmarshalText` has been removed
+- Struct `ClientFactory` has been removed
+- Struct `EnvironmentsClientListByResourceGroupResponse` has been removed
+
+### Features Added
+
+- New value `SKUNameFlexConsumption` added to type alias `SKUName`
+- New value `StorageTypeBlobContainer` added to type alias `StorageType`
+- New value `SupportedTLSVersionsOne3` added to type alias `SupportedTLSVersions`
+- New type alias `AuthType` with values `AuthTypeAnonymous`, `AuthTypeSystemIdentity`, `AuthTypeUserAssigned`, `AuthTypeUserCredentials`
+- New type alias `AuthenticationType` with values `AuthenticationTypeStorageAccountConnectionString`, `AuthenticationTypeSystemAssignedIdentity`, `AuthenticationTypeUserAssignedIdentity`
+- New type alias `AzureStorageProtocol` with values `AzureStorageProtocolHTTP`, `AzureStorageProtocolNfs`, `AzureStorageProtocolSmb`
+- New type alias `RuntimeName` with values `RuntimeNameCustom`, `RuntimeNameDotnetIsolated`, `RuntimeNameJava`, `RuntimeNameNode`, `RuntimeNamePowershell`, `RuntimeNamePython`
+- New function `*WebAppsClient.CreateOrUpdateSiteContainer(context.Context, string, string, string, SiteContainer, *WebAppsClientCreateOrUpdateSiteContainerOptions) (WebAppsClientCreateOrUpdateSiteContainerResponse, error)`
+- New function `*WebAppsClient.CreateOrUpdateSiteContainerSlot(context.Context, string, string, string, string, SiteContainer, *WebAppsClientCreateOrUpdateSiteContainerSlotOptions) (WebAppsClientCreateOrUpdateSiteContainerSlotResponse, error)`
+- New function `*WebAppsClient.DeleteSiteContainer(context.Context, string, string, string, *WebAppsClientDeleteSiteContainerOptions) (WebAppsClientDeleteSiteContainerResponse, error)`
+- New function `*WebAppsClient.DeleteSiteContainerSlot(context.Context, string, string, string, string, *WebAppsClientDeleteSiteContainerSlotOptions) (WebAppsClientDeleteSiteContainerSlotResponse, error)`
+- New function `*WebAppsClient.GetSiteContainer(context.Context, string, string, string, *WebAppsClientGetSiteContainerOptions) (WebAppsClientGetSiteContainerResponse, error)`
+- New function `*WebAppsClient.GetSiteContainerSlot(context.Context, string, string, string, string, *WebAppsClientGetSiteContainerSlotOptions) (WebAppsClientGetSiteContainerSlotResponse, error)`
+- New function `*WebAppsClient.NewListSiteContainersPager(string, string, *WebAppsClientListSiteContainersOptions) *runtime.Pager[WebAppsClientListSiteContainersResponse]`
+- New function `*WebAppsClient.NewListSiteContainersSlotPager(string, string, string, *WebAppsClientListSiteContainersSlotOptions) *runtime.Pager[WebAppsClientListSiteContainersSlotResponse]`
+- New function `timeRFC3339.MarshalText() ([]byte, error)`
+- New function `*timeRFC3339.Parse(string) error`
+- New function `*timeRFC3339.UnmarshalText([]byte) error`
+- New struct `EnvironmentVariable`
+- New struct `FunctionAppConfig`
+- New struct `FunctionsAlwaysReadyConfig`
+- New struct `FunctionsDeployment`
+- New struct `FunctionsDeploymentStorage`
+- New struct `FunctionsDeploymentStorageAuthentication`
+- New struct `FunctionsRuntime`
+- New struct `FunctionsScaleAndConcurrency`
+- New struct `FunctionsScaleAndConcurrencyTriggers`
+- New struct `FunctionsScaleAndConcurrencyTriggersHTTP`
+- New struct `SiteContainer`
+- New struct `SiteContainerCollection`
+- New struct `SiteContainerProperties`
+- New struct `SiteDNSConfig`
+- New struct `VolumeMount`
+- New struct `WebAppsClientListSiteContainersResponse`
+- New struct `WebAppsClientListSiteContainersSlotResponse`
+- New field `Protocol` in struct `AzureStorageInfoValue`
+- New field `DNSConfiguration` in struct `SitePatchResourceProperties`
+- New field `DNSConfiguration` in struct `SiteProperties`
+- New field `FunctionAppConfig` in struct `SiteProperties`
+- New field `VnetBackupRestoreEnabled` in struct `SiteProperties`
+
+
 ## 2.0.0 (2022-07-12)
 ### Breaking Changes
 

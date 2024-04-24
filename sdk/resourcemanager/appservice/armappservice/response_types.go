@@ -540,11 +540,6 @@ type EnvironmentsClientListAppServicePlansResponse struct {
 	PlanCollection
 }
 
-// EnvironmentsClientListByResourceGroupResponse contains the response from method EnvironmentsClient.ListByResourceGroup.
-type EnvironmentsClientListByResourceGroupResponse struct {
-	EnvironmentCollection
-}
-
 // EnvironmentsClientListCapacitiesResponse contains the response from method EnvironmentsClient.ListCapacities.
 type EnvironmentsClientListCapacitiesResponse struct {
 	StampCapacityCollection
@@ -675,6 +670,11 @@ type EnvironmentsClientUpdateWorkerPoolResponse struct {
 // EnvironmentsClientUpgradeResponse contains the response from method EnvironmentsClient.Upgrade.
 type EnvironmentsClientUpgradeResponse struct {
 	// placeholder for future response values
+}
+
+// GetUsagesInLocationClientListResponse contains the response from method GetUsagesInLocationClient.List.
+type GetUsagesInLocationClientListResponse struct {
+	CsmUsageQuotaCollection
 }
 
 // GlobalClientGetDeletedWebAppResponse contains the response from method GlobalClient.GetDeletedWebApp.
@@ -1008,6 +1008,21 @@ type StaticSitesClientApproveOrRejectPrivateEndpointConnectionResponse struct {
 	RemotePrivateEndpointConnectionARMResource
 }
 
+// StaticSitesClientCreateOrUpdateBasicAuthResponse contains the response from method StaticSitesClient.CreateOrUpdateBasicAuth.
+type StaticSitesClientCreateOrUpdateBasicAuthResponse struct {
+	StaticSiteBasicAuthPropertiesARMResource
+}
+
+// StaticSitesClientCreateOrUpdateBuildDatabaseConnectionResponse contains the response from method StaticSitesClient.CreateOrUpdateBuildDatabaseConnection.
+type StaticSitesClientCreateOrUpdateBuildDatabaseConnectionResponse struct {
+	DatabaseConnection
+}
+
+// StaticSitesClientCreateOrUpdateDatabaseConnectionResponse contains the response from method StaticSitesClient.CreateOrUpdateDatabaseConnection.
+type StaticSitesClientCreateOrUpdateDatabaseConnectionResponse struct {
+	DatabaseConnection
+}
+
 // StaticSitesClientCreateOrUpdateStaticSiteAppSettingsResponse contains the response from method StaticSitesClient.CreateOrUpdateStaticSiteAppSettings.
 type StaticSitesClientCreateOrUpdateStaticSiteAppSettingsResponse struct {
 	StringDictionary
@@ -1050,6 +1065,16 @@ type StaticSitesClientCreateZipDeploymentForStaticSiteBuildResponse struct {
 
 // StaticSitesClientCreateZipDeploymentForStaticSiteResponse contains the response from method StaticSitesClient.CreateZipDeploymentForStaticSite.
 type StaticSitesClientCreateZipDeploymentForStaticSiteResponse struct {
+	// placeholder for future response values
+}
+
+// StaticSitesClientDeleteBuildDatabaseConnectionResponse contains the response from method StaticSitesClient.DeleteBuildDatabaseConnection.
+type StaticSitesClientDeleteBuildDatabaseConnectionResponse struct {
+	// placeholder for future response values
+}
+
+// StaticSitesClientDeleteDatabaseConnectionResponse contains the response from method StaticSitesClient.DeleteDatabaseConnection.
+type StaticSitesClientDeleteDatabaseConnectionResponse struct {
 	// placeholder for future response values
 }
 
@@ -1097,6 +1122,51 @@ type StaticSitesClientDetachUserProvidedFunctionAppFromStaticSiteBuildResponse s
 // StaticSitesClientDetachUserProvidedFunctionAppFromStaticSiteResponse contains the response from method StaticSitesClient.DetachUserProvidedFunctionAppFromStaticSite.
 type StaticSitesClientDetachUserProvidedFunctionAppFromStaticSiteResponse struct {
 	// placeholder for future response values
+}
+
+// StaticSitesClientGetBasicAuthResponse contains the response from method StaticSitesClient.GetBasicAuth.
+type StaticSitesClientGetBasicAuthResponse struct {
+	StaticSiteBasicAuthPropertiesARMResource
+}
+
+// StaticSitesClientGetBuildDatabaseConnectionResponse contains the response from method StaticSitesClient.GetBuildDatabaseConnection.
+type StaticSitesClientGetBuildDatabaseConnectionResponse struct {
+	DatabaseConnection
+}
+
+// StaticSitesClientGetBuildDatabaseConnectionWithDetailsResponse contains the response from method StaticSitesClient.GetBuildDatabaseConnectionWithDetails.
+type StaticSitesClientGetBuildDatabaseConnectionWithDetailsResponse struct {
+	DatabaseConnection
+}
+
+// StaticSitesClientGetBuildDatabaseConnectionsResponse contains the response from method StaticSitesClient.GetBuildDatabaseConnections.
+type StaticSitesClientGetBuildDatabaseConnectionsResponse struct {
+	DatabaseConnectionCollection
+}
+
+// StaticSitesClientGetBuildDatabaseConnectionsWithDetailsResponse contains the response from method StaticSitesClient.GetBuildDatabaseConnectionsWithDetails.
+type StaticSitesClientGetBuildDatabaseConnectionsWithDetailsResponse struct {
+	DatabaseConnectionCollection
+}
+
+// StaticSitesClientGetDatabaseConnectionResponse contains the response from method StaticSitesClient.GetDatabaseConnection.
+type StaticSitesClientGetDatabaseConnectionResponse struct {
+	DatabaseConnection
+}
+
+// StaticSitesClientGetDatabaseConnectionWithDetailsResponse contains the response from method StaticSitesClient.GetDatabaseConnectionWithDetails.
+type StaticSitesClientGetDatabaseConnectionWithDetailsResponse struct {
+	DatabaseConnection
+}
+
+// StaticSitesClientGetDatabaseConnectionsResponse contains the response from method StaticSitesClient.GetDatabaseConnections.
+type StaticSitesClientGetDatabaseConnectionsResponse struct {
+	DatabaseConnectionCollection
+}
+
+// StaticSitesClientGetDatabaseConnectionsWithDetailsResponse contains the response from method StaticSitesClient.GetDatabaseConnectionsWithDetails.
+type StaticSitesClientGetDatabaseConnectionsWithDetailsResponse struct {
+	DatabaseConnectionCollection
 }
 
 // StaticSitesClientGetLinkedBackendForBuildResponse contains the response from method StaticSitesClient.GetLinkedBackendForBuild.
@@ -1189,6 +1259,11 @@ type StaticSitesClientLinkBackendToBuildResponse struct {
 	StaticSiteLinkedBackendARMResource
 }
 
+// StaticSitesClientListBasicAuthResponse contains the response from method StaticSitesClient.ListBasicAuth.
+type StaticSitesClientListBasicAuthResponse struct {
+	StaticSiteBasicAuthPropertiesCollection
+}
+
 // StaticSitesClientListResponse contains the response from method StaticSitesClient.List.
 type StaticSitesClientListResponse struct {
 	StaticSiteCollection
@@ -1272,6 +1347,16 @@ type StaticSitesClientUnlinkBackendFromBuildResponse struct {
 // StaticSitesClientUnlinkBackendResponse contains the response from method StaticSitesClient.UnlinkBackend.
 type StaticSitesClientUnlinkBackendResponse struct {
 	// placeholder for future response values
+}
+
+// StaticSitesClientUpdateBuildDatabaseConnectionResponse contains the response from method StaticSitesClient.UpdateBuildDatabaseConnection.
+type StaticSitesClientUpdateBuildDatabaseConnectionResponse struct {
+	DatabaseConnection
+}
+
+// StaticSitesClientUpdateDatabaseConnectionResponse contains the response from method StaticSitesClient.UpdateDatabaseConnection.
+type StaticSitesClientUpdateDatabaseConnectionResponse struct {
+	DatabaseConnection
 }
 
 // StaticSitesClientUpdateStaticSiteResponse contains the response from method StaticSitesClient.UpdateStaticSite.
@@ -1493,6 +1578,16 @@ type WebAppsClientCreateOrUpdateRelayServiceConnectionSlotResponse struct {
 // WebAppsClientCreateOrUpdateResponse contains the response from method WebAppsClient.CreateOrUpdate.
 type WebAppsClientCreateOrUpdateResponse struct {
 	Site
+}
+
+// WebAppsClientCreateOrUpdateSiteContainerResponse contains the response from method WebAppsClient.CreateOrUpdateSiteContainer.
+type WebAppsClientCreateOrUpdateSiteContainerResponse struct {
+	SiteContainer
+}
+
+// WebAppsClientCreateOrUpdateSiteContainerSlotResponse contains the response from method WebAppsClient.CreateOrUpdateSiteContainerSlot.
+type WebAppsClientCreateOrUpdateSiteContainerSlotResponse struct {
+	SiteContainer
 }
 
 // WebAppsClientCreateOrUpdateSlotResponse contains the response from method WebAppsClient.CreateOrUpdateSlot.
@@ -1717,6 +1812,16 @@ type WebAppsClientDeleteResponse struct {
 	// placeholder for future response values
 }
 
+// WebAppsClientDeleteSiteContainerResponse contains the response from method WebAppsClient.DeleteSiteContainer.
+type WebAppsClientDeleteSiteContainerResponse struct {
+	// placeholder for future response values
+}
+
+// WebAppsClientDeleteSiteContainerSlotResponse contains the response from method WebAppsClient.DeleteSiteContainerSlot.
+type WebAppsClientDeleteSiteContainerSlotResponse struct {
+	// placeholder for future response values
+}
+
 // WebAppsClientDeleteSiteExtensionResponse contains the response from method WebAppsClient.DeleteSiteExtension.
 type WebAppsClientDeleteSiteExtensionResponse struct {
 	// placeholder for future response values
@@ -1769,6 +1874,16 @@ type WebAppsClientDeleteVnetConnectionResponse struct {
 
 // WebAppsClientDeleteVnetConnectionSlotResponse contains the response from method WebAppsClient.DeleteVnetConnectionSlot.
 type WebAppsClientDeleteVnetConnectionSlotResponse struct {
+	// placeholder for future response values
+}
+
+// WebAppsClientDeployWorkflowArtifactsResponse contains the response from method WebAppsClient.DeployWorkflowArtifacts.
+type WebAppsClientDeployWorkflowArtifactsResponse struct {
+	// placeholder for future response values
+}
+
+// WebAppsClientDeployWorkflowArtifactsSlotResponse contains the response from method WebAppsClient.DeployWorkflowArtifactsSlot.
+type WebAppsClientDeployWorkflowArtifactsSlotResponse struct {
 	// placeholder for future response values
 }
 
@@ -2046,6 +2161,11 @@ type WebAppsClientGetInstanceProcessSlotResponse struct {
 	ProcessInfo
 }
 
+// WebAppsClientGetInstanceWorkflowSlotResponse contains the response from method WebAppsClient.GetInstanceWorkflowSlot.
+type WebAppsClientGetInstanceWorkflowSlotResponse struct {
+	WorkflowEnvelope
+}
+
 // WebAppsClientGetMSDeployLogResponse contains the response from method WebAppsClient.GetMSDeployLog.
 type WebAppsClientGetMSDeployLogResponse struct {
 	MSDeployLog
@@ -2272,6 +2392,16 @@ type WebAppsClientGetSiteConnectionStringKeyVaultReferencesSlotResponse struct {
 	APIKVReferenceCollection
 }
 
+// WebAppsClientGetSiteContainerResponse contains the response from method WebAppsClient.GetSiteContainer.
+type WebAppsClientGetSiteContainerResponse struct {
+	SiteContainer
+}
+
+// WebAppsClientGetSiteContainerSlotResponse contains the response from method WebAppsClient.GetSiteContainerSlot.
+type WebAppsClientGetSiteContainerSlotResponse struct {
+	SiteContainer
+}
+
 // WebAppsClientGetSiteExtensionResponse contains the response from method WebAppsClient.GetSiteExtension.
 type WebAppsClientGetSiteExtensionResponse struct {
 	SiteExtensionInfo
@@ -2382,6 +2512,11 @@ type WebAppsClientGetWebSiteContainerLogsResponse struct {
 type WebAppsClientGetWebSiteContainerLogsSlotResponse struct {
 	// Body contains the streaming response.
 	Body io.ReadCloser
+}
+
+// WebAppsClientGetWorkflowResponse contains the response from method WebAppsClient.GetWorkflow.
+type WebAppsClientGetWorkflowResponse struct {
+	WorkflowEnvelope
 }
 
 // WebAppsClientInstallSiteExtensionResponse contains the response from method WebAppsClient.InstallSiteExtension.
@@ -2629,6 +2764,11 @@ type WebAppsClientListInstanceProcessesSlotResponse struct {
 	ProcessInfoCollection
 }
 
+// WebAppsClientListInstanceWorkflowsSlotResponse contains the response from method WebAppsClient.ListInstanceWorkflowsSlot.
+type WebAppsClientListInstanceWorkflowsSlotResponse struct {
+	WorkflowEnvelopeCollection
+}
+
 // WebAppsClientListMetadataResponse contains the response from method WebAppsClient.ListMetadata.
 type WebAppsClientListMetadataResponse struct {
 	StringDictionary
@@ -2759,6 +2899,16 @@ type WebAppsClientListSiteBackupsResponse struct {
 // WebAppsClientListSiteBackupsSlotResponse contains the response from method WebAppsClient.ListSiteBackupsSlot.
 type WebAppsClientListSiteBackupsSlotResponse struct {
 	BackupItemCollection
+}
+
+// WebAppsClientListSiteContainersResponse contains the response from method WebAppsClient.ListSiteContainers.
+type WebAppsClientListSiteContainersResponse struct {
+	SiteContainerCollection
+}
+
+// WebAppsClientListSiteContainersSlotResponse contains the response from method WebAppsClient.ListSiteContainersSlot.
+type WebAppsClientListSiteContainersSlotResponse struct {
+	SiteContainerCollection
 }
 
 // WebAppsClientListSiteExtensionsResponse contains the response from method WebAppsClient.ListSiteExtensions.
@@ -2896,6 +3046,21 @@ type WebAppsClientListWebJobsResponse struct {
 // WebAppsClientListWebJobsSlotResponse contains the response from method WebAppsClient.ListWebJobsSlot.
 type WebAppsClientListWebJobsSlotResponse struct {
 	WebJobCollection
+}
+
+// WebAppsClientListWorkflowsConnectionsResponse contains the response from method WebAppsClient.ListWorkflowsConnections.
+type WebAppsClientListWorkflowsConnectionsResponse struct {
+	WorkflowEnvelope
+}
+
+// WebAppsClientListWorkflowsConnectionsSlotResponse contains the response from method WebAppsClient.ListWorkflowsConnectionsSlot.
+type WebAppsClientListWorkflowsConnectionsSlotResponse struct {
+	WorkflowEnvelope
+}
+
+// WebAppsClientListWorkflowsResponse contains the response from method WebAppsClient.ListWorkflows.
+type WebAppsClientListWorkflowsResponse struct {
+	WorkflowEnvelopeCollection
 }
 
 // WebAppsClientMigrateMySQLResponse contains the response from method WebAppsClient.MigrateMySQL.
@@ -3385,6 +3550,11 @@ type WebSiteManagementClientGetSourceControlResponse struct {
 // WebSiteManagementClientGetSubscriptionDeploymentLocationsResponse contains the response from method WebSiteManagementClient.GetSubscriptionDeploymentLocations.
 type WebSiteManagementClientGetSubscriptionDeploymentLocationsResponse struct {
 	DeploymentLocations
+}
+
+// WebSiteManagementClientListAseRegionsResponse contains the response from method WebSiteManagementClient.ListAseRegions.
+type WebSiteManagementClientListAseRegionsResponse struct {
+	AseRegionCollection
 }
 
 // WebSiteManagementClientListBillingMetersResponse contains the response from method WebSiteManagementClient.ListBillingMeters.

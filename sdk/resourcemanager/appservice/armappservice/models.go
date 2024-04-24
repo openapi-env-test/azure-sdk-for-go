@@ -478,10 +478,12 @@ type ApplicationStackResource struct {
 }
 
 type ArcConfiguration struct {
-	ArtifactStorageAccessMode    *string                `json:"artifactStorageAccessMode,omitempty"`
-	ArtifactStorageClassName     *string                `json:"artifactStorageClassName,omitempty"`
-	ArtifactStorageMountPath     *string                `json:"artifactStorageMountPath,omitempty"`
-	ArtifactStorageNodeName      *string                `json:"artifactStorageNodeName,omitempty"`
+	ArtifactStorageAccessMode *string `json:"artifactStorageAccessMode,omitempty"`
+	ArtifactStorageClassName  *string `json:"artifactStorageClassName,omitempty"`
+	ArtifactStorageMountPath  *string `json:"artifactStorageMountPath,omitempty"`
+	ArtifactStorageNodeName   *string `json:"artifactStorageNodeName,omitempty"`
+
+	// Property to select Azure Storage type. Available options: blobContainer.
 	ArtifactsStorageType         *StorageType           `json:"artifactsStorageType,omitempty"`
 	FrontEndServiceConfiguration *FrontEndConfiguration `json:"frontEndServiceConfiguration,omitempty"`
 	KubeConfig                   *string                `json:"kubeConfig,omitempty"`
@@ -509,6 +511,54 @@ type ArmPlan struct {
 
 	// Version of product.
 	Version *string `json:"version,omitempty"`
+}
+
+// AseRegion - ASE region.
+type AseRegion struct {
+	// Kind of resource.
+	Kind *string `json:"kind,omitempty"`
+
+	// ASE region resource specific properties
+	Properties *AseRegionProperties `json:"properties,omitempty"`
+
+	// READ-ONLY; Resource Id.
+	ID *string `json:"id,omitempty" azure:"ro"`
+
+	// READ-ONLY; Resource Name.
+	Name *string `json:"name,omitempty" azure:"ro"`
+
+	// READ-ONLY; Resource type.
+	Type *string `json:"type,omitempty" azure:"ro"`
+}
+
+// AseRegionCollection - Collection of ASE regions.
+type AseRegionCollection struct {
+	// REQUIRED; Collection of resources.
+	Value []*AseRegion `json:"value,omitempty"`
+
+	// READ-ONLY; Link to next page of resources.
+	NextLink *string `json:"nextLink,omitempty" azure:"ro"`
+}
+
+// AseRegionProperties - ASE region resource specific properties
+type AseRegionProperties struct {
+	// Available OSs in region.
+	AvailableOS []*string `json:"availableOS,omitempty"`
+
+	// Available Skus in region.
+	AvailableSKU []*string `json:"availableSku,omitempty"`
+
+	// READ-ONLY; Dedicated host enabled.
+	DedicatedHost *bool `json:"dedicatedHost,omitempty" azure:"ro"`
+
+	// READ-ONLY; Display name for region.
+	DisplayName *string `json:"displayName,omitempty" azure:"ro"`
+
+	// READ-ONLY; Is region standard.
+	Standard *bool `json:"standard,omitempty" azure:"ro"`
+
+	// READ-ONLY; Zone redundant deployment enabled.
+	ZoneRedundant *bool `json:"zoneRedundant,omitempty" azure:"ro"`
 }
 
 // AseV3NetworkingConfiguration - Full view of networking configuration for an ASE.
@@ -757,6 +807,9 @@ type AzureStorageInfoValue struct {
 
 	// Path to mount the storage within the site's runtime environment.
 	MountPath *string `json:"mountPath,omitempty"`
+
+	// Mounting protocol to use for the storage account.
+	Protocol *AzureStorageProtocol `json:"protocol,omitempty"`
 
 	// Name of the file share (container name, for Blob storage).
 	ShareName *string `json:"shareName,omitempty"`
@@ -2288,6 +2341,30 @@ type DaprComponent struct {
 	Version *string `json:"version,omitempty"`
 }
 
+// DaprConfig - App Dapr configuration.
+type DaprConfig struct {
+	// Dapr application identifier
+	AppID *string `json:"appId,omitempty"`
+
+	// Tells Dapr which port your application is listening on
+	AppPort *int32 `json:"appPort,omitempty"`
+
+	// Enables API logging for the Dapr sidecar
+	EnableAPILogging *bool `json:"enableApiLogging,omitempty"`
+
+	// Boolean indicating if the Dapr side car is enabled
+	Enabled *bool `json:"enabled,omitempty"`
+
+	// Increasing max size of request body http servers parameter in MB to handle uploading of big files. Default is 4 MB.
+	HTTPMaxRequestSize *int32 `json:"httpMaxRequestSize,omitempty"`
+
+	// Dapr max size of http header read buffer in KB to handle when sending multi-KB headers. Default is 65KB.
+	HTTPReadBufferSize *int32 `json:"httpReadBufferSize,omitempty"`
+
+	// Sets the log level for the Dapr sidecar. Allowed values are debug, info, warn, error. Default is info.
+	LogLevel *DaprLogLevel `json:"logLevel,omitempty"`
+}
+
 // DaprMetadata - Container App Dapr component metadata.
 type DaprMetadata struct {
 	// Metadata property name.
@@ -2354,6 +2431,96 @@ type DatabaseBackupSetting struct {
 	// overwrite connection strings options.
 	ConnectionStringName *string `json:"connectionStringName,omitempty"`
 	Name                 *string `json:"name,omitempty"`
+}
+
+// DatabaseConnection - Static Site Database Connection resource.
+type DatabaseConnection struct {
+	// Kind of resource.
+	Kind *string `json:"kind,omitempty"`
+
+	// DatabaseConnection resource specific properties
+	Properties *DatabaseConnectionProperties `json:"properties,omitempty"`
+
+	// READ-ONLY; Resource Id.
+	ID *string `json:"id,omitempty" azure:"ro"`
+
+	// READ-ONLY; Resource Name.
+	Name *string `json:"name,omitempty" azure:"ro"`
+
+	// READ-ONLY; Resource type.
+	Type *string `json:"type,omitempty" azure:"ro"`
+}
+
+// DatabaseConnectionCollection - Collection of static site database connections.
+type DatabaseConnectionCollection struct {
+	// REQUIRED; Collection of resources.
+	Value []*DatabaseConnection `json:"value,omitempty"`
+
+	// READ-ONLY; Link to next page of resources.
+	NextLink *string `json:"nextLink,omitempty" azure:"ro"`
+}
+
+// DatabaseConnectionOverview - Static Site Database Connection overview.
+type DatabaseConnectionOverview struct {
+	// READ-ONLY; A list of configuration files associated with this database connection.
+	ConfigurationFiles []*StaticSiteDatabaseConnectionConfigurationFileOverview `json:"configurationFiles,omitempty" azure:"ro"`
+
+	// READ-ONLY; If present, the identity is used in conjunction with connection string to connect to the database. Use of the
+	// system-assigned managed identity is indicated with the string 'SystemAssigned', while use
+	// of a user-assigned managed identity is indicated with the resource id of the managed identity resource.
+	ConnectionIdentity *string `json:"connectionIdentity,omitempty" azure:"ro"`
+
+	// READ-ONLY; If present, the name of this database connection resource.
+	Name *string `json:"name,omitempty" azure:"ro"`
+
+	// READ-ONLY; The region of the database resource.
+	Region *string `json:"region,omitempty" azure:"ro"`
+
+	// READ-ONLY; The resource id of the database.
+	ResourceID *string `json:"resourceId,omitempty" azure:"ro"`
+}
+
+// DatabaseConnectionPatchRequest - Static Site Database Connection Request Properties resource when patching
+type DatabaseConnectionPatchRequest struct {
+	// DatabaseConnectionPatchRequest resource specific properties
+	Properties *DatabaseConnectionPatchRequestProperties `json:"properties,omitempty"`
+}
+
+// DatabaseConnectionPatchRequestProperties - DatabaseConnectionPatchRequest resource specific properties
+type DatabaseConnectionPatchRequestProperties struct {
+	// If present, the identity is used in conjunction with connection string to connect to the database. Use of the system-assigned
+	// managed identity is indicated with the string 'SystemAssigned', while use
+	// of a user-assigned managed identity is indicated with the resource id of the managed identity resource.
+	ConnectionIdentity *string `json:"connectionIdentity,omitempty"`
+
+	// The connection string to use to connect to the database.
+	ConnectionString *string `json:"connectionString,omitempty"`
+
+	// The region of the database resource.
+	Region *string `json:"region,omitempty"`
+
+	// The resource id of the database.
+	ResourceID *string `json:"resourceId,omitempty"`
+}
+
+// DatabaseConnectionProperties - DatabaseConnection resource specific properties
+type DatabaseConnectionProperties struct {
+	// REQUIRED; The region of the database resource.
+	Region *string `json:"region,omitempty"`
+
+	// REQUIRED; The resource id of the database.
+	ResourceID *string `json:"resourceId,omitempty"`
+
+	// If present, the identity is used in conjunction with connection string to connect to the database. Use of the system-assigned
+	// managed identity is indicated with the string 'SystemAssigned', while use
+	// of a user-assigned managed identity is indicated with the resource id of the managed identity resource.
+	ConnectionIdentity *string `json:"connectionIdentity,omitempty"`
+
+	// The connection string to use to connect to the database.
+	ConnectionString *string `json:"connectionString,omitempty"`
+
+	// READ-ONLY; A list of configuration files associated with this database connection.
+	ConfigurationFiles []*StaticSiteDatabaseConnectionConfigurationFileOverview `json:"configurationFiles,omitempty" azure:"ro"`
 }
 
 // DefaultAuthorizationPolicy - The configuration settings of the Azure Active Directory default authorization policy.
@@ -3577,6 +3744,14 @@ type EnvironmentVar struct {
 	Value *string `json:"value,omitempty"`
 }
 
+type EnvironmentVariable struct {
+	// REQUIRED; Environment variable name
+	Name *string `json:"name,omitempty"`
+
+	// REQUIRED; Environment variable value
+	Value *string `json:"value,omitempty"`
+}
+
 // EnvironmentsClientBeginApproveOrRejectPrivateEndpointConnectionOptions contains the optional parameters for the EnvironmentsClient.BeginApproveOrRejectPrivateEndpointConnection
 // method.
 type EnvironmentsClientBeginApproveOrRejectPrivateEndpointConnectionOptions struct {
@@ -3722,12 +3897,6 @@ type EnvironmentsClientGetWorkerPoolOptions struct {
 // EnvironmentsClientListAppServicePlansOptions contains the optional parameters for the EnvironmentsClient.ListAppServicePlans
 // method.
 type EnvironmentsClientListAppServicePlansOptions struct {
-	// placeholder for future optional parameters
-}
-
-// EnvironmentsClientListByResourceGroupOptions contains the optional parameters for the EnvironmentsClient.ListByResourceGroup
-// method.
-type EnvironmentsClientListByResourceGroupOptions struct {
 	// placeholder for future optional parameters
 }
 
@@ -4071,6 +4240,18 @@ type FrontEndConfiguration struct {
 	Kind *FrontEndServiceType `json:"kind,omitempty"`
 }
 
+// FunctionAppConfig - Function app configuration.
+type FunctionAppConfig struct {
+	// Function app deployment configuration.
+	Deployment *FunctionsDeployment `json:"deployment,omitempty"`
+
+	// Function app runtime settings.
+	Runtime *FunctionsRuntime `json:"runtime,omitempty"`
+
+	// Function app scale and concurrency settings.
+	ScaleAndConcurrency *FunctionsScaleAndConcurrency `json:"scaleAndConcurrency,omitempty"`
+}
+
 // FunctionAppMajorVersion - Function App stack major version.
 type FunctionAppMajorVersion struct {
 	// READ-ONLY; Function App stack major version (display only).
@@ -4272,6 +4453,87 @@ type FunctionSecrets struct {
 	TriggerURL *string `json:"trigger_url,omitempty"`
 }
 
+// FunctionsAlwaysReadyConfig - Sets the number of 'Always Ready' instances for a function group or a specific function.
+type FunctionsAlwaysReadyConfig struct {
+	// Sets the number of 'Always Ready' instances for a given function group or a specific function. For additional information
+	// see https://aka.ms/flexconsumption/alwaysready.
+	InstanceCount *float32 `json:"instanceCount,omitempty"`
+
+	// Either a function group or a function name is required. For additional information see https://aka.ms/flexconsumption/alwaysready.
+	Name *string `json:"name,omitempty"`
+}
+
+// FunctionsDeployment - Configuration section for the function app deployment.
+type FunctionsDeployment struct {
+	// Storage for deployed package used by the function app.
+	Storage *FunctionsDeploymentStorage `json:"storage,omitempty"`
+}
+
+// FunctionsDeploymentStorage - Storage for deployed package used by the function app.
+type FunctionsDeploymentStorage struct {
+	// Authentication method to access the storage account for deployment.
+	Authentication *FunctionsDeploymentStorageAuthentication `json:"authentication,omitempty"`
+
+	// Property to select Azure Storage type. Available options: blobContainer.
+	Type *StorageType `json:"type,omitempty"`
+
+	// Property to set the URL for the selected Azure Storage type. Example: For blobContainer, the value could be https://.blob.core.windows.net/.
+	Value *string `json:"value,omitempty"`
+}
+
+// FunctionsDeploymentStorageAuthentication - Authentication method to access the storage account for deployment.
+type FunctionsDeploymentStorageAuthentication struct {
+	// Use this property for StorageAccountConnectionString. Set the name of the app setting that has the storage account connection
+	// string. Do not set a value for this property when using other
+	// authentication type.
+	StorageAccountConnectionStringName *string `json:"storageAccountConnectionStringName,omitempty"`
+
+	// Property to select authentication type to access the selected storage account. Available options: SystemAssignedIdentity,
+	// UserAssignedIdentity, StorageAccountConnectionString.
+	Type *AuthenticationType `json:"type,omitempty"`
+
+	// Use this property for UserAssignedIdentity. Set the resource ID of the identity. Do not set a value for this property when
+	// using other authentication type.
+	UserAssignedIdentityResourceID *string `json:"userAssignedIdentityResourceId,omitempty"`
+}
+
+// FunctionsRuntime - Function app runtime name and version.
+type FunctionsRuntime struct {
+	// Function app runtime name. Available options: dotnet-isolated, node, java, powershell, python, custom
+	Name *RuntimeName `json:"name,omitempty"`
+
+	// Function app runtime version. Example: 8 (for dotnet-isolated)
+	Version *string `json:"version,omitempty"`
+}
+
+// FunctionsScaleAndConcurrency - Scale and concurrency settings for the function app.
+type FunctionsScaleAndConcurrency struct {
+	// 'Always Ready' configuration for the function app.
+	AlwaysReady []*FunctionsAlwaysReadyConfig `json:"alwaysReady,omitempty"`
+
+	// Set the amount of memory allocated to each instance of the function app in MB. CPU and network bandwidth are allocated
+	// proportionally.
+	InstanceMemoryMB *float32 `json:"instanceMemoryMB,omitempty"`
+
+	// The maximum number of instances for the function app.
+	MaximumInstanceCount *float32 `json:"maximumInstanceCount,omitempty"`
+
+	// Scale and concurrency settings for the function app triggers.
+	Triggers *FunctionsScaleAndConcurrencyTriggers `json:"triggers,omitempty"`
+}
+
+// FunctionsScaleAndConcurrencyTriggers - Scale and concurrency settings for the function app triggers.
+type FunctionsScaleAndConcurrencyTriggers struct {
+	// Scale and concurrency settings for the HTTP trigger.
+	HTTP *FunctionsScaleAndConcurrencyTriggersHTTP `json:"http,omitempty"`
+}
+
+// FunctionsScaleAndConcurrencyTriggersHTTP - Scale and concurrency settings for the HTTP trigger.
+type FunctionsScaleAndConcurrencyTriggersHTTP struct {
+	// The maximum number of concurrent HTTP trigger invocations per instance.
+	PerInstanceConcurrency *float32 `json:"perInstanceConcurrency,omitempty"`
+}
+
 // GeoRegion - Geographical region.
 type GeoRegion struct {
 	// Kind of resource.
@@ -4309,6 +4571,11 @@ type GeoRegionProperties struct {
 
 	// READ-ONLY; Display name for region.
 	OrgDomain *string `json:"orgDomain,omitempty" azure:"ro"`
+}
+
+// GetUsagesInLocationClientListOptions contains the optional parameters for the GetUsagesInLocationClient.List method.
+type GetUsagesInLocationClientListOptions struct {
+	// placeholder for future optional parameters
 }
 
 // GitHub - The configuration settings of the GitHub provider.
@@ -7466,6 +7733,15 @@ type ResourceCollection struct {
 	NextLink *string `json:"nextLink,omitempty" azure:"ro"`
 }
 
+// ResourceConfig - Function app resource requirements.
+type ResourceConfig struct {
+	// Required CPU in cores, e.g. 0.5
+	CPU *float64 `json:"cpu,omitempty"`
+
+	// Required memory, e.g. "1Gi"
+	Memory *string `json:"memory,omitempty"`
+}
+
 // ResourceHealthMetadata - Used for getting ResourceHealthCheck settings.
 type ResourceHealthMetadata struct {
 	// Kind of resource.
@@ -7613,6 +7889,11 @@ type ResourceNameAvailabilityRequest struct {
 
 	// REQUIRED; Resource type used for verification.
 	Type *CheckNameResourceTypes `json:"type,omitempty"`
+
+	// Azure Resource Manager ID of the customer's selected Container Apps Environment on which to host the Function app. This
+	// must be of the form
+	// /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.App/managedEnvironments/{managedEnvironmentName}
+	EnvironmentID *string `json:"environmentId,omitempty"`
 
 	// Is fully qualified domain name.
 	IsFqdn *bool `json:"isFqdn,omitempty"`
@@ -8053,8 +8334,8 @@ type SiteAuthSettingsProperties struct {
 	// form "key=value".
 	AdditionalLoginParams []*string `json:"additionalLoginParams,omitempty"`
 
-	// Allowed audience values to consider when validating JWTs issued by Azure Active Directory. Note that the ClientID value
-	// is always considered an allowed audience, regardless of this setting.
+	// Allowed audience values to consider when validating JSON Web Tokens issued by Azure Active Directory. Note that the ClientID
+	// value is always considered an allowed audience, regardless of this setting.
 	AllowedAudiences []*string `json:"allowedAudiences,omitempty"`
 
 	// External URLs that can be redirected to as part of logging in or logging out of the app. Note that the query string part
@@ -8310,6 +8591,10 @@ type SiteConfig struct {
 	// Document root.
 	DocumentRoot *string `json:"documentRoot,omitempty"`
 
+	// Maximum number of workers that a site can scale out to. This setting only applies to apps in plans where ElasticScaleEnabled
+	// is true
+	ElasticWebAppScaleLimit *int32 `json:"elasticWebAppScaleLimit,omitempty"`
+
 	// This is work around for polymorphic types.
 	Experiments *Experiments `json:"experiments,omitempty"`
 
@@ -8339,6 +8624,9 @@ type SiteConfig struct {
 
 	// IP security restrictions for main.
 	IPSecurityRestrictions []*IPSecurityRestriction `json:"ipSecurityRestrictions,omitempty"`
+
+	// Default action for main access restriction if no rules are matched.
+	IPSecurityRestrictionsDefaultAction *DefaultAction `json:"ipSecurityRestrictionsDefaultAction,omitempty"`
 
 	// Java container.
 	JavaContainer *string `json:"javaContainer,omitempty"`
@@ -8372,6 +8660,12 @@ type SiteConfig struct {
 
 	// Managed Service Identity Id
 	ManagedServiceIdentityID *int32 `json:"managedServiceIdentityId,omitempty"`
+
+	// Application metadata. This property cannot be retrieved, since it may contain secrets.
+	Metadata []*NameValuePair `json:"metadata,omitempty"`
+
+	// The minimum strength TLS cipher suite allowed for an application
+	MinTLSCipherSuite *TLSCipherSuites `json:"minTlsCipherSuite,omitempty"`
 
 	// MinTlsVersion: configures the minimum version of TLS required for SSL requests
 	MinTLSVersion *SupportedTLSVersions `json:"minTlsVersion,omitempty"`
@@ -8423,6 +8717,9 @@ type SiteConfig struct {
 
 	// IP security restrictions for scm.
 	ScmIPSecurityRestrictions []*IPSecurityRestriction `json:"scmIpSecurityRestrictions,omitempty"`
+
+	// Default action for scm access restriction if no rules are matched.
+	ScmIPSecurityRestrictionsDefaultAction *DefaultAction `json:"scmIpSecurityRestrictionsDefaultAction,omitempty"`
 
 	// IP security restrictions for scm to use main.
 	ScmIPSecurityRestrictionsUseMain *bool `json:"scmIpSecurityRestrictionsUseMain,omitempty"`
@@ -8548,6 +8845,92 @@ type SiteConfigurationSnapshotInfoProperties struct {
 
 	// READ-ONLY; The time the snapshot was taken.
 	Time *time.Time `json:"time,omitempty" azure:"ro"`
+}
+
+// SiteContainer - Container of a site
+type SiteContainer struct {
+	// Kind of resource.
+	Kind *string `json:"kind,omitempty"`
+
+	// SiteContainer resource specific properties
+	Properties *SiteContainerProperties `json:"properties,omitempty"`
+
+	// READ-ONLY; Resource Id.
+	ID *string `json:"id,omitempty" azure:"ro"`
+
+	// READ-ONLY; Resource Name.
+	Name *string `json:"name,omitempty" azure:"ro"`
+
+	// READ-ONLY; Resource type.
+	Type *string `json:"type,omitempty" azure:"ro"`
+}
+
+// SiteContainerCollection - Collection of site containers
+type SiteContainerCollection struct {
+	// REQUIRED; Collection of resources.
+	Value []*SiteContainer `json:"value,omitempty"`
+
+	// READ-ONLY; Link to next page of resources.
+	NextLink *string `json:"nextLink,omitempty" azure:"ro"`
+}
+
+// SiteContainerProperties - SiteContainer resource specific properties
+type SiteContainerProperties struct {
+	// REQUIRED; Image Name
+	Image *string `json:"image,omitempty"`
+
+	// REQUIRED; true if the container is the main site container; false otherwise.
+	IsMain *bool `json:"isMain,omitempty"`
+
+	// Auth Type
+	AuthType *AuthType `json:"authType,omitempty"`
+
+	// List of environment variables
+	EnvironmentVariables []*EnvironmentVariable `json:"environmentVariables,omitempty"`
+
+	// Password Secret
+	PasswordSecret *string `json:"passwordSecret,omitempty"`
+
+	// StartUp Command
+	StartUpCommand *string `json:"startUpCommand,omitempty"`
+
+	// Target Port
+	TargetPort *string `json:"targetPort,omitempty"`
+
+	// UserManagedIdentity ClientId
+	UserManagedIdentityClientID *string `json:"userManagedIdentityClientId,omitempty"`
+
+	// User Name
+	UserName *string `json:"userName,omitempty"`
+
+	// List of volume mounts
+	VolumeMounts []*VolumeMount `json:"volumeMounts,omitempty"`
+
+	// READ-ONLY; Created Time
+	CreatedTime *time.Time `json:"createdTime,omitempty" azure:"ro"`
+
+	// READ-ONLY; Last Modified Time
+	LastModifiedTime *time.Time `json:"lastModifiedTime,omitempty" azure:"ro"`
+}
+
+type SiteDNSConfig struct {
+	// Alternate DNS server to be used by apps. This property replicates the WEBSITEDNSALT_SERVER app setting.
+	DNSAltServer *string `json:"dnsAltServer,omitempty"`
+
+	// Custom time for DNS to be cached in seconds. Allowed range: 0-60. Default is 30 seconds. 0 means caching disabled.
+	DNSMaxCacheTimeout *int32 `json:"dnsMaxCacheTimeout,omitempty"`
+
+	// Total number of retries for dns lookup. Allowed range: 1-5. Default is 3.
+	DNSRetryAttemptCount *int32 `json:"dnsRetryAttemptCount,omitempty"`
+
+	// Timeout for a single dns lookup in seconds. Allowed range: 1-30. Default is 3.
+	DNSRetryAttemptTimeout *int32 `json:"dnsRetryAttemptTimeout,omitempty"`
+
+	// List of custom DNS servers to be used by an app for lookups. Maximum 5 dns servers can be set.
+	DNSServers []*string `json:"dnsServers,omitempty"`
+
+	// READ-ONLY; Indicates that sites using Virtual network custom DNS servers are still sorting the list of DNS servers. Read-Only.
+	DNSLegacySortOrder *bool `json:"dnsLegacySortOrder,omitempty" azure:"ro"`
 }
 
 // SiteExtensionInfo - Site Extension Information.
@@ -8746,6 +9129,9 @@ type SitePatchResourceProperties struct {
 	// Unique identifier that verifies the custom domains assigned to the app. Customer will add this id to a txt record for verification.
 	CustomDomainVerificationID *string `json:"customDomainVerificationId,omitempty"`
 
+	// Property to configure various DNS related settings for a site.
+	DNSConfiguration *SiteDNSConfig `json:"dnsConfiguration,omitempty"`
+
 	// Maximum allowed daily memory-time quota (applicable on dynamic apps only).
 	DailyMemoryTimeQuota *int32 `json:"dailyMemoryTimeQuota,omitempty"`
 
@@ -8915,11 +9301,20 @@ type SiteProperties struct {
 	// Unique identifier that verifies the custom domains assigned to the app. Customer will add this id to a txt record for verification.
 	CustomDomainVerificationID *string `json:"customDomainVerificationId,omitempty"`
 
+	// Property to configure various DNS related settings for a site.
+	DNSConfiguration *SiteDNSConfig `json:"dnsConfiguration,omitempty"`
+
 	// Maximum allowed daily memory-time quota (applicable on dynamic apps only).
 	DailyMemoryTimeQuota *int32 `json:"dailyMemoryTimeQuota,omitempty"`
 
+	// Dapr configuration of the app.
+	DaprConfig *DaprConfig `json:"daprConfig,omitempty"`
+
 	// true if the app is enabled; otherwise, false. Setting this value to false disables the app (takes the app offline).
 	Enabled *bool `json:"enabled,omitempty"`
+
+	// Configuration specific of the Azure Function app.
+	FunctionAppConfig *FunctionAppConfig `json:"functionAppConfig,omitempty"`
 
 	// HttpsOnly: configures a web site to accept only https requests. Issues redirect for http requests
 	HTTPSOnly *bool `json:"httpsOnly,omitempty"`
@@ -8943,6 +9338,11 @@ type SiteProperties struct {
 	// Identity to use for Key Vault Reference authentication.
 	KeyVaultReferenceIdentity *string `json:"keyVaultReferenceIdentity,omitempty"`
 
+	// Azure Resource Manager ID of the customer's selected Managed Environment on which to host this app. This must be of the
+	// form
+	// /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.App/managedEnvironments/{managedEnvironmentName}
+	ManagedEnvironmentID *string `json:"managedEnvironmentId,omitempty"`
+
 	// Property to allow or block all public traffic. Allowed Values: 'Enabled', 'Disabled' or an empty string.
 	PublicNetworkAccess *string `json:"publicNetworkAccess,omitempty"`
 
@@ -8951,6 +9351,9 @@ type SiteProperties struct {
 
 	// true if reserved; otherwise, false.
 	Reserved *bool `json:"reserved,omitempty"`
+
+	// Function app resource requirements.
+	ResourceConfig *ResourceConfig `json:"resourceConfig,omitempty"`
 
 	// true to stop SCM (KUDU) site when the app is stopped; otherwise, false. The default is false.
 	ScmSiteAlsoStopped *bool `json:"scmSiteAlsoStopped,omitempty"`
@@ -8969,6 +9372,9 @@ type SiteProperties struct {
 	// /subscriptions/{subscriptionName}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty"`
 
+	// To enable Backup and Restore operations over virtual network
+	VnetBackupRestoreEnabled *bool `json:"vnetBackupRestoreEnabled,omitempty"`
+
 	// To enable accessing content over virtual network
 	VnetContentShareEnabled *bool `json:"vnetContentShareEnabled,omitempty"`
 
@@ -8978,6 +9384,9 @@ type SiteProperties struct {
 	// Virtual Network Route All enabled. This causes all outbound traffic to have Virtual Network Security Groups and User Defined
 	// Routes applied.
 	VnetRouteAllEnabled *bool `json:"vnetRouteAllEnabled,omitempty"`
+
+	// Workload profile name for function app to execute on.
+	WorkloadProfileName *string `json:"workloadProfileName,omitempty"`
 
 	// READ-ONLY; Management information availability state for the app.
 	AvailabilityState *SiteAvailabilityState `json:"availabilityState,omitempty" azure:"ro"`
@@ -9489,6 +9898,9 @@ type StaticSite struct {
 	// READ-ONLY; The custom domains associated with this static site.
 	CustomDomains []*string `json:"customDomains,omitempty" azure:"ro"`
 
+	// READ-ONLY; Database connections for the static site
+	DatabaseConnections []*DatabaseConnectionOverview `json:"databaseConnections,omitempty" azure:"ro"`
+
 	// READ-ONLY; The default autogenerated hostname for the static site.
 	DefaultHostname *string `json:"defaultHostname,omitempty" azure:"ro"`
 
@@ -9535,6 +9947,51 @@ type StaticSiteARMResource struct {
 	Type *string `json:"type,omitempty" azure:"ro"`
 }
 
+// StaticSiteBasicAuthPropertiesARMResource - Static site basic auth properties ARM resource.
+type StaticSiteBasicAuthPropertiesARMResource struct {
+	// Kind of resource.
+	Kind *string `json:"kind,omitempty"`
+
+	// StaticSiteBasicAuthPropertiesARMResource resource specific properties
+	Properties *StaticSiteBasicAuthPropertiesARMResourceProperties `json:"properties,omitempty"`
+
+	// READ-ONLY; Resource Id.
+	ID *string `json:"id,omitempty" azure:"ro"`
+
+	// READ-ONLY; Resource Name.
+	Name *string `json:"name,omitempty" azure:"ro"`
+
+	// READ-ONLY; Resource type.
+	Type *string `json:"type,omitempty" azure:"ro"`
+}
+
+// StaticSiteBasicAuthPropertiesARMResourceProperties - StaticSiteBasicAuthPropertiesARMResource resource specific properties
+type StaticSiteBasicAuthPropertiesARMResourceProperties struct {
+	// REQUIRED; State indicating if basic auth is enabled and for what environments it is active.
+	ApplicableEnvironmentsMode *string `json:"applicableEnvironmentsMode,omitempty"`
+
+	// The list of enabled environments for Basic Auth if ApplicableEnvironmentsMode is set to SpecifiedEnvironments.
+	Environments []*string `json:"environments,omitempty"`
+
+	// The password for basic auth.
+	Password *string `json:"password,omitempty"`
+
+	// Url to the secret in Key Vault.
+	SecretURL *string `json:"secretUrl,omitempty"`
+
+	// READ-ONLY; State indicating if basic auth has a secret and what type it is.
+	SecretState *string `json:"secretState,omitempty" azure:"ro"`
+}
+
+// StaticSiteBasicAuthPropertiesCollection - Collection of static site basic auth.
+type StaticSiteBasicAuthPropertiesCollection struct {
+	// REQUIRED; Collection of resources.
+	Value []*StaticSiteBasicAuthPropertiesARMResource `json:"value,omitempty"`
+
+	// READ-ONLY; Link to next page of resources.
+	NextLink *string `json:"nextLink,omitempty" azure:"ro"`
+}
+
 // StaticSiteBuildARMResource - Static Site Build ARM resource.
 type StaticSiteBuildARMResource struct {
 	// Kind of resource.
@@ -9560,6 +10017,9 @@ type StaticSiteBuildARMResourceProperties struct {
 
 	// READ-ONLY; When this build was created.
 	CreatedTimeUTC *time.Time `json:"createdTimeUtc,omitempty" azure:"ro"`
+
+	// READ-ONLY; Database connections for the static site build
+	DatabaseConnections []*DatabaseConnectionOverview `json:"databaseConnections,omitempty" azure:"ro"`
 
 	// READ-ONLY; The hostname for a static site build.
 	Hostname *string `json:"hostname,omitempty" azure:"ro"`
@@ -9696,6 +10156,18 @@ type StaticSiteCustomDomainRequestPropertiesARMResource struct {
 type StaticSiteCustomDomainRequestPropertiesARMResourceProperties struct {
 	// Validation method for adding a custom domain
 	ValidationMethod *string `json:"validationMethod,omitempty"`
+}
+
+// StaticSiteDatabaseConnectionConfigurationFileOverview - A database connection configuration file
+type StaticSiteDatabaseConnectionConfigurationFileOverview struct {
+	// READ-ONLY; The Base64 encoding of the file contents.
+	Contents *string `json:"contents,omitempty" azure:"ro"`
+
+	// READ-ONLY; The name of the configuration file.
+	FileName *string `json:"fileName,omitempty" azure:"ro"`
+
+	// READ-ONLY; The type of configuration file.
+	Type *string `json:"type,omitempty" azure:"ro"`
 }
 
 // StaticSiteFunctionOverviewARMResource - Static Site Function Overview ARM resource.
@@ -10189,6 +10661,24 @@ type StaticSitesClientBeginValidateCustomDomainCanBeAddedToStaticSiteOptions str
 	ResumeToken string
 }
 
+// StaticSitesClientCreateOrUpdateBasicAuthOptions contains the optional parameters for the StaticSitesClient.CreateOrUpdateBasicAuth
+// method.
+type StaticSitesClientCreateOrUpdateBasicAuthOptions struct {
+	// placeholder for future optional parameters
+}
+
+// StaticSitesClientCreateOrUpdateBuildDatabaseConnectionOptions contains the optional parameters for the StaticSitesClient.CreateOrUpdateBuildDatabaseConnection
+// method.
+type StaticSitesClientCreateOrUpdateBuildDatabaseConnectionOptions struct {
+	// placeholder for future optional parameters
+}
+
+// StaticSitesClientCreateOrUpdateDatabaseConnectionOptions contains the optional parameters for the StaticSitesClient.CreateOrUpdateDatabaseConnection
+// method.
+type StaticSitesClientCreateOrUpdateDatabaseConnectionOptions struct {
+	// placeholder for future optional parameters
+}
+
 // StaticSitesClientCreateOrUpdateStaticSiteAppSettingsOptions contains the optional parameters for the StaticSitesClient.CreateOrUpdateStaticSiteAppSettings
 // method.
 type StaticSitesClientCreateOrUpdateStaticSiteAppSettingsOptions struct {
@@ -10219,6 +10709,18 @@ type StaticSitesClientCreateUserRolesInvitationLinkOptions struct {
 	// placeholder for future optional parameters
 }
 
+// StaticSitesClientDeleteBuildDatabaseConnectionOptions contains the optional parameters for the StaticSitesClient.DeleteBuildDatabaseConnection
+// method.
+type StaticSitesClientDeleteBuildDatabaseConnectionOptions struct {
+	// placeholder for future optional parameters
+}
+
+// StaticSitesClientDeleteDatabaseConnectionOptions contains the optional parameters for the StaticSitesClient.DeleteDatabaseConnection
+// method.
+type StaticSitesClientDeleteDatabaseConnectionOptions struct {
+	// placeholder for future optional parameters
+}
+
 // StaticSitesClientDeleteStaticSiteUserOptions contains the optional parameters for the StaticSitesClient.DeleteStaticSiteUser
 // method.
 type StaticSitesClientDeleteStaticSiteUserOptions struct {
@@ -10234,6 +10736,59 @@ type StaticSitesClientDetachUserProvidedFunctionAppFromStaticSiteBuildOptions st
 // StaticSitesClientDetachUserProvidedFunctionAppFromStaticSiteOptions contains the optional parameters for the StaticSitesClient.DetachUserProvidedFunctionAppFromStaticSite
 // method.
 type StaticSitesClientDetachUserProvidedFunctionAppFromStaticSiteOptions struct {
+	// placeholder for future optional parameters
+}
+
+// StaticSitesClientGetBasicAuthOptions contains the optional parameters for the StaticSitesClient.GetBasicAuth method.
+type StaticSitesClientGetBasicAuthOptions struct {
+	// placeholder for future optional parameters
+}
+
+// StaticSitesClientGetBuildDatabaseConnectionOptions contains the optional parameters for the StaticSitesClient.GetBuildDatabaseConnection
+// method.
+type StaticSitesClientGetBuildDatabaseConnectionOptions struct {
+	// placeholder for future optional parameters
+}
+
+// StaticSitesClientGetBuildDatabaseConnectionWithDetailsOptions contains the optional parameters for the StaticSitesClient.GetBuildDatabaseConnectionWithDetails
+// method.
+type StaticSitesClientGetBuildDatabaseConnectionWithDetailsOptions struct {
+	// placeholder for future optional parameters
+}
+
+// StaticSitesClientGetBuildDatabaseConnectionsOptions contains the optional parameters for the StaticSitesClient.GetBuildDatabaseConnections
+// method.
+type StaticSitesClientGetBuildDatabaseConnectionsOptions struct {
+	// placeholder for future optional parameters
+}
+
+// StaticSitesClientGetBuildDatabaseConnectionsWithDetailsOptions contains the optional parameters for the StaticSitesClient.GetBuildDatabaseConnectionsWithDetails
+// method.
+type StaticSitesClientGetBuildDatabaseConnectionsWithDetailsOptions struct {
+	// placeholder for future optional parameters
+}
+
+// StaticSitesClientGetDatabaseConnectionOptions contains the optional parameters for the StaticSitesClient.GetDatabaseConnection
+// method.
+type StaticSitesClientGetDatabaseConnectionOptions struct {
+	// placeholder for future optional parameters
+}
+
+// StaticSitesClientGetDatabaseConnectionWithDetailsOptions contains the optional parameters for the StaticSitesClient.GetDatabaseConnectionWithDetails
+// method.
+type StaticSitesClientGetDatabaseConnectionWithDetailsOptions struct {
+	// placeholder for future optional parameters
+}
+
+// StaticSitesClientGetDatabaseConnectionsOptions contains the optional parameters for the StaticSitesClient.GetDatabaseConnections
+// method.
+type StaticSitesClientGetDatabaseConnectionsOptions struct {
+	// placeholder for future optional parameters
+}
+
+// StaticSitesClientGetDatabaseConnectionsWithDetailsOptions contains the optional parameters for the StaticSitesClient.GetDatabaseConnectionsWithDetails
+// method.
+type StaticSitesClientGetDatabaseConnectionsWithDetailsOptions struct {
 	// placeholder for future optional parameters
 }
 
@@ -10331,6 +10886,11 @@ type StaticSitesClientGetUserProvidedFunctionAppsForStaticSiteOptions struct {
 	// placeholder for future optional parameters
 }
 
+// StaticSitesClientListBasicAuthOptions contains the optional parameters for the StaticSitesClient.ListBasicAuth method.
+type StaticSitesClientListBasicAuthOptions struct {
+	// placeholder for future optional parameters
+}
+
 // StaticSitesClientListOptions contains the optional parameters for the StaticSitesClient.List method.
 type StaticSitesClientListOptions struct {
 	// placeholder for future optional parameters
@@ -10418,6 +10978,18 @@ type StaticSitesClientUnlinkBackendFromBuildOptions struct {
 type StaticSitesClientUnlinkBackendOptions struct {
 	// Decides if Easy Auth configuration will be removed from backend configuration
 	IsCleaningAuthConfig *bool
+}
+
+// StaticSitesClientUpdateBuildDatabaseConnectionOptions contains the optional parameters for the StaticSitesClient.UpdateBuildDatabaseConnection
+// method.
+type StaticSitesClientUpdateBuildDatabaseConnectionOptions struct {
+	// placeholder for future optional parameters
+}
+
+// StaticSitesClientUpdateDatabaseConnectionOptions contains the optional parameters for the StaticSitesClient.UpdateDatabaseConnection
+// method.
+type StaticSitesClientUpdateDatabaseConnectionOptions struct {
+	// placeholder for future optional parameters
 }
 
 // StaticSitesClientUpdateStaticSiteOptions contains the optional parameters for the StaticSitesClient.UpdateStaticSite method.
@@ -11380,6 +11952,20 @@ type VnetValidationTestFailureProperties struct {
 	TestName *string `json:"testName,omitempty"`
 }
 
+type VolumeMount struct {
+	// REQUIRED; Target path on the container where volume is mounted on
+	ContainerMountPath *string `json:"containerMountPath,omitempty"`
+
+	// REQUIRED; Sub path in the volume where volume is mounted from.
+	VolumeSubPath *string `json:"volumeSubPath,omitempty"`
+
+	// Config Data to be mounted on the volume
+	Data *string `json:"data,omitempty"`
+
+	// Boolean to specify if the mount is read only on the container
+	ReadOnly *bool `json:"readOnly,omitempty"`
+}
+
 // WebAppCollection - Collection of App Service apps.
 type WebAppCollection struct {
 	// REQUIRED; Collection of resources.
@@ -11941,6 +12527,18 @@ type WebAppsClientCreateOrUpdateRelayServiceConnectionSlotOptions struct {
 	// placeholder for future optional parameters
 }
 
+// WebAppsClientCreateOrUpdateSiteContainerOptions contains the optional parameters for the WebAppsClient.CreateOrUpdateSiteContainer
+// method.
+type WebAppsClientCreateOrUpdateSiteContainerOptions struct {
+	// placeholder for future optional parameters
+}
+
+// WebAppsClientCreateOrUpdateSiteContainerSlotOptions contains the optional parameters for the WebAppsClient.CreateOrUpdateSiteContainerSlot
+// method.
+type WebAppsClientCreateOrUpdateSiteContainerSlotOptions struct {
+	// placeholder for future optional parameters
+}
+
 // WebAppsClientCreateOrUpdateSwiftVirtualNetworkConnectionWithCheckOptions contains the optional parameters for the WebAppsClient.CreateOrUpdateSwiftVirtualNetworkConnectionWithCheck
 // method.
 type WebAppsClientCreateOrUpdateSwiftVirtualNetworkConnectionWithCheckOptions struct {
@@ -12154,6 +12752,17 @@ type WebAppsClientDeleteRelayServiceConnectionSlotOptions struct {
 	// placeholder for future optional parameters
 }
 
+// WebAppsClientDeleteSiteContainerOptions contains the optional parameters for the WebAppsClient.DeleteSiteContainer method.
+type WebAppsClientDeleteSiteContainerOptions struct {
+	// placeholder for future optional parameters
+}
+
+// WebAppsClientDeleteSiteContainerSlotOptions contains the optional parameters for the WebAppsClient.DeleteSiteContainerSlot
+// method.
+type WebAppsClientDeleteSiteContainerSlotOptions struct {
+	// placeholder for future optional parameters
+}
+
 // WebAppsClientDeleteSiteExtensionOptions contains the optional parameters for the WebAppsClient.DeleteSiteExtension method.
 type WebAppsClientDeleteSiteExtensionOptions struct {
 	// placeholder for future optional parameters
@@ -12217,6 +12826,20 @@ type WebAppsClientDeleteVnetConnectionOptions struct {
 // method.
 type WebAppsClientDeleteVnetConnectionSlotOptions struct {
 	// placeholder for future optional parameters
+}
+
+// WebAppsClientDeployWorkflowArtifactsOptions contains the optional parameters for the WebAppsClient.DeployWorkflowArtifacts
+// method.
+type WebAppsClientDeployWorkflowArtifactsOptions struct {
+	// Application settings and files of the workflow.
+	WorkflowArtifacts *WorkflowArtifacts
+}
+
+// WebAppsClientDeployWorkflowArtifactsSlotOptions contains the optional parameters for the WebAppsClient.DeployWorkflowArtifactsSlot
+// method.
+type WebAppsClientDeployWorkflowArtifactsSlotOptions struct {
+	// Application settings and files of the workflow.
+	WorkflowArtifacts *WorkflowArtifacts
 }
 
 // WebAppsClientDiscoverBackupOptions contains the optional parameters for the WebAppsClient.DiscoverBackup method.
@@ -12522,6 +13145,12 @@ type WebAppsClientGetInstanceProcessSlotOptions struct {
 	// placeholder for future optional parameters
 }
 
+// WebAppsClientGetInstanceWorkflowSlotOptions contains the optional parameters for the WebAppsClient.GetInstanceWorkflowSlot
+// method.
+type WebAppsClientGetInstanceWorkflowSlotOptions struct {
+	// placeholder for future optional parameters
+}
+
 // WebAppsClientGetMSDeployLogOptions contains the optional parameters for the WebAppsClient.GetMSDeployLog method.
 type WebAppsClientGetMSDeployLogOptions struct {
 	// placeholder for future optional parameters
@@ -12753,6 +13382,16 @@ type WebAppsClientGetSiteConnectionStringKeyVaultReferencesSlotOptions struct {
 	// placeholder for future optional parameters
 }
 
+// WebAppsClientGetSiteContainerOptions contains the optional parameters for the WebAppsClient.GetSiteContainer method.
+type WebAppsClientGetSiteContainerOptions struct {
+	// placeholder for future optional parameters
+}
+
+// WebAppsClientGetSiteContainerSlotOptions contains the optional parameters for the WebAppsClient.GetSiteContainerSlot method.
+type WebAppsClientGetSiteContainerSlotOptions struct {
+	// placeholder for future optional parameters
+}
+
 // WebAppsClientGetSiteExtensionOptions contains the optional parameters for the WebAppsClient.GetSiteExtension method.
 type WebAppsClientGetSiteExtensionOptions struct {
 	// placeholder for future optional parameters
@@ -12867,6 +13506,11 @@ type WebAppsClientGetWebSiteContainerLogsOptions struct {
 // WebAppsClientGetWebSiteContainerLogsSlotOptions contains the optional parameters for the WebAppsClient.GetWebSiteContainerLogsSlot
 // method.
 type WebAppsClientGetWebSiteContainerLogsSlotOptions struct {
+	// placeholder for future optional parameters
+}
+
+// WebAppsClientGetWorkflowOptions contains the optional parameters for the WebAppsClient.GetWorkflow method.
+type WebAppsClientGetWorkflowOptions struct {
 	// placeholder for future optional parameters
 }
 
@@ -13138,6 +13782,12 @@ type WebAppsClientListInstanceProcessesSlotOptions struct {
 	// placeholder for future optional parameters
 }
 
+// WebAppsClientListInstanceWorkflowsSlotOptions contains the optional parameters for the WebAppsClient.ListInstanceWorkflowsSlot
+// method.
+type WebAppsClientListInstanceWorkflowsSlotOptions struct {
+	// placeholder for future optional parameters
+}
+
 // WebAppsClientListMetadataOptions contains the optional parameters for the WebAppsClient.ListMetadata method.
 type WebAppsClientListMetadataOptions struct {
 	// placeholder for future optional parameters
@@ -13273,6 +13923,17 @@ type WebAppsClientListSiteBackupsOptions struct {
 
 // WebAppsClientListSiteBackupsSlotOptions contains the optional parameters for the WebAppsClient.ListSiteBackupsSlot method.
 type WebAppsClientListSiteBackupsSlotOptions struct {
+	// placeholder for future optional parameters
+}
+
+// WebAppsClientListSiteContainersOptions contains the optional parameters for the WebAppsClient.ListSiteContainers method.
+type WebAppsClientListSiteContainersOptions struct {
+	// placeholder for future optional parameters
+}
+
+// WebAppsClientListSiteContainersSlotOptions contains the optional parameters for the WebAppsClient.ListSiteContainersSlot
+// method.
+type WebAppsClientListSiteContainersSlotOptions struct {
 	// placeholder for future optional parameters
 }
 
@@ -13428,6 +14089,23 @@ type WebAppsClientListWebJobsOptions struct {
 
 // WebAppsClientListWebJobsSlotOptions contains the optional parameters for the WebAppsClient.ListWebJobsSlot method.
 type WebAppsClientListWebJobsSlotOptions struct {
+	// placeholder for future optional parameters
+}
+
+// WebAppsClientListWorkflowsConnectionsOptions contains the optional parameters for the WebAppsClient.ListWorkflowsConnections
+// method.
+type WebAppsClientListWorkflowsConnectionsOptions struct {
+	// placeholder for future optional parameters
+}
+
+// WebAppsClientListWorkflowsConnectionsSlotOptions contains the optional parameters for the WebAppsClient.ListWorkflowsConnectionsSlot
+// method.
+type WebAppsClientListWorkflowsConnectionsSlotOptions struct {
+	// placeholder for future optional parameters
+}
+
+// WebAppsClientListWorkflowsOptions contains the optional parameters for the WebAppsClient.ListWorkflows method.
+type WebAppsClientListWorkflowsOptions struct {
 	// placeholder for future optional parameters
 }
 
@@ -13968,6 +14646,12 @@ type WebSiteManagementClientGetSubscriptionDeploymentLocationsOptions struct {
 	// placeholder for future optional parameters
 }
 
+// WebSiteManagementClientListAseRegionsOptions contains the optional parameters for the WebSiteManagementClient.ListAseRegions
+// method.
+type WebSiteManagementClientListAseRegionsOptions struct {
+	// placeholder for future optional parameters
+}
+
 // WebSiteManagementClientListBillingMetersOptions contains the optional parameters for the WebSiteManagementClient.ListBillingMeters
 // method.
 type WebSiteManagementClientListBillingMetersOptions struct {
@@ -14153,10 +14837,73 @@ type Workflow struct {
 	Type *string `json:"type,omitempty" azure:"ro"`
 }
 
+// WorkflowArtifacts - The workflow filter.
+type WorkflowArtifacts struct {
+	// Application settings of the workflow.
+	AppSettings interface{} `json:"appSettings,omitempty"`
+
+	// Files of the app.
+	Files map[string]interface{} `json:"files,omitempty"`
+
+	// Files of the app to delete.
+	FilesToDelete []*string `json:"filesToDelete,omitempty"`
+}
+
+// WorkflowEnvelope - Workflow properties definition.
+type WorkflowEnvelope struct {
+	// The resource kind.
+	Kind *string `json:"kind,omitempty"`
+
+	// The resource location.
+	Location *string `json:"location,omitempty"`
+
+	// Additional workflow properties.
+	Properties *WorkflowEnvelopeProperties `json:"properties,omitempty"`
+
+	// READ-ONLY; The resource id.
+	ID *string `json:"id,omitempty" azure:"ro"`
+
+	// READ-ONLY; Gets the resource name.
+	Name *string `json:"name,omitempty" azure:"ro"`
+
+	// READ-ONLY; Gets the resource type.
+	Type *string `json:"type,omitempty" azure:"ro"`
+}
+
+// WorkflowEnvelopeCollection - Collection of Kudu workflow information elements.
+type WorkflowEnvelopeCollection struct {
+	// REQUIRED; Collection of resources.
+	Value []*WorkflowEnvelope `json:"value,omitempty"`
+
+	// READ-ONLY; Link to next page of resources.
+	NextLink *string `json:"nextLink,omitempty" azure:"ro"`
+}
+
+// WorkflowEnvelopeProperties - Additional workflow properties.
+type WorkflowEnvelopeProperties struct {
+	// Gets or sets the files.
+	Files map[string]interface{} `json:"files,omitempty"`
+
+	// Gets or sets the state of the workflow.
+	FlowState *WorkflowState `json:"flowState,omitempty"`
+
+	// Gets or sets workflow health.
+	Health *WorkflowHealth `json:"health,omitempty"`
+}
+
 // WorkflowFilter - The workflow filter.
 type WorkflowFilter struct {
 	// The state of workflows.
 	State *WorkflowState `json:"state,omitempty"`
+}
+
+// WorkflowHealth - Represents the workflow health.
+type WorkflowHealth struct {
+	// REQUIRED; Gets or sets the workflow health state.
+	State *WorkflowHealthState `json:"state,omitempty"`
+
+	// Gets or sets the workflow error.
+	Error *ErrorEntity `json:"error,omitempty"`
 }
 
 // WorkflowListResult - The list of workflows.
