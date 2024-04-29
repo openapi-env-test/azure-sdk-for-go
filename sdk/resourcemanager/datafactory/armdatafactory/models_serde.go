@@ -29983,6 +29983,7 @@ func (m ManagedIdentityCredential) MarshalJSON() ([]byte, error) {
 	populate(objectMap, "annotations", m.Annotations)
 	populate(objectMap, "description", m.Description)
 	objectMap["type"] = "ManagedIdentity"
+	populate(objectMap, "typeProperties", m.TypeProperties)
 	if m.AdditionalProperties != nil {
 		for key, val := range m.AdditionalProperties {
 			objectMap[key] = val
@@ -30009,6 +30010,9 @@ func (m *ManagedIdentityCredential) UnmarshalJSON(data []byte) error {
 		case "type":
 			err = unpopulate(val, "Type", &m.Type)
 			delete(rawMsg, key)
+		case "typeProperties":
+			err = unpopulate(val, "TypeProperties", &m.TypeProperties)
+			delete(rawMsg, key)
 		default:
 			if m.AdditionalProperties == nil {
 				m.AdditionalProperties = map[string]any{}
@@ -30018,6 +30022,33 @@ func (m *ManagedIdentityCredential) UnmarshalJSON(data []byte) error {
 				err = json.Unmarshal(val, &aux)
 				m.AdditionalProperties[key] = aux
 			}
+			delete(rawMsg, key)
+		}
+		if err != nil {
+			return fmt.Errorf("unmarshalling type %T: %v", m, err)
+		}
+	}
+	return nil
+}
+
+// MarshalJSON implements the json.Marshaller interface for type ManagedIdentityTypeProperties.
+func (m ManagedIdentityTypeProperties) MarshalJSON() ([]byte, error) {
+	objectMap := make(map[string]any)
+	populate(objectMap, "resourceId", m.ResourceID)
+	return json.Marshal(objectMap)
+}
+
+// UnmarshalJSON implements the json.Unmarshaller interface for type ManagedIdentityTypeProperties.
+func (m *ManagedIdentityTypeProperties) UnmarshalJSON(data []byte) error {
+	var rawMsg map[string]json.RawMessage
+	if err := json.Unmarshal(data, &rawMsg); err != nil {
+		return fmt.Errorf("unmarshalling type %T: %v", m, err)
+	}
+	for key, val := range rawMsg {
+		var err error
+		switch key {
+		case "resourceId":
+			err = unpopulate(val, "ResourceID", &m.ResourceID)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -46913,7 +46944,7 @@ func (s ScriptActivityScriptBlock) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]any)
 	populate(objectMap, "parameters", s.Parameters)
 	populateAny(objectMap, "text", s.Text)
-	populate(objectMap, "type", s.Type)
+	populateAny(objectMap, "type", s.Type)
 	return json.Marshal(objectMap)
 }
 

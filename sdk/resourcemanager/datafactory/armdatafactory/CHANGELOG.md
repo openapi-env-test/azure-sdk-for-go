@@ -1,5 +1,18 @@
 # Release History
 
+## 8.0.0 (2024-04-29)
+### Breaking Changes
+
+- Enum `ScriptType` has been removed
+- Function `*FactoriesClient.NewListPager` has been removed
+
+### Features Added
+
+- Type of `ScriptActivityScriptBlock.Type` has been changed from `*ScriptType` to `any`
+- New struct `ManagedIdentityTypeProperties`
+- New field `TypeProperties` in struct `ManagedIdentityCredential`
+
+
 ## 7.0.0 (2024-04-04)
 ### Breaking Changes
 
