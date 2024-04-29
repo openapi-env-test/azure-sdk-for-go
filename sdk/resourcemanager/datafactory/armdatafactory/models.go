@@ -17222,6 +17222,9 @@ type ManagedIdentityCredential struct {
 
 	// Credential description.
 	Description *string
+
+	// Managed identity credential properties.
+	TypeProperties *ManagedIdentityTypeProperties
 }
 
 // GetCredential implements the CredentialClassification interface for type ManagedIdentityCredential.
@@ -17232,6 +17235,12 @@ func (m *ManagedIdentityCredential) GetCredential() *Credential {
 		Description:          m.Description,
 		Type:                 m.Type,
 	}
+}
+
+// ManagedIdentityTypeProperties - Managed identity type properties.
+type ManagedIdentityTypeProperties struct {
+	// The resource id of user assigned managed identity
+	ResourceID *string
 }
 
 // ManagedIntegrationRuntime - Managed integration runtime, including managed elastic and managed dedicated integration runtimes.
@@ -26829,8 +26838,9 @@ type ScriptActivityScriptBlock struct {
 	// REQUIRED; The query text. Type: string (or Expression with resultType string).
 	Text any
 
-	// REQUIRED; The type of the query. Type: string.
-	Type *ScriptType
+	// REQUIRED; The type of the query. Please refer to the ScriptType for valid options. Type: string (or Expression with resultType
+	// string).
+	Type any
 
 	// Array of script parameters. Type: array.
 	Parameters []*ScriptActivityParameter
