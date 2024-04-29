@@ -4,9 +4,7 @@
     "generateScript": {
       "path": "generator automation-v2",
       "stderr": {
-        "showInComment": "^\\[AUTOREST\\]",
-        "scriptError": "^\\[ERROR\\]",
-        "scriptWarning": "^\\[WARNING\\]"
+        "showInComment": "^[autorest]"
       }
     }
   },
@@ -16,10 +14,7 @@
   },
   "initOptions": {
     "initScript": {
-      "path": "sh ./eng/scripts/automation_init.sh",
-      "stderr": {
-        "scriptWarning": false
-      }
+      "path": "sh ./eng/scripts/automation_init.sh"
     }
   },
   "packageOptions": {
